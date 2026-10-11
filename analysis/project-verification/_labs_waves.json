@@ -1,0 +1,663 @@
+{
+  "route": "/labs/waves",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "振动与波 · WaveLab",
+      "text": "← WEDULAB\nWAVELAB\n振动与波\n简体中文\n视角\n实验课题\n01\n弹簧振子\nSimple harmonic motion\n02\n单摆\nSimple pendulum\n03\n简谐运动的能量\nEnergy & damping\n04\n受迫振动与共振\nResonance\n机械波\n05\n机械波的形成\nHow waves form\n06\n波的反射\nReflection at boundaries\n07\n波的叠加与驻波\nSuperposition & standing waves\n08\n水波的干涉与衍射\nRipple tank\n09\n多普勒效应\nDoppler effect\n10\n声音的特性与共鸣\nSound & resonance tube\n11\n自由实验\nSandbox\n空格 暂停 / 继续\nS 慢动作\n←→ 切换课题\n平衡位置\nLESSON 01\n弹簧振子\n\nSimple harmonic motion\n\nt\n2.99\ns\nx\n2.47\ncm\nT\n0.628\ns\nx-t\nv-t\n数据表\nT-√m\nCSV\n0\n2\n4\n6\n8\n10\n-4\n-2\n0\n2\n4\n6\nt / s\n位移 x / cm\nx / cm\n01\n弹簧振子\nSimple harmonic motion\n\n竖直悬挂的弹簧下端挂着钩码。把钩码向下拉开一段距离后释放，它在平衡位置附近上下往复运动。回复力与位移成正比、方向相反：\n\nF = −kx\n\n这样的运动叫简谐运动。钩码上的笔在匀速移动的纸带上画出的 x-t 图像是一条正弦曲线。\n\nT = 2π√(m/k)\n\n周期与振幅无关，只由振子的质量 m 和弹簧的劲度系数 k 决定。改变 m、k 记录周期，画出 T-√m 图像。\n\n拖动钩码向下拉，松手释放\n从纸带上的 x-t 图读出周期\n改变振幅，周期不变\n改变 m 记录周期，画 T-√m 图\nSETUP · 实验参数\n振子质量 m\n200 g\n劲度系数 k\n20 N/m\n振幅 A\n4.0 cm\n重新释放\n● 记录数据\nREADOUT · 实时读数\n位移 x\n2.47 cm\n速度 v\n0.315 m/s\n固有周期 T = 2π√(m/k)\n0.628 s\n实测周期\n0.628 s\nVIEW · 显示\n暂停\n声音\n1×\n¼×\n⅒×\n问题反馈\n作者：WY",
+      "randomCalls": 105258,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:7247)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:14202)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at St (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1988)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:8262)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:14202)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Gt (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:6444)\n    at Ot (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:6874)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:14299)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Ht (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1653)\n    at B (http://127.0.0.1:4173/assets/theme-aLwyR9RG.js:1:883)\n    at Ot (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:7362)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:14299)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:20106)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Tt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:2551)\n    at gt (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:8889)\n    at Object.as [as spring] (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:17469)\n    at g (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:16195)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:2400)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ns (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:16057)\n    at Object.as [as spring] (http://127.0.0.1:4173/assets/Page-t52A13oF.js:1:17521)\n    at g (http://127.0.0.1:4173/assets/Page-t52A13oF.js:56:16195)\n    at zs (http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:2400)\n    at http://127.0.0.1:4173/assets/Page-t52A13oF.js:57:3009\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-t52A13oF.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4173/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4173/assets/Page-CnNnv5QM.css",
+        "http://127.0.0.1:4173/assets/RoundedBoxGeometry-BuxEdaMS.js",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n弹簧振子\nSimple harmonic motion",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n单摆\nSimple pendulum",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n简谐运动的能量\nEnergy & damping",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n受迫振动与共振\nResonance",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n机械波的形成\nHow waves form",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n波的反射\nReflection at boundaries",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n波的叠加与驻波\nSuperposition & standing waves",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n水波的干涉与衍射\nRipple tank",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n多普勒效应\nDoppler effect",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n声音的特性与共鸣\nSound & resonance tube",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n自由实验\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "x-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "v-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "数据表",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "T-√m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "重新释放",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aRec",
+          "text": "● 记录数据",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暂停",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "声音",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "¼×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "⅒×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "振动与波 · WaveLab",
+      "text": "← WEDULAB\nWAVELAB\n振动与波\n简体中文\n视角\n实验课题\n01\n弹簧振子\nSimple harmonic motion\n02\n单摆\nSimple pendulum\n03\n简谐运动的能量\nEnergy & damping\n04\n受迫振动与共振\nResonance\n机械波\n05\n机械波的形成\nHow waves form\n06\n波的反射\nReflection at boundaries\n07\n波的叠加与驻波\nSuperposition & standing waves\n08\n水波的干涉与衍射\nRipple tank\n09\n多普勒效应\nDoppler effect\n10\n声音的特性与共鸣\nSound & resonance tube\n11\n自由实验\nSandbox\n空格 暂停 / 继续\nS 慢动作\n←→ 切换课题\n平衡位置\nLESSON 01\n弹簧振子\n\nSimple harmonic motion\n\nt\n2.99\ns\nx\n2.47\ncm\nT\n0.628\ns\nx-t\nv-t\n数据表\nT-√m\nCSV\n0\n2\n4\n6\n8\n10\n-4\n-2\n0\n2\n4\n6\nt / s\n位移 x / cm\nx / cm\n01\n弹簧振子\nSimple harmonic motion\n\n竖直悬挂的弹簧下端挂着钩码。把钩码向下拉开一段距离后释放，它在平衡位置附近上下往复运动。回复力与位移成正比、方向相反：\n\nF = −kx\n\n这样的运动叫简谐运动。钩码上的笔在匀速移动的纸带上画出的 x-t 图像是一条正弦曲线。\n\nT = 2π√(m/k)\n\n周期与振幅无关，只由振子的质量 m 和弹簧的劲度系数 k 决定。改变 m、k 记录周期，画出 T-√m 图像。\n\n拖动钩码向下拉，松手释放\n从纸带上的 x-t 图读出周期\n改变振幅，周期不变\n改变 m 记录周期，画 T-√m 图\nSETUP · 实验参数\n振子质量 m\n200 g\n劲度系数 k\n20 N/m\n振幅 A\n4.0 cm\n重新释放\n● 记录数据\nREADOUT · 实时读数\n位移 x\n2.47 cm\n速度 v\n0.315 m/s\n固有周期 T = 2π√(m/k)\n0.628 s\n实测周期\n0.628 s\nVIEW · 显示\n暂停\n声音\n1×\n¼×\n⅒×\n问题反馈\n作者：WY",
+      "randomCalls": 105258,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20565:17)\n    at new _d (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20590:57)\n    at Bt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:433:13)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3338:9)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at St (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:138:18)\n    at Bt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:475:13)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3338:9)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Gt (http://127.0.0.1:4174/src/labs/waves/Page.js:389:15)\n    at Ot (http://127.0.0.1:4174/src/labs/waves/Page.js:412:14)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3341:13)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Ht (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:118:18)\n    at B (http://127.0.0.1:4174/src/vendor/theme-aLwyR9RG.js:67:13)\n    at Ot (http://127.0.0.1:4174/src/labs/waves/Page.js:440:58)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3341:13)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3626:11)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Tt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:170:14)\n    at gt (http://127.0.0.1:4174/src/labs/waves/Page.js:530:12)\n    at Object.as [as spring] (http://127.0.0.1:4174/src/labs/waves/Page.js:1163:9)\n    at g (http://127.0.0.1:4174/src/labs/waves/Page.js:3485:36)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3822:3)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ns (http://127.0.0.1:4174/src/labs/waves/Page.js:1073:15)\n    at Object.as [as spring] (http://127.0.0.1:4174/src/labs/waves/Page.js:1164:19)\n    at g (http://127.0.0.1:4174/src/labs/waves/Page.js:3485:36)\n    at zs (http://127.0.0.1:4174/src/labs/waves/Page.js:3822:3)\n    at http://127.0.0.1:4174/src/labs/waves/Page.js:3851:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/labs/waves/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4174/src/vendor/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4174/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4174/src/vendor/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4174/assets/Page-CnNnv5QM.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-24066da46699.css",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPQ.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n弹簧振子\nSimple harmonic motion",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n单摆\nSimple pendulum",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n简谐运动的能量\nEnergy & damping",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n受迫振动与共振\nResonance",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n机械波的形成\nHow waves form",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n波的反射\nReflection at boundaries",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n波的叠加与驻波\nSuperposition & standing waves",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n水波的干涉与衍射\nRipple tank",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n多普勒效应\nDoppler effect",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n声音的特性与共鸣\nSound & resonance tube",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n自由实验\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "x-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "v-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "数据表",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "T-√m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "重新释放",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aRec",
+          "text": "● 记录数据",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暂停",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "声音",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "¼×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "⅒×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

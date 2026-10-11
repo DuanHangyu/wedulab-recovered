@@ -1,0 +1,540 @@
+{
+  "route": "/labs/conic",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "圆锥曲线 · ConicLab",
+      "text": "← WEDULAB\nCONICLAB\n圆锥曲线\n简体中文\n纸面\n视角\n章节\n01\n圆锥的截线\nConic sections\n02\nDandelin 双球\nDandelin spheres\n03\n椭圆\nEllipse\n04\n双曲线\nHyperbola\n05\n抛物线\nParabola\n06\n离心率\nEccentricity\n07\n光学性质\nReflective property\n08\n直线与圆锥曲线\nLines and conics\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n圆锥的截线\n\nConic sections\n\n01\n圆锥的截线\nConic sections\n\n用平面去截一个对顶圆锥，截线随平面的倾斜程度变化：平面垂直于轴时是圆，稍微倾斜是椭圆，与某条母线平行时是抛物线，同时截到上下两个圆锥时是双曲线。\n\n设截面与轴所成的角为 β，圆锥的半顶角为 α，则离心率 e = cos β / cos α：β > α 为椭圆，β = α 为抛物线，β < α 为双曲线。\n\n圆\n椭圆\n抛物线\n双曲线\n过顶点\n截面倾角\n35°\n截面位置\n1.60\n半顶角 α\n30°\n椭圆\nβ > α\n截面与轴的夹角\nβ = 55°\n半顶角\nα = 30°\n离心率\ne = cos β / cos α = 0.662\na, b\n1.35, 1.01\n\n比较 β 与 α：β > α 为椭圆（β = 90° 时为圆），β = α 为抛物线，β < α 为双曲线。\n\nVIEW · 显示设置\n面填充\n被遮挡的线\n图上标注\n自动旋转\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Ce (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:1318)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17428)\n    at Te (http://127.0.0.1:4173/assets/Page-ByKJXWQd.js:1:33173)\n    at http://127.0.0.1:4173/assets/Page-ByKJXWQd.js:1:33451\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "ov",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Oe (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:5573)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17450)\n    at Te (http://127.0.0.1:4173/assets/Page-ByKJXWQd.js:1:33173)\n    at http://127.0.0.1:4173/assets/Page-ByKJXWQd.js:1:33451\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:9022)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17472)\n    at Te (http://127.0.0.1:4173/assets/Page-ByKJXWQd.js:1:33173)\n    at http://127.0.0.1:4173/assets/Page-ByKJXWQd.js:1:33451\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-ByKJXWQd.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/math-_7kWGBgE.js",
+        "http://127.0.0.1:4173/assets/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4173/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4173/assets/outline-B5slIcEP.js",
+        "http://127.0.0.1:4173/assets/Page-BM6zSfKl.css",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n圆锥的截线\nConic sections",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\nDandelin 双球\nDandelin spheres",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n椭圆\nEllipse",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n双曲线\nHyperbola",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n抛物线\nParabola",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n离心率\nEccentricity",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n光学性质\nReflective property",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n直线与圆锥曲线\nLines and conics",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "椭圆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "抛物线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "双曲线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "过顶点",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "面填充",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "被遮挡的线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "圆锥曲线 · ConicLab",
+      "text": "← WEDULAB\nCONICLAB\n圆锥曲线\n简体中文\n纸面\n视角\n章节\n01\n圆锥的截线\nConic sections\n02\nDandelin 双球\nDandelin spheres\n03\n椭圆\nEllipse\n04\n双曲线\nHyperbola\n05\n抛物线\nParabola\n06\n离心率\nEccentricity\n07\n光学性质\nReflective property\n08\n直线与圆锥曲线\nLines and conics\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n圆锥的截线\n\nConic sections\n\n01\n圆锥的截线\nConic sections\n\n用平面去截一个对顶圆锥，截线随平面的倾斜程度变化：平面垂直于轴时是圆，稍微倾斜是椭圆，与某条母线平行时是抛物线，同时截到上下两个圆锥时是双曲线。\n\n设截面与轴所成的角为 β，圆锥的半顶角为 α，则离心率 e = cos β / cos α：β > α 为椭圆，β = α 为抛物线，β < α 为双曲线。\n\n圆\n椭圆\n抛物线\n双曲线\n过顶点\n截面倾角\n35°\n截面位置\n1.60\n半顶角 α\n30°\n椭圆\nβ > α\n截面与轴的夹角\nβ = 55°\n半顶角\nα = 30°\n离心率\ne = cos β / cos α = 0.662\na, b\n1.35, 1.01\n\n比较 β 与 α：β > α 为椭圆（β = 90° 时为圆），β = α 为抛物线，β < α 为双曲线。\n\nVIEW · 显示设置\n面填充\n被遮挡的线\n图上标注\n自动旋转\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20565:17)\n    at new _d (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20590:57)\n    at Ce (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:82:13)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1177:13)\n    at Te (http://127.0.0.1:4174/src/labs/conic/Page.js:2233:3)\n    at http://127.0.0.1:4174/src/labs/conic/Page.js:2255:57\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "ov",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Oe (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:366:15)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1178:13)\n    at Te (http://127.0.0.1:4174/src/labs/conic/Page.js:2233:3)\n    at http://127.0.0.1:4174/src/labs/conic/Page.js:2255:57\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:596:15)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1179:9)\n    at Te (http://127.0.0.1:4174/src/labs/conic/Page.js:2233:3)\n    at http://127.0.0.1:4174/src/labs/conic/Page.js:2255:57\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/labs/conic/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4174/src/vendor/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4174/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4174/src/vendor/outline-B5slIcEP.js",
+        "http://127.0.0.1:4174/assets/Page-BM6zSfKl.css",
+        "http://127.0.0.1:4174/assets/theme-CtpKaZpm.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-4de47f548de6.css",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7RlrCWv.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWv.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n圆锥的截线\nConic sections",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\nDandelin 双球\nDandelin spheres",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n椭圆\nEllipse",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n双曲线\nHyperbola",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n抛物线\nParabola",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n离心率\nEccentricity",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n光学性质\nReflective property",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n直线与圆锥曲线\nLines and conics",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "椭圆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "抛物线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "双曲线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "过顶点",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "面填充",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "被遮挡的线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

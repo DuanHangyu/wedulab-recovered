@@ -1,0 +1,662 @@
+{
+  "route": "/labs/fields",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "电场与磁场 · FieldLab",
+      "text": "← WEDULAB\nFIELDLAB\n电场与磁场\n简体中文\n视角\n静电场\n01\n电场线与等势面\nField lines & equipotentials\n02\n电场力做功与电势能\nWork & potential energy\n03\n平行板电容器\nParallel-plate capacitor\n04\n示波管\nCathode-ray tube\n磁场\n05\n磁感线\nMagnetic field lines\n06\n安培力\nForce on a current\n07\n洛伦兹力\nLorentz force\n08\n质谱仪与回旋加速器\nMass spectrometer & cyclotron\n电磁感应\n09\n电磁感应与楞次定律\nInduction & Lenz's law\n10\n交流发电机\nAC generator\n11\n自由实验\nSandbox\n拖动电荷、磁铁、探针移动\nD 暗室开关\n←→ 切换课题\nq₁ +5.0 nC\nq₂ −5.0 nC\nE 1676 N/C · φ 0 V\nLESSON 01\n电场线与等势面\n\nField lines & equipotentials\n\nE\n1676\nN/C\nφ\n0\nV\n探针读数\nφ - x\nCSV\n探针位置\n(0.0, -14.0) cm\n场强 E\n1676 N/C\n方向（与 +x 轴夹角）\n0.0°\n电势 φ\n0.0 V\n到 q₁ 的距离\n19.1 cm\n到 q₂ 的距离\n19.1 cm\n\n拖动黄色探针，箭头指向该点的场强方向，长度随 E 的大小（对数）变化。电势以无穷远处为零。\n\n01\n电场线与等势面\nField lines & equipotentials\n\n点电荷周围的电场 E = kQ/r²，多个电荷的电场按矢量叠加。用电场线形象地描述电场：线上每点的切线方向就是场强方向，线的疏密表示场强大小。电场线从正电荷（或无穷远）出发，终止于负电荷（或无穷远），不相交、不闭合。\n\n电势 φ = kQ/r 是标量，直接相加。电势相等的点连成等势线：\n\n等势线处处与电场线垂直，沿电场线方向电势降低\n\n拖动电荷改变它们的位置，拖动探针读出任意一点的 E 和 φ。打开三维电势面：正电荷处是“山峰”，负电荷处是“深谷”，电场线就是“最陡的下坡方向”。\n\n比较单个、同种、异种电荷的电场线\n拖动探针，看 E 与等势线的关系\n把 q₁、q₂ 调成不等量\n打开三维电势面\nSETUP · 实验参数\n电荷分布\n单个\n同种\n异种\n不等量\n三个\n电荷 q₁\n+5.0 nC\n电荷 q₂\n−5.0 nC\n显示电场线\n显示等势线\n三维电势面\nREADOUT · 实时读数\n探针处场强 E\n1676 N/C\n场强方向\n0°\n探针处电势 φ\n0 V\n电荷个数\n2\n等势线间隔\n200 V\nVIEW · 显示\n暗室\n标注\n问题反馈\n作者：WY",
+      "randomCalls": 1402,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Bt (https://wedulab.com/assets/charts-CzzpgoDB.js:1:7247)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:85070)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (https://wedulab.com/assets/charts-CzzpgoDB.js:1:432)\n    at St (https://wedulab.com/assets/charts-CzzpgoDB.js:1:1988)\n    at Bt (https://wedulab.com/assets/charts-CzzpgoDB.js:1:8262)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:85070)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (https://wedulab.com/assets/charts-CzzpgoDB.js:1:432)\n    at Ht (https://wedulab.com/assets/charts-CzzpgoDB.js:1:1653)\n    at B (https://wedulab.com/assets/theme-aLwyR9RG.js:1:883)\n    at po (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:9204)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:85200)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at lo (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:8182)\n    at po (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:9234)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:85200)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at lo (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:8271)\n    at po (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:9234)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:85200)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:90988)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Un (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:20581)\n    at g0 (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:20723)\n    at Object.vo [as efield] (https://wedulab.com/assets/Page-rwd5-Bjn.js:28:10520)\n    at u (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:87062)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2287)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Nt (https://wedulab.com/assets/Page-rwd5-Bjn.js:1:19783)\n    at Y0 (https://wedulab.com/assets/Page-rwd5-Bjn.js:28:845)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:28:10727\n    at Array.forEach (<anonymous>)\n    at c (https://wedulab.com/assets/Page-rwd5-Bjn.js:28:10697)\n    at Object.vo [as efield] (https://wedulab.com/assets/Page-rwd5-Bjn.js:28:11009)\n    at u (https://wedulab.com/assets/Page-rwd5-Bjn.js:36:87062)\n    at ks (https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2287)\n    at https://wedulab.com/assets/Page-rwd5-Bjn.js:37:2851"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-rwd5-Bjn.js",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/OutputPass-B-cSf-Py.js",
+        "https://wedulab.com/assets/theme-aLwyR9RG.js",
+        "https://wedulab.com/assets/charts-CzzpgoDB.js",
+        "https://wedulab.com/assets/theme-BwshCFgs.css",
+        "https://wedulab.com/assets/RoundedBoxGeometry-BuxEdaMS.js",
+        "https://wedulab.com/assets/Page-CNIimdwS.css",
+        "https://wedulab.com/assets/LineSegments2-CF4-EQBa.js",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n电场线与等势面\nField lines & equipotentials",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n电场力做功与电势能\nWork & potential energy",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n平行板电容器\nParallel-plate capacitor",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n示波管\nCathode-ray tube",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n磁感线\nMagnetic field lines",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n安培力\nForce on a current",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n洛伦兹力\nLorentz force",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n质谱仪与回旋加速器\nMass spectrometer & cyclotron",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n电磁感应与楞次定律\nInduction & Lenz's law",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n交流发电机\nAC generator",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n自由实验\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "探针读数",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "φ - x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "单个",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "同种",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "异种",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "不等量",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "三个",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "显示电场线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "显示等势线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "三维电势面",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暗室",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "电场与磁场 · FieldLab",
+      "text": "← WEDULAB\nFIELDLAB\n电场与磁场\n简体中文\n视角\n静电场\n01\n电场线与等势面\nField lines & equipotentials\n02\n电场力做功与电势能\nWork & potential energy\n03\n平行板电容器\nParallel-plate capacitor\n04\n示波管\nCathode-ray tube\n磁场\n05\n磁感线\nMagnetic field lines\n06\n安培力\nForce on a current\n07\n洛伦兹力\nLorentz force\n08\n质谱仪与回旋加速器\nMass spectrometer & cyclotron\n电磁感应\n09\n电磁感应与楞次定律\nInduction & Lenz's law\n10\n交流发电机\nAC generator\n11\n自由实验\nSandbox\n拖动电荷、磁铁、探针移动\nD 暗室开关\n←→ 切换课题\nq₁ +5.0 nC\nq₂ −5.0 nC\nE 1676 N/C · φ 0 V\nLESSON 01\n电场线与等势面\n\nField lines & equipotentials\n\nE\n1676\nN/C\nφ\n0\nV\n探针读数\nφ - x\nCSV\n探针位置\n(0.0, -14.0) cm\n场强 E\n1676 N/C\n方向（与 +x 轴夹角）\n0.0°\n电势 φ\n0.0 V\n到 q₁ 的距离\n19.1 cm\n到 q₂ 的距离\n19.1 cm\n\n拖动黄色探针，箭头指向该点的场强方向，长度随 E 的大小（对数）变化。电势以无穷远处为零。\n\n01\n电场线与等势面\nField lines & equipotentials\n\n点电荷周围的电场 E = kQ/r²，多个电荷的电场按矢量叠加。用电场线形象地描述电场：线上每点的切线方向就是场强方向，线的疏密表示场强大小。电场线从正电荷（或无穷远）出发，终止于负电荷（或无穷远），不相交、不闭合。\n\n电势 φ = kQ/r 是标量，直接相加。电势相等的点连成等势线：\n\n等势线处处与电场线垂直，沿电场线方向电势降低\n\n拖动电荷改变它们的位置，拖动探针读出任意一点的 E 和 φ。打开三维电势面：正电荷处是“山峰”，负电荷处是“深谷”，电场线就是“最陡的下坡方向”。\n\n比较单个、同种、异种电荷的电场线\n拖动探针，看 E 与等势线的关系\n把 q₁、q₂ 调成不等量\n打开三维电势面\nSETUP · 实验参数\n电荷分布\n单个\n同种\n异种\n不等量\n三个\n电荷 q₁\n+5.0 nC\n电荷 q₂\n−5.0 nC\n显示电场线\n显示等势线\n三维电势面\nREADOUT · 实时读数\n探针处场强 E\n1676 N/C\n场强方向\n0°\n探针处电势 φ\n0 V\n电荷个数\n2\n等势线间隔\n200 V\nVIEW · 显示\n暗室\n标注\n问题反馈\n作者：WY",
+      "randomCalls": 1402,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:7247)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:85070)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at St (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1988)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:8262)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:85070)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Ht (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1653)\n    at B (http://127.0.0.1:4173/assets/theme-aLwyR9RG.js:1:883)\n    at po (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:9204)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:85200)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at lo (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:8182)\n    at po (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:9234)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:85200)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at lo (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:8271)\n    at po (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:9234)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:85200)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:90988)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Un (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:20581)\n    at g0 (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:20723)\n    at Object.vo [as efield] (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:28:10520)\n    at u (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:87062)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2287)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Nt (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:1:19783)\n    at Y0 (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:28:845)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:28:10727\n    at Array.forEach (<anonymous>)\n    at c (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:28:10697)\n    at Object.vo [as efield] (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:28:11009)\n    at u (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:36:87062)\n    at ks (http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2287)\n    at http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js:37:2851"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-rwd5-Bjn.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4173/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4173/assets/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4173/assets/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4173/assets/Page-CNIimdwS.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n电场线与等势面\nField lines & equipotentials",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n电场力做功与电势能\nWork & potential energy",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n平行板电容器\nParallel-plate capacitor",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n示波管\nCathode-ray tube",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n磁感线\nMagnetic field lines",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n安培力\nForce on a current",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n洛伦兹力\nLorentz force",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n质谱仪与回旋加速器\nMass spectrometer & cyclotron",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n电磁感应与楞次定律\nInduction & Lenz's law",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n交流发电机\nAC generator",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n自由实验\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "探针读数",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "φ - x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "单个",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "同种",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "异种",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "不等量",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "三个",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "显示电场线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "显示等势线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "三维电势面",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暗室",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,678 @@
+{
+  "route": "/labs/contour",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "等高线 3D 课堂",
+      "text": "← WEDULAB\nCONTOUR·3D\n等高线地形 · 三维教学演示\n简体中文\n视角\nCHAPTERS · 章节\n00\n认识等高线地形图\nOVERVIEW\n01\n等高线的形成\nHOW CONTOURS FORM\n02\n海拔与相对高度\nELEVATION\n03\n等高距与坡度\nINTERVAL & SLOPE\n04\n山顶与盆地\nSUMMIT & BASIN\n05\n山脊与山谷\nRIDGE & VALLEY\n06\n鞍部\nSADDLE\n07\n陡崖\nCLIFF\n08\n地形剖面图\nTOPOGRAPHIC PROFILE\n09\n随堂检测\nQUIZ\n← → 切换章节\nR 重置视角　F 全屏\n主峰\n1432 m\n中峰\n1057 m\n东峰\n1268 m\n鞍部\n747 m\n鞍部\n798 m\n山脊\nRIDGE\n山谷\nVALLEY\n陡崖\nCLIFF\n盆地\n35 m\n孤丘\n448 m\nCHAPTER 00 / 09\n认识等高线地形图\n\nOVERVIEW\n\nN\n等高线地形图\n拖动绘制剖面线\n悬停读取海拔\n比例 1:50 000\n地形剖面图\n×\n00\n认识等高线地形图\nOVERVIEW\n\n等高线是地面上海拔相同的各点连成的闭合曲线。把立体的地表“压”成平面上的一圈圈线条，就能在一张纸上读出山的高低、坡的陡缓和地形的起伏。\n\n8 km × 8 km 虚拟山区\n北部三座山峰连成东西向山脉，两条支流从鞍部南侧发源、在中南部汇合；东峰东南翼被断层切出一道陡崖；西南有盆地湖泊，南部还有一座孤丘。下方悬浮的是同一地区的等高线地形图。\n\n操作\n拖动旋转视角，滚轮缩放，右键平移。\n鼠标悬停地表可读取该点海拔与坡度，左下角地形图同步显示位置。\n在左下角地形图上拖动可绘制剖面线；单击可让镜头飞到该处。\n键盘 ← → 切换章节，适合投屏讲解。\n开始\n环绕观察\n进入第一节\nVIEW · 显示设置\n等高距\n50 m\n100 m\n200 m\n地表\n实景\n分层设色\n坡度\n垂直夸张\n1.5×\n等高线\n阶梯模型\n地貌标注\n投影底图\n河湖\n植被\n云影\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 610,
+      "canvas": [
+        {
+          "id": "gl",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ze (https://wedulab.com/assets/OrbitControls-D-zZTbsE.js:2827:44115)\n    at new Ue (https://wedulab.com/assets/OrbitControls-D-zZTbsE.js:2827:44507)\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:1:7307)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at It (https://wedulab.com/assets/Page-CCiHCD5r.js:59:1031)\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:59:1481)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:78:3729\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:78:4133)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "map",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:78:11713)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "prof",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:78:14685)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Yt (https://wedulab.com/assets/Page-CCiHCD5r.js:78:7457)\n    at Vt (https://wedulab.com/assets/Page-CCiHCD5r.js:78:7404)\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:173:8683)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Yt (https://wedulab.com/assets/Page-CCiHCD5r.js:78:7571)\n    at Vt (https://wedulab.com/assets/Page-CCiHCD5r.js:78:7404)\n    at Un (https://wedulab.com/assets/Page-CCiHCD5r.js:173:8683)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Yt (https://wedulab.com/assets/Page-CCiHCD5r.js:78:7571)\n    at https://wedulab.com/assets/Page-CCiHCD5r.js:173:8937"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-CCiHCD5r.js",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/OrbitControls-D-zZTbsE.js",
+        "https://wedulab.com/assets/Page-DRo91e6G.css",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "00\n认识等高线地形图\nOVERVIEW",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n等高线的形成\nHOW CONTOURS FORM",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n海拔与相对高度\nELEVATION",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n等高距与坡度\nINTERVAL & SLOPE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n山顶与盆地\nSUMMIT & BASIN",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n山脊与山谷\nRIDGE & VALLEY",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n鞍部\nSADDLE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n陡崖\nCLIFF",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n地形剖面图\nTOPOGRAPHIC PROFILE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n随堂检测\nQUIZ",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "mapExp",
+          "text": "",
+          "type": "submit",
+          "title": "放大"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "profClose",
+          "text": "×",
+          "type": "submit",
+          "title": "关闭"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "环绕观察",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "进入第一节",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "50 m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "100 m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "200 m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "实景",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "分层设色",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "坡度",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "exR",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "等高线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "阶梯模型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "地貌标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "投影底图",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "河湖",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "植被",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "云影",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "等高线 3D 课堂",
+      "text": "← WEDULAB\nCONTOUR·3D\n等高线地形 · 三维教学演示\n简体中文\n视角\nCHAPTERS · 章节\n00\n认识等高线地形图\nOVERVIEW\n01\n等高线的形成\nHOW CONTOURS FORM\n02\n海拔与相对高度\nELEVATION\n03\n等高距与坡度\nINTERVAL & SLOPE\n04\n山顶与盆地\nSUMMIT & BASIN\n05\n山脊与山谷\nRIDGE & VALLEY\n06\n鞍部\nSADDLE\n07\n陡崖\nCLIFF\n08\n地形剖面图\nTOPOGRAPHIC PROFILE\n09\n随堂检测\nQUIZ\n← → 切换章节\nR 重置视角　F 全屏\n主峰\n1432 m\n中峰\n1057 m\n东峰\n1268 m\n鞍部\n747 m\n鞍部\n798 m\n山脊\nRIDGE\n山谷\nVALLEY\n陡崖\nCLIFF\n盆地\n35 m\n孤丘\n448 m\nCHAPTER 00 / 09\n认识等高线地形图\n\nOVERVIEW\n\nN\n等高线地形图\n拖动绘制剖面线\n悬停读取海拔\n比例 1:50 000\n地形剖面图\n×\n00\n认识等高线地形图\nOVERVIEW\n\n等高线是地面上海拔相同的各点连成的闭合曲线。把立体的地表“压”成平面上的一圈圈线条，就能在一张纸上读出山的高低、坡的陡缓和地形的起伏。\n\n8 km × 8 km 虚拟山区\n北部三座山峰连成东西向山脉，两条支流从鞍部南侧发源、在中南部汇合；东峰东南翼被断层切出一道陡崖；西南有盆地湖泊，南部还有一座孤丘。下方悬浮的是同一地区的等高线地形图。\n\n操作\n拖动旋转视角，滚轮缩放，右键平移。\n鼠标悬停地表可读取该点海拔与坡度，左下角地形图同步显示位置。\n在左下角地形图上拖动可绘制剖面线；单击可让镜头飞到该处。\n键盘 ← → 切换章节，适合投屏讲解。\n开始\n环绕观察\n进入第一节\nVIEW · 显示设置\n等高距\n50 m\n100 m\n200 m\n地表\n实景\n分层设色\n坡度\n垂直夸张\n1.5×\n等高线\n阶梯模型\n地貌标注\n投影底图\n河湖\n植被\n云影\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 610,
+      "canvas": [
+        {
+          "id": "gl",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ze (http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js:2827:44115)\n    at new Ue (http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js:2827:44507)\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:1:7307)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at It (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:59:1031)\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:59:1481)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:3729\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:4133)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "map",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:11713)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "prof",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:14685)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Yt (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:7457)\n    at Vt (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:7404)\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:8683)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Yt (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:7571)\n    at Vt (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:7404)\n    at Un (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:8683)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:9119\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Yt (http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:78:7571)\n    at http://127.0.0.1:4173/assets/Page-CCiHCD5r.js:173:8937"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-CCiHCD5r.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js",
+        "http://127.0.0.1:4173/assets/Page-DRo91e6G.css",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "00\n认识等高线地形图\nOVERVIEW",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n等高线的形成\nHOW CONTOURS FORM",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n海拔与相对高度\nELEVATION",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n等高距与坡度\nINTERVAL & SLOPE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n山顶与盆地\nSUMMIT & BASIN",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n山脊与山谷\nRIDGE & VALLEY",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n鞍部\nSADDLE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n陡崖\nCLIFF",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n地形剖面图\nTOPOGRAPHIC PROFILE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n随堂检测\nQUIZ",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "mapExp",
+          "text": "",
+          "type": "submit",
+          "title": "放大"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "profClose",
+          "text": "×",
+          "type": "submit",
+          "title": "关闭"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "环绕观察",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "进入第一节",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "50 m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "100 m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "200 m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "实景",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "分层设色",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "坡度",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "exR",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "等高线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "阶梯模型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "地貌标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "投影底图",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "河湖",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "植被",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "云影",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

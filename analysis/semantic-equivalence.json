@@ -1,0 +1,205 @@
+{
+  "method": "Compare Babel ASTs after alpha-normalizing lexical binding names and mapping import paths; ignore formatting/comments/source locations/shorthand metadata and grammar-preserving block wrappers around a single if, and equivalent literal object keys only. Core split checked separately by visual regression and preserved definitions.",
+  "results": [
+    {
+      "original": "Home-DIbY4xn7.js",
+      "semantic": "home/Home.js",
+      "equivalent": true
+    },
+    {
+      "original": "catalog-XdwsjaGd.js",
+      "semantic": "home/catalog.js",
+      "equivalent": true
+    },
+    {
+      "original": "LanguageSwitcher-K4pSOXN-.js",
+      "semantic": "components/LanguageSwitcher.js",
+      "equivalent": true
+    },
+    {
+      "original": "Analytics-DJiIjrsr.js",
+      "semantic": "admin/Analytics.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-DDIIxL8W.js",
+      "semantic": "labs/volt/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-Bjq3k2Gg.js",
+      "semantic": "labs/motion/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-DwZTQJtf.js",
+      "semantic": "labs/optics/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-t52A13oF.js",
+      "semantic": "labs/waves/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-rwd5-Bjn.js",
+      "semantic": "labs/fields/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-CCiHCD5r.js",
+      "semantic": "labs/contour/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-C83Ns7th.js",
+      "semantic": "labs/atmos/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-DtRXWW06.js",
+      "semantic": "labs/earth/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-DhtjytuL.js",
+      "semantic": "labs/drift/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-C7ATjR3d.js",
+      "semantic": "labs/water/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-BmHCOAca.js",
+      "semantic": "labs/vsepr/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-iY65WCs6.js",
+      "semantic": "labs/orbital/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-C9Fi6SfR.js",
+      "semantic": "labs/reaction/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-BIoROilc.js",
+      "semantic": "labs/mechanism/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-DpQvKtp-.js",
+      "semantic": "labs/cell/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-qS6a4Hdm.js",
+      "semantic": "labs/micro/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-B-ZrcdrO.js",
+      "semantic": "labs/geo/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-ByKJXWQd.js",
+      "semantic": "labs/conic/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-tKxVWO0n.js",
+      "semantic": "labs/func/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-DbWcpJ3P.js",
+      "semantic": "labs/construct/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-9KV-PZLB.js",
+      "semantic": "labs/pythagoras/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "Page-BHNjPbNx.js",
+      "semantic": "labs/wonder/Page.js",
+      "equivalent": true
+    },
+    {
+      "original": "BufferGeometryUtils--VnzLiDd.js",
+      "semantic": "vendor/BufferGeometryUtils--VnzLiDd.js",
+      "equivalent": true
+    },
+    {
+      "original": "LineSegments2-CF4-EQBa.js",
+      "semantic": "vendor/LineSegments2-CF4-EQBa.js",
+      "equivalent": true
+    },
+    {
+      "original": "OrbitControls-D-zZTbsE.js",
+      "semantic": "vendor/OrbitControls-D-zZTbsE.js",
+      "equivalent": true
+    },
+    {
+      "original": "OutputPass-B-cSf-Py.js",
+      "semantic": "vendor/OutputPass-B-cSf-Py.js",
+      "equivalent": true
+    },
+    {
+      "original": "RoundedBoxGeometry-BuxEdaMS.js",
+      "semantic": "vendor/RoundedBoxGeometry-BuxEdaMS.js",
+      "equivalent": true
+    },
+    {
+      "original": "charts-CzzpgoDB.js",
+      "semantic": "vendor/charts-CzzpgoDB.js",
+      "equivalent": true
+    },
+    {
+      "original": "confetti-D_DoZ5bY.js",
+      "semantic": "vendor/confetti-D_DoZ5bY.js",
+      "equivalent": true
+    },
+    {
+      "original": "earth_bm_07-CEsBUeyA.js",
+      "semantic": "vendor/earth_bm_07-CEsBUeyA.js",
+      "equivalent": true
+    },
+    {
+      "original": "earth_clouds_1024-Dm-FkLh-.js",
+      "semantic": "vendor/earth_clouds_1024-Dm-FkLh-.js",
+      "equivalent": true
+    },
+    {
+      "original": "land-50m-fTrrQOwI.js",
+      "semantic": "vendor/land-50m-fTrrQOwI.js",
+      "equivalent": true
+    },
+    {
+      "original": "math-_7kWGBgE.js",
+      "semantic": "vendor/math-_7kWGBgE.js",
+      "equivalent": true
+    },
+    {
+      "original": "outline-B5slIcEP.js",
+      "semantic": "vendor/outline-B5slIcEP.js",
+      "equivalent": true
+    },
+    {
+      "original": "studio-DdpeYmJn.js",
+      "semantic": "vendor/studio-DdpeYmJn.js",
+      "equivalent": true
+    },
+    {
+      "original": "theme-aLwyR9RG.js",
+      "semantic": "vendor/theme-aLwyR9RG.js",
+      "equivalent": true
+    }
+  ]
+}

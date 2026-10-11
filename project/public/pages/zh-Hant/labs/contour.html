@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230092c7'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='24' fill='white'%3EW%3C/text%3E%3C/svg%3E" />
+    <title>等高線 3D 課堂 - WeduLab 教學工具集</title>
+    <meta name="description" content="等高線三維教學演示：水平面切割與投影動畫、階梯模型、同步地形圖、剖面圖繪製與隨堂檢測。" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="WY" />
+    <link rel="canonical" href="https://wedulab.com/labs/contour?lang=zh-Hant" />
+    <link rel="alternate" hreflang="zh-CN" href="https://wedulab.com/labs/contour" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://wedulab.com/labs/contour?lang=zh-Hant" />
+    <link rel="alternate" hreflang="ja" href="https://wedulab.com/labs/contour?lang=ja" />
+    <link rel="alternate" hreflang="ko" href="https://wedulab.com/labs/contour?lang=ko" />
+    <link rel="alternate" hreflang="tr" href="https://wedulab.com/labs/contour?lang=tr" />
+    <link rel="alternate" hreflang="en" href="https://wedulab.com/labs/contour?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://wedulab.com/labs/contour" />
+    <meta property="og:url" content="https://wedulab.com/labs/contour?lang=zh-Hant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="WeduLab" />
+    <meta property="og:title" content="等高線 3D 課堂 - WeduLab 教學工具集" />
+    <meta property="og:description" content="等高線三維教學演示：水平面切割與投影動畫、階梯模型、同步地形圖、剖面圖繪製與隨堂檢測。" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+    <meta property="og:locale:alternate" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="等高線 3D 課堂 - WeduLab 教學工具集" />
+    <meta name="twitter:description" content="等高線三維教學演示：水平面切割與投影動畫、階梯模型、同步地形圖、剖面圖繪製與隨堂檢測。" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://wedulab.com/#website","url":"https://wedulab.com/","name":"WeduLab","alternateName":"WeduLab 教學工具集","description":"面向課堂的交互式教學工具合集。打開即用，無需安裝，適合投屏演示與學生自主探究。","inLanguage":["zh-CN","zh-Hant","ja","ko","tr","en"],"author":{"@type":"Person","name":"WY"}},{"@type":"LearningResource","@id":"https://wedulab.com/labs/contour?lang=zh-Hant#lab","url":"https://wedulab.com/labs/contour?lang=zh-Hant","name":"等高線 3D 課堂","alternateName":["Contour 3D","TOPOGRAPHIC CONTOUR LAB"],"description":"等高線三維教學演示：水平面切割與投影動畫、階梯模型、同步地形圖、剖面圖繪製與隨堂檢測。","inLanguage":"zh-Hant","learningResourceType":"Interactive simulation","interactivityType":"active","educationalUse":["Classroom demonstration","Self-directed exploration"],"educationalLevel":["國中","高中"],"about":{"@type":"Thing","name":"地理"},"teaches":["等高線形成","山頂·山脊·山谷","鞍部·陡崖·盆地","地形剖面圖"],"keywords":"等高線形成、山頂·山脊·山谷、鞍部·陡崖·盆地、地形剖面圖","isAccessibleForFree":true,"author":{"@type":"Person","name":"WY"},"isPartOf":{"@id":"https://wedulab.com/#website"},"hasPart":[{"@type":"LearningResource","name":"認識等高線地形圖"},{"@type":"LearningResource","name":"等高線的形成"},{"@type":"LearningResource","name":"海拔與相對高度"},{"@type":"LearningResource","name":"等高距與坡度"},{"@type":"LearningResource","name":"山頂與盆地"},{"@type":"LearningResource","name":"山脊與山谷"},{"@type":"LearningResource","name":"鞍部"},{"@type":"LearningResource","name":"陡崖"},{"@type":"LearningResource","name":"地形剖面圖"},{"@type":"LearningResource","name":"隨堂檢測"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WeduLab","item":"https://wedulab.com/?lang=zh-Hant"},{"@type":"ListItem","position":2,"name":"等高線 3D 課堂","item":"https://wedulab.com/labs/contour?lang=zh-Hant"}]}]}</script>
+    <style>.seo{box-sizing:border-box;max-width:780px;margin:24px auto;padding:28px 20px 40px;background:#fff;color:#1f2a37;border-radius:12px;font:15px/1.75 system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;animation:seo-in .3s 1.5s both}.seo h1{font-size:26px;line-height:1.3;margin:8px 0 12px}.seo h2{font-size:19px;margin:28px 0 8px}.seo h3{font-size:16px;margin:18px 0 4px}.seo p{margin:6px 0}.seo a{color:#0071a1}.seo ul{padding-left:20px}.seo .seo-meta{color:#526070;font-size:14px}@keyframes seo-in{from{opacity:0}}@media (prefers-color-scheme:dark){.seo{background:#121a24;color:#dce4ec}.seo a{color:#5cc8f0}.seo .seo-meta{color:#9aa8b6}}</style>
+    
+    
+    <!-- 字体样式表不阻塞首屏：Google Fonts 在部分网络下很慢或不可达。 -->
+    <link href="/fonts/fonts.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="/fonts/fonts.css" rel="stylesheet" /></noscript>
+    <script type="module" crossorigin src="/src/main.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BOM_njxY.css">
+  </head>
+  <body>
+    <div id="root"><main class="seo">
+<nav class="seo-meta"><a href="/?lang=zh-Hant">WeduLab</a> › 地理</nav>
+<h1>等高線 3D 課堂</h1>
+<p>等高線三維教學演示：水平面切割與投影動畫、階梯模型、同步地形圖、剖面圖繪製與隨堂檢測。</p>
+<p class="seo-meta">學科：地理 · 適用學段：國中、高中 · 知識點：等高線形成、山頂·山脊·山谷、鞍部·陡崖·盆地、地形剖面圖</p>
+<h2>章節內容</h2>
+<section><h3>認識等高線地形圖</h3><p>等高線是地面上海拔相同的各點連成的閉合曲線。把立體的地表“壓”成平面上的一圈圈線條，就能在一張紙上讀出山的高低、坡的陡緩和地形的起伏。</p><p>8 km × 8 km 虛擬山區北部三座山峰連成東西向山脈，兩條支流從鞍部南側發源、在中南部匯合；東峰東南翼被斷層切出一道陡崖；西南有盆地湖泊，南部還有一座孤丘。下方懸浮的是同一地區的等高線地形圖。</p><p>拖動旋轉視角，滾輪縮放，右鍵平移。</p><p>鼠標懸停地表可讀取該點海拔與坡度，左下角地形圖同步顯示位置。</p><p>在左下角地形圖上拖動可繪製剖面線；單擊可讓鏡頭飛到該處。</p><p>鍵盤 ← → 切換章節，適合投屏講解。</p></section>
+<section><h3>等高線的形成</h3><p>用一組間隔相等的水平面去截切地表，每個水平面與地表的交線就是一條等高線；再把這些交線垂直投影到同一平面上，便得到等高線地形圖。</p><p>同線等高：同一條等高線上各點的海拔相等。</p><p>同圖等距：同一幅圖中，相鄰等高線的高差（等高距）相同。</p><p>閉合曲線：每條等高線都是閉合的，可能在圖幅外閉合。</p><p>一般不相交：只有在陡崖處才會重合。</p></section>
+<section><h3>海拔與相對高度</h3><p>海拔（絕對高度）是地面某點高出海平面的垂直距離；相對高度是兩個地點之間的海拔差。</p><p>相對高度 = 海拔高 − 海拔低</p></section>
+<section><h3>等高距與坡度</h3><p>相鄰兩條等高線之間的高差叫等高距。在同一幅圖中，等高線越密集，坡度越陡；越稀疏，坡度越緩。</p><p>密陡 · 疏緩水平距離越短、升高同樣的等高距，坡就越陡。</p></section>
+<section><h3>山頂與盆地</h3><p>兩者都表現為一組閉合等高線。數值內高外低為山頂，內低外高為盆地（窪地）。</p><p>內高外低 → 山頂內低外高 → 盆地</p><p>垂直於等高線的短線，指向海拔較低的一側。</p><p>山頂的示坡線畫在閉合線外側，盆地的畫在內側——在左下角地形圖中可以看到。</p></section>
+<section><h3>山脊與山谷</h3><p>等高線向同一方向彎曲時：彎曲部分凸向低處為山脊，凸向高處為山谷。</p><p>凸低為脊 · 凸高為谷</p><p>山脊線（金色）是分水線：雨水沿它向兩側分流。</p><p>山谷線是集水線，河流多發育在山谷中（藍色河流）。</p><p>河流的流向與山谷處等高線的凸出方向相反；本圖兩條支流都發源於北部鞍部，自北向南流，在中南部匯合。</p></section>
+<section><h3>鞍部</h3><p>鞍部是相鄰兩個山頂之間相對低窪的部位，形似馬鞍。在圖上表現為兩組閉合等高線之間的部分。</p><p>兩山夾一低比兩側山頂低，又比兩側山谷高。</p></section>
+<section><h3>陡崖</h3><p>多條等高線在某處重合的地方是陡崖。圖上常用專門的陡崖符號表示，短齒指向崖下低處。本圖東峰的東南翼被一條東北—西南走向的斷層切斷，下降盤一側沉落，留下高聳的斷層崖：崖高在中段最大，向兩端逐漸消失，等高線也只在中段重合。</p></section>
+<section><h3>地形剖面圖</h3><p>剖面圖反映沿某條直線方向的地勢起伏。在地形圖上確定剖面線，找出它與各等高線的交點，按比例標出交點海拔，再用平滑曲線連接。</p><p>01定剖面線</p><p>02找交點</p><p>03定海拔</p><p>04連曲線</p></section>
+<section><h3>隨堂檢測</h3></section>
+<h2>更多實驗</h2>
+<ul><li><a href="/labs/volt?lang=zh-Hant">VoltLab 電學實驗臺</a></li><li><a href="/labs/atmos?lang=zh-Hant">大氣環流粒子課堂</a></li><li><a href="/labs/earth?lang=zh-Hant">地球運動課堂</a></li><li><a href="/labs/drift?lang=zh-Hant">海陸的變遷</a></li><li><a href="/labs/water?lang=zh-Hant">水循環三維沙盤 · WaterCycle</a></li><li><a href="/labs/cell?lang=zh-Hant">細胞 · 三維結構</a></li><li><a href="/labs/micro?lang=zh-Hant">顯微鏡實驗台 · MicroLab</a></li><li><a href="/labs/mechanism?lang=zh-Hant">反應機理 · 分子動畫</a></li><li><a href="/labs/vsepr?lang=zh-Hant">分子構型 · VSEPR</a></li><li><a href="/labs/orbital?lang=zh-Hant">原子軌道 · 電子雲</a></li><li><a href="/labs/reaction?lang=zh-Hant">化學反應 · 微觀世界</a></li><li><a href="/labs/geo?lang=zh-Hant">立體幾何 · GeoSpace</a></li><li><a href="/labs/conic?lang=zh-Hant">圓錐曲線 · ConicLab</a></li><li><a href="/labs/func?lang=zh-Hant">函數圖像 · FuncLab</a></li><li><a href="/labs/construct?lang=zh-Hant">尺規作圖 · ConstructLab</a></li><li><a href="/labs/pythagoras?lang=zh-Hant">勾股定理 · PythagoLab</a></li><li><a href="/labs/wonder?lang=zh-Hant">趣味數學 · WonderLab</a></li><li><a href="/labs/motion?lang=zh-Hant">運動與力 · MotionLab</a></li><li><a href="/labs/optics?lang=zh-Hant">光學實驗台 · OpticsLab</a></li><li><a href="/labs/waves?lang=zh-Hant">振動與波 · WaveLab</a></li><li><a href="/labs/fields?lang=zh-Hant">電場與磁場 · FieldLab</a></li></ul>
+<p><a href="/?lang=zh-Hant">返回首頁</a></p>
+</main></div>
+  </body>
+</html>

@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "name": "WeduLab homepage with laboratory theme variants",
+    "description": "SOURCE CSS tokens from Home-CfI5xIBn.css; qualitative style descriptions are inferred. Laboratory exact values are retained in route CSS rather than flattened into one palette.",
+    "source_references": [
+      "https://wedulab.com/?lang=zh-CN",
+      "../recovered-production/assets/Home-CfI5xIBn.css",
+      "01-module-inventory.md"
+    ],
+    "created_at": "2026-10-11"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "cool neutral palette with subject-specific accent colors",
+      "primary": {
+        "hex": "#0092c7",
+        "role": "brand and physics accent"
+      },
+      "secondary": {
+        "hex": "#c9800f",
+        "role": "geography accent"
+      },
+      "accent": {
+        "hex": "#c43aa0",
+        "role": "chemistry accent"
+      },
+      "neutral": {
+        "scale": [
+          "#ffffff",
+          "#f5f8fb",
+          "#eef2f7",
+          "#97a4b3",
+          "#5b6b7d",
+          "#12202f"
+        ],
+        "usage": "cards/backgrounds and caption/body text"
+      },
+      "semantic": {
+        "success": "#0f9e63",
+        "warning": "#c9800f",
+        "error": "#d1372c",
+        "info": "#0092c7"
+      },
+      "surface": {
+        "background": "#eef2f7",
+        "card": "#ffffff",
+        "elevated": "#f5f8fb"
+      },
+      "contrast_strategy": "dark text on light layered surfaces"
+    },
+    "typography": {
+      "font_families": {
+        "heading": "Chakra Petch with Chinese system sans fallbacks",
+        "body": "Chakra Petch, PingFang SC, Hiragino Sans GB, Noto Sans SC, Microsoft YaHei, sans-serif",
+        "mono": "JetBrains Mono, ui-monospace, Menlo, Consolas, monospace"
+      },
+      "font_style_notes": "Latin technical lettering; laboratory long-form content also uses Noto Serif SC."
+    },
+    "spacing": {
+      "base_unit": "SOURCE background grid: 24px; spacing constants preserved in CSS",
+      "scale": [
+        6,
+        8,
+        12,
+        18,
+        24
+      ],
+      "content_density": "comfortable",
+      "section_rhythm": "card grid followed by spaced social section"
+    },
+    "layout": {
+      "grid_system": "responsive CSS grid; three desktop card columns",
+      "max_content_width": "1180px",
+      "columns": "3 desktop, fewer at original breakpoints",
+      "gutter": "24px outer padding",
+      "breakpoints": [
+        "@media(max-width:900px)",
+        "@media(max-width:480px)",
+        "@media(max-width:640px)"
+      ],
+      "alignment_tendency": "strict card grid"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "square clipped cards",
+        "medium": "original input/modal CSS retained",
+        "large": "not used for main cards",
+        "pill": "feedback trigger and language controls use original CSS"
+      },
+      "border_usage": "1px translucent blue-gray borders",
+      "divider_style": "thin blue-gray dividers"
+    },
+    "elevation": {
+      "shadow_style": "subtle drop shadow and hover accent",
+      "depth_cues": "white cards, borders and SVG glow"
+    },
+    "iconography": {
+      "style": "technical line SVG illustrations",
+      "stroke_weight": "SOURCE varies by SVG drawing; retained catalog SVG strings",
+      "size_scale": [
+        "36px brand",
+        "card preview SVG viewBox sizes retained"
+      ],
+      "preferred_set": "original custom inline SVG"
+    },
+    "motion": {
+      "easing": "original CSS easing and SVG SMIL timing retained",
+      "entrance_pattern": "initial card display",
+      "exit_pattern": "filter changes; original React state retained",
+      "philosophy": "animated previews communicate scientific models"
+    },
+    "components": {
+      "button_style": "small outlined chips and language menu",
+      "input_style": "outlined feedback inputs",
+      "card_style": "white cards with clipped 12px corners and subject accent",
+      "navigation_pattern": "sticky 64px brand header; category filter; linked experiment cards",
+      "modal_style": "native dialog feedback form",
+      "list_style": "subject topic tags in each card",
+      "component_notes": "Home initial 12 cards; expand reveals all 22. Laboratory pages have distinct original control panels."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": [
+        "technical",
+        "clear",
+        "exploratory",
+        "academic"
+      ],
+      "visual_metaphor": "teaching laboratory console",
+      "era_influence": "contemporary web scientific tools",
+      "genre": "interactive educational toolkit",
+      "personality_traits": [
+        "precise",
+        "accessible",
+        "curious"
+      ],
+      "adjectives": [
+        "structured",
+        "light",
+        "technical"
+      ]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "grid background, clipped corners and animated SVG",
+      "whitespace_usage": "consistent card gutters",
+      "visual_weight_distribution": "even grid with subject accents",
+      "focal_strategy": "distributed tool previews",
+      "contrast_level": "high text contrast",
+      "texture_usage": "24px subtle grid"
+    },
+    "composition": {
+      "hierarchy_method": "brand, filters, preview, title, description, tags, action",
+      "balance_type": "symmetric grid",
+      "flow_direction": "top-to-bottom",
+      "grouping_strategy": "subject filters and equal card grouping",
+      "negative_space_role": "separates tool previews and social information"
+    },
+    "imagery": {
+      "photo_treatment": "unaltered original social QR images",
+      "illustration_style": "scientific SVG line illustrations",
+      "graphic_elements": "circuits, contours, orbits, molecules and particles",
+      "pattern_usage": "fine grid",
+      "image_shape": "clipped card preview panels"
+    },
+    "interaction_feel": {
+      "feedback_style": "hover border/accent and pressed filter states",
+      "hover_behavior": "original transitions; cards remain linked",
+      "transition_personality": "quick functional transitions",
+      "loading_style": "animated atom loader",
+      "microinteraction_density": "moderate"
+    },
+    "brand_voice_in_ui": {
+      "tone": "instructional",
+      "formality": "clear neutral Chinese",
+      "cta_style": "enter experiment",
+      "empty_state_approach": "explicit error message and return-home link",
+      "error_tone": "direct and actionable"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "moderate",
+      "performance_tier": "lightweight homepage; heavy laboratory scenes",
+      "fallback_strategy": "original error/loading boundaries retained",
+      "primary_technology": "SVG/CSS homepage; original Three/WebGL and Canvas2D laboratory runtimes"
+    },
+    "background_effects": {
+      "type": "CSS grid and radial gradient",
+      "description": "24px light grid with blue radial wash",
+      "technology": "CSS"
+    },
+    "particle_systems": {
+      "enabled": false
+    },
+    "3d_elements": {
+      "enabled": false
+    },
+    "shader_effects": {
+      "enabled": false
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": false
+      },
+      "scroll_triggered_animations": {
+        "enabled": false
+      },
+      "scroll_morphing": {
+        "enabled": false
+      }
+    },
+    "text_effects": {
+      "type": "none",
+      "description": "static technical typography",
+      "technology": "CSS"
+    },
+    "cursor_effects": {
+      "enabled": false
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": true,
+      "style": "translucent sticky header",
+      "params": {
+        "blur_radius": "8px",
+        "transparency": "#ffffffbf header"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": false
+    },
+    "svg_animations": {
+      "enabled": true,
+      "type": "decorative-loop",
+      "description": "original catalog inline SVG animation strings retained",
+      "params": {
+        "animation_method": "SVG SMIL and CSS animation"
+      }
+    },
+    "composite_notes": "Enabled flags describe homepage only. Experiments retain their own WebGL/Canvas scene definitions. Exact viewport, renderer context, source binding and source-replay evidence for contour are documented under shader/. No effect was recreated by visual guessing."
+  }
+}

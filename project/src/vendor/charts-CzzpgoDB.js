@@ -1,0 +1,1063 @@
+// Recovered from public deployment: charts-CzzpgoDB.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  aI as U,
+  w as nt,
+  k as ot,
+  x as tt,
+  W as at,
+  A as st,
+  h as rt,
+  S as et,
+  C as N,
+  F as lt,
+  j as it,
+  r as ct,
+  H as ft,
+  Z as dt,
+  D as Z,
+  b as I,
+  l as j,
+  M as K,
+  c as z,
+  E as ut,
+  q as pt,
+  U as gt,
+  V as ht,
+  O as xt,
+  f as V,
+  B as bt,
+  a as mt,
+  i as wt,
+  N as yt,
+} from "./OutputPass-B-cSf-Py.js";
+function q(i = 1) {
+  let f = i >>> 0;
+  return () => (f = (f * 1664525 + 1013904223) >>> 0) / 4294967296;
+}
+function D(i, f) {
+  const n = document.createElement("canvas");
+  return ((n.width = i), (n.height = f), [n, n.getContext("2d")]);
+}
+function F(i, { repeat: f = [1, 1], srgb: n = !0, aniso: e = 8 } = {}) {
+  const s = new nt(i);
+  return (
+    (s.wrapS = s.wrapT = ot),
+    s.repeat.set(...f),
+    (s.anisotropy = e),
+    n && (s.colorSpace = tt),
+    s
+  );
+}
+function J(i, f) {
+  const n = Array.from(
+    {
+      length: f + 1,
+    },
+    i,
+  );
+  return (e) => {
+    const s = Math.floor(e) % f,
+      t = e - Math.floor(e),
+      o = t * t * (3 - 2 * t);
+    return n[s] * (1 - o) + n[s + 1] * o;
+  };
+}
+function Pt() {
+  const [n, e] = D(2048, 512),
+    [s, t] = D(2048, 512),
+    o = q(7),
+    l = J(o, 48),
+    c = J(o, 24),
+    r = J(o, 256),
+    u = e.createImageData(2048, 512),
+    x = t.createImageData(2048, 512);
+  for (let a = 0; a < 512; a++)
+    for (let h = 0; h < 2048; h++) {
+      const p = h / 2048,
+        y = l((p * 48 + a * 0.002) % 48) * 9 + c((p * 24) % 24) * 16,
+        m = (a + y) * 0.21,
+        w = Math.pow(0.5 + 0.5 * Math.sin(m + Math.sin(m * 0.37) * 1.2), 2.2),
+        H = r((a * 7.3 + p * 3) % 256) * 0.18,
+        A = o() < 0.006 ? -14 : 0,
+        S = 0.8 + 0.1 * w + H - 0.09,
+        $ = (a * 2048 + h) * 4;
+      ((u.data[$] = 112 * S + 16 + A),
+        (u.data[$ + 1] = 72 * S + 10 + A * 0.7),
+        (u.data[$ + 2] = 44 * S + 6 + A * 0.5),
+        (u.data[$ + 3] = 255));
+      const g = 160 + w * 30 + (o() - 0.5) * 24;
+      ((x.data[$] = x.data[$ + 1] = x.data[$ + 2] = g), (x.data[$ + 3] = 255));
+    }
+  (e.putImageData(u, 0, 0),
+    t.putImageData(x, 0, 0),
+    (e.globalAlpha = 0.04),
+    (e.strokeStyle = "#f0d8b0"));
+  for (let a = 0; a < 160; a++) {
+    e.beginPath();
+    const h = o() * 2048,
+      p = o() * 512,
+      y = 20 + o() * 160,
+      m = (o() - 0.5) * 0.4;
+    (e.moveTo(h, p),
+      e.lineTo(h + Math.cos(m) * y, p + Math.sin(m) * y),
+      (e.lineWidth = 0.6 + o()),
+      e.stroke());
+  }
+  return {
+    map: F(n, {
+      repeat: [1, 1],
+    }),
+    rough: F(s, {
+      srgb: !1,
+    }),
+  };
+}
+function Ht(i = 3) {
+  const [e, s] = D(1024, 256),
+    t = q(i);
+  ((s.fillStyle = "#b8bcc2"), s.fillRect(0, 0, 1024, 256));
+  for (let o = 0; o < 2600; o++) {
+    const l = t() * 256,
+      c = t() * 1024,
+      r = 80 + t() * 600,
+      u = 150 + t() * 105;
+    ((s.strokeStyle = `rgba(${u},${u},${u + 4},${0.08 + t() * 0.18})`),
+      (s.lineWidth = 0.5 + t() * 1.2),
+      s.beginPath(),
+      s.moveTo(c, l),
+      s.lineTo(c + r, l + (t() - 0.5) * 0.8),
+      s.stroke());
+  }
+  return F(e, {
+    srgb: !1,
+  });
+}
+function St() {
+  const [f, n] = D(1024, 1024),
+    e = q(11);
+  ((n.fillStyle = "#3a3c3f"), n.fillRect(0, 0, 1024, 1024));
+  for (let s = 0; s < 9e3; s++) {
+    const t = 40 + e() * 40;
+    n.fillStyle = `rgba(${t},${t + 1},${t + 3},${0.25 * e()})`;
+    const o = e() * 3.2;
+    n.fillRect(e() * 1024, e() * 1024, o, o);
+  }
+  for (let s = 0; s < 40; s++) {
+    const t = n.createRadialGradient(
+      e() * 1024,
+      e() * 1024,
+      0,
+      e() * 1024,
+      e() * 1024,
+      60 + e() * 160,
+    );
+    (t.addColorStop(0, `rgba(0,0,0,${0.12 * e()})`),
+      t.addColorStop(1, "rgba(0,0,0,0)"),
+      (n.fillStyle = t),
+      n.fillRect(0, 0, 1024, 1024));
+  }
+  return F(f, {
+    repeat: [6, 6],
+  });
+}
+function Tt(i, { dark: f = !0, every: n = 10 } = {}) {
+  const e = Math.round(i * 100),
+    t = Math.min(8192, e * 24),
+    o = 96,
+    l = t / e,
+    [c, r] = D(t, o);
+  ((r.fillStyle = f ? "#16181b" : "#f1ede2"), r.fillRect(0, 0, t, o));
+  const u = f ? "#e9ecef" : "#1b1d20";
+  ((r.fillStyle = u), (r.strokeStyle = u));
+  for (let a = 0; a <= e * 10; a++) {
+    const h = (a / 10) * l,
+      p = a % 100 === 0 ? 44 : a % 50 === 0 ? 30 : a % 10 === 0 ? 24 : 12;
+    ((r.globalAlpha = a % 10 === 0 ? 0.95 : 0.55),
+      r.fillRect(Math.min(t - 1.5, h), 0, a % 10 === 0 ? 1.6 : 1, p));
+  }
+  ((r.globalAlpha = 0.95),
+    (r.font = "600 30px 'JetBrains Mono', Menlo, monospace"),
+    (r.textAlign = "center"));
+  for (let a = 0; a <= e; a += n)
+    r.fillText(String(a), Math.min(t - 30, Math.max(20, a * l)), 80);
+  ((r.font = "600 18px 'JetBrains Mono', Menlo, monospace"),
+    (r.textAlign = "left"),
+    (r.globalAlpha = 0.6),
+    r.fillText("cm", 6, 80));
+  const x = F(c);
+  return ((x.wrapS = x.wrapT = U), x);
+}
+function Wt(i) {
+  const [n, e] = D(256, 256),
+    s = q(i.length * 17),
+    t =
+      {
+        towel: "#d9d4c7",
+        rubber: "#26282b",
+        felt: "#3c5a49",
+        wood: "#a77c4f",
+      }[i] || "#888";
+  if (((e.fillStyle = t), e.fillRect(0, 0, 256, 256), i === "towel")) {
+    for (let o = 0; o < 9e3; o++) {
+      const l = s();
+      ((e.fillStyle =
+        l > 0.5 ? "rgba(255,255,250,.35)" : "rgba(120,110,95,.25)"),
+        e.beginPath(),
+        e.arc(s() * 256, s() * 256, 0.8 + s() * 1.6, 0, 7),
+        e.fill());
+    }
+    ((e.fillStyle = "rgba(60,110,150,.55)"),
+      e.fillRect(0, 256 * 0.08, 256, 6),
+      e.fillRect(0, 256 * 0.86, 256, 6));
+  } else if (i === "rubber")
+    for (let o = 0; o < 256; o += 8)
+      for (let l = (o / 8) % 2 ? 4 : 0; l < 256; l += 8)
+        ((e.fillStyle = "rgba(255,255,255,.05)"),
+          e.beginPath(),
+          e.arc(l, o, 2.2, 0, 7),
+          e.fill());
+  else
+    for (let o = 0; o < 6e3; o++)
+      ((e.fillStyle = `rgba(255,255,255,${s() * 0.06})`),
+        e.fillRect(s() * 256, s() * 256, 1 + s() * 4, 1));
+  return F(n);
+}
+function Et() {
+  const [n, e] = D(1024, 64);
+  ((e.fillStyle = "#c9cdd2"),
+    e.fillRect(0, 0, 1024, 64),
+    (e.fillStyle = "#2a2d31"));
+  for (let s = 8; s < 1024; s += 16)
+    for (const t of [18, 46])
+      (e.beginPath(), e.arc(s + (t === 46 ? 8 : 0), t, 2.4, 0, 7), e.fill());
+  return F(n, {
+    repeat: [8, 1],
+  });
+}
+function $t(
+  i,
+  {
+    w: f = 512,
+    h: n = 128,
+    bg: e = "#1b1d21",
+    fg: s = "#e8e4da",
+    accent: t = "#f0a531",
+  } = {},
+) {
+  const [o, l] = D(f, n);
+  ((l.fillStyle = e),
+    l.fillRect(0, 0, f, n),
+    (l.fillStyle = t),
+    l.fillRect(0, 0, 6, n),
+    (l.fillStyle = s),
+    (l.textBaseline = "middle"),
+    i.forEach((r, u) => {
+      ((l.font =
+        u === 0
+          ? `700 ${Math.round(n * 0.3)}px 'PingFang SC','Noto Sans SC',sans-serif`
+          : `500 ${Math.round(n * 0.18)}px 'JetBrains Mono',Menlo,monospace`),
+        (l.globalAlpha = u === 0 ? 1 : 0.6),
+        l.fillText(r, 22, n * (i.length === 1 ? 0.5 : u === 0 ? 0.38 : 0.74)));
+    }));
+  const c = F(o);
+  return ((c.wrapS = c.wrapT = U), c);
+}
+const Mt = {
+  0: "abcdef",
+  1: "bc",
+  2: "abdeg",
+  3: "abcdg",
+  4: "bcfg",
+  5: "acdfg",
+  6: "acdefg",
+  7: "abc",
+  8: "abcdefg",
+  9: "abcdfg",
+  "-": "g",
+  " ": "",
+  E: "adefg",
+  r: "eg",
+  o: "cdeg",
+  L: "def",
+  H: "bcefg",
+  P: "abefg",
+  F: "aefg",
+  n: "ceg",
+  t: "defg",
+};
+function At(i = 6, { color: f = "#ff4436", w: n = 512, h: e = 160 } = {}) {
+  const [s, t] = D(n, e),
+    o = F(s);
+  o.wrapS = o.wrapT = U;
+  const l = (n - 40) / i,
+    c = e - 44,
+    r = Math.max(5, l * 0.13);
+  function u(a, h, p, y) {
+    const m = l * 0.62,
+      w = c / 2,
+      H = {
+        a: [a + r, h, m - r, r],
+        d: [a + r, h + c - r, m - r, r],
+        g: [a + r, h + w - r / 2, m - r, r],
+        f: [a, h + r, r, w - r],
+        b: [a + m, h + r, r, w - r],
+        e: [a, h + w + r / 2, r, w - r],
+        c: [a + m, h + w + r / 2, r, w - r],
+      }[p];
+    (t.save(),
+      t.transform(1, 0, -0.08, 1, (h + c) * 0.08, 0),
+      (t.fillStyle = y ? f : "rgba(255,70,50,.07)"),
+      y && ((t.shadowColor = f), (t.shadowBlur = 14)),
+      t.fillRect(...H),
+      t.restore());
+  }
+  function x(a) {
+    ((t.fillStyle = "#0b0605"), t.fillRect(0, 0, n, e));
+    const h = t.createLinearGradient(0, 0, 0, e);
+    (h.addColorStop(0, "rgba(255,255,255,.05)"),
+      h.addColorStop(0.5, "rgba(255,255,255,0)"),
+      (t.fillStyle = h),
+      t.fillRect(0, 0, n, e));
+    const p = [];
+    for (const y of String(a))
+      y === "." && p.length
+        ? (p[p.length - 1].dot = !0)
+        : p.push({
+            ch: y,
+            dot: !1,
+          });
+    for (; p.length < i;)
+      p.unshift({
+        ch: " ",
+        dot: !1,
+      });
+    (p.slice(-i).forEach(({ ch: y, dot: m }, w) => {
+      const H = 22 + w * l,
+        A = 22;
+      for (const S of "abcdefg") u(H, A, S, (Mt[y] || "").includes(S));
+      ((t.fillStyle = m ? f : "rgba(255,70,50,.07)"),
+        m && ((t.shadowColor = f), (t.shadowBlur = 12)),
+        t.beginPath(),
+        t.arc(H + l * 0.8, A + c - r / 2, r * 0.62, 0, 7),
+        t.fill(),
+        (t.shadowBlur = 0));
+    }),
+      (o.needsUpdate = !0));
+  }
+  return (
+    x(""),
+    {
+      texture: o,
+      draw: x,
+    }
+  );
+}
+function Lt(i) {
+  const n = Math.min(8192, Math.round(i * 2400)),
+    e = 64,
+    [s, t] = D(n, e),
+    o = F(s);
+  o.wrapS = o.wrapT = U;
+  const l = n / i,
+    c = q(5);
+  function r() {
+    ((t.fillStyle = "#f3eedf"), t.fillRect(0, 0, n, e));
+    for (let x = 0; x < 1600; x++)
+      ((t.fillStyle = `rgba(160,140,100,${c() * 0.07})`),
+        t.fillRect(c() * n, c() * e, 1 + c() * 6, 1));
+    ((t.fillStyle = "rgba(120,100,70,.18)"),
+      t.fillRect(0, 0, n, 2),
+      t.fillRect(0, e - 2, n, 2),
+      (o.needsUpdate = !0));
+  }
+  function u(x) {
+    const a = n - x * l;
+    a < 0 ||
+      a > n ||
+      ((t.fillStyle = "#111"),
+      t.beginPath(),
+      t.arc(a, e / 2 + (c() - 0.5) * 2, 3.6, 0, 7),
+      t.fill(),
+      (o.needsUpdate = !0));
+  }
+  return (
+    r(),
+    {
+      texture: o,
+      clear: r,
+      dot: u,
+    }
+  );
+}
+function vt(i) {
+  const f = new et();
+  f.background = new N("#141518");
+  const n = new I(
+    new bt(14, 6, 14),
+    new z({
+      color: "#1c1d21",
+      side: mt,
+    }),
+  );
+  ((n.position.y = 2), f.add(n));
+  const e = new I(
+    new j(14, 14),
+    new z({
+      color: "#2a2724",
+    }),
+  );
+  ((e.rotation.x = -Math.PI / 2), (e.position.y = -0.9), f.add(e));
+  const s = (l, c, r, u, x, a) => {
+    const h = new I(
+      new j(l, c),
+      new z({
+        color: new N(r).multiplyScalar(u),
+        side: yt,
+      }),
+    );
+    (h.position.set(...x), h.lookAt(...a), f.add(h));
+  };
+  for (let l = -2; l <= 2; l++)
+    s(0.35, 3.2, "#fff4e2", 2.2, [l * 1.6, 4.9, 0], [l * 1.6, 0, 0]);
+  (s(4, 2.2, "#dfe8ff", 0.9, [-6.9, 2.2, 1], [0, 1, 0]),
+    s(3, 1.6, "#ffe0b8", 0.5, [6.9, 1.6, -1], [0, 1, 0]),
+    s(6, 1.2, "#ffffff", 0.35, [0, 1.4, 6.9], [0, 1, 0]));
+  const t = new wt(i),
+    o = t.fromScene(f, 0.02).texture;
+  return (f.traverse((l) => l.geometry?.dispose()), t.dispose(), o);
+}
+const Ct = (i) => (i < 0.5 ? 4 * i * i * i : 1 - Math.pow(-2 * i + 2, 3) / 2);
+function Bt(i, f = {}) {
+  const n = new at({
+    canvas: i,
+    antialias: !0,
+    powerPreference: "high-performance",
+  });
+  n.setPixelRatio(Math.min(window.devicePixelRatio, f.pixelRatio ?? 2));
+  const e = f.maxDegrade ?? 3;
+  ((n.outputColorSpace = tt),
+    (n.toneMapping = st),
+    (n.toneMappingExposure = 0.95),
+    (n.shadowMap.enabled = !0),
+    (n.shadowMap.type = rt));
+  const s = new et();
+  ((s.background = new N("#121316")),
+    (s.fog = new lt("#121316", 6, 16)),
+    (s.environment = vt(n)));
+  const t = new it(32, 1, 0.02, 60);
+  t.position.set(0.4, 1.1, 2.6);
+  const o = new ct(t, i);
+  ((o.enableDamping = !0),
+    (o.dampingFactor = 0.08),
+    (o.minDistance = 0.25),
+    (o.maxDistance = 7),
+    (o.maxPolarAngle = Math.PI * 0.49),
+    o.target.set(0, 0.1, 0));
+  const l = new ft("#d8e2ff", "#2a2118", 0.35);
+  s.add(l);
+  const c = new dt("#ffe7c7", 34, 12, 0.62, 0.55, 1.6);
+  (c.position.set(-1.6, 3.4, 2.2),
+    c.target.position.set(0, 0, 0),
+    (c.castShadow = !0),
+    c.shadow.mapSize.set(2048, 2048),
+    (c.shadow.bias = -15e-5),
+    (c.shadow.normalBias = 0.02),
+    (c.shadow.radius = 4),
+    (c.shadow.camera.near = 1),
+    (c.shadow.camera.far = 8),
+    s.add(c, c.target));
+  const r = new Z("#9fb8ff", 0.55);
+  (r.position.set(3, 1.5, 2), s.add(r));
+  const u = new Z("#ffffff", 0.9);
+  (u.position.set(0.5, 2.5, -3), s.add(u));
+  const x = St(),
+    a = new I(
+      new j(30, 30),
+      new K({
+        map: x,
+        roughness: 0.92,
+        metalness: 0,
+        color: "#8a8d92",
+      }),
+    );
+  ((a.rotation.x = -Math.PI / 2),
+    (a.position.y = -0.78),
+    (a.receiveShadow = !0),
+    s.add(a));
+  const h = new K({
+      color: "#1d1f23",
+      roughness: 0.95,
+    }),
+    p = new I(new j(30, 10), h);
+  (p.position.set(0, 4, -3.2), s.add(p));
+  for (let b = -3; b <= 3; b++) {
+    const P = new I(
+      new j(1.6, 0.05),
+      new z({
+        color: new N("#ffdcae").multiplyScalar(1.4),
+      }),
+    );
+    (P.position.set(b * 2.4, 2.6, -3.18), s.add(P));
+  }
+  const y = new ut(n);
+  y.addPass(new pt(s, t));
+  const m = new gt(new ht(256, 256), 0.28, 0.3, 1.05);
+  (y.addPass(m), y.addPass(new xt()));
+  let w = 1,
+    H = 1;
+  function A() {
+    const b = i.getBoundingClientRect();
+    ((w = Math.max(1, b.width)),
+      (H = Math.max(1, b.height)),
+      n.setSize(w, H, !1),
+      y.setSize(w, H),
+      (t.aspect = w / H),
+      t.updateProjectionMatrix());
+  }
+  (new ResizeObserver(A).observe(i), A());
+  let S = null;
+  function $(b, P, d = 1.1) {
+    S = {
+      p0: t.position.clone(),
+      t0: o.target.clone(),
+      p1: new V(...b),
+      t1: new V(...P),
+      k: 0,
+      dur: d,
+    };
+  }
+  function g(b, P) {
+    ((S = null), t.position.set(...b), o.target.set(...P), o.update());
+  }
+  let T = 0,
+    v = 0,
+    k = 0,
+    R = 0;
+  function W(b) {
+    if (((k += b), R++, k < 2)) return;
+    const P = R / k;
+    ((k = 0),
+      (R = 0),
+      P < 38 ? v++ : (v = 0),
+      v >= 2 &&
+        T < e &&
+        (T++,
+        (v = 0),
+        T === 1 && (m.enabled = !1),
+        T === 2 && (n.setPixelRatio(1), A()),
+        T === 3 &&
+          ((n.shadowMap.enabled = !1),
+          s.traverse((d) => d.material && (d.material.needsUpdate = !0)))));
+  }
+  function L(b) {
+    if (S) {
+      S.k = Math.min(1, S.k + b / S.dur);
+      const P = Ct(S.k);
+      (t.position.lerpVectors(S.p0, S.p1, P),
+        o.target.lerpVectors(S.t0, S.t1, P),
+        S.k >= 1 && (S = null));
+    }
+    (o.update(), y.render(), W(b));
+  }
+  const E = new V();
+  function C(b) {
+    return (
+      E.copy(b).project(t),
+      {
+        x: (E.x * 0.5 + 0.5) * w,
+        y: (-E.y * 0.5 + 0.5) * H,
+        behind: E.z > 1,
+      }
+    );
+  }
+  return {
+    renderer: n,
+    scene: s,
+    camera: t,
+    controls: o,
+    key: c,
+    floor: a,
+    bloom: m,
+    fly: $,
+    jump: g,
+    render: L,
+    project: C,
+    size: () => [w, H],
+    interrupt: () => (S = null),
+  };
+}
+function Dt(i, f, n, e, s) {
+  i.replaceChildren();
+  const t = {};
+  for (const o of f) {
+    const l = s[o];
+    if (!l) continue;
+    const c = document.createElement("div");
+    if (((c.className = `ctl ctl-${l.type}`), l.type === "range")) {
+      ((c.innerHTML =
+        '<div class="ch"><span></span><b></b></div><input type="range">'),
+        (c.querySelector("span").textContent = l.label));
+      const r = c.querySelector("input");
+      Object.assign(r, {
+        min: l.min,
+        max: l.max,
+        step: l.step,
+      });
+      const u = c.querySelector("b"),
+        x = (a) => {
+          ((r.value = a),
+            (u.textContent = l.show(+a)),
+            r.style.setProperty("--k", (a - l.min) / (l.max - l.min)));
+        };
+      (r.addEventListener("input", () => {
+        (x(+r.value), e(o, +r.value));
+      }),
+        (t[o] = x),
+        x(n[o]));
+    } else if (l.type === "toggle") {
+      c.innerHTML = '<button class="tgl"><i></i><span></span></button>';
+      const r = c.querySelector("button");
+      r.querySelector("span").textContent = l.label;
+      const u = (x) => r.classList.toggle("on", !!x);
+      (r.addEventListener("click", () => {
+        const x = !r.classList.contains("on");
+        (u(x), e(o, x));
+      }),
+        (t[o] = u),
+        u(n[o]));
+    } else if (l.type === "seg") {
+      ((c.innerHTML =
+        '<div class="ch"><span></span></div><div class="segs"></div>'),
+        (c.querySelector("span").textContent = l.label));
+      const r = c.querySelector(".segs"),
+        u = l.options.map(([a, h]) => {
+          const p = document.createElement("button");
+          return (
+            (p.textContent = h),
+            p.addEventListener("click", () => {
+              (x(a), e(o, a));
+            }),
+            r.appendChild(p),
+            [a, p]
+          );
+        }),
+        x = (a) => u.forEach(([h, p]) => p.classList.toggle("on", h === a));
+      ((t[o] = x), x(n[o]));
+    }
+    i.appendChild(c);
+  }
+  return (o, l) => t[o]?.(l);
+}
+const kt = "http://www.w3.org/2000/svg",
+  M = (i, f = {}, n) => {
+    const e = document.createElementNS(kt, i);
+    for (const s in f) e.setAttribute(s, f[s]);
+    return (n && n.appendChild(e), e);
+  };
+function Q(i, f, n = 5) {
+  f > i || (f = i + 1);
+  const e = f - i,
+    s = e / n,
+    t = Math.pow(10, Math.floor(Math.log10(s))),
+    o = [1, 2, 2.5, 5, 10].map((u) => u * t).find((u) => e / u <= n) || 10 * t,
+    l = Math.floor(i / o) * o,
+    c = Math.ceil(f / o) * o,
+    r = [];
+  for (let u = l; u <= c + o * 1e-6; u += o) r.push(+u.toFixed(10));
+  return {
+    lo: l,
+    hi: c,
+    step: o,
+    ticks: r,
+  };
+}
+const _ = (i, f) => {
+  const n = Math.max(0, -Math.floor(Math.log10(f) + 1e-9));
+  return i.toFixed(Math.min(4, n));
+};
+function Ft(i, { onScrub: f } = {}) {
+  const n = M(
+      "svg",
+      {
+        class: "chart",
+        preserveAspectRatio: "none",
+      },
+      i,
+    ),
+    e = M(
+      "g",
+      {
+        class: "grid",
+      },
+      n,
+    ),
+    s = M(
+      "g",
+      {
+        class: "axis",
+      },
+      n,
+    ),
+    t = M(
+      "g",
+      {
+        class: "data",
+      },
+      n,
+    ),
+    o = M(
+      "g",
+      {
+        class: "fit",
+      },
+      n,
+    ),
+    l = M(
+      "line",
+      {
+        class: "cursor",
+      },
+      n,
+    ),
+    c = M(
+      "g",
+      {
+        class: "hover",
+      },
+      n,
+    ),
+    r = M("line", {}, c),
+    u = M("g", {}, c);
+  c.style.display = "none";
+  const x = document.createElement("div");
+  ((x.className = "legend"), i.appendChild(x));
+  const a = {
+    l: 52,
+    r: 16,
+    t: 14,
+    b: 30,
+  };
+  let h = null,
+    p = null,
+    y = null,
+    m = 0,
+    w = 0;
+  function H(g) {
+    h = g;
+    const T = i.getBoundingClientRect();
+    ((m = Math.max(120, T.width)),
+      (w = Math.max(80, T.height)),
+      n.setAttribute("viewBox", `0 0 ${m} ${w}`));
+    const v = g.series.filter((d) => d.pts.length);
+    let k = g.x?.[0],
+      R = g.x?.[1],
+      W = g.y?.[0],
+      L = g.y?.[1];
+    const E = [],
+      C = [];
+    for (const d of v) for (const B of d.pts) (E.push(B[0]), C.push(B[1]));
+    if (
+      (k == null && (k = E.length ? Math.min(...E) : 0),
+      R == null && (R = E.length ? Math.max(...E) : 1),
+      W == null && (W = Math.min(0, ...(C.length ? C : [0]))),
+      L == null && (L = Math.max(...(C.length ? C : [1]))),
+      g.fit && g.fitRange)
+    )
+      for (const d of g.fitRange) {
+        const B = g.fit.k * d + g.fit.b;
+        ((L = Math.max(L, B)), (W = Math.min(W, B)));
+      }
+    L - W < 1e-9 && ((L += 0.5), (W -= W === 0 ? 0 : 0.5));
+    const b = Q(k, R, Math.max(3, Math.floor(m / 90))),
+      P = Q(W, L + (L - W) * 0.04, Math.max(3, Math.floor(w / 40)));
+    ((p = (d) => a.l + ((d - b.lo) / (b.hi - b.lo)) * (m - a.l - a.r)),
+      (y = (d) => w - a.b - ((d - P.lo) / (P.hi - P.lo)) * (w - a.t - a.b)),
+      (p.inv = (d) => b.lo + ((d - a.l) / (m - a.l - a.r)) * (b.hi - b.lo)),
+      e.replaceChildren(),
+      s.replaceChildren());
+    for (const d of b.ticks)
+      (M(
+        "line",
+        {
+          x1: p(d),
+          x2: p(d),
+          y1: a.t,
+          y2: w - a.b,
+        },
+        e,
+      ),
+        (M(
+          "text",
+          {
+            x: p(d),
+            y: w - a.b + 16,
+            "text-anchor": "middle",
+          },
+          s,
+        ).textContent = _(d, b.step)));
+    for (const d of P.ticks)
+      (M(
+        "line",
+        {
+          x1: a.l,
+          x2: m - a.r,
+          y1: y(d),
+          y2: y(d),
+          class: Math.abs(d) < 1e-12 ? "zero" : "",
+        },
+        e,
+      ),
+        (M(
+          "text",
+          {
+            x: a.l - 8,
+            y: y(d) + 4,
+            "text-anchor": "end",
+          },
+          s,
+        ).textContent = _(d, P.step)));
+    ((M(
+      "text",
+      {
+        x: m - a.r,
+        y: w - 4,
+        "text-anchor": "end",
+        class: "lab",
+      },
+      s,
+    ).textContent = g.xLabel || ""),
+      (M(
+        "text",
+        {
+          x: a.l + 4,
+          y: a.t + 2,
+          class: "lab",
+          "dominant-baseline": "hanging",
+        },
+        s,
+      ).textContent = g.yLabel || ""),
+      t.replaceChildren());
+    for (const d of v) {
+      if (d.kind === "scatter") {
+        for (const G of d.pts)
+          M(
+            "circle",
+            {
+              cx: p(G[0]),
+              cy: y(G[1]),
+              r: 4.5,
+              fill: d.color,
+              stroke: "rgba(0,0,0,.4)",
+              "stroke-width": 1,
+            },
+            t,
+          );
+        continue;
+      }
+      if (d.kind === "dots") {
+        for (const G of d.pts)
+          M(
+            "circle",
+            {
+              cx: p(G[0]),
+              cy: y(G[1]),
+              r: 3,
+              fill: d.color,
+            },
+            t,
+          );
+        continue;
+      }
+      let B = "",
+        X = -1;
+      (d.pts.forEach((G, Y) => {
+        const O = p(G[0]);
+        (Y && O - X < 0.75 && Y !== d.pts.length - 1) ||
+          ((X = O),
+          (B += `${B ? "L" : "M"}${O.toFixed(1)},${y(G[1]).toFixed(1)}`));
+      }),
+        M(
+          "path",
+          {
+            d: B,
+            stroke: d.color,
+            "stroke-width": d.width || 2,
+            fill: "none",
+            "stroke-dasharray": d.dashed ? "5 4" : "",
+            opacity: d.opacity ?? 1,
+            "stroke-linejoin": "round",
+          },
+          t,
+        ));
+    }
+    if ((o.replaceChildren(), g.fit)) {
+      const [d, B] = g.fitRange || [b.lo, b.hi];
+      (M(
+        "line",
+        {
+          x1: p(d),
+          y1: y(g.fit.k * d + g.fit.b),
+          x2: p(B),
+          y2: y(g.fit.k * B + g.fit.b),
+          stroke: g.fit.color || "#fff",
+          "stroke-width": 1.6,
+          "stroke-dasharray": "6 4",
+        },
+        o,
+      ),
+        g.fit.label &&
+          (M(
+            "text",
+            {
+              x: m - a.r - 6,
+              y: a.t + 34,
+              "text-anchor": "end",
+              class: "fitlab",
+              fill: g.fit.color || "#fff",
+            },
+            o,
+          ).textContent = g.fit.label));
+    }
+    if (g.cursor != null) {
+      l.style.display = "";
+      const d = p(g.cursor);
+      (l.setAttribute("x1", d),
+        l.setAttribute("x2", d),
+        l.setAttribute("y1", a.t),
+        l.setAttribute("y2", w - a.b));
+    } else l.style.display = "none";
+    x.innerHTML = v
+      .filter((d) => d.name)
+      .map(
+        (d) =>
+          `<span><i style="background:${d.color};opacity:${d.opacity ?? 1}"></i>${d.name}</span>`,
+      )
+      .join("");
+  }
+  function A(g, T) {
+    let v = 0,
+      k = g.length - 1;
+    if (!g.length) return null;
+    for (; k - v > 1;) {
+      const R = (v + k) >> 1;
+      g[R][0] <= T ? (v = R) : (k = R);
+    }
+    return Math.abs(g[v][0] - T) < Math.abs(g[k][0] - T) ? g[v] : g[k];
+  }
+  let S = !1;
+  function $(g) {
+    if (!h || !p) return;
+    const T = n.getBoundingClientRect(),
+      v = ((g.clientX - T.left) / T.width) * m;
+    if (v < a.l || v > m - a.r) {
+      c.style.display = "none";
+      return;
+    }
+    const k = p.inv(v);
+    (S && f && f(k),
+      (c.style.display = ""),
+      r.setAttribute("x1", v),
+      r.setAttribute("x2", v),
+      r.setAttribute("y1", a.t),
+      r.setAttribute("y2", w - a.b),
+      u.replaceChildren());
+    const R = [];
+    for (const C of h.series) {
+      if (!C.pts.length || C.kind === "scatter" || C.noHover) continue;
+      const b = A(C.pts, k);
+      b &&
+        (M(
+          "circle",
+          {
+            cx: p(b[0]),
+            cy: y(b[1]),
+            r: 3.5,
+            fill: C.color,
+            stroke: "#0b0c0e",
+            "stroke-width": 1.5,
+          },
+          u,
+        ),
+        R.push({
+          c: C.color,
+          t: `${C.name ? C.name + "  " : ""}${b[1].toFixed(3)}`,
+          x: b[0],
+        }));
+    }
+    if (!R.length) return;
+    const W = 128,
+      L = 18 + R.length * 16,
+      E = v + 12 + W > m ? v - 12 - W : v + 12;
+    (M(
+      "rect",
+      {
+        x: E,
+        y: a.t + 4,
+        width: W,
+        height: L,
+        rx: 5,
+        class: "tip",
+      },
+      u,
+    ),
+      (M(
+        "text",
+        {
+          x: E + 8,
+          y: a.t + 18,
+          class: "tipx",
+        },
+        u,
+      ).textContent = `${h.xName || "t"} = ${R[0].x.toFixed(3)}`),
+      R.forEach((C, b) => {
+        (M(
+          "circle",
+          {
+            cx: E + 11,
+            cy: a.t + 30 + b * 16,
+            r: 3,
+            fill: C.c,
+          },
+          u,
+        ),
+          (M(
+            "text",
+            {
+              x: E + 20,
+              y: a.t + 34 + b * 16,
+            },
+            u,
+          ).textContent = C.t));
+      }));
+  }
+  return (
+    n.addEventListener("pointermove", $),
+    n.addEventListener("pointerleave", () => {
+      c.style.display = "none";
+    }),
+    n.addEventListener("pointerdown", (g) => {
+      !f || !p || ((S = !0), n.setPointerCapture(g.pointerId), $(g));
+    }),
+    n.addEventListener("pointerup", () => (S = !1)),
+    {
+      draw: H,
+      redraw: () => h && H(h),
+      el: n,
+    }
+  );
+}
+export {
+  Et as a,
+  Dt as b,
+  Ft as c,
+  Bt as d,
+  Ht as e,
+  Wt as f,
+  $t as p,
+  Tt as r,
+  At as s,
+  Lt as t,
+  Pt as w,
+};

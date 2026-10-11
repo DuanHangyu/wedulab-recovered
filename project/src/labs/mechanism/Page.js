@@ -1,0 +1,3637 @@
+// Recovered from public deployment: Page-BIoROilc.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  t as translate,
+  r as React,
+  j as jsxRuntime,
+  b as localizedUrl,
+} from "../../core/runtime.js";
+import { L as jt } from "../../components/LanguageSwitcher.js";
+import {
+  f as z,
+  G as bt,
+  b as G,
+  m as Nt,
+  w as Et,
+  ad as Pt,
+  ae as Lt,
+  o as Ct,
+  L as qt,
+  v as Ft,
+  Q as It,
+  aB as Rt,
+  u as zt,
+  K as Tt,
+  M as st,
+  X as Dt,
+  a1 as Vt,
+  c as Gt,
+  N as Wt,
+  C as Jt,
+} from "../../vendor/OutputPass-B-cSf-Py.js";
+import {
+  c as Ut,
+  a as Zt,
+  l as lt,
+  p as _t,
+  u as Kt,
+  S as Qt,
+  n as Xt,
+} from "../../vendor/studio-DdpeYmJn.js"; /* empty css              */ /* empty css               */
+const it = {
+    H: 0.31,
+    C: 0.76,
+    N: 0.71,
+    O: 0.66,
+    F: 0.57,
+    P: 1.07,
+    S: 1.05,
+    Cl: 1.02,
+    Br: 1.2,
+    I: 1.39,
+    Na: 1.66,
+    Ag: 1.45,
+    Zn: 1.22,
+    Cu: 1.32,
+    Al: 1.21,
+    Fe: 1.32,
+    Mg: 1.41,
+  },
+  Ht = {
+    H: 1,
+    C: 4,
+    N: 5,
+    O: 6,
+    F: 7,
+    P: 5,
+    S: 6,
+    Cl: 7,
+    Br: 7,
+    I: 7,
+  },
+  _ = (s, n) => [s[0] - n[0], s[1] - n[1], s[2] - n[2]],
+  K = (s) => Math.hypot(s[0], s[1], s[2]);
+function Q(s, n, c = 1) {
+  return (
+    ((it[s] ?? 1) + (it[n] ?? 1)) *
+    (c >= 3 ? 0.78 : c >= 2 ? 0.87 : c >= 1.5 ? 0.92 : 1)
+  );
+}
+function Yt(s, n, c) {
+  return s in Ht ? Math.max(0, Math.floor((Ht[s] - n - c) / 2)) : 0;
+}
+const te = {
+  2: 180,
+  3: 120,
+  4: 109.47,
+  5: 90,
+  6: 90,
+};
+function yt(s, n, c = {}, { iterations: m = 900, dt: d = 0.04 } = {}) {
+  const M = s.length,
+    i = s.map((g) => [...g.pos]),
+    a = s.map(() => [0, 0, 0]),
+    h = s.map(() => []),
+    y = new Set(),
+    x = (g, e) => (g < e ? `${g}|${e}` : `${e}|${g}`),
+    w = [];
+  for (const g of n) {
+    (h[g.a].push({
+      j: g.b,
+      partial: !!g.partial,
+      order: g.order,
+    }),
+      h[g.b].push({
+        j: g.a,
+        partial: !!g.partial,
+        order: g.order,
+      }),
+      y.add(x(g.a, g.b)));
+    const e = Q(s[g.a].el, s[g.b].el, g.order) * (g.partial ? 1.38 : 1);
+    w.push([g.a, g.b, e, g.partial ? 0.5 : 1.6]);
+  }
+  const b = new Set(c.planar || []),
+    B = [];
+  for (let g = 0; g < M; g++) {
+    const e = h[g].filter((p) => !p.partial);
+    if (e.length < 2) continue;
+    const o = e.reduce((p, O) => p + O.order, 0),
+      r = b.has(g) ? 3 : e.length + Yt(s[g].el, s[g].charge || 0, o),
+      u = ((te[Math.min(6, Math.max(2, r))] || 109.47) * Math.PI) / 180;
+    r === 3 && e.length === 3 && B.push([g, e[0].j, e[1].j, e[2].j]);
+    for (let p = 0; p < e.length; p++)
+      for (let O = p + 1; O < e.length; O++) {
+        const l = e[p].j,
+          f = e[O].j,
+          H = Q(s[g].el, s[l].el, e[p].order),
+          E = Q(s[g].el, s[f].el, e[O].order);
+        (w.push([
+          l,
+          f,
+          Math.sqrt(H * H + E * E - 2 * H * E * Math.cos(u)),
+          0.5,
+        ]),
+          y.add(x(l, f)));
+      }
+  }
+  for (const [g, e, o] of c.pull || []) w.push([g, e, o, 0.8]);
+  const $ = (g, e) => {
+      const o = s[g].el === "H",
+        r = s[e].el === "H";
+      return o && r ? 1.8 : o || r ? 2.2 : 2.6;
+    },
+    A = s.map(() => [0, 0, 0]);
+  for (let g = 0; g < m; g++) {
+    for (const e of A) e[0] = e[1] = e[2] = 0;
+    for (const [e, o, r, u] of w) {
+      const p = _(i[o], i[e]),
+        O = Math.max(K(p), 1e-6),
+        l = (u * (O - r)) / O;
+      for (let f = 0; f < 3; f++)
+        ((A[e][f] += l * p[f]), (A[o][f] -= l * p[f]));
+    }
+    for (const [e, o, r, u] of B) {
+      const p = _(i[r], i[o]),
+        O = _(i[u], i[o]),
+        l = [
+          p[1] * O[2] - p[2] * O[1],
+          p[2] * O[0] - p[0] * O[2],
+          p[0] * O[1] - p[1] * O[0],
+        ],
+        f = K(l);
+      if (f < 1e-6) continue;
+      const H =
+        ((i[e][0] - i[o][0]) * l[0] +
+          (i[e][1] - i[o][1]) * l[1] +
+          (i[e][2] - i[o][2]) * l[2]) /
+        f;
+      for (let E = 0; E < 3; E++) {
+        const I = (1.2 * H * l[E]) / f;
+        ((A[e][E] -= I),
+          (A[o][E] += I / 3),
+          (A[r][E] += I / 3),
+          (A[u][E] += I / 3));
+      }
+    }
+    for (let e = 0; e < M; e++)
+      for (let o = e + 1; o < M; o++) {
+        if (y.has(x(e, o))) continue;
+        const r = _(i[o], i[e]),
+          u = Math.max(K(r), 1e-6),
+          p = $(e, o);
+        if (u >= p) continue;
+        const O = (0.35 * (p - u)) / u;
+        for (let l = 0; l < 3; l++)
+          ((A[e][l] -= O * r[l]), (A[o][l] += O * r[l]));
+      }
+    for (const [e, o] of c.place || []) {
+      const r = [0, 0, 0];
+      for (const u of e) for (let p = 0; p < 3; p++) r[p] += i[u][p] / e.length;
+      for (const u of e)
+        for (let p = 0; p < 3; p++) A[u][p] += 0.12 * (o[p] - r[p]);
+    }
+    for (const [e, o, r] of c.apart || []) {
+      const u = [0, 0, 0],
+        p = [0, 0, 0];
+      for (const f of e) for (let H = 0; H < 3; H++) u[H] += i[f][H] / e.length;
+      for (const f of o) for (let H = 0; H < 3; H++) p[H] += i[f][H] / o.length;
+      const O = _(p, u),
+        l = Math.max(K(O), 1e-6);
+      if (l < r) {
+        const f = (0.1 * (r - l)) / l;
+        for (const H of e) for (let E = 0; E < 3; E++) A[H][E] -= f * O[E];
+        for (const H of o) for (let E = 0; E < 3; E++) A[H][E] += f * O[E];
+      }
+    }
+    for (const [e, o] of c.pins || [])
+      for (let r = 0; r < 3; r++) A[e][r] += 2 * (o[r] - i[e][r]);
+    for (let e = 0; e < M; e++)
+      if (!s[e].fixed)
+        for (let o = 0; o < 3; o++)
+          ((a[e][o] = (a[e][o] + A[e][o] * d * 8) * 0.82),
+            (i[e][o] += a[e][o] * d));
+  }
+  return i;
+}
+function ee(s, n, c = [0, 0, 0], m = 1) {
+  let d = m;
+  const M = () => (d = (d * 16807) % 2147483647) / 2147483647,
+    i = s.length,
+    a = s.map(() => []);
+  for (const $ of n) (a[$.a].push($), a[$.b].push($));
+  const h = new Array(i).fill(null),
+    y = new Array(i).fill(null);
+  for (const $ of oe(i, n)) {
+    if ($.some((e) => h[e])) continue;
+    const g =
+      Q(s[$[0]].el, s[$[1]].el, 1.5) / (2 * Math.sin(Math.PI / $.length));
+    $.forEach((e, o) => {
+      const r = (2 * Math.PI * o) / $.length,
+        u = [Math.cos(r), Math.sin(r), 0];
+      ((h[e] = [c[0] + g * u[0], c[1] + g * u[1], c[2]]), (y[e] = u));
+    });
+  }
+  const x = h.map(($, A) => ($ ? A : -1)).filter(($) => $ >= 0),
+    w = new Set(x),
+    b = [...x, ...[...Array(i).keys()].filter(($) => !h[$])];
+  let B = !0;
+  for (const $ of b) {
+    if (h[$] && !(B && x.length)) continue;
+    h[$] ||
+      (h[$] = [
+        c[0] + (M() - 0.5) * 0.2,
+        c[1] + (M() - 0.5) * 0.2,
+        c[2] + (M() - 0.5) * 0.2,
+      ]);
+    const A = B && x.length ? [...x] : [$];
+    for (B = !1; A.length;) {
+      const g = A.shift(),
+        e = a[g].map((r) => (r.a === g ? r.b : r.a)).filter((r) => !h[r]),
+        o = y[g];
+      e.forEach((r, u) => {
+        const p = (2 * Math.PI * u) / Math.max(1, e.length) + M() * 0.3;
+        let O;
+        if (!o) O = [Math.cos(p), Math.sin(p) * 0.8, (M() - 0.5) * 0.6];
+        else {
+          const H = Math.abs(o[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0],
+            E = xt(wt(o, H)),
+            I = wt(o, E),
+            C = e.length === 1 ? (w.has(g) ? 0 : 0.35) : 1.15;
+          O = [0, 1, 2].map(
+            (k) =>
+              o[k] * Math.cos(C) +
+              (E[k] * Math.cos(p) + I[k] * Math.sin(p)) * Math.sin(C),
+          );
+        }
+        O = xt(O);
+        const l = a[g].find((H) => H.a === r || H.b === r),
+          f = Q(s[g].el, s[r].el, l.order);
+        ((h[r] = [0, 1, 2].map((H) => h[g][H] + O[H] * f)),
+          (y[r] = O),
+          A.push(r));
+      });
+    }
+  }
+  return h;
+}
+function oe(s, n) {
+  const c = Array.from(
+    {
+      length: s,
+    },
+    () => [],
+  );
+  for (const i of n) (c[i.a].push(i.b), c[i.b].push(i.a));
+  const m = new Array(s).fill(-1),
+    d = new Array(s).fill(-1),
+    M = [];
+  for (let i = 0; i < s; i++) {
+    if (d[i] >= 0) continue;
+    d[i] = 0;
+    const a = [i];
+    for (; a.length;) {
+      const h = a.pop();
+      for (const y of c[h])
+        if (d[y] < 0) ((d[y] = d[h] + 1), (m[y] = h), a.push(y));
+        else if (y !== m[h] && d[y] <= d[h] && d[y] >= 0) {
+          const x = [];
+          let w = h,
+            b = y;
+          const B = [],
+            $ = [];
+          for (; d[w] > d[b];) (B.push(w), (w = m[w]));
+          for (; w !== b;) (B.push(w), $.push(b), (w = m[w]), (b = m[b]));
+          (x.push(...B, w, ...$.reverse()),
+            x.length <= 8 &&
+              !M.some(
+                (A) => A.length === x.length && A.every((g) => x.includes(g)),
+              ) &&
+              M.push(x));
+        }
+    }
+  }
+  return M;
+}
+const wt = (s, n) => [
+    s[1] * n[2] - s[2] * n[1],
+    s[2] * n[0] - s[0] * n[2],
+    s[0] * n[1] - s[1] * n[0],
+  ],
+  xt = (s) => {
+    const n = K(s) || 1;
+    return [s[0] / n, s[1] / n, s[2] / n];
+  },
+  nt = Qt,
+  J = "#ff4a36",
+  Ot = "#5fb0ff",
+  vt = 0.12,
+  U = (s) =>
+    Math.max(0.23, (it[s] ?? 1) * 0.46) *
+    (["Na", "Ag", "Zn", "Cu", "Al", "Fe", "Mg"].includes(s) ? 0.9 : 1),
+  se = (s) => (s < 0.5 ? 4 * s * s * s : 1 - Math.pow(-2 * s + 2, 3) / 2),
+  ne = (s) => new z(s[0], s[1], s[2]);
+function ae(s) {
+  const n = Ut(s),
+    { camera: c, controls: m } = n;
+  ((m.minDistance = 5), (m.maxDistance = 80));
+  const d = {
+    distance: 20,
+    target: new z(),
+  };
+  function M(a = d.distance, h = d.target) {
+    ((d.distance = a),
+      (d.target = h.clone()),
+      m.target.copy(h).add(new z(0, a * 0.045, 0)),
+      c.position
+        .copy(m.target)
+        .add(new z(0.22, 0.38, 1).normalize().multiplyScalar(a)),
+      m.update());
+  }
+  function i(a) {
+    const h = Math.tan(((c.fov / 2) * Math.PI) / 180);
+    return (a / (h * Math.min(1, c.aspect))) * 1.1;
+  }
+  return (
+    M(),
+    {
+      ...n,
+      resetView: M,
+      fitDistance: i,
+    }
+  );
+}
+const at = new Nt(1, 40, 28),
+  kt = new qt(1, 1, 1, 18, 1, !0),
+  rt = new Dt(1, 1, 18),
+  Mt = (s, n) =>
+    lt(s, {
+      opacity: n ? 0.18 : 1,
+    });
+class re {
+  constructor(n, c, { showSolvent: m = !0 } = {}) {
+    ((this.stage = n),
+      (this.c = c),
+      (this.group = new bt()),
+      n.root.add(this.group),
+      (this.showSolvent = m));
+    const d = c.keyframes[0];
+    this.atoms = c.atoms.map((y, x) => {
+      const w = new G(at, Mt(d.elements[x], y.solvent));
+      return (
+        (w.userData = {
+          solvent: y.solvent,
+        }),
+        this.group.add(w),
+        w
+      );
+    });
+    const M = (() => {
+      const y = document.createElement("canvas");
+      y.width = y.height = 128;
+      const x = y.getContext("2d"),
+        w = x.createRadialGradient(64, 64, 10, 64, 64, 64);
+      return (
+        w.addColorStop(0, "rgba(255,190,40,.95)"),
+        w.addColorStop(0.45, "rgba(255,176,0,.45)"),
+        w.addColorStop(1, "rgba(255,176,0,0)"),
+        (x.fillStyle = w),
+        x.fillRect(0, 0, 128, 128),
+        new Et(y)
+      );
+    })();
+    ((this.halos = Object.keys(c.track).map((y) => {
+      const x = new Pt(
+        new Lt({
+          map: M,
+          depthWrite: !1,
+          transparent: !0,
+          blending: Ct,
+        }),
+      );
+      return (
+        (x.userData.atom = +y),
+        (x.renderOrder = -1),
+        this.group.add(x),
+        x
+      );
+    })),
+      (this.bondPool = []),
+      (this.neckPool = []),
+      (this.piPool = []),
+      (this.rings = c.keyframes.map((y) => Zt(c.atoms.length, y.bonds))),
+      (this.arrowGroup = new bt()),
+      this.group.add(this.arrowGroup),
+      (this.electronPool = []),
+      (this.flashes = []),
+      (this.lastStage = 0),
+      (this.positions = d.pos.map(ne)));
+    const i = [1 / 0, 1 / 0, 1 / 0],
+      a = [-1 / 0, -1 / 0, -1 / 0];
+    let h = 1 / 0;
+    for (const y of c.keyframes)
+      y.pos.forEach((x, w) => {
+        if (((h = Math.min(h, x[1])), !c.atoms[w].solvent))
+          for (let b = 0; b < 3; b++)
+            ((i[b] = Math.min(i[b], x[b])), (a[b] = Math.max(a[b], x[b])));
+      });
+    ((this.center = new z(
+      (i[0] + a[0]) / 2,
+      (i[1] + a[1]) / 2,
+      (i[2] + a[2]) / 2,
+    )),
+      (this.radius = Math.max(
+        3,
+        Math.hypot(a[0] - i[0], a[1] - i[1], a[2] - i[2]) / 2 + 1.2,
+      )));
+  }
+  neck(n) {
+    for (; this.neckPool.length <= n;) {
+      const m = new G(void 0, lt("C"));
+      ((m.userData.sharedGeometry = !0),
+        this.group.add(m),
+        this.neckPool.push(m));
+    }
+    const c = this.neckPool[n];
+    return ((c.visible = !0), c);
+  }
+  bond(n) {
+    for (; this.bondPool.length <= n;) {
+      const m = new G(
+        kt,
+        new Ft({
+          roughness: 0.2,
+          clearcoat: 1,
+          clearcoatRoughness: 0.08,
+          transparent: !0,
+        }),
+      );
+      (this.group.add(m), this.bondPool.push(m));
+    }
+    const c = this.bondPool[n];
+    return ((c.visible = !0), c);
+  }
+  update(n, c, m) {
+    const d = this.c.keyframes,
+      M = Math.min(d.length - 2, Math.floor(n)),
+      i = d.length === 1 ? 0 : se(Math.max(0, Math.min(1, n - M))),
+      a = d[Math.max(0, M)],
+      h = d[Math.min(d.length - 1, M + 1)],
+      y = Math.round(n),
+      x = Math.abs(n - y) < 0.001;
+    this.atoms.forEach((o, r) => {
+      const u = a.pos[r],
+        p = h.pos[r];
+      (this.positions[r].set(
+        u[0] + (p[0] - u[0]) * i,
+        u[1] + (p[1] - u[1]) * i,
+        u[2] + (p[2] - u[2]) * i,
+      ),
+        o.position.copy(this.positions[r]));
+      const O = i < 0.5 ? a.elements[r] : h.elements[r];
+      ((o.material = Mt(O, this.c.atoms[r].solvent)),
+        o.scale.setScalar(U(O)),
+        (o.visible = this.showSolvent || !this.c.atoms[r].solvent));
+    });
+    const w = new Map();
+    for (const o of a.bonds)
+      w.set(`${o.a}|${o.b}`, {
+        a: o.a,
+        b: o.b,
+        A: o,
+        B: null,
+      });
+    for (const o of h.bonds) {
+      const r = `${o.a}|${o.b}`;
+      w.has(r)
+        ? (w.get(r).B = o)
+        : w.set(r, {
+            a: o.a,
+            b: o.b,
+            A: null,
+            B: o,
+          });
+    }
+    let b = 0;
+    this.neckCount = 0;
+    for (const o of w.values()) {
+      if (!this.showSolvent && this.c.atoms[o.a].solvent) continue;
+      const r = this.positions[o.a],
+        u = this.positions[o.b];
+      let p = 1,
+        O = o.B || o.A;
+      if (
+        (o.A
+          ? o.B
+            ? (O = i < 0.5 ? o.A : o.B)
+            : (p = Math.max(0, 1 - i / 0.55))
+          : (p = Math.max(0, (i - 0.35) / 0.5)),
+        p <= 0.01)
+      )
+        continue;
+      const l = this.c.atoms[o.a].solvent;
+      b = this.drawBond(
+        b,
+        r,
+        u,
+        O,
+        l ? p * 0.18 : p,
+        a.elements[o.a],
+        a.elements[o.b],
+        !o.A || !o.B,
+        l,
+      );
+    }
+    for (let o = b; o < this.bondPool.length; o++)
+      this.bondPool[o].visible = !1;
+    for (let o = this.neckCount; o < this.neckPool.length; o++)
+      this.neckPool[o].visible = !1;
+    const B = this.rings[Math.max(0, M)],
+      $ = this.rings[Math.min(d.length - 1, M + 1)],
+      A = (o) => [...o].sort((r, u) => r - u).join(","),
+      g = new Map();
+    for (const o of B)
+      g.set(A(o), {
+        r: o,
+        a: 1,
+        b: 0,
+      });
+    for (const o of $)
+      g.has(A(o))
+        ? (g.get(A(o)).b = 1)
+        : g.set(A(o), {
+            r: o,
+            a: 0,
+            b: 1,
+          });
+    let e = 0;
+    for (const { r: o, a: r, b: u } of g.values()) {
+      const p = r * (1 - i) + u * i;
+      if (p < 0.02) continue;
+      for (; this.piPool.length <= e;) {
+        const l = _t();
+        (this.group.add(l), this.piPool.push(l));
+      }
+      const O = this.piPool[e++];
+      ((O.visible = !0),
+        Kt(
+          O,
+          o.map((l) => this.positions[l]),
+        ),
+        O.children.forEach((l) =>
+          l.material
+            ? (l.material.uniforms.uOpacity.value = l.userData.baseOpacity * p)
+            : (l.intensity = 6 * p),
+        ));
+    }
+    for (let o = e; o < this.piPool.length; o++) this.piPool[o].visible = !1;
+    for (const o of this.halos) {
+      const r = o.userData.atom;
+      o.position.copy(this.positions[r]);
+      const u = 1 + 0.12 * Math.sin(m * 4);
+      o.scale.setScalar(U(h.elements[r]) * 4.2 * u);
+    }
+    if (
+      (this.drawArrows(x ? d[y].arrows : [], c),
+      this.drawElectrons(i > 0 && i < 1 ? h.electrons : [], i),
+      x && y !== this.lastStage)
+    ) {
+      for (const o of d[y].flash) this.flash(this.positions[o].clone(), m);
+      this.lastStage = y;
+    } else x || (this.lastStage = -1);
+    this.updateFlashes(m);
+  }
+  drawBond(n, c, m, d, M, i, a, h, y = !1) {
+    const x = new z().subVectors(m, c),
+      w = x.length();
+    if (w < 0.001) return n;
+    x.normalize();
+    const b = new z()
+        .crossVectors(x, Math.abs(x.y) < 0.9 ? new z(0, 1, 0) : new z(1, 0, 0))
+        .normalize(),
+      B = d.partial ? 1 : Math.round(d.order * 2) / 2;
+    if (!d.partial && !h && !y && M >= 0.999 && B <= 1.5 && nt[i] && nt[a]) {
+      const e = Xt(U(i), U(a), w, vt),
+        o = new It().setFromUnitVectors(new z(0, 1, 0), x);
+      for (const [r, u] of [
+        [e.a, i],
+        [e.b, a],
+      ]) {
+        const p = this.neck(this.neckCount++);
+        ((p.geometry = r),
+          (p.material = lt(u)),
+          p.position.copy(c),
+          p.quaternion.copy(o));
+      }
+      return n;
+    }
+    const $ = B >= 3 ? [-0.17, 0, 0.17] : B >= 2 ? [-0.13, 0.13] : [0],
+      A = B >= 3 ? 0.065 : B >= 2 ? 0.075 : vt,
+      g = c.clone().lerp(m, 0.5);
+    return (
+      $.forEach((e, o) => {
+        const r = b.clone().multiplyScalar(e),
+          u = d.partial,
+          p = u ? 6 : 1;
+        for (const [O, l, f] of [
+          [c, g, i],
+          [g, m, a],
+        ])
+          for (let H = 0; H < p; H++) {
+            const E = u ? (H + 0.2) / p : 0,
+              I = u ? (H + 0.75) / p : 1,
+              C = O.clone().lerp(l, E).add(r),
+              k = O.clone().lerp(l, I).add(r),
+              v = this.bond(n++),
+              j = C.distanceTo(k);
+            (v.position.copy(C).lerp(k, 0.5),
+              v.scale.set(d.partial ? 0.055 : A, j, d.partial ? 0.055 : A),
+              v.quaternion.setFromUnitVectors(new z(0, 1, 0), x),
+              v.material.color.set(d.partial ? J : nt[f] || "#999"),
+              (v.material.opacity = M),
+              v.material.emissive?.set(
+                d.partial ? J : h ? "#ff8a1f" : "#000000",
+              ),
+              (v.material.emissiveIntensity = d.partial
+                ? 1.4
+                : h
+                  ? 0.9 * M
+                  : 0));
+          }
+      }),
+      n
+    );
+  }
+  point(n, c) {
+    if (Array.isArray(n))
+      return this.positions[n[0]].clone().lerp(this.positions[n[1]], 0.5);
+    const m = this.positions[n].clone();
+    if (c) {
+      const d = c.clone().sub(m).normalize();
+      m.addScaledVector(d, U("O") * 1.4);
+    }
+    return m;
+  }
+  drawArrows(n, c) {
+    const m = `${n.length}:${Math.round(c * 60)}:${this.stage.camera.position
+      .toArray()
+      .map((d) => d.toFixed(2))
+      .join()}`;
+    (m === this.arrowKey && n === this.arrowList) ||
+      ((this.arrowKey = m),
+      (this.arrowList = n),
+      this.arrowGroup.children.forEach((d) => {
+        (d.geometry !== rt && d.geometry.dispose(), d.material.dispose());
+      }),
+      this.arrowGroup.clear(),
+      n.forEach((d, M) => {
+        const i = Math.max(0, Math.min(1, c * 1.6 - M * 0.35));
+        if (i <= 0) return;
+        const a = this.point(d.to),
+          h = this.point(d.from, a),
+          y = a.clone();
+        Array.isArray(d.to) ||
+          y.addScaledVector(h.clone().sub(a).normalize(), U("O") * 1.35);
+        const x = h.clone().lerp(y, 0.5),
+          w = new z()
+            .crossVectors(
+              y.clone().sub(h),
+              this.stage.camera.position.clone().sub(x),
+            )
+            .normalize();
+        w.y < 0 && w.negate();
+        const b = x
+            .clone()
+            .addScaledVector(w, Math.max(0.7, h.distanceTo(y) * 0.45))
+            .addScaledVector(
+              this.stage.camera.position.clone().sub(x).normalize(),
+              0.6,
+            ),
+          B = new Rt(h, b, y),
+          $ = B.getPoints(40).slice(0, Math.max(2, Math.round(40 * i) + 1)),
+          A = new G(
+            new zt(new Tt($), 40, 0.045, 8),
+            new st({
+              color: J,
+              emissive: J,
+              emissiveIntensity: 1.6,
+              roughness: 0.4,
+            }),
+          );
+        if ((this.arrowGroup.add(A), i > 0.95)) {
+          const g = B.getPoint(1),
+            e = B.getPoint(0.9),
+            o = new G(
+              rt,
+              new st({
+                color: J,
+                emissive: J,
+                emissiveIntensity: 1.6,
+                roughness: 0.4,
+              }),
+            ),
+            r = g.clone().sub(e).normalize();
+          (o.position.copy(g).addScaledVector(r, -0.14),
+            o.scale.set(0.14, 0.32, 0.14),
+            o.quaternion.setFromUnitVectors(new z(0, 1, 0), r),
+            this.arrowGroup.add(o));
+        }
+      }));
+  }
+  drawElectrons(n, c) {
+    let m = 0;
+    for (const [d, M, i] of n) {
+      const a = this.positions[d],
+        h = this.positions[M];
+      for (let y = 0; y < i; y++) {
+        for (; this.electronPool.length <= m;) {
+          const B = new G(
+            at,
+            new st({
+              color: Ot,
+              emissive: Ot,
+              emissiveIntensity: 3,
+            }),
+          );
+          (B.scale.setScalar(0.13),
+            this.group.add(B),
+            this.electronPool.push(B));
+        }
+        const x = this.electronPool[m++],
+          w = Math.max(0, Math.min(1, (c - 0.1 - y * 0.08) / 0.7)),
+          b = a.clone().lerp(h, w);
+        ((b.y += Math.sin(Math.PI * w) * 1.4),
+          x.position.copy(b),
+          (x.visible = w > 0 && w < 1));
+      }
+    }
+    for (let d = m; d < this.electronPool.length; d++)
+      this.electronPool[d].visible = !1;
+  }
+  flash(n, c) {
+    const m = new G(
+      new Vt(0.6, 0.75, 48),
+      new Gt({
+        color: new Jt("#ff8a1f").multiplyScalar(2),
+        transparent: !0,
+        side: Wt,
+        depthWrite: !1,
+        blending: Ct,
+      }),
+    );
+    (m.position.copy(n),
+      (m.userData.t0 = c),
+      this.group.add(m),
+      this.flashes.push(m));
+  }
+  updateFlashes(n) {
+    this.flashes = this.flashes.filter((c) => {
+      const m = n - c.userData.t0;
+      return m > 0.9
+        ? (c.geometry.dispose(), c.material.dispose(), c.removeFromParent(), !1)
+        : (c.quaternion.copy(this.stage.camera.quaternion),
+          c.scale.setScalar(1 + m * 3),
+          (c.material.opacity = 1 - m / 0.9),
+          !0);
+    });
+  }
+  dispose() {
+    (this.arrowGroup.clear(),
+      this.group.traverse((n) => {
+        n.geometry &&
+          !n.userData.sharedGeometry &&
+          ![at, kt, rt].includes(n.geometry) &&
+          n.geometry.dispose();
+      }),
+      this.group.removeFromParent());
+  }
+}
+const le = {
+    B: [3],
+    C: [4],
+    N: [3, 5],
+    O: [2],
+    P: [3, 5],
+    S: [2, 4, 6],
+    F: [1],
+    Cl: [1],
+    Br: [1],
+    I: [1],
+  },
+  ie = ["Cl", "Br", "B", "C", "N", "O", "P", "S", "F", "I", "c", "n", "o"];
+function ce(s) {
+  const n = [],
+    c = [],
+    m = [],
+    d = {};
+  let M = -1,
+    i = 1,
+    a = !1,
+    h = 0;
+  const y = (b, B) => (!a && n[b].aromatic && n[B].aromatic ? 1.5 : i),
+    x = (b) => {
+      n.push(b);
+      const B = n.length - 1;
+      (M >= 0 && c.push([M, B, y(M, B)]), (i = 1), (a = !1), (M = B));
+    };
+  for (; h < s.length;) {
+    const b = s[h];
+    if (b === "(") (m.push(M), h++);
+    else if (b === ")") ((M = m.pop()), h++);
+    else if (b === "-" || b === "=" || b === "#")
+      ((i = {
+        "-": 1,
+        "=": 2,
+        "#": 3,
+      }[b]),
+        (a = !0),
+        h++);
+    else if (b === ".") ((M = -1), h++);
+    else if (/\d/.test(b)) {
+      if (d[b] !== void 0) {
+        const B =
+          n[d[b].atom].aromatic && n[M].aromatic && !a
+            ? 1.5
+            : Math.max(i, d[b].order);
+        (c.push([d[b].atom, M, B]), delete d[b], (i = 1));
+      } else
+        ((d[b] = {
+          atom: M,
+          order: i,
+        }),
+          (i = 1));
+      h++;
+    } else if (b === "[") {
+      const B = s.indexOf("]", h),
+        $ = s.slice(h + 1, B),
+        A = $.match(
+          /^(\d+)?([A-Z][a-z]?|[cno])(H\d*)?([+-]+\d*|[+-]\d+)?(?::(\w+))?$/,
+        );
+      if (!A) throw new Error(`Bad bracket atom [${$}]`);
+      const [, g, e, o, r, u] = A,
+        p = /^[cno]$/.test(e),
+        O = p ? e.toUpperCase() : e;
+      let l = 0;
+      if (r) {
+        const f = r[0] === "+" ? 1 : -1,
+          H = r.replace(/[+-]/g, "");
+        l = f * (H ? +H : r.length);
+      }
+      (x({
+        el: O,
+        aromatic: p,
+        charge: l,
+        isotope: g ? +g : null,
+        label: u || null,
+        hcount: o ? (o.length > 1 ? +o.slice(1) : 1) : 0,
+        bracket: !0,
+      }),
+        (h = B + 1));
+    } else {
+      const B = ie.find((A) => s.startsWith(A, h));
+      if (!B) throw new Error(`Unexpected '${b}' in ${s}`);
+      const $ = B === B.toLowerCase();
+      (x({
+        el: $ ? B.toUpperCase() : B,
+        aromatic: $,
+        charge: 0,
+        isotope: null,
+        label: null,
+        hcount: null,
+        bracket: !1,
+      }),
+        (h += B.length));
+    }
+  }
+  const w = n.length;
+  for (let b = 0; b < w; b++) {
+    const B = n[b];
+    let $ = B.hcount;
+    if (!B.bracket) {
+      const A = c.reduce((e, [o, r, u]) => e + (o === b || r === b ? u : 0), 0),
+        g = (le[B.el] || [0]).find((e) => e >= A) ?? A;
+      $ = Math.floor(g - A + 1e-9);
+    }
+    for (let A = 0; A < $; A++)
+      (n.push({
+        el: "H",
+        charge: 0,
+        isotope: null,
+        label: null,
+        hcount: 0,
+        bracket: !1,
+        parent: b,
+      }),
+        c.push([b, n.length - 1, 1]));
+  }
+  return {
+    atoms: n,
+    bonds: c,
+  };
+}
+function he(s) {
+  const n = {};
+  for (const d of s) n[d] = (n[d] || 0) + 1;
+  const c = Object.keys(n).sort();
+  return (n.C ? ["C", "H", ...c.filter((d) => d !== "C" && d !== "H")] : c)
+    .filter((d) => n[d])
+    .map((d) => `${d}${n[d] > 1 ? n[d] : ""}`)
+    .join("");
+}
+function de(s) {
+  return () => {
+    ((s |= 0), (s = (s + 1831565813) | 0));
+    let n = Math.imul(s ^ (s >>> 15), 1 | s);
+    return (
+      (n = (n + Math.imul(n ^ (n >>> 7), 61 | n)) ^ n),
+      ((n ^ (n >>> 14)) >>> 0) / 4294967296
+    );
+  };
+}
+function pe(s) {
+  const n = de(s.seed || 7),
+    c = [],
+    m = new Map(),
+    d = {},
+    M = (e, o) => (e < o ? `${e}|${o}` : `${o}|${e}`),
+    i = (e, o, r, u = !1) =>
+      m.set(M(e, o), {
+        a: Math.min(e, o),
+        b: Math.max(e, o),
+        order: r,
+        partial: u,
+      }),
+    a = [];
+  if (
+    ((s.molecules || []).forEach((e, o) => {
+      if (e.grid) {
+        const {
+          el: l,
+          n: f,
+          a: H,
+          at: E = [0, 0, 0],
+          fixed: I = !0,
+          label: C = l.toLowerCase(),
+          charge: k = 0,
+        } = e.grid;
+        let v = 0;
+        for (let j = 0; j < f[0]; j++)
+          for (let S = 0; S < f[1]; S++)
+            for (let P = 0; P < f[2]; P++) {
+              const L = [
+                  E[0] + (j - (f[0] - 1) / 2) * H,
+                  E[1] + (S - (f[1] - 1) / 2) * H,
+                  E[2] + (P - (f[2] - 1) / 2) * H,
+                ],
+                V = `${C}${v++}`;
+              ((d[V] = c.length),
+                c.push({
+                  el: l,
+                  charge: typeof k == "function" ? k(j, S, P) : k,
+                  pos: L,
+                  fixed: I,
+                  label: V,
+                  mol: o,
+                }));
+            }
+        return;
+      }
+      const r = ce(e.smiles),
+        u = c.length;
+      r.atoms.forEach((l, f) => {
+        const H = l.label || `m${o}_${f}`;
+        ((d[H] = u + f),
+          c.push({
+            el: l.el,
+            charge: l.charge,
+            isotope: l.isotope,
+            label: H,
+            mol: o,
+            solvent: !!e.solvent,
+            pos: [0, 0, 0],
+          }));
+      });
+      for (const [l, f, H] of r.bonds) i(u + l, u + f, H);
+      const p = r.atoms.map((l, f) => u + f),
+        O = ee(
+          p.map((l) => c[l]),
+          r.bonds.map(([l, f, H]) => ({
+            a: l,
+            b: f,
+            order: H,
+          })),
+          e.at || [0, 0, 0],
+          (s.seed || 7) + o * 13,
+        );
+      (p.forEach((l, f) => (c[l].pos = O[f])), a.push([p, e.at || [0, 0, 0]]));
+    }),
+    s.solvent)
+  ) {
+    const { count: e, box: o } = s.solvent;
+    for (let r = 0; r < e; r++) {
+      const u = o.map((O) => (n() - 0.5) * O),
+        p = c.length;
+      (c.push({
+        el: "O",
+        charge: 0,
+        label: `w${r}`,
+        solvent: !0,
+        pos: u,
+      }),
+        c.push({
+          el: "H",
+          charge: 0,
+          label: `w${r}a`,
+          solvent: !0,
+          pos: [u[0] + 0.96, u[1], u[2]],
+        }),
+        c.push({
+          el: "H",
+          charge: 0,
+          label: `w${r}b`,
+          solvent: !0,
+          pos: [u[0] - 0.24, u[1] + 0.93, u[2]],
+        }),
+        i(p, p + 1, 1),
+        i(p, p + 2, 1),
+        a.push([[p, p + 1, p + 2], u]));
+    }
+  }
+  const h = (e) => {
+    if (!(e in d)) throw new Error(`${s.id}: unknown atom label "${e}"`);
+    return d[e];
+  };
+  function y() {
+    const e = c.map((u, p) => p),
+      o = (u) => (e[u] === u ? u : (e[u] = o(e[u])));
+    for (const u of m.values()) e[o(u.a)] = o(u.b);
+    const r = new Map();
+    return (
+      c.forEach((u, p) => {
+        const O = o(p);
+        (r.has(O) || r.set(O, []), r.get(O).push(p));
+      }),
+      [...r.values()]
+    );
+  }
+  const x = (e) => y().find((o) => o.includes(e)),
+    w = (e, o) =>
+      [0, 1, 2].map((r) => e.reduce((u, p) => u + o[p][r], 0) / e.length);
+  let b = yt(
+    c,
+    [...m.values()],
+    {
+      place: a,
+    },
+    {
+      iterations: 1200,
+    },
+  );
+  b.forEach((e, o) => (c[o].pos = e));
+  const B = {};
+  c.forEach((e, o) => {
+    e.charge &&
+      (B[o] =
+        e.charge > 0
+          ? e.charge > 1
+            ? `${e.charge}+`
+            : "+"
+          : e.charge < -1
+            ? `${-e.charge}−`
+            : "−");
+  });
+  const $ = [],
+    A = Object.fromEntries(
+      Object.entries(s.track || {}).map(([e, o]) => [h(e), o]),
+    ),
+    g = (e) => (Array.isArray(e) ? e.map(h) : h(e));
+  return (
+    s.stages.forEach((e, o) => {
+      for (const [l, f, H] of e.form || []) i(h(l), h(f), H ?? 1);
+      for (const [l, f] of e.break || []) m.delete(M(h(l), h(f)));
+      for (const [l, f] of e.partial || []) {
+        const H = m.get(M(h(l), h(f)));
+        i(h(l), h(f), H ? H.order : 1, !0);
+      }
+      for (const [l, f, H] of e.order || []) i(h(l), h(f), H);
+      for (const [l, f] of Object.entries(e.charge || {}))
+        (f === null ? delete B[h(l)] : (B[h(l)] = f),
+          (c[h(l)].charge =
+            f === "+"
+              ? 1
+              : f === "−"
+                ? -1
+                : f === "2+"
+                  ? 2
+                  : f === "3+"
+                    ? 3
+                    : f === "2−"
+                      ? -2
+                      : 0));
+      for (const [l, f] of Object.entries(e.el || {})) c[h(l)].el = f;
+      for (const l of e.free || []) c[h(l)].fixed = !1;
+      const r = y(),
+        u = new Set(),
+        p = [];
+      for (const [l, f] of e.place || []) {
+        const H = r.find((E) => E.includes(h(l)));
+        (p.push([H, f]), H.forEach((E) => u.add(E)));
+      }
+      for (const l of r) l.some((f) => u.has(f)) || p.push([l, w(l, b)]);
+      const O = {
+        place: p,
+        pull: (e.pull || []).map(([l, f, H]) => [h(l), h(f), H]),
+        apart: (e.apart || []).map(([l, f, H]) => [x(h(l)), x(h(f)), H]),
+        pins: (e.pin || []).map(([l, f]) => [h(l), f]),
+        planar: (e.planar || []).map(h),
+      };
+      ((o > 0 || e.pull || e.place || e.pin) &&
+        (b = yt(
+          c.map((l, f) => ({
+            ...l,
+            pos: b[f],
+          })),
+          [...m.values()],
+          O,
+          {
+            iterations: 1100,
+          },
+        )),
+        $.push({
+          pos: b.map((l) => [...l]),
+          bonds: [...m.values()].map((l) => ({
+            ...l,
+          })),
+          charges: {
+            ...B,
+          },
+          elements: c.map((l) => l.el),
+          arrows: (e.arrows || []).map((l) => ({
+            from: g(l.from),
+            to: g(l.to),
+          })),
+          electrons: (e.electrons || []).map(([l, f, H]) => [
+            h(l),
+            h(f),
+            H || 1,
+          ]),
+          flash: (e.flash || []).map(h),
+          lone: (e.lone || []).map(h),
+          energy: e.energy ?? 0,
+        }));
+    }),
+    {
+      id: s.id,
+      atoms: c.map((e) => ({
+        el: e.el,
+        label: e.label,
+        isotope: e.isotope,
+        solvent: !!e.solvent,
+      })),
+      track: A,
+      keyframes: $,
+      formulas: (e = $.length - 1) => ue($[e], c),
+    }
+  );
+}
+function ue(s, n) {
+  const c = n.length,
+    m = [...Array(c).keys()],
+    d = (i) => (m[i] === i ? i : (m[i] = d(m[i])));
+  for (const i of s.bonds) i.partial || (m[d(i.a)] = d(i.b));
+  const M = new Map();
+  for (let i = 0; i < c; i++) {
+    if (n[i].solvent) continue;
+    const a = d(i);
+    (M.has(a) || M.set(a, []), M.get(a).push(s.elements[i]));
+  }
+  return [...M.values()].map(he).sort();
+}
+const fe = [
+    {
+      id: "esterification",
+      title: translate("酯化反应"),
+      equation: "CH₃COOH + CH₃CH₂<i>¹⁸O</i>H ⇌ CH₃CO<i>¹⁸O</i>CH₂CH₃ + H₂O",
+      conditions: [translate("浓硫酸"), translate("加热")],
+      macro: translate(
+        "饱和碳酸钠溶液液面上出现有香味的油状液体（乙酸乙酯）。浓硫酸作催化剂和吸水剂。",
+      ),
+      track: {
+        o3: "¹⁸O",
+      },
+      products: ["C4H8O2", "H2O"],
+      molecules: [
+        {
+          smiles: "C[C:c1](=[O:o1])[O:o2][H:h1]",
+          at: [-3.2, 0, 0],
+        },
+        {
+          smiles: "CC[18O:o3][H:h2]",
+          at: [3.6, 0.4, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate(
+            "乙酸与乙醇。用 ¹⁸O 标记乙醇中的氧原子，看它最后去了哪里。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("相互靠近"),
+          text: translate(
+            "乙醇的 ¹⁸O 用孤对电子进攻羧基碳；与此同时，羧基上的 –OH 准备离开。",
+          ),
+          pull: [["o3", "c1", 2.9]],
+          arrows: [
+            {
+              from: "o3",
+              to: "c1",
+            },
+            {
+              from: ["c1", "o2"],
+              to: "o2",
+            },
+          ],
+          energy: 0.45,
+        },
+        {
+          title: translate("旧键断裂、新键形成"),
+          text: translate(
+            "C–¹⁸O 键逐渐形成，C–OH 键逐渐断裂；乙醇羟基上的 H 转移到离去的 –OH 上。",
+          ),
+          partial: [
+            ["o3", "c1"],
+            ["c1", "o2"],
+            ["o3", "h2"],
+          ],
+          form: [],
+          pull: [
+            ["o3", "c1", 1.9],
+            ["o2", "h2", 1.6],
+          ],
+          energy: 1,
+        },
+        {
+          title: translate("生成酯和水"),
+          text: translate(
+            "¹⁸O 留在乙酸乙酯中，水中的氧来自乙酸——“酸脱羟基，醇脱氢”。",
+          ),
+          break: [
+            ["c1", "o2"],
+            ["o3", "h2"],
+          ],
+          form: [
+            ["o3", "c1", 1],
+            ["o2", "h2", 1],
+          ],
+          apart: [["c1", "o2", 6]],
+          energy: -0.1,
+        },
+      ],
+    },
+    {
+      id: "saponification",
+      title: translate("酯的碱性水解"),
+      equation: "CH₃COOCH₂CH₃ + <i>OH⁻</i> → CH₃COO⁻ + CH₃CH₂OH",
+      conditions: [translate("NaOH 溶液"), translate("加热")],
+      macro: translate(
+        "油层逐渐消失。碱性条件下水解进行到底；油脂在碱性条件下的水解叫皂化反应，可用来制肥皂。",
+      ),
+      track: {
+        o3: "OH⁻",
+      },
+      products: ["C2H3O2", "C2H6O"],
+      molecules: [
+        {
+          smiles: "C[C:c1](=[O:o1])[O:o2]CC",
+          at: [-1.8, 0, 0],
+        },
+        {
+          smiles: "[O-:o3][H:h3]",
+          at: [3.4, 1.6, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate("乙酸乙酯与氢氧根离子。"),
+          energy: 0,
+          arrows: [],
+        },
+        {
+          title: translate("亲核进攻"),
+          text: translate(
+            "OH⁻ 进攻缺电子的羰基碳，C=O 中的一对电子转移到氧上。",
+          ),
+          pull: [["o3", "c1", 2.8]],
+          arrows: [
+            {
+              from: "o3",
+              to: "c1",
+            },
+            {
+              from: ["c1", "o1"],
+              to: "o1",
+            },
+          ],
+          energy: 0.6,
+        },
+        {
+          title: translate("四面体中间体"),
+          text: translate(
+            "碳原子暂时连着四个基团，变成四面体构型，羰基氧带负电。",
+          ),
+          form: [["o3", "c1", 1]],
+          order: [["c1", "o1", 1]],
+          charge: {
+            o1: "−",
+            o3: null,
+          },
+          arrows: [
+            {
+              from: "o1",
+              to: ["c1", "o1"],
+            },
+            {
+              from: ["c1", "o2"],
+              to: "o2",
+            },
+          ],
+          energy: 0.25,
+        },
+        {
+          title: translate("乙氧基离开"),
+          text: translate("C=O 重新形成，乙氧基 CH₃CH₂O⁻ 被挤走。"),
+          order: [["c1", "o1", 2]],
+          break: [["c1", "o2"]],
+          charge: {
+            o1: null,
+            o2: "−",
+          },
+          apart: [["c1", "o2", 5.5]],
+          arrows: [
+            {
+              from: "o2",
+              to: "h3",
+            },
+            {
+              from: ["o3", "h3"],
+              to: "o3",
+            },
+          ],
+          energy: 0.4,
+        },
+        {
+          title: translate("质子转移"),
+          text: translate(
+            "强碱 CH₃CH₂O⁻ 夺走羧酸的质子，生成乙酸根和乙醇。这一步几乎不可逆，所以碱性水解能进行到底。",
+          ),
+          break: [["o3", "h3"]],
+          form: [["o2", "h3", 1]],
+          charge: {
+            o2: null,
+            o3: "−",
+          },
+          apart: [["c1", "o2", 6.5]],
+          energy: -0.6,
+        },
+      ],
+    },
+    {
+      id: "addition",
+      title: translate("乙烯与溴的加成"),
+      equation: "CH₂=CH₂ + <i>Br</i>–Br → CH₂<i>Br</i>–CH₂Br",
+      conditions: [translate("溴的四氯化碳溶液")],
+      macro: translate("溴的红棕色迅速褪去。可以用来鉴别乙烯和甲烷。"),
+      track: {
+        b1: "Br",
+        b2: "Br",
+      },
+      products: ["C2H4Br2"],
+      molecules: [
+        {
+          smiles: "[CH2:c1]=[CH2:c2]",
+          at: [0, -1.2, 0],
+        },
+        {
+          smiles: "[Br:b1][Br:b2]",
+          at: [0.2, 3.2, 0.4],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate("乙烯分子中的碳碳双键里有一个容易断裂的 π 键。"),
+          energy: 0,
+        },
+        {
+          title: translate("溴分子被极化"),
+          text: translate("Br₂ 靠近富含电子的双键，被极化成 Brδ+–Brδ−。"),
+          pull: [
+            ["b1", "c1", 2.7],
+            ["b1", "c2", 2.7],
+          ],
+          charge: {
+            b1: "δ+",
+            b2: "δ−",
+          },
+          arrows: [
+            {
+              from: ["c1", "c2"],
+              to: "b1",
+            },
+            {
+              from: ["b1", "b2"],
+              to: "b2",
+            },
+          ],
+          energy: 0.5,
+        },
+        {
+          title: translate("溴鎓离子"),
+          text: translate(
+            "π 键断开，两个碳同时与一个溴相连，形成三元环溴鎓离子；另一个溴变成 Br⁻。",
+          ),
+          partial: [
+            ["b1", "c1"],
+            ["b1", "c2"],
+          ],
+          order: [["c1", "c2", 1]],
+          break: [["b1", "b2"]],
+          charge: {
+            b1: "+",
+            b2: "−",
+          },
+          pull: [
+            ["b1", "c1", 2],
+            ["b1", "c2", 2],
+            ["b2", "c2", 3.6],
+          ],
+          arrows: [
+            {
+              from: "b2",
+              to: "c2",
+            },
+            {
+              from: ["b1", "c2"],
+              to: "b1",
+            },
+          ],
+          energy: 0.35,
+        },
+        {
+          title: translate("反式加成"),
+          text: translate(
+            "Br⁻ 从溴鎓离子的背面进攻碳原子，环打开，得到 1,2-二溴乙烷。两个溴分别加在原双键的两侧。",
+          ),
+          form: [
+            ["b2", "c2", 1],
+            ["b1", "c1", 1],
+          ],
+          break: [["b1", "c2"]],
+          charge: {
+            b1: null,
+            b2: null,
+          },
+          energy: -0.7,
+        },
+      ],
+    },
+    {
+      id: "polymerization",
+      title: translate("乙烯的加聚反应"),
+      equation: "n CH₂=CH₂ → –[CH₂–CH₂]ₙ–",
+      conditions: [translate("催化剂"), translate("加热加压")],
+      macro: translate("得到聚乙烯，一种常见的塑料，可以制成保鲜膜和食品袋。"),
+      track: {},
+      products: ["C8H16"],
+      molecules: [
+        {
+          smiles: "[CH2:a1]=[CH2:a2]",
+          at: [-6, 0, 0],
+        },
+        {
+          smiles: "[CH2:b1]=[CH2:b2]",
+          at: [-2, 0.4, 0],
+        },
+        {
+          smiles: "[CH2:c1]=[CH2:c2]",
+          at: [2, -0.4, 0],
+        },
+        {
+          smiles: "[CH2:d1]=[CH2:d2]",
+          at: [6, 0, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("单体"),
+          text: translate("许多乙烯分子（单体），每个都含碳碳双键。"),
+          energy: 0,
+        },
+        {
+          title: translate("双键打开"),
+          text: translate(
+            "每个双键中的 π 键断开，碳原子上各留下一个未成对电子。",
+          ),
+          order: [
+            ["a1", "a2", 1],
+            ["b1", "b2", 1],
+            ["c1", "c2", 1],
+            ["d1", "d2", 1],
+          ],
+          charge: {
+            a1: "·",
+            a2: "·",
+            b1: "·",
+            b2: "·",
+            c1: "·",
+            c2: "·",
+            d1: "·",
+            d2: "·",
+          },
+          pull: [
+            ["a2", "b1", 2.4],
+            ["b2", "c1", 2.4],
+            ["c2", "d1", 2.4],
+          ],
+          energy: 0.8,
+        },
+        {
+          title: translate("首尾相连"),
+          text: translate(
+            "相邻单体之间形成新的 C–C 键，连成长长的碳链——聚乙烯。链节是 –CH₂–CH₂–。",
+          ),
+          form: [
+            ["a2", "b1", 1],
+            ["b2", "c1", 1],
+            ["c2", "d1", 1],
+          ],
+          charge: {
+            a2: null,
+            b1: null,
+            b2: null,
+            c1: null,
+            c2: null,
+            d1: null,
+          },
+          flash: ["a2", "b1", "b2", "c1", "c2", "d1"],
+          energy: -1,
+        },
+      ],
+    },
+    {
+      id: "substitution",
+      title: translate("甲烷与氯气的取代"),
+      equation: "CH₄ + Cl₂ → CH₃<i>Cl</i> + HCl",
+      conditions: [translate("光照")],
+      macro: translate(
+        "黄绿色逐渐变浅，试管壁出现油状液滴，液面上升。还会继续生成 CH₂Cl₂、CHCl₃、CCl₄。",
+      ),
+      track: {
+        a1: "Cl·",
+      },
+      products: ["CH3Cl", "Cl", "Cl", "ClH"],
+      molecules: [
+        {
+          smiles: "[CH3:c][H:h]",
+          at: [0.5, -0.5, 0],
+        },
+        {
+          smiles: "[Cl:a1][Cl:a2]",
+          at: [-4.5, 2, 0],
+        },
+        {
+          smiles: "[Cl:b1][Cl:b2]",
+          at: [4.2, 2.6, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate("甲烷与氯气混合，在暗处不反应。"),
+          energy: 0,
+        },
+        {
+          title: translate("光照：链引发"),
+          text: translate(
+            "光使 Cl–Cl 键均裂，生成两个带有未成对电子的氯原子 Cl·（自由基）。",
+          ),
+          break: [["a1", "a2"]],
+          charge: {
+            a1: "·",
+            a2: "·",
+          },
+          apart: [["a1", "a2", 4]],
+          flash: ["a1", "a2"],
+          energy: 1,
+        },
+        {
+          title: translate("Cl· 夺氢"),
+          text: translate(
+            "Cl· 从甲烷中夺取一个氢原子，生成 HCl 和甲基自由基 ·CH₃。",
+          ),
+          pull: [["a1", "h", 1.6]],
+          partial: [["c", "h"]],
+          energy: 1.15,
+        },
+        {
+          title: translate("甲基自由基"),
+          text: translate("·CH₃ 呈平面三角形，碳上有一个未成对电子。"),
+          break: [["c", "h"]],
+          form: [["a1", "h", 1]],
+          charge: {
+            a1: null,
+            c: "·",
+          },
+          apart: [["c", "a1", 4.5]],
+          pull: [["c", "b1", 2.8]],
+          energy: 0.95,
+        },
+        {
+          title: translate("链传递"),
+          text: translate(
+            "·CH₃ 夺取 Cl₂ 中的一个氯原子，生成一氯甲烷，同时又产生新的 Cl·，链反应得以继续。",
+          ),
+          form: [["c", "b1", 1]],
+          break: [["b1", "b2"]],
+          charge: {
+            c: null,
+            b2: "·",
+          },
+          apart: [["b1", "b2", 5]],
+          flash: ["b2"],
+          energy: 0.6,
+        },
+      ],
+    },
+    {
+      id: "oxidation",
+      title: translate("乙醇的催化氧化"),
+      equation: "2CH₃CH₂OH + O₂ →(Cu) 2CH₃CHO + 2H₂O",
+      conditions: [translate("铜丝"), translate("加热")],
+      macro: translate(
+        "铜丝在火焰上变黑（生成 CuO），插入乙醇后又变红，并闻到刺激性气味（乙醛）。铜是催化剂。",
+      ),
+      track: {
+        cu: "Cu",
+      },
+      products: ["C2H4O", "Cu", "H2O"],
+      molecules: [
+        {
+          smiles: "C[CH:c1]([H:h2])[O:o1][H:h1]",
+          at: [-2.6, 0, 0],
+        },
+        {
+          smiles: "[Cu:cu]=[O:o2]",
+          at: [2.6, 0.2, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("CuO 与乙醇"),
+          text: translate(
+            "铜丝加热时先被氧化：2Cu + O₂ → 2CuO（铜丝变黑）。黑色的 CuO 再与乙醇反应。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("脱去两个氢"),
+          text: translate(
+            "CuO 中的氧夺取乙醇羟基上的 H 和与羟基相连碳上的 H。",
+          ),
+          pull: [
+            ["o2", "h1", 1.7],
+            ["o2", "h2", 1.9],
+          ],
+          partial: [
+            ["o1", "h1"],
+            ["c1", "h2"],
+          ],
+          energy: 0.8,
+        },
+        {
+          title: translate("生成乙醛"),
+          text: translate(
+            "C–O 变成 C=O，生成乙醛；氧与两个氢结合成水，CuO 被还原为红色的 Cu。",
+          ),
+          break: [
+            ["o1", "h1"],
+            ["c1", "h2"],
+            ["cu", "o2"],
+          ],
+          form: [
+            ["o2", "h1", 1],
+            ["o2", "h2", 1],
+          ],
+          order: [["c1", "o1", 2]],
+          apart: [
+            ["cu", "o2", 4],
+            ["c1", "o2", 5],
+          ],
+          energy: -0.5,
+        },
+      ],
+    },
+    {
+      id: "elimination",
+      title: translate("乙醇的消去反应"),
+      equation: translate("CH₃CH₂OH →(浓硫酸, 170 ℃) CH₂=CH₂↑ + H₂O"),
+      conditions: [translate("浓硫酸"), translate("170 ℃")],
+      macro: translate(
+        "生成的气体能使溴水、酸性高锰酸钾溶液褪色。温度需迅速升到 170 ℃，140 ℃ 时主要生成乙醚。",
+      ),
+      track: {
+        o1: "O",
+      },
+      products: ["C2H4", "H2O"],
+      molecules: [
+        {
+          smiles: "[H:h2][CH2:c2][CH2:c1][O:o1][H:h1]",
+          at: [0, 0, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("乙醇分子"),
+          text: translate("与羟基相连的碳叫 α 碳，相邻的碳叫 β 碳。"),
+          energy: 0,
+        },
+        {
+          title: translate("脱去 –OH 和 β-H"),
+          text: translate(
+            "C–OH 键和 β 碳上的 C–H 键同时减弱，β-H 与 –OH 结合。",
+          ),
+          partial: [
+            ["c1", "o1"],
+            ["c2", "h2"],
+          ],
+          pull: [["h2", "o1", 1.5]],
+          arrows: [
+            {
+              from: ["c2", "h2"],
+              to: ["c1", "c2"],
+            },
+            {
+              from: ["c1", "o1"],
+              to: "o1",
+            },
+          ],
+          energy: 1,
+        },
+        {
+          title: translate("生成乙烯和水"),
+          text: translate(
+            "相邻两个碳上脱去一个小分子（水），形成碳碳双键——这就是消去反应。",
+          ),
+          break: [
+            ["c1", "o1"],
+            ["c2", "h2"],
+          ],
+          form: [["o1", "h2", 1]],
+          order: [["c1", "c2", 2]],
+          apart: [["c1", "o1", 5]],
+          energy: 0.3,
+        },
+      ],
+    },
+    {
+      id: "bromination",
+      title: translate("苯的溴代反应"),
+      equation: "C₆H₆ + <i>Br</i>₂ →(FeBr₃) C₆H₅<i>Br</i> + HBr",
+      conditions: [translate("液溴"), translate("FeBr₃ 催化")],
+      macro: translate(
+        "生成无色油状的溴苯（因溶有溴而呈褐色），导管口出现白雾（HBr 遇水蒸气）。苯不能使溴水褪色。",
+      ),
+      track: {
+        b1: "Br⁺",
+      },
+      products: ["Br3Fe", "BrH", "C6H5Br"],
+      molecules: [
+        {
+          smiles: "[cH:k6]1ccc[cH:k2][c:k1]1[H:hk]",
+          at: [-2.6, 0, 0],
+        },
+        {
+          smiles: "[Br:b1][Br:b2]",
+          at: [2.4, 1.4, 0],
+        },
+        {
+          smiles: "[Br:f1][Fe:fe]([Br:f2])[Br:f3]",
+          at: [5.6, -0.6, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate(
+            "苯环上的六个 π 电子形成稳定的大 π 键，Br₂ 本身不足以进攻。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("催化剂活化 Br₂"),
+          text: translate(
+            "FeBr₃ 接受 Br₂ 的一个溴，使另一个溴带正电，成为很强的亲电试剂。",
+          ),
+          pull: [["b2", "fe", 2.6]],
+          charge: {
+            b1: "δ+",
+            b2: "δ−",
+          },
+          arrows: [
+            {
+              from: ["b1", "b2"],
+              to: "b2",
+            },
+          ],
+          energy: 0.4,
+        },
+        {
+          title: translate("Br⁺ 进攻苯环"),
+          text: translate("生成 FeBr₄⁻ 和 Br⁺；苯环的 π 电子进攻 Br⁺。"),
+          form: [["b2", "fe", 1]],
+          break: [["b1", "b2"]],
+          charge: {
+            b1: "+",
+            b2: null,
+            fe: "−",
+          },
+          pull: [["b1", "k1", 2.5]],
+          arrows: [
+            {
+              from: ["k1", "k2"],
+              to: "b1",
+            },
+          ],
+          energy: 0.6,
+        },
+        {
+          title: translate("σ 络合物"),
+          text: translate(
+            "溴连到苯环上，该碳变成 sp³ 杂化，苯环暂时失去芳香性并带正电。",
+          ),
+          form: [["b1", "k1", 1]],
+          order: [
+            ["k1", "k2", 1],
+            ["k1", "k6", 1],
+          ],
+          charge: {
+            b1: null,
+            k2: "+",
+          },
+          pull: [["f1", "hk", 2.6]],
+          arrows: [
+            {
+              from: ["k1", "hk"],
+              to: ["k1", "k2"],
+            },
+          ],
+          energy: 1,
+        },
+        {
+          title: translate("失去 H⁺，恢复芳香性"),
+          text: translate(
+            "C–H 键的电子回到环上，苯环恢复稳定的大 π 键；H⁺ 与 FeBr₄⁻ 生成 HBr，FeBr₃ 再生。",
+          ),
+          break: [
+            ["k1", "hk"],
+            ["fe", "f1"],
+          ],
+          form: [["hk", "f1", 1]],
+          order: [
+            ["k1", "k2", 1.5],
+            ["k1", "k6", 1.5],
+          ],
+          charge: {
+            k2: null,
+            fe: null,
+          },
+          apart: [
+            ["hk", "k1", 5],
+            ["fe", "k1", 6],
+          ],
+          energy: -0.3,
+        },
+      ],
+    },
+  ],
+  F = (s, n) => (c, m, d) => [n[0] + c * s, n[1] + m * s, n[2] + d * s],
+  me = [
+    {
+      id: "neutralization",
+      title: translate("酸碱中和"),
+      equation: "<i>H</i>₃O⁺ + OH⁻ → 2H₂O　（H⁺ + OH⁻ = H₂O）",
+      conditions: [translate("水溶液")],
+      macro: translate(
+        "滴有酚酞的 NaOH 溶液中逐滴加入盐酸，红色恰好褪去时酸碱恰好中和。Na⁺ 和 Cl⁻ 不参与反应。",
+      ),
+      track: {
+        h1: "H⁺",
+      },
+      products: ["H2O", "H2O"],
+      solvent: {
+        count: 14,
+        box: [16, 10, 10],
+      },
+      molecules: [
+        {
+          smiles: "[H:h1][O+:o1]([H])[H]",
+          at: [-3, 0, 0],
+        },
+        {
+          smiles: "[O-:o2][H]",
+          at: [3, 0.5, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("溶液中的离子"),
+          text: translate(
+            "酸溶液中的 H⁺ 实际以水合氢离子 H₃O⁺ 的形式存在；碱溶液中有 OH⁻。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("正负离子相互吸引"),
+          text: translate("带正电的 H₃O⁺ 与带负电的 OH⁻ 相互吸引、靠近。"),
+          pull: [["o2", "h1", 1.75]],
+          arrows: [
+            {
+              from: "o2",
+              to: "h1",
+            },
+            {
+              from: ["o1", "h1"],
+              to: "o1",
+            },
+          ],
+          energy: 0.15,
+        },
+        {
+          title: translate("质子转移"),
+          text: translate(
+            "H⁺ 从 H₃O⁺ 转移到 OH⁻ 上，生成两个水分子，并放出热量（中和热）。",
+          ),
+          break: [["o1", "h1"]],
+          form: [["o2", "h1", 1]],
+          charge: {
+            o1: null,
+            o2: null,
+          },
+          apart: [["o1", "o2", 4]],
+          flash: ["h1"],
+          energy: -1,
+        },
+      ],
+    },
+    {
+      id: "precipitation",
+      title: translate("生成氯化银沉淀"),
+      equation: "<i>Ag</i>⁺ + Cl⁻ → AgCl↓",
+      conditions: [translate("AgNO₃ 溶液 + NaCl 溶液")],
+      macro: translate(
+        "立即产生白色沉淀，加稀硝酸沉淀不溶解。常用来检验 Cl⁻。Na⁺ 和 NO₃⁻ 是旁观离子。",
+      ),
+      track: {
+        ag0: "Ag⁺",
+        ag1: "Ag⁺",
+        ag2: "Ag⁺",
+        ag3: "Ag⁺",
+      },
+      products: null,
+      solvent: {
+        count: 10,
+        box: [18, 10, 10],
+      },
+      molecules: [
+        {
+          smiles: "[Ag+:ag0]",
+          at: [-6, 2, 1],
+        },
+        {
+          smiles: "[Ag+:ag1]",
+          at: [-4, -2.5, -2],
+        },
+        {
+          smiles: "[Ag+:ag2]",
+          at: [5.5, 2.5, -1],
+        },
+        {
+          smiles: "[Ag+:ag3]",
+          at: [6, -2, 2],
+        },
+        {
+          smiles: "[Cl-:cl0]",
+          at: [-1, 3.5, 2],
+        },
+        {
+          smiles: "[Cl-:cl1]",
+          at: [1.5, -3.5, -1],
+        },
+        {
+          smiles: "[Cl-:cl2]",
+          at: [-2, -0.5, 3],
+        },
+        {
+          smiles: "[Cl-:cl3]",
+          at: [2.5, 1, -3],
+        },
+        {
+          smiles: "[Na+:na0]",
+          at: [-7, -3, 3],
+        },
+        {
+          smiles: "[Na+:na1]",
+          at: [7, 3.5, 3],
+        },
+        {
+          smiles: "[O-][N+:no](=O)[O-]",
+          at: [-6.5, 3.5, -3],
+        },
+        {
+          smiles: "[O-][N+:no2](=O)[O-]",
+          at: [6.5, -3.5, -3],
+        },
+      ],
+      stages: [
+        {
+          title: translate("两种溶液混合"),
+          text: translate(
+            "AgNO₃ 和 NaCl 都完全电离，溶液中有 Ag⁺、NO₃⁻、Na⁺、Cl⁻ 四种离子自由移动。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("Ag⁺ 与 Cl⁻ 结合"),
+          text: translate(
+            "Ag⁺ 与 Cl⁻ 相互吸引，按一正一负交替排列，开始形成晶核。",
+          ),
+          pin: [
+            ["ag0", F(2.8, [0, 0, 0])(-0.5, -0.5, -0.5)],
+            ["cl0", F(2.8, [0, 0, 0])(0.5, -0.5, -0.5)],
+            ["ag1", F(2.8, [0, 0, 0])(0.5, 0.5, -0.5)],
+            ["cl1", F(2.8, [0, 0, 0])(-0.5, 0.5, -0.5)],
+            ["cl2", F(2.8, [0, 0, 0])(-0.5, -0.5, 0.5)],
+            ["ag2", F(2.8, [0, 0, 0])(0.5, -0.5, 0.5)],
+            ["cl3", F(2.8, [0, 0, 0])(0.5, 0.5, 0.5)],
+            ["ag3", F(2.8, [0, 0, 0])(-0.5, 0.5, 0.5)],
+          ],
+          energy: -0.4,
+        },
+        {
+          title: translate("白色沉淀"),
+          text: translate(
+            "越来越多的离子加入，晶体长大到肉眼可见，沉降为白色的 AgCl。Na⁺、NO₃⁻ 始终留在溶液中——离子方程式只写真正参加反应的离子。",
+          ),
+          partial: [
+            ["ag0", "cl0"],
+            ["cl0", "ag1"],
+            ["ag1", "cl1"],
+            ["cl1", "ag0"],
+            ["cl2", "ag2"],
+            ["ag2", "cl3"],
+            ["cl3", "ag3"],
+            ["ag3", "cl2"],
+            ["ag0", "cl2"],
+            ["cl0", "ag2"],
+            ["ag1", "cl3"],
+            ["cl1", "ag3"],
+          ],
+          pin: [
+            ["ag0", F(2.8, [0, -2.5, 0])(-0.5, -0.5, -0.5)],
+            ["cl0", F(2.8, [0, -2.5, 0])(0.5, -0.5, -0.5)],
+            ["ag1", F(2.8, [0, -2.5, 0])(0.5, 0.5, -0.5)],
+            ["cl1", F(2.8, [0, -2.5, 0])(-0.5, 0.5, -0.5)],
+            ["cl2", F(2.8, [0, -2.5, 0])(-0.5, -0.5, 0.5)],
+            ["ag2", F(2.8, [0, -2.5, 0])(0.5, -0.5, 0.5)],
+            ["cl3", F(2.8, [0, -2.5, 0])(0.5, 0.5, 0.5)],
+            ["ag3", F(2.8, [0, -2.5, 0])(-0.5, 0.5, 0.5)],
+          ],
+          energy: -1,
+        },
+      ],
+    },
+    {
+      id: "displacement",
+      title: translate("锌置换铜"),
+      equation: "<i>Zn</i> + Cu²⁺ → Zn²⁺ + Cu",
+      conditions: [translate("锌片放入 CuSO₄ 溶液")],
+      macro: translate(
+        "锌片表面析出红色的铜，溶液蓝色逐渐变浅。本质是电子从 Zn 转移到 Cu²⁺。",
+      ),
+      track: {
+        zn25: "Zn",
+        zn22: "Zn",
+      },
+      products: null,
+      solvent: {
+        count: 8,
+        box: [12, 10, 10],
+      },
+      molecules: [
+        {
+          grid: {
+            el: "Zn",
+            n: [2, 4, 4],
+            a: 2.5,
+            at: [-5.5, 0, 0],
+            label: "zn",
+          },
+        },
+        {
+          smiles: "[Cu+2:cu1]",
+          at: [1.5, 2.2, -1],
+        },
+        {
+          smiles: "[Cu+2:cu2]",
+          at: [3.5, -2, 2],
+        },
+      ],
+      stages: [
+        {
+          title: translate("锌片浸入溶液"),
+          text: translate(
+            "左边是锌的金属晶体，溶液中有蓝色的 Cu²⁺（硫酸根未画出）。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("Cu²⁺ 靠近锌表面"),
+          text: translate("Cu²⁺ 移动到锌表面。锌比铜活泼，更容易失去电子。"),
+          pin: [
+            ["cu1", [-1.9, 1.25, -1.25]],
+            ["cu2", [-1.9, -1.25, 1.25]],
+          ],
+          energy: 0.1,
+        },
+        {
+          title: translate("电子转移"),
+          text: translate(
+            "每个锌原子失去 2 个电子变成 Zn²⁺ 进入溶液；Cu²⁺ 得到这 2 个电子变成铜原子，附着在锌片表面。",
+          ),
+          electrons: [
+            ["zn25", "cu1", 2],
+            ["zn22", "cu2", 2],
+          ],
+          charge: {
+            zn25: "2+",
+            zn22: "2+",
+            cu1: null,
+            cu2: null,
+          },
+          free: ["zn25", "zn22"],
+          pin: [
+            ["zn25", [2, 3.2, 1]],
+            ["zn22", [3, -3, -2]],
+            ["cu1", [-4.25, 1.25, -1.25]],
+            ["cu2", [-4.25, -1.25, 1.25]],
+          ],
+          energy: -0.8,
+        },
+      ],
+    },
+    {
+      id: "sodium",
+      title: translate("钠与水反应"),
+      equation: "2<i>Na</i> + 2H₂O → 2Na⁺ + 2OH⁻ + H₂↑",
+      conditions: [translate("常温")],
+      macro: translate(
+        "钠浮在水面上，熔成小球，四处游动，发出嘶嘶声；滴入酚酞的溶液变红。",
+      ),
+      track: {
+        na6: "Na",
+        na5: "Na",
+      },
+      products: null,
+      solvent: {
+        count: 8,
+        box: [16, 10, 10],
+      },
+      molecules: [
+        {
+          grid: {
+            el: "Na",
+            n: [2, 2, 2],
+            a: 3.6,
+            at: [-4.5, 0, 0],
+            label: "na",
+          },
+        },
+        {
+          smiles: "[H][O:w1][H:hA]",
+          at: [0.5, 2.4, 0],
+        },
+        {
+          smiles: "[H][O:w2][H:hB]",
+          at: [0.5, -2.4, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("钠块与水"),
+          text: translate(
+            "钠是很活泼的金属，最外层只有 1 个电子，很容易失去。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("钠失去电子"),
+          text: translate(
+            "两个钠原子各失去 1 个电子变成 Na⁺；电子被水分子中的 H 获得。",
+          ),
+          electrons: [
+            ["na6", "hA", 1],
+            ["na5", "hB", 1],
+          ],
+          charge: {
+            na6: "+",
+            na5: "+",
+          },
+          free: ["na6", "na5"],
+          pin: [
+            ["na6", [-1, 4.2, -2]],
+            ["na5", [-1, -4.2, 2]],
+          ],
+          partial: [
+            ["w1", "hA"],
+            ["w2", "hB"],
+          ],
+          energy: -0.3,
+        },
+        {
+          title: translate("生成 H₂ 和 OH⁻"),
+          text: translate(
+            "两个 H 原子结合成氢气逸出，水分子剩下的部分变成 OH⁻，所以溶液显碱性。反应放出大量热，钠熔成小球。",
+          ),
+          break: [
+            ["w1", "hA"],
+            ["w2", "hB"],
+          ],
+          form: [["hA", "hB", 1]],
+          charge: {
+            w1: "−",
+            w2: "−",
+          },
+          place: [["hA", [2.5, 0, 0]]],
+          flash: ["hA", "hB"],
+          energy: -1,
+        },
+        {
+          title: translate("氢气逸出"),
+          text: translate("H₂ 分子离开，留下 Na⁺ 和 OH⁻。"),
+          place: [["hA", [6, 4, 0]]],
+          energy: -1,
+        },
+      ],
+    },
+  ],
+  ge = [
+    {
+      id: "combustion",
+      title: translate("甲烷燃烧"),
+      equation: "<i>C</i>H₄ + 2O₂ → <i>C</i>O₂ + 2H₂O　ΔH = −890 kJ/mol",
+      conditions: [translate("点燃")],
+      macro: translate(
+        "淡蓝色火焰，放出大量热；罩在火焰上方的干冷烧杯内壁出现水珠，倒入澄清石灰水变浑浊。",
+      ),
+      track: {
+        c: "C",
+      },
+      products: ["CO2", "H2O", "H2O"],
+      molecules: [
+        {
+          smiles: "[C:c]([H:h1])([H:h2])([H:h3])[H:h4]",
+          at: [0, 0, 0],
+        },
+        {
+          smiles: "[O:o1]=[O:o2]",
+          at: [-4, 2.5, 0],
+        },
+        {
+          smiles: "[O:o3]=[O:o4]",
+          at: [4, -2.5, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate("1 个 CH₄ 分子和 2 个 O₂ 分子。"),
+          energy: 0,
+        },
+        {
+          title: translate("断键：吸收能量"),
+          text: translate(
+            "4 个 C–H 键和 2 个 O=O 键全部断开，需要吸收能量（≈ 2 648 kJ/mol）。",
+          ),
+          break: [
+            ["c", "h1"],
+            ["c", "h2"],
+            ["c", "h3"],
+            ["c", "h4"],
+            ["o1", "o2"],
+            ["o3", "o4"],
+          ],
+          place: [
+            ["c", [0, 0, 0]],
+            ["h1", [-2.2, 2.2, 1.5]],
+            ["h2", [2.2, 2.2, -1.5]],
+            ["h3", [-2.2, -2.2, -1.5]],
+            ["h4", [2.2, -2.2, 1.5]],
+            ["o1", [-4.5, 0.8, 0]],
+            ["o2", [4.5, 0.8, 0]],
+            ["o3", [0, 3.8, 0]],
+            ["o4", [0, -3.8, 0]],
+          ],
+          energy: 1.6,
+        },
+        {
+          title: translate("成键：放出能量"),
+          text: translate(
+            "原子重新组合：形成 2 个 C=O 键和 4 个 O–H 键，放出的能量（≈ 3 538 kJ/mol）比吸收的多，所以燃烧放热。",
+          ),
+          form: [
+            ["c", "o1", 2],
+            ["c", "o2", 2],
+            ["o3", "h1", 1],
+            ["o3", "h2", 1],
+            ["o4", "h3", 1],
+            ["o4", "h4", 1],
+          ],
+          place: [
+            ["c", [0, 0, 0]],
+            ["o3", [-1, 4, 0]],
+            ["o4", [1, -4, 0]],
+          ],
+          flash: ["c", "o3", "o4"],
+          energy: -1.2,
+        },
+      ],
+    },
+    {
+      id: "hcl",
+      title: translate("氢气在氯气中燃烧"),
+      equation: "H₂ + <i>Cl</i>₂ → 2H<i>Cl</i>　ΔH = −183 kJ/mol",
+      conditions: [translate("点燃")],
+      macro: translate(
+        "安静燃烧，发出苍白色火焰，瓶口出现白雾（HCl 遇水蒸气形成盐酸小液滴）。",
+      ),
+      track: {
+        a: "Cl",
+        b: "Cl",
+      },
+      products: ["ClH", "ClH"],
+      molecules: [
+        {
+          smiles: "[H:h1][H:h2]",
+          at: [-3, 0, 0],
+        },
+        {
+          smiles: "[Cl:a][Cl:b]",
+          at: [3, 0, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate("H–H 键能 436 kJ/mol，Cl–Cl 键能 243 kJ/mol。"),
+          energy: 0,
+        },
+        {
+          title: translate("断键吸热"),
+          text: translate(
+            "断开 1 mol H–H 和 1 mol Cl–Cl，共吸收 436 + 243 = 679 kJ。",
+          ),
+          break: [
+            ["h1", "h2"],
+            ["a", "b"],
+          ],
+          place: [
+            ["h1", [-1.6, 2.2, 0]],
+            ["h2", [-1.6, -2.2, 0]],
+            ["a", [1.6, 2.2, 0]],
+            ["b", [1.6, -2.2, 0]],
+          ],
+          energy: 1.4,
+        },
+        {
+          title: translate("成键放热"),
+          text: translate(
+            "形成 2 mol H–Cl（键能 431 kJ/mol），放出 862 kJ。净放热 862 − 679 = 183 kJ。",
+          ),
+          form: [
+            ["h1", "a", 1],
+            ["h2", "b", 1],
+          ],
+          place: [
+            ["h1", [-0.6, 2.6, 0]],
+            ["h2", [-0.6, -2.6, 0]],
+          ],
+          flash: ["h1", "h2"],
+          energy: -0.8,
+        },
+      ],
+    },
+    {
+      id: "thermite",
+      title: translate("铝热反应"),
+      equation: translate("2<i>Al</i> + Fe₂O₃ →(高温) Al₂O₃ + 2Fe"),
+      conditions: [translate("镁条引燃"), translate("高温")],
+      macro: translate(
+        "剧烈反应，火星四射，放出大量热，生成的铁呈熔融状态落入沙中。可用于焊接钢轨。",
+      ),
+      track: {
+        al1: "Al",
+        al2: "Al",
+      },
+      products: null,
+      molecules: [
+        {
+          smiles: "[Fe+3:fe1]",
+          at: [2, 1.2, 0],
+        },
+        {
+          smiles: "[Fe+3:fe2]",
+          at: [2, -1.2, 0],
+        },
+        {
+          smiles: "[O-2:o1]",
+          at: [3.6, 0, 0],
+        },
+        {
+          smiles: "[O-2:o2]",
+          at: [0.6, 0, 1.4],
+        },
+        {
+          smiles: "[O-2:o3]",
+          at: [0.6, 0, -1.4],
+        },
+        {
+          smiles: "[Al:al1]",
+          at: [-5, 1.6, 0],
+        },
+        {
+          smiles: "[Al:al2]",
+          at: [-5, -1.6, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate(
+            "左边是铝原子，右边是氧化铁中的 Fe³⁺ 和 O²⁻。铝比铁活泼。",
+          ),
+          partial: [
+            ["fe1", "o1"],
+            ["fe1", "o2"],
+            ["fe1", "o3"],
+            ["fe2", "o1"],
+            ["fe2", "o2"],
+            ["fe2", "o3"],
+          ],
+          pin: [
+            ["fe1", [2, 1.2, 0]],
+            ["fe2", [2, -1.2, 0]],
+            ["o1", [3.6, 0, 0]],
+            ["o2", [0.8, 0, 1.6]],
+            ["o3", [0.8, 0, -1.6]],
+            ["al1", [-5, 1.6, 0]],
+            ["al2", [-5, -1.6, 0]],
+          ],
+          energy: 0,
+        },
+        {
+          title: translate("电子转移"),
+          text: translate(
+            "每个 Al 失去 3 个电子变成 Al³⁺，每个 Fe³⁺ 得到 3 个电子变成 Fe。铝是还原剂，氧化铁是氧化剂。",
+          ),
+          electrons: [
+            ["al1", "fe1", 3],
+            ["al2", "fe2", 3],
+          ],
+          charge: {
+            al1: "3+",
+            al2: "3+",
+            fe1: null,
+            fe2: null,
+          },
+          pin: [
+            ["fe1", [2, 1.2, 0]],
+            ["fe2", [2, -1.2, 0]],
+            ["o1", [3.6, 0, 0]],
+            ["o2", [0.8, 0, 1.6]],
+            ["o3", [0.8, 0, -1.6]],
+            ["al1", [-2.2, 1.6, 0]],
+            ["al2", [-2.2, -1.6, 0]],
+          ],
+          energy: 0.4,
+        },
+        {
+          title: translate("氧转移给铝"),
+          text: translate(
+            "O²⁻ 转而与 Al³⁺ 结合成 Al₂O₃，单质铁被置换出来。反应放出的热足以使铁熔化（约 2 500 ℃）。",
+          ),
+          break: [
+            ["fe1", "o1"],
+            ["fe1", "o2"],
+            ["fe1", "o3"],
+            ["fe2", "o1"],
+            ["fe2", "o2"],
+            ["fe2", "o3"],
+          ],
+          partial: [
+            ["al1", "o1"],
+            ["al1", "o2"],
+            ["al1", "o3"],
+            ["al2", "o1"],
+            ["al2", "o2"],
+            ["al2", "o3"],
+          ],
+          pin: [
+            ["al1", [-2, 1.1, 0]],
+            ["al2", [-2, -1.1, 0]],
+            ["o1", [-3.5, 0, 0]],
+            ["o2", [-0.8, 0, 1.4]],
+            ["o3", [-0.8, 0, -1.4]],
+            ["fe1", [3.6, 1.3, 0]],
+            ["fe2", [3.6, -1.3, 0]],
+          ],
+          form: [["fe1", "fe2", 1]],
+          flash: ["fe1", "fe2", "o1"],
+          energy: -1.4,
+        },
+      ],
+    },
+  ],
+  be = [
+    {
+      id: "sn2",
+      title: translate("SN2 反应"),
+      equation: "<i>HO</i>⁻ + CH₃Br → CH₃OH + Br⁻",
+      conditions: [translate("一步协同"), translate("背面进攻")],
+      macro: translate(
+        "速率 = k[CH₃Br][OH⁻]，二级反应。手性碳发生构型翻转（瓦尔登翻转），像大风把伞吹翻。",
+      ),
+      track: {
+        o: "OH⁻",
+      },
+      products: ["Br", "CH4O"],
+      molecules: [
+        {
+          smiles: "[O-:o][H:ho]",
+          at: [-4.2, 0, 0],
+        },
+        {
+          smiles: "[C:c]([H:h1])([H:h2])([H:h3])[Br:b]",
+          at: [1.2, 0, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate(
+            "C–Br 键极性很强，碳带部分正电荷。三个 H 像一把伞，伞面朝向左边。",
+          ),
+          pin: [
+            ["c", [0.6, 0, 0]],
+            ["b", [2.56, 0, 0]],
+            ["o", [-4, 0, 0]],
+            ["ho", [-4.6, 0.75, 0]],
+          ],
+          charge: {
+            c: "δ+",
+            b: "δ−",
+          },
+          energy: 0,
+        },
+        {
+          title: translate("背面进攻"),
+          text: translate(
+            "OH⁻ 从溴的背面（180°）进攻碳原子：一对孤对电子指向碳，C–Br 键的电子向溴转移。",
+          ),
+          pin: [
+            ["c", [0.6, 0, 0]],
+            ["b", [2.56, 0, 0]],
+            ["o", [-2.1, 0, 0]],
+            ["ho", [-2.6, 0.8, 0]],
+          ],
+          arrows: [
+            {
+              from: "o",
+              to: "c",
+            },
+            {
+              from: ["c", "b"],
+              to: "b",
+            },
+          ],
+          energy: 0.5,
+        },
+        {
+          title: translate("过渡态"),
+          text: translate(
+            "五配位过渡态：O···C···Br 共线，三个 H 处在同一平面上，像伞被吹到水平。新键和旧键都只“一半”。",
+          ),
+          partial: [
+            ["o", "c"],
+            ["c", "b"],
+          ],
+          planar: ["c"],
+          pin: [
+            ["c", [0, 0, 0]],
+            ["b", [2.3, 0, 0]],
+            ["o", [-1.95, 0, 0]],
+            ["ho", [-2.4, 0.85, 0]],
+          ],
+          charge: {
+            o: "δ−",
+            c: null,
+            b: "δ−",
+          },
+          energy: 1,
+        },
+        {
+          title: translate("构型翻转"),
+          text: translate(
+            "C–O 键形成，Br⁻ 离开。三个 H 翻到右边——构型发生了翻转。",
+          ),
+          form: [["o", "c", 1]],
+          break: [["c", "b"]],
+          charge: {
+            o: null,
+            b: "−",
+          },
+          pin: [["b", [5.5, 0, 0]]],
+          energy: -0.5,
+        },
+      ],
+    },
+    {
+      id: "sn1",
+      title: translate("SN1 反应"),
+      equation: "(CH₃)₃C<i>Br</i> + H₂O → (CH₃)₃COH + HBr",
+      conditions: [translate("分两步"), translate("碳正离子中间体")],
+      macro: translate(
+        "速率 = k[(CH₃)₃CBr]，一级反应，只与底物有关。碳正离子是平面的，亲核试剂可从两面进攻，手性底物会外消旋化。",
+      ),
+      track: {
+        b: "Br",
+      },
+      products: ["BrH", "C4H10O", "H2O"],
+      molecules: [
+        {
+          smiles: "C[C:c](C)(C)[Br:b]",
+          at: [0, 0, 0],
+        },
+        {
+          smiles: "[H][O:w][H:hw]",
+          at: [-1.5, 4.2, 0],
+        },
+        {
+          smiles: "[OH2:w2]",
+          at: [3.5, 4, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("叔丁基溴"),
+          text: translate(
+            "中心碳连着三个甲基和一个溴，背面被甲基挡住，SN2 很难发生。",
+          ),
+          energy: 0,
+        },
+        {
+          title: translate("C–Br 异裂（慢）"),
+          text: translate(
+            "C–Br 键自发异裂，溴带着一对电子离开——这是决定速率的一步。",
+          ),
+          arrows: [
+            {
+              from: ["c", "b"],
+              to: "b",
+            },
+          ],
+          partial: [["c", "b"]],
+          energy: 0.9,
+        },
+        {
+          title: translate("碳正离子"),
+          text: translate(
+            "生成平面三角形的叔丁基碳正离子，三个甲基的推电子作用使它比较稳定。",
+          ),
+          break: [["c", "b"]],
+          charge: {
+            c: "+",
+            b: "−",
+          },
+          apart: [["c", "b", 5]],
+          pull: [["w", "c", 3]],
+          arrows: [
+            {
+              from: "w",
+              to: "c",
+            },
+          ],
+          energy: 0.6,
+        },
+        {
+          title: translate("水进攻（快）"),
+          text: translate(
+            "水分子的孤对电子进攻碳正离子——它可以从平面的上方或下方进攻。",
+          ),
+          form: [["w", "c", 1]],
+          charge: {
+            c: null,
+            w: "+",
+          },
+          pull: [["w2", "hw", 1.9]],
+          arrows: [
+            {
+              from: "w2",
+              to: "hw",
+            },
+            {
+              from: ["w", "hw"],
+              to: "w",
+            },
+          ],
+          energy: 0.3,
+        },
+        {
+          title: translate("脱质子"),
+          text: translate("另一个水分子夺走质子，得到叔丁醇和 H₃O⁺。"),
+          break: [["w", "hw"]],
+          form: [["w2", "hw", 1]],
+          charge: {
+            w: null,
+            w2: "+",
+          },
+          apart: [["w2", "c", 5.5]],
+          pull: [["b", "hw", 2.4]],
+          arrows: [
+            {
+              from: "b",
+              to: "hw",
+            },
+            {
+              from: ["w2", "hw"],
+              to: "w2",
+            },
+          ],
+          energy: -0.2,
+        },
+        {
+          title: translate("生成 HBr"),
+          text: translate(
+            "H₃O⁺ 与 Br⁻ 在溶液中相当于氢溴酸（这里画成 HBr 分子）。",
+          ),
+          break: [["w2", "hw"]],
+          form: [["b", "hw", 1]],
+          charge: {
+            w2: null,
+            b: null,
+          },
+          apart: [["w2", "b", 4]],
+          energy: -0.25,
+        },
+      ],
+    },
+    {
+      id: "e2",
+      title: translate("E2 消除"),
+      equation: "<i>HO</i>⁻ + CH₃CH₂Br → CH₂=CH₂ + H₂O + Br⁻",
+      conditions: [translate("强碱"), translate("反式共平面")],
+      macro: translate(
+        "一步协同。被夺去的 β-H 与离去的 Br 必须处在反式共平面（二面角 180°），产物是烯烃。",
+      ),
+      track: {
+        hb: "β-H",
+      },
+      products: ["Br", "C2H4", "H2O"],
+      molecules: [
+        {
+          smiles: "[Br:b][CH2:c1][CH2:c2][H:hb]",
+          at: [0, 0, 0],
+        },
+        {
+          smiles: "[O-:o][H]",
+          at: [3.5, 3.5, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反式共平面"),
+          text: translate(
+            "旋转到 β-H 与 Br 处于反式共平面的构象：一个朝上，一个朝下。",
+          ),
+          pin: [
+            ["c1", [0, 0, 0]],
+            ["c2", [1.52, 0, 0]],
+            ["b", [-0.62, -1.78, 0]],
+            ["hb", [1.88, 1, 0]],
+            ["o", [3.6, 3.4, 0]],
+          ],
+          energy: 0,
+        },
+        {
+          title: translate("碱进攻 β-H"),
+          text: translate(
+            "OH⁻ 夺取 β-H；C–H 键的电子转移形成 π 键；C–Br 键的电子随 Br⁻ 离开——三件事同时发生。",
+          ),
+          pin: [
+            ["c1", [0, 0, 0]],
+            ["c2", [1.52, 0, 0]],
+            ["b", [-0.62, -1.78, 0]],
+            ["hb", [1.9, 1.05, 0]],
+            ["o", [2.6, 2.6, 0]],
+          ],
+          arrows: [
+            {
+              from: "o",
+              to: "hb",
+            },
+            {
+              from: ["c2", "hb"],
+              to: ["c1", "c2"],
+            },
+            {
+              from: ["c1", "b"],
+              to: "b",
+            },
+          ],
+          energy: 0.4,
+        },
+        {
+          title: translate("过渡态"),
+          text: translate(
+            "O···H···C 与 C···Br 同时部分成键、部分断键，C–C 键获得部分双键性质。",
+          ),
+          partial: [
+            ["o", "hb"],
+            ["c2", "hb"],
+            ["c1", "b"],
+          ],
+          order: [["c1", "c2", 1.5]],
+          pin: [
+            ["c1", [0, 0, 0]],
+            ["c2", [1.45, 0, 0]],
+            ["b", [-0.8, -2.2, 0]],
+            ["hb", [2.1, 1.35, 0]],
+            ["o", [2.6, 2.4, 0]],
+          ],
+          charge: {
+            o: "δ−",
+            b: "δ−",
+          },
+          energy: 1,
+        },
+        {
+          title: translate("生成乙烯"),
+          text: translate("形成 C=C 双键，同时生成水和 Br⁻。"),
+          break: [
+            ["c2", "hb"],
+            ["c1", "b"],
+          ],
+          form: [["o", "hb", 1]],
+          order: [["c1", "c2", 2]],
+          charge: {
+            o: null,
+            b: "−",
+          },
+          apart: [
+            ["o", "c1", 5],
+            ["b", "c1", 5],
+          ],
+          energy: -0.4,
+        },
+      ],
+    },
+    {
+      id: "fischer",
+      title: translate("酯化反应完整机理"),
+      equation: "CH₃COOH + CH₃CH₂<i>¹⁸O</i>H ⇌(H⁺) CH₃CO<i>¹⁸O</i>Et + H₂O",
+      conditions: [translate("酸催化"), translate("可逆")],
+      macro: translate(
+        "费歇尔酯化：加成–消除机理，经过四面体中间体。H⁺ 在第一步被消耗、最后一步再生，所以是催化剂。",
+      ),
+      track: {
+        o3: "¹⁸O",
+        hp: "H⁺",
+      },
+      products: ["C4H8O2", "H2O", "H3O"],
+      molecules: [
+        {
+          smiles: "C[C:c1](=[O:o1])[O:o2][H:h1]",
+          at: [-2.4, 0, 0],
+        },
+        {
+          smiles: "CC[18O:o3][H:h3]",
+          at: [3.8, -1.2, 0],
+        },
+        {
+          smiles: "[H:hp][O+:ow]([H])[H]",
+          at: [-2.4, 4, 0],
+        },
+      ],
+      stages: [
+        {
+          title: translate("反应物"),
+          text: translate("乙酸、¹⁸O 标记的乙醇和催化剂 H₃O⁺。"),
+          pull: [["o1", "hp", 2.2]],
+          arrows: [
+            {
+              from: "o1",
+              to: "hp",
+            },
+            {
+              from: ["ow", "hp"],
+              to: "ow",
+            },
+          ],
+          energy: 0,
+        },
+        {
+          title: translate("① 羰基质子化"),
+          text: translate(
+            "羰基氧接受 H⁺，羰基碳的正电性大大增强，更容易被弱亲核试剂进攻。",
+          ),
+          form: [["o1", "hp", 1]],
+          break: [["ow", "hp"]],
+          charge: {
+            o1: "+",
+            ow: null,
+          },
+          apart: [["ow", "c1", 5.5]],
+          pull: [["o3", "c1", 2.9]],
+          arrows: [
+            {
+              from: "o3",
+              to: "c1",
+            },
+            {
+              from: ["c1", "o1"],
+              to: "o1",
+            },
+          ],
+          energy: 0.3,
+        },
+        {
+          title: translate("② 乙醇加成"),
+          text: translate("乙醇的 ¹⁸O 进攻羰基碳，生成四面体中间体。"),
+          form: [["o3", "c1", 1]],
+          order: [["c1", "o1", 1]],
+          charge: {
+            o1: null,
+            o3: "+",
+          },
+          pull: [["h3", "o2", 1.9]],
+          arrows: [
+            {
+              from: "o2",
+              to: "h3",
+            },
+            {
+              from: ["o3", "h3"],
+              to: "o3",
+            },
+          ],
+          energy: 0.6,
+        },
+        {
+          title: translate("③ 质子转移"),
+          text: translate(
+            "质子从 ¹⁸O 转移到原羧基的 –OH 上，把它变成好的离去基团 –OH₂⁺。",
+          ),
+          break: [["o3", "h3"]],
+          form: [["o2", "h3", 1]],
+          charge: {
+            o3: null,
+            o2: "+",
+          },
+          arrows: [
+            {
+              from: "o1",
+              to: ["c1", "o1"],
+            },
+            {
+              from: ["c1", "o2"],
+              to: "o2",
+            },
+          ],
+          energy: 0.55,
+        },
+        {
+          title: translate("④ 脱水"),
+          text: translate(
+            "C=O 重新形成，一分子水离开。注意：离开的水中的氧来自乙酸。",
+          ),
+          break: [["c1", "o2"]],
+          order: [["c1", "o1", 2]],
+          charge: {
+            o2: null,
+            o1: "+",
+          },
+          apart: [["o2", "c1", 5.5]],
+          pull: [["ow", "hp", 2.2]],
+          arrows: [
+            {
+              from: "ow",
+              to: "hp",
+            },
+            {
+              from: ["o1", "hp"],
+              to: "o1",
+            },
+          ],
+          energy: 0.4,
+        },
+        {
+          title: translate("⑤ 去质子，催化剂再生"),
+          text: translate(
+            "水分子夺回 H⁺，得到乙酸乙酯，H₃O⁺ 再生。整个过程每一步都可逆。",
+          ),
+          break: [["o1", "hp"]],
+          form: [["ow", "hp", 1]],
+          charge: {
+            o1: null,
+            ow: "+",
+          },
+          apart: [["ow", "c1", 5.5]],
+          energy: -0.1,
+        },
+      ],
+    },
+  ],
+  ct = [
+    {
+      id: "organic",
+      title: translate("高中有机"),
+      reactions: fe,
+    },
+    {
+      id: "inorganic",
+      title: translate("离子反应"),
+      reactions: me,
+    },
+    {
+      id: "redox",
+      title: translate("燃烧与氧化还原"),
+      reactions: ge,
+    },
+    {
+      id: "advanced",
+      title: translate("大学有机机理"),
+      reactions: be,
+    },
+  ],
+  Z = ct.flatMap((s) =>
+    s.reactions.map((n) => ({
+      ...n,
+      group: s.id,
+    })),
+  );
+function Ce() {
+  const s = (C) => document.querySelector(C),
+    n = ae(s("#c3")),
+    c = "⁰¹²³⁴⁵⁶⁷⁸⁹",
+    m = (C) =>
+      C.replace(
+        /[₀-₉]+/g,
+        (k) =>
+          `<sub>${[...k].map((v) => v.charCodeAt(0) - 8320).join("")}</sub>`,
+      )
+        .replace(
+          /[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g,
+          (k) => `<sup>${[...k].map((v) => c.indexOf(v)).join("")}</sup>`,
+        )
+        .replace(/([⁺⁻])/g, (k) => `<sup>${k === "⁺" ? "+" : "−"}</sup>`),
+    d = 2.2,
+    M = 1.6,
+    i = new Map(),
+    a = {
+      index: 0,
+      p: 0,
+      hold: 0,
+      playing: !0,
+      labels: !0,
+      solvent: !0,
+      spin: !1,
+      speed: 1,
+    };
+  let h = null,
+    y = null;
+  const x = () => Z[a.index],
+    w = () => x().stages;
+  function b(C, k = !0) {
+    a.index = (C + Z.length) % Z.length;
+    const v = x();
+    (i.has(v.id) || i.set(v.id, pe(v)),
+      (y = i.get(v.id)),
+      h?.dispose(),
+      (h = new re(n, y, {
+        showSolvent: a.solvent,
+      })),
+      (a.p = 0),
+      (a.hold = 0),
+      (a.playing = k),
+      n.resetView(n.fitDistance(h.radius), h.center),
+      history.replaceState(null, "", `#${v.id}`),
+      document
+        .querySelectorAll("#nav .ni")
+        .forEach((S) => S.classList.toggle("on", S.dataset.rx === v.id)));
+    const j = s("#chapter");
+    ((j.querySelector(".n").textContent = ct.find(
+      (S) => S.id === v.group,
+    ).title),
+      (j.querySelector("h1").textContent = v.title),
+      (j.querySelector("p").innerHTML = m(v.equation)),
+      j.classList.remove("in"),
+      j.offsetWidth,
+      j.classList.add("in"),
+      B(),
+      o(),
+      (s("#lesson").scrollTop = 0));
+  }
+  function B() {
+    const C = x(),
+      k = C.stages
+        .map(
+          (v, j) =>
+            `<li data-step="${j}"><em>${j + 1}</em><b>${v.title}</b></li>`,
+        )
+        .join("");
+    ((s("#lesson").innerHTML = `
+      <div class="rh"><h2>${C.title}</h2><div class="eqn">${m(C.equation)}</div>
+        <div class="conds">${C.conditions.map((v) => `<span>${m(v)}</span>`).join("")}</div></div>
+      <ol class="steps">${k}</ol>
+      <div class="now"><div class="now-h" id="nowH"></div><p id="nowT"></p></div>
+      <div class="ep"><div class="ep-h">${translate("能量变化")}</div><canvas id="epC"></canvas></div>
+      <div class="macro"><div class="macro-h">${translate("宏观现象")}</div><p>${m(C.macro)}</p></div>`),
+      A(!0));
+  }
+  let $ = -1;
+  function A(C) {
+    const k = Math.round(a.p);
+    if (k === $ && !C) return;
+    (($ = k),
+      document.querySelectorAll(".steps li").forEach((P, L) => {
+        (P.classList.toggle("on", L === k), P.classList.toggle("done", L < k));
+      }));
+    const v = w()[k];
+    ((s("#nowH").innerHTML = `${translate("第 {0} 步", [k + 1])} · ${v.title}`),
+      (s("#nowT").innerHTML = m(v.text)));
+    const j = w().map((P) => P.energy ?? 0),
+      S = k ? j[k] - j[k - 1] : 0;
+    s("#spec").innerHTML = [
+      [
+        translate("步骤"),
+        `${String(k + 1).padStart(2, "0")} / ${String(w().length).padStart(2, "0")}`,
+      ],
+      [translate("阶段"), v.title],
+      [
+        translate("能量"),
+        k === 0
+          ? "—"
+          : S > 0.05
+            ? translate("↑ 升高")
+            : S < -0.05
+              ? translate("↓ 降低")
+              : translate("→ 持平"),
+      ],
+    ]
+      .map(([P, L]) => `<div><span>${P}</span><b>${L}</b></div>`)
+      .join("");
+  }
+  function g() {
+    const C = s("#epC");
+    if (!C) return;
+    const k = Math.min(window.devicePixelRatio || 1, 2),
+      v = C.clientWidth,
+      j = C.clientHeight;
+    C.width !== Math.round(v * k) &&
+      ((C.width = Math.round(v * k)), (C.height = Math.round(j * k)));
+    const S = C.getContext("2d");
+    (S.setTransform(k, 0, 0, k, 0, 0), S.clearRect(0, 0, v, j));
+    const P = w().map((q) => q.energy ?? 0),
+      L = Math.min(...P) - 0.25,
+      V = Math.max(...P) + 0.3,
+      W = 16,
+      X = (q) => W + (q / Math.max(1, P.length - 1)) * (v - 2 * W),
+      Y = (q) => j - 18 - ((q - L) / (V - L)) * (j - 34),
+      R = P.map((q, T) => [X(T), Y(q)]),
+      ht = (q) => {
+        const T = Math.min(R.length - 2, Math.floor(q)),
+          D = q - T,
+          dt = R[Math.max(0, T - 1)],
+          pt = R[T],
+          ut = R[T + 1],
+          ft = R[Math.min(R.length - 1, T + 2)],
+          mt = (tt, et, ot, gt) =>
+            0.5 *
+            (2 * et +
+              (-tt + ot) * D +
+              (2 * tt - 5 * et + 4 * ot - gt) * D * D +
+              (-tt + 3 * et - 3 * ot + gt) * D * D * D);
+        return [mt(dt[0], pt[0], ut[0], ft[0]), mt(dt[1], pt[1], ut[1], ft[1])];
+      };
+    if (
+      ((S.strokeStyle = "rgba(29,35,33,.12)"),
+      S.beginPath(),
+      S.moveTo(W, Y(0)),
+      S.lineTo(v - W, Y(0)),
+      S.stroke(),
+      R.length > 1)
+    ) {
+      S.beginPath();
+      for (let q = 0; q <= R.length - 1 + 1e-6; q += 0.02) {
+        const [T, D] = ht(Math.min(q, R.length - 1 - 1e-6));
+        q ? S.lineTo(T, D) : S.moveTo(T, D);
+      }
+      ((S.strokeStyle = "#0f9e63"), (S.lineWidth = 2), S.stroke());
+    }
+    ((S.font = "600 10px 'JetBrains Mono', monospace"),
+      (S.textAlign = "center"),
+      R.forEach(([q, T], D) => {
+        ((S.fillStyle = D <= Math.round(a.p) ? "#1d2321" : "#a2a8a4"),
+          S.beginPath(),
+          S.arc(q, T, 3, 0, Math.PI * 2),
+          S.fill(),
+          S.fillText(String(D + 1), q, j - 4));
+      }));
+    const [Bt, At] =
+      R.length > 1 ? ht(Math.min(a.p, R.length - 1 - 1e-6)) : R[0];
+    ((S.fillStyle = "#ff8a1f"),
+      (S.shadowColor = "#ff8a1f"),
+      (S.shadowBlur = 10),
+      S.beginPath(),
+      S.arc(Bt, At, 5.5, 0, Math.PI * 2),
+      S.fill(),
+      (S.shadowBlur = 0));
+  }
+  const e = {
+    play: '<svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5z"/></svg>',
+    pause: '<svg viewBox="0 0 16 16"><path d="M5 3v10M11 3v10"/></svg>',
+    prev: '<svg viewBox="0 0 16 16"><path d="M4 3v10M13 3l-7 5 7 5z"/></svg>',
+    next: '<svg viewBox="0 0 16 16"><path d="M12 3v10M3 3l7 5-7 5z"/></svg>',
+  };
+  function o() {
+    const C = w().length;
+    s("#stageBar").innerHTML =
+      `<button data-act="prev" title="${translate("上一步")}">${e.prev}</button><button data-act="play" class="pp">${a.playing ? e.pause : e.play}</button><button data-act="next" title="${translate("下一步")}">${e.next}</button>
+      <div class="tl"><input type="range" id="tl" min="0" max="${C - 1}" step="0.01" value="${a.p}"><div class="ticks">${w()
+        .map(
+          (k, v) => `<i style="left:${(v / Math.max(1, C - 1)) * 100}%"></i>`,
+        )
+        .join("")}</div></div>
+      <button data-act="speed" class="sp">${a.speed === 1 ? "1×" : "0.5×"}</button>`;
+  }
+  const r = () => {
+    const C = s("#stageBar .pp");
+    C && (C.innerHTML = a.playing ? e.pause : e.play);
+  };
+  function u(C) {
+    ((a.p = Math.max(0, Math.min(w().length - 1, Math.round(a.p) + C))),
+      (a.hold = 0),
+      (a.playing = !1),
+      r());
+  }
+  ((s("#nav").innerHTML =
+    ct
+      .map(
+        (C) =>
+          `<div class="navh">${C.title}</div>` +
+          C.reactions
+            .map(
+              (k) =>
+                `<button class="ni" data-rx="${k.id}"><em>${String(Z.findIndex((v) => v.id === k.id) + 1).padStart(2, "0")}</em><b>${k.title}</b></button>`,
+            )
+            .join(""),
+      )
+      .join("") +
+    `<div class="navf">${translate("<kbd>Space</kbd> 播放 / 暂停<br><kbd>←</kbd> <kbd>→</kbd> 上一步 / 下一步<br><kbd>↑</kbd> <kbd>↓</kbd> 切换反应")}</div>`),
+    s("#nav").addEventListener("click", (C) => {
+      const k = C.target.closest("[data-rx]");
+      k && b(Z.findIndex((v) => v.id === k.dataset.rx));
+    }),
+    document.addEventListener("click", (C) => {
+      const k = C.target.closest("[data-step]");
+      if (k) {
+        ((a.p = +k.dataset.step), (a.hold = 0), (a.playing = !1), r());
+        return;
+      }
+      const v = C.target.closest("[data-act],[data-tg]");
+      if (!v) return;
+      const j = v.dataset.act;
+      j === "play"
+        ? (a.p >= w().length - 1 && ((a.p = 0), (a.hold = 0)),
+          (a.playing = !a.playing),
+          r())
+        : j === "prev"
+          ? u(-1)
+          : j === "next"
+            ? u(1)
+            : j === "speed"
+              ? ((a.speed = a.speed === 1 ? 0.5 : 1),
+                (v.textContent = a.speed === 1 ? "1×" : "0.5×"))
+              : v.dataset.tg &&
+                ((a[v.dataset.tg] = !a[v.dataset.tg]),
+                v.dataset.tg === "solvent" && (h.showSolvent = a.solvent),
+                p());
+    }),
+    document.addEventListener("input", (C) => {
+      C.target.id === "tl" &&
+        ((a.p = +C.target.value), (a.hold = 0), (a.playing = !1), r());
+    }));
+  function p() {
+    s("#tgs").innerHTML = [
+      ["labels", translate("原子符号")],
+      ["solvent", translate("溶剂水分子")],
+      ["spin", translate("自动旋转")],
+    ]
+      .map(
+        ([C, k]) =>
+          `<button class="tg ${a[C] ? "on" : ""}" data-tg="${C}"><i></i>${k}</button>`,
+      )
+      .join("");
+  }
+  ((s("#bPrev").onclick = () => b(a.index - 1)),
+    (s("#bNext").onclick = () => b(a.index + 1)),
+    (s("#bReset").onclick = () => n.resetView()),
+    (s("#bFull").onclick = () =>
+      document.fullscreenElement
+        ? document.exitFullscreen()
+        : document.documentElement.requestFullscreen?.()),
+    window.addEventListener("keydown", (C) => {
+      C.target.closest?.("input") ||
+        (C.key === " "
+          ? (C.preventDefault(), s("[data-act=play]")?.click())
+          : C.key === "ArrowLeft"
+            ? u(-1)
+            : C.key === "ArrowRight"
+              ? u(1)
+              : C.key === "ArrowUp"
+                ? b(a.index - 1)
+                : C.key === "ArrowDown"
+                  ? b(a.index + 1)
+                  : (C.key === "r" || C.key === "R") && n.resetView());
+    }),
+    new ResizeObserver(() => n.resize()).observe(s("#stage")));
+  const O = s("#labels"),
+    l = [];
+  function f() {
+    const C = [],
+      k = y.keyframes,
+      v = k[Math.min(k.length - 1, Math.round(a.p))];
+    for (
+      y.atoms.forEach((j, S) => {
+        if (j.solvent) return;
+        const P = v.charges[S],
+          L = y.track[S];
+        if (!a.labels && !P && !L) return;
+        const V = v.elements[S],
+          W = j.isotope ? `<sup>${j.isotope}</sup>` : "",
+          X =
+            (a.labels || L ? `${W}${V}` : "") +
+            (P ? `<sup class="q">${P}</sup>` : "");
+        X &&
+          C.push([L ? "lb trk" : V === "H" ? "lb h" : "lb", X, h.positions[S]]);
+      });
+      l.length < C.length;
+    ) {
+      const j = document.createElement("div");
+      (O.appendChild(j), l.push(j));
+    }
+    l.forEach((j, S) => {
+      const P = C[S];
+      if (!P) return void (j.style.display = "none");
+      const L = n.project(P[2]);
+      ((j.style.display = L.visible ? "" : "none"),
+        j.className !== P[0] && (j.className = P[0]),
+        j.dataset.t !== P[1] && ((j.innerHTML = P[1]), (j.dataset.t = P[1])),
+        (j.style.transform = `translate(${L.x.toFixed(1)}px,${L.y.toFixed(1)}px) translate(-50%,-50%)`));
+    });
+  }
+  let H = performance.now();
+  function E(C) {
+    const k = C / 1e3,
+      v = Math.max(0, Math.min(0.1, (C - H) / 1e3)) * a.speed;
+    H = C;
+    const j = w().length,
+      S = Math.abs(a.p - Math.round(a.p)) < 0.001;
+    if ((S && (a.hold += v), a.playing && !(S && a.hold < d)))
+      if (a.p < j - 1) {
+        const L = Math.floor(a.p + 1e-6) + 1;
+        ((a.p = Math.min(L, a.p + v / M)),
+          a.p >= L - 1e-6 && ((a.p = L), (a.hold = 0)));
+      } else ((a.playing = !1), r());
+    (h.update(a.p, Math.min(1, a.hold / (d * 0.7)), k),
+      (n.controls.autoRotate = a.spin),
+      n.render(),
+      f(),
+      A(),
+      g());
+    const P = s("#tl");
+    (P && document.activeElement !== P && (P.value = a.p),
+      requestAnimationFrame(E));
+  }
+  p();
+  const I = Z.findIndex((C) => C.id === location.hash.slice(1));
+  (b(I >= 0 ? I : 0),
+    requestAnimationFrame(E),
+    document.body.classList.add("ready"));
+}
+function mechanismLabPage() {
+  return (
+    React.useLayoutEffect(() => {
+      ((document.title = translate("反应机理 · 分子动画")), Ce());
+    }, []),
+    jsxRuntime.jsxs("div", {
+      id: "app",
+      children: [
+        jsxRuntime.jsxs("header", {
+          id: "top",
+          children: [
+            jsxRuntime.jsx("a", {
+              className: "back",
+              href: localizedUrl("/"),
+              children: "← WEDULAB",
+            }),
+            jsxRuntime.jsxs("div", {
+              className: "brand",
+              children: [
+                jsxRuntime.jsxs("svg", {
+                  viewBox: "0 0 32 32",
+                  fill: "none",
+                  "aria-hidden": "true",
+                  children: [
+                    jsxRuntime.jsx("path", {
+                      d: "M7 20c3-10 15-12 19-4",
+                      stroke: "#c2362b",
+                      strokeWidth: "1.6",
+                      strokeLinecap: "round",
+                    }),
+                    jsxRuntime.jsx("path", {
+                      d: "M26 16l-1-4.2M26 16l-4 .8",
+                      stroke: "#c2362b",
+                      strokeWidth: "1.6",
+                      strokeLinecap: "round",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "9",
+                      cy: "22",
+                      r: "3.4",
+                      fill: "#e0483c",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "20",
+                      cy: "22",
+                      r: "3.4",
+                      fill: "#3a3f46",
+                    }),
+                    jsxRuntime.jsx("path", {
+                      d: "M12.4 22h4.2",
+                      stroke: "#3a3f46",
+                      strokeWidth: "1.6",
+                      strokeDasharray: "1.6 1.4",
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  children: [
+                    jsxRuntime.jsxs("b", {
+                      children: [
+                        "MECHA",
+                        jsxRuntime.jsx("i", {
+                          children: "NISM",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("span", {
+                      children: translate("反应机理 · 分子动画"),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("div", {
+              className: "prog",
+              id: "prog",
+            }),
+            jsxRuntime.jsx(jt, {}),
+            jsxRuntime.jsxs("div", {
+              className: "tbtns",
+              children: [
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bPrev",
+                  title: translate("上一个反应 (↑)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M10 3L5 8l5 5",
+                    }),
+                  }),
+                }),
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bNext",
+                  title: translate("下一个反应 (↓)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M6 3l5 5-5 5",
+                    }),
+                  }),
+                }),
+                jsxRuntime.jsxs("button", {
+                  className: "tb",
+                  id: "bReset",
+                  title: translate("重置视角 (R)"),
+                  children: [
+                    jsxRuntime.jsxs("svg", {
+                      viewBox: "0 0 16 16",
+                      children: [
+                        jsxRuntime.jsx("path", {
+                          d: "M2.5 8a5.5 5.5 0 1 0 1.8-4.1",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M2.5 2.5v3h3",
+                        }),
+                      ],
+                    }),
+                    translate("视角"),
+                  ],
+                }),
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bFull",
+                  title: translate("全屏 (F)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4",
+                    }),
+                  }),
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsxRuntime.jsx("nav", {
+          id: "nav",
+        }),
+        jsxRuntime.jsxs("main", {
+          id: "stage",
+          children: [
+            jsxRuntime.jsx("canvas", {
+              id: "c3",
+            }),
+            jsxRuntime.jsx("div", {
+              id: "labels",
+            }),
+            jsxRuntime.jsx("div", {
+              id: "spec",
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "chapter",
+              children: [
+                jsxRuntime.jsx("div", {
+                  className: "n",
+                }),
+                jsxRuntime.jsx("h1", {}),
+                jsxRuntime.jsx("p", {}),
+              ],
+            }),
+            jsxRuntime.jsx("div", {
+              id: "stageBar",
+            }),
+          ],
+        }),
+        jsxRuntime.jsxs("aside", {
+          id: "panel",
+          children: [
+            jsxRuntime.jsx("div", {
+              id: "lesson",
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "view",
+              children: [
+                jsxRuntime.jsx("div", {
+                  className: "vh",
+                  children: translate("VIEW · 显示设置"),
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "tgs",
+                  id: "tgs",
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    })
+  );
+}
+export { mechanismLabPage as default };

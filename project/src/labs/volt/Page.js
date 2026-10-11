@@ -1,0 +1,11480 @@
+// Recovered from public deployment: Page-DDIIxL8W.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  t as translate,
+  r as React,
+  j as jsxRuntime,
+  b as localizedUrl,
+} from "../../core/runtime.js";
+import { L as Ho } from "../../components/LanguageSwitcher.js";
+import {
+  S as On,
+  B as bt,
+  M as Rt,
+  a as qo,
+  P as Ps,
+  b as Lt,
+  c as Me,
+  d as Xo,
+  R as Yo,
+  V as In,
+  e as Jo,
+  f as Ko,
+  g as X0,
+  W as Qo,
+  h as Zo,
+  A as Wo,
+  C as ge,
+  F as ti,
+  i as ei,
+  j as si,
+  H as ni,
+  D as oi,
+  k as En,
+  l as be,
+  G as Ot,
+  I as ii,
+  m as oe,
+  n as Nn,
+  o as v0,
+  p as ai,
+  T as Y0,
+  E as li,
+  q as ri,
+  U as ci,
+  O as fi,
+  r as di,
+  s as Rs,
+  t as zn,
+  u as e0,
+  Q as pi,
+  v as J0,
+  w as hi,
+  x as ui,
+  y as mi,
+  z as $n,
+  J as bi,
+  K as w0,
+  L as K0,
+  N as M0,
+  X as js,
+  Y as Dn,
+  Z as xi,
+} from "../../vendor/OutputPass-B-cSf-Py.js";
+import { R as yi } from "../../vendor/RoundedBoxGeometry-BuxEdaMS.js";
+class vi extends On {
+  constructor(Bt = null) {
+    super();
+    const Mt = new bt();
+    Mt.deleteAttribute("uv");
+    const _t = new Rt({
+        side: qo,
+      }),
+      ie = new Rt();
+    let k0 = 5;
+    Bt !== null && Bt._useLegacyLights === !1 && (k0 = 900);
+    const E = new Ps(16777215, k0, 28, 2);
+    (E.position.set(0.418, 16.199, 0.3), this.add(E));
+    const Q = new Lt(Mt, _t);
+    (Q.position.set(-0.757, 13.219, 0.717),
+      Q.scale.set(31.713, 28.305, 28.591),
+      this.add(Q));
+    const Ct = new Lt(Mt, ie);
+    (Ct.position.set(-10.906, 2.009, 1.846),
+      Ct.rotation.set(0, -0.195, 0),
+      Ct.scale.set(2.328, 7.905, 4.651),
+      this.add(Ct));
+    const Te = new Lt(Mt, ie);
+    (Te.position.set(-5.607, -0.754, -0.758),
+      Te.rotation.set(0, 0.994, 0),
+      Te.scale.set(1.97, 1.534, 3.955),
+      this.add(Te));
+    const z = new Lt(Mt, ie);
+    (z.position.set(6.167, 0.857, 7.803),
+      z.rotation.set(0, 0.561, 0),
+      z.scale.set(3.927, 6.285, 3.687),
+      this.add(z));
+    const ae = new Lt(Mt, ie);
+    (ae.position.set(-2.017, 0.018, 6.124),
+      ae.rotation.set(0, 0.333, 0),
+      ae.scale.set(2.002, 4.566, 2.064),
+      this.add(ae));
+    const Ge = new Lt(Mt, ie);
+    (Ge.position.set(2.291, -0.756, -2.621),
+      Ge.rotation.set(0, -0.286, 0),
+      Ge.scale.set(1.546, 1.552, 1.496),
+      this.add(Ge));
+    const ke = new Lt(Mt, ie);
+    (ke.position.set(-2.193, -0.369, -5.547),
+      ke.rotation.set(0, 0.516, 0),
+      ke.scale.set(3.875, 3.487, 2.986),
+      this.add(ke));
+    const de = new Lt(Mt, s0(50));
+    (de.position.set(-16.116, 14.37, 8.208),
+      de.scale.set(0.1, 2.428, 2.739),
+      this.add(de));
+    const Ve = new Lt(Mt, s0(50));
+    (Ve.position.set(-16.109, 18.021, -8.207),
+      Ve.scale.set(0.1, 2.425, 2.751),
+      this.add(Ve));
+    const Ae = new Lt(Mt, s0(17));
+    (Ae.position.set(14.904, 12.198, -1.832),
+      Ae.scale.set(0.15, 4.265, 6.331),
+      this.add(Ae));
+    const Ie = new Lt(Mt, s0(43));
+    (Ie.position.set(-0.462, 8.89, 14.52),
+      Ie.scale.set(4.38, 5.441, 0.088),
+      this.add(Ie));
+    const st = new Lt(Mt, s0(20));
+    (st.position.set(3.235, 11.486, -12.541),
+      st.scale.set(2.5, 2, 0.1),
+      this.add(st));
+    const F = new Lt(Mt, s0(100));
+    (F.position.set(0, 20, 0), F.scale.set(1, 0.1, 1), this.add(F));
+  }
+  dispose() {
+    const Bt = new Set();
+    this.traverse((Mt) => {
+      Mt.isMesh && (Bt.add(Mt.geometry), Bt.add(Mt.material));
+    });
+    for (const Mt of Bt) Mt.dispose();
+  }
+}
+function s0(fe) {
+  const Bt = new Me();
+  return (Bt.color.setScalar(fe), Bt);
+}
+function wi() {
+  const fe = {
+      play: '<svg class="ic" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></svg>',
+      pause:
+        '<svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>',
+      reset:
+        '<svg class="ic" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4"/></svg>',
+      trash:
+        '<svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>',
+      cube: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>',
+      schem:
+        '<svg class="ic" viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 10 2-5h7"/></svg>',
+      wave: '<svg class="ic" viewBox="0 0 24 24"><path d="M3 12c2-6 4-6 6 0s4 6 6 0 4-6 6 0"/></svg>',
+    },
+    Bt = 20,
+    Mt = 0.025852,
+    _t = 1e-10,
+    ie = 1e3,
+    k0 = 1e-11,
+    E = (t) => document.querySelector(t),
+    Q = (t, e, s) => (t < e ? e : t > s ? s : t),
+    Ct = (t, e, s) => t + (e - t) * s,
+    Te = [
+      [1e9, "G"],
+      [1e6, "M"],
+      [1e3, "k"],
+      [1, ""],
+      [0.001, "m"],
+      [1e-6, "µ"],
+      [1e-9, "n"],
+      [1e-12, "p"],
+    ];
+  function z(t, e = "", s = 3) {
+    if (t == null || Number.isNaN(t)) return "—";
+    if (!isFinite(t)) return (t < 0 ? "-" : "") + "∞ " + e;
+    const n = Math.abs(t);
+    if (n < 1e-14) return "0 " + e;
+    for (const [i, a] of Te)
+      if (n >= i * 0.99995) return +(t / i).toPrecision(s) + " " + a + e;
+    return +(t / 1e-12).toPrecision(s) + " p" + e;
+  }
+  function ae(t, e = "", s = 4) {
+    if (!isFinite(t)) return "OVER";
+    const n = Math.abs(t);
+    if (n < 1e-14) return "0.000 " + e;
+    for (const [i, a] of Te)
+      if (n >= i * 0.99995) return (t / i).toPrecision(s) + " " + a + e;
+    return (t / 1e-12).toPrecision(s) + " p" + e;
+  }
+  function Ge(t) {
+    t = String(t)
+      .trim()
+      .replace(/Ω|ohm|V|A|F|H|Hz|W|s$/gi, (n) => (n === "M" ? "M" : ""));
+    const e = /^([-+]?\d*\.?\d+(?:e[-+]?\d+)?)\s*([GMkKmuµnp]?)/.exec(t);
+    if (!e) return NaN;
+    const s = {
+      G: 1e9,
+      M: 1e6,
+      k: 1e3,
+      K: 1e3,
+      m: 0.001,
+      u: 1e-6,
+      µ: 1e-6,
+      n: 1e-9,
+      p: 1e-12,
+      "": 1,
+    }[e[2]];
+    return parseFloat(e[1]) * s;
+  }
+  function ke(t, e, s) {
+    switch (s & 3) {
+      case 0:
+        return [t, e];
+      case 1:
+        return [-e, t];
+      case 2:
+        return [-t, -e];
+      default:
+        return [e, -t];
+    }
+  }
+  function de(t, e, s) {
+    const [n, i] = ke(e, s, t.rot);
+    return [t.x + n, t.y + i];
+  }
+  function Ve(t, e, s) {
+    return ke(e - t.x, s - t.y, (4 - t.rot) & 3);
+  }
+  function Ae(t) {
+    t /= 100;
+    let e, s, n;
+    return (
+      t <= 66
+        ? ((e = 255),
+          (s = 99.47 * Math.log(t) - 161.12),
+          (n = t <= 19 ? 0 : 138.52 * Math.log(t - 10) - 305.04))
+        : ((e = 329.7 * Math.pow(t - 60, -0.1332)),
+          (s = 288.12 * Math.pow(t - 60, -0.0755)),
+          (n = 255)),
+      [Q(e, 0, 255) | 0, Q(s, 0, 255) | 0, Q(n, 0, 255) | 0]
+    );
+  }
+  const Ie = [
+    "#e5484d",
+    "#3e9bff",
+    "#f5c542",
+    "#30c48d",
+    "#e879f9",
+    "#ff8b3d",
+    "#7dd3fc",
+    "#c4b5fd",
+    "#f472b6",
+    "#a3e635",
+  ];
+  function st(t, e, s, n, i, a) {
+    (t.beginPath(),
+      t.roundRect ? t.roundRect(e, s, n, i, a) : t.rect(e, s, n, i));
+  }
+  function F(t, e, s, n, i, a = 2.4) {
+    ((t.lineCap = "round"),
+      (t.strokeStyle = "#6f7782"),
+      (t.lineWidth = a + 1.2),
+      t.beginPath(),
+      t.moveTo(e, s),
+      t.lineTo(n, i),
+      t.stroke(),
+      (t.strokeStyle = "#c3c9d1"),
+      (t.lineWidth = a * 0.55),
+      t.beginPath(),
+      t.moveTo(e, s),
+      t.lineTo(n, i),
+      t.stroke());
+  }
+  function ct(t, e, s, n, i, a) {
+    const f = t.createLinearGradient(e, s, n, i);
+    return (a.forEach((d, p) => f.addColorStop(d[0], d[1])), f);
+  }
+  function J(t, e, s, n) {
+    (t.beginPath(), t.arc(e, s, n, 0, Math.PI * 2));
+  }
+  function S0(t, e, s, n) {
+    const i = t.createRadialGradient(
+      e - n * 0.35,
+      s - n * 0.4,
+      n * 0.05,
+      e,
+      s,
+      n,
+    );
+    (i.addColorStop(0, "rgba(255,255,255,.45)"),
+      i.addColorStop(0.25, "rgba(255,255,255,.10)"),
+      i.addColorStop(1, "rgba(255,255,255,.02)"),
+      (t.fillStyle = i),
+      J(t, e, s, n),
+      t.fill());
+  }
+  function xt(t, e, s, n, i = 10, a = "#111", f = "center", d = 700) {
+    ((t.font = `${d} ${i}px JetBrains Mono, monospace`),
+      (t.fillStyle = a),
+      (t.textAlign = f),
+      (t.textBaseline = "middle"),
+      t.fillText(e, s, n));
+  }
+  function Fe(t, e, s, n, i, a) {
+    const f = Q((e.heat || 0) - 0.8, 0, 2.5) / 2.5;
+    f <= 0 ||
+      e.burnt ||
+      ((t.fillStyle = `rgba(255,${(90 - 60 * f) | 0},20,${0.25 + 0.5 * f})`),
+      st(t, s, n, i, a, 3),
+      t.fill());
+  }
+  function R0(t, e, s, n, i) {
+    ((t.fillStyle = "#141110"),
+      st(t, e, s, n, i, 3),
+      t.fill(),
+      (t.strokeStyle = "#ff6a2a"),
+      (t.globalAlpha = 0.5),
+      (t.lineWidth = 1),
+      t.beginPath(),
+      t.moveTo(e + n * 0.3, s),
+      t.lineTo(e + n * 0.45, s + i * 0.5),
+      t.lineTo(e + n * 0.35, s + i),
+      t.stroke(),
+      (t.globalAlpha = 1));
+  }
+  const q = {},
+    K = (t, e, s, n, i, a = {}) => ({
+      k: t,
+      label: e,
+      unit: s,
+      min: n,
+      max: i,
+      log: a.log ?? (n > 0 && i / n >= 100),
+      int: a.int,
+      step: a.step,
+    }),
+    gt = (t, e, s) => ({
+      k: t,
+      label: e,
+      options: s,
+    }),
+    j0 = (t, e) => ({
+      k: t,
+      label: e,
+      bool: !0,
+    });
+  function ht(t, e) {
+    ((e.type = t),
+      (e.terms = e.terms || [
+        [-40, 0],
+        [40, 0],
+      ]),
+      (e.box = e.box || [-30, -14, 30, 14]),
+      (e.params = e.params || []),
+      (e.defaults = e.defaults || {}),
+      (e.labelOff = e.labelOff || [0, -26]),
+      (q[t] = e));
+  }
+  function n0(t, e, s, n) {
+    if (t > n && Math.abs(t - e) > 2 * s)
+      if (e > 0) {
+        const i = 1 + (t - e) / s;
+        t = i > 0 ? e + s * Math.log(i) : n;
+      } else t = s * Math.log(t / s);
+    return t;
+  }
+  function Q0(t, e, s, n, i, a = 0.005) {
+    if (t.burnt) {
+      e.lin(t, 0, 1, _t, 0);
+      return;
+    }
+    const f = e.V(t, 0) - e.V(t, 1),
+      d = n * Math.log(n / (Math.SQRT2 * s)),
+      p = t.s.vd ?? 0;
+    let y = n0(f, p, n, d);
+    if (i > 0) {
+      const O = -y - i,
+        U = -p - i,
+        _ = n0(O, U, n, n * Math.log(n / (Math.SQRT2 * a)));
+      _ !== O && (y = -_ - i);
+    }
+    (Math.abs(y - f) > 1e-9 && (e.limited = !0), (t.s.vd = y));
+    const b = Math.exp(Math.min(y / n, 90));
+    let j = s * (b - 1),
+      A = (s * b) / n;
+    if (i > 0) {
+      const O = Math.exp(Math.min((-y - i) / n, 90));
+      ((j -= a * O), (A += (a * O) / n));
+    }
+    ((A += 1e-12), (j += 1e-12 * y), e.lin(t, 0, 1, A, j - A * y));
+  }
+  const Ee = {
+      red: [translate("红"), 1.85, "#ff2a2a"],
+      orange: [translate("橙"), 2, "#ff8a1f"],
+      yellow: [translate("黄"), 2.1, "#ffe135"],
+      green: [translate("绿"), 2.2, "#2dff6a"],
+      blue: [translate("蓝"), 2.95, "#3a7bff"],
+      white: [translate("白"), 3.05, "#eaf2ff"],
+      uv: [translate("紫"), 3.3, "#b45cff"],
+    },
+    P0 = {
+      si: [translate("硅二极管 1N4148"), 0.7, "1N4148"],
+      ge: [translate("锗二极管 2AP9"), 0.3, translate("锗管")],
+      sch: [translate("肖特基 1N5819"), 0.35, translate("肖特基")],
+    };
+  ht("battery", {
+    name: translate("电池组"),
+    cat: "src",
+    prefix: "E",
+    termNames: ["−", "+"],
+    primary: "E",
+    params: [
+      K("E", translate("电动势 E"), "V", 0, 1e3, {
+        log: !1,
+      }),
+      K("r", translate("内阻 r"), "Ω", 0.001, 100),
+    ],
+    defaults: {
+      E: 3,
+      r: 0.5,
+    },
+    box: [-30, -13, 32, 13],
+    stamp(t, e) {
+      const s = 1 / Math.max(t.p.r, 1e-4);
+      e.lin(t, 0, 1, s, s * t.p.E);
+    },
+    post(t, e, s) {
+      const n = t.i * t.i * t.p.r;
+      t.heat += (n / 3 - t.heat) * Math.min(1, s / 1.2);
+    },
+    label: (t) => z(t.p.E, "V"),
+    extra: (t) => [
+      [translate("端电压"), z(t.v[1] - t.v[0], "V")],
+      [translate("内阻热功率"), z(t.i * t.i * t.p.r, "W")],
+      [translate("输出功率"), z(t.i * (t.v[1] - t.v[0]), "W")],
+    ],
+    draw(t, e) {
+      (F(t, -40, 0, -28, 0),
+        F(t, 30, 0, 40, 0),
+        (t.fillStyle = ct(t, 0, -12, 0, 12, [
+          [0, "#4a505a"],
+          [0.3, "#22262d"],
+          [1, "#0b0d10"],
+        ])),
+        st(t, -28, -12, 30, 24, 4),
+        t.fill(),
+        (t.fillStyle = ct(t, 0, -12, 0, 12, [
+          [0, "#ffd892"],
+          [0.35, "#e0942c"],
+          [1, "#6a3d0c"],
+        ])),
+        st(t, 0, -12, 25, 24, 4),
+        t.fill(),
+        (t.fillStyle = ct(t, 0, -5, 0, 5, [
+          [0, "#f2f4f7"],
+          [1, "#7b828c"],
+        ])),
+        st(t, 24, -5, 7, 10, 2),
+        t.fill(),
+        xt(t, "−", -19, 0, 13, "#c9cfd8"),
+        xt(t, "+", 12, 0, 13, "#3a2305"),
+        Fe(t, e, -28, -12, 53, 24));
+    },
+  });
+  function Z0(t, e) {
+    const s = (((e * t.f) % 1) + 1) % 1;
+    let n;
+    switch (t.wave) {
+      case "square":
+        n = s < 0.5 ? 1 : -1;
+        break;
+      case "tri":
+        n = s < 0.25 ? 4 * s : s < 0.75 ? 2 - 4 * s : 4 * s - 4;
+        break;
+      case "saw":
+        n = 2 * s - 1;
+        break;
+      case "pulse":
+        n = s < t.duty ? 1 : 0;
+        break;
+      default:
+        n = Math.sin(2 * Math.PI * s);
+    }
+    return t.off + t.Vp * n;
+  }
+  (ht("psu", {
+    name: translate("学生电源"),
+    cat: "src",
+    prefix: "E",
+    primary: "V",
+    termNames: ["−", "+"],
+    params: [
+      gt(
+        "V",
+        translate("输出电压档位"),
+        ["2", "4", "6", "8", "10", "12", "14", "16"].map((t) => [t, t + " V"]),
+      ),
+      K("r", translate("内阻"), "Ω", 0.001, 20),
+    ],
+    defaults: {
+      V: "6",
+      r: 0.1,
+    },
+    box: [-32, -16, 32, 16],
+    stamp(t, e) {
+      const s = 1 / Math.max(t.p.r, 1e-4);
+      e.lin(t, 0, 1, s, s * +t.p.V);
+    },
+    post(t, e, s) {
+      const n = t.i * t.i * t.p.r;
+      ((t.heat += (n / 3 - t.heat) * Math.min(1, s / 1.2)),
+        t.i > 5 &&
+          !t.s.warned &&
+          ((t.s.warned = 1),
+          Pt(translate("{0}：输出过载（短路？）", [t.name]), "warn")),
+        t.i < 3 && (t.s.warned = 0));
+    },
+    label: (t) => t.p.V + " V",
+    extra: (t) => [
+      [translate("端电压"), z(t.v[1] - t.v[0], "V")],
+      [translate("输出功率"), z(t.i * (t.v[1] - t.v[0]), "W")],
+    ],
+    draw(t, e) {
+      (F(t, -40, 0, -30, 0),
+        F(t, 30, 0, 40, 0),
+        (t.fillStyle = ct(t, 0, -16, 0, 16, [
+          [0, "#8aa2bf"],
+          [1, "#4c6583"],
+        ])),
+        st(t, -30, -16, 60, 32, 4),
+        t.fill(),
+        (t.fillStyle = "#eef1f4"),
+        st(t, -26, -12, 52, 24, 2),
+        t.fill(),
+        (t.fillStyle = "#1a1b1f"),
+        J(t, -15, 5, 4),
+        t.fill(),
+        (t.fillStyle = "#d21f1b"),
+        J(t, -3, 5, 4),
+        t.fill(),
+        (t.fillStyle = "#222"),
+        J(t, 14, 2, 6),
+        t.fill(),
+        (t.fillStyle = "#2dff6a"),
+        J(t, 20, -8, 1.8),
+        t.fill(),
+        xt(t, "DC", -9, -6, 7, "#334"),
+        Fe(t, e, -30, -16, 60, 32));
+    },
+  }),
+    ht("ac", {
+      name: translate("信号源 / 交流电源"),
+      cat: "src",
+      prefix: "U",
+      primary: "f",
+      params: [
+        K("Vp", translate("峰值 Um"), "V", 0, 500, {
+          log: !1,
+        }),
+        K("f", translate("频率 f"), "Hz", 0.05, 1e5),
+        gt("wave", translate("波形"), [
+          ["sine", translate("正弦波")],
+          ["square", translate("方波")],
+          ["tri", translate("三角波")],
+          ["saw", translate("锯齿波")],
+          ["pulse", translate("脉冲")],
+        ]),
+        K("off", translate("直流偏置"), "V", -50, 50, {
+          log: !1,
+        }),
+        K("duty", translate("占空比(脉冲)"), "", 0.01, 0.99, {
+          log: !1,
+        }),
+        K("r", translate("内阻"), "Ω", 0.001, 1e3),
+      ],
+      defaults: {
+        Vp: 5,
+        f: 50,
+        wave: "sine",
+        off: 0,
+        duty: 0.5,
+        r: 0.1,
+      },
+      box: [-24, -24, 24, 24],
+      stamp(t, e) {
+        const s = 1 / Math.max(t.p.r, 1e-4);
+        e.lin(t, 0, 1, s, s * Z0(t.p, e.t));
+      },
+      label: (t) => `${z(t.p.Vp, "V")} ${z(t.p.f, "Hz")}`,
+      extra: (t) => [
+        [translate("有效值(正弦)"), z(t.p.Vp / Math.SQRT2, "V")],
+        [translate("周期"), z(1 / t.p.f, "s")],
+      ],
+      draw(t, e) {
+        (F(t, -40, 0, -23, 0),
+          F(t, 23, 0, 40, 0),
+          (t.fillStyle = ct(t, -24, -24, 24, 24, [
+            [0, "#59616c"],
+            [1, "#1b1f25"],
+          ])),
+          J(t, 0, 0, 24),
+          t.fill(),
+          (t.fillStyle = "#081210"),
+          J(t, 0, 0, 19),
+          t.fill(),
+          (t.strokeStyle = "#3cf2a3"),
+          (t.lineWidth = 2),
+          (t.shadowColor = "#3cf2a3"),
+          (t.shadowBlur = 6),
+          t.beginPath());
+        for (let s = 0; s <= 30; s++) {
+          const n = -13 + (s * 26) / 30,
+            i =
+              -8 *
+              Z0(
+                {
+                  ...e.p,
+                  off: 0,
+                  Vp: 1,
+                  f: 1,
+                },
+                s / 30,
+              );
+          s ? t.lineTo(n, i) : t.moveTo(n, i);
+        }
+        (t.stroke(),
+          (t.shadowBlur = 0),
+          S0(t, 0, 0, 19),
+          xt(t, "−", -30, -8, 9, "#8a95a3"),
+          xt(t, "+", 30, -8, 9, "#ffb23e"));
+      },
+    }),
+    ht("isrc", {
+      name: translate("恒流源"),
+      cat: "src",
+      prefix: "Is",
+      primary: "I",
+      params: [K("I", translate("输出电流"), "A", 1e-6, 10)],
+      defaults: {
+        I: 0.01,
+      },
+      box: [-22, -22, 22, 22],
+      stamp(t, e) {
+        e.lin(t, 0, 1, 1e-6, t.p.I);
+      },
+      label: (t) => z(t.p.I, "A"),
+      draw(t, e) {
+        (F(t, -40, 0, -21, 0),
+          F(t, 21, 0, 40, 0),
+          (t.fillStyle = ct(t, -22, -22, 22, 22, [
+            [0, "#5a4f7a"],
+            [1, "#1c1830"],
+          ])),
+          J(t, 0, 0, 21),
+          t.fill(),
+          (t.strokeStyle = "#d7c9ff"),
+          (t.lineWidth = 2.4),
+          t.beginPath(),
+          t.moveTo(-11, 0),
+          t.lineTo(9, 0),
+          t.stroke(),
+          (t.fillStyle = "#d7c9ff"),
+          t.beginPath(),
+          t.moveTo(13, 0),
+          t.lineTo(5, -6),
+          t.lineTo(5, 6),
+          t.fill(),
+          S0(t, 0, 0, 21));
+      },
+    }),
+    ht("ground", {
+      name: translate("接地"),
+      cat: "src",
+      prefix: "GND",
+      terms: [[0, 0]],
+      box: [-14, -2, 14, 24],
+      noLabel: !0,
+      stamp() {},
+      post(t) {
+        ((t.i = 0), (t.iT[0] = 0));
+      },
+      draw(t) {
+        (F(t, 0, 0, 0, 10),
+          (t.strokeStyle = "#aab3be"),
+          (t.lineWidth = 2.4),
+          (t.lineCap = "round"),
+          [
+            [10, 12],
+            [15, 8],
+            [20, 4],
+          ].forEach(([e, s]) => {
+            (t.beginPath(), t.moveTo(-s, e), t.lineTo(s, e), t.stroke());
+          }));
+      },
+    }));
+  const He = [
+    "#111",
+    "#7a4a1e",
+    "#e0342b",
+    "#ff8a1f",
+    "#f2d024",
+    "#2fa84f",
+    "#2f6fe0",
+    "#8b4fd8",
+    "#8a8f98",
+    "#f4f4f4",
+  ];
+  function Ls(t) {
+    if (!(t > 0)) return [He[0], He[0], He[0]];
+    let e = Math.floor(Math.log10(t)) - 1,
+      s = Math.round(t / Math.pow(10, e));
+    s >= 100 && ((s = Math.round(s / 10)), e++);
+    const n = e === -1 ? "#d4af37" : e === -2 ? "#c0c0c0" : He[Q(e, 0, 9)];
+    return [He[Math.floor(s / 10) % 10], He[s % 10], n];
+  }
+  (ht("resistor", {
+    name: translate("定值电阻"),
+    cat: "basic",
+    prefix: "R",
+    primary: "R",
+    params: [
+      K("R", translate("电阻 R"), "Ω", 0.01, 1e8),
+      K("Pmax", translate("额定功率"), "W", 0.05, 100),
+    ],
+    defaults: {
+      R: 100,
+      Pmax: 0.5,
+    },
+    box: [-28, -10, 28, 10],
+    stamp(t, e) {
+      e.lin(t, 0, 1, t.burnt ? _t : 1 / t.p.R, 0);
+    },
+    post(t, e, s) {
+      const n = Math.abs(t.i * (t.v[0] - t.v[1]));
+      ((t.heat += (n / t.p.Pmax - t.heat) * Math.min(1, s / 0.9)),
+        t.heat > 4 && !t.burnt && ve(t, translate("功率过大，已烧毁")));
+    },
+    label: (t) => z(t.p.R, "Ω"),
+    draw(t, e) {
+      if ((F(t, -40, 0, -23, 0), F(t, 23, 0, 40, 0), e.burnt)) {
+        R0(t, -24, -8, 48, 16);
+        return;
+      }
+      ((t.fillStyle = ct(t, 0, -8, 0, 8, [
+        [0, "#f0dcae"],
+        [0.45, "#cfb07a"],
+        [1, "#8a6c3c"],
+      ])),
+        st(t, -24, -8, 48, 16, 7),
+        t.fill());
+      const s = Ls(e.p.R);
+      ([
+        [-15, s[0]],
+        [-8, s[1]],
+        [-1, s[2]],
+        [12, "#d4af37"],
+      ].forEach(([n, i]) => {
+        ((t.fillStyle = i), t.fillRect(n, -8, 4, 16));
+      }),
+        (t.fillStyle = "rgba(255,255,255,.22)"),
+        st(t, -22, -6, 44, 3, 1.5),
+        t.fill(),
+        Fe(t, e, -24, -8, 48, 16));
+    },
+  }),
+    ht("pot", {
+      name: translate("滑动变阻器"),
+      cat: "basic",
+      prefix: "Rp",
+      primary: "pos",
+      terms: [
+        [-60, 0],
+        [60, 0],
+        [60, -40],
+        [-60, -40],
+      ],
+      termNames: ["A", "B", "D", "C"],
+      params: [
+        K("Rmax", translate("最大阻值"), "Ω", 1, 1e7),
+        K("pos", translate("滑片位置 (A→B)"), "", 0, 1, {
+          log: !1,
+        }),
+        K("Pmax", translate("额定功率"), "W", 0.1, 200),
+      ],
+      defaults: {
+        Rmax: 50,
+        pos: 0.5,
+        Pmax: 20,
+      },
+      box: [-58, -34, 64, 14],
+      labelOff: [0, 30],
+      sliderX: (t) => -44 + 88 * t.p.pos,
+      stamp(t, e) {
+        const s = Math.max(t.p.pos * t.p.Rmax, 0.01),
+          n = Math.max((1 - t.p.pos) * t.p.Rmax, 0.01);
+        ((t.s.ga = t.burnt ? _t : 1 / s),
+          (t.s.gb = t.burnt ? _t : 1 / n),
+          e.lin(t, 0, 2, t.s.ga, 0),
+          e.lin(t, 2, 1, t.s.gb, 0),
+          e.lin(t, 3, 2, 1e3, 0));
+      },
+      post(t, e, s) {
+        const [n, i, a, f] = t.v,
+          d = t.s.ga * (n - a),
+          p = t.s.gb * (a - i),
+          y = 1e3 * (f - a);
+        ((t.s.ia = d),
+          (t.s.ib = p),
+          (t.s.ir = y),
+          (t.iT[0] = d),
+          (t.iT[1] = -p),
+          (t.iT[2] = p - d - y),
+          (t.iT[3] = y),
+          (t.i = d));
+        const b = d * (n - a) + p * (a - i);
+        ((t.heat += (b / t.p.Pmax - t.heat) * Math.min(1, s / 2)),
+          t.heat > 4 && !t.burnt && ve(t, translate("过热烧毁")));
+      },
+      paths(t) {
+        const e = q.pot.sliderX(t),
+          s = t.s.ia || 0,
+          n = t.s.ib || 0,
+          i = t.s.ir || 0;
+        return [
+          [
+            [
+              [-60, 0],
+              [e, 0],
+            ],
+            s,
+          ],
+          [
+            [
+              [e, 0],
+              [60, 0],
+            ],
+            n,
+          ],
+          [
+            [
+              [e, 0],
+              [e, -26],
+            ],
+            s - n,
+          ],
+          [
+            [
+              [-60, -40],
+              [-60, -26],
+              [e, -26],
+            ],
+            i,
+          ],
+          [
+            [
+              [e, -26],
+              [60, -26],
+              [60, -40],
+            ],
+            s - n + i,
+          ],
+        ];
+      },
+      label: (t) => `${z(t.p.Rmax, "Ω")} · R_AP=${z(t.p.pos * t.p.Rmax, "Ω")}`,
+      extra: (t) => [
+        ["R_AP", z(t.p.pos * t.p.Rmax, "Ω")],
+        ["R_PB", z((1 - t.p.pos) * t.p.Rmax, "Ω")],
+        ["I_AP", z(t.s.ia, "A")],
+        ["I_PB", z(t.s.ib, "A")],
+      ],
+      draw(t, e) {
+        if (
+          (F(t, -60, 0, -54, 0),
+          F(t, 54, 0, 60, 0),
+          F(t, 60, -26, 60, -40),
+          F(t, -60, -26, -60, -40),
+          F(t, -60, -26, -56, -26),
+          (t.fillStyle = "#5b6470"),
+          st(t, -56, -14, 6, 28, 2),
+          t.fill(),
+          st(t, 50, -14, 6, 28, 2),
+          t.fill(),
+          (t.fillStyle = ct(t, 0, -10, 0, 10, [
+            [0, "#f4ecd8"],
+            [0.5, "#d8ccaf"],
+            [1, "#948767"],
+          ])),
+          st(t, -50, -10, 100, 20, 4),
+          t.fill(),
+          e.burnt)
+        )
+          R0(t, -50, -10, 100, 20);
+        else {
+          ((t.strokeStyle = "#a8662c"), (t.lineWidth = 1.1));
+          for (let n = -47; n <= 47; n += 2.6)
+            (t.beginPath(),
+              t.moveTo(n, -10),
+              t.lineTo(n + 1.6, 10),
+              t.stroke());
+          ((t.fillStyle = "rgba(255,255,255,.18)"),
+            t.fillRect(-50, -8, 100, 3),
+            Fe(t, e, -50, -10, 100, 20));
+        }
+        ((t.strokeStyle = "#646c77"),
+          (t.lineWidth = 2),
+          t.beginPath(),
+          t.moveTo(-53, -14),
+          t.lineTo(-53, -26),
+          t.moveTo(53, -14),
+          t.lineTo(53, -26),
+          t.stroke(),
+          (t.strokeStyle = ct(t, 0, -28, 0, -24, [
+            [0, "#f2f4f7"],
+            [1, "#7b828c"],
+          ])),
+          (t.lineWidth = 4),
+          t.beginPath(),
+          t.moveTo(-58, -26),
+          t.lineTo(62, -26),
+          t.stroke());
+        const s = q.pot.sliderX(e);
+        ((t.strokeStyle = "#d99a4a"),
+          (t.lineWidth = 2),
+          t.beginPath(),
+          t.moveTo(s, -22),
+          t.lineTo(s - 2, -16),
+          t.lineTo(s + 2, -13),
+          t.lineTo(s, -9),
+          t.stroke(),
+          (t.fillStyle = ct(t, 0, -34, 0, -18, [
+            [0, "#6fa0d8"],
+            [1, "#1f3a5c"],
+          ])),
+          st(t, s - 8, -33, 16, 13, 3),
+          t.fill(),
+          (t.strokeStyle = "#9cc3ef"),
+          (t.lineWidth = 1),
+          st(t, s - 8, -33, 16, 13, 3),
+          t.stroke(),
+          xt(t, "A", -62, 12, 8, "#7a889a"),
+          xt(t, "B", 62, 12, 8, "#7a889a"),
+          xt(t, "D", 70, -40, 8, "#7a889a"),
+          xt(t, "C", -70, -40, 8, "#7a889a"));
+      },
+    }),
+    ht("cap", {
+      name: translate("电容器"),
+      cat: "basic",
+      prefix: "C",
+      primary: "C",
+      params: [
+        K("C", translate("电容 C"), "F", 1e-12, 10),
+        K("Vmax", translate("耐压"), "V", 1, 1e4),
+        j0("polar", translate("电解电容(有极性，左+)")),
+      ],
+      defaults: {
+        C: 1e-4,
+        Vmax: 25,
+        polar: !0,
+      },
+      box: [-20, -17, 20, 17],
+      stamp(t, e) {
+        if (t.burnt) {
+          e.lin(t, 0, 1, _t, 0);
+          return;
+        }
+        const s = t.s.v1 || 0,
+          n = t.s.v2 ?? s,
+          i = t.p.C / (2 * e.dt);
+        e.lin(t, 0, 1, 3 * i, -i * (4 * s - n));
+      },
+      post(t, e, s) {
+        const n = t.v[0] - t.v[1];
+        ((t.s.v2 = t.s.v1 ?? n), (t.s.v1 = n));
+        const i = Math.abs(n) > t.p.Vmax * 1.25 || (t.p.polar && n < -1.5);
+        ((t.heat = i ? t.heat + s / 0.25 : Math.max(0, t.heat - s)),
+          t.heat > 1 &&
+            !t.burnt &&
+            (ve(
+              t,
+              t.p.polar && n < 0
+                ? translate("电解电容反接，爆裂！")
+                : translate("超过耐压，击穿爆裂！"),
+              !0,
+            ),
+            (t.s.v1 = t.s.v2 = 0)));
+      },
+      label: (t) => z(t.p.C, "F"),
+      extra: (t) => {
+        const e = t.v[0] - t.v[1];
+        return [
+          [translate("电荷量 Q"), z(t.p.C * e, "C")],
+          [translate("储能"), z(0.5 * t.p.C * e * e, "J")],
+        ];
+      },
+      actions: [
+        [
+          translate("放电"),
+          (t) => {
+            t.s.v1 = t.s.v2 = 0;
+          },
+        ],
+      ],
+      draw(t, e) {
+        (F(t, -40, 0, -16, 0), F(t, 16, 0, 40, 0));
+        const s = e.v[0] - e.v[1] || 0,
+          n = Q(Math.abs(s) / e.p.Vmax, 0, 1);
+        (e.p.polar
+          ? ((t.fillStyle = e.burnt
+              ? "#1a1612"
+              : ct(t, 0, -16, 0, 16, [
+                  [0, "#6aa9ff"],
+                  [0.35, "#2459b8"],
+                  [1, "#0d2253"],
+                ])),
+            st(t, -17, -16, 34, 32, 5),
+            t.fill(),
+            e.burnt
+              ? ((t.strokeStyle = "#b5b0a5"),
+                (t.lineWidth = 1.5),
+                t.beginPath(),
+                t.moveTo(-10, -16),
+                t.lineTo(-3, -4),
+                t.lineTo(4, -12),
+                t.lineTo(9, 3),
+                t.stroke())
+              : ((t.fillStyle = ct(t, 0, -16, 0, 16, [
+                  [0, "#e6ecf4"],
+                  [1, "#8d97a6"],
+                ])),
+                t.fillRect(7, -16, 7, 32),
+                xt(t, "−", 10.5, -7, 8, "#1f3a6a"),
+                xt(t, "−", 10.5, 7, 8, "#1f3a6a"),
+                (t.strokeStyle = "rgba(255,255,255,.25)"),
+                (t.lineWidth = 1),
+                t.beginPath(),
+                t.moveTo(-13, -16),
+                t.lineTo(-13, 16),
+                t.stroke()))
+          : ((t.fillStyle = e.burnt
+              ? "#1a1612"
+              : ct(t, -14, -16, 14, 16, [
+                  [0, "#f0a44a"],
+                  [1, "#8c4a12"],
+                ])),
+            t.beginPath(),
+            t.ellipse(0, 0, 14, 17, 0, 0, Math.PI * 2),
+            t.fill(),
+            e.burnt ||
+              ((t.fillStyle = "rgba(255,255,255,.25)"),
+              t.beginPath(),
+              t.ellipse(-4, -6, 5, 7, -0.4, 0, Math.PI * 2),
+              t.fill())),
+          !e.burnt &&
+            n > 0.01 &&
+            ((t.fillStyle =
+              s > 0
+                ? `rgba(94,230,255,${0.12 + 0.4 * n})`
+                : `rgba(255,106,213,${0.12 + 0.4 * n})`),
+            t.fillRect(-15, 18, 30 * n, 3)));
+      },
+    }),
+    ht("ind", {
+      name: translate("电感线圈"),
+      cat: "basic",
+      prefix: "L",
+      primary: "L",
+      params: [
+        K("L", translate("电感 L"), "H", 1e-9, 1e3),
+        K("R", translate("线圈电阻"), "Ω", 0.001, 1e4),
+      ],
+      defaults: {
+        L: 0.1,
+        R: 1,
+      },
+      box: [-28, -14, 28, 14],
+      stamp(t, e) {
+        const s = (2 * e.dt) / (3 * t.p.L),
+          n = t.s.i1 || 0,
+          i = t.s.i2 ?? n,
+          a = (4 * n - i) / 3,
+          f = 1 + t.p.R * s;
+        e.lin(t, 0, 1, s / f, a / f);
+      },
+      post(t) {
+        ((t.s.i2 = t.s.i1 ?? t.i), (t.s.i1 = t.i));
+      },
+      label: (t) => z(t.p.L, "H"),
+      extra: (t) => [
+        [translate("磁场能"), z(0.5 * t.p.L * t.i * t.i, "J")],
+        [translate("磁链 LI"), z(t.p.L * t.i, "Wb")],
+      ],
+      draw(t, e) {
+        (F(t, -40, 0, -26, 0),
+          F(t, 26, 0, 40, 0),
+          (t.fillStyle = ct(t, 0, -6, 0, 6, [
+            [0, "#8b939e"],
+            [1, "#2a2f36"],
+          ])),
+          st(t, -28, -6, 56, 12, 2),
+          t.fill(),
+          (t.fillStyle = "#39404a"),
+          t.fillRect(-28, -13, 4, 26),
+          t.fillRect(24, -13, 4, 26));
+        const s = Math.min(1, Math.abs(e.i || 0) * 3);
+        for (let n = 0; n < 9; n++) {
+          const i = -21 + n * 5.2;
+          ((t.strokeStyle = ct(t, 0, -12, 0, 12, [
+            [0, "#ffd2a0"],
+            [0.4, "#c87533"],
+            [1, "#6b3510"],
+          ])),
+            (t.lineWidth = 3.4),
+            t.beginPath(),
+            t.ellipse(i, 0, 2.4, 11.5, 0.12, 0, Math.PI * 2),
+            t.stroke());
+        }
+        s > 0.02 &&
+          ((t.strokeStyle = `rgba(94,230,255,${s * 0.5})`),
+          (t.lineWidth = 1),
+          t.setLineDash([3, 3]),
+          t.beginPath(),
+          t.ellipse(0, 0, 34, 20, 0, 0, Math.PI * 2),
+          t.stroke(),
+          t.setLineDash([]));
+      },
+    }),
+    ht("ldr", {
+      name: translate("光敏电阻"),
+      cat: "basic",
+      prefix: "RG",
+      primary: "lux",
+      params: [
+        K("lux", translate("光照强度"), "lx", 0, 2e3, {
+          log: !1,
+        }),
+        K("Rd", translate("暗电阻"), "Ω", 1e3, 1e8),
+      ],
+      defaults: {
+        lux: 800,
+        Rd: 1e6,
+      },
+      box: [-20, -20, 20, 20],
+      R: (t) => t.p.Rd / (1 + t.p.lux * 2),
+      stamp(t, e) {
+        e.lin(t, 0, 1, 1 / q.ldr.R(t), 0);
+      },
+      label: (t) => `${z(t.p.lux, "lx")} · ${z(q.ldr.R(t), "Ω")}`,
+      extra: (t) => [[translate("当前阻值"), z(q.ldr.R(t), "Ω")]],
+      draw(t, e) {
+        (F(t, -40, 0, -17, 0),
+          F(t, 17, 0, 40, 0),
+          (t.fillStyle = ct(t, -18, -18, 18, 18, [
+            [0, "#e8b27a"],
+            [1, "#8e4f22"],
+          ])),
+          J(t, 0, 0, 18),
+          t.fill(),
+          (t.strokeStyle = "#3b2412"),
+          (t.lineWidth = 1.6),
+          t.beginPath(),
+          t.moveTo(-11, -8));
+        for (let n = 0; n < 6; n++) {
+          const i = -8 + n * 3.2;
+          (t.lineTo(n % 2 ? -11 : 11, i), t.lineTo(n % 2 ? -11 : 11, i + 3.2));
+        }
+        (t.stroke(), S0(t, 0, 0, 18));
+        const s = Q(e.p.lux / 1e3, 0, 1);
+        s > 0.02 &&
+          ((t.strokeStyle = `rgba(255,220,90,${0.25 + 0.7 * s})`),
+          (t.fillStyle = t.strokeStyle),
+          (t.lineWidth = 1.6),
+          [
+            [-14, -34],
+            [2, -36],
+          ].forEach(([n, i]) => {
+            (t.beginPath(),
+              t.moveTo(n, i),
+              t.lineTo(n + 8, i + 12),
+              t.stroke(),
+              t.beginPath(),
+              t.moveTo(n + 10, i + 15),
+              t.lineTo(n + 4, i + 12),
+              t.lineTo(n + 9, i + 8),
+              t.fill());
+          }));
+      },
+    }));
+  const L0 = 2800,
+    Wt = 300;
+  (ht("bulb", {
+    name: translate("小灯泡"),
+    cat: "load",
+    prefix: "H",
+    primary: "Vr",
+    params: [
+      K("Vr", translate("额定电压"), "V", 0.5, 250),
+      K("Pr", translate("额定功率"), "W", 0.05, 200),
+    ],
+    defaults: {
+      Vr: 3.8,
+      Pr: 1.14,
+    },
+    box: [-21, -21, 21, 21],
+    R: (t) => (((t.p.Vr * t.p.Vr) / t.p.Pr) * Math.max(t.s.T || Wt, Wt)) / L0,
+    stamp(t, e) {
+      e.lin(t, 0, 1, t.burnt ? _t : 1 / q.bulb.R(t), 0);
+    },
+    post(t, e, s) {
+      let n = t.s.T || Wt;
+      const i = Math.abs(t.i * (t.v[0] - t.v[1])),
+        a = t.p.Pr / (L0 ** 4 - Wt ** 4),
+        f = 0.05 * 4 * a * L0 ** 3,
+        d = Math.ceil(s / 0.004),
+        p = s / d;
+      for (let y = 0; y < d; y++)
+        ((n += ((i - a * (n ** 4 - Wt ** 4)) / f) * p),
+          n < Wt && (n = Wt),
+          n > 6e3 && (n = 6e3));
+      ((t.s.T = n),
+        n > 3450 && !t.burnt && (ve(t, translate("灯丝烧断！")), (t.s.T = Wt)),
+        (t.s.b = t.burnt ? 0 : Math.pow(Q((n - 850) / (L0 - 850), 0, 2), 2.4)));
+    },
+    label: (t) => `${z(t.p.Vr, "V")} ${z(t.p.Pr, "W")}`,
+    extra: (t) => [
+      [translate("灯丝温度"), Math.round(t.s.T || Wt) + " K"],
+      [translate("实时电阻"), z(q.bulb.R(t), "Ω")],
+      [translate("亮度"), Math.round(100 * (t.s.b || 0)) + " %"],
+    ],
+    draw(t, e) {
+      (F(t, -40, 0, -18, 0), F(t, 18, 0, 40, 0));
+      const s = e.s.T || Wt,
+        n = e.s.b || 0,
+        [i, a, f] = Ae(Math.max(s, 1e3));
+      if (
+        ((t.fillStyle = ct(t, 0, -20, 0, 20, [
+          [0, "rgba(210,225,240,.10)"],
+          [1, "rgba(120,140,160,.18)"],
+        ])),
+        J(t, 0, 0, 20),
+        t.fill(),
+        n > 0.005)
+      ) {
+        const p = t.createRadialGradient(0, 2, 1, 0, 0, 20);
+        (p.addColorStop(0, `rgba(${i},${a},${f},${Math.min(1, n)})`),
+          p.addColorStop(1, `rgba(${i},${a},${f},${Math.min(0.5, n * 0.4)})`),
+          (t.fillStyle = p),
+          J(t, 0, 0, 20),
+          t.fill());
+      }
+      (e.burnt &&
+        ((t.fillStyle = "rgba(40,34,30,.55)"), J(t, 0, 0, 20), t.fill()),
+        (t.strokeStyle = "#9aa2ac"),
+        (t.lineWidth = 1.3),
+        t.beginPath(),
+        t.moveTo(-18, 0),
+        t.lineTo(-8, 6),
+        t.lineTo(-8, -2),
+        t.moveTo(18, 0),
+        t.lineTo(8, 6),
+        t.lineTo(8, -2),
+        t.stroke());
+      const d = Q((s - 700) / 2e3, 0, 1);
+      ((t.strokeStyle = e.burnt
+        ? "#333"
+        : d > 0
+          ? `rgb(${Ct(90, i, d) | 0},${Ct(80, a, d) | 0},${Ct(70, f, d) | 0})`
+          : "#5a5550"),
+        (t.lineWidth = 1.4),
+        t.beginPath(),
+        t.moveTo(-8, -2));
+      for (let p = 1; p <= 8; p++) {
+        if (e.burnt && p === 5) {
+          (t.stroke(),
+            t.beginPath(),
+            t.moveTo(-8 + p * 2 + 1, -2 + (p % 2 ? -3 : 3)));
+          continue;
+        }
+        t.lineTo(-8 + p * 2, -2 + (p % 2 ? -3 : 3));
+      }
+      (t.stroke(),
+        (t.strokeStyle = "rgba(220,235,250,.55)"),
+        (t.lineWidth = 1.3),
+        J(t, 0, 0, 20),
+        t.stroke(),
+        S0(t, 0, 0, 20));
+    },
+    glow(t, e, s) {
+      const n = e.s.b || 0;
+      if (n < 0.01) return;
+      const [i, a, f] = Ae(Math.max(e.s.T || Wt, 1e3)),
+        [d, p] = s;
+      let y = t.createRadialGradient(
+        d,
+        p,
+        4,
+        d,
+        p,
+        30 + 110 * Math.min(n, 1.6),
+      );
+      (y.addColorStop(0, `rgba(${i},${a},${f},${Math.min(0.85, 0.6 * n)})`),
+        y.addColorStop(0.3, `rgba(${i},${a},${f},${Math.min(0.35, 0.22 * n)})`),
+        y.addColorStop(1, `rgba(${i},${a},${f},0)`),
+        (t.fillStyle = y),
+        J(t, d, p, 30 + 110 * Math.min(n, 1.6)),
+        t.fill(),
+        (y = t.createRadialGradient(d, p, 10, d, p, 320 * Math.min(n, 1.5))),
+        y.addColorStop(0, `rgba(${i},${a},${f},${0.08 * Math.min(n, 1.5)})`),
+        y.addColorStop(1, "rgba(0,0,0,0)"),
+        (t.fillStyle = y),
+        J(t, d, p, 320 * Math.min(n, 1.5)),
+        t.fill());
+    },
+  }),
+    ht("led", {
+      name: translate("发光二极管"),
+      cat: "load",
+      prefix: "LED",
+      primary: "Imax",
+      nl: !0,
+      params: [
+        gt(
+          "color",
+          translate("颜色"),
+          Object.entries(Ee).map(([t, e]) => [t, e[0] + " (" + e[1] + "V)"]),
+        ),
+        K("Imax", translate("额定电流"), "A", 0.001, 1),
+      ],
+      defaults: {
+        color: "red",
+        Imax: 0.02,
+      },
+      box: [-14, -14, 16, 14],
+      model: (t) => {
+        const e = Ee[t.p.color][1],
+          s = 2 * Mt;
+        return [(0.01 * t.p.Imax) / 0.02 / Math.exp(e / s), s];
+      },
+      stamp(t, e) {
+        const [s, n] = q.led.model(t);
+        Q0(t, e, s, n, 0);
+      },
+      post(t, e, s) {
+        const n = t.i / t.p.Imax;
+        ((t.s.b = t.burnt ? 0 : Q(n, 0, 2)),
+          (t.heat =
+            n > 2.5 ? t.heat + (s / 0.2) * (n / 2.5) : Math.max(0, t.heat - s)),
+          t.heat > 1 && !t.burnt && ve(t, translate("电流过大，LED 烧坏！")));
+      },
+      label: (t) => Ee[t.p.color][0] + translate("色"),
+      extra: (t) => [
+        [translate("亮度"), Math.round(100 * Math.min(t.s.b || 0, 2)) + " %"],
+        [translate("正向导通电压"), Ee[t.p.color][1] + " V"],
+      ],
+      draw(t, e) {
+        (F(t, -40, 0, -10, 0), F(t, 10, 0, 40, 0));
+        const s = Ee[e.p.color][2],
+          n = Math.min(e.s.b || 0, 1.5);
+        ((t.fillStyle = e.burnt ? "#2a2420" : s),
+          (t.globalAlpha = e.burnt ? 1 : 0.35 + 0.65 * Math.min(1, n + 0.05)),
+          t.beginPath(),
+          t.arc(0, 0, 12, Math.PI * 0.5, Math.PI * 1.5, !0),
+          t.lineTo(12, -12),
+          t.lineTo(12, 12),
+          t.closePath(),
+          t.fill(),
+          (t.globalAlpha = 1),
+          (t.fillStyle = "rgba(0,0,0,.35)"),
+          t.fillRect(-5, -5, 4, 10),
+          t.beginPath(),
+          t.moveTo(2, -6),
+          t.lineTo(7, -2),
+          t.lineTo(7, 5),
+          t.lineTo(2, 6),
+          t.fill(),
+          (t.strokeStyle = "rgba(255,255,255,.4)"),
+          (t.lineWidth = 1.2),
+          t.beginPath(),
+          t.arc(0, 0, 12, Math.PI * 0.5, Math.PI * 1.5, !0),
+          t.lineTo(12, -12),
+          t.lineTo(12, 12),
+          t.closePath(),
+          t.stroke(),
+          (t.fillStyle = "rgba(255,255,255,.35)"),
+          t.beginPath(),
+          t.ellipse(-4, -6, 3, 4.5, -0.5, 0, Math.PI * 2),
+          t.fill(),
+          n > 0.02 &&
+            ((t.fillStyle = `rgba(255,255,255,${0.6 * n})`),
+            J(t, 0, 0, 5),
+            t.fill()));
+      },
+      glow(t, e, s) {
+        const n = Math.min(e.s.b || 0, 1.6);
+        if (n < 0.01) return;
+        const i = Ee[e.p.color][2],
+          [a, f] = s,
+          d = 20 + 80 * n,
+          p = t.createRadialGradient(a, f, 2, a, f, d);
+        (p.addColorStop(0, i + "dd"),
+          p.addColorStop(0.25, i + "55"),
+          p.addColorStop(1, i + "00"),
+          (t.globalAlpha = Math.min(1, n)),
+          (t.fillStyle = p),
+          J(t, a, f, d),
+          t.fill(),
+          (t.globalAlpha = 1));
+      },
+    }),
+    ht("motor", {
+      name: translate("直流电动机"),
+      cat: "load",
+      prefix: "M",
+      primary: "TL",
+      params: [
+        K("Ra", translate("电枢电阻"), "Ω", 0.01, 1e3),
+        K("kt", translate("电机常数 k"), "V·s", 1e-4, 1),
+        K("J", translate("转动惯量"), "kg·m²", 1e-7, 0.1),
+        K("b", translate("摩擦系数"), "N·m·s", 1e-8, 0.01),
+        K("TL", translate("负载转矩"), "N·m", 0, 0.1, {
+          log: !1,
+        }),
+      ],
+      defaults: {
+        Ra: 2,
+        kt: 0.01,
+        J: 2e-5,
+        b: 5e-6,
+        TL: 0,
+      },
+      box: [-26, -26, 26, 26],
+      stamp(t, e) {
+        const s = t.p.kt * (t.s.w || 0),
+          n = 1 / t.p.Ra;
+        e.lin(t, 0, 1, n, -s * n);
+      },
+      post(t, e, s) {
+        let n = t.s.w || 0;
+        const i = t.p.kt * t.i,
+          a = t.p.J;
+        n = (n + (s * i) / a) / (1 + (s * t.p.b) / a);
+        const f = (t.p.TL * s) / a;
+        ((n = Math.abs(n) <= f ? 0 : n - Math.sign(n) * f),
+          (t.s.w = n),
+          (t.s.ang = ((t.s.ang || 0) + n * s) % (Math.PI * 2)));
+      },
+      label: (t) => Math.round(((t.s.w || 0) * 60) / (2 * Math.PI)) + " rpm",
+      extra: (t) => {
+        const e = t.s.w || 0;
+        return [
+          [translate("转速"), Math.round((e * 30) / Math.PI) + " r/min"],
+          [translate("反电动势"), z(t.p.kt * e, "V")],
+          [translate("机械功率"), z(t.p.kt * t.i * e, "W")],
+          [
+            translate("效率"),
+            t.i * (t.v[0] - t.v[1]) > 1e-9
+              ? Math.round(
+                  (100 * t.p.kt * e * t.i) / (t.i * (t.v[0] - t.v[1])),
+                ) + " %"
+              : "—",
+          ],
+        ];
+      },
+      draw(t, e) {
+        (F(t, -40, 0, -25, 0),
+          F(t, 25, 0, 40, 0),
+          (t.fillStyle = ct(t, -26, -26, 26, 26, [
+            [0, "#c9d1db"],
+            [0.5, "#6d7682"],
+            [1, "#2b3038"],
+          ])),
+          J(t, 0, 0, 25),
+          t.fill(),
+          (t.fillStyle = "#12161b"),
+          J(t, 0, 0, 20),
+          t.fill());
+        const s = Math.abs((e.s.w || 0) * G.speed),
+          n = e.s.vang || 0;
+        if (s > 60) {
+          const i = t.createRadialGradient(0, 0, 3, 0, 0, 18);
+          (i.addColorStop(0, "rgba(210,140,70,.9)"),
+            i.addColorStop(1, "rgba(150,90,40,.35)"),
+            (t.fillStyle = i),
+            J(t, 0, 0, 18),
+            t.fill());
+        }
+        (t.save(), t.rotate(n), (t.globalAlpha = s > 60 ? 0.35 : 1));
+        for (let i = 0; i < 3; i++)
+          (t.rotate((Math.PI * 2) / 3),
+            (t.fillStyle = ct(t, 0, 0, 17, 0, [
+              [0, "#c87533"],
+              [1, "#f2b777"],
+            ])),
+            t.beginPath(),
+            t.moveTo(0, -3),
+            t.quadraticCurveTo(10, -10, 17, -4),
+            t.lineTo(17, 3),
+            t.quadraticCurveTo(9, 2, 0, 3),
+            t.fill());
+        (t.restore(),
+          (t.globalAlpha = 1),
+          (t.fillStyle = ct(t, -4, -4, 4, 4, [
+            [0, "#fff"],
+            [1, "#777"],
+          ])),
+          J(t, 0, 0, 4),
+          t.fill(),
+          (t.strokeStyle = "rgba(255,255,255,.3)"),
+          (t.lineWidth = 1),
+          J(t, 0, 0, 25),
+          t.stroke());
+      },
+    }),
+    ht("buzzer", {
+      name: translate("蜂鸣器"),
+      cat: "load",
+      prefix: "B",
+      primary: "Vr",
+      params: [
+        K("Vr", translate("额定电压"), "V", 1, 24),
+        K("f", translate("音调"), "Hz", 200, 5e3),
+      ],
+      defaults: {
+        Vr: 5,
+        f: 2300,
+      },
+      box: [-20, -20, 20, 20],
+      stamp(t, e) {
+        e.lin(t, 0, 1, 1 / (t.p.Vr / 0.03), 0);
+      },
+      post(t) {
+        t.s.lvl = Q(t.i / 0.03, 0, 1.5);
+      },
+      label: (t) => z(t.p.Vr, "V"),
+      draw(t, e) {
+        (F(t, -40, 0, -18, 0),
+          F(t, 18, 0, 40, 0),
+          (t.fillStyle = ct(t, -18, -18, 18, 18, [
+            [0, "#4a4f57"],
+            [1, "#08090b"],
+          ])),
+          J(t, 0, 0, 19),
+          t.fill(),
+          (t.strokeStyle = "#2a2e35"),
+          (t.lineWidth = 1.5),
+          J(t, 0, 0, 13),
+          t.stroke(),
+          (t.fillStyle = "#000"),
+          J(t, 0, 0, 4),
+          t.fill(),
+          xt(t, "+", -11, -11, 8, "#ffb23e"));
+        const s = e.s.lvl || 0;
+        if (s > 0.05) {
+          ((t.strokeStyle = `rgba(255,178,62,${0.3 + 0.5 * Math.min(1, s)})`),
+            (t.lineWidth = 1.5));
+          const n = (performance.now() / 120) % 1;
+          for (let i = 0; i < 2; i++)
+            (t.beginPath(),
+              t.arc(0, 0, 22 + ((n + i * 0.5) % 1) * 14, -0.7, 0.7),
+              t.stroke(),
+              t.beginPath(),
+              t.arc(
+                0,
+                0,
+                22 + ((n + i * 0.5) % 1) * 14,
+                Math.PI - 0.7,
+                Math.PI + 0.7,
+              ),
+              t.stroke());
+        }
+      },
+    }),
+    ht("diode", {
+      name: translate("二极管"),
+      cat: "semi",
+      prefix: "D",
+      nl: !0,
+      params: [
+        gt(
+          "model",
+          translate("型号"),
+          Object.entries(P0).map(([t, e]) => [t, e[0]]),
+        ),
+        K("Imax", translate("最大电流"), "A", 0.01, 50),
+      ],
+      defaults: {
+        model: "si",
+        Imax: 1,
+      },
+      box: [-18, -9, 18, 9],
+      stamp(t, e) {
+        const s = P0[t.p.model][1],
+          n = 1.2 * Mt;
+        Q0(t, e, 0.01 / Math.exp(s / n), n, 0);
+      },
+      post(t, e, s) {
+        const n = Math.abs(t.i) / t.p.Imax;
+        ((t.heat = n > 2 ? t.heat + s / 0.3 : Math.max(0, t.heat - s)),
+          t.heat > 1 && !t.burnt && ve(t, translate("过流烧毁")));
+      },
+      label: (t) => P0[t.p.model][2],
+      draw(t, e) {
+        if ((F(t, -40, 0, -15, 0), F(t, 15, 0, 40, 0), e.burnt)) {
+          R0(t, -16, -7, 32, 14);
+          return;
+        }
+        ((t.fillStyle = ct(t, 0, -7, 0, 7, [
+          [0, "#5b5f66"],
+          [0.4, "#1d2024"],
+          [1, "#050607"],
+        ])),
+          st(t, -16, -7, 32, 14, 5),
+          t.fill(),
+          (t.fillStyle = ct(t, 0, -7, 0, 7, [
+            [0, "#f4f4f4"],
+            [1, "#8a8f98"],
+          ])),
+          t.fillRect(8, -7, 4, 14),
+          (t.fillStyle = "rgba(255,255,255,.25)"),
+          st(t, -14, -5, 20, 2, 1),
+          t.fill());
+      },
+    }),
+    ht("zener", {
+      name: translate("稳压二极管"),
+      cat: "semi",
+      prefix: "Dz",
+      nl: !0,
+      primary: "Vz",
+      params: [
+        K("Vz", translate("稳压值"), "V", 1, 200),
+        K("Pmax", translate("额定功率"), "W", 0.1, 10),
+      ],
+      defaults: {
+        Vz: 5.1,
+        Pmax: 0.5,
+      },
+      box: [-18, -9, 18, 9],
+      stamp(t, e) {
+        const s = 1.2 * Mt;
+        Q0(t, e, 0.01 / Math.exp(0.7 / s), s, t.p.Vz);
+      },
+      post(t, e, s) {
+        const n = Math.abs(t.i * (t.v[0] - t.v[1]));
+        ((t.heat += (n / t.p.Pmax - t.heat) * Math.min(1, s / 0.5)),
+          t.heat > 3 && !t.burnt && ve(t, translate("功率过大烧毁")));
+      },
+      label: (t) => "Vz=" + z(t.p.Vz, "V"),
+      draw(t, e) {
+        if ((F(t, -40, 0, -15, 0), F(t, 15, 0, 40, 0), e.burnt)) {
+          R0(t, -16, -7, 32, 14);
+          return;
+        }
+        ((t.fillStyle = ct(t, 0, -7, 0, 7, [
+          [0, "#ffc98a"],
+          [0.45, "#e2741d"],
+          [1, "#6a2d06"],
+        ])),
+          (t.globalAlpha = 0.9),
+          st(t, -16, -7, 32, 14, 5),
+          t.fill(),
+          (t.globalAlpha = 1),
+          (t.fillStyle = "#111"),
+          t.fillRect(8, -7, 4, 14),
+          (t.fillStyle = "rgba(255,255,255,.35)"),
+          st(t, -14, -5, 20, 2, 1),
+          t.fill());
+      },
+    }),
+    ht("bjt", {
+      name: translate("三极管"),
+      cat: "semi",
+      prefix: "Q",
+      nl: !0,
+      primary: "beta",
+      terms: [
+        [-40, 0],
+        [20, -40],
+        [20, 40],
+      ],
+      box: [-14, -24, 34, 24],
+      labelOff: [44, 0],
+      params: [
+        gt("pol", translate("类型"), [
+          ["npn", "NPN"],
+          ["pnp", "PNP"],
+        ]),
+        K("beta", translate("放大倍数 β"), "", 10, 1e3),
+      ],
+      defaults: {
+        pol: "npn",
+        beta: 100,
+      },
+      stamp(t, e) {
+        const s = t.p.pol === "pnp" ? -1 : 1,
+          n = 1e-14,
+          i = t.p.beta,
+          a = 1,
+          f = Mt,
+          d = e.V(t, 0),
+          p = e.V(t, 1),
+          y = e.V(t, 2),
+          b = f * Math.log(f / (Math.SQRT2 * n));
+        let j = s * (d - y),
+          A = s * (d - p);
+        const O = n0(j, t.s.vbe ?? 0, f, b),
+          U = n0(A, t.s.vbc ?? 0, f, b);
+        ((Math.abs(O - j) > 1e-9 || Math.abs(U - A) > 1e-9) && (e.limited = !0),
+          (t.s.vbe = O),
+          (t.s.vbc = U));
+        const _ = Math.exp(Math.min(O / f, 90)),
+          g = Math.exp(Math.min(U / f, 90)),
+          Y = n * (_ - 1),
+          V = n * (g - 1),
+          $ = (n * _) / f + 1e-12,
+          Z = (n * g) / f + 1e-12,
+          pt = Y - V * (1 + 1 / a),
+          Tt = Y / i + V / a,
+          Dt = [
+            [$ / i, Z / a, Tt],
+            [$, -Z * (1 + 1 / a), pt],
+          ];
+        Dt.push([-(Dt[0][0] + Dt[1][0]), -(Dt[0][1] + Dt[1][1]), -(Tt + pt)]);
+        const Ht = [],
+          Be = [];
+        for (const [zt, ue, U0] of Dt)
+          (Ht.push([zt + ue, -ue, -zt]), Be.push(s * (U0 - zt * O - ue * U)));
+        ((t.s.J = Ht), (t.s.C = Be), e.raw(t, Ht, Be));
+      },
+      post(t) {
+        const { J: e, C: s } = t.s;
+        if (e) {
+          for (let n = 0; n < 3; n++)
+            t.iT[n] =
+              e[n][0] * t.v[0] + e[n][1] * t.v[1] + e[n][2] * t.v[2] + s[n];
+          t.i = t.iT[1];
+        }
+      },
+      paths(t) {
+        return [
+          [
+            [
+              [20, -40],
+              [20, -20],
+              [2, -8],
+              [2, 8],
+              [20, 20],
+              [20, 40],
+            ],
+            t.iT[1] || 0,
+          ],
+          [
+            [
+              [-40, 0],
+              [2, 0],
+            ],
+            t.iT[0] || 0,
+          ],
+        ];
+      },
+      label: (t) => (t.p.pol === "pnp" ? "PNP" : "NPN") + " β=" + t.p.beta,
+      extra: (t) => {
+        const e = t.p.pol === "pnp" ? -1 : 1,
+          s = e * (t.v[0] - t.v[2]),
+          n = e * (t.v[1] - t.v[2]),
+          i = e * t.iT[0],
+          a = e * t.iT[1],
+          f =
+            s < 0.5
+              ? translate("截止")
+              : n < 0.3
+                ? translate("饱和")
+                : translate("放大");
+        return [
+          ["I_B", z(t.iT[0], "A")],
+          ["I_C", z(t.iT[1], "A")],
+          ["U_BE", z(s * e, "V")],
+          ["U_CE", z(n * e, "V")],
+          [translate("工作状态"), f],
+          ["I_C/I_B", i > 1e-12 ? (a / i).toFixed(1) : "—"],
+        ];
+      },
+      draw(t, e) {
+        (F(t, -40, 0, -4, 0),
+          F(t, 20, -40, 20, -22),
+          F(t, 20, 22, 20, 40),
+          (t.fillStyle = ct(t, -14, -24, 34, 24, [
+            [0, "#3a3f47"],
+            [1, "#07080a"],
+          ])),
+          J(t, 10, 0, 24),
+          t.fill(),
+          (t.strokeStyle = "#586270"),
+          (t.lineWidth = 1.2),
+          J(t, 10, 0, 24),
+          t.stroke(),
+          (t.strokeStyle = "#e6ebf1"),
+          (t.lineWidth = 3),
+          t.beginPath(),
+          t.moveTo(0, -12),
+          t.lineTo(0, 12),
+          t.stroke(),
+          (t.lineWidth = 2),
+          t.beginPath(),
+          t.moveTo(-4, 0),
+          t.lineTo(0, 0),
+          t.moveTo(0, -6),
+          t.lineTo(20, -20),
+          t.lineTo(20, -24),
+          t.moveTo(0, 6),
+          t.lineTo(20, 20),
+          t.lineTo(20, 24),
+          t.stroke());
+        const s = e.p.pol === "pnp";
+        ((t.fillStyle = "#ffb23e"),
+          t.save(),
+          s
+            ? (t.translate(5, 9.5), t.rotate(Math.atan2(14, 20) + Math.PI))
+            : (t.translate(17, 18), t.rotate(Math.atan2(14, 20))),
+          t.beginPath(),
+          t.moveTo(3, 0),
+          t.lineTo(-5, -4),
+          t.lineTo(-5, 4),
+          t.fill(),
+          t.restore(),
+          xt(t, "B", -12, -8, 8, "#7a889a"),
+          xt(t, "C", 28, -30, 8, "#7a889a"),
+          xt(t, "E", 28, 30, 8, "#7a889a"));
+      },
+    }),
+    ht("switch", {
+      name: translate("单刀开关"),
+      cat: "sw",
+      prefix: "S",
+      clickable: !0,
+      params: [j0("closed", translate("闭合"))],
+      defaults: {
+        closed: !1,
+      },
+      box: [-32, -22, 32, 10],
+      stamp(t, e) {
+        e.lin(t, 0, 1, t.p.closed ? ie : t.s.arc ? 1 / 40 : _t, 0);
+      },
+      post(t) {
+        const e = Math.abs(t.v[0] - t.v[1]);
+        t.p.closed
+          ? (t.s.arc = !1)
+          : (e > 500 && !t.s.arc && (t.s.arc = !0),
+            t.s.arc && Math.abs(t.i) < 0.005 && (t.s.arc = !1));
+      },
+      click(t) {
+        ((t.p.closed = !t.p.closed), pe("click"));
+      },
+      label: (t) => (t.p.closed ? translate("闭合") : translate("断开")),
+      draw(t, e) {
+        (F(t, -40, 0, -26, 0),
+          F(t, 26, 0, 40, 0),
+          (t.fillStyle = ct(t, 0, -7, 0, 7, [
+            [0, "#3c2c1c"],
+            [1, "#1b120a"],
+          ])),
+          st(t, -31, -7, 62, 14, 4),
+          t.fill(),
+          (t.fillStyle = "#c9a24a"),
+          J(t, -24, 0, 4.5),
+          t.fill(),
+          (t.fillStyle = "#b08a38"),
+          t.fillRect(20, -6, 3, 8),
+          t.fillRect(27, -6, 3, 8));
+        const s = e.s.ang ?? (e.p.closed ? 0 : -0.62);
+        (t.save(),
+          t.translate(-24, 0),
+          t.rotate(s),
+          (t.strokeStyle = ct(t, 0, -2, 0, 2, [
+            [0, "#fff2d2"],
+            [1, "#b98b3c"],
+          ])),
+          (t.lineWidth = 3.6),
+          (t.lineCap = "round"),
+          t.beginPath(),
+          t.moveTo(0, 0),
+          t.lineTo(50, 0),
+          t.stroke(),
+          (t.fillStyle = "#16181c"),
+          st(t, 44, -4, 16, 8, 4),
+          t.fill(),
+          (t.fillStyle = "rgba(255,255,255,.2)"),
+          t.fillRect(46, -3, 12, 1.5),
+          t.restore(),
+          (t.fillStyle = "#e6c46d"),
+          J(t, -24, 0, 2),
+          t.fill());
+      },
+    }),
+    ht("spdt", {
+      name: translate("单刀双掷开关"),
+      cat: "sw",
+      prefix: "S",
+      clickable: !0,
+      terms: [
+        [-40, 0],
+        [40, -20],
+        [40, 20],
+      ],
+      box: [-32, -28, 32, 28],
+      labelOff: [0, -36],
+      params: [
+        gt("pos", translate("接通"), [
+          ["0", translate("上掷 (1)")],
+          ["1", translate("下掷 (2)")],
+        ]),
+      ],
+      defaults: {
+        pos: "0",
+      },
+      stamp(t, e) {
+        const s = t.p.pos === "0";
+        (e.lin(t, 0, 1, s ? ie : _t, 0),
+          (t.s.ga = s ? ie : _t),
+          (t.s.gb = s ? _t : ie),
+          e.lin(t, 0, 2, t.s.gb, 0));
+      },
+      post(t) {
+        const e = t.s.ga * (t.v[0] - t.v[1]),
+          s = t.s.gb * (t.v[0] - t.v[2]);
+        ((t.s.ia = e),
+          (t.s.ib = s),
+          (t.iT[0] = e + s),
+          (t.iT[1] = -e),
+          (t.iT[2] = -s),
+          (t.i = e + s));
+      },
+      click(t) {
+        ((t.p.pos = t.p.pos === "0" ? "1" : "0"), pe("click"));
+      },
+      paths(t) {
+        return [
+          [
+            [
+              [-40, 0],
+              [-24, 0],
+              [24, -20],
+              [40, -20],
+            ],
+            t.s.ia || 0,
+          ],
+          [
+            [
+              [-40, 0],
+              [-24, 0],
+              [24, 20],
+              [40, 20],
+            ],
+            t.s.ib || 0,
+          ],
+        ];
+      },
+      label: (t) =>
+        t.p.pos === "0" ? translate("掷向 1") : translate("掷向 2"),
+      draw(t, e) {
+        (F(t, -40, 0, -26, 0),
+          F(t, 26, -20, 40, -20),
+          F(t, 26, 20, 40, 20),
+          (t.fillStyle = ct(t, 0, -27, 0, 27, [
+            [0, "#3c2c1c"],
+            [1, "#1b120a"],
+          ])),
+          st(t, -31, -27, 62, 54, 5),
+          t.fill(),
+          (t.fillStyle = "#c9a24a"),
+          J(t, -24, 0, 4.5),
+          t.fill(),
+          (t.fillStyle = "#b08a38"),
+          [[-20], [20]].forEach(([i]) => {
+            (t.fillRect(21, i - 5, 3, 10), J(t, 27, i, 3), t.fill());
+          }),
+          xt(t, "1", 14, -22, 8, "#9d8a6a"),
+          xt(t, "2", 14, 22, 8, "#9d8a6a"));
+        const s = e.p.pos === "0" ? Math.atan2(-20, 50) : Math.atan2(20, 50),
+          n = e.s.ang ?? s;
+        (t.save(),
+          t.translate(-24, 0),
+          t.rotate(n),
+          (t.strokeStyle = ct(t, 0, -2, 0, 2, [
+            [0, "#fff2d2"],
+            [1, "#b98b3c"],
+          ])),
+          (t.lineWidth = 3.6),
+          (t.lineCap = "round"),
+          t.beginPath(),
+          t.moveTo(0, 0),
+          t.lineTo(54, 0),
+          t.stroke(),
+          (t.fillStyle = "#16181c"),
+          st(t, 30, -4, 14, 8, 4),
+          t.fill(),
+          t.restore());
+      },
+    }),
+    ht("button", {
+      name: translate("按钮开关"),
+      cat: "sw",
+      prefix: "SB",
+      clickable: !0,
+      params: [j0("nc", translate("常闭型"))],
+      defaults: {
+        nc: !1,
+      },
+      box: [-26, -18, 26, 10],
+      closed: (t) => !!t.s.pressed != !!t.p.nc,
+      stamp(t, e) {
+        e.lin(t, 0, 1, q.button.closed(t) ? ie : _t, 0);
+      },
+      label: (t) => (t.p.nc ? translate("常闭") : translate("常开")),
+      draw(t, e) {
+        (F(t, -40, 0, -20, 0),
+          F(t, 20, 0, 40, 0),
+          (t.fillStyle = "#1b1e23"),
+          st(t, -24, -8, 48, 16, 4),
+          t.fill());
+        const s = q.button.closed(e),
+          n = !!e.s.pressed;
+        ((t.strokeStyle = "#c9a24a"),
+          (t.lineWidth = 3),
+          t.beginPath(),
+          t.moveTo(-18, s ? 0 : -6),
+          t.lineTo(18, s ? 0 : -6),
+          t.stroke(),
+          (t.fillStyle = n
+            ? "#9c1f18"
+            : ct(t, 0, -18, 0, 0, [
+                [0, "#ff7a6e"],
+                [1, "#c52a1f"],
+              ])),
+          J(t, 0, n ? -6 : -10, 9),
+          t.fill(),
+          (t.fillStyle = "rgba(255,255,255,.35)"),
+          J(t, -3, n ? -9 : -13, 3),
+          t.fill());
+      },
+    }),
+    ht("fuse", {
+      name: translate("保险丝"),
+      cat: "sw",
+      prefix: "FU",
+      primary: "Ir",
+      params: [K("Ir", translate("额定电流"), "A", 0.01, 100)],
+      defaults: {
+        Ir: 1,
+      },
+      box: [-26, -9, 26, 9],
+      stamp(t, e) {
+        e.lin(t, 0, 1, t.burnt ? _t : 20, 0);
+      },
+      post(t, e, s) {
+        const n = (t.i * t.i) / (t.p.Ir * t.p.Ir);
+        ((t.heat += (n - t.heat) * Math.min(1, s / 0.15)),
+          t.heat > 2.2 && !t.burnt && ve(t, translate("保险丝熔断！")));
+      },
+      label: (t) => z(t.p.Ir, "A"),
+      draw(t, e) {
+        (F(t, -40, 0, -24, 0),
+          F(t, 24, 0, 40, 0),
+          (t.fillStyle = e.burnt
+            ? "rgba(60,50,40,.7)"
+            : "rgba(200,220,235,.18)"),
+          st(t, -18, -7, 36, 14, 3),
+          t.fill());
+        const s = Q(e.heat, 0, 2.2) / 2.2;
+        ((t.strokeStyle = e.burnt
+          ? "#555"
+          : s > 0.3
+            ? `rgb(255,${(200 - 150 * s) | 0},${(120 - 100 * s) | 0})`
+            : "#c9ccd1"),
+          (t.lineWidth = 1.3),
+          t.beginPath(),
+          e.burnt
+            ? (t.moveTo(-18, 0),
+              t.lineTo(-4, 1),
+              t.moveTo(5, -1),
+              t.lineTo(18, 0))
+            : (t.moveTo(-18, 0), t.bezierCurveTo(-6, -4, 6, 4, 18, 0)),
+          t.stroke(),
+          (t.fillStyle = ct(t, 0, -8, 0, 8, [
+            [0, "#f2f4f7"],
+            [1, "#7b828c"],
+          ])),
+          st(t, -25, -8, 8, 16, 2),
+          t.fill(),
+          st(t, 17, -8, 8, 16, 2),
+          t.fill(),
+          (t.strokeStyle = "rgba(255,255,255,.3)"),
+          (t.lineWidth = 1),
+          st(t, -18, -7, 36, 14, 3),
+          t.stroke());
+      },
+    }));
+  const Cs = [
+      1e-4, 3e-4, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 0.6, 1, 3, 10, 30,
+    ],
+    Bn = [0.01, 0.03, 0.1, 0.3, 1, 3, 15, 30, 100, 300, 1e3, 3e3],
+    C0 = {
+      A: [
+        ["0.6/3", 0.6, 3],
+        ["0.06/0.3", 0.06, 0.3],
+        ["0.006/0.03", 0.006, 0.03],
+      ],
+      V: [
+        ["3/15", 3, 15],
+        ["0.3/1.5", 0.3, 1.5],
+        ["30/150", 30, 150],
+      ],
+    };
+  function o0(t) {
+    const e = q[t.type];
+    if (!e.multi) return [Se(t), Se(t)];
+    const s = C0[e.meter].find((n) => n[0] === t.p.rs) || C0[e.meter][0];
+    return [s[1], s[2]];
+  }
+  function Ts(t, e) {
+    ht(t, {
+      name: e.name,
+      cat: "meter",
+      prefix: e.prefix,
+      meter: e.kind,
+      multi: !0,
+      mo: e,
+      box: [-30, -30, 30, 30],
+      labelOff: [0, -46],
+      terms: [
+        [-40, 0],
+        [40, 0],
+        [40, 20],
+      ],
+      termNames: (s) => {
+        const [n, i] = o0(s);
+        return ["−", String(n), String(i)];
+      },
+      params: [
+        gt(
+          "rs",
+          translate("量程组 (小/大)"),
+          C0[e.kind].map((s) => [s[0], s[0] + " " + e.unit]),
+        ),
+        e.kind === "A"
+          ? K("rin", translate("内阻 (小量程档)"), "Ω", 0.001, 100)
+          : K("opv", translate("每伏内阻"), "Ω/V", 100, 1e7),
+        gt("mode", translate("测量模式"), [
+          ["dc", translate("DC 直流")],
+          ["ac", translate("AC 有效值")],
+        ]),
+      ],
+      defaults: {
+        rs: C0[e.kind][0][0],
+        rin: 0.1,
+        opv: 2e4,
+        mode: "dc",
+      },
+      gs(s) {
+        const [n, i] = o0(s);
+        return e.kind === "A"
+          ? [1 / s.p.rin, i / (s.p.rin * n)]
+          : [1 / (s.p.opv * n), 1 / (s.p.opv * i)];
+      },
+      stamp(s, n) {
+        const [i, a] = q[s.type].gs(s);
+        (n.lin(s, 1, 0, i, 0), n.lin(s, 2, 0, a, 0));
+      },
+      post(s, n, i) {
+        const [a, f] = q[s.type].gs(s),
+          [d, p] = o0(s),
+          y = s.v[1] - s.v[0],
+          b = s.v[2] - s.v[0],
+          j = a * y,
+          A = f * b;
+        ((s.iT[0] = -(j + A)), (s.iT[1] = j), (s.iT[2] = A), (s.i = j + A));
+        const O = e.kind === "A" ? j / d : y / d,
+          U = e.kind === "A" ? A / p : b / p,
+          _ = O + U,
+          g = (Y) => s._p && (G.deg.get(s._p[Y]) || 0) > 1;
+        ((s.s.act = g(2) && (!g(1) || Math.abs(U) > Math.abs(O)) ? p : d),
+          s.p.mode === "ac"
+            ? ((s.s.ms =
+                (s.s.ms ?? _ * _) +
+                (_ * _ - (s.s.ms ?? _ * _)) * Math.min(1, i / n.acTau)),
+              (s.s.frac = Math.sqrt(s.s.ms)))
+            : (s.s.frac = _),
+          (s.s.read = s.s.frac * s.s.act));
+      },
+      paths(s) {
+        return [
+          [
+            [
+              [40, 0],
+              [0, 0],
+            ],
+            s.iT[1] || 0,
+          ],
+          [
+            [
+              [40, 20],
+              [22, 14],
+              [0, 0],
+            ],
+            s.iT[2] || 0,
+          ],
+          [
+            [
+              [0, 0],
+              [-40, 0],
+            ],
+            -(s.iT[0] || 0),
+          ],
+        ];
+      },
+      label: () => "",
+      extra: (s) => [
+        [translate("读数"), z(s.s.read, e.unit, 4)],
+        [translate("所用量程"), z(Se(s), e.unit)],
+        [translate("偏转"), Math.round(100 * (s.s.frac || 0)) + " %"],
+      ],
+      draw(s, n) {
+        (F(s, -40, 0, -28, 0),
+          F(s, 28, 0, 40, 0),
+          F(s, 24, 13, 40, 20),
+          s.save(),
+          s.rotate((-n.rot * Math.PI) / 2),
+          Vs(s, n, e),
+          s.restore());
+      },
+    });
+  }
+  function Un(t, e) {
+    ht(t, {
+      name: e.name,
+      cat: "meter",
+      prefix: e.prefix,
+      primary: "rin",
+      meter: e.kind,
+      mo: e,
+      box: [-30, -30, 30, 30],
+      labelOff: [0, -46],
+      params: [
+        K("rin", translate("内阻"), "Ω", e.rmin, e.rmax),
+        gt(
+          "range",
+          translate("量程"),
+          [["auto", translate("自动")]].concat(
+            e.ranges.map((s) => [String(s), z(s, e.unit)]),
+          ),
+        ),
+        gt("mode", translate("测量模式"), [
+          ["dc", translate("DC 直流(瞬时)")],
+          ["ac", translate("AC 有效值")],
+        ]),
+      ],
+      defaults: {
+        rin: e.rin,
+        range: e.defRange || "auto",
+        mode: "dc",
+      },
+      stamp(s, n) {
+        n.lin(s, 0, 1, 1 / s.p.rin, 0);
+      },
+      post(s, n, i) {
+        const a = e.kind === "V" ? s.v[0] - s.v[1] : s.i;
+        (s.p.mode === "ac"
+          ? ((s.s.ms =
+              (s.s.ms ?? a * a) +
+              (a * a - (s.s.ms ?? a * a)) * Math.min(1, i / n.acTau)),
+            (s.s.read = Math.sqrt(s.s.ms)))
+          : (s.s.read = a),
+          (s.s.frac = s.s.read / Se(s)));
+      },
+      label: (s) => "",
+      extra: (s) => [
+        [translate("读数"), z(s.s.read, e.unit, 4)],
+        [translate("当前量程"), z(Se(s), e.unit)],
+      ],
+      center: e.center,
+      draw(s, n) {
+        (F(s, -40, 0, -28, 0),
+          F(s, 28, 0, 40, 0),
+          s.save(),
+          s.rotate((-n.rot * Math.PI) / 2),
+          Vs(s, n, e),
+          s.restore());
+      },
+    });
+  }
+  function Se(t) {
+    const e = q[t.type];
+    if (e.multi) return t.s.act || o0(t)[0];
+    const s = e.meter === "V" ? Bn : Cs;
+    if (t.p.range !== "auto") return +t.p.range;
+    const n = Math.abs(t.s.read || 0);
+    let i = t.s.ar || s[0];
+    if (n > i * 1.02) i = s.find((a) => a >= n * 1.02) || s[s.length - 1];
+    else {
+      const a = s.indexOf(i);
+      a > 0 &&
+        n < s[a - 1] * 0.85 &&
+        (i = s.find((f) => f >= n * 1.02) || s[0]);
+    }
+    return ((t.s.ar = i), i);
+  }
+  function Vs(t, e, s) {
+    ((t.fillStyle = ct(t, -28, -28, 28, 28, [
+      [0, "#4a525d"],
+      [1, "#12151a"],
+    ])),
+      J(t, 0, 0, 29),
+      t.fill(),
+      (t.fillStyle = ct(t, 0, -24, 0, 24, [
+        [0, "#f6f0e0"],
+        [1, "#d9d0b8"],
+      ])),
+      J(t, 0, 0, 24),
+      t.fill());
+    const n = -Math.PI * 0.78,
+      i = -Math.PI * 0.22,
+      a = 0,
+      f = 11,
+      d = 21;
+    ((t.strokeStyle = "#2c2c2c"),
+      (t.lineWidth = 1),
+      t.beginPath(),
+      t.arc(a, f, d - 3, n, i),
+      t.stroke());
+    for (let j = 0; j <= 20; j++) {
+      const A = Ct(n, i, j / 20),
+        O = j % 5 ? 2.5 : 5;
+      (t.beginPath(),
+        t.moveTo(a + Math.cos(A) * (d - 3), f + Math.sin(A) * (d - 3)),
+        t.lineTo(a + Math.cos(A) * (d - 3 - O), f + Math.sin(A) * (d - 3 - O)),
+        t.stroke());
+    }
+    ((t.strokeStyle = "#c0392b"),
+      (t.lineWidth = 1.6),
+      t.beginPath(),
+      t.arc(a, f, d - 1.5, Ct(n, i, 0.9), i),
+      t.stroke(),
+      xt(t, s.kind, 0, 4, 9, "#1c1c1c", "center", 700));
+    const p = Se(e);
+    xt(t, z(p, s.unit, 2).replace(" ", ""), 0, 15, 5.5, "#555", "center", 600);
+    const y = e.s.needle ?? (s.center ? (n + i) / 2 : n);
+    ((t.strokeStyle = "#d62c1f"),
+      (t.lineWidth = 1.3),
+      t.beginPath(),
+      t.moveTo(a, f),
+      t.lineTo(a + Math.cos(y) * (d - 1), f + Math.sin(y) * (d - 1)),
+      t.stroke(),
+      (t.fillStyle = "#222"),
+      J(t, a, f, 2.5),
+      t.fill());
+    const b = t.createLinearGradient(-20, -24, 10, 10);
+    (b.addColorStop(0, "rgba(255,255,255,.35)"),
+      b.addColorStop(0.5, "rgba(255,255,255,0)"),
+      (t.fillStyle = b),
+      J(t, 0, 0, 24),
+      t.fill(),
+      q[e.type].multi
+        ? (xt(t, "−", -23, 18, 7, "#9fb0c2"), xt(t, "+", 23, -8, 7, "#ff6b5f"))
+        : (xt(t, "+", -23, 18, 7, "#ff6b5f"),
+          xt(t, "−", 23, 18, 7, "#9fb0c2")));
+  }
+  (Ts("ammeter", {
+    name: translate("电流表"),
+    prefix: "A",
+    kind: "A",
+    unit: "A",
+  }),
+    Ts("voltmeter", {
+      name: translate("电压表"),
+      prefix: "V",
+      kind: "V",
+      unit: "V",
+    }),
+    Un("galv", {
+      name: translate("灵敏电流计"),
+      prefix: "G",
+      kind: "G",
+      unit: "A",
+      rin: 100,
+      rmin: 1,
+      rmax: 1e4,
+      ranges: Cs,
+      center: !0,
+      defRange: "0.0003",
+    }),
+    ht("xfmr", {
+      name: translate("变压器"),
+      cat: "em",
+      prefix: "T",
+      primary: "n",
+      terms: [
+        [-40, -20],
+        [-40, 20],
+        [40, -20],
+        [40, 20],
+      ],
+      box: [-34, -36, 34, 36],
+      labelOff: [0, -46],
+      params: [
+        K("L1", translate("原线圈电感"), "H", 1e-4, 1e3),
+        K("n", translate("匝数比 n₂/n₁"), "", 0.01, 100),
+        K("k", translate("耦合系数"), "", 0.5, 0.99999, {
+          log: !1,
+        }),
+        K("R1", translate("原线圈电阻"), "Ω", 0.001, 1e3),
+        K("R2", translate("副线圈电阻"), "Ω", 0.001, 1e3),
+      ],
+      defaults: {
+        L1: 10,
+        n: 0.5,
+        k: 0.9995,
+        R1: 0.2,
+        R2: 0.2,
+      },
+      stamp(t, e) {
+        const s = t.p.L1,
+          n = s * t.p.n * t.p.n,
+          i = t.p.k * Math.sqrt(s * n),
+          a = 3 / (2 * e.dt),
+          f = a * s + t.p.R1,
+          d = a * i,
+          p = a * n + t.p.R2,
+          y = f * p - d * d,
+          b = p / y,
+          j = -d / y,
+          A = f / y,
+          O = t.s.a1 || 0,
+          U = t.s.a2 ?? O,
+          _ = t.s.b1 || 0,
+          g = t.s.b2 ?? _,
+          Y = 4 * O - U,
+          V = 4 * _ - g,
+          $ = (s * Y + i * V) / (2 * e.dt),
+          Z = (i * Y + n * V) / (2 * e.dt),
+          pt = b * $ + j * Z,
+          Tt = j * $ + A * Z;
+        t.s.G = [b, j, A, pt, Tt];
+        const Dt = [
+          [b, -b, j, -j],
+          [-b, b, -j, j],
+          [j, -j, A, -A],
+          [-j, j, -A, A],
+        ];
+        e.raw(t, Dt, [pt, -pt, Tt, -Tt]);
+      },
+      post(t) {
+        const [e, s, n, i, a] = t.s.G,
+          f = t.v[0] - t.v[1],
+          d = t.v[2] - t.v[3],
+          p = e * f + s * d + i,
+          y = s * f + n * d + a;
+        ((t.s.a2 = t.s.a1 ?? p),
+          (t.s.a1 = p),
+          (t.s.b2 = t.s.b1 ?? y),
+          (t.s.b1 = y),
+          (t.iT = [p, -p, y, -y]),
+          (t.i = p),
+          (t.s.i2 = y));
+      },
+      paths(t) {
+        return [
+          [
+            [
+              [-40, -20],
+              [-22, -20],
+              [-22, 20],
+              [-40, 20],
+            ],
+            t.s.a1 || 0,
+          ],
+          [
+            [
+              [40, -20],
+              [22, -20],
+              [22, 20],
+              [40, 20],
+            ],
+            t.s.b1 || 0,
+          ],
+        ];
+      },
+      label: (t) => `${Math.round(100 / t.p.n) / 100}:1 → n=${t.p.n}`,
+      extra: (t) => [
+        [translate("原线圈 U₁"), z(t.v[0] - t.v[1], "V")],
+        [translate("副线圈 U₂"), z(t.v[2] - t.v[3], "V")],
+        ["I₁", z(t.s.a1, "A")],
+        ["I₂", z(t.s.b1, "A")],
+      ],
+      draw(t, e) {
+        (F(t, -40, -20, -28, -20),
+          F(t, -40, 20, -28, 20),
+          F(t, 40, -20, 28, -20),
+          F(t, 40, 20, 28, 20),
+          (t.fillStyle = ct(t, 0, -34, 0, 34, [
+            [0, "#6c747f"],
+            [1, "#2a2f36"],
+          ])),
+          st(t, -18, -34, 36, 68, 3),
+          t.fill(),
+          (t.fillStyle = "#0b1016"),
+          t.fillRect(-6, -24, 12, 48),
+          (t.strokeStyle = "rgba(0,0,0,.35)"),
+          (t.lineWidth = 1));
+        for (let n = -32; n < 34; n += 4)
+          (t.beginPath(),
+            t.moveTo(-18, n),
+            t.lineTo(-6, n),
+            t.moveTo(6, n),
+            t.lineTo(18, n),
+            t.stroke());
+        const s = (n, i) => {
+          for (let a = 0; a < i; a++) {
+            const f = -22 + ((a + 0.5) * 44) / i;
+            ((t.fillStyle = ct(t, n - 11, 0, n + 11, 0, [
+              [0, "#6b3510"],
+              [0.5, "#f0a860"],
+              [1, "#6b3510"],
+            ])),
+              st(t, n - 11, f - 44 / i / 2 + 0.4, 22, 44 / i - 0.8, 2),
+              t.fill());
+          }
+        };
+        (s(-17, 10), s(17, Q(Math.round(10 * e.p.n), 2, 22)));
+      },
+    }));
+  const qe = [
+    [translate("电源"), ["psu", "battery", "ac", "isrc", "ground"]],
+    [translate("基本元件"), ["resistor", "pot", "cap", "ind", "ldr"]],
+    [translate("用电器"), ["bulb", "led", "motor", "buzzer"]],
+    [translate("半导体"), ["diode", "zener", "bjt"]],
+    [translate("开关与保护"), ["switch", "spdt", "button", "fuse"]],
+    [translate("电表"), ["ammeter", "voltmeter", "galv"]],
+    [translate("电磁"), ["xfmr"]],
+  ];
+  ht("rbox", {
+    name: translate("电阻箱"),
+    cat: "basic",
+    prefix: "R",
+    primary: "R",
+    termNames: ["0", "9999Ω"],
+    params: [
+      K("R", translate("阻值 (0~9999)"), "Ω", 0, 9999, {
+        log: !1,
+        int: !0,
+      }),
+      K("Pmax", translate("额定功率"), "W", 0.1, 50),
+    ],
+    defaults: {
+      R: 100,
+      Pmax: 2,
+    },
+    box: [-30, -16, 30, 16],
+    digits: (t) => {
+      const e = Q(Math.round(t.p.R), 0, 9999);
+      return [
+        Math.floor(e / 1e3),
+        Math.floor(e / 100) % 10,
+        Math.floor(e / 10) % 10,
+        e % 10,
+      ];
+    },
+    stamp(t, e) {
+      e.lin(t, 0, 1, t.burnt ? _t : 1 / Math.max(Math.round(t.p.R), 0.02), 0);
+    },
+    post(t, e, s) {
+      const n = Math.abs(t.i * (t.v[0] - t.v[1]));
+      ((t.heat += (n / t.p.Pmax - t.heat) * Math.min(1, s / 1)),
+        t.heat > 4 && !t.burnt && ve(t, translate("功率过大，已烧毁")));
+    },
+    label: (t) => Math.round(t.p.R) + " Ω",
+    draw(t, e) {
+      (F(t, -40, 0, -30, 0),
+        F(t, 30, 0, 40, 0),
+        (t.fillStyle = ct(t, 0, -16, 0, 16, [
+          [0, "#5a4636"],
+          [1, "#2a1f17"],
+        ])),
+        st(t, -30, -16, 60, 32, 4),
+        t.fill(),
+        q.rbox.digits(e).forEach((s, n) => {
+          const i = -21 + n * 14;
+          ((t.fillStyle = "#111"),
+            J(t, i, -2, 5.5),
+            t.fill(),
+            xt(t, String(s), i, -2, 7, "#ffd08a"),
+            xt(
+              t,
+              ["×1k", "×100", "×10", "×1"][n],
+              i,
+              10,
+              4.5,
+              "#c9b89a",
+              "center",
+              500,
+            ));
+        }),
+        Fe(t, e, -30, -16, 60, 32));
+    },
+  });
+  const i0 = [
+    ["dcv", translate("V⎓ 直流电压")],
+    ["acv", translate("V~ 交流电压")],
+    ["dca", translate("A⎓ 直流电流")],
+    ["ohm", translate("Ω 电阻")],
+  ];
+  ht("mm", {
+    name: translate("多用电表"),
+    cat: "meter",
+    prefix: "MM",
+    primary: "mode",
+    termNames: ["VΩA", "COM"],
+    params: [gt("mode", translate("挡位"), i0)],
+    defaults: {
+      mode: "dcv",
+    },
+    box: [-26, -30, 26, 30],
+    stamp(t, e) {
+      const s = t.p.mode;
+      s === "dca"
+        ? e.lin(t, 0, 1, 10, 0)
+        : s === "ohm"
+          ? e.lin(t, 0, 1, 0.001, -0.0015)
+          : e.lin(t, 0, 1, 1e-7, 0);
+    },
+    post(t, e, s) {
+      const n = t.v[0] - t.v[1],
+        i = t.p.mode;
+      if (i === "dcv") ((t.s.read = n), (t.s.disp = ae(n, "V", 4)));
+      else if (i === "acv")
+        ((t.s.ms =
+          (t.s.ms ?? n * n) +
+          (n * n - (t.s.ms ?? n * n)) * Math.min(1, s / e.acTau)),
+          (t.s.read = Math.sqrt(t.s.ms)),
+          (t.s.disp = ae(t.s.read, "V~", 4)));
+      else if (i === "dca") ((t.s.read = t.i), (t.s.disp = ae(t.i, "A", 4)));
+      else {
+        const a = -t.i;
+        a < 1e-9 || n < 0
+          ? ((t.s.read = 1 / 0), (t.s.disp = "OL  Ω"))
+          : ((t.s.read = n / a),
+            (t.s.disp = t.s.read > 2e7 ? "OL  Ω" : ae(t.s.read, "Ω", 4)));
+      }
+    },
+    label: (t) => t.s.disp || "—",
+    extra: (t) => [
+      [translate("显示"), t.s.disp || "—"],
+      [translate("挡位"), i0.find((e) => e[0] === t.p.mode)[1]],
+    ],
+    draw(t, e) {
+      (F(t, -40, 0, -26, 0),
+        F(t, 26, 0, 40, 0),
+        t.save(),
+        t.rotate((-e.rot * Math.PI) / 2),
+        (t.fillStyle = ct(t, 0, -30, 0, 30, [
+          [0, "#ffd23a"],
+          [1, "#d99a00"],
+        ])),
+        st(t, -26, -30, 52, 60, 7),
+        t.fill(),
+        (t.fillStyle = "#222"),
+        st(t, -21, -25, 42, 34, 4),
+        t.fill(),
+        (t.fillStyle = "#b9c7a8"),
+        st(t, -18, -22, 36, 14, 2),
+        t.fill(),
+        xt(
+          t,
+          (e.s.disp || "0.000").replace(/\s+/g, ""),
+          0,
+          -15,
+          6.5,
+          "#1a2410",
+          "center",
+          700,
+        ),
+        (t.fillStyle = "#333"),
+        J(t, 0, 1, 6),
+        t.fill(),
+        (t.strokeStyle = "#eee"),
+        (t.lineWidth = 1.5));
+      const s =
+        -Math.PI / 2 + i0.findIndex((n) => n[0] === e.p.mode) * 0.9 - 1.35;
+      (t.beginPath(),
+        t.moveTo(0, 1),
+        t.lineTo(Math.cos(s) * 5, 1 + Math.sin(s) * 5),
+        t.stroke(),
+        (t.fillStyle = "#d21f1b"),
+        J(t, -10, 20, 3.5),
+        t.fill(),
+        (t.fillStyle = "#111"),
+        J(t, 10, 20, 3.5),
+        t.fill(),
+        t.restore());
+    },
+  });
+  const Ne = {
+    nicr: [translate("镍铬合金"), 11e-7, "#9aa1aa"],
+    mncu: [translate("锰铜合金"), 44e-8, "#c9a86a"],
+    cu: [translate("铜"), 17e-9, "#d4843f"],
+    fe: [translate("铁"), 1e-7, "#6d7178"],
+  };
+  (ht("rwire", {
+    name: translate("电阻丝"),
+    cat: "basic",
+    prefix: "RL",
+    primary: "L",
+    params: [
+      gt(
+        "mat",
+        translate("材料"),
+        Object.entries(Ne).map(([t, e]) => [t, e[0]]),
+      ),
+      K("L", translate("长度"), "m", 0.05, 3, {
+        log: !1,
+      }),
+      K("d", translate("直径"), "mm", 0.1, 2, {
+        log: !1,
+      }),
+    ],
+    defaults: {
+      mat: "nicr",
+      L: 1,
+      d: 0.5,
+    },
+    box: [-34, -8, 34, 8],
+    R: (t) => (Ne[t.p.mat][1] * t.p.L) / ((Math.PI * (t.p.d * 0.001) ** 2) / 4),
+    stamp(t, e) {
+      e.lin(t, 0, 1, 1 / Math.max(q.rwire.R(t), 1e-4), 0);
+    },
+    post(t, e, s) {
+      const n = Math.abs(t.i * (t.v[0] - t.v[1]));
+      t.heat += (n / (8 * t.p.L) - t.heat) * Math.min(1, s / 1.5);
+    },
+    label: (t) => `${Ne[t.p.mat][0]} ${t.p.L}m Φ${t.p.d}mm`,
+    extra: (t) => [
+      [translate("电阻"), z(q.rwire.R(t), "Ω", 4)],
+      [translate("电阻率 ρ"), Ne[t.p.mat][1].toExponential(1) + " Ω·m"],
+      [translate("横截面积"), z(((Math.PI * t.p.d ** 2) / 4) * 1e-6, "m²")],
+    ],
+    draw(t, e) {
+      (F(t, -40, 0, -32, 0),
+        F(t, 32, 0, 40, 0),
+        (t.fillStyle = "#6b4d2e"),
+        st(t, -34, -7, 68, 14, 3),
+        t.fill(),
+        (t.strokeStyle = Ne[e.p.mat][2]),
+        (t.lineWidth = 0.6 + e.p.d * 1.6),
+        t.beginPath(),
+        t.moveTo(-32, 0),
+        t.lineTo(32, 0),
+        t.stroke(),
+        Fe(t, e, -34, -7, 68, 14));
+    },
+  }),
+    ht("emag", {
+      name: translate("电磁铁"),
+      cat: "em",
+      prefix: "EM",
+      primary: "N",
+      params: [
+        gt("N", translate("线圈匝数"), [
+          ["50", translate("50 匝")],
+          ["100", translate("100 匝")],
+          ["150", translate("150 匝")],
+        ]),
+        j0("core", translate("插入铁芯")),
+      ],
+      defaults: {
+        N: "100",
+        core: !0,
+      },
+      box: [-28, -14, 28, 20],
+      Lval: (t) => 2e-4 * (+t.p.N / 100) ** 2 * (t.p.core ? 40 : 1),
+      stamp(t, e) {
+        const s = q.emag.Lval(t),
+          n = 0.02 * +t.p.N,
+          i = (2 * e.dt) / (3 * s),
+          a = t.s.i1 || 0,
+          f = t.s.i2 ?? a,
+          d = (4 * a - f) / 3,
+          p = 1 + n * i;
+        e.lin(t, 0, 1, i / p, d / p);
+      },
+      post(t) {
+        ((t.s.i2 = t.s.i1 ?? t.i),
+          (t.s.i1 = t.i),
+          (t.s.pins = Math.min(
+            15,
+            Math.floor(Math.abs(t.i) * +t.p.N * (t.p.core ? 0.06 : 0.004)),
+          )));
+      },
+      label: (t) => translate("{0}匝 吸{1}枚", [t.p.N, t.s.pins || 0]),
+      extra: (t) => [
+        [translate("吸引大头针"), (t.s.pins || 0) + translate(" 枚")],
+        [translate("线圈电阻"), z(0.02 * +t.p.N, "Ω")],
+        [translate("电感"), z(q.emag.Lval(t), "H")],
+      ],
+      draw(t, e) {
+        (F(t, -40, 0, -24, 0),
+          F(t, 24, 0, 40, 0),
+          e.p.core &&
+            ((t.fillStyle = "#7d848d"), st(t, -28, -3, 56, 6, 2), t.fill()));
+        const s = +e.p.N / 10;
+        for (let i = 0; i < s; i++) {
+          ((t.strokeStyle = "#c87533"), (t.lineWidth = 1.6));
+          const a = -20 + (i * 40) / s;
+          (t.beginPath(),
+            t.ellipse(a, 0, 1.3, 8, 0, 0, Math.PI * 2),
+            t.stroke());
+        }
+        const n = e.s.pins || 0;
+        ((t.strokeStyle = "#cfd5dc"), (t.lineWidth = 0.8));
+        for (let i = 0; i < n; i++)
+          (t.beginPath(),
+            t.moveTo(-26 + (i % 7) * 3, 5),
+            t.lineTo(-27 + (i % 7) * 3, 12 + (i > 6 ? 5 : 0)),
+            t.stroke());
+      },
+    }));
+  const As = {
+    oil: [translate("煤油"), 2100],
+    water: [translate("水"), 4200],
+  };
+  (ht("heater", {
+    name: translate("电热器(焦耳定律)"),
+    cat: "load",
+    prefix: "RH",
+    primary: "R",
+    params: [
+      K("R", translate("电阻丝阻值"), "Ω", 0.5, 200),
+      gt(
+        "liq",
+        translate("液体"),
+        Object.entries(As).map(([t, e]) => [t, e[0]]),
+      ),
+      K("m", translate("液体质量"), "kg", 0.005, 1),
+    ],
+    defaults: {
+      R: 10,
+      liq: "oil",
+      m: 0.02,
+    },
+    box: [-22, -26, 22, 18],
+    stamp(t, e) {
+      e.lin(t, 0, 1, 1 / t.p.R, 0);
+    },
+    post(t, e, s) {
+      let n = t.s.T ?? 20;
+      const i = t.i * t.i * t.p.R,
+        a = As[t.p.liq][1] * t.p.m;
+      ((n += ((i - 0.02 * (n - 20)) / a) * s),
+        (t.s.T = Math.min(n, 150)),
+        (t.s.Q = (t.s.Q || 0) + i * s));
+    },
+    actions: [
+      [
+        translate("冷却复位"),
+        (t) => {
+          ((t.s.T = 20), (t.s.Q = 0));
+        },
+      ],
+    ],
+    label: (t) => `${z(t.p.R, "Ω")} ${(t.s.T ?? 20).toFixed(1)}℃`,
+    extra: (t) => [
+      [translate("液体温度"), (t.s.T ?? 20).toFixed(2) + " ℃"],
+      [translate("温升 Δt"), ((t.s.T ?? 20) - 20).toFixed(2) + " ℃"],
+      [translate("产生热量 Q"), z(t.s.Q || 0, "J")],
+    ],
+    draw(t, e) {
+      (F(t, -40, 0, -18, 0),
+        F(t, 18, 0, 40, 0),
+        (t.fillStyle = "rgba(200,220,240,.18)"),
+        J(t, 0, 2, 17),
+        t.fill(),
+        t.fillRect(-5, -24, 10, 12));
+      const s = e.s.T ?? 20;
+      ((t.fillStyle =
+        e.p.liq === "oil" ? "rgba(240,200,90,.45)" : "rgba(90,170,255,.4)"),
+        t.beginPath(),
+        t.arc(0, 2, 16, 0.25, Math.PI - 0.25),
+        t.fill(),
+        (t.strokeStyle = "#c87533"),
+        (t.lineWidth = 1.2),
+        t.beginPath(),
+        t.moveTo(-18, 0));
+      for (let i = 0; i <= 8; i++) t.lineTo(-8 + i * 2, 8 + (i % 2 ? -3 : 3));
+      (t.lineTo(18, 0),
+        t.stroke(),
+        (t.fillStyle = "#eee"),
+        t.fillRect(8, -30, 3, 30),
+        (t.fillStyle = "#e0342b"));
+      const n = Q((s - 10) / 90, 0, 1) * 26;
+      (t.fillRect(8.5, -2 - n, 2, n + 2),
+        (t.strokeStyle = "rgba(220,235,250,.6)"),
+        (t.lineWidth = 1.2),
+        J(t, 0, 2, 17),
+        t.stroke());
+    },
+  }),
+    ht("solar", {
+      name: translate("太阳能电池"),
+      cat: "src",
+      prefix: "PV",
+      primary: "lux",
+      nl: !0,
+      termNames: ["−", "+"],
+      params: [
+        K("lux", translate("光照强度 (相对)"), "", 0, 1.5, {
+          log: !1,
+        }),
+        K("Isc", translate("短路电流 (满光照)"), "A", 0.01, 5),
+        gt("N", translate("串联片数"), [
+          ["6", translate("6 片 (~3.6V)")],
+          ["10", translate("10 片 (~6V)")],
+          ["20", translate("20 片 (~12V)")],
+        ]),
+      ],
+      defaults: {
+        lux: 1,
+        Isc: 0.3,
+        N: "10",
+      },
+      box: [-30, -22, 30, 22],
+      stamp(t, e) {
+        const s = +t.p.N,
+          n = s * 1.3 * Mt,
+          i = 1e-9,
+          a = t.p.Isc * t.p.lux,
+          f = e.V(t, 1) - e.V(t, 0),
+          d = n * Math.log(n / (Math.SQRT2 * i)),
+          p = t.s.vd ?? 0,
+          y = n0(f, p, n, d);
+        (Math.abs(y - f) > 1e-9 && (e.limited = !0), (t.s.vd = y));
+        const b = Math.exp(Math.min(y / n, 90)),
+          j = i * (b - 1),
+          A = (i * b) / n + 1e-4;
+        ((t.s.lin = [A, j + 1e-4 * y - A * y - a]),
+          e.lin(t, 1, 0, A, t.s.lin[1]));
+      },
+      post(t) {
+        const [e, s] = t.s.lin || [0, 0],
+          n = e * (t.v[1] - t.v[0]) + s;
+        ((t.i = -n), (t.iT[1] = n), (t.iT[0] = -n));
+      },
+      label: (t) => translate("光照 {0}%", [Math.round(t.p.lux * 100)]),
+      extra: (t) => [
+        [translate("输出电压"), z(t.v[1] - t.v[0], "V")],
+        [translate("输出功率"), z(t.i * (t.v[1] - t.v[0]), "W")],
+      ],
+      draw(t, e) {
+        (F(t, -40, 0, -30, 0),
+          F(t, 30, 0, 40, 0),
+          (t.fillStyle = "#c9ced6"),
+          st(t, -30, -22, 60, 44, 3),
+          t.fill(),
+          (t.fillStyle = "#16305e"),
+          st(t, -27, -19, 54, 38, 2),
+          t.fill(),
+          (t.strokeStyle = "#8fa9d6"),
+          (t.lineWidth = 0.6));
+        for (let n = -27; n <= 27; n += 9)
+          (t.beginPath(), t.moveTo(n, -19), t.lineTo(n, 19), t.stroke());
+        for (let n = -19; n <= 19; n += 9.5)
+          (t.beginPath(), t.moveTo(-27, n), t.lineTo(27, n), t.stroke());
+        const s = Q(e.p.lux, 0, 1);
+        (s > 0.02 &&
+          ((t.fillStyle = `rgba(255,255,255,${0.25 * s})`),
+          t.beginPath(),
+          t.moveTo(-27, -19),
+          t.lineTo(0, -19),
+          t.lineTo(-27, 10),
+          t.fill()),
+          xt(t, "−", -34, -9, 8, "#9fb0c2"),
+          xt(t, "+", 34, -9, 8, "#ff6b5f"));
+      },
+    }),
+    ht("ntc", {
+      name: translate("热敏电阻"),
+      cat: "basic",
+      prefix: "RT",
+      primary: "T",
+      params: [
+        K("T", translate("温度"), "℃", -20, 150, {
+          log: !1,
+        }),
+        K("R25", translate("25℃阻值"), "Ω", 10, 1e6),
+        K("B", translate("B 值"), "K", 1e3, 6e3, {
+          log: !1,
+        }),
+      ],
+      defaults: {
+        T: 25,
+        R25: 1e4,
+        B: 3950,
+      },
+      box: [-24, -12, 24, 12],
+      R: (t) => t.p.R25 * Math.exp(t.p.B * (1 / (t.p.T + 273.15) - 1 / 298.15)),
+      stamp(t, e) {
+        e.lin(t, 0, 1, 1 / q.ntc.R(t), 0);
+      },
+      label: (t) => `${Math.round(t.p.T)}℃ ${z(q.ntc.R(t), "Ω")}`,
+      extra: (t) => [[translate("当前阻值"), z(q.ntc.R(t), "Ω", 4)]],
+      draw(t, e) {
+        (F(t, -40, 0, -8, 0),
+          F(t, 8, 0, 40, 0),
+          (t.fillStyle = ct(t, -8, -8, 8, 8, [
+            [0, "#4a4f58"],
+            [1, "#0d0f12"],
+          ])),
+          t.beginPath(),
+          t.ellipse(0, 0, 9, 7, 0, 0, Math.PI * 2),
+          t.fill(),
+          (t.strokeStyle = "#ff8a3d"),
+          (t.lineWidth = 1.4),
+          t.beginPath(),
+          t.moveTo(-14, 10),
+          t.lineTo(14, -10),
+          t.lineTo(18, -10),
+          t.stroke(),
+          xt(t, "t°", -16, -8, 7, "#ffb23e"));
+      },
+    }),
+    qe.find((t) => t[0] === translate("电源"))[1].push("solar"),
+    qe
+      .find((t) => t[0] === translate("基本元件"))[1]
+      .push("rbox", "rwire", "ntc"),
+    qe.find((t) => t[0] === translate("用电器"))[1].push("heater"),
+    qe.find((t) => t[0] === translate("电表"))[1].push("mm"),
+    qe.find((t) => t[0] === translate("电磁"))[1].push("emag"));
+  const T = {
+      comps: [],
+      wires: [],
+      nextId: 1,
+      sel: null,
+      hover: null,
+    },
+    G = {
+      running: !0,
+      speed: 1,
+      spf: 40,
+      t: 0,
+      dirty: !0,
+      hasNL: !1,
+      lag: 0,
+      points: [],
+      groups: [],
+      deg: new Map(),
+      nodeOfPt: [],
+      vmax: 1,
+      diverged: 0,
+    },
+    vt = {
+      n: 0,
+      A: new Float64Array(0),
+      b: new Float64Array(0),
+      x: new Float64Array(0),
+      dt: 0.001,
+      t: 0,
+      limited: !1,
+      acTau: 0.2,
+      V(t, e) {
+        const s = t.n[e];
+        return s < 0 ? 0 : this.x[s];
+      },
+      lin(t, e, s, n, i) {
+        const a = t.n[e],
+          f = t.n[s],
+          d = this.n,
+          p = this.A,
+          y = this.b;
+        (a >= 0 && ((p[a * d + a] += n), (y[a] -= i)),
+          f >= 0 && ((p[f * d + f] += n), (y[f] += i)),
+          a >= 0 && f >= 0 && ((p[a * d + f] -= n), (p[f * d + a] -= n)),
+          e === 0 && s === 1 && ((t._g = n), (t._ieq = i)));
+      },
+      raw(t, e, s) {
+        const n = this.n,
+          i = this.A,
+          a = this.b;
+        for (let f = 0; f < e.length; f++) {
+          const d = t.n[f];
+          if (d < 0) continue;
+          a[d] -= s[f];
+          const p = e[f];
+          for (let y = 0; y < p.length; y++) {
+            const b = t.n[y];
+            b >= 0 && (i[d * n + b] += p[y]);
+          }
+        }
+      },
+    };
+  function a0(t, e, s, n = 0, i = {}) {
+    const a = q[t],
+      f = a.terms.length,
+      d = {
+        id: T.nextId++,
+        type: t,
+        x: e,
+        y: s,
+        rot: n,
+        p: {
+          ...a.defaults,
+          ...i,
+        },
+        s: {},
+        v: new Array(f).fill(0),
+        iT: new Array(f).fill(0),
+        n: new Array(f).fill(-1),
+        i: 0,
+        heat: 0,
+        burnt: !1,
+        flow: [0, 0, 0, 0],
+      };
+    return ((d.name = _n(a.prefix)), d);
+  }
+  function _n(t) {
+    if (t === "GND") return "GND";
+    let e = 0;
+    const s = new RegExp("^" + t + "(\\d+)$");
+    for (const n of T.comps) {
+      const i = s.exec(n.name);
+      i && (e = Math.max(e, +i[1]));
+    }
+    return t + (e + 1);
+  }
+  function le(t) {
+    return q[t.type].terms.map(([e, s]) => de(t, e, s));
+  }
+  const T0 = (t, e) => t + "," + e;
+  function V0() {
+    ((G.dirty = !1), (G.topoVer = (G.topoVer || 0) + 1));
+    const t = new Map(),
+      e = [],
+      s = [],
+      n = (V, $) => {
+        const Z = T0(V, $);
+        let pt = t.get(Z);
+        return (
+          pt === void 0 &&
+            ((pt = e.length), t.set(Z, pt), e.push(pt), s.push([V, $])),
+          pt
+        );
+      },
+      i = (V) => {
+        for (; e[V] !== V;) ((e[V] = e[e[V]]), (V = e[V]));
+        return V;
+      },
+      a = (V, $) => {
+        ((V = i(V)), ($ = i($)), V !== $ && (e[V] = $));
+      },
+      f = new Map();
+    for (const V of T.comps)
+      ((V._p = le(V).map(([$, Z]) => n($, Z))),
+        V._p.forEach(($) => f.set($, (f.get($) || 0) + 1)));
+    for (const V of T.wires)
+      ((V._a = n(V.x1, V.y1)),
+        (V._b = n(V.x2, V.y2)),
+        a(V._a, V._b),
+        f.set(V._a, (f.get(V._a) || 0) + 1),
+        f.set(V._b, (f.get(V._b) || 0) + 1));
+    let d = -1;
+    const p = T.comps.filter((V) => V.type === "ground");
+    if (p.length) {
+      d = i(p[0]._p[0]);
+      for (const V of p) a(V._p[0], d);
+      d = i(d);
+    } else {
+      const V = T.comps.find(
+        ($) => $.type === "battery" || $.type === "ac" || $.type === "isrc",
+      );
+      V && (d = i(V._p[0]));
+    }
+    const y = new Map();
+    let b = 0;
+    const j = (V) => {
+        const $ = i(V);
+        if ($ === d) return -1;
+        let Z = y.get($);
+        return (Z === void 0 && ((Z = b++), y.set($, Z)), Z);
+      },
+      A = new Map();
+    for (const V of T.comps)
+      V.n &&
+        V.n.forEach(($, Z) => {
+          V._p && $ >= 0 && A.set(i(V._p[Z]), V.v[Z] || 0);
+        });
+    for (const V of T.comps) V.n = V._p.map(j);
+    ((G.nodeOfPt = s.map((V, $) => j($))),
+      (G.points = s),
+      (G.deg = f),
+      (G.ptIndex = t),
+      (vt.n = b),
+      (vt.A = new Float64Array(b * b)),
+      (vt.b = new Float64Array(b)),
+      (vt.x = new Float64Array(b)));
+    for (const [V, $] of y) vt.x[$] = A.get(V) || 0;
+    G.hasNL = T.comps.some((V) => q[V.type].nl);
+    const O = T.comps.filter((V) => V.type === "ac");
+    vt.acTau = O.length ? 3 / Math.min(...O.map((V) => V.p.f)) : 0.2;
+    const U = s.map((V, $) => $),
+      _ = (V) => {
+        for (; U[V] !== V;) ((U[V] = U[U[V]]), (V = U[V]));
+        return V;
+      };
+    for (const V of T.wires) {
+      const $ = _(V._a),
+        Z = _(V._b);
+      $ !== Z && (U[$] = Z);
+    }
+    const g = new Map();
+    for (const V of T.wires) {
+      const $ = _(V._a);
+      g.has($) ||
+        g.set($, {
+          pts: new Map(),
+          wires: [],
+        });
+      const Z = g.get($);
+      Z.wires.push(V);
+      for (const pt of [V._a, V._b]) Z.pts.has(pt) || Z.pts.set(pt, Z.pts.size);
+    }
+    const Y = new Map();
+    for (const V of T.comps)
+      V._p.forEach(($, Z) => {
+        (Y.has($) || Y.set($, []), Y.get($).push([V, Z]));
+      });
+    ((G.groups = [...g.values()].map((V) => {
+      const $ = [...V.pts.keys()];
+      let Z = 0;
+      return (
+        $.forEach((pt, Tt) => {
+          (Y.get(pt) || []).forEach(([Dt]) => {
+            Dt.type === "ground" && (Z = Tt);
+          });
+        }),
+        {
+          list: $,
+          idx: V.pts,
+          wires: V.wires,
+          ref: Z,
+          terms: $.map((pt) => Y.get(pt) || []),
+        }
+      );
+    })),
+      (G.termPts = new Set()));
+    for (const V of T.comps) V._p.forEach(($) => G.termPts.add($));
+    sn();
+  }
+  function Is(t, e, s) {
+    for (let i = 0; i < s; i++) {
+      let a = i,
+        f = Math.abs(t[i * s + i]);
+      for (let p = i + 1; p < s; p++) {
+        const y = Math.abs(t[p * s + i]);
+        y > f && ((f = y), (a = p));
+      }
+      if (f < 1e-300) continue;
+      if (a !== i) {
+        for (let y = i; y < s; y++) {
+          const b = t[i * s + y];
+          ((t[i * s + y] = t[a * s + y]), (t[a * s + y] = b));
+        }
+        const p = e[i];
+        ((e[i] = e[a]), (e[a] = p));
+      }
+      const d = t[i * s + i];
+      for (let p = i + 1; p < s; p++) {
+        const y = t[p * s + i] / d;
+        if (y !== 0) {
+          for (let b = i; b < s; b++) t[p * s + b] -= y * t[i * s + b];
+          e[p] -= y * e[i];
+        }
+      }
+    }
+    const n = new Float64Array(s);
+    for (let i = s - 1; i >= 0; i--) {
+      let a = e[i];
+      for (let d = i + 1; d < s; d++) a -= t[i * s + d] * n[d];
+      const f = t[i * s + i];
+      n[i] = Math.abs(f) < 1e-300 ? 0 : a / f;
+    }
+    return n;
+  }
+  function Es(t) {
+    G.dirty && V0();
+    const e = vt.n;
+    if (((vt.dt = t), (vt.t = G.t + t), e > 0)) {
+      let s = vt.x;
+      const n = G.hasNL ? 80 : 1;
+      for (let a = 0; a < n; a++) {
+        (vt.A.fill(0), vt.b.fill(0), (vt.limited = !1), (vt.x = s));
+        for (let p = 0; p < e; p++) vt.A[p * e + p] = k0;
+        for (const p of T.comps) q[p.type].stamp(p, vt);
+        const f = Is(vt.A, vt.b, e);
+        let d = !vt.limited;
+        if (d) {
+          for (let p = 0; p < e; p++)
+            if (Math.abs(f[p] - s[p]) > 1e-7 + 1e-6 * Math.abs(f[p])) {
+              d = !1;
+              break;
+            }
+        }
+        if (((s = f), d)) break;
+      }
+      let i = !1;
+      for (let a = 0; a < e; a++)
+        if (!isFinite(s[a])) {
+          i = !0;
+          break;
+        }
+      if (i) {
+        ((s = new Float64Array(e)),
+          performance.now() - G.diverged > 3e3 &&
+            (Pt(translate("数值发散，已重置节点电压"), "warn"),
+            (G.diverged = performance.now())));
+        for (const a of T.comps) a.s = {};
+      }
+      vt.x = s;
+    }
+    G.t = vt.t;
+    for (const s of T.comps) {
+      for (let i = 0; i < s.n.length; i++) s.v[i] = vt.V(s, i);
+      s.n.length === 2 &&
+        s._g !== void 0 &&
+        ((s.i = s._g * (s.v[0] - s.v[1]) + s._ieq),
+        (s.iT[0] = s.i),
+        (s.iT[1] = -s.i));
+      const n = q[s.type];
+      n.post && n.post(s, vt, t);
+    }
+    no();
+  }
+  function Ns() {
+    for (const t of G.groups) {
+      const e = t.list.length;
+      if (e === 2 && t.wires.length === 1) {
+        const p = t.wires[0];
+        let y = 0;
+        for (const [b, j] of t.terms[t.idx.get(p._b)]) y += b.iT[j] || 0;
+        p.i = y;
+        continue;
+      }
+      const s = t.ref,
+        n = e - 1;
+      if (n <= 0) continue;
+      const i = new Float64Array(n * n),
+        a = new Float64Array(n),
+        f = (p) => (p < s ? p : p === s ? -1 : p - 1);
+      for (const p of t.wires) {
+        const y = f(t.idx.get(p._a)),
+          b = f(t.idx.get(p._b));
+        (y >= 0 && (i[y * n + y] += 1),
+          b >= 0 && (i[b * n + b] += 1),
+          y >= 0 && b >= 0 && ((i[y * n + b] -= 1), (i[b * n + y] -= 1)));
+      }
+      for (let p = 0; p < e; p++) {
+        const y = f(p);
+        if (y < 0) continue;
+        let b = 0;
+        for (const [j, A] of t.terms[p]) b += j.iT[A] || 0;
+        a[y] = -b;
+      }
+      const d = Is(i, a, n);
+      for (const p of t.wires) {
+        const y = f(t.idx.get(p._a)),
+          b = f(t.idx.get(p._b));
+        p.i = (y >= 0 ? d[y] : 0) - (b >= 0 ? d[b] : 0);
+      }
+    }
+  }
+  function W0(t) {
+    const e = G.nodeOfPt[t._a];
+    return e === void 0 || e < 0 ? 0 : vt.x[e] || 0;
+  }
+  function ve(t, e, s) {
+    ((t.burnt = !0), (t.heat = 0));
+    const [n, i] = [t.x, t.y];
+    (r0(n, i, "spark", s ? 60 : 30, t.bx, t.by),
+      r0(n, i, "smoke", s ? 26 : 14, t.bx, t.by),
+      r0(n, i, "flash", 1, t.bx, t.by),
+      pe(s ? "bang" : "pop"),
+      Pt(`${t.name}：${e}`, "warn"));
+  }
+  function gn() {
+    for (const t of T.comps)
+      ((t.burnt = !1), (t.heat = 0), t.type === "bulb" && (t.s.T = Wt));
+    Pt(translate("所有元件已修复"), "ok");
+  }
+  function zs() {
+    G.t = 0;
+    for (const t of T.comps)
+      ((t.s = {}), (t.heat = 0), (t.i = 0), t.v.fill(0), t.iT.fill(0));
+    ((G.dirty = !0), (X.data = []));
+  }
+  function Gn(t, e, s) {
+    if ((t.x2 - t.x1) * (s - t.y1) - (t.y2 - t.y1) * (e - t.x1) !== 0)
+      return !1;
+    const i = (e - t.x1) * (t.x2 - t.x1) + (s - t.y1) * (t.y2 - t.y1),
+      a = (t.x2 - t.x1) ** 2 + (t.y2 - t.y1) ** 2;
+    return i > 0 && i < a;
+  }
+  function re() {
+    let t = T.wires.filter((f) => !(f.x1 === f.x2 && f.y1 === f.y2));
+    const e = new Map(),
+      s = (f, d) => e.set(T0(f, d), [f, d]);
+    for (const f of t) (s(f.x1, f.y1), s(f.x2, f.y2));
+    for (const f of T.comps) for (const [d, p] of le(f)) s(d, p);
+    const n = [],
+      i = t.slice();
+    for (; i.length;) {
+      const f = i.pop();
+      let d = null;
+      if (!f.direct) {
+        for (const [p, y] of e.values())
+          if (Gn(f, p, y)) {
+            d = [p, y];
+            break;
+          }
+      }
+      d
+        ? i.push(
+            {
+              ...f,
+              x2: d[0],
+              y2: d[1],
+            },
+            {
+              ...f,
+              x1: d[0],
+              y1: d[1],
+            },
+          )
+        : n.push(f);
+    }
+    const a = new Set();
+    ((T.wires = n.filter((f) => {
+      const d = T0(f.x1, f.y1),
+        p = T0(f.x2, f.y2),
+        y = d < p ? d + "|" + p : p + "|" + d;
+      return a.has(y) ? !1 : (a.add(y), !0);
+    })),
+      T.wires.forEach((f) => {
+        (f.id || (f.id = T.nextId++), (f.i = f.i || 0), (f.fl = f.fl || 0));
+      }),
+      (G.dirty = !0));
+  }
+  function A0(t, e, s, n, i, a) {
+    (t === s && e === n) ||
+      T.wires.push({
+        id: T.nextId++,
+        x1: t,
+        y1: e,
+        x2: s,
+        y2: n,
+        color: i || null,
+        direct: !!a,
+        i: 0,
+        fl: 0,
+      });
+  }
+  function Xe() {
+    return {
+      v: 1,
+      speed: G.speed,
+      comps: T.comps.map((t) => ({
+        t: t.type,
+        x: t.x,
+        y: t.y,
+        r: t.rot,
+        p: t.p,
+        n: t.name,
+        b: t.bx !== void 0 ? [t.bx, t.by, t.brot || 0] : void 0,
+      })),
+      wires: T.wires.map((t) => [
+        t.x1,
+        t.y1,
+        t.x2,
+        t.y2,
+        t.color || 0,
+        t.direct ? 1 : 0,
+      ]),
+      scope: X.ch
+        .map((t) => [T.comps.findIndex((e) => e.id === t.id), t.kind])
+        .filter((t) => t[0] >= 0),
+    };
+  }
+  function l0(t, e) {
+    ((T.comps = []), (T.wires = []), (T.sel = null), (T.hover = null));
+    for (const s of t.comps || []) {
+      if (!q[s.t]) continue;
+      const n = a0(s.t, s.x, s.y, s.r || 0, s.p || {});
+      (s.n && (n.name = s.n),
+        s.b && ((n.bx = s.b[0]), (n.by = s.b[1]), (n.brot = s.b[2])),
+        T.comps.push(n));
+    }
+    for (const s of t.wires || [])
+      A0(s[0], s[1], s[2], s[3], s[4] || null, !!s[5]);
+    (t.speed && rn(t.speed),
+      (X.ch = (t.scope || [])
+        .map(([s, n], i) =>
+          T.comps[s]
+            ? {
+                id: T.comps[s].id,
+                kind: n,
+                color: Oe[i % 4],
+              }
+            : null,
+        )
+        .filter(Boolean)),
+      (X.data = []),
+      (G.t = 0),
+      re(),
+      V0(),
+      e || d0(),
+      je(),
+      he());
+  }
+  const te = E("#cv"),
+    $s = te.getContext("2d"),
+    it = {
+      cx: 0,
+      cy: 0,
+      z: 1,
+    };
+  let Nt = 0,
+    Jt = 0,
+    ee = 1;
+  const se = {
+    flow: !0,
+    elec: !1,
+    volt: !1,
+    labels: !0,
+  };
+  let Gt = [],
+    ts = null;
+  function Ye() {
+    const t = te.getBoundingClientRect();
+    ((ee = Math.min(window.devicePixelRatio || 1, 2.5)),
+      (Nt = t.width),
+      (Jt = t.height),
+      (te.width = Math.round(Nt * ee)),
+      (te.height = Math.round(Jt * ee)),
+      so());
+  }
+  function ze(t, e) {
+    return [(t - Nt / 2) / it.z + it.cx, (e - Jt / 2) / it.z + it.cy];
+  }
+  const ce = (t) => Math.round(t / Bt) * Bt;
+  function Fn() {
+    const t = document.createElement("canvas");
+    t.width = t.height = 160;
+    const e = t.getContext("2d"),
+      s = e.createImageData(160, 160);
+    for (let n = 0; n < s.data.length; n += 4) {
+      const i = Math.random() * 255;
+      ((s.data[n] = s.data[n + 1] = s.data[n + 2] = i), (s.data[n + 3] = 9));
+    }
+    (e.putImageData(s, 0, 0), (ts = $s.createPattern(t, "repeat")));
+  }
+  function es(t) {
+    const e = Math.abs(t);
+    return e < 1e-7
+      ? 0
+      : Math.sign(t) * Math.min(170, 30 * Math.log10(1 + e / 1e-4));
+  }
+  function Hn(t) {
+    const e = Q(t / (G.vmax || 1), -1, 1);
+    return e >= 0
+      ? `rgb(${Ct(120, 40, e) | 0},${Ct(130, 245, e) | 0},${Ct(145, 110, e) | 0})`
+      : `rgb(${Ct(120, 255, -e) | 0},${Ct(130, 70, -e) | 0},${Ct(145, 70, -e) | 0})`;
+  }
+  function Ds(t) {
+    if (se.volt) return Hn(W0(t));
+    if (t.color) return t.color;
+    const e = G.nodeOfPt[t._a];
+    return e === void 0 ? "#8c96a3" : e < 0 ? "#5d6979" : Ie[e % Ie.length];
+  }
+  function Os(t, e, s, n, i = 2.3) {
+    if (!se.flow || Math.abs(n) < 1e-7) return;
+    const a = 16;
+    let f = 0;
+    t.fillStyle = se.elec ? "#7fdcff" : "#ffe066";
+    let p = ((((se.elec ? -1 : 1) * s) % a) + a) % a;
+    for (let y = 0; y < e.length - 1; y++) {
+      const [b, j] = e[y],
+        [A, O] = e[y + 1],
+        U = Math.hypot(A - b, O - j);
+      if (U < 0.01) continue;
+      let _ = p - f;
+      for (; _ < 0;) _ += a;
+      for (; _ < U; _ += a) {
+        const g = _ / U;
+        (t.beginPath(),
+          t.arc(b + (A - b) * g, j + (O - j) * g, i, 0, 6.2832),
+          t.fill());
+      }
+      f += U;
+    }
+  }
+  function Bs(t) {
+    const e = q[t.type];
+    return (
+      e.paths
+        ? e.paths(t)
+        : e.terms.length === 2
+          ? [[[e.terms[0], e.terms[1]], t.i]]
+          : []
+    ).map(([n, i]) => [n.map(([a, f]) => de(t, a, f)), i]);
+  }
+  function qn(t) {
+    const e = $s;
+    e.setTransform(ee, 0, 0, ee, 0, 0);
+    const s = e.createRadialGradient(
+      Nt * 0.5,
+      Jt * 0.45,
+      50,
+      Nt * 0.5,
+      Jt * 0.5,
+      Math.max(Nt, Jt) * 0.75,
+    );
+    (s.addColorStop(0, "#111a24"),
+      s.addColorStop(1, "#070a0e"),
+      (e.fillStyle = s),
+      e.fillRect(0, 0, Nt, Jt),
+      ts && ((e.fillStyle = ts), e.fillRect(0, 0, Nt, Jt)),
+      e.setTransform(
+        ee * it.z,
+        0,
+        0,
+        ee * it.z,
+        ee * (Nt / 2 - it.cx * it.z),
+        ee * (Jt / 2 - it.cy * it.z),
+      ));
+    const [n, i] = ze(0, 0),
+      [a, f] = ze(Nt, Jt),
+      d = it.z * Bt < 9 ? Bt * 5 : Bt,
+      p = 1.1 / it.z;
+    e.fillStyle = "rgba(120,150,180,.16)";
+    for (let b = Math.floor(n / d) * d; b <= a; b += d)
+      for (let j = Math.floor(i / d) * d; j <= f; j += d)
+        e.fillRect(b - p, j - p, 2 * p, 2 * p);
+    ((e.strokeStyle = "rgba(120,150,180,.06)"),
+      (e.lineWidth = 1 / it.z),
+      e.beginPath());
+    const y = Bt * 10;
+    for (let b = Math.floor(n / y) * y; b <= a; b += y)
+      (e.moveTo(b, i), e.lineTo(b, f));
+    for (let b = Math.floor(i / y) * y; b <= f; b += y)
+      (e.moveTo(n, b), e.lineTo(a, b));
+    (e.stroke(), (e.lineCap = "round"));
+    for (const b of T.wires)
+      ((e.strokeStyle = "rgba(0,0,0,.55)"),
+        (e.lineWidth = 8),
+        e.beginPath(),
+        e.moveTo(b.x1 + 1.5, b.y1 + 2.5),
+        e.lineTo(b.x2 + 1.5, b.y2 + 2.5),
+        e.stroke());
+    for (const b of T.wires) {
+      const j = Ds(b);
+      (T.sel === b &&
+        ((e.strokeStyle = "rgba(255,178,62,.55)"),
+        (e.lineWidth = 11),
+        e.beginPath(),
+        e.moveTo(b.x1, b.y1),
+        e.lineTo(b.x2, b.y2),
+        e.stroke()),
+        (e.strokeStyle = "#05070a"),
+        (e.lineWidth = 6.5),
+        e.beginPath(),
+        e.moveTo(b.x1, b.y1),
+        e.lineTo(b.x2, b.y2),
+        e.stroke(),
+        (e.strokeStyle = j),
+        (e.lineWidth = 4.6),
+        e.beginPath(),
+        e.moveTo(b.x1, b.y1),
+        e.lineTo(b.x2, b.y2),
+        e.stroke());
+      const O = Math.hypot(b.x2 - b.x1, b.y2 - b.y1) || 1,
+        U = -(b.y2 - b.y1) / O,
+        _ = (b.x2 - b.x1) / O;
+      ((e.strokeStyle = "rgba(255,255,255,.28)"),
+        (e.lineWidth = 1.2),
+        e.beginPath(),
+        e.moveTo(b.x1 - U * 1.1, b.y1 - _ * 1.1),
+        e.lineTo(b.x2 - U * 1.1, b.y2 - _ * 1.1),
+        e.stroke());
+    }
+    for (const b of T.wires)
+      Os(
+        e,
+        [
+          [b.x1, b.y1],
+          [b.x2, b.y2],
+        ],
+        b.fl,
+        b.i,
+      );
+    for (const [b, j] of G.deg) {
+      if (j < 3) continue;
+      const [A, O] = G.points[b] || [];
+      if (A === void 0 || (G.termPts && G.termPts.has(b))) continue;
+      ((e.fillStyle = "#05070a"), J(e, A, O, 5.2), e.fill());
+      const U = T.wires.find((_) => _._a === b || _._b === b);
+      ((e.fillStyle = U ? Ds(U) : "#aaa"), J(e, A, O, 3.8), e.fill());
+    }
+    for (const b of T.comps) {
+      const j = q[b.type];
+      for (const [A, [O, U]] of Bs(b).entries()) Os(e, O, b.flow[A] || 0, U, 2);
+      (e.save(),
+        e.translate(b.x, b.y),
+        e.rotate((b.rot * Math.PI) / 2),
+        (e.shadowColor = "rgba(0,0,0,.6)"),
+        (e.shadowBlur = 10 * it.z),
+        (e.shadowOffsetY = 3 * it.z));
+      try {
+        j.draw(e, b);
+      } catch (A) {
+        console.error(A);
+      }
+      if ((e.restore(), T.sel === b || T.hover === b)) {
+        (e.save(), e.translate(b.x, b.y), e.rotate((b.rot * Math.PI) / 2));
+        const [A, O, U, _] = j.box;
+        ((e.strokeStyle = T.sel === b ? "#ffb23e" : "rgba(255,178,62,.45)"),
+          (e.lineWidth = (1.3 / it.z) * 1.2),
+          e.setLineDash([5, 4]),
+          st(e, A - 6, O - 6, U - A + 12, _ - O + 12, 6),
+          e.stroke(),
+          e.setLineDash([]),
+          e.restore());
+      }
+    }
+    for (const b of T.comps)
+      le(b).forEach(([j, A], O) => {
+        const U = b._p ? b._p[O] : -1,
+          _ = (G.deg.get(U) || 0) > 1,
+          g = e.createRadialGradient(j - 1.5, A - 1.5, 0.5, j, A, 5.5);
+        (g.addColorStop(0, "#fff0c0"),
+          g.addColorStop(0.45, "#d7a84a"),
+          g.addColorStop(1, "#6d4a14"),
+          (e.fillStyle = g),
+          J(e, j, A, _ ? 4.6 : 5.2),
+          e.fill(),
+          _ ||
+            ((e.strokeStyle = "rgba(255,178,62,.35)"),
+            (e.lineWidth = 1),
+            J(e, j, A, 7.5),
+            e.stroke()),
+          (e.fillStyle = "#4a3208"),
+          J(e, j, A, 1.4),
+          e.fill());
+      });
+    if (
+      (Re &&
+        ((e.strokeStyle = "#3cf2a3"),
+        (e.lineWidth = 2 / it.z),
+        (e.shadowColor = "#3cf2a3"),
+        (e.shadowBlur = 10),
+        J(e, Re[0], Re[1], 9),
+        e.stroke(),
+        (e.shadowBlur = 0)),
+      se.labels)
+    )
+      for (const b of T.comps) Xn(e, b);
+    if (
+      (jt &&
+        (e.save(),
+        (e.globalAlpha = 0.55),
+        e.translate(jt.x, jt.y),
+        e.rotate((jt.rot * Math.PI) / 2),
+        q[jt.type].draw(e, jt),
+        e.restore()),
+      H && H.mode === "wire" && H.route)
+    ) {
+      ((e.strokeStyle = "rgba(255,178,62,.9)"),
+        (e.lineWidth = 4),
+        e.setLineDash([8, 6]),
+        e.beginPath(),
+        H.route.forEach(([j, A], O) => (O ? e.lineTo(j, A) : e.moveTo(j, A))),
+        e.stroke(),
+        e.setLineDash([]));
+      const b = H.route[H.route.length - 1];
+      ((e.fillStyle = "#ffb23e"), J(e, b[0], b[1], 4), e.fill());
+    }
+    e.globalCompositeOperation = "lighter";
+    for (const b of T.comps) {
+      const j = q[b.type];
+      if (
+        (j.glow && j.glow(e, b, [b.x, b.y]), b.type === "switch" && b.s.arc)
+      ) {
+        const [A, O] = de(b, 24, 0),
+          U = 16 + Math.random() * 18,
+          _ = e.createRadialGradient(A, O, 1, A, O, U);
+        (_.addColorStop(0, "rgba(230,240,255,.95)"),
+          _.addColorStop(0.3, "rgba(120,170,255,.55)"),
+          _.addColorStop(1, "rgba(80,120,255,0)"),
+          (e.fillStyle = _),
+          J(e, A, O, U),
+          e.fill());
+      }
+      if (
+        b.heat > 1.1 &&
+        !b.burnt &&
+        (b.type === "resistor" ||
+          b.type === "pot" ||
+          b.type === "battery" ||
+          b.type === "zener")
+      ) {
+        const A = Q((b.heat - 1.1) / 3, 0, 1),
+          O = e.createRadialGradient(b.x, b.y, 2, b.x, b.y, 40 + 30 * A);
+        (O.addColorStop(0, `rgba(255,90,30,${0.35 * A + 0.1})`),
+          O.addColorStop(1, "rgba(255,60,20,0)"),
+          (e.fillStyle = O),
+          J(e, b.x, b.y, 70),
+          e.fill());
+      }
+    }
+    for (const b of Gt) {
+      const j = b.life / b.max;
+      if (b.type === "spark")
+        ((e.strokeStyle = `rgba(255,${(200 + 55 * j) | 0},${(90 + 120 * j) | 0},${j})`),
+          (e.lineWidth = 1.6),
+          e.beginPath(),
+          e.moveTo(b.x, b.y),
+          e.lineTo(b.x - b.vx * 0.03, b.y - b.vy * 0.03),
+          e.stroke());
+      else if (b.type === "flash") {
+        const A = 90 * (1 - j) + 20,
+          O = e.createRadialGradient(b.x, b.y, 1, b.x, b.y, A);
+        (O.addColorStop(0, `rgba(255,250,230,${j})`),
+          O.addColorStop(1, "rgba(255,200,120,0)"),
+          (e.fillStyle = O),
+          J(e, b.x, b.y, A),
+          e.fill());
+      }
+    }
+    e.globalCompositeOperation = "source-over";
+    for (const b of Gt)
+      if (b.type === "smoke") {
+        const j = b.life / b.max;
+        ((e.fillStyle = `rgba(110,110,115,${0.28 * j})`),
+          J(e, b.x, b.y, b.r * (1.8 - j)),
+          e.fill());
+      }
+  }
+  function Xn(t, e) {
+    const s = q[e.type];
+    if (s.noLabel) return;
+    const [n, i] = ke(s.labelOff[0], s.labelOff[1], e.rot),
+      a = e.x + n,
+      f = e.y + i;
+    let d = "center";
+    if (
+      (Math.abs(n) > Math.abs(i) + 1 && (d = n > 0 ? "left" : "right"), s.meter)
+    ) {
+      const O = s.meter === "V" ? "V" : "A",
+        U = e.s.read || 0,
+        _ = Se(e),
+        g =
+          (Math.abs(U) > _ * 1.05 ? "⚠ " : "") +
+          ae(U, O, 4) +
+          (e.p.mode === "ac" ? "~" : "");
+      t.font = "600 11px JetBrains Mono, monospace";
+      const Y = t.measureText(g).width + 14,
+        V = 18;
+      let $ = d === "center" ? a - Y / 2 : d === "left" ? a - 4 : a - Y + 4;
+      const Z = f - V / 2;
+      ((t.fillStyle = "rgba(4,12,9,.92)"),
+        st(t, $, Z, Y, V, 4),
+        t.fill(),
+        (t.strokeStyle = "rgba(60,242,163,.35)"),
+        (t.lineWidth = 1),
+        st(t, $, Z, Y, V, 4),
+        t.stroke(),
+        (t.fillStyle = Math.abs(U) > _ * 1.05 ? "#ff6b5f" : "#3cf2a3"),
+        (t.textAlign = "left"),
+        (t.textBaseline = "middle"),
+        (t.shadowColor = t.fillStyle),
+        (t.shadowBlur = 6),
+        t.fillText(g, $ + 7, f + 0.5),
+        (t.shadowBlur = 0),
+        (t.font = "600 10px Chakra Petch, sans-serif"),
+        (t.fillStyle = "#7a889a"),
+        (t.textAlign = "left"),
+        t.fillText(e.name, $, Z - 7));
+      return;
+    }
+    const p = s.label ? s.label(e) : "";
+    ((t.textBaseline = "middle"),
+      (t.font = "600 11px Chakra Petch, PingFang SC, sans-serif"));
+    const y = t.measureText(e.name + " ").width;
+    t.font = "500 11px JetBrains Mono, monospace";
+    const b = t.measureText(p).width,
+      j = y + b;
+    let A = d === "center" ? a - j / 2 : d === "left" ? a : a - j;
+    ((t.fillStyle = "rgba(6,9,13,.55)"),
+      st(t, A - 4, f - 8, j + 8, 16, 4),
+      t.fill(),
+      (t.textAlign = "left"),
+      (t.font = "600 11px Chakra Petch, PingFang SC, sans-serif"),
+      (t.fillStyle = e.burnt ? "#ff6b5f" : "#aab6c4"),
+      t.fillText(e.name + " ", A, f),
+      (t.font = "500 11px JetBrains Mono, monospace"),
+      (t.fillStyle = "#ffc261"),
+      t.fillText(p, A + y, f));
+  }
+  const Kt = () => !!(window.V3D && V3D.on);
+  function r0(t, e, s, n, i, a) {
+    const f = Gt.length;
+    for (let d = 0; d < n; d++)
+      if (s === "spark") {
+        const p = Math.random() * Math.PI * 2,
+          y = 80 + Math.random() * 260;
+        Gt.push({
+          type: s,
+          x: t,
+          y: e,
+          vx: Math.cos(p) * y,
+          vy: Math.sin(p) * y - 60,
+          life: 0.4 + Math.random() * 0.5,
+          max: 0.9,
+        });
+      } else
+        s === "smoke"
+          ? Gt.push({
+              type: s,
+              x: t + (Math.random() - 0.5) * 20,
+              y: e + (Math.random() - 0.5) * 10,
+              vx: (Math.random() - 0.5) * 14,
+              vy: -18 - Math.random() * 26,
+              r: 6 + Math.random() * 8,
+              life: 1.5 + Math.random() * 1.8,
+              max: 3.3,
+            })
+          : Gt.push({
+              type: s,
+              x: t,
+              y: e,
+              vx: 0,
+              vy: 0,
+              life: 0.35,
+              max: 0.35,
+            });
+    for (let d = f; d < Gt.length; d++) {
+      const p = Gt[d];
+      ((p.x0 = p.x),
+        (p.y0 = p.y),
+        (p.bx0 = (i ?? t) + (p.x - t)),
+        (p.by0 = (a ?? e) + (p.y - e)),
+        (p.h = s === "smoke" ? 25 : 30),
+        (p.vh =
+          s === "spark"
+            ? 150 + Math.random() * 300
+            : s === "smoke"
+              ? 25 + Math.random() * 25
+              : 0));
+    }
+    Gt.length > 900 && Gt.splice(0, Gt.length - 900);
+  }
+  let I0 = 0;
+  function Yn(t) {
+    for (const n of T.wires) n.fl += es(n.i) * t;
+    let e = 0.5;
+    for (let n = 0; n < vt.n; n++) e = Math.max(e, Math.abs(vt.x[n]));
+    ((G.vmax = Ct(G.vmax, e, 0.1)), (I0 = 0));
+    for (const n of T.comps) {
+      const i = q[n.type];
+      if (
+        (Bs(n).forEach(
+          ([a, f], d) => (n.flow[d] = (n.flow[d] || 0) + es(f) * t),
+        ),
+        i.meter)
+      ) {
+        const a = Se(n),
+          f = n.s.read || 0,
+          d = -Math.PI * 0.78,
+          p = -Math.PI * 0.22;
+        let y = i.center ? 0.5 + (0.5 * f) / a : f / a;
+        const b = y > 1.04 || y < -0.04;
+        y = Q(y, -0.04, 1.04);
+        let j = Ct(d, p, y);
+        (b && (j += (Math.random() - 0.5) * 0.05),
+          n.s.needle === void 0 &&
+            ((n.s.needle = Ct(d, p, i.center ? 0.5 : 0)), (n.s.nv = 0)),
+          (n.s.nv += (170 * (j - n.s.needle) - 16 * n.s.nv) * t),
+          (n.s.needle += n.s.nv * t));
+      }
+      if (n.type === "switch") {
+        const a = n.p.closed ? 0 : -0.62;
+        ((n.s.ang =
+          n.s.ang === void 0 ? a : Ct(n.s.ang, a, 1 - Math.exp(-t * 22))),
+          n.s.arc &&
+            Math.random() < 0.6 &&
+            r0(...de(n, 24, 0), "spark", 2, (n.bx ?? n.x) + 30, n.by ?? n.y));
+      }
+      if (n.type === "spdt") {
+        const a = n.p.pos === "0" ? Math.atan2(-20, 50) : Math.atan2(20, 50);
+        n.s.ang =
+          n.s.ang === void 0 ? a : Ct(n.s.ang, a, 1 - Math.exp(-t * 22));
+      }
+      (n.type === "motor" && (n.s.vang = n.s.ang || 0),
+        n.type === "buzzer" && (I0 = Math.max(I0, n.s.lvl || 0)),
+        n.heat > 1.6 &&
+          !n.burnt &&
+          Math.random() < 0.08 * Math.min(3, n.heat) &&
+          r0(n.x, n.y - 6, "smoke", 1, n.bx, n.by));
+    }
+    const s = Kt();
+    for (const n of Gt)
+      ((n.life -= t),
+        (n.x += n.vx * t),
+        (n.y += n.vy * t),
+        (n.h += (n.vh || 0) * t),
+        n.type === "spark" &&
+          (s
+            ? ((n.vh -= 900 * t),
+              n.h < 0 &&
+                ((n.h = 0), (n.vh *= -0.35), (n.vx *= 0.5), (n.vy *= 0.5)))
+            : (n.vy += 500 * t)),
+        n.type === "smoke" && ((n.vx *= 0.98), s && (n.vy *= 0.9)));
+    ((Gt = Gt.filter((n) => n.life > 0)), Jn(G.running ? I0 : 0));
+  }
+  let Ft = null,
+    ss = null,
+    Je = null,
+    $e = null;
+  function E0() {
+    if (!Ft)
+      try {
+        Ft = new (window.AudioContext || window.webkitAudioContext)();
+        const t = Ft.sampleRate;
+        ss = Ft.createBuffer(1, t, t);
+        const e = ss.getChannelData(0);
+        for (let s = 0; s < t; s++) e[s] = Math.random() * 2 - 1;
+      } catch {
+        Ft = null;
+      }
+    return (Ft && Ft.state === "suspended" && Ft.resume(), Ft);
+  }
+  const Us = () => E("#tgSound").checked;
+  function pe(t) {
+    if (!Us()) return;
+    const e = E0();
+    if (!e) return;
+    const s = e.currentTime;
+    if (t === "click") {
+      const d = e.createOscillator(),
+        p = e.createGain();
+      ((d.type = "square"),
+        (d.frequency.value = 1800),
+        p.gain.setValueAtTime(0.06, s),
+        p.gain.exponentialRampToValueAtTime(1e-4, s + 0.03),
+        d.connect(p).connect(e.destination),
+        d.start(s),
+        d.stop(s + 0.04));
+      return;
+    }
+    const n = e.createBufferSource();
+    n.buffer = ss;
+    const i = e.createBiquadFilter(),
+      a = e.createGain(),
+      f = t === "bang" ? 0.5 : t === "pop" ? 0.18 : 0.08;
+    ((i.type = t === "bang" ? "lowpass" : "bandpass"),
+      (i.frequency.value = t === "bang" ? 900 : t === "pop" ? 2200 : 4e3),
+      a.gain.setValueAtTime(t === "bang" ? 0.7 : 0.35, s),
+      a.gain.exponentialRampToValueAtTime(1e-4, s + f),
+      n.connect(i).connect(a).connect(e.destination),
+      n.start(s),
+      n.stop(s + f + 0.02));
+  }
+  function Jn(t) {
+    if (!Us() || !Ft) {
+      $e && ($e.gain.value = 0);
+      return;
+    }
+    if (!Je && t > 0.05) {
+      ((Je = Ft.createOscillator()),
+        (Je.type = "square"),
+        ($e = Ft.createGain()),
+        ($e.gain.value = 0));
+      const e = Ft.createBiquadFilter();
+      ((e.type = "lowpass"),
+        (e.frequency.value = 5e3),
+        Je.connect(e).connect($e).connect(Ft.destination),
+        Je.start());
+    }
+    if ($e) {
+      const e = T.comps.find((s) => s.type === "buzzer");
+      (e && (Je.frequency.value = e.p.f),
+        $e.gain.setTargetAtTime(0.05 * Math.min(1, t), Ft.currentTime, 0.02));
+    }
+  }
+  function _s(t, e, s, n) {
+    const i = Math.min(window.devicePixelRatio || 1, 2);
+    ((t.width = s * i), (t.height = n * i));
+    const a = t.getContext("2d"),
+      f = q[e],
+      d = {
+        type: e,
+        x: 0,
+        y: 0,
+        rot: 0,
+        p: {
+          ...f.defaults,
+        },
+        s: {},
+        v: new Array(f.terms.length).fill(0),
+        iT: [],
+        i: 0,
+        heat: 0,
+        burnt: !1,
+        name: "",
+      },
+      p = f.terms.map((_) => _[0]).concat([f.box[0], f.box[2]]),
+      y = f.terms.map((_) => _[1]).concat([f.box[1], f.box[3]]),
+      b = Math.min(...p) - 6,
+      j = Math.max(...p) + 6,
+      A = Math.min(...y) - 6,
+      O = Math.max(...y) + 6,
+      U = Math.min(s / (j - b), n / (O - A));
+    (a.setTransform(
+      i * U,
+      0,
+      0,
+      i * U,
+      i * (s / 2 - ((b + j) / 2) * U),
+      i * (n / 2 - ((A + O) / 2) * U),
+    ),
+      f.draw(a, d),
+      f.terms.forEach(([_, g]) => {
+        ((a.fillStyle = "#d7a84a"), J(a, _, g, 4), a.fill());
+      }));
+  }
+  let H = null,
+    jt = null,
+    Re = null,
+    c0 = !1;
+  const Ke = [],
+    N0 = [];
+  let we = !1;
+  function yt() {
+    (Ke.push(JSON.stringify(Xe())),
+      Ke.length > 120 && Ke.shift(),
+      (N0.length = 0),
+      (we = !0));
+  }
+  function gs() {
+    if (!Ke.length) return Pt(translate("没有可撤销的操作"));
+    (N0.push(JSON.stringify(Xe())), l0(JSON.parse(Ke.pop()), !0), (we = !0));
+  }
+  function ns() {
+    N0.length &&
+      (Ke.push(JSON.stringify(Xe())), l0(JSON.parse(N0.pop()), !0), (we = !0));
+  }
+  function os() {
+    return E("#stage").getBoundingClientRect();
+  }
+  function is(t) {
+    const e = os();
+    return [t.clientX - e.left, t.clientY - e.top];
+  }
+  function f0(t, e) {
+    const s = 9 / Math.min(it.z, 1.2);
+    for (let a = T.comps.length - 1; a >= 0; a--) {
+      const f = T.comps[a];
+      if (f.type !== "pot") continue;
+      const [d, p] = Ve(f, t, e),
+        y = q.pot.sliderX(f);
+      if (Math.abs(d - y) < 11 && p > -38 && p < -16)
+        return {
+          kind: "slider",
+          c: f,
+        };
+    }
+    let n = null,
+      i = s;
+    for (const a of T.comps)
+      le(a).forEach((f, d) => {
+        const p = Math.hypot(f[0] - t, f[1] - e);
+        p < i &&
+          ((i = p),
+          (n = {
+            kind: "term",
+            c: a,
+            k: d,
+            pt: f,
+          }));
+      });
+    if (n) return n;
+    for (const a of T.wires)
+      for (const f of [
+        [a.x1, a.y1],
+        [a.x2, a.y2],
+      ]) {
+        const d = Math.hypot(f[0] - t, f[1] - e);
+        d < i &&
+          ((i = d),
+          (n = {
+            kind: "wend",
+            pt: f,
+          }));
+      }
+    if (n) return n;
+    for (let a = T.comps.length - 1; a >= 0; a--) {
+      const f = T.comps[a],
+        [d, p] = Ve(f, t, e),
+        [y, b, j, A] = q[f.type].box;
+      if (d >= y - 4 && d <= j + 4 && p >= b - 4 && p <= A + 4)
+        return {
+          kind: "comp",
+          c: f,
+        };
+    }
+    for (const a of T.wires)
+      if (Kn(t, e, a) < 7 / Math.min(it.z, 1.2))
+        return {
+          kind: "wire",
+          w: a,
+        };
+    return null;
+  }
+  function Kn(t, e, s) {
+    const n = s.x2 - s.x1,
+      i = s.y2 - s.y1,
+      a = n * n + i * i;
+    let f = a ? ((t - s.x1) * n + (e - s.y1) * i) / a : 0;
+    return (
+      (f = Q(f, 0, 1)),
+      Math.hypot(t - (s.x1 + f * n), e - (s.y1 + f * i))
+    );
+  }
+  function Gs(t, e) {
+    return t[0] === e[0] || t[1] === e[1]
+      ? [t, e]
+      : Math.abs(e[0] - t[0]) >= Math.abs(e[1] - t[1])
+        ? [t, [e[0], t[1]], e]
+        : [t, [t[0], e[1]], e];
+  }
+  function $t(t) {
+    ((T.sel = t),
+      he(),
+      t && window.innerWidth <= 980 && E("#inspector").classList.add("open"));
+  }
+  (te.addEventListener("contextmenu", (t) => t.preventDefault()),
+    te.addEventListener("pointerdown", (t) => {
+      if (Kt()) return;
+      E0();
+      const [e, s] = is(t),
+        [n, i] = ze(e, s);
+      if ((te.setPointerCapture(t.pointerId), t.button === 2)) {
+        const d = f0(n, i);
+        d && (d.kind === "comp" || d.kind === "term") && ($t(d.c), ls(d.c));
+        return;
+      }
+      if (t.button === 1) {
+        H = {
+          mode: "pan",
+          sx: e,
+          sy: s,
+          cx: it.cx,
+          cy: it.cy,
+          moved: !0,
+        };
+        return;
+      }
+      const a = f0(n, i);
+      H = {
+        sx: e,
+        sy: s,
+        wx: n,
+        wy: i,
+        moved: !1,
+        h: a,
+        mode: "none",
+      };
+      const f = [ce(n), ce(i)];
+      if (
+        c0 &&
+        (!a || a.kind === "wire" || a.kind === "wend" || a.kind === "term")
+      )
+        ((H.mode = "wire"), (H.start = a && a.pt ? a.pt : f));
+      else if (!a) ((H.mode = "pan"), (H.cx = it.cx), (H.cy = it.cy));
+      else if (a.kind === "slider") ((H.mode = "slider"), yt(), $t(a.c));
+      else if (a.kind === "term") ((H.mode = "wire"), (H.start = a.pt));
+      else if (a.kind === "wend") {
+        if (!t.shiftKey) ((H.mode = "wire"), (H.start = a.pt));
+        else {
+          ((H.mode = "wend"), (H.ends = []));
+          for (const d of T.wires)
+            (d.x1 === a.pt[0] && d.y1 === a.pt[1] && H.ends.push([d, 1]),
+              d.x2 === a.pt[0] && d.y2 === a.pt[1] && H.ends.push([d, 2]));
+        }
+      } else
+        a.kind === "comp"
+          ? ((H.mode = "move"),
+            (H.c = a.c),
+            (H.ox = a.c.x),
+            (H.oy = a.c.y),
+            a.c.type === "button" && ((a.c.s.pressed = !0), pe("click")))
+          : a.kind === "wire" &&
+            ((H.mode = "wmove"),
+            (H.w = a.w),
+            (H.o = [a.w.x1, a.w.y1, a.w.x2, a.w.y2]));
+    }),
+    te.addEventListener("pointermove", (t) => {
+      if (Kt()) return;
+      const [e, s] = is(t),
+        [n, i] = ze(e, s);
+      if (!H) {
+        Hs(n, i, e, s, f0(n, i));
+        return;
+      }
+      if (!H.moved && Math.hypot(e - H.sx, s - H.sy) > 4) {
+        if (((H.moved = !0), H.mode === "move")) {
+          yt();
+          const d = H.c;
+          ((H.att = []),
+            le(d).forEach(([p, y], b) => {
+              for (const j of T.wires)
+                (j.x1 === p && j.y1 === y && H.att.push([j, 1, b]),
+                  j.x2 === p && j.y2 === y && H.att.push([j, 2, b]));
+            }));
+        }
+        (H.mode === "wend" || H.mode === "wmove") && yt();
+      }
+      if (!H.moved) return;
+      const a = ce(n - H.wx),
+        f = ce(i - H.wy);
+      switch (H.mode) {
+        case "pan":
+          ((it.cx = H.cx - (e - H.sx) / it.z),
+            (it.cy = H.cy - (s - H.sy) / it.z));
+          break;
+        case "move": {
+          const d = H.c;
+          ((d.x = H.ox + a), (d.y = H.oy + f));
+          const p = le(d);
+          for (const [y, b, j] of H.att)
+            b === 1
+              ? ((y.x1 = p[j][0]), (y.y1 = p[j][1]))
+              : ((y.x2 = p[j][0]), (y.y2 = p[j][1]));
+          G.dirty = !0;
+          break;
+        }
+        case "wire": {
+          let d = [ce(n), ce(i)];
+          const p = f0(n, i);
+          (p && p.pt && (d = p.pt),
+            (H.route = Gs(H.start, d)),
+            (Re = p && p.pt ? p.pt : null));
+          break;
+        }
+        case "wend": {
+          const d = [ce(n), ce(i)];
+          for (const [p, y] of H.ends)
+            y === 1
+              ? ((p.x1 = d[0]), (p.y1 = d[1]))
+              : ((p.x2 = d[0]), (p.y2 = d[1]));
+          G.dirty = !0;
+          break;
+        }
+        case "wmove": {
+          const d = H.w;
+          ((d.x1 = H.o[0] + a),
+            (d.y1 = H.o[1] + f),
+            (d.x2 = H.o[2] + a),
+            (d.y2 = H.o[3] + f),
+            (G.dirty = !0));
+          break;
+        }
+        case "slider": {
+          const d = H.h.c,
+            [p] = Ve(d, n, i);
+          ((d.p.pos = Q(Math.round(((p + 44) / 88) * 200) / 200, 0, 1)), Ze());
+          break;
+        }
+      }
+    }));
+  function Fs(t) {
+    if (!H) return;
+    const e = H;
+    if (
+      ((H = null),
+      e.mode === "move" && e.c.type === "button" && (e.c.s.pressed = !1),
+      !e.moved)
+    ) {
+      const s = e.h;
+      if (!s) $t(null);
+      else if (s.kind === "comp" || s.kind === "slider") {
+        const n = q[s.c.type];
+        (n.clickable && s.c.type !== "button" && (yt(), n.click(s.c)), $t(s.c));
+      } else if (s.kind === "term") $t(s.c);
+      else if (s.kind === "wire") $t(s.w);
+      else if (s.kind === "wend") {
+        const n = T.wires.find(
+          (i) =>
+            (i.x1 === s.pt[0] && i.y1 === s.pt[1]) ||
+            (i.x2 === s.pt[0] && i.y2 === s.pt[1]),
+        );
+        $t(n || null);
+      }
+      return;
+    }
+    if (e.mode === "wire" && e.route) {
+      yt();
+      for (let s = 0; s < e.route.length - 1; s++)
+        A0(e.route[s][0], e.route[s][1], e.route[s + 1][0], e.route[s + 1][1]);
+      (re(), pe("click"), (Re = null));
+    }
+    ((e.mode === "move" || e.mode === "wend" || e.mode === "wmove") && re(),
+      e.mode === "slider" && (we = !0));
+  }
+  (te.addEventListener("pointerup", Fs),
+    te.addEventListener("pointercancel", Fs),
+    te.addEventListener("pointerleave", () => {
+      H || ((T.hover = null), (Re = null), (E("#tip").style.display = "none"));
+    }));
+  function Hs(t, e, s, n, i) {
+    ((T.hover = i && i.c ? i.c : null),
+      (Re = i && (i.kind === "term" || i.kind === "wend") ? i.pt : null),
+      ((Kt() ? E("#cv3") : te).style.cursor = Kt()
+        ? i
+          ? i.kind === "term"
+            ? "crosshair"
+            : i.kind === "slider"
+              ? "ew-resize"
+              : "pointer"
+          : "grab"
+        : i
+          ? i.kind === "term" || i.kind === "wend"
+            ? "crosshair"
+            : i.kind === "slider"
+              ? "ew-resize"
+              : q[i.c?.type]?.clickable
+                ? "pointer"
+                : "move"
+          : c0
+            ? "crosshair"
+            : "grab"));
+    const a = E("#tip");
+    if ((i && i.c && i.kind !== "term") || (i && i.kind === "term" && Kt())) {
+      const f = i.c,
+        d = q[f.type],
+        p = f.v.length > 1 ? f.v[0] - f.v[1] : f.v[0];
+      let y = `<b>${f.name}</b> <span style="color:#7a889a">${d.name}</span>${f.burnt ? translate(' <span class="badge bad">已损坏</span>') : ""}`;
+      const b = [
+        [translate("电压 U"), z(p, "V")],
+        [translate("电流 I"), z(f.i, "A")],
+        [translate("功率 P"), z(Math.abs(p * f.i), "W")],
+      ].concat((d.extra ? d.extra(f) : []).slice(0, 3));
+      ((y += b
+        .map(
+          ([j, A]) => `<div class="r"><span>${j}</span><span>${A}</span></div>`,
+        )
+        .join("")),
+        (a.innerHTML = y),
+        (a.style.display = "block"),
+        (a.style.left = Math.min(s + 16, Nt - 200) + "px"),
+        (a.style.top = Math.min(n + 14, Jt - 130) + "px"));
+    } else if (i && i.kind === "cable") {
+      const f = i.cable;
+      ((a.innerHTML = translate(
+        '<b>导线</b> <span style="color:#7a889a">{0} {1} ↔ {2} {3}</span><div class="r"><span>电流</span><span>{4}</span></div><div class="r"><span>电势</span><span>{5}</span></div>',
+        [
+          f.ta[0].name,
+          Qe(f.ta[0], f.ta[1]),
+          f.tb[0].name,
+          Qe(f.tb[0], f.tb[1]),
+          z(Math.abs(f.cur || 0), "A"),
+          z(f.ta[0].v[f.ta[1]], "V"),
+        ],
+      )),
+        (a.style.display = "block"),
+        (a.style.left = Math.min(s + 16, Nt - 220) + "px"),
+        (a.style.top = n + 14 + "px"));
+    } else
+      i && i.kind === "wire"
+        ? ((a.innerHTML = translate(
+            '<b>导线</b><div class="r"><span>电势</span><span>{0}</span></div><div class="r"><span>电流</span><span>{1}</span></div>',
+            [z(W0(i.w), "V"), z(Math.abs(i.w.i), "A")],
+          )),
+          (a.style.display = "block"),
+          (a.style.left = Math.min(s + 16, Nt - 200) + "px"),
+          (a.style.top = n + 14 + "px"))
+        : (a.style.display = "none");
+  }
+  te.addEventListener(
+    "wheel",
+    (t) => {
+      if (Kt()) return;
+      t.preventDefault();
+      const [e, s] = is(t),
+        [n, i] = ze(e, s),
+        a = t.ctrlKey || t.metaKey ? null : f0(n, i);
+      if (
+        a &&
+        a.c &&
+        (a.kind === "comp" || a.kind === "slider") &&
+        q[a.c.type].primary
+      ) {
+        as(a.c, t.deltaY < 0 ? 1 : -1, t.shiftKey);
+        return;
+      }
+      Xs(e, s, Math.exp(-Q(t.deltaY, -60, 60) * 0.004));
+    },
+    {
+      passive: !1,
+    },
+  );
+  let qs = 0;
+  function as(t, e, s) {
+    const n = q[t.type],
+      i = n.params.find((f) => f.k === n.primary);
+    if (!i) return;
+    if (
+      (performance.now() - qs > 800 && yt(),
+      (qs = performance.now()),
+      i.options)
+    ) {
+      const f = i.options.findIndex((d) => d[0] === String(t.p[i.k]));
+      ((t.p[i.k] = i.options[Q(f + e, 0, i.options.length - 1)][0]),
+        (G.dirty = !0),
+        T.sel !== t ? $t(t) : Ze());
+      return;
+    }
+    let a = t.p[i.k];
+    if (i.log) a = a * Math.pow(s ? 2 : 1.1, e);
+    else {
+      const f = i.k === "pos" ? 0.02 : (i.max - i.min) / (s ? 20 : 200);
+      a = Math.round((a + e * f) / f) * f;
+    }
+    ((t.p[i.k] = Q(+a.toPrecision(6), i.min, i.max)),
+      (G.dirty = !0),
+      T.sel !== t ? $t(t) : Ze());
+  }
+  function Xs(t, e, s) {
+    const [n, i] = ze(t, e);
+    ((it.z = Q(it.z * s, 0.25, 4)),
+      (it.cx = n - (t - Nt / 2) / it.z),
+      (it.cy = i - (e - Jt / 2) / it.z),
+      (E("#zoomLbl").textContent = Math.round(it.z * 100) + "%"));
+  }
+  function d0() {
+    if (Kt()) {
+      (V3D.fit(), Ys(!0));
+      return;
+    }
+    Ys();
+  }
+  function Ys(t) {
+    Nt || Ye();
+    let e = 1 / 0,
+      s = 1 / 0,
+      n = -1 / 0,
+      i = -1 / 0;
+    const a = (f, d) => {
+      ((e = Math.min(e, f)),
+        (s = Math.min(s, d)),
+        (n = Math.max(n, f)),
+        (i = Math.max(i, d)));
+    };
+    for (const f of T.comps) {
+      const [d, p, y, b] = q[f.type].box;
+      (a(...de(f, d, p)), a(...de(f, y, b)), le(f).forEach((j) => a(...j)));
+    }
+    for (const f of T.wires) (a(f.x1, f.y1), a(f.x2, f.y2));
+    if (!isFinite(e)) ((it.cx = 0), (it.cy = 0), (it.z = 1));
+    else {
+      const f = E("#guide"),
+        d =
+          !t &&
+          f.classList.contains("show") &&
+          !f.classList.contains("min") &&
+          Nt > 760
+            ? f.offsetWidth + 24
+            : 0;
+      ((it.z = Q(
+        Math.min(
+          (Nt - d) / (n - e + (t ? 60 : 160)),
+          Jt / (i - s + (t ? 60 : 170)),
+        ),
+        0.12,
+        1.7,
+      )),
+        (it.cx = (e + n) / 2 - d / 2 / it.z),
+        (it.cy = (s + i) / 2));
+    }
+    E("#zoomLbl").textContent = Math.round(it.z * 100) + "%";
+  }
+  function ls(t) {
+    yt();
+    const e = le(t),
+      s = [];
+    (e.forEach(([i, a], f) => {
+      for (const d of T.wires)
+        (d.x1 === i && d.y1 === a && s.push([d, 1, f]),
+          d.x2 === i && d.y2 === a && s.push([d, 2, f]));
+    }),
+      (t.rot = (t.rot + 1) & 3));
+    const n = le(t);
+    for (const [i, a, f] of s)
+      a === 1
+        ? ((i.x1 = n[f][0]), (i.y1 = n[f][1]))
+        : ((i.x2 = n[f][0]), (i.y2 = n[f][1]));
+    re();
+  }
+  function z0() {
+    const t = T.sel;
+    if (t) {
+      if (t.cable) {
+        if (!t.cable.wires.length)
+          return Pt(
+            translate("这两个接线柱是直接相连的，请在电路图中移开元件"),
+          );
+        yt();
+        const e = new Set(t.cable.wires);
+        ((T.wires = T.wires.filter((s) => !e.has(s))),
+          (T.sel = null),
+          re(),
+          he());
+        return;
+      }
+      (yt(),
+        t.type
+          ? ((T.comps = T.comps.filter((e) => e !== t)),
+            (X.ch = X.ch.filter((e) => e.id !== t.id)),
+            je())
+          : (T.wires = T.wires.filter((e) => e !== t)),
+        (T.sel = null),
+        (T.hover = null),
+        re(),
+        he());
+    }
+  }
+  function Js() {
+    const t = T.sel;
+    if (!t || !t.type) return;
+    yt();
+    const e = a0(
+      t.type,
+      t.x + 40,
+      t.y + 40,
+      t.rot,
+      JSON.parse(JSON.stringify(t.p)),
+    );
+    (t.bx !== void 0 &&
+      ((e.bx = t.bx + 60), (e.by = t.by + 60), (e.brot = t.brot)),
+      T.comps.push(e),
+      re(),
+      $t(e));
+  }
+  window.addEventListener("keydown", (t) => {
+    if (t.target.matches("input,select,textarea")) return;
+    const e = t.key.toLowerCase(),
+      s = t.ctrlKey || t.metaKey;
+    s && e === "z"
+      ? (t.preventDefault(), t.shiftKey ? ns() : gs())
+      : s && e === "y"
+        ? (t.preventDefault(), ns())
+        : s && e === "d"
+          ? (t.preventDefault(), Js())
+          : s && e === "s"
+            ? (t.preventDefault(), us(), Pt(translate("已保存到浏览器"), "ok"))
+            : e === "delete" || e === "backspace"
+              ? (t.preventDefault(), z0())
+              : e === "r"
+                ? jt
+                  ? (jt.rot = (jt.rot + 1) & 3)
+                  : T.sel &&
+                    T.sel.type &&
+                    (Kt()
+                      ? (yt(),
+                        (T.sel.brot =
+                          ((T.sel.brot || 0) + (t.shiftKey ? 3 : 1)) & 3))
+                      : ls(T.sel))
+                : e === "3"
+                  ? p0()
+                  : e === " "
+                    ? (t.preventDefault(), ds())
+                    : e === "w"
+                      ? rs(!c0)
+                      : e === "f"
+                        ? d0()
+                        : e === "escape"
+                          ? ($t(null), rs(!1), (H = null), hs())
+                          : e === "=" || e === "+"
+                            ? $0(1.2)
+                            : e === "-" && $0(1 / 1.2);
+  });
+  function $0(t) {
+    Kt() ? V3D.zoom(t) : Xs(Nt / 2, Jt / 2, t);
+  }
+  function p0(t) {
+    if (!window.V3D)
+      return Pt(translate("3D 引擎未加载（需要联网加载 three.js）"), "warn");
+    ((t = t === void 0 ? !V3D.on : t),
+      V3D.enable(t),
+      E("#btn3d").classList.toggle("on", t),
+      E("#stage").classList.toggle("mode3d", t),
+      (E("#btn3d").innerHTML = t
+        ? fe.schem + translate("电路图")
+        : fe.cube + translate("实物图")));
+    try {
+      localStorage.setItem("voltlab.view", t ? "3d" : "2d");
+    } catch {}
+    (Ye(), d0(), (T.hover = null), (Re = null));
+  }
+  function rs(t) {
+    ((c0 = t),
+      E("#btnWire").classList.toggle("on", t),
+      E("#stage").classList.toggle("wiremode", t));
+  }
+  function Ks() {
+    const t = E("#palette");
+    t.innerHTML = "";
+    for (const [e, s] of qe) {
+      const n = document.createElement("div");
+      ((n.className = "pcat"), (n.textContent = e), t.appendChild(n));
+      const i = document.createElement("div");
+      ((i.className = "pgrid"), t.appendChild(i));
+      for (const a of s) {
+        const f = q[a],
+          d = document.createElement("div");
+        ((d.className = "tile"),
+          (d.title = f.name + translate("（拖动或点击放置）")));
+        const p = document.createElement("canvas");
+        d.appendChild(p);
+        const y = document.createElement("span");
+        ((y.textContent = f.name.split(" ")[0]),
+          d.appendChild(y),
+          i.appendChild(d),
+          _s(p, a, 88, 46),
+          d.addEventListener("pointerdown", (b) => Qn(b, a)));
+      }
+    }
+  }
+  function Qn(t, e) {
+    (t.preventDefault(), E0());
+    const s = t.clientX,
+      n = t.clientY;
+    let i = !1;
+    jt = null;
+    const a = (d) => {
+        Math.hypot(d.clientX - s, d.clientY - n) > 5 && (i = !0);
+        const p = os(),
+          y =
+            d.clientX > p.left &&
+            d.clientX < p.right &&
+            d.clientY > p.top &&
+            d.clientY < p.bottom;
+        if (Kt()) {
+          const b = i && y ? V3D.planeAt(d.clientX, d.clientY) : null;
+          V3D.ghost = b
+            ? {
+                type: e,
+                bx: b[0],
+                by: b[1],
+              }
+            : null;
+          return;
+        }
+        if (i && y) {
+          const [b, j] = ze(d.clientX - p.left, d.clientY - p.top),
+            A = q[e];
+          (jt ||
+            (jt = {
+              type: e,
+              rot: 0,
+              p: {
+                ...A.defaults,
+              },
+              s: {},
+              v: new Array(A.terms.length).fill(0),
+              iT: [],
+              i: 0,
+              heat: 0,
+              name: "",
+            }),
+            (jt.x = ce(b)),
+            (jt.y = ce(j)));
+        } else jt && !y && (jt.x = jt.y = 1e9);
+      },
+      f = (d) => {
+        (window.removeEventListener("pointermove", a),
+          window.removeEventListener("pointerup", f));
+        const p = os(),
+          y =
+            d.clientX > p.left &&
+            d.clientX < p.right &&
+            d.clientY > p.top &&
+            d.clientY < p.bottom;
+        if (Kt()) {
+          const U = V3D.ghost;
+          if (((V3D.ghost = null), i && !y)) return;
+          yt();
+          const [_, g] = Qs(),
+            Y = a0(e, _, g, 0),
+            V = U ? [U.bx, U.by] : V3D.freeSpot();
+          ((Y.bx = V[0]),
+            (Y.by = V[1]),
+            (Y.brot = 0),
+            T.comps.push(Y),
+            re(),
+            $t(Y),
+            pe("click"));
+          return;
+        }
+        let b,
+          j,
+          A = jt ? jt.rot : 0;
+        if (
+          (i && y && jt ? ((b = jt.x), (j = jt.y)) : i || ([b, j] = Qs()),
+          (jt = null),
+          b === void 0)
+        )
+          return;
+        yt();
+        const O = a0(e, b, j, A);
+        (T.comps.push(O), re(), $t(O), pe("click"));
+      };
+    (window.addEventListener("pointermove", a),
+      window.addEventListener("pointerup", f));
+  }
+  function Qs() {
+    let t = ce(it.cx),
+      e = ce(it.cy);
+    for (let s = 0; s < 60; s++) {
+      if (
+        !T.comps.some((n) => Math.abs(n.x - t) < 90 && Math.abs(n.y - e) < 70)
+      )
+        return [t, e];
+      ((t += 100), s % 6 === 5 && ((t -= 600), (e += 80)));
+    }
+    return [t, e];
+  }
+  const De = E("#inspector");
+  function Zn(t, e) {
+    return t.log
+      ? (1e3 * Math.log(e / t.min)) / Math.log(t.max / t.min)
+      : (1e3 * (e - t.min)) / (t.max - t.min);
+  }
+  function Wn(t, e) {
+    return t.log
+      ? t.min * Math.pow(t.max / t.min, e / 1e3)
+      : t.min + ((t.max - t.min) * e) / 1e3;
+  }
+  function he() {
+    const t = T.sel;
+    if (!t) {
+      const a = T.comps.length,
+        f = T.wires.length;
+      ((De.innerHTML = translate(
+        `<div class="empty"><h4>实验台状态</h4>
+      <div class="card"><div class="kv"><span>元件</span><b>{0}</b></div><div class="kv"><span>导线</span><b>{1}</b></div><div class="kv"><span>独立节点</span><b>{2}</b></div>
+      <div class="kv"><span>求解器</span><b>MNA · Newton · BDF2</b></div></div>
+      <p style="margin-top:14px">点击元件查看和调节参数；悬停可读取实时电压电流。</p>
+      <p>试试 <a href="#" id="openLab2" style="color:var(--cyan)">实验库</a> 中的 21 个经典实验，或从左侧拖出元件自由搭建。</p>
+      <div class="sec">快速提示</div>
+      <p style="font-size:12.5px">› 从接线柱拖出导线，连到另一接线柱<br>› 滚轮在器材上 = 调主参数（Shift 加速）<br>› 点击开关、旋钮、电阻箱旋钮直接操作<br>› <b style="color:var(--cyan)">3</b> 键切换实物图 / 电路图<br>› 电表可切换 AC 有效值测交流</p></div>`,
+        [a, f, vt.n + 1],
+      )),
+        (E("#openLab2").onclick = (d) => {
+          (d.preventDefault(), ps("labModal"));
+        }));
+      return;
+    }
+    if (t.cable) {
+      const a = t.cable;
+      De.innerHTML = translate(
+        `<div class="ih"><div class="t"><small>CABLE · 连接导线</small><div style="font-size:17px;font-weight:600">导线</div></div></div>
+      <div class="kv"><span>一端</span><b>{0} · {1}</b></div><div class="kv"><span>另一端</span><b>{2} · {3}</b></div>
+      <div class="sec">颜色</div><div class="swatches" id="sw"></div><div class="sec">操作</div><div class="acts"><button class="btn sm danger" id="aDel">拆除导线</button></div>`,
+        [
+          a.ta[0].name,
+          Qe(a.ta[0], a.ta[1]),
+          a.tb[0].name,
+          Qe(a.tb[0], a.tb[1]),
+        ],
+      );
+      const f = E("#sw");
+      ([
+        null,
+        "#d8261f",
+        "#1f5fd8",
+        "#f2c230",
+        "#2aa84f",
+        "#1d1f23",
+        "#e8e8e8",
+        "#ff8b3d",
+        "#9b59d0",
+      ].forEach((d) => {
+        const p = document.createElement("button");
+        ((p.style.background =
+          d || "conic-gradient(#d8261f,#f2c230,#2aa84f,#1f5fd8,#d8261f)"),
+          (p.title = d || translate("自动")),
+          (p.onclick = () => {
+            (yt(), a.wires.forEach((y) => (y.color = d)), (G.dirty = !0));
+          }),
+          f.appendChild(p));
+      }),
+        (E("#aDel").onclick = z0));
+      return;
+    }
+    if (!t.type) {
+      De.innerHTML = translate(
+        `<div class="ih"><div class="t"><small>WIRE · 导线段</small><div style="font-size:17px;font-weight:600">导线</div></div></div>
+      <div class="reads"><div class="rd"><small>电势</small><b id="rw-v">—</b></div><div class="rd am"><small>电流</small><b id="rw-i">—</b></div></div>
+      <div class="sec">颜色</div><div class="swatches" id="sw"></div>
+      <div class="sec">操作</div><div class="acts"><button class="btn sm danger" id="aDel">删除</button></div>`,
+        [],
+      );
+      const a = E("#sw");
+      ([null]
+        .concat(Ie)
+        .concat(["#1c1f24", "#e8e8e8"])
+        .forEach((f) => {
+          const d = document.createElement("button");
+          ((d.style.background =
+            f ||
+            "conic-gradient(#e5484d,#f5c542,#30c48d,#3e9bff,#e879f9,#e5484d)"),
+            (d.title = f || translate("按节点自动着色")),
+            (t.color || null) === f && d.classList.add("on"),
+            (d.onclick = () => {
+              (yt(), (t.color = f), he());
+            }),
+            a.appendChild(d));
+        }),
+        (E("#aDel").onclick = z0));
+      return;
+    }
+    const e = t,
+      s = q[e.type];
+    let n = `<div class="ih"><canvas id="ihc"></canvas><div class="t"><small>${e.type.toUpperCase()} · ${s.name}</small><input id="nm" value="${e.name}"></div></div>`;
+    (e.burnt &&
+      (n += translate(
+        '<div style="margin:-2px 0 10px"><span class="badge bad">⚠ 已损坏</span> <button class="btn sm" id="aFix">修复</button></div>',
+        [],
+      )),
+      (n += '<div class="reads" id="rds"></div>'),
+      s.params.length &&
+        (n += translate(
+          '<div class="sec">参数</div><div id="prms"></div>',
+          [],
+        )),
+      (n += translate('<div class="sec">操作</div><div class="acts">', [])),
+      s.clickable &&
+        e.type !== "button" &&
+        (n += translate(
+          '<button class="btn sm primary" id="aTog">切换</button>',
+          [],
+        )),
+      (s.actions || []).forEach(
+        (a, f) =>
+          (n += `<button class="btn sm" data-act="${f}">${a[0]}</button>`),
+      ),
+      (n += translate(
+        '<button class="btn sm" id="aRot">{0}旋转</button><button class="btn sm" id="aDup">复制</button><button class="btn sm danger" id="aDel">{1}删除</button></div>',
+        [fe.reset, fe.trash],
+      )),
+      (n += translate(
+        '<div class="sec">测量</div><div class="acts"><button class="btn sm" id="sV">{0}示波器·电压</button><button class="btn sm" id="sI">{1}示波器·电流</button></div>',
+        [fe.wave, fe.wave],
+      )),
+      (De.innerHTML = n),
+      _s(E("#ihc"), e.type, 64, 40),
+      (E("#nm").onchange = (a) => {
+        (yt(), (e.name = a.target.value.trim() || e.name), sn());
+      }),
+      E("#aFix") &&
+        (E("#aFix").onclick = () => {
+          ((e.burnt = !1),
+            (e.heat = 0),
+            e.type === "bulb" && (e.s.T = Wt),
+            he());
+        }),
+      E("#aTog") &&
+        (E("#aTog").onclick = () => {
+          (yt(), s.click(e), Ze());
+        }),
+      De.querySelectorAll("[data-act]").forEach(
+        (a) =>
+          (a.onclick = () => {
+            (s.actions[+a.dataset.act][1](e),
+              Pt(`${e.name}：${s.actions[+a.dataset.act][0]}`));
+          }),
+      ),
+      (E("#aRot").onclick = () => ls(e)),
+      (E("#aDup").onclick = Js),
+      (E("#aDel").onclick = z0),
+      (E("#sV").onclick = () => en(e, "v")),
+      (E("#sI").onclick = () => en(e, "i")));
+    const i = E("#prms");
+    if (i)
+      for (const a of s.params) {
+        const f = document.createElement("div");
+        if (((f.className = "prm"), (f.dataset.k = a.k), a.options)) {
+          f.innerHTML = `<div class="pl"><span>${a.label}</span></div><select class="sel"></select>`;
+          const d = f.querySelector("select");
+          (a.options.forEach(([p, y]) => {
+            const b = document.createElement("option");
+            ((b.value = p), (b.textContent = y), d.appendChild(b));
+          }),
+            (d.value = String(e.p[a.k])),
+            (d.onchange = () => {
+              (yt(), (e.p[a.k] = d.value), (G.dirty = !0));
+            }));
+        } else if (a.bool) {
+          f.innerHTML = `<label class="tg" style="justify-content:space-between;color:#c9d2dc;font-size:13px"><span>${a.label}</span><input type="checkbox"><i></i></label>`;
+          const d = f.querySelector("input");
+          ((d.checked = !!e.p[a.k]),
+            (d.onchange = () => {
+              (yt(), (e.p[a.k] = d.checked), (G.dirty = !0));
+            }));
+        } else {
+          f.innerHTML = `<div class="pl"><span>${a.label}</span><input class="inp"></div><input type="range" min="0" max="1000" step="1">`;
+          const d = f.querySelector(".inp"),
+            p = f.querySelector("[type=range]"),
+            y = () => {
+              const b = e.p[a.k];
+              d.value =
+                a.unit === ""
+                  ? (+b.toPrecision(4)).toString()
+                  : z(b, a.unit, 4);
+              const j = Zn(a, b);
+              ((p.value = j), p.style.setProperty("--p", j / 10 + "%"));
+            };
+          ((f._set = y),
+            y(),
+            p.addEventListener("pointerdown", () => yt()),
+            (p.oninput = () => {
+              let b = Wn(a, +p.value);
+              ((b = +b.toPrecision(a.log ? 3 : 4)),
+                (e.p[a.k] = Q(b, a.min, a.max)),
+                (G.dirty = !0),
+                y());
+            }),
+            (d.onchange = () => {
+              const b = Ge(d.value);
+              (isFinite(b) &&
+                (yt(), (e.p[a.k] = Q(b, a.min, a.max)), (G.dirty = !0)),
+                y());
+            }));
+        }
+        i.appendChild(f);
+      }
+    Zs(!0);
+  }
+  function Qe(t, e) {
+    const s = q[t.type],
+      n = typeof s.termNames == "function" ? s.termNames(t) : s.termNames;
+    return n
+      ? n[e]
+      : s.terms.length === 2
+        ? [translate("端 1"), translate("端 2")][e]
+        : translate("端 ") + (e + 1);
+  }
+  function Ze() {
+    const t = T.sel;
+    !t ||
+      !t.type ||
+      De.querySelectorAll(".prm").forEach((e) => {
+        e._set && e._set();
+        const s = e.querySelector("select");
+        s && (s.value = String(t.p[e.dataset.k]));
+        const n = e.querySelector("input[type=checkbox]");
+        n && (n.checked = !!t.p[e.dataset.k]);
+      });
+  }
+  function Zs(t) {
+    const e = T.sel;
+    if (!e) return;
+    if (!e.type) {
+      const f = E("#rw-v"),
+        d = E("#rw-i");
+      f &&
+        ((f.textContent = z(W0(e), "V")),
+        (d.textContent = z(Math.abs(e.i), "A")));
+      return;
+    }
+    const s = E("#rds");
+    if (!s) return;
+    const n = q[e.type],
+      i = e.v.length > 1 ? e.v[0] - e.v[1] : e.v[0],
+      a = [
+        [translate("电压 U"), z(i, "V", 4), ""],
+        [translate("电流 I"), z(e.i, "A", 4), "am"],
+        [translate("功率 P"), z(Math.abs(i * e.i), "W"), "bl"],
+        [
+          "U / I",
+          Math.abs(e.i) > 1e-12 ? z(Math.abs(i / e.i), "Ω") : "∞",
+          "bl",
+        ],
+      ].concat((n.extra ? n.extra(e) : []).map(([f, d]) => [f, d, ""]));
+    (t || s.children.length !== a.length
+      ? (s.innerHTML = a
+          .map(
+            ([f, d, p]) =>
+              `<div class="rd ${p}"><small>${f}</small><b>${d}</b></div>`,
+          )
+          .join(""))
+      : a.forEach(([f, d], p) => {
+          const y = s.children[p].lastChild;
+          y.textContent !== d && (y.textContent = d);
+        }),
+      !!e.burnt != !!De.querySelector(".badge.bad") && he());
+  }
+  const Oe = ["#ffe04a", "#4ae3ff", "#ff5ad1", "#5cff8a"],
+    X = {
+      ch: [],
+      data: [],
+      tdiv: "auto",
+      mode: "yt",
+      hold: !1,
+      lastT: -1,
+    },
+    D0 = E("#scope"),
+    to = D0.getContext("2d"),
+    O0 = E("#logcv"),
+    eo = O0.getContext("2d");
+  function so() {
+    for (const t of [D0, O0]) {
+      const e = t.getBoundingClientRect();
+      e.width &&
+        ((t.width = Math.round(e.width * ee)),
+        (t.height = Math.round(e.height * ee)));
+    }
+  }
+  function cs(t) {
+    const e = Math.pow(10, Math.floor(Math.log10(t))),
+      s = t / e;
+    return (s <= 1 ? 1 : s <= 2 ? 2 : s <= 5 ? 5 : 10) * e;
+  }
+  function Ws() {
+    return X.tdiv === "auto" ? cs(G.speed * 0.5) * 10 : +X.tdiv * 10;
+  }
+  function tn(t) {
+    const e = t.c;
+    return e
+      ? t.kind === "i"
+        ? e.i
+        : e.v.length > 1
+          ? e.v[0] - e.v[1]
+          : e.v[0]
+      : 0;
+  }
+  function no() {
+    if (!X.ch.length || X.hold) return;
+    const t = Ws();
+    if ((G.t < X.lastT && (X.lastT = -1), G.t - X.lastT < t / 1200)) return;
+    X.lastT = G.t;
+    const e = [G.t];
+    for (const s of X.ch) e.push(tn(s));
+    (X.data.push(e), X.data.length > 3e3 && X.data.splice(0, 1200));
+  }
+  function en(t, e) {
+    if (X.ch.some((s) => s.id === t.id && s.kind === e))
+      return Pt(translate("该通道已在示波器中"));
+    (X.ch.length >= 4 && X.ch.shift(),
+      X.ch.push({
+        id: t.id,
+        kind: e,
+        color: "",
+      }),
+      X.ch.forEach((s, n) => (s.color = Oe[n])),
+      (X.data = []),
+      je(),
+      cn("scope"),
+      Pt(
+        translate("已加入示波器：{0} {1}", [
+          t.name,
+          e === "v" ? translate("电压") : translate("电流"),
+        ]),
+        "ok",
+      ));
+  }
+  function je() {
+    const t = E("#chips");
+    ((t.innerHTML = ""),
+      X.ch.forEach((e, s) => {
+        ((e.color = Oe[s]), (e.c = T.comps.find((i) => i.id === e.id)));
+        const n = document.createElement("div");
+        ((n.className = "chip"),
+          (n.innerHTML = translate(
+            '<i style="background:{0};box-shadow:0 0 8px {1}"></i><span>CH{2} {3} · {4}</span><button title="移除">×</button>',
+            [
+              e.color,
+              e.color,
+              s + 1,
+              e.c ? e.c.name : "?",
+              e.kind === "v" ? translate("电压") : translate("电流"),
+            ],
+          )),
+          (n.querySelector("button").onclick = () => {
+            (X.ch.splice(s, 1), (X.data = []), je());
+          }),
+          t.appendChild(n));
+      }),
+      X.ch.length ||
+        (t.innerHTML = translate(
+          '<div class="meas" style="color:#5d6b7b">选中元件 → 属性面板“示波器: 电压 / 电流”添加通道</div>',
+        )));
+  }
+  function oo() {
+    const t = D0.width,
+      e = D0.height;
+    if (!t) return;
+    const s = to,
+      n = ee;
+    s.setTransform(1, 0, 0, 1, 0, 0);
+    const i = s.createRadialGradient(t / 2, e / 2, 10, t / 2, e / 2, t * 0.7);
+    (i.addColorStop(0, "#07130e"),
+      i.addColorStop(1, "#020604"),
+      (s.fillStyle = i),
+      s.fillRect(0, 0, t, e));
+    const a = 10 * n,
+      f = 8 * n,
+      d = t - 2 * a,
+      p = e - 2 * f;
+    ((s.strokeStyle = "rgba(60,242,163,.10)"), (s.lineWidth = 1));
+    for (let g = 0; g <= 10; g++) {
+      const Y = a + (d * g) / 10;
+      (s.beginPath(), s.moveTo(Y, f), s.lineTo(Y, f + p), s.stroke());
+    }
+    for (let g = 0; g <= 8; g++) {
+      const Y = f + (p * g) / 8;
+      (s.beginPath(), s.moveTo(a, Y), s.lineTo(a + d, Y), s.stroke());
+    }
+    ((s.strokeStyle = "rgba(60,242,163,.25)"),
+      s.beginPath(),
+      s.moveTo(a, f + p / 2),
+      s.lineTo(a + d, f + p / 2),
+      s.moveTo(a + d / 2, f),
+      s.lineTo(a + d / 2, f + p),
+      s.stroke());
+    for (let g = 0; g <= 50; g++) {
+      const Y = a + (d * g) / 50;
+      (s.beginPath(),
+        s.moveTo(Y, f + p / 2 - 3 * n),
+        s.lineTo(Y, f + p / 2 + 3 * n),
+        s.stroke());
+    }
+    const y = X.data,
+      b = Ws();
+    if (
+      ((s.font = `${11 * n}px JetBrains Mono, monospace`),
+      (s.textBaseline = "top"),
+      !X.ch.length || !y.length)
+    ) {
+      ((s.fillStyle = "rgba(60,242,163,.45)"),
+        (s.textAlign = "center"),
+        s.fillText(
+          X.ch.length ? translate("等待数据…（仿真暂停？）") : "NO SIGNAL",
+          t / 2,
+          e / 2 - 20 * n,
+        ),
+        (X.meas = null));
+      return;
+    }
+    const j = y[y.length - 1][0],
+      A = j - b;
+    let O = y.length - 1;
+    for (; O > 0 && y[O - 1][0] >= A;) O--;
+    const U = y.slice(O),
+      _ = X.ch.map((g, Y) => {
+        let V = 0;
+        for (const Z of U) V = Math.max(V, Math.abs(Z[Y + 1] || 0));
+        g.m = V;
+        const $ = cs(Math.max(V, 1e-9) / 3.6);
+        return (
+          (g.div = g.div ? ($ > g.div || $ < g.div / 4 ? $ : g.div) : $),
+          g.div
+        );
+      });
+    if (
+      ((s.lineWidth = 1.6 * n),
+      (s.lineJoin = "round"),
+      X.mode === "xy" && X.ch.length >= 2)
+    ) {
+      const g = _[0],
+        Y = _[1];
+      ((s.strokeStyle = Oe[0]),
+        (s.shadowColor = Oe[0]),
+        (s.shadowBlur = 8 * n),
+        s.beginPath(),
+        U.forEach((V, $) => {
+          const Z = a + d / 2 + ((V[1] / g) * d) / 10,
+            pt = f + p / 2 - ((V[2] / Y) * p) / 8;
+          $ ? s.lineTo(Z, pt) : s.moveTo(Z, pt);
+        }),
+        s.stroke(),
+        (s.shadowBlur = 0),
+        (s.fillStyle = Oe[0]),
+        (s.textAlign = "left"),
+        s.fillText(
+          `X: CH1 ${z(g, X.ch[0].kind === "v" ? "V" : "A")}/div   Y: CH2 ${z(Y, X.ch[1].kind === "v" ? "V" : "A")}/div`,
+          a + 6 * n,
+          f + 4 * n,
+        ));
+    } else
+      (X.ch.forEach((g, Y) => {
+        ((s.strokeStyle = g.color),
+          (s.shadowColor = g.color),
+          (s.shadowBlur = 8 * n),
+          s.beginPath());
+        const V = _[Y];
+        (U.forEach(($, Z) => {
+          const pt = a + (($[0] - A) / b) * d,
+            Tt = f + p / 2 - (($[Y + 1] / V) * p) / 8;
+          Z
+            ? s.lineTo(pt, Q(Tt, -10, e + 10))
+            : s.moveTo(pt, Q(Tt, -10, e + 10));
+        }),
+          s.stroke(),
+          (s.shadowBlur = 0),
+          (s.fillStyle = g.color),
+          (s.textAlign = "left"),
+          s.fillText(
+            `CH${Y + 1} ${g.c ? g.c.name : ""} ${z(V, g.kind === "v" ? "V" : "A")}/div`,
+            a + 6 * n,
+            f + 4 * n + Y * 14 * n,
+          ));
+      }),
+        (s.fillStyle = "rgba(60,242,163,.7)"),
+        (s.textAlign = "right"),
+        s.fillText(
+          `${z(b / 10, "s")}/div   t=${z(j, "s", 4)}`,
+          a + d - 6 * n,
+          f + p - 16 * n,
+        ));
+    (X.hold &&
+      ((s.fillStyle = "#ff6b5f"),
+      (s.textAlign = "right"),
+      s.fillText("HOLD", a + d - 6 * n, f + 4 * n)),
+      (X.vis = U));
+  }
+  function io() {
+    const t = X.vis,
+      e = E("#smeas");
+    if (!t || !t.length || !X.ch.length) {
+      e.innerHTML = "";
+      return;
+    }
+    e.innerHTML = X.ch
+      .map((s, n) => {
+        let i = -1 / 0,
+          a = 1 / 0,
+          f = 0,
+          d = 0;
+        for (const V of t) {
+          const $ = V[n + 1];
+          ((i = Math.max(i, $)), (a = Math.min(a, $)), (f += $), (d += $ * $));
+        }
+        const p = t.length,
+          y = f / p,
+          b = Math.sqrt(d / p),
+          j = s.kind === "v" ? "V" : "A";
+        let A = 0,
+          O = null,
+          U = null,
+          _ = 0;
+        const g = (i - a) * 0.1;
+        for (const V of t) {
+          const $ = V[n + 1] - y;
+          _ <= 0 && $ > g
+            ? (_ < 0 && (A++, O === null && (O = V[0]), (U = V[0])), (_ = 1))
+            : $ < -g && (_ = -1);
+        }
+        const Y = A >= 2 && U > O ? (A - 1) / (U - O) : null;
+        return translate(
+          '<span style="color:{0}">CH{1}</span> 当前 {2}<br>&nbsp;峰峰 {3} 均值 {4}<br>&nbsp;有效 {5}{6}',
+          [
+            s.color,
+            n + 1,
+            z(tn(s), j, 4),
+            z(i - a, j),
+            z(y, j),
+            z(b, j),
+            Y ? translate(" 频率 ") + z(Y, "Hz") : "",
+          ],
+        );
+      })
+      .join("<br>");
+  }
+  const xe = {
+    pts: [],
+  };
+  function sn() {
+    const t = E("#lgU"),
+      e = E("#lgI");
+    if (!t) return;
+    const s = t.value,
+      n = e.value,
+      i = T.comps.filter((f) => f.type === "voltmeter"),
+      a = T.comps.filter((f) => f.type === "ammeter" || f.type === "galv");
+    ((t.innerHTML =
+      i
+        .map((f) =>
+          translate('<option value="{0}">{1} 读数</option>', [f.id, f.name]),
+        )
+        .join("") + translate('<option value="sel">选中元件的 U</option>')),
+      (e.innerHTML =
+        a
+          .map((f) =>
+            translate('<option value="{0}">{1} 读数</option>', [f.id, f.name]),
+          )
+          .join("") + translate('<option value="sel">选中元件的 I</option>')),
+      [...t.options].some((f) => f.value === s) && (t.value = s),
+      [...e.options].some((f) => f.value === n) && (e.value = n));
+  }
+  function nn(t, e) {
+    if (t === "sel") {
+      const n = T.sel;
+      return !n || !n.type
+        ? null
+        : e === "U"
+          ? n.v.length > 1
+            ? n.v[0] - n.v[1]
+            : n.v[0]
+          : n.i;
+    }
+    const s = T.comps.find((n) => String(n.id) === t);
+    return s ? (s.s.read ?? 0) : null;
+  }
+  function ao() {
+    const t = nn(E("#lgU").value, "U"),
+      e = nn(E("#lgI").value, "I");
+    if (t === null || e === null)
+      return Pt(translate("请先放置电压表/电流表，或选中一个元件"), "warn");
+    (xe.pts.push({
+      U: t,
+      I: e,
+    }),
+      h0(),
+      pe("click"),
+      Pt(
+        translate("已记录：U={0}  I={1}", [z(t, "V", 4), z(e, "A", 4)]),
+        "ok",
+      ));
+  }
+  function on(t) {
+    const e = t.length;
+    if (e < 2) return null;
+    let s = 0,
+      n = 0,
+      i = 0,
+      a = 0,
+      f = 0;
+    for (const j of t)
+      ((s += j.I),
+        (n += j.U),
+        (i += j.I * j.I),
+        (a += j.I * j.U),
+        (f += j.U * j.U));
+    const d = e * i - s * s;
+    if (Math.abs(d) < 1e-30) return null;
+    const p = (e * a - s * n) / d,
+      y = (n - p * s) / e,
+      b = (e * a - s * n) ** 2 / (d * (e * f - n * n) || 1);
+    return {
+      k: p,
+      b: y,
+      r2: b,
+    };
+  }
+  function h0() {
+    const t = E("#lgTable");
+    ((t.innerHTML =
+      "<tr><th>#</th><th>U</th><th>I</th><th>U/I</th><th></th></tr>" +
+      xe.pts
+        .map(
+          (s, n) =>
+            `<tr><td>${n + 1}</td><td>${z(s.U, "V", 4)}</td><td>${z(s.I, "A", 4)}</td><td>${Math.abs(s.I) > 1e-12 ? z(s.U / s.I, "Ω") : "—"}</td><td><button class="btn sm ghost" data-del="${n}" style="height:20px;padding:0 5px">×</button></td></tr>`,
+        )
+        .join("")),
+      t.querySelectorAll("[data-del]").forEach(
+        (s) =>
+          (s.onclick = () => {
+            (xe.pts.splice(+s.dataset.del, 1), h0());
+          }),
+      ));
+    const e = on(xe.pts);
+    ((E("#lgFit").innerHTML = xe.pts.length
+      ? e
+        ? translate(
+            '拟合：U = <b>{0}</b> {1} <b>{2}</b>·I<br>R² = {3}<br><span style="color:#7a889a">定值电阻：R ≈ {4}<br>电源：E ≈ {5}，r ≈ {6}</span>',
+            [
+              z(e.b, "V", 4),
+              e.k >= 0 ? "+" : "−",
+              z(Math.abs(e.k), "Ω", 4),
+              e.r2.toFixed(5),
+              z(Math.abs(e.k), "Ω", 4),
+              z(e.b, "V", 4),
+              z(-e.k, "Ω", 4),
+            ],
+          )
+        : translate("已记录 {0} 组，至少需 2 组拟合", [xe.pts.length])
+      : translate(
+          '暂无数据<br><span style="color:#7a889a">调节电路后点“记录一组”，建议 ≥ 5 组</span>',
+        )),
+      ln());
+  }
+  function an(t, e, s = 5) {
+    const n = cs((e - t) / s || 1),
+      i = [];
+    for (let a = Math.ceil(t / n) * n; a <= e + n * 1e-6; a += n)
+      i.push(+a.toPrecision(10));
+    return i;
+  }
+  function ln() {
+    const t = O0.width,
+      e = O0.height;
+    if (!t) return;
+    const s = eo,
+      n = ee;
+    (s.setTransform(1, 0, 0, 1, 0, 0),
+      (s.fillStyle = "#070b10"),
+      s.fillRect(0, 0, t, e));
+    const i = 58 * n,
+      a = 16 * n,
+      f = 16 * n,
+      d = 30 * n,
+      p = t - i - a,
+      y = e - f - d,
+      b = xe.pts;
+    let j = 0,
+      A = 0,
+      O = 0,
+      U = 0;
+    for (const $ of b)
+      ((j = Math.max(j, $.I)),
+        (A = Math.max(A, $.U)),
+        (O = Math.min(O, $.I)),
+        (U = Math.min(U, $.U)));
+    (j === O && (j = O + 1),
+      A === U && (A = U + 1),
+      (j *= 1.1),
+      (A *= 1.1),
+      O < 0 && (O *= 1.1),
+      U < 0 && (U *= 1.1));
+    const _ = ($) => i + (($ - O) / (j - O)) * p,
+      g = ($) => f + y - (($ - U) / (A - U)) * y;
+    ((s.font = `${10 * n}px JetBrains Mono, monospace`),
+      (s.fillStyle = "#6f7d8d"),
+      (s.strokeStyle = "#18212c"),
+      (s.lineWidth = 1),
+      (s.textAlign = "center"),
+      (s.textBaseline = "top"));
+    for (const $ of an(O, j))
+      (s.beginPath(),
+        s.moveTo(_($), f),
+        s.lineTo(_($), f + y),
+        s.stroke(),
+        s.fillText(z($, "A", 2), _($), f + y + 5 * n));
+    ((s.textAlign = "right"), (s.textBaseline = "middle"));
+    for (const $ of an(U, A))
+      (s.beginPath(),
+        s.moveTo(i, g($)),
+        s.lineTo(i + p, g($)),
+        s.stroke(),
+        s.fillText(z($, "V", 2), i - 5 * n, g($)));
+    if (
+      ((s.strokeStyle = "#3a4757"),
+      (s.lineWidth = 1.5 * n),
+      s.beginPath(),
+      s.moveTo(_(0), f),
+      s.lineTo(_(0), f + y),
+      s.moveTo(i, g(0)),
+      s.lineTo(i + p, g(0)),
+      s.stroke(),
+      (s.fillStyle = "#9aa8b8"),
+      (s.textAlign = "left"),
+      (s.textBaseline = "top"),
+      s.fillText("U/V", i + 4 * n, f),
+      (s.textAlign = "right"),
+      s.fillText("I/A", i + p, f + y - 14 * n),
+      !b.length)
+    ) {
+      ((s.textAlign = "center"),
+        (s.fillStyle = "#4d5a6a"),
+        (s.font = `${13 * n}px Chakra Petch, sans-serif`),
+        s.fillText(translate("U - I 图像"), i + p / 2, f + y / 2 - 8 * n));
+      return;
+    }
+    const Y = on(b);
+    Y &&
+      ((s.strokeStyle = "rgba(255,178,62,.8)"),
+      s.setLineDash([6 * n, 5 * n]),
+      (s.lineWidth = 1.5 * n),
+      s.beginPath(),
+      s.moveTo(_(O), g(Y.b + Y.k * O)),
+      s.lineTo(_(j), g(Y.b + Y.k * j)),
+      s.stroke(),
+      s.setLineDash([]));
+    const V = b.slice().sort(($, Z) => $.I - Z.I);
+    ((s.strokeStyle = "rgba(94,230,255,.35)"),
+      (s.lineWidth = 1.2 * n),
+      s.beginPath(),
+      V.forEach(($, Z) =>
+        Z ? s.lineTo(_($.I), g($.U)) : s.moveTo(_($.I), g($.U)),
+      ),
+      s.stroke());
+    for (const $ of b)
+      ((s.fillStyle = "#5ee6ff"),
+        (s.shadowColor = "#5ee6ff"),
+        (s.shadowBlur = 8 * n),
+        J(s, _($.I), g($.U), 4 * n),
+        s.fill());
+    s.shadowBlur = 0;
+  }
+  function lo() {
+    const t = E("#infoTable");
+    ((t.innerHTML =
+      translate(
+        "<tr><th>名称</th><th>类型</th><th>电压 U</th><th>电流 I</th><th>功率 P</th><th>状态</th></tr>",
+      ) +
+      T.comps
+        .filter((e) => e.type !== "ground")
+        .map((e) => {
+          const s = e.v.length > 1 ? e.v[0] - e.v[1] : e.v[0];
+          return `<tr data-id="${e.id}" class="${T.sel === e ? "sel" : ""}"><td>${e.name}</td><td style="font-family:var(--font);color:#7a889a">${q[e.type].name}</td><td>${z(s, "V", 4)}</td><td>${z(e.i, "A", 4)}</td><td>${z(Math.abs(s * e.i), "W")}</td><td style="font-family:var(--font)">${e.burnt ? translate('<span style="color:#ff5b4f">损坏</span>') : e.heat > 1.2 ? translate('<span style="color:#ffb23e">过热</span>') : translate('<span style="color:#3cf2a3">正常</span>')}</td></tr>`;
+        })
+        .join("")),
+      t
+        .querySelectorAll("tr[data-id]")
+        .forEach(
+          (e) =>
+            (e.onclick = () => $t(T.comps.find((s) => s.id === +e.dataset.id))),
+        ));
+  }
+  const fs = [
+      [10, translate("10 s/s 快进")],
+      [3, "3 s/s"],
+      [1, translate("1 s/s 实时")],
+      [0.3, "0.3 s/s"],
+      [0.1, "0.1 s/s"],
+      [0.03, "30 ms/s"],
+      [0.01, "10 ms/s"],
+      [0.003, "3 ms/s"],
+      [0.001, "1 ms/s"],
+      [3e-4, "300 µs/s"],
+      [1e-4, "100 µs/s"],
+      [1e-5, "10 µs/s"],
+    ],
+    ro = [
+      "auto",
+      1e-6,
+      2e-6,
+      5e-6,
+      1e-5,
+      2e-5,
+      5e-5,
+      1e-4,
+      2e-4,
+      5e-4,
+      0.001,
+      0.002,
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1,
+      2,
+      5,
+    ];
+  function rn(t) {
+    let e = fs[0][0];
+    for (const [s] of fs)
+      Math.abs(Math.log(s / t)) < Math.abs(Math.log(e / t)) && (e = s);
+    ((G.speed = e), (E("#speed").value = String(e)), (X.data = []));
+  }
+  function co(t) {
+    ((X.tdiv = t), (E("#tdiv").value = String(t)), (X.data = []));
+  }
+  function ds() {
+    ((G.running = !G.running),
+      (E("#btnRun").innerHTML = G.running
+        ? fe.pause + translate("暂停")
+        : fe.play + translate("运行")),
+      E("#btnRun").classList.toggle("primary", G.running));
+  }
+  function Pt(t, e) {
+    const s = document.createElement("div");
+    for (
+      s.className = "toast " + (e || ""),
+        s.textContent = t,
+        E("#toasts").appendChild(s);
+      E("#toasts").children.length > 4;
+    )
+      E("#toasts").firstChild.remove();
+    setTimeout(
+      () => {
+        ((s.style.transition = "opacity .4s"),
+          (s.style.opacity = 0),
+          setTimeout(() => s.remove(), 400));
+      },
+      e === "warn" ? 3200 : 2e3,
+    );
+  }
+  function ps(t) {
+    E("#" + t).classList.add("show");
+  }
+  function hs() {
+    document
+      .querySelectorAll(".modal")
+      .forEach((t) => t.classList.remove("show"));
+  }
+  function cn(t) {
+    (document
+      .querySelectorAll(".tab")
+      .forEach((e) => e.classList.toggle("on", e.dataset.p === t)),
+      document
+        .querySelectorAll(".pane")
+        .forEach((e) => e.classList.toggle("on", e.id === "pane-" + t)),
+      E("#app").classList.remove("dock-min"),
+      (B0 = t),
+      requestAnimationFrame(() => {
+        (Ye(), ln());
+      }));
+  }
+  let B0 = "scope";
+  function us() {
+    try {
+      localStorage.setItem("voltlab.v1", JSON.stringify(Xe()));
+    } catch {}
+    we = !1;
+  }
+  function ms(t) {
+    const e = E("#guide");
+    if (!t || !t.guide) {
+      e.classList.remove("show");
+      return;
+    }
+    ((e.innerHTML = translate(
+      `<h3><em>{0}</em>{1}<span class="gx"><button id="gMin" title="收起">–</button><button id="gX" title="关闭">×</button></span></h3>
+    <div class="gbody"><p>{2}</p><ol>{3}</ol>{4}</div>`,
+      [
+        t.cat,
+        t.title,
+        t.guide.goal,
+        t.guide.steps.map((s) => `<li>${s}</li>`).join(""),
+        t.guide.tip ? `<div class="gtip">${t.guide.tip}</div>` : "",
+      ],
+    )),
+      e.classList.add("show"),
+      e.classList.remove("min"),
+      (E("#gMin").onclick = () => e.classList.toggle("min")),
+      (E("#gX").onclick = () => e.classList.remove("show")));
+  }
+  function fo() {
+    const t = E("#speed");
+    (fs.forEach(([n, i]) => {
+      const a = document.createElement("option");
+      ((a.value = String(n)), (a.textContent = i), t.appendChild(a));
+    }),
+      (t.value = "1"),
+      (t.onchange = () => {
+        ((G.speed = +t.value), (X.data = []));
+      }),
+      (E("#acc").onchange = (n) => (G.spf = +n.target.value)));
+    const e = E("#tdiv");
+    (ro.forEach((n) => {
+      const i = document.createElement("option");
+      ((i.value = String(n)),
+        (i.textContent = n === "auto" ? translate("自动") : z(n, "s") + "/div"),
+        e.appendChild(i));
+    }),
+      (e.onchange = () => {
+        ((X.tdiv = e.value), (X.data = []));
+      }),
+      (E("#smode").onchange = (n) => (X.mode = n.target.value)),
+      (E("#sHold").onclick = (n) => {
+        ((X.hold = !X.hold), n.target.classList.toggle("on", X.hold));
+      }),
+      (E("#sClear").onclick = () => {
+        ((X.ch = []), (X.data = []), je());
+      }),
+      (E("#btnRun").onclick = ds),
+      (E("#btnStep").onclick = () => {
+        G.running && ds();
+        const n = G.speed / (60 * G.spf);
+        for (let i = 0; i < G.spf; i++) Es(n);
+        Ns();
+      }),
+      (E("#btnReset").onclick = () => {
+        (zs(), Pt(translate("已重置时间与元件状态")));
+      }),
+      (E("#btnLab").onclick = () => ps("labModal")),
+      (E("#btnHelp").onclick = () => ps("helpModal")),
+      (E("#btnUndo").onclick = gs),
+      (E("#btnRedo").onclick = ns),
+      (E("#btnRepair").onclick = gn),
+      (E("#btnClear").onclick = () => {
+        (!T.comps.length && !T.wires.length) ||
+          (yt(),
+          (T.comps = []),
+          (T.wires = []),
+          (X.ch = []),
+          je(),
+          (T.sel = null),
+          re(),
+          he(),
+          ms(null),
+          Pt(translate("已清空，可 Ctrl+Z 撤销")));
+      }),
+      (E("#btnExport").onclick = () => {
+        const n = new Blob([JSON.stringify(Xe(), null, 1)], {
+            type: "application/json",
+          }),
+          i = document.createElement("a");
+        ((i.href = URL.createObjectURL(n)),
+          (i.download = "voltlab-circuit.json"),
+          i.click(),
+          setTimeout(() => URL.revokeObjectURL(i.href), 2e3));
+      }),
+      (E("#btnImport").onclick = () => E("#fileIn").click()),
+      (E("#fileIn").onchange = (n) => {
+        const i = n.target.files[0];
+        i &&
+          (i.text().then((a) => {
+            try {
+              (yt(),
+                l0(JSON.parse(a)),
+                ms(null),
+                Pt(translate("电路已导入"), "ok"));
+            } catch {
+              Pt(translate("文件格式错误"), "warn");
+            }
+          }),
+          (n.target.value = ""));
+      }),
+      (E("#btnShare").onclick = () => {
+        const n = btoa(unescape(encodeURIComponent(JSON.stringify(Xe())))),
+          i = location.href.split("#")[0] + "#c=" + n;
+        (navigator.clipboard
+          ? navigator.clipboard.writeText(i)
+          : Promise.reject()
+        ).then(
+          () => Pt(translate("分享链接已复制到剪贴板"), "ok"),
+          () => {
+            (history.replaceState(null, "", "#c=" + n),
+              Pt(translate("链接已写入地址栏")));
+          },
+        );
+      }),
+      (E("#btnWire").onclick = () => rs(!c0)),
+      (E("#zIn").onclick = () => $0(1.2)),
+      (E("#zOut").onclick = () => $0(1 / 1.2)),
+      (E("#zFit").onclick = d0),
+      (E("#btn3d").onclick = () => p0()),
+      E("#cv").addEventListener("click", () => {
+        Kt() && p0(!1);
+      }),
+      (E("#tgFlow").onchange = (n) => (se.flow = n.target.checked)),
+      (E("#tgElec").onchange = (n) => (se.elec = n.target.checked)),
+      (E("#tgVolt").onchange = (n) => (se.volt = n.target.checked)),
+      (E("#tgLabel").onchange = (n) => (se.labels = n.target.checked)),
+      (E("#mobInsp").onclick = () => E("#inspector").classList.toggle("open")),
+      document
+        .querySelectorAll(".tab")
+        .forEach((n) => (n.onclick = () => cn(n.dataset.p))),
+      (E("#dockToggle").onclick = () => {
+        (E("#app").classList.toggle("dock-min"),
+          (E("#dockToggle").style.transform = E("#app").classList.contains(
+            "dock-min",
+          )
+            ? "rotate(180deg)"
+            : ""),
+          requestAnimationFrame(Ye));
+      }),
+      document.querySelectorAll(".modal").forEach((n) =>
+        n.addEventListener("pointerdown", (i) => {
+          (i.target === n || i.target.hasAttribute("data-close")) && hs();
+        }),
+      ),
+      (E("#lgRec").onclick = ao),
+      (E("#lgClr").onclick = () => {
+        ((xe.pts = []), h0());
+      }),
+      (E("#lgCsv").onclick = () => {
+        const n =
+            `U(V),I(A)
+` +
+            xe.pts.map((a) => a.U + "," + a.I).join(`
+`),
+          i = document.createElement("a");
+        ((i.href = URL.createObjectURL(
+          new Blob([n], {
+            type: "text/csv",
+          }),
+        )),
+          (i.download = "voltlab-data.csv"),
+          i.click());
+      }));
+    const s = E("#labs");
+    (dn.forEach((n, i) => {
+      const a = document.createElement("div");
+      ((a.className = "lab"),
+        (a.innerHTML = `<div class="n">${String(i + 1).padStart(2, "0")}</div><em>${n.cat}</em><h4>${n.title}</h4><p>${n.desc}</p>`),
+        (a.onclick = () => {
+          (hs(), T.comps.length && yt(), fn(n));
+        }),
+        s.appendChild(a));
+    }),
+      window.addEventListener("resize", () => {
+        Ye();
+      }),
+      window.addEventListener("beforeunload", us));
+  }
+  function fn(t) {
+    ((T.comps = []),
+      (T.wires = []),
+      (T.sel = null),
+      (X.ch = []),
+      (X.data = []),
+      (xe.pts = []));
+    const e = {
+      add(s, n, i, a = 0, f = {}, d) {
+        const p = a0(s, n, i, a, f);
+        return (d && (p.name = d), T.comps.push(p), p);
+      },
+      T: (s, n) => de(s, ...q[s.type].terms[n]),
+      W(...s) {
+        for (let n = 0; n < s.length - 1; n++) {
+          const i = Gs(s[n], s[n + 1]);
+          for (let a = 0; a < i.length - 1; a++)
+            A0(i[a][0], i[a][1], i[a + 1][0], i[a + 1][1]);
+        }
+      },
+      scope(...s) {
+        s.forEach(([n, i]) =>
+          X.ch.push({
+            id: n.id,
+            kind: i,
+            color: Oe[X.ch.length],
+          }),
+        );
+      },
+      log(s, n) {
+        e._log = [s, n];
+      },
+      B(s, n, i, a = 0) {
+        ((s.bx = n), (s.by = i), (s.brot = a));
+      },
+    };
+    (t.build(e),
+      re(),
+      zs(),
+      rn(t.speed || 1),
+      co(t.tdiv || "auto"),
+      V0(),
+      ms(t),
+      d0(),
+      je(),
+      he(),
+      h0(),
+      e._log &&
+        ((E("#lgU").value = String(e._log[0].id)),
+        (E("#lgI").value = String(e._log[1].id))),
+      (we = !0));
+  }
+  const dn = [
+    {
+      id: "sp",
+      cat: translate("电路基础"),
+      title: translate("串联与并联电路"),
+      speed: 1,
+      desc: translate(
+        "三只小灯泡组成混联电路，观察开关通断时各灯亮度与电流的变化。",
+      ),
+      guide: {
+        goal: translate(
+          "灯 H1 在干路，H2、H3 并联。观察亮度随电路结构的变化。",
+        ),
+        steps: [
+          translate("S1 已闭合：H1、H2 串联发光"),
+          translate("点击 <b>S2</b> 接入 H3，比较 H1 与 H2 亮度变化"),
+          translate("悬停灯泡查看灯丝温度与实时电阻"),
+          translate("打开“电路参数表”验证：干路电流 = 各支路电流之和"),
+        ],
+        tip: translate("灯丝电阻随温度升高而变大——冷态电阻只有热态的约 1/9。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -200, 160, 2, {
+            V: "6",
+            r: 0.5,
+          }),
+          f = t("switch", -280, 40, 1, {
+            closed: !0,
+          }),
+          d = t("bulb", -160, -80),
+          p = t("bulb", 80, -80),
+          y = t("switch", 0, 40),
+          b = t("bulb", 120, 40),
+          j = t("ammeter", 40, 160, 0);
+        (s(e(a, 1), [-280, 160], e(f, 1)),
+          s(e(f, 0), [-280, -80], e(d, 0)),
+          s(e(d, 1), e(p, 0)),
+          s([-40, -80], [-40, 40], e(y, 0)),
+          s(e(y, 1), e(b, 0)),
+          s(e(p, 1), [200, -80], [200, 160], e(j, 1)),
+          s(e(b, 1), [200, 40]),
+          s(e(j, 0), e(a, 0)),
+          n(a, -430, -230),
+          n(f, -120, -260),
+          n(d, 110, -260),
+          n(p, 340, -170),
+          n(y, 110, 40),
+          n(b, 340, 60),
+          n(j, -420, 250),
+          i([d, "i"], [p, "i"], [b, "i"]));
+      },
+    },
+    {
+      id: "ohm",
+      cat: translate("电路基础"),
+      title: translate("探究欧姆定律"),
+      speed: 1,
+      desc: translate(
+        "用滑动变阻器改变定值电阻两端电压，记录多组 U、I，画出 U-I 图像求电阻。",
+      ),
+      guide: {
+        goal: translate(
+          "保持 R 不变，探究电流与电压的关系。电压表接 15V 量程，电流表接 0.6A 量程。",
+        ),
+        steps: [
+          translate("点击刀闸开关 S1 闭合电路"),
+          translate("拖动滑动变阻器的<b>滑片</b>（或在其上滚动滚轮）改变电压"),
+          translate("读出电压表、电流表示数，在“数据记录”点 <b>● 记录一组</b>"),
+          translate("记录 ≥ 5 组，U-I 图拟合直线斜率即电阻 R"),
+        ],
+        tip: translate(
+          "滑动变阻器采用“一上一下”接法：接了 A 和 D 两个接线柱。",
+        ),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i, log: a }) {
+        const f = t("psu", -80, 160, 2, {
+            V: "6",
+            r: 0.5,
+          }),
+          d = t("switch", -200, 40, 1),
+          p = t("resistor", -80, -80, 0, {
+            R: 10,
+            Pmax: 5,
+          }),
+          y = t("ammeter", 100, -80, 2),
+          b = t("pot", 100, 80, 0, {
+            Rmax: 50,
+            pos: 0.3,
+          }),
+          j = t("voltmeter", -80, -160, 2);
+        (s(e(f, 1), [-200, 160], e(d, 1)),
+          s(e(d, 0), [-200, -80], e(p, 0)),
+          s(e(p, 1), e(y, 1)),
+          s(e(y, 0), [220, -80], [220, 40], e(b, 2)),
+          s(e(b, 0), [40, 160], e(f, 0)),
+          s(e(j, 2), [-140, -180], [-140, -80]),
+          s(e(j, 0), e(p, 1)),
+          n(f, -400, -230),
+          n(d, -60, -250),
+          n(y, 330, -290),
+          n(b, 310, 90),
+          n(p, -60, 40),
+          n(j, -80, 420),
+          i([p, "v"], [p, "i"]),
+          a(j, y));
+      },
+    },
+    {
+      id: "emf",
+      cat: translate("电源"),
+      title: translate("测电源电动势和内阻"),
+      speed: 1,
+      desc: translate(
+        "伏安法测一节旧干电池（E=1.5V，r=1Ω），由 U-I 图纵截距得 E、斜率得 r。",
+      ),
+      guide: {
+        goal: translate("由闭合电路欧姆定律 U = E − Ir，测量 E 与 r。"),
+        steps: [
+          translate("开关已闭合。拖动滑片改变外电阻"),
+          translate("每次调节后记录一组 U、I（至少 6 组，I 范围尽量大）"),
+          translate("拟合直线：纵截距 = E，斜率的绝对值 = r"),
+          translate("将电池内阻改为其他值，重复验证"),
+        ],
+        tip: translate("电流不要超过 0.6A 量程——滑片别推到最左端。"),
+      },
+      build({ add: t, T: e, W: s, B: n, log: i }) {
+        const a = t("battery", -80, 160, 2, {
+            E: 1.5,
+            r: 1,
+          }),
+          f = t("voltmeter", -80, 240, 2),
+          d = t("switch", -200, 40, 1, {
+            closed: !0,
+          }),
+          p = t("ammeter", -40, -80, 2),
+          y = t("pot", 120, -80, 0, {
+            Rmax: 20,
+            pos: 0.5,
+          });
+        (s(e(a, 1), [-200, 160], e(d, 1)),
+          s([-160, 160], [-160, 240], e(f, 1)),
+          s(e(a, 0), e(f, 0)),
+          s(e(d, 0), [-200, -80], e(p, 1)),
+          s(e(p, 0), e(y, 0)),
+          s(e(y, 2), [240, -120], [240, 160], e(a, 0)),
+          n(a, -320, 40),
+          n(f, -320, 260),
+          n(d, -60, -220),
+          n(p, 250, -220),
+          n(y, 260, 70),
+          i(f, p));
+      },
+    },
+    {
+      id: "iv",
+      cat: translate("电路基础"),
+      title: translate("描绘小灯泡的伏安特性曲线"),
+      speed: 1,
+      desc: translate(
+        "滑动变阻器分压式接法，从 0 开始调节灯泡电压，得到弯曲的 U-I 曲线。",
+      ),
+      guide: {
+        goal: translate("小灯泡电阻随温度变化，U-I 图不是直线。"),
+        steps: [
+          translate("滑片初始在 A 端，灯泡电压为 0"),
+          translate("逐步向右拖动滑片，每次记录一组 U、I"),
+          translate("观察 U-I 曲线向上弯曲：电压越高，U/I（电阻）越大"),
+          translate("对比“探究欧姆定律”中定值电阻的直线"),
+        ],
+        tip: translate(
+          "分压式接法：A、B 两端接电源，从 A 与滑片（D）间取电压。",
+        ),
+      },
+      build({ add: t, T: e, W: s, B: n, log: i, scope: a }) {
+        const f = t("pot", 0, 80, 0, {
+            Rmax: 20,
+            pos: 0,
+          }),
+          d = t("battery", 0, 200, 2, {
+            E: 4.5,
+            r: 0.2,
+          }),
+          p = t("bulb", -40, -80),
+          y = t("ammeter", 80, -80, 2),
+          b = t("voltmeter", -40, -160, 2);
+        (s(e(d, 1), [-120, 200], [-120, 80], e(f, 0)),
+          s(e(d, 0), [120, 200], [120, 80], e(f, 1)),
+          s([-120, 80], [-120, -80], e(p, 0)),
+          s(e(p, 1), e(y, 1)),
+          s(e(y, 0), [160, -80], [160, 40], e(f, 2)),
+          s(e(b, 2), [-100, -180], [-100, -80]),
+          s(e(b, 0), e(p, 1)),
+          i(b, y),
+          a([p, "v"], [p, "i"]),
+          n(d, -40, 300),
+          n(f, -40, 90),
+          n(p, -340, -60),
+          n(y, 250, -200),
+          n(b, -40, -220));
+      },
+    },
+    {
+      id: "rc",
+      cat: translate("电容"),
+      title: translate("RC 电路充放电"),
+      speed: 1,
+      tdiv: 1,
+      desc: translate(
+        "单刀双掷开关切换电容的充电与放电，示波器上观察指数曲线，时间常数 τ = RC = 1 s。",
+      ),
+      guide: {
+        goal: translate("观察电容电压、电流的指数变化规律。"),
+        steps: [
+          translate("开关掷向 1：电源经 R 给 C 充电"),
+          translate("观察示波器 CH1（电容电压）按 1−e<sup>−t/τ</sup> 上升"),
+          translate("点击单刀双掷开关掷向 2：电容经 R 放电"),
+          translate("CH2 电流在放电时反向。经过 τ 电压降至约 37%"),
+        ],
+        tip: translate("把 R 或 C 调大 10 倍，看看充电变慢多少？"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -280, 40, 3, {
+            V: "10",
+            r: 0.01,
+          }),
+          f = t("spdt", -120, -80, 2),
+          d = t("resistor", 40, -80, 0, {
+            R: 1e4,
+          }),
+          p = t("cap", 160, 40, 1, {
+            C: 1e-4,
+            Vmax: 25,
+          }),
+          y = t("voltmeter", 240, 40, 3);
+        (s(e(f, 0), e(d, 0)),
+          s(e(d, 1), [160, -80], e(p, 0)),
+          s(
+            e(p, 1),
+            [160, 160],
+            [-340, 160],
+            [-340, -140],
+            [-160, -140],
+            e(f, 2),
+          ),
+          s(e(a, 1), [-280, -60], e(f, 1)),
+          s(e(a, 0), [-280, 160]),
+          s([160, -40], [260, -40], e(y, 2)),
+          s(e(p, 1), e(y, 0)),
+          i([p, "v"], [d, "i"]),
+          n(a, -380, -60),
+          n(f, -120, -240),
+          n(d, 120, -240),
+          n(p, 120, 40),
+          n(y, 360, 40));
+      },
+    },
+    {
+      id: "rl",
+      cat: translate("电磁感应"),
+      title: translate("断电自感现象"),
+      speed: 0.2,
+      desc: translate(
+        "灯泡与大电感线圈并联，断开开关的瞬间灯泡闪亮一下再熄灭。",
+      ),
+      guide: {
+        goal: translate("线圈中电流不能突变——断电时线圈成为“电源”。"),
+        steps: [
+          translate("开关闭合，稳定后线圈电流大于灯泡电流"),
+          translate("点击开关断开，注意灯泡<b>闪亮</b>后缓慢熄灭"),
+          translate("示波器 CH2：灯泡电流瞬间反向并变大"),
+          translate("已放慢到 0.2 倍速，便于观察"),
+        ],
+        tip: translate("把灯泡删除再断开开关，线圈会在开关处拉出电弧！"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -200, 160, 2, {
+            V: "4",
+            r: 0.3,
+          }),
+          f = t("switch", -280, 40, 1, {
+            closed: !0,
+          }),
+          d = t("ind", 80, -80, 0, {
+            L: 2,
+            R: 8,
+          }),
+          p = t("bulb", 80, 40);
+        (s(e(a, 1), [-280, 160], e(f, 1)),
+          s(e(f, 0), [-280, -80], e(d, 0)),
+          s([-40, -80], [-40, 40], e(p, 0)),
+          s(e(d, 1), [200, -80], [200, 160], e(a, 0)),
+          s(e(p, 1), [200, 40]),
+          n(a, -360, -60),
+          n(f, -60, -230),
+          n(d, 200, -160),
+          n(p, 200, 110),
+          i([d, "i"], [p, "i"]));
+      },
+    },
+    {
+      id: "lc",
+      cat: translate("电磁振荡"),
+      title: translate("LC 振荡电路"),
+      speed: 0.01,
+      tdiv: 0.002,
+      desc: translate(
+        "先给电容充电，再切换到电感，观察电场能与磁场能相互转化的阻尼振荡。",
+      ),
+      guide: {
+        goal: translate("f = 1/(2π√LC) ≈ 159 Hz 的电磁振荡。"),
+        steps: [
+          translate("开关掷向 1，电容充电到 6 V"),
+          translate("点击单刀双掷开关掷向 2，电容通过线圈放电"),
+          translate("示波器 CH1 电容电压与 CH2 线圈电流相位差 90°"),
+          translate("切换 X-Y 模式观察相图螺旋"),
+          translate("线圈电阻越大，衰减越快"),
+        ],
+        tip: translate("时间流速已设为 10 ms/s（放慢 100 倍）。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("spdt", 0, -80, 0),
+          f = t("cap", -120, 40, 1, {
+            C: 1e-5,
+            Vmax: 50,
+            polar: !1,
+          }),
+          d = t("psu", 280, 40, 3, {
+            V: "6",
+            r: 1,
+          }),
+          p = t("ind", 120, 40, 1, {
+            L: 0.1,
+            R: 1,
+          });
+        (s(e(a, 0), [-120, -80], e(f, 0)),
+          s(e(a, 1), [280, -100], e(d, 1)),
+          s(e(a, 2), [120, -60], e(p, 0)),
+          s(e(f, 1), [-120, 160], [280, 160], e(d, 0)),
+          s(e(p, 1), [120, 160]),
+          n(a, 0, -200),
+          n(f, -260, 40),
+          n(d, 330, -120),
+          n(p, 100, 100),
+          i([f, "v"], [p, "i"]));
+      },
+    },
+    {
+      id: "rect",
+      cat: translate("交流电"),
+      title: translate("桥式整流与电容滤波"),
+      speed: 0.02,
+      tdiv: 0.01,
+      desc: translate(
+        "四只二极管组成整流桥，把 50Hz 交流变为脉动直流；接入滤波电容后波形变平滑。",
+      ),
+      guide: {
+        goal: translate("二极管的单向导电性应用。"),
+        steps: [
+          translate("示波器 CH1：输入交流电压；CH2：负载电压"),
+          translate("观察全波整流：负半周也被“翻上来”"),
+          translate("闭合开关 S1 接入滤波电容，脉动显著减小"),
+          translate("把负载电阻调小，纹波变大"),
+        ],
+        tip: translate("打开“电流动画”，观察正负半周电流分别走哪两只二极管。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("diode", 0, -80, 3),
+          f = t("diode", 0, 80, 3),
+          d = t("diode", 120, -80, 3),
+          p = t("diode", 120, 80, 3),
+          y = t("ac", 60, 0, 0, {
+            Vp: 12,
+            f: 50,
+            r: 0.5,
+          }),
+          b = t("resistor", 280, 0, 1, {
+            R: 1e3,
+            Pmax: 1,
+          }),
+          j = t("cap", 400, 40, 1, {
+            C: 22e-5,
+            Vmax: 25,
+          }),
+          A = t("switch", 400, -80, 1);
+        (s(e(a, 0), e(f, 1)),
+          s(e(d, 0), e(p, 1)),
+          s(e(y, 0), [0, 0]),
+          s(e(y, 1), [120, 0]),
+          s(e(a, 1), e(d, 1)),
+          s(e(d, 1), [280, -120], e(b, 0)),
+          s([280, -120], e(A, 0)),
+          s(e(f, 0), e(p, 0)),
+          s(e(p, 0), [280, 120], e(b, 1)),
+          s([280, 120], [400, 120], e(j, 1)),
+          s(e(A, 1), e(j, 0)),
+          n(y, -380, 0),
+          n(a, -90, -130, 1),
+          n(d, 90, -130, 1),
+          n(f, -90, 130, 1),
+          n(p, 90, 130, 1),
+          n(b, 290, 0, 1),
+          n(A, 470, -150),
+          n(j, 480, 130),
+          i([y, "v"], [b, "v"]));
+      },
+    },
+    {
+      id: "bridge",
+      cat: translate("测量"),
+      title: translate("惠斯通电桥测电阻"),
+      speed: 1,
+      desc: translate(
+        "调节 R3 使灵敏电流计示数为零，电桥平衡时 Rx = R2·R3 / R1。",
+      ),
+      guide: {
+        goal: translate("用电桥平衡法精确测量未知电阻 Rx。"),
+        steps: [
+          translate("当前电桥不平衡，电流计 G 指针打表"),
+          translate("在 <b>R3</b> 上滚动滚轮（或在右侧面板输入）调节阻值"),
+          translate("使 G 的读数为 0，此时 R1·Rx = R2·R3"),
+          translate("由 Rx = R2·R3/R1 计算，并与 Rx 实际值对比"),
+        ],
+        tip: translate("电流计是中间零点的，指针偏向哪边说明哪侧电势更高。"),
+      },
+      build({ add: t, T: e, W: s, B: n }) {
+        const i = t(
+            "resistor",
+            -120,
+            -80,
+            1,
+            {
+              R: 100,
+            },
+            "R1",
+          ),
+          a = t(
+            "resistor",
+            -120,
+            80,
+            1,
+            {
+              R: 100,
+            },
+            "R3",
+          ),
+          f = t(
+            "resistor",
+            120,
+            -80,
+            1,
+            {
+              R: 100,
+            },
+            "R2",
+          ),
+          d = t(
+            "resistor",
+            120,
+            80,
+            1,
+            {
+              R: 330,
+            },
+            "Rx",
+          ),
+          p = t("galv", 0, 0),
+          y = t("battery", -240, 0, 3, {
+            E: 3,
+            r: 0.5,
+          });
+        (s(e(i, 0), [-120, -160], [120, -160], e(f, 0)),
+          s(e(i, 1), e(a, 0)),
+          s(e(f, 1), e(d, 0)),
+          s(e(a, 1), [-120, 160], [120, 160], e(d, 1)),
+          s([-120, 0], e(p, 0)),
+          s(e(p, 1), [120, 0]),
+          s(e(y, 1), [-240, -160], [-120, -160]),
+          s(e(y, 0), [-240, 160], [-120, 160]),
+          n(i, -200, -170),
+          n(f, 200, -170),
+          n(a, -200, 190),
+          n(d, 200, 190),
+          n(p, 0, 10),
+          n(y, -460, 10));
+      },
+    },
+    {
+      id: "rlc",
+      cat: translate("交流电"),
+      title: translate("RLC 串联谐振"),
+      speed: 0.01,
+      tdiv: 0.002,
+      desc: translate(
+        "改变信号源频率，在 f₀ = 1/(2π√LC) ≈ 503 Hz 时电流达到最大，电容电压可远超电源电压。",
+      ),
+      guide: {
+        goal: translate("寻找串联谐振点，理解品质因数 Q。"),
+        steps: [
+          translate("选中信号源 U1，在其上滚动滚轮改变频率"),
+          translate("观察交流电流表（有效值）A1 读数的变化"),
+          translate("在约 503 Hz 时电流最大，CH1 与 CH2 同相"),
+          translate("CH3 电容电压峰值约为电源的 3 倍（Q≈3）"),
+        ],
+        tip: translate("减小电阻 R，谐振曲线更尖锐，Q 值更高。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("ac", -200, 40, 3, {
+            Vp: 5,
+            f: 200,
+            r: 0.1,
+          }),
+          f = t("resistor", -80, -80, 0, {
+            R: 10,
+            Pmax: 5,
+          }),
+          d = t("ind", 40, -80, 0, {
+            L: 0.01,
+            R: 0.5,
+          }),
+          p = t("cap", 160, -80, 0, {
+            C: 1e-5,
+            Vmax: 100,
+            polar: !1,
+          }),
+          y = t("ammeter", 240, 40, 3, {
+            mode: "ac",
+          });
+        (s(e(a, 1), [-200, -80], e(f, 0)),
+          s(e(f, 1), e(d, 0)),
+          s(e(d, 1), e(p, 0)),
+          s(e(p, 1), [240, -80], e(y, 1)),
+          s(e(y, 0), [240, 160], [-200, 160], e(a, 0)),
+          n(a, -360, 0),
+          n(f, -110, -200),
+          n(d, 110, -200),
+          n(p, 330, -150),
+          n(y, 180, 170),
+          i([a, "v"], [f, "v"], [p, "v"]));
+      },
+    },
+    {
+      id: "xfmr",
+      cat: translate("交流电"),
+      title: translate("变压器原理"),
+      speed: 0.02,
+      tdiv: 0.005,
+      desc: translate(
+        "原副线圈匝数比 2:1，交流电压表显示有效值，验证 U₁/U₂ = n₁/n₂。",
+      ),
+      guide: {
+        goal: translate("理想变压器电压与匝数成正比。"),
+        steps: [
+          translate("V1、V2 为交流有效值模式（接 15V 量程）"),
+          translate("比较两表读数之比与匝数比 n₂/n₁ = 0.5"),
+          translate("选中变压器，滚轮调节匝数比，观察灯泡亮度"),
+          translate("示波器对比原、副线圈电压波形"),
+        ],
+        tip: translate("把信号源换成直流电源试试——变压器不能改变恒定电压！"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("xfmr", 0, 0, 0, {
+            L1: 10,
+            n: 0.5,
+          }),
+          f = t("ac", -160, 0, 3, {
+            Vp: 10,
+            f: 50,
+          }),
+          d = t("voltmeter", -100, 0, 3, {
+            mode: "ac",
+          }),
+          p = t("bulb", 200, 0, 1),
+          y = t("voltmeter", 120, 0, 3, {
+            mode: "ac",
+          });
+        (s(e(f, 1), [-160, -80], [-40, -80], e(a, 0)),
+          s(e(f, 0), [-160, 80], [-40, 80], e(a, 1)),
+          s(e(d, 2), [-80, -80]),
+          s(e(d, 0), [-100, 80]),
+          s(e(a, 2), [40, -80], [200, -80], e(p, 0)),
+          s(e(a, 3), [40, 80], [200, 80], e(p, 1)),
+          s(e(y, 2), [140, -80]),
+          s(e(y, 0), [120, 80]),
+          n(a, 0, 0),
+          n(f, -360, -40),
+          n(d, -220, 230),
+          n(p, 300, -60),
+          n(y, 230, 230),
+          i([f, "v"], [p, "v"]));
+      },
+    },
+    {
+      id: "led",
+      cat: translate("半导体"),
+      title: translate("二极管单向导电性"),
+      speed: 1,
+      desc: translate("1 Hz 交流驱动一对反向并联的红、绿 LED，两灯交替发光。"),
+      guide: {
+        goal: translate("LED 只有正向电压超过导通电压才会发光。"),
+        steps: [
+          translate("观察红、绿 LED 交替闪烁"),
+          translate("开启“电流动画”，看电流方向如何交替"),
+          translate("把信号源改为方波或更高频率"),
+          translate("把限流电阻调到 10Ω 以下，LED 会过流烧毁"),
+        ],
+        tip: translate("不同颜色 LED 导通电压不同：红约 1.8V，蓝约 3V。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("ac", -160, 40, 3, {
+            Vp: 5,
+            f: 1,
+          }),
+          f = t("resistor", -40, -80, 0, {
+            R: 150,
+          }),
+          d = t("led", 80, 0, 1, {
+            color: "red",
+          }),
+          p = t("led", 200, 0, 3, {
+            color: "green",
+          });
+        (s(e(a, 1), [-160, -80], e(f, 0)),
+          s(e(f, 1), [80, -80], e(d, 0)),
+          s([80, -80], [200, -80], e(p, 1)),
+          s(e(d, 1), [80, 120]),
+          s(e(p, 0), [200, 120], [-160, 120], e(a, 0)),
+          n(a, -320, 20),
+          n(f, -40, -180),
+          n(d, 180, -60),
+          n(p, 180, 120, 2),
+          i([a, "v"], [d, "i"], [p, "i"]));
+      },
+    },
+    {
+      id: "ldr",
+      cat: translate("半导体"),
+      title: translate("三极管光控路灯"),
+      speed: 1,
+      desc: translate("光敏电阻与三极管组成光控开关：天黑时 LED 自动点亮。"),
+      guide: {
+        goal: translate("三极管的开关作用与分压式偏置。"),
+        steps: [
+          translate("选中光敏电阻 RG1，在其上滚动滚轮降低光照"),
+          translate("光照变暗 → RG 阻值增大 → 基极电压升高 → 三极管导通"),
+          translate("选中三极管查看 I_B、I_C 及工作状态（截止/放大/饱和）"),
+          translate("调节 β 或 Rb 改变灵敏度"),
+        ],
+        tip: translate("在放大区 I_C ≈ β·I_B，进入饱和后不再成立。"),
+      },
+      build({ add: t, T: e, W: s, B: n }) {
+        const i = t("psu", -280, 0, 3, {
+            V: "6",
+            r: 0.2,
+          }),
+          a = t("bjt", 80, 40, 0),
+          f = t("resistor", 100, -120, 1, {
+            R: 220,
+          }),
+          d = t("led", 100, -40, 1, {
+            color: "white",
+          }),
+          p = t("resistor", -40, -80, 1, {
+            R: 1e4,
+          }),
+          y = t("ldr", -40, 120, 1, {
+            lux: 800,
+          });
+        (s(e(i, 1), [-280, -160], [100, -160]),
+          s(e(p, 0), [-40, -160]),
+          s(e(i, 0), [-280, 160], [100, 160]),
+          s(e(a, 2), [100, 160]),
+          s(e(p, 1), [-40, 40], e(a, 0)),
+          s([-40, 40], e(y, 0)),
+          n(i, -400, 0),
+          n(p, -120, -180),
+          n(y, -120, 170),
+          n(a, 110, 30),
+          n(f, 330, -200),
+          n(d, 330, -20));
+      },
+    },
+    {
+      id: "motor",
+      cat: translate("电与磁"),
+      title: translate("直流电动机"),
+      speed: 1,
+      tdiv: 0.2,
+      desc: translate(
+        "观察电动机启动电流冲击、反电动势以及负载对转速与电流的影响。",
+      ),
+      guide: {
+        goal: translate("电动机不是纯电阻：转动时产生反电动势。"),
+        steps: [
+          translate("闭合开关，示波器 CH1 中电流先冲高后回落"),
+          translate("选中电动机，增大“负载转矩”，转速下降、电流上升"),
+          translate("对比 U/I 与电枢电阻：U/I 远大于 Ra"),
+          translate("滑动变阻器可调速"),
+        ],
+        tip: translate(
+          "电动机堵转（负载很大）时相当于纯电阻，电流最大，最容易烧毁。",
+        ),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -80, 160, 2, {
+            V: "6",
+            r: 0.3,
+          }),
+          f = t("switch", -200, 40, 1),
+          d = t("motor", -80, -80),
+          p = t("ammeter", 100, -80, 2, {
+            rs: "0.6/3",
+          }),
+          y = t("pot", 100, 80, 0, {
+            Rmax: 20,
+            pos: 0,
+          }),
+          b = t("voltmeter", -80, -160, 2);
+        (s(e(a, 1), [-200, 160], e(f, 1)),
+          s(e(f, 0), [-200, -80], e(d, 0)),
+          s(e(d, 1), e(p, 1)),
+          s(e(p, 0), [220, -80], [220, 40], e(y, 2)),
+          s(e(y, 0), [40, 160], e(a, 0)),
+          s(e(b, 2), [-140, -180], [-140, -80]),
+          s(e(b, 0), [-40, -80]),
+          i([d, "i"], [d, "v"]),
+          n(a, -400, -230),
+          n(f, -60, -250),
+          n(p, 330, -290),
+          n(y, 310, 90),
+          n(d, -60, 40),
+          n(b, -80, 420));
+      },
+    },
+    {
+      id: "fuse",
+      cat: translate("安全用电"),
+      title: translate("短路与保险丝"),
+      speed: 1,
+      desc: translate("闭合短路开关，电流急剧增大，保险丝熔断保护电路。"),
+      guide: {
+        goal: translate("理解短路的危害与保险丝的作用。"),
+        steps: [
+          translate("正常工作：灯泡发光，电流约 0.5 A"),
+          translate("闭合 S2 将灯泡短路，观察电流表"),
+          translate("保险丝在瞬间熔断，电路断开"),
+          translate("点顶栏 🔧 修复，把保险丝额定电流调大再试——小心电源过载"),
+        ],
+        tip: translate("保险丝应串联在干路上，额定电流略大于正常工作电流。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -200, 160, 2, {
+            V: "6",
+            r: 0.2,
+          }),
+          f = t("fuse", -280, 40, 1, {
+            Ir: 1,
+          }),
+          d = t("bulb", 80, -80, 0, {
+            Vr: 6,
+            Pr: 3,
+          }),
+          p = t("switch", 80, 40, 0, {}, "S2"),
+          y = t("ammeter", 40, 160, 0);
+        (s(e(a, 1), [-280, 160], e(f, 1)),
+          s(e(f, 0), [-280, -80], e(d, 0)),
+          s([-40, -80], [-40, 40], e(p, 0)),
+          s(e(d, 1), [200, -80], [200, 180], e(y, 2)),
+          s(e(p, 1), [200, 40]),
+          s(e(y, 0), e(a, 0)),
+          n(a, -380, -60),
+          n(f, -80, -240),
+          n(d, 200, -220),
+          n(p, 200, 30),
+          n(y, -60, 230),
+          i([f, "i"]));
+      },
+    },
+    {
+      id: "zener",
+      cat: translate("半导体"),
+      title: translate("稳压二极管稳压电路"),
+      speed: 1,
+      desc: translate(
+        "稳压管反向击穿后两端电压几乎不变，即使电源电压大幅波动，负载电压仍稳定在 5.1V。",
+      ),
+      guide: {
+        goal: translate("稳压管工作在反向击穿区。"),
+        steps: [
+          translate("选中学生电源 E1，在其上滚动滚轮在 6~16 V 间换挡"),
+          translate("观察电压表 V1（15V 量程）几乎稳定在 5.1 V"),
+          translate("电源电压低于 5.1 V 时稳压失效"),
+          translate("减小负载电阻，观察稳压管电流的变化"),
+        ],
+        tip: translate("限流电阻 R1 必不可少，否则稳压管会因过流烧毁。"),
+      },
+      build({ add: t, T: e, W: s, B: n }) {
+        const i = t("psu", -200, 40, 3, {
+            V: "12",
+            r: 0.2,
+          }),
+          a = t("resistor", -80, -80, 0, {
+            R: 100,
+            Pmax: 2,
+          }),
+          f = t("zener", 40, 40, 3),
+          d = t("resistor", 160, 40, 1, {
+            R: 470,
+          }),
+          p = t("voltmeter", 260, 40, 3);
+        (s(e(i, 1), [-200, -80], e(a, 0)),
+          s(e(a, 1), [40, -80], e(f, 1)),
+          s([40, -80], [160, -80], e(d, 0)),
+          s([160, -80], [280, -80], e(p, 2)),
+          s(e(i, 0), [-200, 160], [260, 160], e(p, 0)),
+          s(e(f, 0), [40, 160]),
+          s(e(d, 1), [160, 160]),
+          n(i, -400, -40),
+          n(a, -110, -200),
+          n(f, 80, -40, 1),
+          n(d, 260, -40, 1),
+          n(p, 150, 220));
+      },
+    },
+    {
+      id: "joule",
+      cat: translate("电与热"),
+      title: translate("探究焦耳定律"),
+      speed: 10,
+      desc: translate(
+        "两个装有等质量煤油的烧瓶，电阻丝 5Ω 与 10Ω 串联，比较相同时间内温度计示数的升高。",
+      ),
+      guide: {
+        goal: translate(
+          "电流、通电时间相同时，电阻越大产生的热量越多：Q = I²Rt。",
+        ),
+        steps: [
+          translate("闭合开关 S1（已设为 10 倍速快进）"),
+          translate("观察两支温度计：RH2（10Ω）温度升得更快"),
+          translate("悬停或选中电热器查看温升 Δt 与热量 Q，Δt₂ : Δt₁ ≈ 2 : 1"),
+          translate(
+            "点“冷却复位”后，调大电源电压再做一次，比较电流对热量的影响",
+          ),
+        ],
+        tip: translate(
+          "煤油比热容小，温度变化更明显——这就是实验用煤油而不用水的原因。",
+        ),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -200, 160, 2, {
+            V: "6",
+            r: 0.1,
+          }),
+          f = t("switch", -280, 40, 1),
+          d = t("heater", -120, -80, 0, {
+            R: 5,
+            m: 0.01,
+          }),
+          p = t("heater", 80, -80, 0, {
+            R: 10,
+            m: 0.01,
+          }),
+          y = t("ammeter", 200, 40, 3);
+        (s(e(a, 1), [-280, 160], e(f, 1)),
+          s(e(f, 0), [-280, -80], e(d, 0)),
+          s(e(d, 1), e(p, 0)),
+          s(e(p, 1), [200, -80], e(y, 1)),
+          s(e(y, 0), [200, 160], e(a, 0)),
+          n(a, -430, -120),
+          n(f, -130, -270),
+          n(d, -140, 40),
+          n(p, 130, 40),
+          n(y, 380, -210),
+          i([d, "v"], [p, "v"]));
+      },
+    },
+    {
+      id: "rwire",
+      cat: translate("电路基础"),
+      title: translate("探究影响导体电阻大小的因素"),
+      speed: 1,
+      desc: translate(
+        "四根电阻丝分别改变材料、长度、横截面积，依次接入电路比较电流大小。",
+      ),
+      guide: {
+        goal: translate("导体电阻与材料、长度、横截面积有关：R = ρL/S。"),
+        steps: [
+          translate("先闭合总开关 S1，再<b>每次只闭合一个</b>支路开关"),
+          translate("RL1 与 RL2：材料、粗细相同，长度 1m 与 0.5m"),
+          translate("RL1 与 RL4：长度相同，直径 0.5mm 与 1mm"),
+          translate("RL1 与 RL3：长度粗细相同，镍铬与锰铜"),
+          translate("电流表接 3A 量程，电流越大说明电阻越小"),
+        ],
+        tip: translate("这就是“控制变量法”：每次只改变一个因素。"),
+      },
+      build({ add: t, T: e, W: s, B: n }) {
+        const i = t("psu", -240, 40, 3, {
+            V: "2",
+            r: 0.1,
+          }),
+          a = t("switch", -240, -80, 1),
+          f = t("ammeter", -160, -160, 2);
+        (s(e(i, 1), e(a, 1)),
+          s(e(a, 0), [-240, -180], e(f, 2)),
+          s(e(f, 0), [360, -160]),
+          s(e(i, 0), [-240, 160], [360, 160]),
+          [
+            {
+              mat: "nicr",
+              L: 1,
+              d: 0.5,
+            },
+            {
+              mat: "nicr",
+              L: 0.5,
+              d: 0.5,
+            },
+            {
+              mat: "mncu",
+              L: 1,
+              d: 0.5,
+            },
+            {
+              mat: "nicr",
+              L: 1,
+              d: 1,
+            },
+          ].forEach((p, y) => {
+            const b = y * 120,
+              j = t("switch", b, -80, 1),
+              A = t("rwire", b, 60, 1, p);
+            (s(e(j, 0), [b, -160]),
+              s(e(j, 1), e(A, 0)),
+              s(e(A, 1), [b, 160]),
+              n(j, -60, -170 + y * 155),
+              n(A, 290, -170 + y * 155));
+          }),
+          n(i, -470, 60),
+          n(a, -440, -300),
+          n(f, -130, -420));
+      },
+    },
+    {
+      id: "mm",
+      cat: translate("测量"),
+      title: translate("多用电表的使用"),
+      speed: 1,
+      desc: translate(
+        "用欧姆挡测电阻箱阻值，用直流电压挡测电池组电压；点击电表旋钮切换挡位。",
+      ),
+      guide: {
+        goal: translate("学会读数、换挡，理解欧姆挡内部有电源。"),
+        steps: [
+          translate(
+            "左侧电表处于 Ω 挡：点击<b>电阻箱的旋钮</b>改变阻值，观察读数",
+          ),
+          translate("右侧电表处于 V⎓ 挡，测得电池组电压"),
+          translate(
+            "点击电表的旋钮可以换挡；把左表换到 V 挡，读数为 0（电阻箱不是电源）",
+          ),
+          translate("思考：为什么不能用欧姆挡测带电的电路？"),
+        ],
+        tip: translate(
+          "欧姆挡时电流从红表笔流出，所以红表笔接的是内部电池的正极。",
+        ),
+      },
+      build({ add: t, T: e, W: s, B: n }) {
+        const i = t("rbox", 0, 0, 0, {
+            R: 470,
+          }),
+          a = t("mm", 0, -120, 0, {
+            mode: "ohm",
+          }),
+          f = t("battery", 240, 0, 0, {
+            E: 3,
+            r: 0.3,
+          }),
+          d = t("mm", 240, -120, 2, {
+            mode: "dcv",
+          });
+        (s(e(a, 0), e(i, 0)),
+          s(e(a, 1), e(i, 1)),
+          s(e(d, 0), e(f, 1)),
+          s(e(d, 1), e(f, 0)),
+          n(i, -230, 130),
+          n(a, -230, -150),
+          n(f, 250, 130),
+          n(d, 250, -150));
+      },
+    },
+    {
+      id: "emag",
+      cat: translate("电与磁"),
+      title: translate("影响电磁铁磁性强弱的因素"),
+      speed: 1,
+      desc: translate(
+        "移动滑动变阻器改变电流，观察电磁铁吸引大头针的数目；还可改变匝数、抽出铁芯。",
+      ),
+      guide: {
+        goal: translate("电磁铁磁性与电流大小、线圈匝数、有无铁芯有关。"),
+        steps: [
+          translate("闭合开关，电磁铁吸起一串大头针"),
+          translate("拖动滑片减小电阻 → 电流增大 → 吸起的大头针变多"),
+          translate("选中电磁铁，把匝数改为 50 / 150 匝比较"),
+          translate("取消“插入铁芯”，磁性大大减弱"),
+        ],
+        tip: translate("电流表接的是 3A 量程。"),
+      },
+      build({ add: t, T: e, W: s, B: n, scope: i }) {
+        const a = t("psu", -80, 160, 2, {
+            V: "6",
+            r: 0.1,
+          }),
+          f = t("switch", -200, 40, 1),
+          d = t("emag", -80, -80),
+          p = t("ammeter", 100, -80, 2),
+          y = t("pot", 100, 80, 0, {
+            Rmax: 20,
+            pos: 0.4,
+          });
+        (s(e(a, 1), [-200, 160], e(f, 1)),
+          s(e(f, 0), [-200, -80], e(d, 0)),
+          s(e(d, 1), [-40, -100], e(p, 2)),
+          s(e(p, 0), [220, -80], [220, 40], e(y, 2)),
+          s(e(y, 0), [40, 160], e(a, 0)),
+          n(a, -400, -230),
+          n(f, -60, -250),
+          n(p, 330, -290),
+          n(y, 310, 90),
+          n(d, -80, 70),
+          i([d, "i"]));
+      },
+    },
+    {
+      id: "solar",
+      cat: translate("电源"),
+      title: translate("太阳能电池驱动电动机"),
+      speed: 1,
+      desc: translate(
+        "台灯照射太阳能电池板，产生的电能驱动小电动机；改变光照强度观察转速、电压和电流。",
+      ),
+      guide: {
+        goal: translate("光能 → 电能 → 机械能。太阳能电池的输出随光照变化。"),
+        steps: [
+          translate("闭合开关，电动机转动"),
+          translate("选中太阳能电池板，在其上滚动滚轮调节光照"),
+          translate("光照减弱：电流减小，电动机变慢甚至停转"),
+          translate("断开开关，电压表读数即为开路电压"),
+        ],
+        tip: translate("太阳能电池接近“恒流源”：短路电流与光照强度成正比。"),
+      },
+      build({ add: t, T: e, W: s, B: n }) {
+        const i = t("solar", -200, 40, 3, {
+            lux: 1,
+            Isc: 0.3,
+            N: "10",
+          }),
+          a = t("switch", -80, -80),
+          f = t("ammeter", 80, -80, 2),
+          d = t("motor", 200, 40, 1, {
+            Ra: 4,
+          }),
+          p = t("voltmeter", -320, 40, 3);
+        (s(e(i, 1), [-200, -80], e(a, 0)),
+          s(e(a, 1), e(f, 1)),
+          s(e(f, 0), [200, -80], e(d, 0)),
+          s(e(d, 1), [200, 160], [-200, 160], e(i, 0)),
+          s(e(p, 2), [-300, -80], [-200, -80]),
+          s(e(p, 0), [-320, 160], [-200, 160]),
+          n(i, -380, -40),
+          n(a, -60, -250),
+          n(f, 260, -270),
+          n(d, 260, 110),
+          n(p, -60, 230));
+      },
+    },
+    {
+      id: "free",
+      cat: translate("自由"),
+      title: translate("空白实验台"),
+      speed: 1,
+      desc: translate("清空实验台，从左侧元件库开始自由搭建你自己的电路。"),
+      guide: {
+        goal: translate("自由探索。"),
+        steps: [
+          translate("从左侧拖出器材放到实验台上"),
+          translate("从接线柱拖出导线连到另一个接线柱"),
+          translate("点击器材在右侧面板调节参数"),
+          translate("用示波器与数据记录进行测量"),
+        ],
+        tip: translate(
+          "实物图中：左键拖空白处平移，右键拖动旋转视角，滚轮缩放。",
+        ),
+      },
+      build() {},
+    },
+  ];
+  let bs = performance.now(),
+    pn = 0,
+    hn = 0;
+  function un(t) {
+    const e = Math.min(0.05, (t - bs) / 1e3);
+    if (((bs = t), G.dirty && V0(), G.running)) {
+      const s = G.speed / (60 * G.spf);
+      let n = Math.min(Math.max(1, Math.round(e * 60 * G.spf)), G.spf * 3);
+      const i = performance.now();
+      let a = 0;
+      for (; a < n && (Es(s), !(performance.now() - i > 13)); a++);
+      ((G.lag = Ct(G.lag, a < n ? 1 : 0, 0.05)),
+        (E("#dtInfo").textContent = translate("dt {0} · {1} 节点{2}", [
+          z(s, "s"),
+          vt.n,
+          G.lag > 0.5 ? translate(" · 降速") : "",
+        ])));
+    }
+    (Ns(),
+      Yn(e),
+      Kt() && V3D.render(e),
+      qn(),
+      (E("#simTime").textContent = ae(G.t, "s", 5)),
+      !E("#app").classList.contains("dock-min") && B0 === "scope" && oo(),
+      t - pn > 110 &&
+        ((pn = t),
+        Zs(),
+        B0 === "info" && !E("#app").classList.contains("dock-min") && lo()),
+      t - hn > 300 && ((hn = t), B0 === "scope" && io(), we && us()),
+      requestAnimationFrame(un));
+  }
+  function po() {
+    (Ye(), Fn(), Ks(), fo(), je(), h0());
+    let t = !1;
+    if (location.hash.startsWith("#c="))
+      try {
+        (l0(
+          JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(3))))),
+        ),
+          (t = !0),
+          Pt(translate("已从分享链接载入电路"), "ok"));
+      } catch {
+        Pt(translate("分享链接无效"), "warn");
+      }
+    if (!t)
+      try {
+        const e = localStorage.getItem("voltlab.v1");
+        if (e) {
+          const s = JSON.parse(e);
+          s.comps &&
+            s.comps.length &&
+            (l0(s), (t = !0), Pt(translate("已恢复上次的电路")));
+        }
+      } catch {}
+    (t || fn(dn[1]),
+      he(),
+      requestAnimationFrame((e) => {
+        ((bs = e), un(e));
+      }));
+  }
+  (document.fonts &&
+    document.fonts.ready &&
+    document.fonts.ready.then(() => {
+      Ks();
+    }),
+    po());
+  {
+    let at = function (h, r = 0, c = 0.5, l = {}) {
+        const u = new Rt({
+          color: h,
+          metalness: r,
+          roughness: c,
+          ...l,
+        });
+        return ((u.userData.shared = !0), u);
+      },
+      uo = function () {
+        const h = new J0({
+          color: 16777215,
+          metalness: 0,
+          roughness: 0.04,
+          transparent: !0,
+          opacity: 0.1,
+          clearcoat: 1,
+          clearcoatRoughness: 0.05,
+          depthWrite: !1,
+          envMapIntensity: 0.7,
+        });
+        ((h.userData.shared = !0),
+          (P = {
+            paint: at(6125718, 0.45, 0.38),
+            paintDk: at(4414069, 0.45, 0.42),
+            panel: at(15856629, 0, 0.55),
+            capRed: at(13573400, 0, 0.3, {
+              flatShading: !0,
+            }),
+            capBlack: at(1579293, 0, 0.35, {
+              flatShading: !0,
+            }),
+            brass: at(14464102, 1, 0.28),
+            steel: at(13883873, 1, 0.2),
+            chrome: at(16054008, 1, 0.07),
+            copper: at(12874042, 1, 0.3),
+            black: at(1447706, 0.1, 0.35),
+            rubber: at(2237480, 0, 0.85),
+            ceramic: at(15788503, 0, 0.42),
+            white: at(16250867, 0, 0.45),
+            grey: at(9081500, 0.6, 0.35),
+            core: at(6120557, 0.85, 0.42),
+            plastic: at(2830134, 0, 0.45),
+            glass: h,
+          }));
+      },
+      Qt = function (h, r, c) {
+        const l = document.createElement("canvas");
+        ((l.width = h), (l.height = r));
+        const u = l.getContext("2d");
+        c(u, h, r);
+        const m = new hi(l);
+        return (
+          (m.colorSpace = ui),
+          (m.anisotropy = 8),
+          (m.userData = {
+            g: u,
+            cv: l,
+          }),
+          m
+        );
+      },
+      g0 = function (h, r) {
+        const { g: c, cv: l } = h.userData;
+        (c.setTransform(1, 0, 0, 1, 0, 0),
+          c.clearRect(0, 0, l.width, l.height),
+          r(c, l.width, l.height),
+          (h.needsUpdate = !0));
+      },
+      L = function (h, r, c, l = 0, u = 0, m = 0) {
+        const v = new Lt(r, c);
+        return (
+          v.position.set(l, u, m),
+          (v.castShadow = !0),
+          (v.receiveShadow = !0),
+          h.add(v),
+          v
+        );
+      },
+      W = function (h, r, c, l, u) {
+        const m = I().subVectors(c, r),
+          v = m.length(),
+          x = L(h, new K0(l, l, v, 8), u);
+        return (
+          x.position.copy(r).addScaledVector(m, 0.5),
+          x.quaternion.setFromUnitVectors(I(0, 1, 0), m.normalize()),
+          x
+        );
+      },
+      Vt = function () {
+        return {
+          g: new Ot(),
+          posts: [],
+          top: 3,
+          h: 1.1,
+          upd: null,
+          tex: [],
+        };
+      },
+      ot = function (h, r, c, l, u, m, v = !1) {
+        const x = new Ot();
+        x.position.set(r, c, l);
+        const M = u === "red" ? P.capRed : u === "black" ? P.capBlack : P.brass;
+        return (
+          L(x, rt(0.62, 0.68, 0.14, 24), P.brass, 0, 0.07, 0),
+          L(x, rt(0.2, 0.2, 0.9, 12), P.brass, 0, 0.55, 0),
+          L(x, rt(0.52, 0.56, 0.85, 18), M, 0, 1.28, 0),
+          L(x, rt(0.34, 0.52, 0.2, 18), M, 0, 1.8, 0),
+          v && (x.rotation.x = s / 2),
+          (x.userData.pick = {
+            kind: "term",
+            k: m,
+          }),
+          h.g.add(x),
+          (h.posts[m] = {
+            g: x,
+            anchor: I(0, 0.42, 0),
+            front: v,
+          }),
+          x
+        );
+      },
+      ne = function (h, r, c, l = 1.1, u = P.paint) {
+        return (L(h.g, Ut(r, l, c, 0.35), u, 0, l / 2, 0), (h.h = l), l);
+      },
+      qt = function (h, r, c, l, u, m, v, x = {}) {
+        const M = Qt(x.pw || 256, x.ph || 64, (S, N, C) => {
+            ((S.fillStyle = x.color || "#1b2735"),
+              (S.font = `${x.weight || 600} ${x.size || 38}px ${Pe}`),
+              (S.textAlign = "center"),
+              (S.textBaseline = "middle"),
+              S.fillText(r, N / 2, C / 2));
+          }),
+          k = L(
+            h.g,
+            new be(c, l),
+            new Rt({
+              map: M,
+              transparent: !0,
+              roughness: 0.6,
+              depthWrite: !1,
+            }),
+            u,
+            m,
+            v,
+          );
+        return ((k.rotation.x = -s / 2), (k.castShadow = !1), h.tex.push(M), k);
+      },
+      ye = function (h, r = 12, c = 4.4, l = ["red", "black"]) {
+        const u = Vt(),
+          m = ne(u, r, c);
+        return (
+          ot(u, -r / 2 + 1.3, m, 0, l[0], 0),
+          ot(u, r / 2 - 1.3, m, 0, l[1], 1),
+          u
+        );
+      },
+      xn = function (h, r, c) {
+        const l = h.h,
+          u = Math.abs(h.posts[0].g.position.x);
+        (W(h.g, I(-r, c, 0), I(-u + 0.25, l + 0.45, 0), 0.07, P.steel),
+          W(h.g, I(r, c, 0), I(u - 0.25, l + 0.45, 0), 0.07, P.steel));
+      },
+      m0 = function (h, r, c, l = !0) {
+        return Qt(64, 512, (u, m, v) => {
+          ((u.fillStyle = h),
+            u.fillRect(0, 0, m, v),
+            (u.strokeStyle = r),
+            (u.lineWidth = (v / c) * 0.45));
+          for (let M = 0; M < c; M++) {
+            const k = ((M + 0.5) * v) / c;
+            (u.beginPath(), u.moveTo(0, k), u.lineTo(m, k), u.stroke());
+          }
+          const x = u.createLinearGradient(0, 0, m, 0);
+          (x.addColorStop(0, "rgba(255,255,255,.0)"),
+            x.addColorStop(0.5, "rgba(255,255,255,.12)"),
+            x.addColorStop(1, "rgba(0,0,0,.0)"),
+            (u.fillStyle = x),
+            u.fillRect(0, 0, m, v));
+        });
+      },
+      yn = function (h, r, c, l) {
+        const u = q[l.type],
+          m = !!u.center;
+        ((h.fillStyle = "#fbfaf4"), h.fillRect(0, 0, r, c));
+        const v = r / 2,
+          x = c * 0.9,
+          M = c * 0.66,
+          k = -s / 2 - 0.85,
+          S = -s / 2 + 0.85;
+        ((h.strokeStyle = "rgba(140,155,170,.55)"),
+          (h.lineWidth = c * 0.035),
+          h.beginPath(),
+          h.arc(v, x, M * 0.83, k, S),
+          h.stroke(),
+          (h.strokeStyle = "#1b1b1b"),
+          (h.lineWidth = 2.5),
+          h.beginPath(),
+          h.arc(v, x, M, k, S),
+          h.stroke());
+        const N = 30;
+        for (let et = 0; et <= N; et++) {
+          const ut = k + ((S - k) * et) / N,
+            nt = et % 10 === 0 ? c * 0.075 : et % 5 === 0 ? c * 0.05 : c * 0.03;
+          ((h.lineWidth = et % 5 === 0 ? 2.4 : 1.5),
+            h.beginPath(),
+            h.moveTo(v + Math.cos(ut) * M, x + Math.sin(ut) * M),
+            h.lineTo(v + Math.cos(ut) * (M + nt), x + Math.sin(ut) * (M + nt)),
+            h.stroke());
+        }
+        ((h.textAlign = "center"),
+          (h.textBaseline = "middle"),
+          (h.fillStyle = "#1b1b1b"));
+        const C = (et) => String(+et.toPrecision(3));
+        if (m) {
+          h.font = `600 ${c * 0.07}px Arial`;
+          for (let et = -3; et <= 3; et++) {
+            const ut = k + ((S - k) * (et + 3)) / 6;
+            h.fillText(
+              String(et),
+              v + Math.cos(ut) * (M + c * 0.13),
+              x + Math.sin(ut) * (M + c * 0.13),
+            );
+          }
+          ((h.font = `500 ${c * 0.05}px Arial`),
+            h.fillText("×100 μA", v, x - M * 0.2));
+        } else {
+          const [et, ut] = o0(l);
+          for (let nt = 0; nt <= 3; nt++) {
+            const kt = k + ((S - k) * nt) / 3;
+            ((h.font = `600 ${c * 0.072}px Arial`),
+              (h.fillStyle = "#1b1b1b"),
+              h.fillText(
+                C((et * nt) / 3),
+                v + Math.cos(kt) * (M + c * 0.135),
+                x + Math.sin(kt) * (M + c * 0.135),
+              ),
+              (h.font = `500 ${c * 0.058}px Arial`),
+              (h.fillStyle = "#5a5f66"),
+              h.fillText(
+                C((ut * nt) / 3),
+                v + Math.cos(kt) * (M * 0.66),
+                x + Math.sin(kt) * (M * 0.66),
+              ));
+          }
+        }
+        ((h.fillStyle = "#1b1b1b"),
+          (h.font = `700 ${c * 0.2}px "Times New Roman",serif`),
+          h.fillText(u.meter, v, x - M * 0.42),
+          (h.font = `500 ${c * 0.04}px Arial`),
+          (h.fillStyle = "#666"),
+          h.fillText(
+            l.p.mode === "ac" ? "~  AC" : "—  DC  2.5",
+            v,
+            x - M * 0.14,
+          ));
+        const R = -s * 0.78,
+          D = s * 0.56,
+          B = l.s.needle,
+          lt = B === void 0 ? (m ? 0.5 : 0) : (B - R) / D,
+          tt = k + (S - k) * Q(lt, -0.04, 1.04);
+        ((h.strokeStyle = "#c81f18"),
+          (h.lineWidth = c * 0.016),
+          (h.lineCap = "round"),
+          h.beginPath(),
+          h.moveTo(v - Math.cos(tt) * M * 0.1, x - Math.sin(tt) * M * 0.1),
+          h.lineTo(v + Math.cos(tt) * M * 1.07, x + Math.sin(tt) * M * 1.07),
+          h.stroke(),
+          (h.fillStyle = "#1b1b1b"),
+          h.beginPath(),
+          h.arc(v, x, c * 0.05, 0, s * 2),
+          h.fill(),
+          (h.strokeStyle = "#8a95a3"),
+          (h.lineWidth = 6),
+          h.strokeRect(3, 3, r - 6, c - 6));
+      },
+      xs = function (h, r, c, l, u, m) {
+        const v = h.g;
+        L(v, Ut(r, c, l, 0.8), P.paint, 0, c / 2 + 0.4, 0);
+        for (const [R, D] of [
+          [-r / 2 + 1.5, -l / 2 + 1.5],
+          [r / 2 - 1.5, -l / 2 + 1.5],
+          [-r / 2 + 1.5, l / 2 - 1.5],
+          [r / 2 - 1.5, l / 2 - 1.5],
+        ])
+          L(v, rt(0.6, 0.6, 0.4, 12), P.rubber, R, 0.2, D);
+        const x = r - 2,
+          M = c - 1.5,
+          k = 32;
+        h.panel = {
+          pw: x,
+          ph: M,
+          k,
+          y0: c / 2 + 0.4,
+        };
+        const S = (R, D, B) => {
+            ((R.fillStyle = "#eef1f4"),
+              R.fillRect(0, 0, D, B),
+              (R.strokeStyle = "#b8c3cf"),
+              (R.lineWidth = 4),
+              R.strokeRect(2, 2, D - 4, B - 4),
+              (R.fillStyle = "#1d2b3b"),
+              (R.font = `600 ${1 * k}px ${Pe}`),
+              (R.textAlign = "left"),
+              (R.textBaseline = "middle"),
+              R.fillText(u, 0.8 * k, 0.95 * k),
+              m && m(R, D, B, k, x, M));
+          },
+          N = Qt(Math.round(x * k), Math.round(M * k), S);
+        h.tex.push(N);
+        const C = L(
+          v,
+          new be(x, M),
+          new Rt({
+            map: N,
+            roughness: 0.55,
+          }),
+          0,
+          c / 2 + 0.4,
+          l / 2 + 0.02,
+        );
+        return (
+          (C.castShadow = !1),
+          Object.assign(h.panel, {
+            tex: N,
+            draw: S,
+          }),
+          (h.top = c + 1),
+          (h.h = c),
+          h
+        );
+      },
+      ys = function (h, r, c) {
+        const l = h.panel;
+        return [(r + l.pw / 2) * l.k, (l.y0 + l.ph / 2 - c) * l.k];
+      },
+      wn = function (h) {
+        const r = q[h.type],
+          c = Vt(),
+          l = ne(c, 10, 5);
+        return (
+          r.terms.forEach((u, m) =>
+            ot(
+              c,
+              -4 + (8 * m) / Math.max(1, r.terms.length - 1),
+              l,
+              0,
+              m ? "black" : "red",
+              m,
+            ),
+          ),
+          c
+        );
+      },
+      bo = function () {
+        ((O = !0),
+          uo(),
+          (f = new Qo({
+            canvas: n,
+            antialias: !0,
+            powerPreference: "high-performance",
+          })),
+          f.setPixelRatio(Math.min(devicePixelRatio || 1, 2)),
+          (f.shadowMap.enabled = !0),
+          (f.shadowMap.type = Zo),
+          (f.toneMapping = Wo),
+          (f.toneMappingExposure = 0.92),
+          (d = new On()),
+          (d.background = new ge(14542318)),
+          (d.fog = new ti(14542318, 260, 700)));
+        const h = new ei(f);
+        ((d.environment = h.fromScene(new vi(), 0.04).texture),
+          (p = new si(32, 1, 1, 3e3)),
+          d.add(new ni(16777215, 10135738, 0.45)),
+          (A = new oi(16774890, 2.1)),
+          (A.castShadow = !0),
+          A.shadow.mapSize.set(4096, 4096),
+          (A.shadow.bias = -4e-4),
+          (A.shadow.normalBias = 0.03),
+          (A.shadow.camera.near = 1),
+          (A.shadow.camera.far = 600),
+          d.add(A),
+          d.add(A.target));
+        const r = Qt(512, 512, (u, m, v) => {
+          ((u.fillStyle = "#e4e9ef"), u.fillRect(0, 0, m, v));
+          const x = u.getImageData(0, 0, m, v);
+          for (let M = 0; M < x.data.length; M += 4) {
+            const k = (Math.random() - 0.5) * 7;
+            ((x.data[M] += k), (x.data[M + 1] += k), (x.data[M + 2] += k));
+          }
+          (u.putImageData(x, 0, 0),
+            (u.strokeStyle = "rgba(90,120,150,.10)"),
+            (u.lineWidth = 2));
+          for (let M = 0; M <= 10; M++)
+            (u.beginPath(),
+              u.moveTo((M * m) / 10, 0),
+              u.lineTo((M * m) / 10, v),
+              u.stroke(),
+              u.beginPath(),
+              u.moveTo(0, (M * v) / 10),
+              u.lineTo(m, (M * v) / 10),
+              u.stroke());
+        });
+        ((r.wrapS = r.wrapT = En), r.repeat.set(24, 24));
+        const c = new Lt(
+          new be(1200, 1200),
+          new Rt({
+            map: r,
+            roughness: 0.92,
+            metalness: 0,
+          }),
+        );
+        ((c.rotation.x = -s / 2),
+          (c.receiveShadow = !0),
+          d.add(c),
+          (g = new Ot()),
+          (Y = new Ot()),
+          d.add(g, Y),
+          (V = new ii(
+            new oe(0.16, 10, 8),
+            new Me({
+              color: 16767050,
+              toneMapped: !1,
+            }),
+            4e3,
+          )),
+          (V.count = 0),
+          (V.frustumCulled = !1),
+          d.add(V));
+        const l = (u, m) => {
+          const v = new mi();
+          (v.setAttribute("position", new $n(new Float32Array(u * 3), 3)),
+            v.setAttribute("color", new $n(new Float32Array(u * 3), 3)));
+          const x = new bi(v, m);
+          return ((x.frustumCulled = !1), d.add(x), x);
+        };
+        (($ = l(
+          1e3,
+          new Nn({
+            size: 0.55,
+            map: bn(),
+            vertexColors: !0,
+            blending: v0,
+            transparent: !0,
+            depthWrite: !1,
+            toneMapped: !1,
+          }),
+        )),
+          (Z = l(
+            1e3,
+            new Nn({
+              size: 5,
+              map: bn(),
+              vertexColors: !0,
+              transparent: !0,
+              opacity: 0.35,
+              depthWrite: !1,
+            }),
+          )),
+          (pt = new ai(new X0(), 16751903)),
+          (pt.visible = !1),
+          d.add(pt),
+          (Tt = new Lt(
+            new Y0(0.85, 0.1, 10, 40),
+            new Me({
+              color: 1696650,
+              depthTest: !1,
+              transparent: !0,
+              toneMapped: !1,
+            }),
+          )),
+          (Tt.renderOrder = 10),
+          (Tt.visible = !1),
+          d.add(Tt),
+          (b = new li(f)),
+          b.addPass(new ri(d, p)),
+          (j = new ci(new In(512, 512), 0.65, 0.5, 3.2)),
+          b.addPass(j),
+          b.addPass(new fi()),
+          $o(),
+          (y = new di(p, n)),
+          (y.enableDamping = !0),
+          (y.dampingFactor = 0.12),
+          (y.screenSpacePanning = !1),
+          (y.mouseButtons = {
+            LEFT: Rs.PAN,
+            MIDDLE: Rs.DOLLY,
+            RIGHT: Rs.ROTATE,
+          }),
+          (y.touches = {
+            ONE: zn.PAN,
+            TWO: zn.DOLLY_ROTATE,
+          }),
+          (y.minDistance = 15),
+          (y.maxDistance = 520),
+          (y.maxPolarAngle = 1.38),
+          (y.minPolarAngle = 0.08),
+          p.position.set(0, 90, 80),
+          y.target.set(0, 0, 0));
+      },
+      vs = function () {
+        const h = n.getBoundingClientRect();
+        if (!h.width || (h.width === U && h.height === _)) return;
+        ((U = h.width),
+          (_ = h.height),
+          f.setSize(U, _, !1),
+          b.setSize(U, _),
+          j.setSize(U, _),
+          (p.aspect = U / _),
+          p.updateProjectionMatrix());
+        const r = Math.min(devicePixelRatio || 1, 2);
+        ((i.width = U * r), (i.height = _ * r));
+      },
+      xo = function (h) {
+        h.bx === void 0 &&
+          ((h.bx = Math.round(h.x * 2.4)),
+          (h.by = Math.round(h.y * 2.4)),
+          (h.brot = 0));
+      },
+      yo = function (h) {
+        const r = {
+          ...h.p,
+        };
+        return (
+          delete r.pos,
+          delete r.closed,
+          delete r.lux,
+          delete r.TL,
+          delete r.Vp,
+          delete r.f,
+          delete r.off,
+          delete r.duty,
+          delete r.I,
+          delete r.V,
+          h.type !== "battery" && delete r.E,
+          h.type === "rbox" && delete r.R,
+          h.type === "mm" && delete r.mode,
+          (h.type === "ntc" || h.type === "solar") &&
+            (delete r.T, delete r.lux, delete r.Isc),
+          h.type + JSON.stringify(r) + (h.burnt ? "x" : "")
+        );
+      },
+      G0 = function (h) {
+        (g.remove(h.g),
+          h.g.traverse((r) => {
+            r.geometry && r.geometry.dispose();
+            const c = Array.isArray(r.material)
+              ? r.material
+              : r.material
+                ? [r.material]
+                : [];
+            for (const l of c) l.userData.shared || l.dispose();
+          }),
+          h.tex.forEach((r) => r.dispose()));
+      },
+      Mn = function (h) {
+        let r;
+        try {
+          r = (dt[h.type] || wn)(h);
+        } catch (c) {
+          (console.error(c), (r = wn(h)));
+        }
+        return (
+          (r.g.userData.pick = {
+            kind: "comp",
+            cid: h.id,
+          }),
+          r.g.traverse((c) => {
+            c.userData.pick && (c.userData.pick.cid = h.id);
+          }),
+          r
+        );
+      },
+      kn = function () {
+        const h = new Set();
+        for (const r of T.comps) {
+          (xo(r), h.add(r.id));
+          let c = zt.get(r.id);
+          const l = yo(r);
+          ((!c || c.sig !== l) &&
+            (c && G0(c), (c = Mn(r)), (c.sig = l), zt.set(r.id, c), g.add(c.g)),
+            c.g.position.set(r.bx * 0.065, 0, r.by * 0.065),
+            (c.g.rotation.y = (-(r.brot || 0) * s) / 2),
+            c.upd && c.upd(r));
+        }
+        for (const [r, c] of zt) h.has(r) || (G0(c), zt.delete(r));
+      },
+      vo = function () {
+        const h = new Map(),
+          r = (R, D, B) => {
+            (h.has(R) || h.set(R, []), h.get(R).push([D, B]));
+          };
+        for (const R of T.wires)
+          R._a !== void 0 && (r(R._a, R._b, R), r(R._b, R._a, R));
+        const c = new Map();
+        for (const R of T.comps)
+          (R._p || []).forEach((D, B) => {
+            (c.has(D) || c.set(D, []), c.get(D).push([R, B]));
+          });
+        const l = (R) => c.has(R) || (h.get(R) || []).length !== 2,
+          u = [],
+          m = new Set();
+        for (const R of h.keys())
+          if (l(R))
+            for (const [D, B] of h.get(R)) {
+              if (m.has(B)) continue;
+              m.add(B);
+              const lt = [B];
+              let tt = D;
+              for (; !l(tt);) {
+                const et = h.get(tt).find(([, ut]) => !m.has(ut));
+                if (!et) break;
+                (m.add(et[1]), lt.push(et[1]), (tt = et[0]));
+              }
+              u.push({
+                a: R,
+                b: tt,
+                wires: lt,
+              });
+            }
+        const v = new Map(),
+          x = (R, D) => {
+            (v.has(R) || v.set(R, []), v.get(R).push(D));
+          };
+        for (const R of u) (x(R.a, R.b), x(R.b, R.a));
+        const M = new Map(),
+          k = [];
+        for (const R of c.keys()) (M.set(R, R), k.push(R));
+        for (let R = 0; R < k.length; R++) {
+          const D = k[R];
+          for (const B of v.get(D) || [])
+            M.has(B) || (M.set(B, M.get(D)), k.push(B));
+        }
+        const S = [],
+          N = new Map(),
+          C = (R, D, B, lt) => {
+            const tt = [R[0].id + ":" + R[1], D[0].id + ":" + D[1]]
+              .sort()
+              .join("|");
+            if (N.has(tt)) {
+              N.get(tt).wires.push(...B);
+              return;
+            }
+            const et = {
+              ta: R,
+              tb: D,
+              wires: B.slice(),
+              a: lt,
+              w0: B[0],
+            };
+            (N.set(tt, et), S.push(et));
+          };
+        for (const R of u) {
+          const D = M.get(R.a),
+            B = M.get(R.b);
+          D === void 0 ||
+            B === void 0 ||
+            D === B ||
+            C(c.get(D)[0], c.get(B)[0], R.wires, R.a);
+        }
+        for (const [R, D] of c)
+          for (let B = 1; B < D.length; B++) C(D[B - 1], D[B], [], R);
+        return S;
+      },
+      wo = function (h) {
+        const r = h.wires.find((x) => x.color);
+        if (r) return r.color;
+        const [c, l] = h.ta,
+          [u, m] = h.tb;
+        if (q[c.type].meter === "V" || q[u.type].meter === "V")
+          return "#f0c02c";
+        const v = c.n[l];
+        for (const x of T.comps)
+          if (
+            x.type === "psu" ||
+            x.type === "battery" ||
+            x.type === "ac" ||
+            x.type === "isrc"
+          ) {
+            if (x.n[1] === v) return "#d8261f";
+            if (x.n[0] === v) return "#1f5fd8";
+          }
+        return ["#27a84f", "#ff8b3d", "#8e56c9", "#17a2b8", "#e0529c"][
+          ((v % 5) + 5) % 5
+        ];
+      },
+      Ue = function ([h, r]) {
+        const c = zt.get(h.id);
+        if (!c || !c.posts[r]) return null;
+        const l = c.posts[r];
+        return l.g.localToWorld(l.anchor.clone());
+      },
+      F0 = function ([h, r], c) {
+        const l = zt.get(h.id);
+        if (l.posts[r].front) return I(0, 0, 1).applyQuaternion(l.g.quaternion);
+        const m = Ue([h, r]),
+          v = m.clone().sub(l.g.position);
+        v.y = 0;
+        const x = c.clone().sub(m);
+        return (
+          (x.y = 0),
+          v.lengthSq() < 1e-6 && v.set(0, 0, 1),
+          v.normalize(),
+          x.lengthSq() > 1e-6 && x.normalize(),
+          v.multiplyScalar(0.55).add(x.multiplyScalar(0.45)).normalize()
+        );
+      },
+      Mo = function (h) {
+        let r = 2166136261;
+        for (let c = 0; c < h.length; c++)
+          ((r ^= h.charCodeAt(c)), (r = Math.imul(r, 16777619)));
+        return ((r >>> 0) % 1e3) / 1e3;
+      },
+      ko = function (h) {
+        const r = [],
+          c = new X0();
+        let l = 1 / 0,
+          u = 1 / 0,
+          m = -1 / 0,
+          v = -1 / 0;
+        for (const N of zt.values())
+          (N.g.updateMatrixWorld(!0),
+            N.g.traverse((C) => {
+              if (!C.isMesh || C.userData.nc || !C.visible) return;
+              const R = C.material;
+              (R && !Array.isArray(R) && R.blending === v0) ||
+                (C.geometry.boundingBox || C.geometry.computeBoundingBox(),
+                c.copy(C.geometry.boundingBox).applyMatrix4(C.matrixWorld),
+                !(c.max.y < 0.05) &&
+                  (r.push([c.min.x, c.min.z, c.max.x, c.max.z, c.max.y]),
+                  (l = Math.min(l, c.min.x)),
+                  (u = Math.min(u, c.min.z)),
+                  (m = Math.max(m, c.max.x)),
+                  (v = Math.max(v, c.max.z))));
+            }));
+        for (const N of h)
+          ((l = Math.min(l, N.x)),
+            (u = Math.min(u, N.z)),
+            (m = Math.max(m, N.x)),
+            (v = Math.max(v, N.z)));
+        (isFinite(l) || ((l = u = -10), (m = v = 10)),
+          (l -= 14),
+          (u -= 14),
+          (m += 14),
+          (v += 14));
+        const x = Math.ceil((m - l) / Xt),
+          M = Math.ceil((v - u) / Xt),
+          k = new Float32Array(x * M),
+          S = Le + 0.12;
+        for (const [N, C, R, D, B] of r) {
+          const lt = Math.max(0, Math.floor((N - S - l) / Xt)),
+            tt = Math.min(x - 1, Math.floor((R + S - l) / Xt)),
+            et = Math.max(0, Math.floor((C - S - u) / Xt)),
+            ut = Math.min(M - 1, Math.floor((D + S - u) / Xt));
+          for (let nt = et; nt <= ut; nt++)
+            for (let kt = lt; kt <= tt; kt++) {
+              const ft = nt * x + kt;
+              k[ft] < B && (k[ft] = B);
+            }
+        }
+        _e = {
+          x0: l,
+          z0: u,
+          nx: x,
+          nz: M,
+          h: k,
+        };
+      },
+      ws = function (h, r, c = Le) {
+        if (!_e) return 0;
+        const { x0: l, z0: u, nx: m, nz: v, h: x } = _e;
+        let M = 0;
+        const k = Math.max(0, Math.floor((h - c - l) / Xt)),
+          S = Math.min(m - 1, Math.floor((h + c - l) / Xt)),
+          N = Math.max(0, Math.floor((r - c - u) / Xt)),
+          C = Math.min(v - 1, Math.floor((r + c - u) / Xt));
+        for (let R = N; R <= C; R++)
+          for (let D = k; D <= S; D++) M = Math.max(M, x[R * m + D]);
+        return M;
+      },
+      So = function (h) {
+        if (!_e) return;
+        const { x0: r, z0: c, nx: l, nz: u, h: m } = _e,
+          v = Le * 1.4;
+        for (const x of h) {
+          const M = x.y + Le,
+            k = Math.max(0, Math.floor((x.x - v - r) / Xt)),
+            S = Math.min(l - 1, Math.floor((x.x + v - r) / Xt)),
+            N = Math.max(0, Math.floor((x.z - v - c) / Xt)),
+            C = Math.min(u - 1, Math.floor((x.z + v - c) / Xt));
+          for (let R = N; R <= C; R++)
+            for (let D = k; D <= S; D++) {
+              const B = R * l + D;
+              m[B] < M && (m[B] = M);
+            }
+        }
+      },
+      Ro = function (h, r, c, l) {
+        const { x0: u, z0: m, nx: v, nz: x, h: M } = _e,
+          k = 3,
+          S = Math.ceil(v / k),
+          N = Math.ceil(x / k),
+          C = Xt * k,
+          R = new Float32Array(S * N);
+        for (let mt = 0; mt < N; mt++)
+          for (let me = 0; me < S; me++) {
+            let At = 0;
+            for (let St = mt * k; St < Math.min(x, mt * k + k); St++)
+              for (let Zt = me * k; Zt < Math.min(v, me * k + k); Zt++)
+                At = Math.max(At, M[St * v + Zt]);
+            R[mt * S + me] =
+              At < 0.05
+                ? 1
+                : At < 1.6
+                  ? 2.2 + At
+                  : At < 3.5
+                    ? 6 + At * 2
+                    : 60 + At * 4;
+          }
+        const D = (mt) => Q(Math.round((mt - u) / C - 0.5), 0, S - 1),
+          B = (mt) => Q(Math.round((mt - m) / C - 0.5), 0, N - 1),
+          lt = B(r) * S + D(h),
+          tt = B(l) * S + D(c);
+        for (const mt of [lt, tt]) R[mt] = Math.min(R[mt], 1.5);
+        const et = S * N,
+          ut = new Float32Array(et).fill(1 / 0),
+          nt = new Int32Array(et).fill(-1),
+          kt = new Uint8Array(et),
+          ft = [],
+          Et = [],
+          b0 = tt % S,
+          x0 = (tt / S) | 0,
+          y0 = (mt, me) => {
+            (ft.push(mt), Et.push(me));
+            let At = ft.length - 1;
+            for (; At > 0;) {
+              const St = (At - 1) >> 1;
+              if (Et[St] <= Et[At]) break;
+              (([ft[St], ft[At]] = [ft[At], ft[St]]),
+                ([Et[St], Et[At]] = [Et[At], Et[St]]),
+                (At = St));
+            }
+          },
+          _o = () => {
+            const mt = ft[0],
+              me = ft.pop(),
+              At = Et.pop();
+            if (ft.length) {
+              ((ft[0] = me), (Et[0] = At));
+              let St = 0;
+              for (;;) {
+                const Zt = 2 * St + 1,
+                  Ce = Zt + 1;
+                let Yt = St;
+                if (
+                  (Zt < ft.length && Et[Zt] < Et[Yt] && (Yt = Zt),
+                  Ce < ft.length && Et[Ce] < Et[Yt] && (Yt = Ce),
+                  Yt === St)
+                )
+                  break;
+                (([ft[Yt], ft[St]] = [ft[St], ft[Yt]]),
+                  ([Et[Yt], Et[St]] = [Et[St], Et[Yt]]),
+                  (St = Yt));
+              }
+            }
+            return mt;
+          };
+        ((ut[lt] = 0), y0(lt, 0));
+        let go = 0;
+        for (; ft.length && go++ < 4e4;) {
+          const mt = _o();
+          if (mt === tt) break;
+          if (kt[mt]) continue;
+          kt[mt] = 1;
+          const me = mt % S,
+            At = (mt / S) | 0;
+          for (let St = -1; St <= 1; St++)
+            for (let Zt = -1; Zt <= 1; Zt++) {
+              if (!Zt && !St) continue;
+              const Ce = me + Zt,
+                Yt = At + St;
+              if (Ce < 0 || Yt < 0 || Ce >= S || Yt >= N) continue;
+              const t0 = Yt * S + Ce;
+              if (kt[t0]) continue;
+              const Ss = ut[mt] + R[t0] * (Zt && St ? 1.4142 : 1);
+              Ss < ut[t0] &&
+                ((ut[t0] = Ss),
+                (nt[t0] = mt),
+                y0(t0, Ss + Math.hypot(Ce - b0, Yt - x0)));
+            }
+        }
+        if (nt[tt] < 0 && lt !== tt) return null;
+        const An = [];
+        for (let mt = tt; mt >= 0 && mt !== lt; mt = nt[mt])
+          An.push([u + ((mt % S) + 0.5) * C, m + (((mt / S) | 0) + 0.5) * C]);
+        return An.reverse();
+      },
+      jo = function (h, r) {
+        for (let c = 0; c < r; c++) {
+          const l = [h[0]];
+          for (let u = 0; u < h.length - 1; u++) {
+            const [m, v] = [h[u], h[u + 1]];
+            l.push(
+              [0.75 * m[0] + 0.25 * v[0], 0.75 * m[1] + 0.25 * v[1]],
+              [0.25 * m[0] + 0.75 * v[0], 0.25 * m[1] + 0.75 * v[1]],
+            );
+          }
+          (l.push(h[h.length - 1]), (h = l));
+        }
+        return h;
+      },
+      Po = function (h, r) {
+        const c = [h[0]];
+        let l = 0;
+        for (let u = 0; u < h.length - 1; u++) {
+          const [m, v] = [h[u], h[u + 1]],
+            x = Math.hypot(v[0] - m[0], v[1] - m[1]);
+          let M = r - l;
+          for (; M < x; M += r)
+            c.push([
+              m[0] + ((v[0] - m[0]) * M) / x,
+              m[1] + ((v[1] - m[1]) * M) / x,
+            ]);
+          l = x - (M - r);
+        }
+        return (c.push(h[h.length - 1]), c);
+      },
+      Sn = function (h, r, c, l, u, m) {
+        const v = h.clone().addScaledVector(c, 0.9),
+          x = r.clone().addScaledVector(l, 0.9),
+          M = h.clone().addScaledVector(c, 2.2),
+          k = r.clone().addScaledVector(l, 2.2);
+        let S = null;
+        if (!m && _e) {
+          const nt = Ro(M.x, M.z, k.x, k.z);
+          nt && (S = [[M.x, M.z], ...nt.slice(1, -1), [k.x, k.z]]);
+        }
+        if (S) S = jo(S, 3);
+        else {
+          const nt = Math.hypot(k.x - M.x, k.z - M.z) || 0.01,
+            kt = -(k.z - M.z) / nt,
+            ft = (k.x - M.x) / nt,
+            Et = (u - 0.5) * 0.3 * nt;
+          S = [];
+          for (let b0 = 0; b0 <= 8; b0++) {
+            const x0 = b0 / 8,
+              y0 = Math.sin(s * x0) * Et;
+            S.push([
+              M.x + (k.x - M.x) * x0 + kt * y0,
+              M.z + (k.z - M.z) * x0 + ft * y0,
+            ]);
+          }
+        }
+        S = Po(S, 0.5);
+        const N = S.length,
+          C = [0];
+        for (let nt = 1; nt < N; nt++)
+          C.push(
+            C[nt - 1] +
+              Math.hypot(S[nt][0] - S[nt - 1][0], S[nt][1] - S[nt - 1][1]),
+          );
+        const R = C[N - 1] || 1,
+          D = 0.75;
+        let B = S.map(([nt, kt], ft) =>
+          Math.max(
+            ws(nt, kt) + Le + 0.02,
+            h.y - D * (C[ft] + 1.3),
+            r.y - D * (R - C[ft] + 1.3),
+          ),
+        );
+        for (let nt = 0; nt < 3; nt++)
+          B = B.map((kt, ft) =>
+            Math.max(
+              kt,
+              ft > 0 && ft < N - 1 ? (B[ft - 1] + B[ft + 1]) / 2 - 0.02 : kt,
+            ),
+          );
+        const lt = S.map(([nt, kt], ft) => I(nt, B[ft], kt)),
+          tt = Math.max(v.y, ws(v.x, v.z, 0.2) + Le),
+          et = Math.max(x.y, ws(x.x, x.z, 0.2) + Le);
+        ((v.y = Math.min(h.y + 0.4, tt)), (x.y = Math.min(r.y + 0.4, et)));
+        const ut = [h.clone(), v, ...lt, x, r.clone()];
+        return {
+          curve: new w0(ut, !1, "centripetal"),
+          mid: lt,
+        };
+      },
+      Lo = function (h, r, c, l, u) {
+        return Sn(h, r, c, l, u, !0).curve;
+      },
+      Rn = function (h) {
+        for (const l of ue)
+          (Y.remove(l.mesh),
+            l.mesh.geometry.dispose(),
+            l.mesh.material.dispose(),
+            l.lugs.forEach((u) => {
+              (Y.remove(u), u.geometry.dispose());
+            }));
+        g.updateMatrixWorld(!0);
+        const r = vo()
+          .map((l) => ({
+            e: l,
+            A: Ue(l.ta),
+            B: Ue(l.tb),
+          }))
+          .filter((l) => l.A && l.B);
+        (ko(r.flatMap((l) => [l.A, l.B])),
+          r.sort((l, u) => l.A.distanceTo(l.B) - u.A.distanceTo(u.B)));
+        const c = ue;
+        ue = [];
+        for (const { e: l, A: u, B: m } of r) {
+          const v = F0(l.ta, m),
+            x = F0(l.tb, u),
+            { curve: M, mid: k } = Sn(
+              u,
+              m,
+              v,
+              x,
+              Mo(l.ta[0].id + "." + l.ta[1] + "-" + l.tb[0].id + "." + l.tb[1]),
+              h,
+            );
+          So(k);
+          const S = M.getLength(),
+            N = new Rt({
+              color: wo(l),
+              roughness: 0.35,
+              metalness: 0,
+              emissive: 0,
+            }),
+            C = new Lt(new e0(M, Math.max(40, Math.round(S * 4)), Le, 10), N);
+          ((C.castShadow = !0),
+            (C.receiveShadow = !0),
+            (C.userData.pick = {
+              kind: "cable",
+              cable: l,
+            }),
+            Y.add(C),
+            (l.lugs = [u, m].map((D) => {
+              const B = new Lt(
+                new Y0(0.34, 0.1, 8, 20).rotateX(s / 2),
+                P.brass,
+              );
+              return (B.position.copy(D), Y.add(B), B);
+            })));
+          const R = c.find((D) => D.w0 && D.w0 === l.w0);
+          ((l.fl = R ? R.fl : 0),
+            Object.assign(l, {
+              curve: M,
+              len: S,
+              mesh: C,
+            }),
+            ue.push(l));
+        }
+        if (T.sel && T.sel.cable) {
+          const l = ue.find((u) => u.w0 && u.w0 === T.sel.cable.w0);
+          T.sel = l
+            ? {
+                cable: l,
+              }
+            : null;
+        }
+      },
+      Co = function (h) {
+        const r = h.w0;
+        return r ? (r._a === h.a ? 1 : -1) * (r.i || 0) : 0;
+      },
+      To = function (h) {
+        let r = 0;
+        for (const c of ue) {
+          const l = Co(c);
+          if (
+            ((c.cur = l),
+            (c.fl = (c.fl || 0) + es(l) * 0.1 * 1.3 * h * (se.elec ? -1 : 1)),
+            !se.flow || Math.abs(l) < 1e-7)
+          )
+            continue;
+          const u = 1.6,
+            m = c.len;
+          let v = ((c.fl % u) + u) % u;
+          for (; v < m && r < 4e3; v += u) {
+            const x = c.curve.getPointAt(v / m);
+            (jn.makeTranslation(x.x, x.y + 0.22, x.z), V.setMatrixAt(r++, jn));
+          }
+        }
+        ((V.count = r),
+          (V.instanceMatrix.needsUpdate = !0),
+          se.elec
+            ? V.material.color.setRGB(1.2, 3.4, 5)
+            : V.material.color.setRGB(5, 3.8, 0.9));
+      },
+      Vo = function () {
+        const h = $.geometry.attributes,
+          r = Z.geometry.attributes;
+        let c = 0,
+          l = 0;
+        for (const u of Gt) {
+          const m = (u.bx0 + (u.x - u.x0) * 0.6) * 0.065,
+            v = u.h * 0.1,
+            x = (u.by0 + (u.y - u.y0) * 0.6) * 0.065,
+            M = Q(u.life / u.max, 0, 1);
+          u.type === "spark" && c < 1e3
+            ? (h.position.setXYZ(c, m, v, x),
+              h.color.setXYZ(c, 1.6 * M, 1.1 * M, 0.4 * M),
+              c++)
+            : u.type === "smoke" &&
+              l < 1e3 &&
+              (r.position.setXYZ(l, m, v, x),
+              r.color.setXYZ(
+                l,
+                0.35 + 0.3 * (1 - M),
+                0.35 + 0.3 * (1 - M),
+                0.37 + 0.3 * (1 - M),
+              ),
+              l++);
+        }
+        ($.geometry.setDrawRange(0, c),
+          Z.geometry.setDrawRange(0, l),
+          (h.position.needsUpdate =
+            h.color.needsUpdate =
+            r.position.needsUpdate =
+            r.color.needsUpdate =
+              !0));
+      },
+      Ao = function () {
+        const h = T.sel;
+        for (const l of ue)
+          l.mesh.material.emissive.setHex(
+            h && h.cable && h.cable.w0 === l.w0 && l.w0
+              ? 5583616
+              : It.hover && It.hover.cable === l
+                ? 2236962
+                : 0,
+          );
+        const r = h && h.type ? zt.get(h.id) : null;
+        r
+          ? (pt.box.setFromObject(r.g).expandByScalar(0.4), (pt.visible = !0))
+          : (pt.visible = !1);
+        const c = It.hoverPost || (It.drag && It.drag.target);
+        if (c) {
+          const l = zt.get(c[0].id),
+            u = l && l.posts[c[1]];
+          u &&
+            (Tt.position.copy(Ue(c)),
+            Tt.quaternion.copy(u.g.getWorldQuaternion(new pi())),
+            Tt.rotateX(s / 2),
+            (Tt.visible = !0));
+        } else Tt.visible = !1;
+      },
+      Pn = function (h, r, c, l) {
+        if ((Dt && (d.remove(Dt), Dt.geometry.dispose(), (Dt = null)), !h))
+          return;
+        const u = Lo(h, c, r, l || I(0, 0, 0), 0.5);
+        ((Dt = new Lt(
+          new e0(u, 60, 0.26, 8),
+          new Rt({
+            color: 16751903,
+            emissive: 5579264,
+            roughness: 0.4,
+            transparent: !0,
+            opacity: 0.85,
+          }),
+        )),
+          d.add(Dt));
+      },
+      Io = function () {
+        const h = V3D.ghost;
+        if (!h) {
+          Ht && (d.remove(Ht.g), G0(Ht), (Ht = null), (Be = null));
+          return;
+        }
+        if (Be !== h.type) {
+          Ht && (d.remove(Ht.g), G0(Ht));
+          const r = q[h.type],
+            c = {
+              id: -1,
+              type: h.type,
+              x: 0,
+              y: 0,
+              rot: 0,
+              p: {
+                ...r.defaults,
+              },
+              s: {},
+              v: new Array(r.terms.length).fill(0),
+              iT: [],
+              i: 0,
+              heat: 0,
+              burnt: !1,
+              n: [],
+            };
+          ((Ht = Mn(c)),
+            (Be = h.type),
+            Ht.g.traverse((l) => {
+              l.material &&
+                !Array.isArray(l.material) &&
+                ((l.material = l.material.clone()),
+                (l.material.userData = {
+                  shared: !1,
+                }),
+                (l.material.transparent = !0),
+                (l.material.opacity = 0.5),
+                (l.material.depthWrite = !1));
+            }),
+            d.add(Ht.g));
+        }
+        Ht.g.position.set(h.bx * 0.065, 0, h.by * 0.065);
+      },
+      Ln = function (h, r, c) {
+        return (
+          H0.set(h, r, c).project(p),
+          H0.z > 1 ? null : [((H0.x + 1) / 2) * U, ((1 - H0.y) / 2) * _]
+        );
+      },
+      No = function () {
+        const h = Math.min(devicePixelRatio || 1, 2);
+        (a.setTransform(h, 0, 0, h, 0, 0),
+          a.clearRect(0, 0, U, _),
+          (a.textAlign = "center"),
+          (a.textBaseline = "middle"),
+          (a.lineJoin = "round"));
+        const r = [],
+          c = T.comps.slice().sort((l, u) => (u.by || 0) - (l.by || 0));
+        for (const l of c) {
+          const u = zt.get(l.id);
+          if (!u || l.type === "ground") continue;
+          (!u.box || u.boxKey !== l.bx + "," + l.by + "," + l.brot) &&
+            ((u.box = new X0().setFromObject(u.g)),
+            (u.boxKey = l.bx + "," + l.by + "," + l.brot));
+          const m = Ln(
+            (u.box.min.x + u.box.max.x) / 2,
+            u.box.max.y + 0.8,
+            u.box.min.z + (u.box.max.z - u.box.min.z) * 0.25,
+          );
+          if (!m) continue;
+          const v = q[l.type],
+            x = `${Eo[l.type] || v.name} ${l.name}`;
+          a.font = `700 15px ${Pe}`;
+          const M = Math.max(a.measureText(x).width, 60) + 8;
+          for (let N = 0; N < 8; N++) {
+            const C = [m[0] - M / 2, m[1] - 40, M, 42],
+              R = r.find(
+                (D) =>
+                  C[0] < D[0] + D[2] &&
+                  D[0] < C[0] + C[2] &&
+                  C[1] < D[1] + D[3] &&
+                  D[1] < C[1] + C[3],
+              );
+            if (!R) {
+              r.push(C);
+              break;
+            }
+            m[1] = R[1] - 2;
+          }
+          if (
+            ((a.font = `700 15px ${Pe}`),
+            (a.lineWidth = 4),
+            (a.strokeStyle = "rgba(255,255,255,.9)"),
+            a.strokeText(x, m[0], m[1] - 30),
+            (a.fillStyle = l.burnt ? "#c0261c" : "#13253a"),
+            a.fillText(x, m[0], m[1] - 30),
+            !se.labels)
+          )
+            continue;
+          let k = v.meter
+            ? ae(l.s.read || 0, v.meter === "V" ? "V" : "A", 3) +
+              (l.p.mode === "ac" ? "~" : "")
+            : v.label
+              ? v.label(l)
+              : "";
+          if ((l.burnt && (k = translate("已损坏")), !k)) continue;
+          a.font = '600 12px "JetBrains Mono",monospace';
+          const S = a.measureText(k).width + 14;
+          ((a.fillStyle = v.meter
+            ? "rgba(10,24,18,.85)"
+            : "rgba(19,37,58,.72)"),
+            a.beginPath(),
+            a.roundRect
+              ? a.roundRect(m[0] - S / 2, m[1] - 19, S, 18, 9)
+              : a.rect(m[0] - S / 2, m[1] - 19, S, 18),
+            a.fill(),
+            (a.fillStyle = v.meter
+              ? "#48ff9a"
+              : l.burnt
+                ? "#ff8a80"
+                : "#ffd08a"),
+            a.fillText(k, m[0], m[1] - 9.5));
+        }
+        for (const l of T.comps) {
+          const u = q[l.type];
+          l.type !== "pot" ||
+            !zt.get(l.id) ||
+            u.termNames.forEach((v, x) => {
+              const M = Ue([l, x]);
+              if (!M) return;
+              const k = Ln(
+                M.x,
+                M.y - (x < 2 ? 1.3 : -2.6),
+                M.z + (x < 2 ? 1.6 : 0),
+              );
+              k &&
+                ((a.font = 'italic 700 16px "Times New Roman",serif'),
+                (a.lineWidth = 3),
+                (a.strokeStyle = "rgba(255,255,255,.9)"),
+                a.strokeText(v, k[0], k[1]),
+                (a.fillStyle = "#13253a"),
+                a.fillText(v, k[0], k[1]));
+            });
+        }
+      },
+      Tn = function (h, r) {
+        const c = n.getBoundingClientRect();
+        (Cn.set(
+          ((h - c.left) / c.width) * 2 - 1,
+          -((r - c.top) / c.height) * 2 + 1,
+        ),
+          Ms.setFromCamera(Cn, p));
+      },
+      ks = function (h, r) {
+        if (!O) return null;
+        Tn(h, r);
+        const c = I();
+        return Ms.ray.intersectPlane(zo, c) ? [c.x / 0.065, c.z / 0.065] : null;
+      },
+      q0 = function (h, r) {
+        Tn(h, r);
+        const c = Ms.intersectObjects([g, Y], !0);
+        for (const l of c) {
+          let u = l.object;
+          for (; u;) {
+            const m = u.userData.pick;
+            if (m) {
+              if (m.kind === "cable")
+                return {
+                  kind: "cable",
+                  cable: m.cable,
+                };
+              const v = T.comps.find((x) => x.id === m.cid);
+              if (!v) break;
+              return m.kind === "term"
+                ? {
+                    kind: "term",
+                    c: v,
+                    k: m.k,
+                    pt: le(v)[m.k],
+                  }
+                : {
+                    kind: m.kind,
+                    c: v,
+                    dec: m.dec,
+                  };
+            }
+            u = u.parent;
+          }
+        }
+        return null;
+      },
+      Vn = function (h, r, c) {
+        yt();
+        const l = q.rbox.digits(h),
+          u = 3 - r;
+        ((l[u] = (l[u] + c + 10) % 10),
+          (h.p.R = l[0] * 1e3 + l[1] * 100 + l[2] * 10 + l[3]),
+          (G.dirty = !0),
+          T.sel === h ? Ze() : $t(h));
+      },
+      $o = function () {
+        const h = (c) => {
+          const l = n.getBoundingClientRect();
+          return [c.clientX - l.left, c.clientY - l.top];
+        };
+        (n.addEventListener("pointerdown", (c) => {
+          if ((E0(), c.button !== 0)) return;
+          const l = q0(c.clientX, c.clientY);
+          if (!l) return;
+          (c.stopImmediatePropagation(), n.setPointerCapture(c.pointerId));
+          const u = ks(c.clientX, c.clientY) || [0, 0];
+          ((It.drag = {
+            h: l,
+            sx: c.clientX,
+            sy: c.clientY,
+            moved: !1,
+            p0: u,
+          }),
+            l.kind === "comp" &&
+              ((It.drag.o = [l.c.bx, l.c.by]),
+              l.c.type === "button" && ((l.c.s.pressed = !0), pe("click"))),
+            l.kind === "slider" && (yt(), $t(l.c)));
+        }),
+          n.addEventListener("pointermove", (c) => {
+            const [l, u] = h(c),
+              m = It.drag;
+            if (!m) {
+              if (c.buttons) return;
+              const x = q0(c.clientX, c.clientY);
+              ((It.hover = x),
+                (It.hoverPost = x && x.kind === "term" ? [x.c, x.k] : null),
+                (T.hover = x && x.c ? x.c : null),
+                Hs(0, 0, l, u, x));
+              return;
+            }
+            if (
+              (!m.moved &&
+                Math.hypot(c.clientX - m.sx, c.clientY - m.sy) > 4 &&
+                ((m.moved = !0), m.h.kind === "comp" && yt()),
+              !m.moved)
+            )
+              return;
+            const v = ks(c.clientX, c.clientY);
+            if (v) {
+              if (((E("#tip").style.display = "none"), m.h.kind === "comp")) {
+                const x = m.h.c;
+                ((x.bx = Math.round((m.o[0] + v[0] - m.p0[0]) / 5) * 5),
+                  (x.by = Math.round((m.o[1] + v[1] - m.p0[1]) / 5) * 5));
+              } else if (m.h.kind === "slider") {
+                const M = zt
+                  .get(m.h.c.id)
+                  .g.worldToLocal(I(v[0] * 0.065, 7.6, v[1] * 0.065));
+                ((m.h.c.p.pos = Q(
+                  Math.round(((M.x + 8.6) / 17.2) * 200) / 200,
+                  0,
+                  1,
+                )),
+                  Ze());
+              } else if (m.h.kind === "term") {
+                const x = Ue([m.h.c, m.h.k]),
+                  M = q0(c.clientX, c.clientY);
+                m.target =
+                  M && M.kind === "term" && !(M.c === m.h.c && M.k === m.h.k)
+                    ? [M.c, M.k]
+                    : null;
+                const k = m.target
+                  ? Ue(m.target)
+                  : I(v[0] * 0.065, 0.3, v[1] * 0.065);
+                Pn(
+                  x,
+                  F0([m.h.c, m.h.k], k),
+                  k,
+                  m.target ? F0(m.target, x) : null,
+                );
+              }
+            }
+          }));
+        const r = (c) => {
+          const l = It.drag;
+          if (l) {
+            if (
+              ((It.drag = null),
+              Pn(null),
+              l.h.kind === "comp" &&
+                l.h.c.type === "button" &&
+                (l.h.c.s.pressed = !1),
+              !l.moved)
+            ) {
+              const { h: u } = l;
+              if (u.kind === "cable") {
+                ((T.sel = {
+                  cable: u.cable,
+                }),
+                  he(),
+                  window.innerWidth <= 980 &&
+                    E("#inspector").classList.add("open"));
+                return;
+              }
+              if (u.kind === "knob") {
+                (u.dec !== void 0
+                  ? Vn(u.c, u.dec, c.shiftKey ? -1 : 1)
+                  : as(u.c, c.shiftKey ? -1 : 1),
+                  pe("click"));
+                return;
+              }
+              const m = q[u.c.type];
+              (u.kind === "comp" &&
+                m.clickable &&
+                u.c.type !== "button" &&
+                (yt(), m.click(u.c)),
+                $t(u.c));
+              return;
+            }
+            if (l.h.kind === "term" && l.target) {
+              const [u, m] = l.target,
+                v = l.h.c,
+                x = l.h.k,
+                M = le(v)[x],
+                k = le(u)[m];
+              (M[0] !== k[0] || M[1] !== k[1]) &&
+                (yt(),
+                A0(M[0], M[1], k[0], k[1], null, !0),
+                re(),
+                pe("click"),
+                Pt(
+                  translate("已连接 {0}·{1} → {2}·{3}", [
+                    v.name,
+                    Qe(v, x),
+                    u.name,
+                    Qe(u, m),
+                  ]),
+                  "ok",
+                ));
+            }
+            (l.h.kind === "slider" && (we = !0),
+              l.h.kind === "comp" && (we = !0));
+          }
+        };
+        (n.addEventListener("pointerup", r),
+          n.addEventListener("pointercancel", r),
+          n.addEventListener("pointerleave", () => {
+            It.drag ||
+              ((It.hover = null),
+              (It.hoverPost = null),
+              (T.hover = null),
+              (E("#tip").style.display = "none"));
+          }),
+          n.addEventListener(
+            "wheel",
+            (c) => {
+              if (c.ctrlKey || c.metaKey) return;
+              const l = q0(c.clientX, c.clientY);
+              if (l && l.kind === "knob" && l.dec !== void 0) {
+                (c.preventDefault(),
+                  c.stopImmediatePropagation(),
+                  Vn(l.c, l.dec, c.deltaY < 0 ? 1 : -1));
+                return;
+              }
+              l &&
+                l.c &&
+                (l.kind === "comp" ||
+                  l.kind === "slider" ||
+                  l.kind === "knob") &&
+                q[l.c.type].primary &&
+                (c.preventDefault(),
+                c.stopImmediatePropagation(),
+                as(l.c, c.deltaY < 0 ? 1 : -1, c.shiftKey));
+            },
+            {
+              passive: !1,
+            },
+          ),
+          n.addEventListener("contextmenu", (c) => c.preventDefault()));
+      },
+      Do = function () {
+        if (!O) return;
+        (vs(), kn(), g.updateMatrixWorld(!0));
+        const h = new X0();
+        for (const N of zt.values()) h.expandByObject(N.g);
+        h.isEmpty() && h.set(I(-30, 0, -20), I(30, 5, 20));
+        const r = h.getCenter(I()),
+          c = h.getSize(I()),
+          l = document.getElementById("cv").getBoundingClientRect(),
+          u = U > 700 ? Math.min(l.width * 0.55, U * 0.25) : 0,
+          m = 0.8,
+          v = Math.tan((p.fov * s) / 360),
+          x = (v * p.aspect * (U - u)) / U,
+          M = Math.max((c.x / 2 + 3) / x, (c.z * 0.55 + 4) / v, 35) * 1.2,
+          k = (2 * M * v) / _;
+        (y.target.set(r.x + (u / 2) * k, 0, r.z + c.z * 0.05),
+          p.position.set(
+            y.target.x,
+            M * Math.sin(m) + 2,
+            y.target.z + M * Math.cos(m),
+          ),
+          y.update());
+        const S = Math.max(c.x, c.z) * 0.75 + 30;
+        (A.position.set(r.x - S * 0.45, S * 1.6, r.z + S * 0.7),
+          A.target.position.set(r.x, 0, r.z),
+          Object.assign(A.shadow.camera, {
+            left: -S,
+            right: S,
+            top: S,
+            bottom: -S,
+            far: S * 5,
+          }),
+          A.shadow.camera.updateProjectionMatrix());
+      },
+      Oo = function (h) {
+        const r = p.position
+          .clone()
+          .sub(y.target)
+          .multiplyScalar(1 / h);
+        (p.position.copy(y.target).add(r), y.update());
+      },
+      Bo = function () {
+        const h = y.target,
+          r = h.x / 0.065,
+          c = h.z / 0.065;
+        for (let l = 0; l < 12; l++)
+          for (let u = 0; u < Math.max(1, l * 6); u++) {
+            const m = (u / Math.max(1, l * 6)) * s * 2,
+              v = Math.round((r + Math.cos(m) * l * 230) / 10) * 10,
+              x = Math.round((c + Math.sin(m) * l * 190) / 10) * 10;
+            if (
+              !T.comps.some(
+                (M) =>
+                  M.bx !== void 0 &&
+                  Math.abs(M.bx - v) < 220 &&
+                  Math.abs(M.by - x) < 170,
+              )
+            )
+              return [v, x];
+          }
+        return [r, c];
+      },
+      Uo = function (h) {
+        if (!O) return;
+        (vs(), kn());
+        const r =
+            G.topoVer +
+            "|" +
+            T.comps
+              .map(
+                (l) =>
+                  l.id +
+                  ":" +
+                  l.bx +
+                  "," +
+                  l.by +
+                  "," +
+                  (l.brot || 0) +
+                  (zt.get(l.id) || {}).sig,
+              )
+              .join(";") +
+            "|" +
+            T.wires.map((l) => l.color || "").join(""),
+          c = performance.now();
+        (r !== U0
+          ? ((U0 = r), Rn(!0), (_0 = c + 220))
+          : _0 && c > _0 && !(It.drag && It.drag.moved) && ((_0 = 0), Rn(!1)),
+          To(h),
+          Vo(),
+          Ao(),
+          Io(),
+          y.update(),
+          b.render(),
+          No());
+      };
+    const s = Math.PI,
+      n = document.getElementById("cv3"),
+      i = document.getElementById("cv3o"),
+      a = i.getContext("2d");
+    let f,
+      d,
+      p,
+      y,
+      b,
+      j,
+      A,
+      O = !1,
+      U = 0,
+      _ = 0,
+      g,
+      Y,
+      V,
+      $,
+      Z,
+      pt,
+      Tt,
+      Dt = null,
+      Ht = null,
+      Be = null;
+    const zt = new Map();
+    let ue = [],
+      U0 = "",
+      _0 = 0;
+    const It = {
+        drag: null,
+        hover: null,
+      },
+      I = (h = 0, r = 0, c = 0) => new Ko(h, r, c),
+      ho = document.getElementById("hint").innerHTML,
+      u0 = (h) => {
+        const r = h.clone();
+        return (
+          (r.userData = {
+            shared: !1,
+          }),
+          r
+        );
+      };
+    let P;
+    const Ut = (h, r, c, l = 0.3) =>
+        new yi(
+          h,
+          r,
+          c,
+          3,
+          Math.max(0.02, Math.min(l, h / 2 - 0.01, r / 2 - 0.01, c / 2 - 0.01)),
+        ),
+      rt = (h, r, c, l = 24, u = !1, m = 0, v = s * 2) =>
+        new K0(h, r, c, l, 1, u, m, v),
+      wt = (h, r, c = 24) => new K0(h, h, r, c).rotateZ(s / 2),
+      We = (h, r, c = 24) => new K0(h, h, r, c).rotateX(s / 2),
+      Pe =
+        '"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif',
+      mn = {},
+      mo = (h) => mn[h] || (mn[h] = at(new ge(h).getHex(), 0.1, 0.4)),
+      bn = (() => {
+        let h;
+        return () =>
+          h ||
+          (h = Qt(64, 64, (r) => {
+            const c = r.createRadialGradient(32, 32, 0, 32, 32, 32);
+            (c.addColorStop(0, "rgba(255,255,255,1)"),
+              c.addColorStop(0.4, "rgba(255,255,255,.6)"),
+              c.addColorStop(1, "rgba(255,255,255,0)"),
+              (r.fillStyle = c),
+              r.fillRect(0, 0, 64, 64));
+          }));
+      })(),
+      dt = {};
+    ((dt.meter = (h) => {
+      const r = Vt(),
+        c = r.g,
+        l = q[h.type];
+      L(c, Ut(13.4, 2.4, 10.4, 0.5), P.paint, 0, 1.2, 0);
+      const u = new Ot();
+      (u.position.set(0, 2.1, -1.8),
+        (u.rotation.x = -0.26),
+        c.add(u),
+        L(u, Ut(12.6, 10.6, 4.4, 0.6), P.paint, 0, 5.3, 0),
+        L(u, Ut(11.2, 7.9, 0.3, 0.12), P.paintDk, 0, 6.2, 2.12));
+      const m = Qt(640, 440, (R, D, B) => yn(R, D, B, h));
+      (r.tex.push(m), (r.dial = m));
+      const v = L(
+        u,
+        new be(10.4, 7.15),
+        new Me({
+          map: m,
+          color: 15658734,
+        }),
+        0,
+        6.2,
+        2.3,
+      );
+      ((v.castShadow = !1),
+        (L(u, new be(10.4, 7.15), P.glass, 0, 6.2, 2.42).castShadow = !1),
+        L(u, We(0.35, 0.3, 16), P.black, 0, 1.6, 2.25));
+      const x = !!l.multi,
+        M = x ? [-4, 0.3, 4.2] : [-2.6, 2.6],
+        k = x ? ["black", "red", "red"] : ["red", "black"];
+      M.forEach((R, D) => ot(r, R, 2.4, 2.9, k[D], D));
+      const S = typeof l.termNames == "function" ? l.termNames(h) : ["+", "−"],
+        N = Qt(512, 64, (R, D, B) => {
+          ((R.fillStyle = "#10243a"),
+            (R.font = "italic 700 40px Arial"),
+            (R.textAlign = "center"),
+            (R.textBaseline = "middle"),
+            M.forEach((lt, tt) =>
+              R.fillText(S[tt], D / 2 + (lt / 13) * D, B / 2),
+            ));
+        });
+      r.tex.push(N);
+      const C = L(
+        c,
+        new be(13, 1.6),
+        new Rt({
+          map: N,
+          transparent: !0,
+          depthWrite: !1,
+        }),
+        0,
+        2.41,
+        4.45,
+      );
+      return (
+        (C.rotation.x = -s / 2),
+        (C.castShadow = !1),
+        (r.top = 14),
+        (r.h = 2.4),
+        (r.upd = (R) => {
+          const D = R.s.needle;
+          (Math.abs((D ?? 0) - (r.lastN ?? 99)) > 1e-4 ||
+            r.lastMode !== R.p.mode) &&
+            ((r.lastN = D ?? 0),
+            (r.lastMode = R.p.mode),
+            g0(m, (B, lt, tt) => yn(B, lt, tt, R)));
+        }),
+        r
+      );
+    }),
+      (dt.ammeter = dt.voltmeter = dt.galv = dt.meter));
+    const vn = ["2", "4", "6", "8", "10", "12", "14", "16"];
+    ((dt.psu = (h) => {
+      const r = Vt(),
+        c = 12,
+        l = 4.6,
+        u = 4.3;
+      (xs(r, 20, 9, c, translate("学 生 电 源"), (x, M, k, S) => {
+        const N = (D, B) => ys(r, D, B);
+        ((x.fillStyle = "#1d2b3b"),
+          (x.font = `500 ${0.55 * S}px ${Pe}`),
+          (x.textAlign = "center"));
+        let [C, R] = N(-4.4, 4.9);
+        (x.fillText(translate("直流输出  DC"), C, R),
+          ([C, R] = N(-6.2, 1.9)),
+          (x.font = `700 ${0.8 * S}px Arial`),
+          x.fillText("−", C, R),
+          ([C, R] = N(-2.6, 1.9)),
+          (x.fillStyle = "#c81f18"),
+          x.fillText("+", C, R),
+          (x.fillStyle = "#1d2b3b"),
+          (x.font = `600 ${0.42 * S}px Arial`),
+          vn.forEach((D, B) => {
+            const lt = -2.3 + (4.6 * B) / 7;
+            (([C, R] = N(l + Math.sin(lt) * 2.25, u + Math.cos(lt) * 2.25)),
+              x.fillText(D, C, R));
+          }),
+          ([C, R] = N(l, u - 2.35)),
+          x.fillText("V", C, R),
+          ([C, R] = N(1.6, 7.3)),
+          (x.fillStyle = "#0b1a12"),
+          x.fillRect(C - 1.4 * S, R - 0.55 * S, 2.8 * S, 1.1 * S),
+          (x.fillStyle = "#48ff9a"),
+          (x.font = `700 ${0.8 * S}px "JetBrains Mono",monospace`),
+          x.fillText(h.p.V + ".0V", C, R + 2),
+          ([C, R] = N(7.5, 7.3)),
+          (x.fillStyle = "#1d2b3b"),
+          (x.font = `500 ${0.4 * S}px ${Pe}`),
+          x.fillText(translate("电源"), C - 0.9 * S, R));
+      }),
+        ot(r, -6.2, 3, c / 2 + 0.02, "black", 0, !0),
+        ot(r, -2.6, 3, c / 2 + 0.02, "red", 1, !0));
+      const m = new Ot();
+      (m.position.set(l, u, c / 2 + 0.05),
+        r.g.add(m),
+        L(m, We(1.45, 1.1, 32), P.black, 0, 0, 0.55),
+        L(m, We(1.1, 0.3, 32), P.plastic, 0, 0, 1.2),
+        L(m, new bt(0.18, 0.95, 0.1), P.white, 0, 0.55, 1.37),
+        (m.userData.pick = {
+          kind: "knob",
+        }));
+      const v = L(
+        r.g,
+        new oe(0.28, 16, 12),
+        new Rt({
+          color: 163,
+          emissive: 3014506,
+          emissiveIntensity: 3,
+          toneMapped: !1,
+        }),
+        7.5,
+        7.3,
+        c / 2 + 0.05,
+      );
+      return (
+        (v.castShadow = !1),
+        (r.upd = (x) => {
+          const M = Math.max(0, vn.indexOf(String(x.p.V)));
+          ((m.rotation.z = -(-2.3 + (4.6 * M) / 7)),
+            r.lastV !== x.p.V &&
+              ((r.lastV = x.p.V), g0(r.panel.tex, r.panel.draw)));
+        }),
+        r
+      );
+    }),
+      (dt.ac = (h) => {
+        const r = Vt(),
+          c = 10;
+        (xs(r, 16, 7.4, c, translate("低频信号发生器"), (x, M, k, S) => {
+          const N = (D, B) => ys(r, D, B);
+          ((x.fillStyle = "#1d2b3b"),
+            (x.textAlign = "center"),
+            (x.font = `700 ${0.8 * S}px Arial`));
+          let [C, R] = N(-5.4, 1.6);
+          (x.fillText("−", C, R),
+            ([C, R] = N(-2.4, 1.6)),
+            (x.fillStyle = "#c81f18"),
+            x.fillText("~", C, R),
+            (x.fillStyle = "#1d2b3b"),
+            (x.font = `500 ${0.45 * S}px ${Pe}`),
+            ([C, R] = N(4.6, 1.5)),
+            x.fillText(translate("频率"), C, R));
+        }),
+          ot(r, -5.4, 2.6, c / 2 + 0.02, "black", 0, !0),
+          ot(r, -2.4, 2.6, c / 2 + 0.02, "red", 1, !0));
+        const l = Qt(320, 160, () => {});
+        r.tex.push(l);
+        const u = L(
+          r.g,
+          new be(6.4, 3.2),
+          new Rt({
+            map: l,
+            emissiveMap: l,
+            emissive: 16777215,
+            emissiveIntensity: 0.9,
+            roughness: 0.3,
+          }),
+          1.6,
+          5.3,
+          c / 2 + 0.04,
+        );
+        u.castShadow = !1;
+        const m = new Ot();
+        (m.position.set(4.6, 3.1, c / 2 + 0.05),
+          r.g.add(m),
+          L(m, We(1, 1, 32), P.black, 0, 0, 0.5),
+          L(m, new bt(0.14, 0.7, 0.1), P.white, 0, 0.4, 1.02),
+          (m.userData.pick = {
+            kind: "knob",
+          }));
+        let v = 0;
+        return (
+          (r.upd = (x) => {
+            ((m.rotation.z =
+              -Q(Math.log10(x.p.f / 0.05) / 6.3, 0, 1) * 4.5 + 2.25),
+              v++ % 3 === 0 &&
+                g0(l, (M, k, S) => {
+                  ((M.fillStyle = "#04140c"),
+                    M.fillRect(0, 0, k, S),
+                    (M.strokeStyle = "rgba(60,242,163,.18)"),
+                    (M.lineWidth = 1));
+                  for (let C = 1; C < 8; C++)
+                    (M.beginPath(),
+                      M.moveTo((C * k) / 8, 0),
+                      M.lineTo((C * k) / 8, S),
+                      M.stroke());
+                  for (let C = 1; C < 4; C++)
+                    (M.beginPath(),
+                      M.moveTo(0, (C * S) / 4),
+                      M.lineTo(k, (C * S) / 4),
+                      M.stroke());
+                  ((M.strokeStyle = "#48ff9a"),
+                    (M.lineWidth = 3),
+                    M.beginPath());
+                  const N = G.t * x.p.f;
+                  for (let C = 0; C <= k; C += 3) {
+                    const R = Z0(
+                      {
+                        ...x.p,
+                        off: 0,
+                        Vp: 1,
+                        f: 1,
+                      },
+                      (C / k) * 2 + N,
+                    );
+                    C
+                      ? M.lineTo(C, S * 0.62 - R * S * 0.3)
+                      : M.moveTo(C, S * 0.62 - R * S * 0.3);
+                  }
+                  (M.stroke(),
+                    (M.fillStyle = "#48ff9a"),
+                    (M.font = '700 26px "JetBrains Mono",monospace'),
+                    (M.textAlign = "left"),
+                    M.fillText(z(x.p.f, "Hz") + "  " + z(x.p.Vp, "V"), 10, 28));
+                }));
+          }),
+          r
+        );
+      }),
+      (dt.isrc = (h) => {
+        const r = Vt(),
+          c = 8;
+        return (
+          xs(r, 12, 6.4, c, translate("恒流源"), (l, u, m, v) => {
+            const x = (S, N) => ys(r, S, N);
+            l.fillStyle = "#0b1a12";
+            let [M, k] = x(2.6, 4.9);
+            (l.fillRect(M - 2 * v, k - 0.55 * v, 4 * v, 1.1 * v),
+              (l.fillStyle = "#48ff9a"),
+              (l.font = `700 ${0.7 * v}px monospace`),
+              (l.textAlign = "center"),
+              (l.textBaseline = "middle"),
+              l.fillText(z(h.p.I, "A"), M, k));
+          }),
+          ot(r, -3.4, 2.4, c / 2 + 0.02, "black", 0, !0),
+          ot(r, 0, 2.4, c / 2 + 0.02, "red", 1, !0),
+          r
+        );
+      }),
+      (dt.battery = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = Q(Math.round(h.p.E / 1.5), 1, 4),
+          u = l * 1.9 + 0.8;
+        L(c, Ut(11, 1.3, u, 0.3), P.plastic, 0, 0.65, 0);
+        const m = Qt(128, 512, (x, M, k) => {
+          ((x.fillStyle = "#16181c"), x.fillRect(0, 0, M, k));
+          const S = x.createLinearGradient(0, 0, 0, k * 0.42);
+          (S.addColorStop(0, "#f7c25a"),
+            S.addColorStop(1, "#c9812a"),
+            (x.fillStyle = S),
+            x.fillRect(0, 0, M, k * 0.42),
+            (x.fillStyle = "#fff"),
+            (x.font = "700 48px Arial"),
+            x.save(),
+            x.translate(M / 2, k * 0.7),
+            x.rotate(s / 2),
+            (x.textAlign = "center"),
+            (x.textBaseline = "middle"),
+            x.fillText("1.5V", 0, 0),
+            x.restore());
+        });
+        r.tex.push(m);
+        const v = new Rt({
+          map: m,
+          roughness: 0.35,
+          metalness: 0.2,
+        });
+        for (let x = 0; x < l; x++) {
+          const M = (x - (l - 1) / 2) * 1.9,
+            k = x % 2 ? -1 : 1,
+            S = L(c, wt(0.75, 8.4, 32), v, 0, 2.05, M);
+          ((S.rotation.x = 0),
+            k < 0 && (S.rotation.y = s),
+            L(c, wt(0.28, 0.3, 16), P.chrome, 4.35 * k, 2.05, M));
+        }
+        return (
+          L(c, new bt(0.3, 1.6, u - 0.4), P.steel, -5.1, 1.9, 0),
+          L(c, new bt(0.3, 1.6, u - 0.4), P.steel, 5.1, 1.9, 0),
+          L(c, Ut(2.2, 1, 2.4, 0.2), P.plastic, -6.6, 0.5, 0),
+          L(c, Ut(2.2, 1, 2.4, 0.2), P.plastic, 6.6, 0.5, 0),
+          ot(r, -6.6, 1, 0, "black", 0),
+          ot(r, 6.6, 1, 0, "red", 1),
+          (r.h = 1),
+          (r.top = 4),
+          r
+        );
+      }),
+      (dt.switch = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 12.4, 5);
+        (ot(r, -4.9, l, 0, "red", 0),
+          ot(r, 4.9, l, 0, "black", 1),
+          L(c, new bt(3.2, 0.06, 0.7), P.brass, -3.6, l + 0.03, 0),
+          L(c, new bt(3.2, 0.06, 0.7), P.brass, 3.6, l + 0.03, 0));
+        for (const v of [-0.36, 0.36])
+          (L(c, new bt(0.9, 1.5, 0.12), P.brass, -2.6, l + 0.75, v),
+            L(c, new bt(0.8, 1.3, 0.12), P.brass, 2.9, l + 0.65, v));
+        const u = new Ot();
+        (u.position.set(-2.6, l + 1.15, 0),
+          c.add(u),
+          L(u, new bt(6.6, 0.16, 0.56), P.steel, 3.3, 0, 0));
+        const m = L(u, rt(0.34, 0.3, 1.9, 24), P.black, 6.7, 0.75, 0);
+        return (
+          (m.rotation.z = -0.35),
+          L(u, new oe(0.36, 16, 12), P.black, 7, 1.62, 0),
+          L(c, We(0.14, 1.2, 12), P.chrome, -2.6, l + 1.15, 0),
+          (r.top = 5),
+          (r.upd = (v) => {
+            u.rotation.z = -(v.s.ang ?? (v.p.closed ? 0 : -0.62)) * 1.7;
+          }),
+          r
+        );
+      }),
+      (dt.spdt = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 12.4, 8);
+        (ot(r, -4.9, l, 0, "red", 0),
+          ot(r, 4.9, l, -2.6, "black", 1),
+          ot(r, 4.9, l, 2.6, "black", 2));
+        for (const m of [-0.36, 0.36])
+          L(c, new bt(0.9, 1.4, 0.12), P.brass, -2.4, l + 0.7, m);
+        for (const m of [-2.2, 2.2]) {
+          for (const v of [-0.34, 0.34])
+            L(c, new bt(0.12, 1.2, 0.8), P.brass, 3 + v, l + 0.6, m);
+          L(c, new bt(2, 0.06, 0.6), P.brass, 4, l + 0.03, m);
+        }
+        (qt(r, "1", 1, 1, 3, l + 0.01, -3.4),
+          qt(r, "2", 1, 1, 3, l + 0.01, 3.4));
+        const u = new Ot();
+        return (
+          u.position.set(-2.4, l + 1, 0),
+          c.add(u),
+          L(u, new bt(5.9, 0.56, 0.16), P.steel, 2.95, 0, 0),
+          L(u, rt(0.3, 0.3, 1.5, 20), P.black, 5.9, 0.7, 0),
+          (r.top = 4.5),
+          (r.upd = (m) => {
+            u.rotation.y = -(m.s.ang ?? 0);
+          }),
+          r
+        );
+      }),
+      (dt.button = (h) => {
+        const r = ye(h, 8.4, 4.4),
+          c = r.g,
+          l = r.h;
+        L(c, rt(1.25, 1.35, 0.9, 32), P.black, 0, l + 0.45, 0);
+        const u = L(c, rt(0.85, 0.85, 0.8, 32), P.capRed, 0, l + 1.3, 0);
+        return (
+          (r.top = 4),
+          (r.upd = (m) => {
+            u.position.y = l + (m.s.pressed ? 1 : 1.3);
+          }),
+          r
+        );
+      }),
+      (dt.fuse = (h) => {
+        const r = ye(h, 12, 4.2),
+          c = r.g,
+          l = r.h,
+          u = l + 1.2;
+        for (const x of [-2.2, 2.2])
+          for (const M of [-0.45, 0.45])
+            L(c, new bt(0.5, 1.3, 0.1), P.brass, x, l + 0.65, M);
+        (L(c, wt(0.52, 0.8, 24), P.chrome, -1.9, u, 0),
+          L(c, wt(0.52, 0.8, 24), P.chrome, 1.9, u, 0));
+        const m = L(
+          c,
+          wt(0.5, 3, 24),
+          h.burnt
+            ? at(3814444, 0, 0.3, {
+                transparent: !0,
+                opacity: 0.6,
+              })
+            : P.glass,
+          0,
+          u,
+          0,
+        );
+        m.castShadow = !1;
+        const v = u0(P.steel);
+        return (
+          (v.emissive = new ge(0)),
+          h.burnt
+            ? (L(c, wt(0.04, 1, 8), v, -1, u, 0),
+              L(c, wt(0.04, 1, 8), v, 1, u, 0))
+            : L(c, wt(0.04, 3, 8), v, 0, u, 0),
+          W(c, I(-4.7, l + 0.45, 0), I(-2.2, l + 0.2, 0), 0.08, P.brass),
+          W(c, I(4.7, l + 0.45, 0), I(2.2, l + 0.2, 0), 0.08, P.brass),
+          (r.top = 4),
+          (r.upd = (x) => {
+            const M = Q(x.heat / 2.2, 0, 1);
+            v.emissive.setRGB(M * 3, M * 1.2, M * 0.3);
+          }),
+          r
+        );
+      }),
+      (dt.resistor = (h) => {
+        const r = ye(),
+          c = r.g,
+          l = r.h,
+          u = l + 1.3,
+          m = u0(P.ceramic);
+        (m.color.set(h.burnt ? 1775124 : 14731157),
+          (m.emissive = new ge(0)),
+          L(c, wt(0.5, 3.2, 28), m, 0, u, 0));
+        for (const v of [-1.65, 1.65])
+          L(c, new oe(0.6, 24, 14).scale(0.75, 1, 1), m, v, u, 0);
+        if (!h.burnt) {
+          const v = Ls(h.p.R);
+          [
+            [-1.2, v[0]],
+            [-0.65, v[1]],
+            [-0.1, v[2]],
+            [1.1, "#d4af37"],
+          ].forEach(([x, M]) => L(c, wt(0.525, 0.28, 28), mo(M), x, u, 0));
+        }
+        return (
+          xn(r, 2.1, u),
+          qt(r, z(h.p.R, "Ω"), 4, 1, 0, l + 0.01, 1.55),
+          (r.top = 4),
+          (r.upd = (v) => {
+            const x = Q((v.heat || 0) - 0.8, 0, 2.5) / 2.5;
+            m.emissive.setRGB(x * 1.8, x * 0.35, x * 0.05);
+          }),
+          r
+        );
+      }),
+      (dt.diode = dt.zener =
+        (h) => {
+          const r = ye(h, 10, 4.2),
+            c = r.g,
+            l = r.h,
+            u = l + 1.2,
+            m = h.type === "zener",
+            v = h.burnt
+              ? at(2761760, 0, 0.6)
+              : m
+                ? at(14840861, 0, 0.18, {
+                    transparent: !0,
+                    opacity: 0.92,
+                  })
+                : at(1184534, 0.1, 0.18);
+          return (
+            L(c, wt(0.42, 2.4, 24), v, 0, u, 0),
+            L(c, wt(0.44, 0.3, 24), m ? P.black : P.steel, 0.8, u, 0),
+            xn(r, 1.2, u),
+            qt(
+              r,
+              m ? `Vz ${h.p.Vz}V` : P0[h.p.model][2],
+              4,
+              1,
+              0,
+              l + 0.01,
+              1.5,
+            ),
+            qt(r, "▶|", 1.6, 0.8, 0, l + 0.01, -1.5, {
+              size: 40,
+            }),
+            (r.top = 3.5),
+            r
+          );
+        }),
+      (dt.led = (h) => {
+        const r = ye(h, 8, 4.4),
+          c = r.g,
+          l = r.h,
+          u = new ge(Ee[h.p.color][2]),
+          m = new J0({
+            color: h.burnt ? 2761760 : u,
+            roughness: 0.15,
+            transmission: 0,
+            transparent: !0,
+            opacity: 0.85,
+            clearcoat: 1,
+            emissive: u,
+            emissiveIntensity: 0,
+          }),
+          v = l + 2.1;
+        (L(c, rt(0.66, 0.66, 0.16, 28), m, 0, v, 0),
+          L(c, rt(0.55, 0.55, 0.9, 28), m, 0, v + 0.5, 0),
+          L(c, new oe(0.55, 28, 14, 0, s * 2, 0, s / 2), m, 0, v + 0.95, 0),
+          W(c, I(-0.22, l, 0), I(-0.22, v, 0), 0.05, P.steel),
+          W(c, I(0.22, l, 0), I(0.22, v, 0), 0.05, P.steel),
+          W(c, I(-2.5, l + 0.45, 0), I(-0.22, l + 0.3, 0), 0.05, P.steel),
+          W(c, I(2.5, l + 0.45, 0), I(0.22, l + 0.3, 0), 0.05, P.steel));
+        const x = new Ps(u, 0, 40, 2);
+        return (
+          x.position.set(0, v + 1.1, 0),
+          c.add(x),
+          (r.top = 4.5),
+          (r.upd = (M) => {
+            const k = Math.min(M.s.b || 0, 1.6);
+            ((m.emissiveIntensity = 0.05 + 9 * k), (x.intensity = 60 * k));
+          }),
+          r
+        );
+      }),
+      (dt.bulb = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 9, 6.6);
+        (ot(r, -3.3, l, 1.9, "red", 0), ot(r, 3.3, l, 1.9, "black", 1));
+        const u = -0.8;
+        (L(c, rt(1.3, 1.4, 1, 32), P.ceramic, 0, l + 0.5, u),
+          L(c, rt(0.8, 0.8, 1.2, 32), P.steel, 0, l + 1.6, u));
+        for (let N = 0; N < 3; N++)
+          L(
+            c,
+            new Y0(0.8, 0.07, 8, 32).rotateX(s / 2),
+            P.steel,
+            0,
+            l + 1.2 + N * 0.35,
+            u,
+          );
+        const m = l + 3.9,
+          v = u0(P.glass);
+        (v.color.set(h.burnt ? 9076848 : 16777215),
+          (v.opacity = h.burnt ? 0.4 : 0.22),
+          (L(c, new oe(1.8, 40, 28), v, 0, m, u).castShadow = !1),
+          (L(c, rt(0.85, 0.75, 0.8, 32), v, 0, l + 2.45, u).castShadow = !1),
+          W(c, I(-0.25, l + 2.2, u), I(-0.75, m - 0.1, u), 0.035, P.steel),
+          W(c, I(0.25, l + 2.2, u), I(0.75, m - 0.1, u), 0.035, P.steel));
+        const x = [];
+        for (let N = 0; N <= 16; N++) {
+          const C = -0.75 + (1.5 * N) / 16;
+          x.push(
+            I(
+              C,
+              m - 0.1 + Math.sin(N * 1.9) * 0.12,
+              u + Math.cos(N * 1.9) * 0.12,
+            ),
+          );
+        }
+        const M = new Rt({
+          color: 3814446,
+          emissive: 0,
+          roughness: 0.6,
+        });
+        h.burnt
+          ? (L(c, new e0(new w0(x.slice(0, 7)), 20, 0.035, 6), M),
+            L(c, new e0(new w0(x.slice(10)), 20, 0.035, 6), M))
+          : L(c, new e0(new w0(x), 48, 0.035, 6), M);
+        const k = new Lt(
+          new oe(1.74, 32, 24),
+          new Me({
+            color: 16755285,
+            transparent: !0,
+            opacity: 0,
+            blending: v0,
+            depthWrite: !1,
+          }),
+        );
+        (k.position.set(0, m, u), (k.userData.nc = !0), c.add(k));
+        const S = new Ps(16761466, 0, 120, 2);
+        return (
+          S.position.set(0, m, u),
+          c.add(S),
+          W(
+            c,
+            I(-3.1, l + 0.45, 1.9),
+            I(-1.2, l + 0.3, u + 0.6),
+            0.06,
+            P.brass,
+          ),
+          W(c, I(3.1, l + 0.45, 1.9), I(1.2, l + 0.3, u + 0.6), 0.06, P.brass),
+          (r.top = m + 2.2),
+          (r.upd = (N) => {
+            const C = N.s.b || 0,
+              R = N.s.T || 300,
+              [D, B, lt] = Ae(Math.max(R, 900)),
+              tt = Q((R - 700) / 2100, 0, 1);
+            (M.emissive
+              .setRGB(D / 255, B / 255, lt / 255)
+              .multiplyScalar(tt * tt * 10 + C * 14),
+              k.material.color.setRGB(D / 255, B / 255, lt / 255),
+              (k.material.opacity = Math.min(0.55, C * 0.4)),
+              S.color.setRGB(D / 255, B / 255, lt / 255),
+              (S.intensity = 700 * Math.min(C, 1.8)));
+          }),
+          r
+        );
+      }),
+      (dt.cap = (h) => {
+        const r = ye(h, 9.4, 4.4),
+          c = r.g,
+          l = r.h,
+          u = u0(P.steel);
+        if (((u.emissive = new ge(0)), h.p.polar)) {
+          const m = h.burnt ? at(1907223, 0, 0.7) : at(2382005, 0.15, 0.3);
+          (L(c, rt(1.25, 1.25, 3.3, 40), m, 0, l + 1.9, 0),
+            h.burnt
+              ? L(
+                  c,
+                  rt(1.3, 1.1, 0.5, 40),
+                  at(7038558, 0.3, 0.6),
+                  0,
+                  l + 3.7,
+                  0,
+                )
+              : (L(
+                  c,
+                  rt(1.265, 1.265, 3.3, 40, !0, s / 2 - 0.42, 0.84),
+                  at(14212580, 0, 0.4, {
+                    side: M0,
+                  }),
+                  0,
+                  l + 1.9,
+                  0,
+                ),
+                L(c, rt(1.18, 1.18, 0.06, 40), u, 0, l + 3.58, 0)),
+            W(c, I(-0.45, l + 0.25, 0), I(-3, l + 0.45, 0), 0.06, P.steel),
+            W(c, I(0.45, l + 0.25, 0), I(3, l + 0.45, 0), 0.06, P.steel),
+            (r.top = 5.5));
+        } else
+          (L(
+            c,
+            We(1.35, 0.5, 40),
+            h.burnt ? at(1907223, 0, 0.7) : at(13203244, 0, 0.35),
+            0,
+            l + 2.2,
+            0,
+          ),
+            W(c, I(-0.5, l + 1, 0), I(-3, l + 0.45, 0), 0.05, P.steel),
+            W(c, I(0.5, l + 1, 0), I(3, l + 0.45, 0), 0.05, P.steel),
+            W(c, I(-0.5, l + 1, 0), I(-0.5, l + 1.3, 0), 0.05, P.steel),
+            W(c, I(0.5, l + 1, 0), I(0.5, l + 1.3, 0), 0.05, P.steel),
+            (r.top = 4.5));
+        return (
+          qt(r, z(h.p.C, "F"), 3.6, 0.9, 0, l + 0.01, 1.6),
+          (r.upd = (m) => {
+            const v = m.v[0] - m.v[1] || 0,
+              x = Q(Math.abs(v) / m.p.Vmax, 0, 1);
+            u.emissive.setRGB(0.1 * x, 0.6 * x, 0.9 * x);
+          }),
+          r
+        );
+      }),
+      (dt.ind = (h) => {
+        const r = ye(h, 12, 5.4),
+          c = r.g,
+          l = r.h,
+          u = l + 2.3;
+        L(c, new bt(7.4, 1.1, 1.1), P.core, 0, u, 0);
+        for (const v of [-2.5, 2.5]) L(c, wt(2.1, 0.3, 40), P.plastic, v, u, 0);
+        const m = m0("#7a3b17", "#c8743a", 60);
+        return (
+          (m.wrapS = m.wrapT = En),
+          r.tex.push(m),
+          L(
+            c,
+            wt(1.75, 4.7, 48),
+            new Rt({
+              map: m,
+              metalness: 0.7,
+              roughness: 0.3,
+            }),
+            0,
+            u,
+            0,
+          ),
+          W(c, I(-2.4, u - 1.6, 0), I(-4.4, l + 0.45, 0), 0.06, P.copper),
+          W(c, I(2.4, u - 1.6, 0), I(4.4, l + 0.45, 0), 0.06, P.copper),
+          (r.top = u + 2.6),
+          r
+        );
+      }),
+      (dt.ldr = (h) => {
+        const r = ye(h, 8.4, 4.4),
+          c = r.g,
+          l = r.h,
+          u = l + 1.6,
+          m = Qt(256, 256, (x, M, k) => {
+            ((x.fillStyle = "#c8733a"),
+              x.beginPath(),
+              x.arc(M / 2, k / 2, M / 2, 0, s * 2),
+              x.fill(),
+              (x.strokeStyle = "#3b2412"),
+              (x.lineWidth = 10),
+              x.beginPath());
+            for (let S = 0; S < 7; S++) {
+              const N = 50 + S * 26;
+              (x.moveTo(40, N), x.lineTo(216, N));
+            }
+            (x.stroke(),
+              (x.fillStyle = "#e8e2d6"),
+              x.fillRect(30, 30, 16, 196),
+              x.fillRect(210, 30, 16, 196));
+          });
+        (r.tex.push(m),
+          L(
+            c,
+            rt(1.3, 1.3, 0.35, 40),
+            [
+              at(9326370, 0, 0.4),
+              new Rt({
+                map: m,
+                roughness: 0.4,
+              }),
+              at(9326370, 0, 0.4),
+            ],
+            0,
+            u,
+            0,
+          ),
+          (L(
+            c,
+            new oe(1.3, 32, 12, 0, s * 2, 0, s / 2).scale(1, 0.35, 1),
+            P.glass,
+            0,
+            u + 0.18,
+            0,
+          ).castShadow = !1),
+          W(c, I(-0.4, u - 0.2, 0), I(-2.8, l + 0.45, 0), 0.05, P.steel),
+          W(c, I(0.4, u - 0.2, 0), I(2.8, l + 0.45, 0), 0.05, P.steel));
+        const v = new Lt(
+          new js(2.4, 7, 32, 1, !0),
+          new Me({
+            color: 16773808,
+            transparent: !0,
+            opacity: 0,
+            blending: v0,
+            depthWrite: !1,
+            side: M0,
+          }),
+        );
+        return (
+          v.position.set(0, u + 3.6, 0),
+          (v.rotation.x = s),
+          (v.userData.nc = !0),
+          c.add(v),
+          (r.top = 4),
+          (r.upd = (x) => {
+            v.material.opacity = 0.16 * Q(x.p.lux / 1e3, 0, 1.5);
+          }),
+          r
+        );
+      }),
+      (dt.motor = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 11, 6.4);
+        (ot(r, -3.9, l, 2.2, "red", 0), ot(r, 3.9, l, 2.2, "black", 1));
+        const u = l + 2.3,
+          m = -0.7;
+        (L(c, new bt(3.4, 1.6, 2.6), P.paintDk, -0.8, l + 0.8, m),
+          L(c, wt(1.8, 4.2, 40), P.steel, -0.8, u, m),
+          L(c, wt(1.25, 0.6, 32), P.grey, 1.6, u, m),
+          L(c, wt(1.5, 0.5, 32), P.black, -3.1, u, m),
+          L(c, wt(0.12, 1.8, 12), P.chrome, 2.6, u, m));
+        const v = new Ot();
+        (v.position.set(3.3, u, m),
+          c.add(v),
+          L(v, wt(0.45, 0.5, 20), P.capRed, 0, 0, 0));
+        const x = at(16747039, 0, 0.4, {
+          transparent: !0,
+          opacity: 1,
+        });
+        x.userData.shared = !1;
+        for (let k = 0; k < 3; k++) {
+          const S = L(v, new bt(0.1, 2.6, 0.75), x, 0, 1.4, 0),
+            N = new Ot();
+          (N.add(S),
+            (S.rotation.y = 0.35),
+            (N.rotation.x = (k * 2 * s) / 3),
+            v.add(N));
+        }
+        const M = new Lt(
+          new Dn(2.8, 40).rotateY(s / 2),
+          new Me({
+            color: 16751162,
+            transparent: !0,
+            opacity: 0,
+            depthWrite: !1,
+            side: M0,
+          }),
+        );
+        return (
+          M.position.set(3.3, u, m),
+          (M.userData.nc = !0),
+          c.add(M),
+          W(c, I(-3.4, u - 0.8, m), I(-3.7, l + 0.45, 2.2), 0.06, P.copper),
+          W(c, I(-3.4, u + 0.3, m), I(3.7, l + 0.45, 2.2), 0.06, P.copper),
+          (r.top = u + 3.2),
+          (r.upd = (k) => {
+            v.rotation.x = -(k.s.ang || 0);
+            const S = Math.abs((k.s.w || 0) * G.speed),
+              N = Q((S - 30) / 60, 0, 1);
+            ((x.opacity = 1 - 0.7 * N), (M.material.opacity = 0.35 * N));
+          }),
+          r
+        );
+      }),
+      (dt.buzzer = (h) => {
+        const r = ye(h, 8.4, 4.4),
+          c = r.g,
+          l = r.h;
+        (L(c, rt(1.45, 1.45, 1.3, 40), P.black, 0, l + 0.65, 0),
+          L(c, rt(0.3, 0.3, 0.02, 20), at(0), 0, l + 1.31, 0));
+        const u = [0, 1].map(() => {
+          const m = new Lt(
+            new Y0(1.6, 0.05, 8, 48).rotateX(s / 2),
+            new Me({
+              color: 16757310,
+              transparent: !0,
+              opacity: 0,
+              blending: v0,
+              depthWrite: !1,
+            }),
+          );
+          return (
+            m.position.set(0, l + 1.3, 0),
+            (m.userData.nc = !0),
+            c.add(m),
+            m
+          );
+        });
+        return (
+          W(c, I(-0.6, l + 0.1, 0), I(-2.8, l + 0.45, 0), 0.05, P.capRed),
+          W(c, I(0.6, l + 0.1, 0), I(2.8, l + 0.45, 0), 0.05, P.black),
+          (r.top = 3.8),
+          (r.upd = (m) => {
+            const v = Math.min(1, m.s.lvl || 0),
+              x = performance.now() / 400;
+            u.forEach((M, k) => {
+              const S = (x + k * 0.5) % 1;
+              (M.scale.setScalar(1 + S * 1.2),
+                (M.material.opacity = v * (1 - S) * 0.8));
+            });
+          }),
+          r
+        );
+      }),
+      (dt.bjt = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 9.4, 7.2);
+        (ot(r, -3.5, l, 0, "red", 0),
+          ot(r, 2.9, l, -2.5, "black", 1),
+          ot(r, 2.9, l, 2.5, "black", 2));
+        const u = l + 2.3;
+        return (
+          L(c, rt(0.95, 0.95, 1.8, 32, !1, 0, s), P.black, 0.3, u, 0),
+          L(c, new bt(0.02, 1.8, 1.9), P.black, 0.3, u, 0),
+          W(c, I(0.4, u - 0.9, 0), I(-3.2, l + 0.45, 0), 0.05, P.steel),
+          W(c, I(0.4, u - 0.9, -0.55), I(2.7, l + 0.45, -2.3), 0.05, P.steel),
+          W(c, I(0.4, u - 0.9, 0.55), I(2.7, l + 0.45, 2.3), 0.05, P.steel),
+          qt(r, "B", 1, 1, -3.5, l + 0.01, 1.6),
+          qt(r, "C", 1, 1, 4.2, l + 0.01, -2.5),
+          qt(r, "E", 1, 1, 4.2, l + 0.01, 2.5),
+          qt(r, h.p.pol.toUpperCase(), 2.4, 0.8, -1, l + 0.01, -2.6, {
+            size: 34,
+          }),
+          (r.top = 4.5),
+          r
+        );
+      }),
+      (dt.pot = (h) => {
+        const r = Vt(),
+          c = r.g;
+        for (const v of [-11, 11])
+          (L(c, Ut(2.6, 0.7, 5.4, 0.2), P.paint, v, 0.35, 0),
+            L(c, Ut(1.5, 7.6, 2.4, 0.2), P.paint, v, 4.1, 0));
+        const l = 3.6;
+        L(c, wt(1.9, 20.4, 40), P.ceramic, 0, l, 0);
+        const u = m0("#1a1b1e", "#4a4c52", 220);
+        (r.tex.push(u),
+          L(
+            c,
+            wt(1.97, 18, 48),
+            new Rt({
+              map: u,
+              metalness: 0.5,
+              roughness: 0.35,
+            }),
+            0,
+            l,
+            0,
+          ),
+          L(c, new bt(18, 0.06, 0.45), P.copper, 0, l + 1.98, 0),
+          L(c, wt(2.05, 0.5, 40), P.grey, -9.3, l, 0),
+          L(c, wt(2.05, 0.5, 40), P.grey, 9.3, l, 0),
+          L(c, new bt(23.4, 0.6, 0.6), P.steel, 0, 7.6, 0));
+        const m = new Ot();
+        return (
+          m.position.set(0, 7.6, 0),
+          c.add(m),
+          L(m, Ut(2.4, 1.4, 1.8, 0.2), P.paintDk, 0, 0, 0),
+          L(m, rt(0.45, 0.5, 0.8, 20), P.black, 0, 1, 0),
+          L(m, new bt(0.3, 2, 0.5), P.brass, 0, -1.6, 0),
+          (m.userData.pick = {
+            kind: "slider",
+          }),
+          ot(r, -11, 0.7, 1.9, "black", 0),
+          ot(r, 11, 0.7, 1.9, "black", 1),
+          ot(r, 11, 7.9, 0, "red", 2),
+          ot(r, -11, 7.9, 0, "red", 3),
+          W(c, I(-11, 1.2, 1.5), I(-10, l - 1.2, 0.6), 0.07, P.brass),
+          W(c, I(11, 1.2, 1.5), I(10, l - 1.2, 0.6), 0.07, P.brass),
+          (r.h = 0.7),
+          (r.top = 11),
+          (r.upd = (v) => {
+            m.position.x = -8.6 + 17.2 * v.p.pos;
+          }),
+          r
+        );
+      }),
+      (dt.xfmr = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 13, 9);
+        (L(c, new bt(7.2, 1.4, 2.6), P.core, 0, l + 0.7, 0),
+          L(c, new bt(7.2, 1.4, 2.6), P.core, 0, l + 7.3, 0));
+        for (const v of [-2.9, 2.9])
+          L(c, new bt(1.4, 5.2, 2.6), P.core, v, l + 4, 0);
+        const u = m0("#6b1e14", "#a8412c", 40),
+          m = m0(
+            "#7a3b17",
+            "#d08040",
+            Math.max(8, Math.round(40 * Math.min(h.p.n, 2))),
+          );
+        return (
+          r.tex.push(u, m),
+          L(
+            c,
+            rt(1.9, 1.9, 4.4, 40),
+            new Rt({
+              map: u,
+              metalness: 0.6,
+              roughness: 0.35,
+            }),
+            -2.9,
+            l + 4,
+            0,
+          ),
+          L(
+            c,
+            rt(1.9, 1.9, 4.4, 40),
+            new Rt({
+              map: m,
+              metalness: 0.6,
+              roughness: 0.35,
+            }),
+            2.9,
+            l + 4,
+            0,
+          ),
+          ot(r, -5.4, l, -2.9, "red", 0),
+          ot(r, -5.4, l, 2.9, "black", 1),
+          ot(r, 5.4, l, -2.9, "red", 2),
+          ot(r, 5.4, l, 2.9, "black", 3),
+          W(c, I(-3.5, l + 5.5, -1.6), I(-5.2, l + 0.45, -2.7), 0.06, P.copper),
+          W(c, I(-3.5, l + 2.5, 1.6), I(-5.2, l + 0.45, 2.7), 0.06, P.copper),
+          W(c, I(3.5, l + 5.5, -1.6), I(5.2, l + 0.45, -2.7), 0.06, P.copper),
+          W(c, I(3.5, l + 2.5, 1.6), I(5.2, l + 0.45, 2.7), 0.06, P.copper),
+          qt(r, translate("原"), 1.2, 1.2, -2.9, l + 0.01, 3.6),
+          qt(r, translate("副"), 1.2, 1.2, 2.9, l + 0.01, 3.6),
+          (r.top = l + 9),
+          r
+        );
+      }),
+      (dt.ground = (h) => {
+        const r = Vt(),
+          c = ne(r, 4.4, 4.4, 0.9, P.paintDk);
+        return (
+          ot(r, 0, c, -0.6, "black", 0),
+          qt(r, "⏚", 1.6, 1.6, 0, c + 0.01, 1.4, {
+            size: 56,
+            pw: 64,
+            ph: 64,
+          }),
+          (r.top = 3),
+          r
+        );
+      }),
+      (dt.rbox = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = 5;
+        (L(c, Ut(17, l, 11, 0.4), at(8015660, 0, 0.55), 0, l / 2, 0),
+          L(c, Ut(16.2, 0.4, 10.2, 0.15), P.black, 0, l + 0.2, 0));
+        const u = [-5.7, -1.9, 1.9, 5.7],
+          m = -1.4,
+          v = l + 0.4,
+          x = Qt(648, 408, (S, N, C) => {
+            const R = N / 16.2;
+            ((S.fillStyle = "#17181b"),
+              S.fillRect(0, 0, N, C),
+              (S.fillStyle = "#e8e2d2"),
+              (S.textAlign = "center"),
+              (S.textBaseline = "middle"),
+              u.forEach((D, B) => {
+                const lt = (D + 8.1) * R,
+                  tt = (m + 5.1) * R;
+                S.font = `600 ${0.55 * R}px Arial`;
+                for (let et = 0; et < 10; et++) {
+                  const ut = -Math.PI / 2 + (et * Math.PI * 2) / 10;
+                  S.fillText(
+                    String(et),
+                    lt + Math.cos(ut) * 1.55 * R,
+                    tt + Math.sin(ut) * 1.55 * R,
+                  );
+                }
+                ((S.font = `700 ${0.55 * R}px Arial`),
+                  S.fillText(
+                    ["×1000", "×100", "×10", "×1"][B],
+                    lt,
+                    tt + 2.35 * R,
+                  ));
+              }),
+              (S.font = `700 ${0.6 * R}px ${Pe}`),
+              S.fillText(translate("ZX21 型电阻箱"), 8.1 * R, 0.8 * R),
+              (S.font = `600 ${0.5 * R}px Arial`),
+              S.fillText("0", (-5.5 + 8.1) * R, (4.2 + 5.1) * R + 12),
+              S.fillText("9999.9Ω", (-1.8 + 8.1) * R, (4.2 + 5.1) * R + 12));
+          });
+        r.tex.push(x);
+        const M = L(
+          c,
+          new be(16.2, 10.2),
+          new Rt({
+            map: x,
+            roughness: 0.5,
+          }),
+          0,
+          v + 0.01,
+          0,
+        );
+        ((M.rotation.x = -s / 2), (M.castShadow = !1));
+        const k = u.map((S, N) => {
+          const C = new Ot();
+          return (
+            C.position.set(S, v, m),
+            c.add(C),
+            L(C, rt(0.95, 1.05, 0.9, 28), P.black, 0, 0.45, 0),
+            L(C, rt(0.7, 0.95, 0.25, 28), P.plastic, 0, 1, 0),
+            L(C, new bt(0.16, 0.08, 1.3), P.white, 0, 1.15, -0.55),
+            (C.userData.pick = {
+              kind: "knob",
+              dec: 3 - N,
+            }),
+            C
+          );
+        });
+        return (
+          ot(r, -5.5, v, 3.4, "red", 0),
+          ot(r, -1.8, v, 3.4, "black", 1),
+          (r.h = v),
+          (r.top = v + 3),
+          (r.upd = (S) =>
+            q.rbox.digits(S).forEach((N, C) => {
+              k[C].rotation.y = (-N * s * 2) / 10;
+            })),
+          r
+        );
+      }),
+      (dt.mm = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = new Ot();
+        (l.position.set(0, 0.05, 3.2),
+          (l.rotation.x = 0.38),
+          c.add(l),
+          W(c, I(-2.6, 0, -8.2), I(-2.6, 4.6, -7.4), 0.18, P.plastic),
+          W(c, I(2.6, 0, -8.2), I(2.6, 4.6, -7.4), 0.18, P.plastic),
+          W(c, I(-2.6, 4.6, -7.4), I(2.6, 4.6, -7.4), 0.18, P.plastic),
+          L(l, Ut(10, 2.2, 16, 0.9), at(15909403, 0, 0.6), 0, 1.1, -7.4),
+          L(l, Ut(8.4, 0.3, 14.2, 0.4), at(2895669, 0.1, 0.45), 0, 2.25, -7.4));
+        const u = Qt(420, 710, (k, S, N) => {
+          const C = S / 8.4;
+          ((k.fillStyle = "#2c2f35"),
+            k.fillRect(0, 0, S, N),
+            (k.fillStyle = "#e8ecf0"),
+            (k.font = `700 ${0.55 * C}px Arial`),
+            (k.textAlign = "center"),
+            (k.textBaseline = "middle"),
+            k.fillText("DIGITAL MULTIMETER", S / 2, 0.55 * C));
+          const R = S / 2,
+            D = 8.3 * C;
+          (["V⎓", "V~", "A⎓", "Ω"].forEach((lt, tt) => {
+            const et = -Math.PI / 2 + tt * 0.9 - 1.35;
+            ((k.fillStyle = tt === 3 ? "#8ef08e" : "#ffd84a"),
+              (k.font = `700 ${0.7 * C}px Arial`),
+              k.fillText(
+                lt,
+                R + Math.cos(et) * 2.6 * C,
+                D + Math.sin(et) * 2.6 * C,
+              ));
+          }),
+            (k.fillStyle = "#e8ecf0"),
+            (k.font = `700 ${0.5 * C}px Arial`),
+            k.fillText("VΩA", (4.2 + 1.9) * C, 13.2 * C),
+            k.fillText("COM", (4.2 - 1.9) * C, 13.2 * C));
+        });
+        r.tex.push(u);
+        const m = L(
+          l,
+          new be(8.4, 14.2),
+          new Rt({
+            map: u,
+            roughness: 0.5,
+          }),
+          0,
+          2.41,
+          -7.4,
+        );
+        ((m.rotation.x = -s / 2), (m.castShadow = !1));
+        const v = Qt(512, 170, () => {});
+        r.tex.push(v);
+        const x = L(
+          l,
+          new be(7, 2.35),
+          new Me({
+            map: v,
+            color: 14540253,
+          }),
+          0,
+          2.43,
+          -12.3,
+        );
+        ((x.rotation.x = -s / 2), (x.castShadow = !1));
+        const M = new Ot();
+        return (
+          M.position.set(0, 2.4, -6.4),
+          l.add(M),
+          L(M, rt(1.9, 2, 0.7, 36), P.black, 0, 0.35, 0),
+          L(M, new bt(0.7, 0.5, 3.4), P.plastic, 0, 0.9, 0),
+          L(M, new bt(0.18, 0.1, 1.5), P.white, 0, 1.18, -1),
+          (M.userData.pick = {
+            kind: "knob",
+          }),
+          ot(r, 1.9, 0, 0, "red", 0),
+          ot(r, -1.9, 0, 0, "black", 1),
+          r.posts.forEach((k) => {
+            (l.add(k.g), k.g.position.set(k.g.position.x, 2.4, -2.2));
+          }),
+          (r.h = 2),
+          (r.top = 10),
+          (r.upd = (k) => {
+            const S = Math.max(
+              0,
+              i0.findIndex((C) => C[0] === k.p.mode),
+            );
+            M.rotation.y = -(S * 0.9 - 1.35);
+            const N = (k.s.disp || "0.000 V").replace(/\s+/g, " ");
+            r.lastD !== N &&
+              ((r.lastD = N),
+              g0(v, (C, R, D) => {
+                ((C.fillStyle = "#b6c4a3"),
+                  C.fillRect(0, 0, R, D),
+                  (C.fillStyle = "#18200f"),
+                  (C.font = '700 96px "JetBrains Mono",monospace'),
+                  (C.textAlign = "right"),
+                  (C.textBaseline = "middle"),
+                  C.fillText(N, R - 20, D / 2 + 6),
+                  (C.font = "600 26px Arial"),
+                  (C.textAlign = "left"),
+                  C.fillText(i0[S][1].split(" ")[0], 14, 26));
+              }));
+          }),
+          r
+        );
+      }),
+      (dt.rwire = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 25, 5, 1, at(10187847, 0, 0.6));
+        (ot(r, -11, l, 0, "red", 0), ot(r, 11, l, 0, "black", 1));
+        for (const v of [-9.4, 9.4])
+          L(c, rt(0.35, 0.45, 1.4, 16), P.ceramic, v, l + 0.7, 0);
+        const u = new ge(Ne[h.p.mat][2]),
+          m = new Rt({
+            color: u,
+            metalness: 1,
+            roughness: 0.25,
+            emissive: 0,
+          });
+        return (
+          L(c, wt(0.03 + h.p.d * 0.07, 18.8, 12), m, 0, l + 1.45, 0),
+          W(c, I(-9.4, l + 1.45, 0), I(-10.8, l + 0.45, 0), 0.05, P.brass),
+          W(c, I(9.4, l + 1.45, 0), I(10.8, l + 0.45, 0), 0.05, P.brass),
+          qt(
+            r,
+            `${Ne[h.p.mat][0]}  L=${h.p.L}m  Φ${h.p.d}mm`,
+            11,
+            1.1,
+            0,
+            l + 0.01,
+            1.7,
+            {
+              pw: 640,
+              ph: 64,
+              size: 34,
+            },
+          ),
+          (r.top = 4),
+          (r.upd = (v) => {
+            const x = Q(v.heat - 0.6, 0, 3) / 3;
+            m.emissive.setRGB(x * 3, x * 1, x * 0.2);
+          }),
+          r
+        );
+      }),
+      (dt.emag = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 13, 7);
+        (ot(r, -5, l, 2.4, "red", 0), ot(r, 5, l, 2.4, "black", 1));
+        const u = l + 3.6,
+          m = -0.8;
+        for (const k of [-4.2, 3.4])
+          L(c, new bt(0.8, 3.6, 1.6), P.paintDk, k, l + 1.8, m);
+        h.p.core
+          ? (L(c, wt(0.34, 9.6, 16), P.steel, 0.3, u, m),
+            L(c, wt(0.7, 0.2, 20), P.steel, -4.5, u, m),
+            L(c, new js(0.34, 0.9, 16).rotateZ(-s / 2), P.steel, 5.5, u, m))
+          : L(
+              c,
+              wt(0.5, 6, 16),
+              at(15261896, 0, 0.5, {
+                transparent: !0,
+                opacity: 0.8,
+              }),
+              0,
+              u,
+              m,
+            );
+        const v = 0.75 + (0.18 * +h.p.N) / 50,
+          x = m0("#7a3b17", "#c8743a", Math.round(+h.p.N / 2));
+        (r.tex.push(x),
+          L(
+            c,
+            wt(v, 5, 40),
+            new Rt({
+              map: x,
+              metalness: 0.7,
+              roughness: 0.3,
+            }),
+            -0.6,
+            u,
+            m,
+          ),
+          W(c, I(-3.1, u - v, m), I(-4.8, l + 0.45, 2.2), 0.05, P.copper),
+          W(c, I(1.9, u - v, m), I(4.8, l + 0.45, 2.2), 0.05, P.copper),
+          L(
+            c,
+            rt(1.8, 1.6, 0.5, 30),
+            at(12108492, 0.6, 0.35),
+            5.2,
+            l + 0.25,
+            m,
+          ));
+        for (let k = 0; k < 10; k++) {
+          const S = L(
+            c,
+            rt(0.03, 0.03, 1.4, 6),
+            P.chrome,
+            5.2 + Math.cos(k * 2.4) * 0.9,
+            l + 0.55,
+            m + Math.sin(k * 2.4) * 0.9,
+          );
+          ((S.rotation.z = s / 2), (S.rotation.y = k));
+        }
+        const M = [];
+        for (let k = 0; k < 15; k++) {
+          const S = k % 5,
+            N = Math.floor(k / 5),
+            C = L(
+              c,
+              rt(0.03, 0.03, 1.3, 6),
+              P.chrome,
+              4.1 + S * 0.35,
+              u - 0.95 - N * 1.25,
+              m + (S % 2 ? 0.15 : -0.15),
+            );
+          ((C.rotation.z = (S - 2) * 0.08), (C.visible = !1), M.push(C));
+        }
+        return (
+          (r.top = u + 2.5),
+          (r.upd = (k) =>
+            M.forEach((S, N) => (S.visible = N < (k.s.pins || 0)))),
+          r
+        );
+      }),
+      (dt.heater = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 9, 7.4);
+        (ot(r, -3.3, l, 2.5, "red", 0), ot(r, 3.3, l, 2.5, "black", 1));
+        const u = l + 2.6,
+          m = -0.6;
+        L(c, rt(1.6, 2, 0.5, 30), P.paintDk, 0, l + 0.25, m);
+        const v = u0(P.glass);
+        ((v.opacity = 0.16),
+          (L(c, new oe(2.5, 40, 28), v, 0, u, m).castShadow = !1),
+          (L(c, rt(0.75, 0.75, 3, 28, !0), v, 0, u + 3.3, m).castShadow = !1));
+        const x = h.p.liq === "oil" ? 15911008 : 7320831,
+          M = L(
+            c,
+            new oe(2.35, 32, 20, 0, s * 2, s * 0.36, s * 0.64),
+            new J0({
+              color: x,
+              transparent: !0,
+              opacity: 0.55,
+              roughness: 0.1,
+              side: M0,
+              depthWrite: !1,
+            }),
+            0,
+            u,
+            m,
+          );
+        M.castShadow = !1;
+        const k = L(
+          c,
+          new Dn(2.1, 32).rotateX(-s / 2),
+          new J0({
+            color: x,
+            transparent: !0,
+            opacity: 0.45,
+            roughness: 0.05,
+            depthWrite: !1,
+          }),
+          0,
+          u + 0.95,
+          m,
+        );
+        ((k.castShadow = !1),
+          L(c, rt(0.85, 0.7, 0.9, 24), at(11549230, 0, 0.7), 0, u + 5.1, m));
+        const S = [];
+        for (let B = 0; B <= 60; B++) {
+          const lt = (B / 60) * s * 10;
+          S.push(
+            I(
+              -1.1 + (2.2 * B) / 60,
+              u - 0.6 + Math.sin(lt) * 0.35,
+              m + Math.cos(lt) * 0.35,
+            ),
+          );
+        }
+        const N = new Rt({
+          color: 9067064,
+          metalness: 0.8,
+          roughness: 0.35,
+          emissive: 0,
+        });
+        (L(c, new e0(new w0(S), 160, 0.05, 6), N),
+          W(c, I(-1.1, u - 0.6, m), I(-0.35, u + 5.5, m), 0.05, P.copper),
+          W(c, I(1.1, u - 0.6, m), I(0.35, u + 5.5, m), 0.05, P.copper),
+          W(c, I(-0.35, u + 5.5, m), I(-3.1, l + 0.45, 2.5), 0.05, P.copper),
+          W(c, I(0.35, u + 5.5, m), I(3.1, l + 0.45, 2.5), 0.05, P.copper));
+        const C = 0.9,
+          R = m + 0.9;
+        ((L(c, rt(0.2, 0.2, 7.5, 12), v, C, u + 3.2, R).castShadow = !1),
+          L(c, new oe(0.28, 16, 12), at(13639193, 0, 0.3), C, u - 0.5, R));
+        const D = L(c, rt(0.08, 0.08, 1, 8), at(13639193, 0, 0.3), C, 0, R);
+        return (
+          L(c, new bt(0.05, 6.5, 0.5), P.white, C + 0.28, u + 3.3, R),
+          (r.top = u + 7.6),
+          (r.upd = (B) => {
+            const lt = B.s.T ?? 20,
+              tt = 0.8 + Q((lt - 0) / 100, 0, 1) * 6.2;
+            ((D.scale.y = tt), (D.position.y = u - 0.4 + tt / 2));
+            const et = Math.min(1, (B.i * B.i * B.p.R) / 20);
+            N.emissive.setRGB(et * 2.5, et * 0.7, et * 0.15);
+          }),
+          r
+        );
+      }),
+      (dt.solar = (h) => {
+        const r = Vt(),
+          c = r.g,
+          l = ne(r, 13, 7);
+        (ot(r, -4.6, l, 2.5, "black", 0),
+          ot(r, 4.6, l, 2.5, "red", 1),
+          L(c, rt(0.25, 0.25, 3.2, 12), P.steel, 0, l + 1.6, -0.8));
+        const u = new Ot();
+        (u.position.set(0, l + 3.4, -0.8),
+          (u.rotation.x = 0.7),
+          c.add(u),
+          L(u, Ut(12.4, 0.45, 9, 0.12), at(10134445, 0.8, 0.45), 0, 0, 0));
+        const m = +h.p.N,
+          v = m >= 20 || m >= 10 ? 5 : 3,
+          x = Math.ceil(m / v),
+          M = Qt(512, 384, (D, B, lt) => {
+            ((D.fillStyle = "#e6ebf0"), D.fillRect(0, 0, B, lt));
+            const tt = B / v,
+              et = lt / x;
+            for (let ut = 0; ut < v; ut++)
+              for (let nt = 0; nt < x; nt++) {
+                const kt = D.createLinearGradient(
+                  ut * tt,
+                  nt * et,
+                  (ut + 1) * tt,
+                  (nt + 1) * et,
+                );
+                (kt.addColorStop(0, "#1d3f82"),
+                  kt.addColorStop(1, "#0d2355"),
+                  (D.fillStyle = kt),
+                  D.fillRect(ut * tt + 3, nt * et + 3, tt - 6, et - 6),
+                  (D.strokeStyle = "rgba(190,210,240,.35)"),
+                  (D.lineWidth = 1));
+                for (let ft = 1; ft < 4; ft++)
+                  (D.beginPath(),
+                    D.moveTo(ut * tt + (ft * tt) / 4, nt * et + 3),
+                    D.lineTo(ut * tt + (ft * tt) / 4, (nt + 1) * et - 3),
+                    D.stroke());
+              }
+          });
+        r.tex.push(M);
+        const k = new Rt({
+            map: M,
+            roughness: 0.45,
+            metalness: 0.1,
+            emissive: 2245802,
+            emissiveIntensity: 0,
+          }),
+          S = L(u, new be(11.8, 8.4), k, 0, 0.24, 0);
+        ((S.rotation.x = -s / 2),
+          (S.castShadow = !1),
+          W(c, I(-0.5, l + 2.4, -0.2), I(-4.4, l + 0.45, 2.3), 0.05, P.black),
+          W(c, I(0.5, l + 2.4, -0.2), I(4.4, l + 0.45, 2.3), 0.05, P.capRed));
+        const N = new Ot();
+        (N.position.set(0, l + 13, 3), c.add(N));
+        const C = new Rt({
+          color: 16774872,
+          emissive: 16770720,
+          emissiveIntensity: 0,
+        });
+        (L(
+          N,
+          new js(2.2, 2, 28, 1, !0),
+          at(3949648, 0.5, 0.4, {
+            side: M0,
+          }),
+          0,
+          0.6,
+          0,
+        ),
+          L(N, new oe(0.9, 20, 14), C, 0, 0, 0));
+        const R = new xi(16773324, 0, 60, 0.7, 0.5, 1.5);
+        return (
+          R.position.set(0, 0, 0),
+          R.target.position.set(0, -13, -4),
+          N.add(R, R.target),
+          L(c, rt(0.12, 0.12, 13, 10), P.steel, 5.8, l + 6.5, 3),
+          L(c, rt(0.12, 0.12, 5.8, 10).rotateZ(s / 2), P.steel, 2.9, l + 13, 3),
+          (r.top = l + 15),
+          (r.upd = (D) => {
+            const B = Q(D.p.lux, 0, 1.5);
+            ((C.emissiveIntensity = 2.5 * B),
+              (R.intensity = 90 * B),
+              (k.emissiveIntensity = 0.12 * B));
+          }),
+          r
+        );
+      }),
+      (dt.ntc = (h) => {
+        const r = ye(h, 8.4, 4.2),
+          c = r.g,
+          l = r.h;
+        return (
+          L(
+            c,
+            new oe(0.55, 20, 14).scale(1, 1.2, 0.8),
+            at(1776930, 0.1, 0.3),
+            0,
+            l + 2.4,
+            0,
+          ),
+          W(c, I(-0.2, l + 2, 0), I(-2.7, l + 0.45, 0), 0.04, P.steel),
+          W(c, I(0.2, l + 2, 0), I(2.7, l + 0.45, 0), 0.04, P.steel),
+          qt(r, "NTC  t°", 3, 0.9, 0, l + 0.01, 1.5),
+          (r.top = 4),
+          r
+        );
+      }));
+    let _e = null;
+    const Xt = 0.4,
+      Le = 0.3,
+      jn = new Xo(),
+      Eo = {
+        psu: translate("电源"),
+        battery: translate("电池组"),
+        ac: translate("信号源"),
+        isrc: translate("恒流源"),
+        resistor: translate("定值电阻"),
+        pot: translate("滑动变阻器"),
+        cap: translate("电容器"),
+        ind: translate("线圈"),
+        ldr: translate("光敏电阻"),
+        bulb: translate("小灯泡"),
+        led: "LED",
+        motor: translate("电动机"),
+        buzzer: translate("蜂鸣器"),
+        diode: translate("二极管"),
+        zener: translate("稳压管"),
+        bjt: translate("三极管"),
+        switch: translate("开关"),
+        spdt: translate("单刀双掷开关"),
+        button: translate("按钮"),
+        fuse: translate("保险丝"),
+        ammeter: translate("电流表"),
+        voltmeter: translate("电压表"),
+        galv: translate("灵敏电流计"),
+        xfmr: translate("变压器"),
+        ground: translate("接地"),
+        rbox: translate("电阻箱"),
+        mm: translate("多用电表"),
+        rwire: translate("电阻丝"),
+        emag: translate("电磁铁"),
+        heater: translate("电热器"),
+        solar: translate("太阳能电池"),
+        ntc: translate("热敏电阻"),
+      },
+      H0 = I(),
+      Ms = new Yo(),
+      Cn = new In(),
+      zo = new Jo(I(0, 1, 0), 0);
+    window.V3D = {
+      on: !1,
+      ghost: null,
+      enable(h) {
+        (h && !O && bo(),
+          (this.on = h),
+          (document.getElementById("hint").innerHTML = h
+            ? translate(
+                '<b style="color:#23405f">实物图</b> · 拖动器材摆放 · 从<b style="color:#b8862b">接线柱</b>拖到另一接线柱连线 · 点击导线后 <kbd>Del</kbd> 拆除 · 点击开关/旋钮操作 · 滚轮在器材上调参<br>左键拖空白 平移 · 右键拖 旋转视角 · 滚轮 缩放 · <kbd>R</kbd> 旋转器材 · <kbd>3</kbd> 切换电路图',
+              )
+            : ho),
+          h || ((It.hover = null), (It.hoverPost = null)),
+          h && ((U = 0), vs()));
+      },
+      render: Uo,
+      fit: Do,
+      zoom: Oo,
+      planeAt: ks,
+      freeSpot: Bo,
+      center() {
+        return O ? [y.target.x / 0.065, y.target.z / 0.065] : [0, 0];
+      },
+    };
+    try {
+      localStorage.getItem("voltlab.view") !== "2d" && p0(!0);
+    } catch {
+      p0(!0);
+    }
+  }
+}
+function voltLabPage() {
+  return (
+    React.useLayoutEffect(() => {
+      ((document.title = translate("VoltLab 电学实验台")), wi());
+    }, []),
+    jsxRuntime.jsxs(jsxRuntime.Fragment, {
+      children: [
+        jsxRuntime.jsxs("div", {
+          id: "app",
+          children: [
+            jsxRuntime.jsxs("header", {
+              id: "top",
+              children: [
+                jsxRuntime.jsxs("a", {
+                  className: "brand",
+                  href: localizedUrl("/"),
+                  title: translate("返回工具首页"),
+                  children: [
+                    jsxRuntime.jsxs("svg", {
+                      viewBox: "0 0 40 40",
+                      children: [
+                        jsxRuntime.jsxs("defs", {
+                          children: [
+                            jsxRuntime.jsxs("lineargradient", {
+                              id: "lg",
+                              x1: "0",
+                              y1: "0",
+                              x2: "1",
+                              y2: "1",
+                              children: [
+                                jsxRuntime.jsx("stop", {
+                                  offset: "0",
+                                  stopColor: "#7cf0ff",
+                                }),
+                                jsxRuntime.jsx("stop", {
+                                  offset: "1",
+                                  stopColor: "#1aa7ff",
+                                }),
+                              ],
+                            }),
+                            jsxRuntime.jsxs("lineargradient", {
+                              id: "lg2",
+                              x1: "0",
+                              y1: "0",
+                              x2: "0",
+                              y2: "1",
+                              children: [
+                                jsxRuntime.jsx("stop", {
+                                  offset: "0",
+                                  stopColor: "#ffd27a",
+                                }),
+                                jsxRuntime.jsx("stop", {
+                                  offset: "1",
+                                  stopColor: "#ff8a1f",
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M20 2l15.6 9v18L20 38 4.4 29V11z",
+                          fill: "rgba(63,216,255,.06)",
+                          stroke: "url(#lg)",
+                          strokeWidth: "1.6",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M20 7l11.3 6.5v13L20 33 8.7 26.5v-13z",
+                          fill: "none",
+                          stroke: "rgba(63,216,255,.35)",
+                          strokeWidth: "1",
+                          strokeDasharray: "2 2",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M22 9 L13 22 H19.5 L17 31 L27 17 H20.5 Z",
+                          fill: "url(#lg2)",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      children: [
+                        jsxRuntime.jsxs("b", {
+                          children: [
+                            "VOLT",
+                            jsxRuntime.jsx("i", {
+                              children: "LAB",
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsx("span", {
+                          children: translate("VIRTUAL · 电学虚拟实验台"),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsx(Ho, {}),
+                jsxRuntime.jsxs("div", {
+                  className: "grp",
+                  children: [
+                    jsxRuntime.jsxs("button", {
+                      className: "btn primary",
+                      id: "btnRun",
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M8 5v14M16 5v14",
+                          }),
+                        }),
+                        translate("暂停"),
+                      ],
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnStep",
+                      title: translate("单步"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M6 5l9 7-9 7zM18 5v14",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnReset",
+                      title: translate("重置时间与元件状态"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("select", {
+                      className: "sel",
+                      id: "speed",
+                      title: translate("时间流速：每真实秒推进的仿真时间"),
+                    }),
+                    jsxRuntime.jsxs("select", {
+                      className: "sel",
+                      id: "acc",
+                      title: translate("精度：每帧计算步数"),
+                      defaultValue: "40",
+                      children: [
+                        jsxRuntime.jsx("option", {
+                          value: "16",
+                          children: translate("精度 低"),
+                        }),
+                        jsxRuntime.jsx("option", {
+                          value: "40",
+                          children: translate("精度 中"),
+                        }),
+                        jsxRuntime.jsx("option", {
+                          value: "100",
+                          children: translate("精度 高"),
+                        }),
+                        jsxRuntime.jsx("option", {
+                          value: "240",
+                          children: translate("精度 极高"),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      className: "clock",
+                      children: [
+                        jsxRuntime.jsx("span", {
+                          id: "simTime",
+                          children: "0.000 s",
+                        }),
+                        jsxRuntime.jsx("small", {
+                          id: "dtInfo",
+                          children: "dt —",
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  className: "grp",
+                  children: [
+                    jsxRuntime.jsxs("label", {
+                      className: "tg",
+                      title: translate("电流动画"),
+                      children: [
+                        jsxRuntime.jsx("input", {
+                          type: "checkbox",
+                          id: "tgFlow",
+                          defaultChecked: !0,
+                        }),
+                        jsxRuntime.jsx("i", {}),
+                        jsxRuntime.jsx("span", {
+                          children: translate("电流动画"),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("label", {
+                      className: "tg",
+                      title: translate("电子流向"),
+                      children: [
+                        jsxRuntime.jsx("input", {
+                          type: "checkbox",
+                          id: "tgElec",
+                        }),
+                        jsxRuntime.jsx("i", {}),
+                        jsxRuntime.jsx("span", {
+                          children: translate("电子流向"),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("label", {
+                      className: "tg",
+                      title: translate("电势着色"),
+                      children: [
+                        jsxRuntime.jsx("input", {
+                          type: "checkbox",
+                          id: "tgVolt",
+                        }),
+                        jsxRuntime.jsx("i", {}),
+                        jsxRuntime.jsx("span", {
+                          children: translate("电势着色"),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("label", {
+                      className: "tg",
+                      title: translate("标签"),
+                      children: [
+                        jsxRuntime.jsx("input", {
+                          type: "checkbox",
+                          id: "tgLabel",
+                          defaultChecked: !0,
+                        }),
+                        jsxRuntime.jsx("i", {}),
+                        jsxRuntime.jsx("span", {
+                          children: translate("标签"),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("label", {
+                      className: "tg",
+                      title: translate("音效"),
+                      children: [
+                        jsxRuntime.jsx("input", {
+                          type: "checkbox",
+                          id: "tgSound",
+                          defaultChecked: !0,
+                        }),
+                        jsxRuntime.jsx("i", {}),
+                        jsxRuntime.jsx("span", {
+                          children: translate("音效"),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  className: "grp",
+                  children: [
+                    jsxRuntime.jsxs("button", {
+                      className: "btn",
+                      id: "btnLab",
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M9 3h6M10 3v6L4.6 18.6A1.6 1.6 0 0 0 6 21h12a1.6 1.6 0 0 0 1.4-2.4L14 9V3M7 15h10",
+                          }),
+                        }),
+                        translate("实验库"),
+                      ],
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnUndo",
+                      title: translate("撤销 Ctrl+Z"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnRedo",
+                      title: translate("重做 Ctrl+Y"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M15 14l5-5-5-5M20 9H10a6 6 0 0 0 0 12h3",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsxs("button", {
+                      className: "btn",
+                      id: "btnRepair",
+                      title: translate("修复所有损坏元件"),
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z",
+                          }),
+                        }),
+                        translate("修复"),
+                      ],
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnExport",
+                      title: translate("导出电路 JSON"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M12 3v12M7 10l5 5 5-5M4 21h16",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnImport",
+                      title: translate("导入 JSON"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M12 15V3M7 8l5-5 5 5M4 21h16",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnShare",
+                      title: translate("复制分享链接"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon danger",
+                      id: "btnClear",
+                      title: translate("清空实验台"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "btnHelp",
+                      title: translate("操作指南"),
+                      children: jsxRuntime.jsxs("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: [
+                          jsxRuntime.jsx("circle", {
+                            cx: "12",
+                            cy: "12",
+                            r: "9",
+                          }),
+                          jsxRuntime.jsx("path", {
+                            d: "M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01",
+                          }),
+                        ],
+                      }),
+                    }),
+                    jsxRuntime.jsxs("button", {
+                      className: "btn",
+                      id: "mobInsp",
+                      children: [
+                        jsxRuntime.jsxs("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: [
+                            jsxRuntime.jsx("path", {
+                              d: "M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0",
+                            }),
+                            jsxRuntime.jsx("circle", {
+                              cx: "16",
+                              cy: "6",
+                              r: "2",
+                            }),
+                            jsxRuntime.jsx("circle", {
+                              cx: "10",
+                              cy: "12",
+                              r: "2",
+                            }),
+                            jsxRuntime.jsx("circle", {
+                              cx: "18",
+                              cy: "18",
+                              r: "2",
+                            }),
+                          ],
+                        }),
+                        translate("属性"),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("aside", {
+              id: "palette",
+            }),
+            jsxRuntime.jsxs("main", {
+              id: "stage",
+              children: [
+                jsxRuntime.jsx("canvas", {
+                  id: "cv3",
+                }),
+                jsxRuntime.jsx("canvas", {
+                  id: "cv3o",
+                }),
+                jsxRuntime.jsx("canvas", {
+                  id: "cv",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "insetLbl",
+                  children: translate("SCHEMATIC · 电路图"),
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "guide",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "toasts",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "tip",
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "hint",
+                  children: [
+                    translate("拖动元件到实验台 · 从"),
+                    jsxRuntime.jsx("b", {
+                      style: {
+                        color: "#c9a24a",
+                      },
+                      children: translate("接线柱"),
+                    }),
+                    translate("拖出导线 · 点击开关切换 · 在元件上滚轮调参"),
+                    jsxRuntime.jsx("br", {}),
+                    jsxRuntime.jsx("kbd", {
+                      children: "R",
+                    }),
+                    translate("旋转 "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "Del",
+                    }),
+                    translate("删除 "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "W",
+                    }),
+                    translate("导线模式 "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "Space",
+                    }),
+                    translate("暂停 "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "Ctrl+Z",
+                    }),
+                    translate("撤销 "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "Ctrl+D",
+                    }),
+                    translate("复制 "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "F",
+                    }),
+                    translate("适应视图 · 右键旋转 · "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "Shift",
+                    }),
+                    translate("+拖端点改接 · "),
+                    jsxRuntime.jsx("kbd", {
+                      children: "3",
+                    }),
+                    translate("实物图"),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "hud",
+                  children: [
+                    jsxRuntime.jsxs("button", {
+                      className: "btn",
+                      id: "btn3d",
+                      title: translate("实物图 / 电路图 切换 (3)"),
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5",
+                          }),
+                        }),
+                        translate("实物图"),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("button", {
+                      className: "btn",
+                      id: "btnWire",
+                      title: translate("导线模式 (W)：从任意格点画导线"),
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M4 20l4-1 11-11-3-3L5 16zM14 6l3 3",
+                          }),
+                        }),
+                        translate("导线"),
+                      ],
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "zOut",
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M5 12h14",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("span", {
+                      id: "zoomLbl",
+                      children: "100%",
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "zIn",
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M12 5v14M5 12h14",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn icon",
+                      id: "zFit",
+                      title: translate("适应视图 (F)"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5",
+                        }),
+                      }),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("aside", {
+              id: "inspector",
+            }),
+            jsxRuntime.jsxs("section", {
+              id: "dock",
+              children: [
+                jsxRuntime.jsxs("div", {
+                  className: "tabs",
+                  children: [
+                    jsxRuntime.jsxs("button", {
+                      className: "tab on",
+                      "data-p": "scope",
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M3 12c2-6 4-6 6 0s4 6 6 0 4-6 6 0",
+                          }),
+                        }),
+                        translate("示波器"),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("button", {
+                      className: "tab",
+                      "data-p": "log",
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M4 20V10M10 20V4M16 20v-7M22 20H2",
+                          }),
+                        }),
+                        translate("数据记录"),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("button", {
+                      className: "tab",
+                      "data-p": "info",
+                      children: [
+                        jsxRuntime.jsx("svg", {
+                          className: "ic",
+                          viewBox: "0 0 24 24",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
+                          }),
+                        }),
+                        translate("电路参数表"),
+                      ],
+                    }),
+                    jsxRuntime.jsx("span", {
+                      className: "sp",
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "btn sm icon",
+                      id: "dockToggle",
+                      title: translate("折叠/展开"),
+                      children: jsxRuntime.jsx("svg", {
+                        className: "ic",
+                        viewBox: "0 0 24 24",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M6 9l6 6 6-6",
+                        }),
+                      }),
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  className: "pane on",
+                  id: "pane-scope",
+                  children: [
+                    jsxRuntime.jsx("div", {
+                      className: "scr",
+                      children: jsxRuntime.jsx("canvas", {
+                        id: "scope",
+                      }),
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      className: "side",
+                      children: [
+                        jsxRuntime.jsxs("label", {
+                          children: [
+                            translate("时基 "),
+                            jsxRuntime.jsx("select", {
+                              className: "sel",
+                              id: "tdiv",
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("label", {
+                          children: [
+                            translate("模式 "),
+                            jsxRuntime.jsxs("select", {
+                              className: "sel",
+                              id: "smode",
+                              children: [
+                                jsxRuntime.jsx("option", {
+                                  value: "yt",
+                                  children: translate("Y-T 波形"),
+                                }),
+                                jsxRuntime.jsx("option", {
+                                  value: "xy",
+                                  children: translate("X-Y 李萨如"),
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("div", {
+                          style: {
+                            display: "flex",
+                            gap: "6px",
+                          },
+                          children: [
+                            jsxRuntime.jsxs("button", {
+                              className: "btn sm",
+                              id: "sHold",
+                              children: [
+                                jsxRuntime.jsx("svg", {
+                                  className: "ic",
+                                  viewBox: "0 0 24 24",
+                                  children: jsxRuntime.jsx("path", {
+                                    d: "M8 5v14M16 5v14",
+                                  }),
+                                }),
+                                translate("冻结"),
+                              ],
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "btn sm",
+                              id: "sClear",
+                              children: translate("清除通道"),
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsx("div", {
+                          id: "chips",
+                        }),
+                        jsxRuntime.jsx("div", {
+                          className: "meas",
+                          id: "smeas",
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  className: "pane",
+                  id: "pane-log",
+                  children: [
+                    jsxRuntime.jsx("div", {
+                      className: "scr",
+                      style: {
+                        background: "#070b10",
+                        borderColor: "var(--line)",
+                      },
+                      children: jsxRuntime.jsx("canvas", {
+                        id: "logcv",
+                      }),
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      className: "side",
+                      style: {
+                        width: "230px",
+                      },
+                      children: [
+                        jsxRuntime.jsxs("label", {
+                          children: [
+                            translate("U 取自 "),
+                            jsxRuntime.jsx("select", {
+                              className: "sel",
+                              id: "lgU",
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("label", {
+                          children: [
+                            translate("I 取自 "),
+                            jsxRuntime.jsx("select", {
+                              className: "sel",
+                              id: "lgI",
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("div", {
+                          style: {
+                            display: "flex",
+                            gap: "6px",
+                            flexWrap: "wrap",
+                          },
+                          children: [
+                            jsxRuntime.jsx("button", {
+                              className: "btn sm primary",
+                              id: "lgRec",
+                              children: translate("记录一组"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "btn sm",
+                              id: "lgCsv",
+                              children: "CSV",
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "btn sm danger",
+                              id: "lgClr",
+                              children: translate("清空"),
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsx("div", {
+                          className: "fitbox",
+                          id: "lgFit",
+                          children: translate("暂无数据"),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("div", {
+                      className: "tbwrap",
+                      style: {
+                        maxWidth: "260px",
+                      },
+                      children: jsxRuntime.jsx("table", {
+                        className: "tb",
+                        id: "lgTable",
+                      }),
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "pane",
+                  id: "pane-info",
+                  children: jsxRuntime.jsx("div", {
+                    className: "tbwrap",
+                    children: jsxRuntime.jsx("table", {
+                      className: "tb",
+                      id: "infoTable",
+                    }),
+                  }),
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsxRuntime.jsx("div", {
+          className: "modal",
+          id: "labModal",
+          children: jsxRuntime.jsxs("div", {
+            className: "mbox",
+            children: [
+              jsxRuntime.jsx("button", {
+                className: "btn icon mclose",
+                "data-close": !0,
+                children: jsxRuntime.jsx("svg", {
+                  className: "ic",
+                  viewBox: "0 0 24 24",
+                  children: jsxRuntime.jsx("path", {
+                    d: "M6 6l12 12M18 6L6 18",
+                  }),
+                }),
+              }),
+              jsxRuntime.jsxs("h2", {
+                children: [
+                  jsxRuntime.jsx("svg", {
+                    className: "ic",
+                    viewBox: "0 0 24 24",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M9 3h6M10 3v6L4.6 18.6A1.6 1.6 0 0 0 6 21h12a1.6 1.6 0 0 0 1.4-2.4L14 9V3M7 15h10",
+                    }),
+                  }),
+                  translate("实验"),
+                  jsxRuntime.jsx("i", {
+                    children: translate("库"),
+                  }),
+                ],
+              }),
+              jsxRuntime.jsx("div", {
+                className: "sub",
+                children: translate(
+                  "选择一个经典实验，电路会自动搭好并附带实验指导。所有元件都可继续修改、重新接线。",
+                ),
+              }),
+              jsxRuntime.jsx("div", {
+                className: "labs",
+                id: "labs",
+              }),
+            ],
+          }),
+        }),
+        jsxRuntime.jsx("div", {
+          className: "modal",
+          id: "helpModal",
+          children: jsxRuntime.jsxs("div", {
+            className: "mbox",
+            style: {
+              width: "min(860px,100%)",
+            },
+            children: [
+              jsxRuntime.jsx("button", {
+                className: "btn icon mclose",
+                "data-close": !0,
+                children: jsxRuntime.jsx("svg", {
+                  className: "ic",
+                  viewBox: "0 0 24 24",
+                  children: jsxRuntime.jsx("path", {
+                    d: "M6 6l12 12M18 6L6 18",
+                  }),
+                }),
+              }),
+              jsxRuntime.jsxs("h2", {
+                children: [
+                  jsxRuntime.jsxs("svg", {
+                    className: "ic",
+                    viewBox: "0 0 24 24",
+                    children: [
+                      jsxRuntime.jsx("circle", {
+                        cx: "12",
+                        cy: "12",
+                        r: "9",
+                      }),
+                      jsxRuntime.jsx("path", {
+                        d: "M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01",
+                      }),
+                    ],
+                  }),
+                  translate("操作"),
+                  jsxRuntime.jsx("i", {
+                    children: translate("指南"),
+                  }),
+                ],
+              }),
+              jsxRuntime.jsx("div", {
+                className: "sub",
+                children: translate(
+                  "VoltLab 使用改进节点分析法 (MNA) + 牛顿迭代 + BDF2 积分，实时求解任意电路的瞬态行为。",
+                ),
+              }),
+              jsxRuntime.jsxs("div", {
+                className: "help-grid",
+                children: [
+                  jsxRuntime.jsxs("div", {
+                    children: [
+                      jsxRuntime.jsx("h4", {
+                        children: translate("搭建电路"),
+                      }),
+                      translate("从左侧元件库"),
+                      jsxRuntime.jsx("b", {
+                        children: translate("拖动"),
+                      }),
+                      translate("或"),
+                      jsxRuntime.jsx("b", {
+                        children: translate("点击"),
+                      }),
+                      translate("元件放到实验台。"),
+                      jsxRuntime.jsx("br", {}),
+                      translate("从元件的"),
+                      jsxRuntime.jsx("b", {
+                        children: translate("铜色接线柱"),
+                      }),
+                      translate(
+                        "按住拖出导线，松开即连接；导线端点落在另一根导线上会自动形成节点。",
+                      ),
+                      jsxRuntime.jsx("br", {}),
+                      translate("从导线端点拖动可继续延伸导线；按住 "),
+                      jsxRuntime.jsx("kbd", {
+                        children: "Shift",
+                      }),
+                      translate(" 拖动端点可改接；拖动导线中段可整体平移。"),
+                      jsxRuntime.jsx("br", {}),
+                      jsxRuntime.jsx("kbd", {
+                        children: "W",
+                      }),
+                      translate(" 进入导线模式，可从任意格点起画。"),
+                    ],
+                  }),
+                  jsxRuntime.jsxs("div", {
+                    children: [
+                      jsxRuntime.jsx("h4", {
+                        children: translate("操作元件"),
+                      }),
+                      translate("点击选中，右侧面板可精确调参；在元件上"),
+                      jsxRuntime.jsx("b", {
+                        children: translate("滚动滚轮"),
+                      }),
+                      translate("快速调主参数。"),
+                      jsxRuntime.jsx("br", {}),
+                      translate("点击"),
+                      jsxRuntime.jsx("b", {
+                        children: translate("开关/按钮"),
+                      }),
+                      translate("直接切换；直接拖动"),
+                      jsxRuntime.jsx("b", {
+                        children: translate("滑动变阻器的滑片"),
+                      }),
+                      "。",
+                      jsxRuntime.jsx("br", {}),
+                      jsxRuntime.jsx("kbd", {
+                        children: "R",
+                      }),
+                      translate("/右键 旋转，"),
+                      jsxRuntime.jsx("kbd", {
+                        children: "Del",
+                      }),
+                      translate(" 删除，"),
+                      jsxRuntime.jsx("kbd", {
+                        children: "Ctrl+D",
+                      }),
+                      translate(" 复制，"),
+                      jsxRuntime.jsx("kbd", {
+                        children: "Ctrl+Z",
+                      }),
+                      "/",
+                      jsxRuntime.jsx("kbd", {
+                        children: "Ctrl+Y",
+                      }),
+                      translate(" 撤销重做。"),
+                    ],
+                  }),
+                  jsxRuntime.jsxs("div", {
+                    children: [
+                      jsxRuntime.jsx("h4", {
+                        children: translate("视图"),
+                      }),
+                      translate("拖动空白处平移，滚轮缩放（按住 "),
+                      jsxRuntime.jsx("kbd", {
+                        children: "Ctrl",
+                      }),
+                      translate(" 始终缩放），"),
+                      jsxRuntime.jsx("kbd", {
+                        children: "F",
+                      }),
+                      translate(" 适应视图。"),
+                      jsxRuntime.jsx("br", {}),
+                      translate("悬停元件查看电压、电流、功率。"),
+                      jsxRuntime.jsx("br", {}),
+                      translate(
+                        "顶部可切换电流动画（黄=常规电流，蓝=电子）、电势着色。",
+                      ),
+                    ],
+                  }),
+                  jsxRuntime.jsxs("div", {
+                    children: [
+                      jsxRuntime.jsx("h4", {
+                        children: translate("测量"),
+                      }),
+                      translate(
+                        "选中元件 → “示波器”加入电压/电流通道，最多 4 路，支持 X-Y 模式。",
+                      ),
+                      jsxRuntime.jsx("br", {}),
+                      translate(
+                        "“数据记录”读取电压表与电流表示数，自动绘制 U-I 图并线性拟合。",
+                      ),
+                      jsxRuntime.jsx("br", {}),
+                      translate(
+                        "电表可设 DC/AC(有效值) 和量程，超量程指针会打表。",
+                      ),
+                    ],
+                  }),
+                  jsxRuntime.jsxs("div", {
+                    children: [
+                      jsxRuntime.jsx("h4", {
+                        children: translate("真实效应"),
+                      }),
+                      translate(
+                        "灯丝电阻随温度变化；电阻/LED 过功率会冒烟烧毁；保险丝熔断；电解电容反接或过压会爆裂；断开电感电路会拉出电弧；电池短路发热。点击 🔧 修复。",
+                      ),
+                    ],
+                  }),
+                  jsxRuntime.jsxs("div", {
+                    children: [
+                      jsxRuntime.jsx("h4", {
+                        children: translate("保存与分享"),
+                      }),
+                      translate(
+                        "电路自动保存在浏览器。可导出/导入 JSON，或复制分享链接（电路编码在网址中）。",
+                      ),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+        }),
+        jsxRuntime.jsx("input", {
+          type: "file",
+          id: "fileIn",
+          accept: ".json,application/json",
+          hidden: !0,
+        }),
+      ],
+    })
+  );
+}
+export { voltLabPage as default };

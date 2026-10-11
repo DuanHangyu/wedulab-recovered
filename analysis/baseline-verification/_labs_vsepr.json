@@ -1,0 +1,752 @@
+{
+  "route": "/labs/vsepr",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "分子构型 · VSEPR",
+      "text": "← WEDULAB\nMOLECRAFT\n分子构型 · 价层电子对互斥\n简体中文\n视角\n章节\n01\n价层电子对互斥\nVSEPR\n02\n电子对构型与分子构型\nElectron vs. molecular geometry\n03\n键角比较\nBond angles\n04\n杂化轨道\nHybridization\n05\n分子极性\nPolarity\n06\n扩展八隅体\nExpanded octets\n07\n手性分子\nChirality\n08\n分子库\nLibrary\n← → 切换章节\nR 重置视角 Space 打乱\n108.4°\n111.5°\n01 / 08\n价层电子对互斥\n\nVSEPR\n\nAX4\n电子对构型\n正四面体形\n分子构型\n正四面体形\n模型键角\n108.4° · 111.5°\n已达到能量最低的排布\n01\n价层电子对互斥\nVSEPR\n\n中心原子周围的价层电子对（成键电子对与孤对电子）带负电，彼此排斥，会尽可能远离。\n\n左边每个电子域都在球面上受到其他电子域的推力。增减电子对，或点击打乱，看它们自己弹开，找到最稳定的排布。\n\n孤对电子只受一个原子核吸引，离核更近、更“胖”，所以排斥也更强。\n\n成键电子对\n−\n4\n+\n孤对电子\n−\n0\n+\n打乱\nSpace\n快速选择\nAX2\nAX3\nAX2E\nAX4\nAX3E\nAX2E2\nAX5\nAX4E\nAX3E2\nAX2E3\nAX6\nAX5E\nAX4E2\nAX3E3\nAX2E4\nAX7\nVIEW · 显示设置\n球棍模型\n空间填充\n孤对电子\n键角\n原子标签\n键偶极\n电子对构型\n杂化轨道\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 263338,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at ue (https://wedulab.com/assets/studio-DdpeYmJn.js:1:1890)\n    at ys (https://wedulab.com/assets/Page-BmHCOAca.js:1:14623)\n    at qs (https://wedulab.com/assets/Page-BmHCOAca.js:4:377)\n    at https://wedulab.com/assets/Page-BmHCOAca.js:21:6722\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ae (https://wedulab.com/assets/studio-DdpeYmJn.js:1:1458)\n    at ue (https://wedulab.com/assets/studio-DdpeYmJn.js:1:2089)\n    at ys (https://wedulab.com/assets/Page-BmHCOAca.js:1:14623)\n    at qs (https://wedulab.com/assets/Page-BmHCOAca.js:4:377)\n    at https://wedulab.com/assets/Page-BmHCOAca.js:21:6722\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-BmHCOAca.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/OutputPass-B-cSf-Py.js",
+        "https://wedulab.com/assets/studio-DdpeYmJn.js",
+        "https://wedulab.com/assets/Page-Ck6gdys0.css",
+        "https://wedulab.com/assets/theme-CtpKaZpm.css",
+        "https://wedulab.com/assets/studio-spZVrGLA.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n价层电子对互斥\nVSEPR",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n电子对构型与分子构型\nElectron vs. molecular geometry",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n键角比较\nBond angles",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n杂化轨道\nHybridization",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n分子极性\nPolarity",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n扩展八隅体\nExpanded octets",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n手性分子\nChirality",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n分子库\nLibrary",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "−",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "+",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "−",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "+",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "打乱\nSpace",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX4",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX5",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX4E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3E2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E3",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX6",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX5E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX4E2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3E3",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E4",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX7",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "球棍模型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "空间填充",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "孤对电子",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "键角",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "原子标签",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "键偶极",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "电子对构型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "杂化轨道",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "分子构型 · VSEPR",
+      "text": "← WEDULAB\nMOLECRAFT\n分子构型 · 价层电子对互斥\n简体中文\n视角\n章节\n01\n价层电子对互斥\nVSEPR\n02\n电子对构型与分子构型\nElectron vs. molecular geometry\n03\n键角比较\nBond angles\n04\n杂化轨道\nHybridization\n05\n分子极性\nPolarity\n06\n扩展八隅体\nExpanded octets\n07\n手性分子\nChirality\n08\n分子库\nLibrary\n← → 切换章节\nR 重置视角 Space 打乱\n108.4°\n111.5°\n01 / 08\n价层电子对互斥\n\nVSEPR\n\nAX4\n电子对构型\n正四面体形\n分子构型\n正四面体形\n模型键角\n108.4° · 111.5°\n已达到能量最低的排布\n01\n价层电子对互斥\nVSEPR\n\n中心原子周围的价层电子对（成键电子对与孤对电子）带负电，彼此排斥，会尽可能远离。\n\n左边每个电子域都在球面上受到其他电子域的推力。增减电子对，或点击打乱，看它们自己弹开，找到最稳定的排布。\n\n孤对电子只受一个原子核吸引，离核更近、更“胖”，所以排斥也更强。\n\n成键电子对\n−\n4\n+\n孤对电子\n−\n0\n+\n打乱\nSpace\n快速选择\nAX2\nAX3\nAX2E\nAX4\nAX3E\nAX2E2\nAX5\nAX4E\nAX3E2\nAX2E3\nAX6\nAX5E\nAX4E2\nAX3E3\nAX2E4\nAX7\nVIEW · 显示设置\n球棍模型\n空间填充\n孤对电子\n键角\n原子标签\n键偶极\n电子对构型\n杂化轨道\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 263338,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at ue (http://127.0.0.1:4173/assets/studio-DdpeYmJn.js:1:1890)\n    at ys (http://127.0.0.1:4173/assets/Page-BmHCOAca.js:1:14623)\n    at qs (http://127.0.0.1:4173/assets/Page-BmHCOAca.js:4:377)\n    at http://127.0.0.1:4173/assets/Page-BmHCOAca.js:21:6722\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ae (http://127.0.0.1:4173/assets/studio-DdpeYmJn.js:1:1458)\n    at ue (http://127.0.0.1:4173/assets/studio-DdpeYmJn.js:1:2089)\n    at ys (http://127.0.0.1:4173/assets/Page-BmHCOAca.js:1:14623)\n    at qs (http://127.0.0.1:4173/assets/Page-BmHCOAca.js:4:377)\n    at http://127.0.0.1:4173/assets/Page-BmHCOAca.js:21:6722\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-BmHCOAca.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "http://127.0.0.1:4173/assets/Page-Ck6gdys0.css",
+        "http://127.0.0.1:4173/assets/studio-spZVrGLA.css",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n价层电子对互斥\nVSEPR",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n电子对构型与分子构型\nElectron vs. molecular geometry",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n键角比较\nBond angles",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n杂化轨道\nHybridization",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n分子极性\nPolarity",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n扩展八隅体\nExpanded octets",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n手性分子\nChirality",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n分子库\nLibrary",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "−",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "+",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "−",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "+",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "打乱\nSpace",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX4",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX5",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX4E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3E2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E3",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX6",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX5E",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX4E2",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX3E3",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX2E4",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "AX7",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "球棍模型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "空间填充",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "孤对电子",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "键角",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "原子标签",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "键偶极",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "电子对构型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "杂化轨道",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

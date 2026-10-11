@@ -1,0 +1,566 @@
+{
+  "route": "/labs/earth",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "地球运动课堂",
+      "text": "← WEDULAB\nEARTH·MOTION\n地球运动 · 三维演示\nDATE\n6月22日\n节气\n夏至\nSUBSOLAR\n23°26′N\n简体中文\n视角\nOVERVIEW · 总览\n00\n地球运动总览\nOverview\nROTATION · 自转\n01\n地球自转\nRotation\n02\n昼夜交替与晨昏线\nDay, night & terminator\nREVOLUTION · 公转\n03\n地球公转\nRevolution\n04\n太阳直射点的移动\nSubsolar point\n05\n昼夜长短\nLength of day\n06\n正午太阳高度\nNoon sun altitude\n07\n四季更替\nSeasons\nREVIEW · 复习\n08\n随堂检测\nQuiz\n← → 切换章节\nR 重置视角　F 全屏\nAZ 000° · EL 27° · R 67.1\n太阳\n春分3月21日\n夏至6月22日\n秋分9月23日\n冬至12月22日\n近日点 · 1月初\n远日点 · 7月初\n地球6月22日\nCHAPTER 00\n/ 08\n地球运动总览\n\nOverview\n\nREVOLUTION · 地球公转\n日期\n6月22日\n日地距离\n1.520 亿 km\n公转速度\n29.30 km/s\n直射点\n23°26′N\n北半球\n北半球夏半年\n6月22日\n夏至 · 直射 23°26′N\n00\n地球运动总览\nOverview\n\n地球同时进行着两种运动：绕地轴的自转（周期约 1 天）和绕太阳的公转（周期约 1 年）。自转带来昼夜交替与时差；公转加上地轴倾斜，带来太阳直射点的移动、昼夜长短与正午太阳高度的变化，最终形成四季。\n\n日期\n日期\n6月22日\n春分\n夏至\n秋分\n冬至\n播放一年\n操作\n拖动旋转视角、滚轮缩放；拖动日期或点击“播放一年”，看地球沿轨道运行。\n注意地轴始终指向同一方向（北极星附近），所以一年中北半球有时朝向太阳、有时背向太阳。\n键盘 ← → 切换章节，R 重置视角，F 全屏。\nVIEW · 显示设置\n标注\n经纬网\n镜头环绕\n问题反馈\n作者：WY",
+      "randomCalls": 84262,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ze (https://wedulab.com/assets/OrbitControls-D-zZTbsE.js:2827:44115)\n    at new Ue (https://wedulab.com/assets/OrbitControls-D-zZTbsE.js:2827:44507)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:1:1651)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (https://wedulab.com/assets/Page-DtRXWW06.js:25:441)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:25:774)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (https://wedulab.com/assets/Page-DtRXWW06.js:25:441)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:25:893)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:25:1059\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:25:1515)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (https://wedulab.com/assets/Page-DtRXWW06.js:25:441)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:42:411)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (https://wedulab.com/assets/Page-DtRXWW06.js:25:441)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:42:2677)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:45:5790)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "cardC",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:45:13039)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "tlC",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ra (https://wedulab.com/assets/Page-DtRXWW06.js:110:5009)\n    at https://wedulab.com/assets/Page-DtRXWW06.js:110:11720\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106076)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-DtRXWW06.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/earth_bm_07-CEsBUeyA.js",
+        "https://wedulab.com/assets/earth_clouds_1024-Dm-FkLh-.js",
+        "https://wedulab.com/assets/OrbitControls-D-zZTbsE.js",
+        "https://wedulab.com/assets/Page-kcZ9bXrN.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap",
+        "https://wedulab.com/assets/earth_bm_07-DvX0MfOX.jpg",
+        "https://wedulab.com/assets/earth_clouds_1024-CKDLEBqO.png",
+        "https://wedulab.com/assets/earth_lights_2048-Bf-MO9Bx.png",
+        "https://wedulab.com/assets/earth_specular_2048-6aAFN27D.jpg",
+        "https://wedulab.com/assets/earth_normal_2048-BD2vMuPH.jpg",
+        "https://wedulab.com/assets/earth_bm_01-AeM0Q4AK.jpg",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "00\n地球运动总览\nOverview",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n地球自转\nRotation",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n昼夜交替与晨昏线\nDay, night & terminator",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n地球公转\nRevolution",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n太阳直射点的移动\nSubsolar point",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n昼夜长短\nLength of day",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n正午太阳高度\nNoon sun altitude",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n四季更替\nSeasons",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n随堂检测\nQuiz",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "tlPlay",
+          "text": "",
+          "type": "submit",
+          "title": "播放一年 (空格)"
+        },
+        {
+          "tag": "INPUT",
+          "id": "doyR",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "春分",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "夏至",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "秋分",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "冬至",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "播放一年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "经纬网",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "镜头环绕",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "地球运动课堂",
+      "text": "← WEDULAB\nEARTH·MOTION\n地球运动 · 三维演示\nDATE\n6月22日\n节气\n夏至\nSUBSOLAR\n23°26′N\n简体中文\n视角\nOVERVIEW · 总览\n00\n地球运动总览\nOverview\nROTATION · 自转\n01\n地球自转\nRotation\n02\n昼夜交替与晨昏线\nDay, night & terminator\nREVOLUTION · 公转\n03\n地球公转\nRevolution\n04\n太阳直射点的移动\nSubsolar point\n05\n昼夜长短\nLength of day\n06\n正午太阳高度\nNoon sun altitude\n07\n四季更替\nSeasons\nREVIEW · 复习\n08\n随堂检测\nQuiz\n← → 切换章节\nR 重置视角　F 全屏\nAZ 000° · EL 27° · R 67.1\n太阳\n春分3月21日\n夏至6月22日\n秋分9月23日\n冬至12月22日\n近日点 · 1月初\n远日点 · 7月初\n地球6月22日\nCHAPTER 00\n/ 08\n地球运动总览\n\nOverview\n\nREVOLUTION · 地球公转\n日期\n6月22日\n日地距离\n1.520 亿 km\n公转速度\n29.30 km/s\n直射点\n23°26′N\n北半球\n北半球夏半年\n6月22日\n夏至 · 直射 23°26′N\n00\n地球运动总览\nOverview\n\n地球同时进行着两种运动：绕地轴的自转（周期约 1 天）和绕太阳的公转（周期约 1 年）。自转带来昼夜交替与时差；公转加上地轴倾斜，带来太阳直射点的移动、昼夜长短与正午太阳高度的变化，最终形成四季。\n\n日期\n日期\n6月22日\n春分\n夏至\n秋分\n冬至\n播放一年\n操作\n拖动旋转视角、滚轮缩放；拖动日期或点击“播放一年”，看地球沿轨道运行。\n注意地轴始终指向同一方向（北极星附近），所以一年中北半球有时朝向太阳、有时背向太阳。\n键盘 ← → 切换章节，R 重置视角，F 全屏。\nVIEW · 显示设置\n标注\n经纬网\n镜头环绕\n问题反馈\n作者：WY",
+      "randomCalls": 84262,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ze (http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js:2827:44115)\n    at new Ue (http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js:2827:44507)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:1:1651)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:441)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:774)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:441)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:893)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:1059\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:1515)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:441)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:42:411)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Kt (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:25:441)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:42:2677)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:45:5790)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "cardC",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:45:13039)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "tlC",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ra (http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:5009)\n    at http://127.0.0.1:4173/assets/Page-DtRXWW06.js:110:11720\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/Page-DtRXWW06.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js",
+        "http://127.0.0.1:4173/assets/earth_clouds_1024-Dm-FkLh-.js",
+        "http://127.0.0.1:4173/assets/earth_bm_07-CEsBUeyA.js",
+        "http://127.0.0.1:4173/assets/Page-kcZ9bXrN.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap",
+        "http://127.0.0.1:4173/assets/earth_bm_07-DvX0MfOX.jpg",
+        "http://127.0.0.1:4173/assets/earth_lights_2048-Bf-MO9Bx.png",
+        "http://127.0.0.1:4173/assets/earth_normal_2048-BD2vMuPH.jpg",
+        "http://127.0.0.1:4173/assets/earth_specular_2048-6aAFN27D.jpg",
+        "http://127.0.0.1:4173/assets/earth_clouds_1024-CKDLEBqO.png",
+        "http://127.0.0.1:4173/assets/earth_bm_01-AeM0Q4AK.jpg",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "00\n地球运动总览\nOverview",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n地球自转\nRotation",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n昼夜交替与晨昏线\nDay, night & terminator",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n地球公转\nRevolution",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n太阳直射点的移动\nSubsolar point",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n昼夜长短\nLength of day",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n正午太阳高度\nNoon sun altitude",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n四季更替\nSeasons",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n随堂检测\nQuiz",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "tlPlay",
+          "text": "",
+          "type": "submit",
+          "title": "播放一年 (空格)"
+        },
+        {
+          "tag": "INPUT",
+          "id": "doyR",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "春分",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "夏至",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "秋分",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "冬至",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "播放一年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "经纬网",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "镜头环绕",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 3,
+  "source": {
+    "url": "https://wedulab.com/labs/contour?lang=zh-CN",
+    "canonicalUrl": "https://wedulab.com/labs/contour",
+    "route": "/labs/contour",
+    "permissionBoundary": "public",
+    "allowedPermissionBoundaries": [
+      "public",
+      "user-authorized",
+      "external-blocked"
+    ],
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "dpr": 1
+    }
+  },
+  "targetSurfaces": [
+    {
+      "selector": "#gl",
+      "backend": "WebGL2"
+    },
+    {
+      "selector": "#map",
+      "backend": "Canvas2D"
+    },
+    {
+      "selector": "#prof",
+      "backend": "Canvas2D"
+    }
+  ],
+  "runtime": {
+    "backend": "WebGL2+Canvas2D",
+    "framework": "preserved bundled Three renderer and OrbitControls",
+    "platform": "React 19.3.0",
+    "owner": "main thread; Un() of Page-CCiHCD5r.js"
+  },
+  "renderGraph": {
+    "passes": [
+      {
+        "name": "source scene render",
+        "implementation": "Un/rn retained without modification",
+        "truth": "SOURCE"
+      }
+    ],
+    "framebuffers": [],
+    "dependencies": [
+      "original Three renderer/terrain uniforms",
+      "Canvas2D map",
+      "DOM label projections"
+    ]
+  },
+  "resources": [
+    "../deployment-manifest.json"
+  ],
+  "state": {
+    "gl": {
+      "antialias": true,
+      "alpha": true,
+      "pixelRatio": "min(devicePixelRatio,2)",
+      "shadows": "PCFSoftShadowMap",
+      "truth": "SOURCE"
+    },
+    "webgpu": {},
+    "canvas2d": {}
+  },
+  "timeline": {
+    "timeOrigin": "performance.now() in initializer; RAF timestamp in rn",
+    "unit": "seconds dt=(e-ln)/1000, camera transitions in milliseconds",
+    "deltaRule": "clamp(dt,0,0.05)",
+    "random": "terrain source generators retained; quiz Fisher-Yates Math.random retained",
+    "truth": "SOURCE"
+  },
+  "inputs": {
+    "pointer": "original OrbitControls and terrain/map listeners",
+    "scroll": "original zoom listener",
+    "resize": "ResizeObserver on #stage; renderer size and camera aspect update",
+    "route": "location.hash chapter restoration and chapter controls",
+    "truth": "SOURCE"
+  },
+  "output": {
+    "colorSpace": "original renderer behavior retained; deprecated outputEncoding assignment kept, not converted",
+    "toneMapping": "ACESFilmicToneMapping; exposure 1.08",
+    "premultipliedAlpha": "retained renderer defaults from exact module",
+    "domComposite": "#gl alpha canvas, map and DOM labels over #stage; original stylesheet",
+    "truth": "SOURCE"
+  },
+  "pageBindings": [
+    "../contour-runtime.json"
+  ],
+  "routes": [
+    "/labs/contour?lang=zh-CN#0"
+  ],
+  "evidence": [
+    {
+      "status": "passed",
+      "evidenceId": "retained-scene-source",
+      "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+      "truth": "SOURCE",
+      "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+    }
+  ],
+  "truth": {
+    "leafFacts": [
+      {
+        "fact": "source assets and shaders retained",
+        "truth": "SOURCE",
+        "path": "../../recovered-production/assets/Page-CCiHCD5r.js"
+      }
+    ],
+    "wiringFacts": [
+      {
+        "fact": "entire initializer, loop, renderer, observer and handlers retained",
+        "truth": "SOURCE",
+        "path": "../../recovered-production/assets/Page-CCiHCD5r.js"
+      }
+    ],
+    "defaultLabel": "GUESS",
+    "allowedTruth": [
+      "SOURCE",
+      "PARTIAL",
+      "GUESS"
+    ]
+  },
+  "unknowns": {
+    "blocking": [],
+    "important": [
+      "Browser backend and actual fonts must match for visual QA."
+    ],
+    "deferred": [
+      "Original TS/JSX names and comments not available"
+    ],
+    "external": []
+  },
+  "replay": {
+    "route": "SOURCE_REPLAY",
+    "allowedRoutes": [
+      "SOURCE_REPLAY",
+      "PIPELINE_REPLAY",
+      "BEHAVIOR_REBUILD"
+    ],
+    "fidelityTier": "exact deployed client runtime; original uncompiled engineering source not recovered",
+    "fallbacks": []
+  },
+  "gateDecision": {
+    "replayReady": true,
+    "requiredEvidence": {
+      "targetSurfaces": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "runtimeOwnerBackend": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "renderGraphOrFallback": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "criticalResources": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "timelineAndInputs": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "outputComposite": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "truthLabels": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ],
+      "blockingUnknownsResolvedOrDowngraded": [
+        {
+          "status": "passed",
+          "evidenceId": "retained-scene-source",
+          "path": "../../recovered-production/assets/Page-CCiHCD5r.js",
+          "truth": "SOURCE",
+          "notes": "Original full scene and imported renderer retained, including state/input/timing and composition. No guessed replacement pipeline."
+        }
+      ]
+    },
+    "blockers": [],
+    "decidedAt": "2026-10-11"
+  }
+}

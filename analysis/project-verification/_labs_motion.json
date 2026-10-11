@@ -1,0 +1,884 @@
+{
+  "route": "/labs/motion",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "运动与力 · MotionLab",
+      "text": "← WEDULAB\nMOTIONLAB\n运动与力实验台\n简体中文\n视角\n实验课题\n01\n纸带与 v-t 图\nTicker tape\n02\n光电门测速度\nPhotogates\n03\n自由落体\nFree fall\n04\n牛顿第二定律\na = F / m\n05\n滑动摩擦力\nSliding friction\n06\n斜面与力的分解\nInclined plane\n07\n超重与失重\nApparent weight\n08\n机械能守恒\nEnergy\n09\n动量守恒\nCollisions\n10\n自由实验台\nSandbox\n空格 开始 / 暂停\n⌫ 复位实验\nS 慢动作　A 受力\n←→ 切换课题\nLESSON 01\n纸带与 v-t 图\n\nTicker tape\n\n就绪\nt\n0.00\ns\nv\n0.000\nm/s\na\n0.00\nm/s²\n按 空格 开始实验\n纸带\nv-t\nx-t\n回放\nCSV\n释放小车后，纸带会出现在这里。\n01\n纸带与 v-t 图\nTicker tape\n\n钩码通过细绳拉动小车，小车拖着纸带穿过打点计时器。计时器每 0.02 s 打一个点，纸带记录下了小车在各个时刻的位置。\n\n实验结束后在数据坞的纸带页中，每 5 个点取一个计数点（T = 0.1 s），量出相邻计数点的间距 x₁、x₂、x₃……\n\nvₙ = (xₙ + xₙ₊₁) / 2T　　a = Δx / T²\n\n相邻间距之差 Δx 几乎不变，说明小车做匀加速直线运动；用各计数点的速度描出 v-t 图，图线的斜率就是加速度。\n\n按 空格 释放小车\n在纸带页查看计数点与间距\n切换到 v-t 图，读出斜率\n改变钩码质量，再做一次比较\nSETUP · 实验参数\n钩码质量 m\n30 g\n小车质量 M\n0.5 kg\n开始实验\nSpace\nREADOUT · 实时读数\n时间 t\n0.00 s\n位移 x\n0.000 m\n速度 v\n0.000 m/s\n加速度 a\n0.000 m/s²\nVIEW · 显示\n受力分析\n频闪残影\n1×\n¼×\n⅒×\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:7247)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4790)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at St (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1988)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:8262)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4790)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Ht (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1653)\n    at B (http://127.0.0.1:4173/assets/theme-aLwyR9RG.js:1:883)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:14919)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Pt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:776)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:14949)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Pt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:794)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:14949)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Tt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:2551)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:15800)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Et (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:3891)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:16339)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:16982)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:17524)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Pt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:776)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:19636)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Pt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:794)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:19636)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Wt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:3182)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:19653)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Wt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:3182)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:19653)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Wt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:3182)\n    at an (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:19653)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4836)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at Xt (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:23081)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4871)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at Xt (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:23081)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4885)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at Zt (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:24876)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4901)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at Zt (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:24876)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4917)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at dn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:26062)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:4931)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at un (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:29267)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5127)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Lt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:5999)\n    at un (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:29438)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5127)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at es (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:30684)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5136)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at es (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:30684)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5147)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at At (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4859)\n    at hn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:31581)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5161)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at At (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4859)\n    at hn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:31587)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5161)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at hn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:31908)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5161)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at f (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:31782)\n    at hn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:32200)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5161)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at f (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:31782)\n    at hn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:32217)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5161)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at mn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:33300)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5216)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at mn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:34673)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5216)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at At (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4859)\n    at gn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:1:35575)\n    at jn (http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:15:5224)\n    at http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js:16:6333\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-Bjq3k2Gg.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4173/assets/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4173/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4173/assets/RoundedBoxGeometry-BuxEdaMS.js",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bSound",
+          "text": "",
+          "type": "submit",
+          "title": "音效"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n纸带与 v-t 图\nTicker tape",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n光电门测速度\nPhotogates",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n自由落体\nFree fall",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n牛顿第二定律\na = F / m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n滑动摩擦力\nSliding friction",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n斜面与力的分解\nInclined plane",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n超重与失重\nApparent weight",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n机械能守恒\nEnergy",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n动量守恒\nCollisions",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n自由实验台\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "纸带",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "v-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "x-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReplay",
+          "text": "回放",
+          "type": "submit",
+          "title": "回放本次实验"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aGo",
+          "text": "开始实验\nSpace",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aReset",
+          "text": "",
+          "type": "submit",
+          "title": "复位实验 (⌫)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "受力分析",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "频闪残影",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "¼×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "⅒×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "运动与力 · MotionLab",
+      "text": "← WEDULAB\nMOTIONLAB\n运动与力实验台\n简体中文\n视角\n实验课题\n01\n纸带与 v-t 图\nTicker tape\n02\n光电门测速度\nPhotogates\n03\n自由落体\nFree fall\n04\n牛顿第二定律\na = F / m\n05\n滑动摩擦力\nSliding friction\n06\n斜面与力的分解\nInclined plane\n07\n超重与失重\nApparent weight\n08\n机械能守恒\nEnergy\n09\n动量守恒\nCollisions\n10\n自由实验台\nSandbox\n空格 开始 / 暂停\n⌫ 复位实验\nS 慢动作　A 受力\n←→ 切换课题\nLESSON 01\n纸带与 v-t 图\n\nTicker tape\n\n就绪\nt\n0.00\ns\nv\n0.000\nm/s\na\n0.00\nm/s²\n按 空格 开始实验\n纸带\nv-t\nx-t\n回放\nCSV\n释放小车后，纸带会出现在这里。\n01\n纸带与 v-t 图\nTicker tape\n\n钩码通过细绳拉动小车，小车拖着纸带穿过打点计时器。计时器每 0.02 s 打一个点，纸带记录下了小车在各个时刻的位置。\n\n实验结束后在数据坞的纸带页中，每 5 个点取一个计数点（T = 0.1 s），量出相邻计数点的间距 x₁、x₂、x₃……\n\nvₙ = (xₙ + xₙ₊₁) / 2T　　a = Δx / T²\n\n相邻间距之差 Δx 几乎不变，说明小车做匀加速直线运动；用各计数点的速度描出 v-t 图，图线的斜率就是加速度。\n\n按 空格 释放小车\n在纸带页查看计数点与间距\n切换到 v-t 图，读出斜率\n改变钩码质量，再做一次比较\nSETUP · 实验参数\n钩码质量 m\n30 g\n小车质量 M\n0.5 kg\n开始实验\nSpace\nREADOUT · 实时读数\n时间 t\n0.00 s\n位移 x\n0.000 m\n速度 v\n0.000 m/s\n加速度 a\n0.000 m/s²\nVIEW · 显示\n受力分析\n频闪残影\n1×\n¼×\n⅒×\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20565:17)\n    at new _d (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20590:57)\n    at Bt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:433:13)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3590:13)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at St (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:138:18)\n    at Bt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:475:13)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3590:13)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Ht (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:118:18)\n    at B (http://127.0.0.1:4174/src/vendor/theme-aLwyR9RG.js:67:13)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1033:13)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Pt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:68:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1036:13)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Pt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:69:14)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1036:13)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Tt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:170:14)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1072:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Et (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:228:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1107:15)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1140:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1167:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Pt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:68:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1269:26)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Pt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:69:14)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1269:26)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Wt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:193:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1269:45)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Wt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:193:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1269:45)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Wt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:193:18)\n    at an (http://127.0.0.1:4174/src/labs/motion/Page.js:1269:45)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3592:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at Xt (http://127.0.0.1:4174/src/labs/motion/Page.js:1469:12)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3597:14)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at Xt (http://127.0.0.1:4174/src/labs/motion/Page.js:1469:12)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3598:14)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at Zt (http://127.0.0.1:4174/src/labs/motion/Page.js:1572:12)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3599:16)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at Zt (http://127.0.0.1:4174/src/labs/motion/Page.js:1572:12)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3600:16)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at dn (http://127.0.0.1:4174/src/labs/motion/Page.js:1641:15)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3601:14)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at un (http://127.0.0.1:4174/src/labs/motion/Page.js:1811:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3609:13)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Lt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:360:14)\n    at un (http://127.0.0.1:4174/src/labs/motion/Page.js:1823:13)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3609:13)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at es (http://127.0.0.1:4174/src/labs/motion/Page.js:1894:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3610:10)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at es (http://127.0.0.1:4174/src/labs/motion/Page.js:1894:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3610:23)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at At (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:291:18)\n    at hn (http://127.0.0.1:4174/src/labs/motion/Page.js:1947:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3611:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at At (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:291:18)\n    at hn (http://127.0.0.1:4174/src/labs/motion/Page.js:1947:21)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3611:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at hn (http://127.0.0.1:4174/src/labs/motion/Page.js:1975:14)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3611:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at f (http://127.0.0.1:4174/src/labs/motion/Page.js:1962:16)\n    at hn (http://127.0.0.1:4174/src/labs/motion/Page.js:1993:23)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3611:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at f (http://127.0.0.1:4174/src/labs/motion/Page.js:1962:16)\n    at hn (http://127.0.0.1:4174/src/labs/motion/Page.js:1993:43)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3611:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at mn (http://127.0.0.1:4174/src/labs/motion/Page.js:2059:15)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3614:13)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at mn (http://127.0.0.1:4174/src/labs/motion/Page.js:2128:12)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3614:13)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at At (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:291:18)\n    at gn (http://127.0.0.1:4174/src/labs/motion/Page.js:2188:9)\n    at jn (http://127.0.0.1:4174/src/labs/motion/Page.js:3615:9)\n    at http://127.0.0.1:4174/src/labs/motion/Page.js:5212:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/labs/motion/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4174/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4174/src/vendor/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-24066da46699.css",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bSound",
+          "text": "",
+          "type": "submit",
+          "title": "音效"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n纸带与 v-t 图\nTicker tape",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n光电门测速度\nPhotogates",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n自由落体\nFree fall",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n牛顿第二定律\na = F / m",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n滑动摩擦力\nSliding friction",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n斜面与力的分解\nInclined plane",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n超重与失重\nApparent weight",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n机械能守恒\nEnergy",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n动量守恒\nCollisions",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n自由实验台\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "纸带",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "v-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "x-t",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReplay",
+          "text": "回放",
+          "type": "submit",
+          "title": "回放本次实验"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aGo",
+          "text": "开始实验\nSpace",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aReset",
+          "text": "",
+          "type": "submit",
+          "title": "复位实验 (⌫)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "受力分析",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "频闪残影",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "¼×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "⅒×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

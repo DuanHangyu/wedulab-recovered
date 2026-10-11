@@ -1,0 +1,58 @@
+{
+  "home": {
+    "filterMathCards": 6,
+    "initialCards": 12,
+    "expandedCards": 22,
+    "mobileViewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  "languages": [
+    "zh-CN",
+    "zh-Hant",
+    "ja",
+    "ko",
+    "tr",
+    "en"
+  ],
+  "languageChecks": "Titles, document.lang and experiment links verified for all six locales.",
+  "contour": {
+    "keyboardChapter": "#1",
+    "profileVisible": true,
+    "profileDistance": "6.29km",
+    "profileHighest": "1284m",
+    "profileLowest": "173m",
+    "lineOfSight": "not visible"
+  },
+  "earth": {
+    "chapter": "#5",
+    "winterDay": 356,
+    "summerDay": 173,
+    "readoutsChange": true
+  },
+  "vsepr": {
+    "AX2": "linear",
+    "AX4": "tetrahedral",
+    "readoutsChange": true
+  },
+  "legacyRedirects": [
+    "/index.html?lang=en#follow -> /?lang=en#follow",
+    "/contour-lab.html?lang=zh-CN#2 -> /labs/contour?lang=zh-CN#2"
+  ],
+  "feedback": {
+    "submittedLocally": true,
+    "receivedIntegerId": 1
+  },
+  "volt": {
+    "exportJSON": true,
+    "importJSON": true,
+    "presetLibrary": 21,
+    "RCpresetLoaded": true,
+    "RCcomponentCount": 5,
+    "RCwireCount": 16,
+    "RCnodeCount": 6,
+    "solver": "MNA · Newton · BDF2"
+  }
+}

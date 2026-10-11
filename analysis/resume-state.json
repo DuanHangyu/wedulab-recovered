@@ -1,0 +1,31 @@
+{
+  "objective": "恢复整个 WeduLab 网站项目，保持当前生产视觉、22 个实验、语言与交互；本地运行并持续对照",
+  "status": "complete",
+  "baseline": "outputs/recovered-production",
+  "project": "outputs/project",
+  "baselineUrl": "http://127.0.0.1:4173",
+  "projectUrl": "http://127.0.0.1:4174",
+  "assets": {
+    "count": 138,
+    "allSaved": true
+  },
+  "verification": "outputs/analysis/verification-summary.json",
+  "next": [],
+  "limits": [
+    "原始 TS/JSX 与注释不可由公开部署复原",
+    "后端为依据公开前端契约的兼容重建",
+    "原数据库和 IP 定位服务缺失"
+  ],
+  "completionEvidence": {
+    "sourceDesktopRoutes": 23,
+    "editableDesktopRoutes": 23,
+    "mobileRoutes": 6,
+    "allDifferentPixels": 0,
+    "labInteractions": 22,
+    "htmlTemplates": 144,
+    "semanticModules": 40,
+    "adminUI": "passed",
+    "build": "passed",
+    "serverTests": "passed"
+  }
+}

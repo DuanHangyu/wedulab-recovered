@@ -1,0 +1,4116 @@
+// Recovered from public deployment: Page-t52A13oF.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  t as translate,
+  r as React,
+  j as jsxRuntime,
+  b as localizedUrl,
+} from "../../core/runtime.js";
+import { L as Tt } from "../../components/LanguageSwitcher.js";
+import {
+  G as O,
+  b as $,
+  v as ie,
+  M as K,
+  B as ye,
+  w as Ae,
+  k as Pt,
+  x as je,
+  l as $e,
+  L as D,
+  T as Se,
+  f as C,
+  u as lt,
+  K as dt,
+  X as Et,
+  m as ge,
+  I as _e,
+  c as Me,
+  d as pt,
+  N as ut,
+  C as At,
+  a3 as Be,
+  y as xe,
+  a5 as Ee,
+  a8 as jt,
+  a9 as ht,
+  Q as zt,
+  z as It,
+  a2 as Ht,
+  a4 as Ft,
+  Y as ft,
+  a6 as Ct,
+  a7 as qt,
+} from "../../vendor/OutputPass-B-cSf-Py.js";
+import {
+  r as Rt,
+  b as Bt,
+  d as Nt,
+  c as Dt,
+} from "../../vendor/charts-CzzpgoDB.js";
+import {
+  m as U,
+  s as Q,
+  l as mt,
+  a as Wt,
+} from "../../vendor/theme-aLwyR9RG.js";
+import { R as G } from "../../vendor/RoundedBoxGeometry-BuxEdaMS.js";
+const ve = [
+    {
+      id: "spring",
+      title: translate("弹簧振子"),
+      sub: "Simple harmonic motion",
+      scene: "spring",
+      record: "spring",
+      params: {
+        mode: "free",
+        m: 0.2,
+        k: 20,
+        A: 0.04,
+        b: 0,
+      },
+      controls: ["m", "k", "A"],
+      tabs: ["xt", "vt", "record", "fitM"],
+      cam: [
+        [0.55, 0.62, 1.3],
+        [-0.02, 0.44, 0],
+      ],
+      body: translate(
+        '<p>竖直悬挂的弹簧下端挂着钩码。把钩码向下拉开一段距离后释放，它在<b>平衡位置</b>附近上下往复运动。回复力与位移成正比、方向相反：</p><p class="eq">F = −kx</p><p>这样的运动叫<b>简谐运动</b>。钩码上的笔在匀速移动的纸带上画出的 x-t 图像是一条正弦曲线。</p><p class="eq">T = 2π√(m/k)</p><p>周期与振幅无关，只由振子的质量 m 和弹簧的劲度系数 k 决定。改变 m、k 记录周期，画出 T-√m 图像。</p>',
+      ),
+      steps: [
+        translate("拖动钩码向下拉，松手释放"),
+        translate("从纸带上的 x-t 图读出周期"),
+        translate("改变振幅，周期不变"),
+        translate("改变 m 记录周期，画 T-√m 图"),
+      ],
+    },
+    {
+      id: "pendulum",
+      title: translate("单摆"),
+      sub: "Simple pendulum",
+      scene: "pendulum",
+      record: "pendulum",
+      params: {
+        L: 0.6,
+        theta0: 8,
+        g: "earth",
+        b: 0,
+        energy: !1,
+      },
+      controls: ["L", "theta0", "g"],
+      tabs: ["xt", "record", "fitT"],
+      cam: [
+        [0.35, 0.78, 1.95],
+        [-0.02, 0.6, 0],
+      ],
+      body: translate(
+        '<p>细线下端拴一个小球，摆角很小时小球近似做简谐运动。光电门记录小球每次经过最低点的时刻，测出周期：</p><p class="eq">T = 2π√(L/g)</p><p>单摆的周期与摆球质量、振幅（摆角小时）无关，只与摆长 L 和当地的重力加速度 g 有关——这就是<b>单摆的等时性</b>，也是测量 g 的方法：画出 T²-L 图像，斜率 k = 4π²/g。</p><p>把摆角增大到 30° 以上，实测周期会比公式值<b>偏大</b>；到月球或火星上试试，周期变长。</p>',
+      ),
+      steps: [
+        translate("拖动摆球拉开小角度后释放"),
+        translate("改变摆长，记录周期"),
+        translate("在 T²-L 图上求 g"),
+        translate("增大摆角或换到月球比较"),
+      ],
+    },
+    {
+      id: "energy",
+      title: translate("简谐运动的能量"),
+      sub: "Energy & damping",
+      scene: "pendulum",
+      params: {
+        L: 0.6,
+        theta0: 20,
+        g: "earth",
+        b: 0,
+        energy: !0,
+      },
+      controls: ["theta0", "b"],
+      tabs: ["energy", "xt"],
+      cam: [
+        [0.35, 0.78, 1.95],
+        [-0.02, 0.6, 0],
+      ],
+      body: translate(
+        '<p>摆球在最高点速度为零，动能为零、势能最大；经过最低点时速度最大，动能最大、势能最小。没有阻力时，动能与势能相互转化，<b>机械能守恒</b>：</p><p class="eq">E = Eₖ + Eₚ = 常量</p><p>增大<b>阻尼</b>，机械能逐渐转化为内能，振幅越来越小，这就是<b>阻尼振动</b>。注意：阻尼振动的周期几乎不变。</p>',
+      ),
+      steps: [
+        translate("观察能量柱的此消彼长"),
+        translate("增大阻尼，观察振幅衰减"),
+        translate("比较有无阻尼时的 x-t 图"),
+      ],
+    },
+    {
+      id: "resonance",
+      title: translate("受迫振动与共振"),
+      sub: "Resonance",
+      scene: "spring",
+      record: "resonance",
+      params: {
+        mode: "forced",
+        m: 0.2,
+        k: 20,
+        A: 0,
+        b: 0.15,
+        fd: 0.8,
+      },
+      controls: ["fd", "b"],
+      tabs: ["resonance", "xt"],
+      cam: [
+        [0.55, 0.62, 1.3],
+        [-0.02, 0.44, 0],
+      ],
+      body: translate(
+        "<p>电机通过偏心轮让弹簧的上端周期性地上下运动，振子在<b>驱动力</b>作用下做受迫振动。稳定后振子的频率等于<b>驱动力的频率</b>，与固有频率无关。</p><p>驱动频率越接近振子的<b>固有频率</b> f₀ = (1/2π)√(k/m)，振幅越大；两者相等时振幅最大——<b>共振</b>。</p><p>按“扫描驱动频率”自动画出共振曲线。阻尼越小，共振峰越高越尖。部队过桥便步走、洗衣机的减震，都与共振有关。</p>",
+      ),
+      steps: [
+        translate("改变驱动频率，观察稳定后的振幅"),
+        translate("按“扫描驱动频率”画共振曲线"),
+        translate("改变阻尼，再扫描一次比较"),
+      ],
+    },
+    {
+      id: "formation",
+      title: translate("机械波的形成"),
+      sub: "How waves form",
+      scene: "rope",
+      params: {
+        view: "beads",
+        pol: "transverse",
+        left: "driven",
+        right: "absorb",
+        f: 1.8,
+        A: 0.03,
+        c: 0.9,
+        gamma: 0,
+      },
+      controls: ["pol", "f", "c"],
+      tabs: ["wave", "history"],
+      cam: [
+        [0.12, 0.62, 1.75],
+        [0, 0.1, 0],
+      ],
+      body: translate(
+        '<p>一排质点由弹性力相互连接。最左边的质点在外力作用下振动，带动相邻质点依次振动，振动的形式和能量就这样传播出去，形成<b>机械波</b>。</p><p>注意<b>质点本身并不随波迁移</b>，只是在各自的平衡位置附近振动（看红色质点）。质点振动方向与传播方向垂直的是<b>横波</b>；在同一直线上的是<b>纵波</b>，形成疏部和密部。</p><p class="eq">v = λ f = λ / T</p>',
+      ),
+      steps: [
+        translate("观察红色质点只在原地振动"),
+        translate("切换横波 / 纵波"),
+        translate("在波形图上读出波长 λ"),
+        translate("改变频率，验证 v = λf"),
+      ],
+    },
+    {
+      id: "reflection",
+      title: translate("波的反射"),
+      sub: "Reflection at boundaries",
+      scene: "rope",
+      params: {
+        view: "rope",
+        pol: "transverse",
+        left: "pulse",
+        right: "fixed",
+        f: 1,
+        A: 0.05,
+        c: 0.8,
+        gamma: 0,
+      },
+      controls: ["right"],
+      tabs: ["wave", "info"],
+      cam: [
+        [0.12, 0.62, 1.75],
+        [0, 0.1, 0],
+      ],
+      body: translate(
+        "<p>在绳的一端甩出一个脉冲，脉冲传到另一端后被<b>反射</b>回来。</p><p>· <b>固定端</b>：绳端被夹住不能动，反射波与入射波<b>反相</b>（波峰变成波谷），相当于损失了半个波长——<b>半波损失</b>。<br>· <b>自由端</b>：绳端套在光滑竖杆上可以自由滑动，反射波与入射波<b>同相</b>。</p><p>反射前后波速不变。</p>",
+      ),
+      steps: [
+        translate("按“发出脉冲”"),
+        translate("观察固定端反射波的形状"),
+        translate("切换为自由端再试一次"),
+      ],
+    },
+    {
+      id: "standing",
+      title: translate("波的叠加与驻波"),
+      sub: "Superposition & standing waves",
+      scene: "rope",
+      params: {
+        view: "rope",
+        pol: "transverse",
+        left: "driven",
+        right: "fixed",
+        f: 1,
+        A: 0.01,
+        c: 1.2,
+        gamma: 0.12,
+        mode2: "standing",
+      },
+      controls: ["mode2", "f"],
+      tabs: ["wave", "harmonics"],
+      cam: [
+        [0.12, 0.62, 1.75],
+        [0, 0.1, 0],
+      ],
+      body: translate(
+        '<p>几列波相遇时，每个质点的位移等于各列波单独引起的位移之和——<b>波的叠加原理</b>。相遇后各列波保持原来的形状继续传播。</p><p>振源在左端持续振动，波在右端固定处反射，入射波与反射波叠加。当绳长恰好等于半波长的整数倍时形成稳定的<b>驻波</b>：有些点始终不动（<b>波节</b>），有些点振幅最大（<b>波腹</b>）。</p><p class="eq">fₙ = n v / 2L　(n = 1, 2, 3 …)</p><p>吉他、小提琴的弦就是这样发声的。</p>',
+      ),
+      steps: [
+        translate("“两个脉冲”：观察相遇时的叠加"),
+        translate("切换到驻波，调节频率"),
+        translate("找到 n = 1 ~ 5 的驻波"),
+        translate("数出波节与波腹"),
+      ],
+    },
+    {
+      id: "ripple",
+      title: translate("水波的干涉与衍射"),
+      sub: "Ripple tank",
+      scene: "ripple",
+      params: {
+        rmode: "two",
+        fr: 6,
+        d: 0.08,
+        slit: 0.05,
+        lines: !0,
+      },
+      controls: ["rmode", "fr", "d", "slit", "lines"],
+      tabs: ["info"],
+      cam: [
+        [0, 0.85, 0.62],
+        [0, 0, -0.02],
+      ],
+      body: translate(
+        '<p>两个振动情况完全相同的波源（<b>相干波源</b>）在水面激起水波。某点到两波源的<b>波程差</b>为波长整数倍时振动加强，为半波长奇数倍时振动减弱，水面出现稳定的加强区和减弱区相间分布——<b>波的干涉</b>。</p><p class="eq">Δr = kλ 加强　Δr = (2k+1)λ/2 减弱</p><p>切换到<b>单缝</b>：平面波通过挡板上的缝后向各方向传播，这就是<b>衍射</b>。缝宽比波长小或相差不多时，衍射最明显。</p>',
+      ),
+      steps: [
+        translate("观察加强线与减弱线"),
+        translate("改变频率与两波源间距"),
+        translate("切换到单缝，改变缝宽"),
+        translate("比较缝宽与波长的关系"),
+      ],
+    },
+    {
+      id: "doppler",
+      title: translate("多普勒效应"),
+      sub: "Doppler effect",
+      scene: "doppler",
+      params: {
+        vs: 0.4,
+        f0: 440,
+        listen: "front",
+      },
+      controls: ["vs", "f0", "listen"],
+      tabs: ["doppler", "info"],
+      cam: [
+        [0, 1.5, 1.05],
+        [0, 0, 0.02],
+      ],
+      body: translate(
+        '<p>声源向观察者靠近时，前方的波面被“挤”在一起，波长变短，观察者听到的<b>频率升高</b>；声源远离时波长变长，频率降低。这就是<b>多普勒效应</b>：</p><p class="eq">f′ = f · v / (v ∓ vₛ)</p><p>打开声音，切换“听者位置”听一听音调的变化。声源速度超过声速时，波面叠加成一个圆锥——<b>马赫锥</b>，产生音爆。</p>',
+      ),
+      steps: [
+        translate("观察声源前后波面的疏密"),
+        translate("打开声音，比较前方与后方"),
+        translate("把声源速度调到 1 倍声速以上"),
+      ],
+    },
+    {
+      id: "sound",
+      title: translate("声音的特性与共鸣"),
+      sub: "Sound & resonance tube",
+      scene: "sound",
+      params: {
+        instrument: "fork",
+        fs: 440,
+        loud: 0.6,
+        water: 0.6,
+      },
+      controls: ["instrument", "fs", "loud", "water"],
+      tabs: ["scope", "spectrum"],
+      cam: [
+        [0.45, 0.95, 1.85],
+        [-0.12, 0.52, 0],
+      ],
+      body: translate(
+        '<p>声音由物体振动产生，以声波的形式传播。示波器显示麦克风接收到的波形：</p><p>· <b>响度</b>由振幅决定<br>· <b>音调</b>由频率决定<br>· <b>音色</b>由波形（各次谐波的组成）决定——音叉几乎是纯正弦波，钢琴、小提琴含有丰富的谐波。</p><p>敲响音叉放在<b>共鸣管</b>口，调节水面高度改变空气柱长度 L。当</p><p class="eq">L = (2n − 1) λ / 4</p><p>时空气柱发生共鸣，声音明显变响。由两次共鸣的长度差 λ/2 可以测出声速。</p>',
+      ),
+      steps: [
+        translate("改变响度、音调，观察波形"),
+        translate("切换乐器，比较音色"),
+        translate("拖动水位找到共鸣位置"),
+        translate("由两次共鸣位置算出声速"),
+      ],
+    },
+    {
+      id: "free",
+      title: translate("自由实验"),
+      sub: "Sandbox",
+      scene: "rope",
+      params: {
+        view: "rope",
+        pol: "transverse",
+        left: "driven",
+        right: "fixed",
+        f: 1.5,
+        A: 0.02,
+        c: 1,
+        gamma: 0.05,
+      },
+      controls: ["left", "right", "pol", "f", "A", "c", "gamma"],
+      tabs: ["wave", "harmonics"],
+      cam: [
+        [0.12, 0.62, 1.75],
+        [0, 0.1, 0],
+      ],
+      body: translate(
+        "<p>所有参数开放：左端的振动方式、右端的边界、波速、频率、振幅、阻尼。</p><p>试一试：</p><p>· 左端驱动、右端吸收：持续的行波<br>· 左端驱动、右端固定：驻波<br>· 左端脉冲、右端自由：同相反射<br>· 调大阻尼：波在传播中衰减</p>",
+      ),
+      steps: [
+        translate("设计一个实验并预测结果"),
+        translate("暂停、慢放观察细节"),
+      ],
+    },
+  ],
+  Vt = 0,
+  Y = {
+    x0: -1,
+    x1: 1,
+    z0: -0.5,
+    z1: 0.45,
+    thick: 0.04,
+    floor: -0.78,
+  };
+function Gt() {
+  const e = document.createElement("canvas");
+  e.width = e.height = 1024;
+  const a = e.getContext("2d");
+  ((a.fillStyle = "#16181b"), a.fillRect(0, 0, 1024, 1024));
+  for (let r = 0; r < 26e3; r++) {
+    const c = 30 + Math.random() * 40;
+    ((a.fillStyle = `rgba(${c},${c + 2},${c + 4},${Math.random() * 0.5})`),
+      a.fillRect(Math.random() * 1024, Math.random() * 1024, 1.2, 1.2));
+  }
+  const o = new Ae(e);
+  return (
+    (o.wrapS = o.wrapT = Pt),
+    o.repeat.set(3, 1.5),
+    (o.colorSpace = je),
+    o
+  );
+}
+function Ot(t) {
+  const e = new O();
+  t.add(e);
+  const a = Y.x1 - Y.x0,
+    o = Y.z1 - Y.z0,
+    r = new $(
+      new G(a, Y.thick, o, 3, 0.008),
+      new ie({
+        map: Gt(),
+        roughness: 0.42,
+        clearcoat: 0.7,
+        clearcoatRoughness: 0.22,
+        envMapIntensity: 0.6,
+      }),
+    );
+  (r.position.set((Y.x0 + Y.x1) / 2, -0.04 / 2, (Y.z0 + Y.z1) / 2), e.add(r));
+  const c = new K({
+      color: "#2a2e35",
+      roughness: 0.6,
+      metalness: 0.2,
+    }),
+    u = new $(new ye(a - 0.04, 0.78 - Y.thick - 0.08, o - 0.08), c);
+  (u.position.set(
+    0,
+    (Y.floor - Y.thick + 0.08) / 2 - 0,
+    (Y.z0 + Y.z1) / 2 - 0.02,
+  ),
+    e.add(u));
+  for (let n = 0; n < 4; n++) {
+    const x = new $(
+      new ye(0.004, 0.62, 0.002),
+      new K({
+        color: "#111317",
+      }),
+    );
+    (x.position.set(-0.75 + n * 0.5, -0.4, Y.z1 - 0.059), e.add(x));
+    const d = new $(new G(0.12, 0.012, 0.012, 2, 0.004), U().darkSteel);
+    (d.position.set(-0.5 + n * 0.5, -0.12, Y.z1 - 0.052), n < 3 && e.add(d));
+  }
+  return (
+    Q(e),
+    (r.castShadow = !1),
+    {
+      root: e,
+    }
+  );
+}
+function bt(t = 0.62, e = 0.18) {
+  const a = U(),
+    o = new O(),
+    r = new $(
+      new G(0.2, 0.018, 0.13, 2, 0.004),
+      new K({
+        color: "#2b3138",
+        metalness: 0.6,
+        roughness: 0.5,
+      }),
+    );
+  r.position.set(-e, 0.009, 0);
+  const c = new $(new D(0.0065, 0.0065, t + 0.08, 20), a.chrome);
+  c.position.set(-e, (t + 0.08) / 2, 0);
+  const u = new $(
+    new G(0.03, 0.03, 0.03, 2, 0.004),
+    new K({
+      color: "#3a3f47",
+      metalness: 0.7,
+      roughness: 0.35,
+    }),
+  );
+  u.position.set(-e, t, 0);
+  const n = new $(new D(0.008, 0.008, 0.02, 16), a.red);
+  ((n.rotation.x = Math.PI / 2), n.position.set(-e, t, 0.024));
+  const x = new $(new D(0.005, 0.005, e + 0.02, 16), a.chrome);
+  ((x.rotation.z = Math.PI / 2), x.position.set(-e / 2, t, 0));
+  const d = new $(new Se(0.006, 0.0014, 8, 20), a.steel);
+  return (d.position.set(0, t - 0.008, 0), o.add(r, c, u, n, x, d), Q(o));
+}
+function Ut(t = 18, e = 0.012, a = 0.0012) {
+  U();
+  const o = t * 20,
+    r = [];
+  for (let n = 0; n <= o; n++) {
+    const x = (n / 20) * Math.PI * 2;
+    r.push(new C(Math.cos(x) * e, -n / o, Math.sin(x) * e));
+  }
+  const c = new lt(new dt(r), o * 2, a, 6),
+    u = new $(
+      c,
+      new K({
+        color: "#c9ced6",
+        metalness: 0.9,
+        roughness: 0.28,
+      }),
+    );
+  return (
+    (u.castShadow = !0),
+    (u.setLength = (n) => (u.scale.y = Math.max(0.01, n))),
+    u
+  );
+}
+function Zt(t = 2) {
+  const e = U(),
+    a = new O(),
+    o = new $(new Se(0.005, 0.0013, 8, 20), e.steel);
+  ((o.position.y = -0.005), a.add(o));
+  const r = new O();
+  return (
+    a.add(r),
+    (a.setCount = (c) => {
+      r.clear();
+      for (let u = 0; u < c; u++) {
+        const n = new $(new D(0.014, 0.014, 0.026, 32), e.brass);
+        n.position.y = -0.024 - u * 0.03;
+        const x = new $(new D(0.003, 0.003, 0.006, 12), e.brass);
+        ((x.position.y = -0.008 - u * 0.03), (n.castShadow = !0), r.add(n, x));
+      }
+      a.bottom = -0.037 - (c - 1) * 0.03;
+    }),
+    a.setCount(t),
+    Q(a)
+  );
+}
+function gt(t = 0.5) {
+  const e = new $(
+    new $e(t, 0.03),
+    new K({
+      map: Rt(t, {
+        dark: !1,
+      }),
+      roughness: 0.5,
+    }),
+  );
+  e.rotation.z = -Math.PI / 2;
+  const a = new O();
+  e.position.y = -t / 2;
+  const o = new $(
+    new ye(0.034, t + 0.01, 0.004),
+    new K({
+      color: "#2b2f36",
+      roughness: 0.5,
+    }),
+  );
+  return (o.position.set(0, -t / 2, -0.003), a.add(o, e), a);
+}
+const _t = {
+    m: {
+      type: "range",
+      label: translate("振子质量 m"),
+      min: 0.05,
+      max: 0.5,
+      step: 0.05,
+      show: (t) => `${Math.round(t * 1e3)} g`,
+    },
+    k: {
+      type: "range",
+      label: translate("劲度系数 k"),
+      min: 5,
+      max: 60,
+      step: 1,
+      show: (t) => `${t} N/m`,
+    },
+    A: {
+      type: "range",
+      label: translate("振幅 A"),
+      min: 0.005,
+      max: 0.06,
+      step: 0.001,
+      show: (t) => `${(t * 100).toFixed(1)} cm`,
+    },
+    b: {
+      type: "range",
+      label: translate("阻尼"),
+      min: 0,
+      max: 0.6,
+      step: 0.01,
+      show: (t) => t.toFixed(2),
+    },
+    fd: {
+      type: "range",
+      label: translate("驱动频率"),
+      min: 0.2,
+      max: 3,
+      step: 0.01,
+      show: (t) => `${t.toFixed(2)} Hz`,
+    },
+    L: {
+      type: "range",
+      label: translate("摆长 L"),
+      min: 0.2,
+      max: 0.95,
+      step: 0.01,
+      show: (t) => `${(t * 100).toFixed(0)} cm`,
+    },
+    theta0: {
+      type: "range",
+      label: translate("摆角"),
+      min: 2,
+      max: 70,
+      step: 1,
+      show: (t) => `${t}°`,
+    },
+    g: {
+      type: "seg",
+      label: translate("所在星球"),
+      options: [
+        ["earth", translate("地球")],
+        ["moon", translate("月球")],
+        ["mars", translate("火星")],
+        ["jupiter", translate("木星")],
+      ],
+    },
+    pol: {
+      type: "seg",
+      label: translate("波的类型"),
+      options: [
+        ["transverse", translate("横波")],
+        ["longitudinal", translate("纵波")],
+      ],
+    },
+    f: {
+      type: "range",
+      label: translate("频率 f"),
+      min: 0.2,
+      max: 3,
+      step: 0.01,
+      show: (t) => `${t.toFixed(2)} Hz`,
+    },
+    c: {
+      type: "range",
+      label: translate("波速 v"),
+      min: 0.4,
+      max: 1.6,
+      step: 0.05,
+      show: (t) => `${t.toFixed(2)} m/s`,
+    },
+    gamma: {
+      type: "range",
+      label: translate("阻尼"),
+      min: 0,
+      max: 1,
+      step: 0.01,
+      show: (t) => t.toFixed(2),
+    },
+    left: {
+      type: "seg",
+      label: translate("左端"),
+      options: [
+        ["driven", translate("持续振动")],
+        ["pulse", translate("单个脉冲")],
+        ["fixed", translate("固定")],
+      ],
+    },
+    right: {
+      type: "seg",
+      label: translate("右端"),
+      options: [
+        ["fixed", translate("固定端")],
+        ["free", translate("自由端")],
+        ["absorb", translate("吸收")],
+      ],
+    },
+    mode2: {
+      type: "seg",
+      label: translate("演示"),
+      options: [
+        ["pulses", translate("两个脉冲")],
+        ["standing", translate("驻波")],
+      ],
+    },
+    rmode: {
+      type: "seg",
+      label: translate("演示"),
+      options: [
+        ["two", translate("双波源干涉")],
+        ["slit", translate("单缝衍射")],
+      ],
+    },
+    fr: {
+      type: "range",
+      label: translate("振源频率"),
+      min: 3,
+      max: 15,
+      step: 0.1,
+      show: (t) => `${t.toFixed(1)} Hz`,
+    },
+    d: {
+      type: "range",
+      label: translate("波源间距"),
+      min: 0.03,
+      max: 0.2,
+      step: 0.005,
+      show: (t) => `${(t * 100).toFixed(1)} cm`,
+    },
+    slit: {
+      type: "range",
+      label: translate("缝宽"),
+      min: 0.01,
+      max: 0.2,
+      step: 0.005,
+      show: (t) => `${(t * 100).toFixed(1)} cm`,
+    },
+    lines: {
+      type: "toggle",
+      label: translate("标出加强线 / 减弱线"),
+    },
+    vs: {
+      type: "range",
+      label: translate("声源速度（声速的倍数）"),
+      min: 0,
+      max: 1.6,
+      step: 0.01,
+      show: (t) => `${t.toFixed(2)} v`,
+    },
+    f0: {
+      type: "range",
+      label: translate("声源频率"),
+      min: 220,
+      max: 880,
+      step: 1,
+      show: (t) => `${t} Hz`,
+    },
+    listen: {
+      type: "seg",
+      label: translate("听者位置"),
+      options: [
+        ["front", translate("前方")],
+        ["back", translate("后方")],
+        ["side", translate("侧面")],
+      ],
+    },
+    instrument: {
+      type: "seg",
+      label: translate("声源"),
+      options: [
+        ["fork", translate("音叉")],
+        ["flute", translate("长笛")],
+        ["piano", translate("钢琴")],
+        ["violin", translate("小提琴")],
+      ],
+    },
+    fs: {
+      type: "range",
+      label: translate("音调（频率）"),
+      min: 200,
+      max: 1e3,
+      step: 1,
+      show: (t) => `${t} Hz`,
+    },
+    loud: {
+      type: "range",
+      label: translate("响度（振幅）"),
+      min: 0.1,
+      max: 1,
+      step: 0.01,
+      show: (t) => `${Math.round(t * 100)}%`,
+    },
+    water: {
+      type: "range",
+      label: translate("水面到管口的距离 L"),
+      min: 0.05,
+      max: 0.85,
+      step: 0.002,
+      show: (t) => `${(t * 100).toFixed(1)} cm`,
+    },
+  },
+  Kt = (t, e, a, o) => Bt(t, e, a, o, _t);
+function Jt(t, e, a, o, r) {
+  const c = [r[0] - a[0], r[1] - a[1]],
+    u = Math.hypot(c[0], c[1]) || 1,
+    n = (o[0] * c[0] + o[1] * c[1]) / u;
+  return (t * e) / (e - n);
+}
+const Xt = (t, e) => (e > t ? Math.asin(t / e) : null),
+  Je = {
+    fork: [1],
+    flute: [1, 0.18, 0.06, 0.02],
+    piano: [1, 0.6, 0.35, 0.22, 0.12, 0.08, 0.05],
+    violin: [1, 0.85, 0.7, 0.55, 0.42, 0.33, 0.25, 0.18, 0.12],
+    clarinet: [1, 0.02, 0.6, 0.02, 0.35, 0.02, 0.18],
+  };
+function st(t, e, a, o) {
+  const r = Je[t],
+    c = r.reduce((n, x) => n + x, 0);
+  let u = 0;
+  return (
+    r.forEach(
+      (n, x) => (u += n * Math.sin(2 * Math.PI * e * (x + 1) * o + x * 0.7)),
+    ),
+    (a * u) / c
+  );
+}
+const Ke = (t, e = 4) =>
+  Array.from(
+    {
+      length: e,
+    },
+    (a, o) => ((2 * o + 1) * t) / 4,
+  );
+function Yt(t, e, a = 340, o = 18) {
+  const r = a / e;
+  let c = 0;
+  for (const u of Ke(r, 6))
+    c = Math.max(c, 1 / (1 + ((o * (t - u)) / r) ** 2 * 16));
+  return c;
+}
+function Qt() {
+  let t = null,
+    e = null,
+    a = [],
+    o = !0,
+    r = null,
+    c = {
+      f: 440,
+      A: 0,
+      timbre: "fork",
+    };
+  function u() {
+    if (t) return t;
+    const d = window.AudioContext || window.webkitAudioContext;
+    return d
+      ? ((t = new d()),
+        (e = t.createGain()),
+        (e.gain.value = 0),
+        e.connect(t.destination),
+        t)
+      : null;
+  }
+  function n(d) {
+    for (const L of a) (L.osc.stop(), L.osc.disconnect());
+    a = [];
+    const k = Je[d] || [1],
+      M = k.reduce((L, g) => L + g, 0);
+    (k.forEach((L, g) => {
+      const l = t.createOscillator(),
+        p = t.createGain();
+      ((p.gain.value = L / M),
+        (l.frequency.value = c.f * (g + 1)),
+        l.connect(p),
+        p.connect(e),
+        l.start(),
+        a.push({
+          osc: l,
+          g: p,
+          n: g + 1,
+        }));
+    }),
+      (c.timbre = d));
+  }
+  const x = {
+    unlock() {
+      (u(), t?.state === "suspended" && t.resume());
+    },
+    get muted() {
+      return o;
+    },
+    setMuted(d) {
+      ((o = d), x.set(c));
+    },
+    set({ f: d = c.f, A: k = c.A, timbre: M = c.timbre }) {
+      if (
+        ((c = {
+          f: d,
+          A: k,
+          timbre: M,
+        }),
+        !t)
+      )
+        return;
+      (!a.length || M !== r) && (n(M), (r = M));
+      const L = t.currentTime;
+      for (const g of a)
+        g.osc.frequency.setTargetAtTime(Math.min(18e3, d * g.n), L, 0.02);
+      e.gain.setTargetAtTime(
+        o ? 0 : Math.max(0, Math.min(1, k)) * 0.18,
+        L,
+        0.04,
+      );
+    },
+    stop() {
+      ((c.A = 0), t && e.gain.setTargetAtTime(0, t.currentTime, 0.03));
+    },
+  };
+  return x;
+}
+const es = {
+  earth: 9.8,
+  moon: 1.62,
+  mars: 3.71,
+  jupiter: 24.8,
+};
+function wt(t, e, a, o) {
+  const r = t(e, a),
+    c = t(e + o / 2, [a[0] + (o / 2) * r[0], a[1] + (o / 2) * r[1]]),
+    u = t(e + o / 2, [a[0] + (o / 2) * c[0], a[1] + (o / 2) * c[1]]),
+    n = t(e + o, [a[0] + o * u[0], a[1] + o * u[1]]);
+  return [
+    a[0] + (o / 6) * (r[0] + 2 * c[0] + 2 * u[0] + n[0]),
+    a[1] + (o / 6) * (r[1] + 2 * c[1] + 2 * u[1] + n[1]),
+  ];
+}
+const de = 0.001,
+  vt = 0.01;
+function Ie({
+  m: t = 0.5,
+  k: e = 20,
+  b: a = 0,
+  F0: o = 0,
+  omega: r = 0,
+  x0: c = 0.05,
+  v0: u = 0,
+} = {}) {
+  const n = {
+      t: 0,
+      x: c,
+      v: u,
+      a: 0,
+      steps: 0,
+      samples: [],
+    },
+    x = {
+      m: t,
+      k: e,
+      b: a,
+      F0: o,
+      omega: r,
+    },
+    d = (L, [g, l]) => [
+      l,
+      (-x.k * g - x.b * l + x.F0 * Math.cos(x.omega * L)) / x.m,
+    ],
+    k = () => ({
+      Ek: 0.5 * x.m * n.v * n.v,
+      Ep: 0.5 * x.k * n.x * n.x,
+    }),
+    M = () =>
+      n.samples.push({
+        t: n.t,
+        x: n.x,
+        v: n.v,
+        a: n.a,
+        ...k(),
+      });
+  return (
+    M(),
+    {
+      state: n,
+      params: x,
+      energy: k,
+      step(L) {
+        const g = Math.max(0, Math.round((n.t + L) / de) - n.steps);
+        for (let l = 0; l < g; l++)
+          (([n.x, n.v] = wt(d, n.t, [n.x, n.v], de)),
+            (n.t = (n.steps + 1) * de),
+            n.steps++,
+            (n.a = d(n.t, [n.x, n.v])[1]),
+            n.steps % Math.round(vt / de) === 0 && M());
+      },
+    }
+  );
+}
+function ts({ L: t = 0.8, g: e = 9.8, theta0: a = 0.17, b: o = 0 } = {}) {
+  const r = {
+      t: 0,
+      th: a,
+      w: 0,
+      steps: 0,
+      samples: [],
+      crossings: [],
+    },
+    c = {
+      L: t,
+      g: e,
+      b: o,
+      m: 0.1,
+    },
+    u = (d, [k, M]) => [M, -(c.g / c.L) * Math.sin(k) - c.b * M],
+    n = () => ({
+      Ek: 0.5 * c.m * (c.L * r.w) ** 2,
+      Ep: c.m * c.g * c.L * (1 - Math.cos(r.th)),
+    }),
+    x = () =>
+      r.samples.push({
+        t: r.t,
+        x: r.th,
+        v: r.w,
+        ...n(),
+      });
+  return (
+    x(),
+    {
+      state: r,
+      params: c,
+      energy: n,
+      step(d) {
+        const k = Math.max(0, Math.round((r.t + d) / de) - r.steps);
+        for (let M = 0; M < k; M++) {
+          const L = r.th;
+          (([r.th, r.w] = wt(u, r.t, [r.th, r.w], de)),
+            (r.t = (r.steps + 1) * de),
+            r.steps++,
+            L < 0 &&
+              r.th >= 0 &&
+              r.crossings.push(r.t - de + (de * -L) / (r.th - L)),
+            r.steps % Math.round(vt / de) === 0 && x());
+        }
+      },
+    }
+  );
+}
+const De = (t, e) => 2 * Math.PI * Math.sqrt(t / e),
+  Re = (t, e) => 2 * Math.PI * Math.sqrt(t / e);
+function ss(t, e, a) {
+  let o = 1,
+    r = Math.cos(a / 2);
+  for (let c = 0; c < 30; c++) [o, r] = [(o + r) / 2, Math.sqrt(o * r)];
+  return Re(t, e) / o;
+}
+function nt({ m: t, k: e, b: a, F0: o }, r) {
+  const c = Math.sqrt(e / t),
+    u = a / t;
+  return o / t / Math.sqrt((c * c - r * r) ** 2 + (u * r) ** 2);
+}
+function ot(t) {
+  return t.length < 2 ? null : (t[t.length - 1] - t[0]) / (t.length - 1);
+}
+const b = (t, e = 2) =>
+    t == null || !isFinite(t)
+      ? "—"
+      : (Math.abs(t) < 0.5 * 10 ** -e ? 0 : t).toFixed(e),
+  Le = (t, e, a) => Math.max(e, Math.min(a, t)),
+  yt = (t) => `<div class="empty">${t}</div>`,
+  Xe = new C(0, 0, 1);
+function Mt(t, e, { del: a = !0 } = {}) {
+  return e.length
+    ? `<table class="tbl"><thead><tr><th>#</th>${t.map((o) => `<th>${o}</th>`).join("")}${a ? "<th></th>" : ""}</tr></thead><tbody>${e.map((o, r) => `<tr><td>${r + 1}</td>${o.map((c) => `<td>${c}</td>`).join("")}${a ? `<td><button class="del" data-i="${r}">×</button></td>` : ""}</tr>`).join("")}</tbody></table>`
+    : "";
+}
+function xt(t, e) {
+  return (a) =>
+    a.querySelectorAll(".del").forEach((o) =>
+      o.addEventListener("click", () => {
+        (t.splice(+o.dataset.i, 1), e());
+      }),
+    );
+}
+const Pe = (t, e, a, o = 1) => {
+  const r = t.length ? t[t.length - 1].t : 0,
+    c = [];
+  for (let u = t.length - 1; u >= 0; u--) {
+    const n = t[u];
+    if (n.t < r - a) break;
+    c.push([n.t, n[e] * o]);
+  }
+  return c.reverse();
+};
+function at(t, e = "x", a = 2) {
+  const o = [];
+  for (let r = 1; r < t.length; r++) {
+    const c = t[r - 1][e],
+      u = t[r][e];
+    c < 0 &&
+      u >= 0 &&
+      o.push(t[r - 1].t + ((t[r].t - t[r - 1].t) * -c) / (u - c));
+  }
+  return o.length < a ? null : (o[o.length - 1] - o[0]) / (o.length - 1);
+}
+function ns(t = 0.5, e = 0.22) {
+  const a = document.createElement("canvas");
+  ((a.width = 1024), (a.height = Math.round((1024 * e) / t)));
+  const o = a.getContext("2d"),
+    r = new Ae(a);
+  ((r.colorSpace = je), (r.anisotropy = 8));
+  const c = new $(
+      new $e(t, e),
+      new K({
+        map: r,
+        roughness: 0.85,
+      }),
+    ),
+    u = 0.68;
+  return (
+    (c.draw = (
+      n,
+      { speed: x = 0.06, yScale: d = 1, color: k = "#c0392b" } = {},
+    ) => {
+      const M = a.width,
+        L = a.height,
+        g = M / t;
+      ((o.fillStyle = "#f3efe4"),
+        o.fillRect(0, 0, M, L),
+        (o.strokeStyle = "rgba(60,120,170,.18)"),
+        (o.lineWidth = 1));
+      for (let p = 0; p < M; p += g * 0.01)
+        (o.beginPath(), o.moveTo(p, 0), o.lineTo(p, L), o.stroke());
+      for (let p = (L / 2) % (g * 0.01); p < L; p += g * 0.01)
+        (o.beginPath(), o.moveTo(0, p), o.lineTo(M, p), o.stroke());
+      if (
+        ((o.strokeStyle = "rgba(60,120,170,.45)"),
+        o.beginPath(),
+        o.moveTo(0, L / 2),
+        o.lineTo(M, L / 2),
+        o.stroke(),
+        !n.length)
+      ) {
+        r.needsUpdate = !0;
+        return;
+      }
+      const l = n[n.length - 1][0];
+      ((o.strokeStyle = k),
+        (o.lineWidth = 3),
+        (o.lineJoin = "round"),
+        o.beginPath(),
+        n.forEach(([p, T], S) => {
+          const j = u * M - (l - p) * x * g,
+            f = L / 2 + T * d * g;
+          S ? o.lineTo(j, f) : o.moveTo(j, f);
+        }),
+        o.stroke(),
+        (r.needsUpdate = !0));
+    }),
+    (c.penX = (u - 0.5) * t),
+    c
+  );
+}
+const ue = 0.78,
+  rt = 0.1,
+  Te = 0.006;
+function os() {
+  const t = U(),
+    e = new O(),
+    a = new $(
+      new G(0.07, 0.05, 0.05, 3, 0.006),
+      new ie({
+        color: "#2f5d8a",
+        metalness: 0.3,
+        roughness: 0.4,
+        clearcoat: 0.6,
+      }),
+    );
+  a.position.set(-0.05, 0.03, 0);
+  const o = new $(new D(0.022, 0.022, 0.006, 32), t.chrome);
+  ((o.rotation.x = Math.PI / 2), o.position.set(0, 0.03, 0.03));
+  const r = new $(new D(0.003, 0.003, 0.012, 12), t.red);
+  return (
+    (r.rotation.x = Math.PI / 2),
+    r.position.set(0.012, 0.03, 0.036),
+    e.add(a, o, r),
+    (e.wheel = o),
+    (e.pin = r),
+    Q(e)
+  );
+}
+function as(t) {
+  const e = t.params,
+    a = e.mode === "forced";
+  t.add(bt(ue, 0.2));
+  const o = Ut(16, 0.014, 0.0019);
+  t.add(o);
+  const r = t.add(Zt(Math.round(e.m / 0.05)));
+  t.add(gt(0.5)).position.set(0.07, ue - 0.12, -0.01);
+  const u = t.add(ns(0.5, 0.2)),
+    n = new $(new Et(0.003, 0.03, 12), U().red);
+  ((n.rotation.x = -Math.PI / 2), t.add(n));
+  const x = a ? t.add(os()) : null;
+  x && x.position.set(0, ue + 0.01, 0);
+  let d = null,
+    k = 0,
+    M = {
+      x: 0,
+    };
+  function L() {
+    const f = e.k,
+      h = e.m;
+    ((d = Ie(
+      a
+        ? {
+            m: h,
+            k: f,
+            b: e.b,
+            F0: f * Te,
+            omega: 2 * Math.PI * e.fd,
+            x0: 0,
+          }
+        : {
+            m: h,
+            k: f,
+            b: e.b,
+            x0: e.A,
+          },
+    )),
+      (k = 0),
+      r.setCount(Le(Math.round(h / 0.05), 1, 10)));
+  }
+  L();
+  const g = () => Math.min(0.2, (e.m * 9.8) / e.k),
+    l = () => ue - 0.014 - rt - g();
+  t.draggable(r, {
+    plane: Xe,
+    pos: () => [0, 0],
+    move(f, h) {
+      if (a) return;
+      const m = Le(l() - h.y, -0.06, 0.06);
+      ((e.A = Math.round(Math.abs(m) * 1e3) / 1e3),
+        (d = Ie({
+          m: e.m,
+          k: e.k,
+          b: e.b,
+          x0: m,
+        })),
+        (p = !0));
+    },
+    end() {
+      ((p = !1), t.setParam("A", Le(e.A, 0.005, 0.06)), (k = 0));
+    },
+  });
+  let p = !1,
+    T = null;
+  function S() {
+    for (let f = 0; f < 2 && T && T.i < T.fs.length; f++) {
+      const h = T.fs[T.i++],
+        m = Ie({
+          m: e.m,
+          k: e.k,
+          b: e.b,
+          F0: e.k * Te,
+          omega: 2 * Math.PI * h,
+          x0: 0,
+        }),
+        v = Math.min(60, 10 / Math.max(0.05, e.b / e.m));
+      m.step(v);
+      let A = 0;
+      const F = 1 / h,
+        z = m.state.t;
+      for (; m.state.t < z + 3 * F;)
+        (m.step(0.005), (A = Math.max(A, Math.abs(m.state.x))));
+      t.records.push({
+        f: h,
+        A,
+        b: e.b,
+      });
+    }
+    (T &&
+      T.i >= T.fs.length &&
+      ((T = null), t.flash(translate("共振曲线扫描完成"))),
+      t.refreshDock());
+  }
+  const j = () => Math.sqrt(e.k / e.m) / (2 * Math.PI);
+  return {
+    update(f, h, m) {
+      (m && a && ((d.params.omega = 2 * Math.PI * e.fd), (d.params.b = e.b)),
+        !p && f > 0 && ((k += f), d.step(f)),
+        T && S());
+      const v = d.state.x;
+      M = d.state;
+      const A = a ? ue + Te * Math.cos(d.params.omega * d.state.t) : ue,
+        F = A - 0.014,
+        z = Math.max(0.02, rt + g() + v - (A - ue));
+      (o.position.set(0, F, 0), o.setLength(z), r.position.set(0, F - z, 0));
+      const B = F - z + r.bottom / 2;
+      (n.position.set(0, B, -0.03),
+        u.position.set(-u.penX, l() + r.bottom / 2, -0.045),
+        u.draw(Pe(d.state.samples, "x", 8, -1), {
+          speed: 0.06,
+        }),
+        x &&
+          ((x.position.y = A + 0.01),
+          (x.wheel.rotation.z = -d.params.omega * d.state.t),
+          x.pin.position.set(
+            0.012 * Math.cos(d.params.omega * d.state.t),
+            0.03 + 0.012 * Math.sin(d.params.omega * d.state.t),
+            0.036,
+          )),
+        t.tag(
+          "eq",
+          new C(0.11, l() + r.bottom / 2, 0),
+          translate("平衡位置"),
+          "dim",
+        ),
+        a &&
+          Math.abs(e.fd - j()) < 0.03 &&
+          t.tag("res", new C(0, ue + 0.1, 0), translate("共振！"), "warn"));
+    },
+    onParam(f) {
+      (f === "m" || f === "k" || f === "A" || (!a && f === "b")) && L();
+    },
+    actions: () =>
+      a
+        ? [
+            {
+              label: translate("扫描驱动频率"),
+              run() {
+                const f = [];
+                for (let h = 0.2; h <= 3.0001; h += 0.05) f.push(+h.toFixed(2));
+                T = {
+                  fs: f,
+                  i: 0,
+                };
+              },
+            },
+            {
+              label: translate("清除曲线"),
+              run: () => (t.records.length = 0),
+            },
+          ]
+        : [
+            {
+              label: translate("重新释放"),
+              run: () => L(),
+            },
+          ],
+    record() {
+      if (a) {
+        const h = 1 / e.fd,
+          m = Pe(d.state.samples, "x", 3 * h);
+        (t.records.push({
+          f: e.fd,
+          A: Math.max(...m.map((v) => Math.abs(v[1]))),
+          b: e.b,
+        }),
+          t.flash(translate("已记录第 {0} 组数据", [t.records.length])));
+        return;
+      }
+      const f = at(d.state.samples.slice(-1500));
+      if (!f)
+        return (t.flash(translate("振动时间太短，等几个周期后再记录")), !1);
+      (t.records.push({
+        m: e.m,
+        k: e.k,
+        T: f,
+      }),
+        t.flash(translate("已记录第 {0} 组数据", [t.records.length])));
+    },
+    readouts() {
+      const f = De(e.m, e.k),
+        h = at(d.state.samples.slice(-1500)),
+        m = [
+          [translate("位移 x"), `${b(M.x * 100, 2)} cm`],
+          [translate("速度 v"), `${b(M.v, 3)} m/s`],
+          [translate("固有周期 T = 2π√(m/k)"), `${b(f, 3)} s`],
+        ];
+      return (
+        a
+          ? (m.push([translate("固有频率 f₀"), `${b(j(), 3)} Hz`]),
+            m.push([
+              translate("理论稳态振幅"),
+              `${b(
+                nt(
+                  {
+                    m: e.m,
+                    k: e.k,
+                    b: e.b,
+                    F0: e.k * Te,
+                  },
+                  2 * Math.PI * e.fd,
+                ) * 100,
+                2,
+              )} cm`,
+            ]))
+          : m.push([translate("实测周期"), h ? `${b(h, 3)} s` : "—"]),
+        m
+      );
+    },
+    hud: () =>
+      a
+        ? [
+            ["f", b(e.fd, 2), "Hz"],
+            ["f₀", b(j(), 2), "Hz"],
+            ["x", b(M.x * 100, 1), "cm"],
+          ]
+        : [
+            ["t", b(k, 2), "s"],
+            ["x", b(M.x * 100, 2), "cm"],
+            ["T", b(De(e.m, e.k), 3), "s"],
+          ],
+    dock(f) {
+      const h = d.state.samples;
+      if (f === "xt" || f === "vt") {
+        const m = f === "xt" ? "x" : "v",
+          v = Pe(h, m, 10, m === "x" ? 100 : 1),
+          A = v.length ? v[v.length - 1][0] : 0;
+        return {
+          chart: {
+            series: [
+              {
+                pts: v,
+                color: "#5ee0b8",
+                name: m === "x" ? "x / cm" : "v / (m/s)",
+              },
+            ],
+            x: [Math.max(0, A - 10), Math.max(10, A)],
+            xLabel: "t / s",
+            yLabel:
+              m === "x"
+                ? translate("位移 x / cm")
+                : translate("速度 v / (m·s⁻¹)"),
+            xName: "t",
+          },
+        };
+      }
+      if (f === "record")
+        return t.records.length
+          ? {
+              html: `<div class="gview">${Mt(
+                [
+                  "m / kg",
+                  "k / (N·m⁻¹)",
+                  translate("实测 T / s"),
+                  "2π√(m/k) / s",
+                  "√m",
+                ],
+                t.records.map((m) => [
+                  b(m.m, 2),
+                  b(m.k, 0),
+                  `<b>${b(m.T, 3)}</b>`,
+                  b(De(m.m, m.k), 3),
+                  b(Math.sqrt(m.m), 3),
+                ]),
+              )}</div>`,
+              bind: xt(t.records, () => t.refreshDock()),
+            }
+          : {
+              html: yt(translate("振动几个周期后按“记录数据”。")),
+            };
+      if (f === "fitM") {
+        const m = t.records.map((A) => [Math.sqrt(A.m), A.T]),
+          v =
+            m.length >= 2
+              ? mt(
+                  m.map((A) => A[0]),
+                  m.map((A) => A[1]),
+                )
+              : null;
+        return {
+          chart: {
+            series: [
+              {
+                pts: m,
+                color: "#ffd25a",
+                kind: "scatter",
+                name: translate("实验数据"),
+              },
+            ],
+            x: [0, 0.8],
+            y: [0, null],
+            fit: v
+              ? {
+                  ...v,
+                  color: "#e8e6e0",
+                  label: `k = ${v.k.toFixed(3)}`,
+                }
+              : null,
+            fitRange: [0, 0.8],
+            xLabel: "√m / kg^½",
+            yLabel: "T / s",
+            xName: "√m",
+          },
+          side: `<div class="fitside"><b class="big">${m.length}</b><span>${translate("组数据")}</span>${v ? `<div class="res">k ≈ ${b(((2 * Math.PI) / v.k) ** 2, 1)} N/m</div>` : ""}<p>${translate("保持 k 不变改变 m：T 与 √m 成正比，斜率为 2π/√k。")}</p></div>`,
+        };
+      }
+      if (f === "resonance") {
+        const m = [];
+        for (let z = 0.2; z <= 3; z += 0.01)
+          m.push([
+            z,
+            nt(
+              {
+                m: e.m,
+                k: e.k,
+                b: e.b,
+                F0: e.k * Te,
+              },
+              2 * Math.PI * z,
+            ) * 100,
+          ]);
+        const v = {};
+        for (const z of t.records)
+          (v[z.b.toFixed(2)] ||= []).push([z.f, z.A * 100]);
+        const A = ["#ffd25a", "#6cc8ff", "#e86ad6", "#ff8a5a"];
+        return {
+          chart: {
+            series: [
+              {
+                pts: m,
+                color: "#5d5b57",
+                dashed: !0,
+                name: translate("理论曲线"),
+                noHover: !0,
+              },
+              ...Object.entries(v).map(([z, B], N) => ({
+                pts: B.sort((I, q) => I[0] - q[0]),
+                color: A[N % 4],
+                name: translate("阻尼 {0}", [z]),
+              })),
+            ],
+            x: [0, 3],
+            y: [0, null],
+            xLabel: translate("驱动频率 f / Hz"),
+            yLabel: translate("振幅 A / cm"),
+            xName: "f",
+            cursor: e.fd,
+          },
+        };
+      }
+      return null;
+    },
+    csv() {
+      return t.records.length
+        ? [
+            Object.keys(t.records[0]),
+            ...t.records.map((f) =>
+              Object.values(f).map((h) => +(+h).toFixed(5)),
+            ),
+          ]
+        : [
+            ["t/s", "x/m", "v/(m/s)"],
+            ...d.state.samples.map((f) =>
+              [f.t, f.x, f.v].map((h) => +h.toFixed(5)),
+            ),
+          ];
+    },
+  };
+}
+const he = 1.08,
+  He = 0.02;
+function rs() {
+  const t = document.createElement("canvas");
+  ((t.width = 512), (t.height = 256));
+  const e = t.getContext("2d");
+  ((e.fillStyle = "rgba(240,236,226,.88)"),
+    e.beginPath(),
+    e.arc(256, 0, 250, 0, Math.PI),
+    e.fill(),
+    (e.strokeStyle = "#1b1d21"),
+    (e.fillStyle = "#1b1d21"),
+    (e.font = "600 18px 'JetBrains Mono', monospace"),
+    (e.textAlign = "center"));
+  for (let r = -90; r <= 90; r++) {
+    const c = Math.PI / 2 + (r * Math.PI) / 180,
+      u = r % 10 === 0 ? 26 : r % 5 === 0 ? 18 : 10;
+    ((e.lineWidth = r % 10 === 0 ? 2 : 1),
+      e.beginPath(),
+      e.moveTo(256 + Math.cos(c) * 248, Math.sin(c) * 248),
+      e.lineTo(256 + Math.cos(c) * (248 - u), Math.sin(c) * (248 - u)),
+      e.stroke(),
+      r % 10 === 0 &&
+        r &&
+        e.fillText(
+          String(Math.abs(r)),
+          256 + Math.cos(c) * 205,
+          Math.sin(c) * 205 + 6,
+        ));
+  }
+  const a = new Ae(t);
+  a.colorSpace = je;
+  const o = new $(
+    new $e(0.2, 0.1),
+    new Me({
+      map: a,
+      transparent: !0,
+      side: ut,
+    }),
+  );
+  return ((o.position.y = -0.05), o);
+}
+function is() {
+  const t = U(),
+    e = new O(),
+    a = t.plastic,
+    o = new $(new G(0.02, 0.016, 0.1, 2, 0.004), a);
+  o.position.y = -0.03;
+  for (const u of [-0.042, 0.042]) {
+    const n = new $(new G(0.02, 0.05, 0.012, 2, 0.003), a);
+    (n.position.set(0, -0.005, u), e.add(n));
+  }
+  const r = new $(
+    new D(7e-4, 7e-4, 0.072, 6),
+    new Me({
+      color: new At("#ff2a1a").multiplyScalar(3),
+      transparent: !0,
+      opacity: 0.85,
+      toneMapped: !1,
+    }),
+  );
+  r.rotation.x = Math.PI / 2;
+  const c = new $(new D(0.005, 0.005, 1, 12), t.chrome);
+  return (e.add(o, r, c), (e.beam = r), (e.post = c), Q(e));
+}
+function cs(t) {
+  const e = t.params;
+  (t.add(bt(he, 0.32)), t.add(rs()).position.set(0, he - 0.012, -0.012));
+  const o = U(),
+    r = new $(
+      new D(7e-4, 7e-4, 1, 6),
+      new K({
+        color: "#eae4d4",
+        roughness: 0.9,
+      }),
+    );
+  (r.geometry.translate(0, -0.5, 0), (r.castShadow = !0));
+  const c = new $(new ge(He, 40, 24), o.brass);
+  c.castShadow = !0;
+  const u = new O();
+  (u.add(r, c), u.position.set(0, he - 0.012, 0), t.add(u));
+  const n = t.add(is()),
+    x = new _e(
+      new ge(He, 16, 10),
+      new Me({
+        color: "#5ee0b8",
+        transparent: !0,
+        opacity: 0.07,
+        depthWrite: !1,
+      }),
+      40,
+    );
+  ((x.count = 0), t.add(x));
+  let d = null;
+  const k = () => es[e.g];
+  function M(g = (e.theta0 * Math.PI) / 180) {
+    ((d = ts({
+      L: e.L,
+      g: k(),
+      theta0: g,
+      b: e.b,
+    })),
+      (r.scale.y = e.L - He),
+      (c.position.y = -e.L),
+      n.position.set(0, he - 0.012 - e.L, 0),
+      (n.post.scale.y = n.position.y - 0.03),
+      (n.post.position.y = -0.03 - n.post.scale.y / 2));
+  }
+  M();
+  let L = !1;
+  return (
+    t.draggable(u, {
+      plane: Xe,
+      pos: () => [0, 0],
+      move(g, l) {
+        const p = l.x,
+          T = he - 0.012 - l.y,
+          S = Le(
+            Math.atan2(p, Math.max(0.01, T)),
+            (-70 * Math.PI) / 180,
+            (70 * Math.PI) / 180,
+          );
+        ((L = !0),
+          M(S),
+          (e.theta0 = Math.round(Math.abs((S * 180) / Math.PI))));
+      },
+      end() {
+        ((L = !1), t.setParam("theta0", Le(e.theta0, 2, 70)));
+      },
+    }),
+    {
+      update(g) {
+        !L && g > 0 && d.step(g);
+        const l = d.state.th;
+        u.rotation.z = l;
+        const p = Math.abs(Math.sin(l) * e.L) < He;
+        if (((n.beam.material.opacity = p ? 0.08 : 0.85), e.energy)) {
+          const S = new pt(),
+            j = d.state.samples;
+          let f = 0;
+          for (let h = j.length - 1; h >= 0 && f < 14; h -= 10) {
+            const m = j[h].x;
+            (S.makeTranslation(
+              Math.sin(m) * e.L,
+              he - 0.012 - Math.cos(m) * e.L,
+              0,
+            ),
+              x.setMatrixAt(f++, S));
+          }
+          ((x.count = f), (x.instanceMatrix.needsUpdate = !0));
+        }
+        const T = new C(Math.sin(l) * e.L, he - 0.012 - Math.cos(l) * e.L, 0);
+        (t.tag(
+          "th",
+          new C(0.11, he - 0.07, 0),
+          `θ = ${b((l * 180) / Math.PI, 1)}°`,
+          "gold",
+        ),
+          e.energy &&
+            t.tag(
+              "bob",
+              T.add(new C(0.03, 0.03, 0)),
+              `Eₖ ${b(d.energy().Ek * 1e3, 1)} mJ`,
+              "blue",
+            ));
+      },
+      onParam() {
+        M();
+      },
+      actions: () => [
+        {
+          label: translate("重新释放"),
+          run: () => M(),
+        },
+      ],
+      record() {
+        const g = ot(d.state.crossings.slice(-6));
+        if (!g)
+          return (t.flash(translate("振动时间太短，等几个周期后再记录")), !1);
+        (t.records.push({
+          L: e.L,
+          g: k(),
+          th: e.theta0,
+          T: g,
+        }),
+          t.flash(translate("已记录第 {0} 组数据", [t.records.length])));
+      },
+      readouts() {
+        const g = Re(e.L, k()),
+          l = ss(e.L, k(), (e.theta0 * Math.PI) / 180),
+          p = ot(d.state.crossings.slice(-6)),
+          T = d.energy(),
+          S = [
+            [translate("摆长 L"), `${b(e.L * 100, 0)} cm`],
+            ["g", `${b(k(), 2)} m/s²`],
+            [translate("小角度公式 T"), `${b(g, 3)} s`],
+            [translate("实测周期"), p ? `${b(p, 3)} s` : "—"],
+          ];
+        return (
+          e.theta0 > 15 && S.push([translate("大摆角精确值"), `${b(l, 3)} s`]),
+          e.energy &&
+            S.push([translate("机械能"), `${b((T.Ek + T.Ep) * 1e3, 2)} mJ`]),
+          S
+        );
+      },
+      hud: () => [
+        ["θ", b((d.state.th * 180) / Math.PI, 1), "°"],
+        ["T", b(Re(e.L, k()), 3), "s"],
+        [translate("经过次数"), String(d.state.crossings.length), ""],
+      ],
+      dock(g) {
+        const l = d.state.samples;
+        if (g === "xt") {
+          const p = Pe(l, "x", 12, 180 / Math.PI),
+            T = p.length ? p[p.length - 1][0] : 0;
+          return {
+            chart: {
+              series: [
+                {
+                  pts: p,
+                  color: "#5ee0b8",
+                  name: "θ / °",
+                },
+              ],
+              x: [Math.max(0, T - 12), Math.max(12, T)],
+              xLabel: "t / s",
+              yLabel: translate("摆角 θ / °"),
+              xName: "t",
+            },
+          };
+        }
+        if (g === "energy") {
+          const T = (F) => Pe(l, F, 12, 1e3),
+            S = [],
+            j = l.length ? l[l.length - 1].t : 0;
+          for (const F of l)
+            F.t >= j - 12 && S.push([F.t, (F.Ek + F.Ep) * 1e3]);
+          const f = d.energy(),
+            h = (f.Ek + f.Ep) * 1e3,
+            m = Math.max(
+              h,
+              1e-9,
+              d.params.m *
+                k() *
+                e.L *
+                (1 - Math.cos((e.theta0 * Math.PI) / 180)) *
+                1e3,
+            ),
+            v = (F, z, B) =>
+              `<div class="eb"><div class="bar"><i style="height:${(Math.max(0, F) / m) * 100}%;background:${z}"></i></div><b>${b(F, 2)}</b><span>${B}</span></div>`,
+            A = S.length ? S[S.length - 1][0] : 0;
+          return {
+            chart: {
+              series: [
+                {
+                  pts: T("Ek"),
+                  color: "#ff8a3d",
+                  name: "Eₖ",
+                },
+                {
+                  pts: T("Ep"),
+                  color: "#4d9bff",
+                  name: "Eₚ",
+                },
+                {
+                  pts: S,
+                  color: "#e8e6e0",
+                  name: "E",
+                  width: 2.4,
+                },
+              ],
+              x: [Math.max(0, A - 12), Math.max(12, A)],
+              y: [0, null],
+              xLabel: "t / s",
+              yLabel: translate("能量 / mJ"),
+              xName: "t",
+            },
+            side: `<div class="ebars">${v(f.Ek * 1e3, "#ff8a3d", "E<sub>k</sub>")}${v(f.Ep * 1e3, "#4d9bff", "E<sub>p</sub>")}${v(h, "#e8e6e0", "E")}</div><p class="enote">${translate("摆球质量 100 g，以最低点为势能零点，单位 mJ")}</p>`,
+          };
+        }
+        if (g === "record")
+          return t.records.length
+            ? {
+                html: `<div class="gview">${Mt(
+                  [
+                    "L / m",
+                    "g / (m·s⁻²)",
+                    "θ₀ / °",
+                    translate("实测 T / s"),
+                    "T² / s²",
+                    "2π√(L/g) / s",
+                  ],
+                  t.records.map((p) => [
+                    b(p.L, 2),
+                    b(p.g, 2),
+                    b(p.th, 0),
+                    `<b>${b(p.T, 3)}</b>`,
+                    b(p.T * p.T, 3),
+                    b(Re(p.L, p.g), 3),
+                  ]),
+                )}</div>`,
+                bind: xt(t.records, () => t.refreshDock()),
+              }
+            : {
+                html: yt(translate("振动几个周期后按“记录数据”。")),
+              };
+        if (g === "fitT") {
+          const p = t.records.map((S) => [S.L, S.T * S.T]),
+            T =
+              p.length >= 2
+                ? mt(
+                    p.map((S) => S[0]),
+                    p.map((S) => S[1]),
+                  )
+                : null;
+          return {
+            chart: {
+              series: [
+                {
+                  pts: p,
+                  color: "#ffd25a",
+                  kind: "scatter",
+                  name: translate("实验数据"),
+                },
+              ],
+              x: [0, 1],
+              y: [0, null],
+              fit: T
+                ? {
+                    ...T,
+                    color: "#e8e6e0",
+                    label: `k = ${T.k.toFixed(3)} s²/m`,
+                  }
+                : null,
+              fitRange: [0, 1],
+              xLabel: "L / m",
+              yLabel: "T² / s²",
+              xName: "L",
+            },
+            side: `<div class="fitside"><b class="big">${p.length}</b><span>${translate("组数据")}</span>${T ? `<div class="res">g = 4π²/k ≈ ${b((4 * Math.PI * Math.PI) / T.k, 2)} m/s²</div>` : ""}<p>${translate("T² 与 L 成正比，由斜率 k 求出重力加速度 g。")}</p></div>`,
+          };
+        }
+        return null;
+      },
+      csv: () =>
+        t.records.length
+          ? [
+              ["L/m", "g", "theta0/deg", "T/s"],
+              ...t.records.map((g) => [g.L, g.g, g.th, +g.T.toFixed(4)]),
+            ]
+          : [
+              ["t/s", "theta/rad"],
+              ...d.state.samples.map((g) => [+g.t.toFixed(3), +g.x.toFixed(5)]),
+            ],
+    }
+  );
+}
+function ls({
+  L: t = 1.2,
+  N: e = 241,
+  c: a = 1.2,
+  gamma: o = 0.02,
+  left: r = "driven",
+  right: c = "fixed",
+  A: u = 0.03,
+  f: n = 2,
+  pulseW: x = 0.12,
+  rightPulse: d = !1,
+} = {}) {
+  const k = t / (e - 1),
+    M = (0.5 * k) / a;
+  let L = new Float64Array(e),
+    g = new Float64Array(e);
+  const l = {
+      t: 0,
+      y: L,
+      L: t,
+      N: e,
+      dx: k,
+      c: a,
+      dt: M,
+      A: u,
+      f: n,
+      left: r,
+      right: c,
+      gamma: o,
+    },
+    p = ((a * M) / k) ** 2,
+    T = x / a,
+    S = (h) =>
+      l.left === "driven"
+        ? l.A * Math.sin(2 * Math.PI * l.f * h) * Math.min(1, h * l.f)
+        : l.left === "pulse" && h < T
+          ? l.A * Math.sin((Math.PI * h) / T) ** 2
+          : 0,
+    j = (h) => (d && h < T ? l.A * Math.sin((Math.PI * h) / T) ** 2 : 0);
+  function f() {
+    const h = new Float64Array(e),
+      m = l.gamma * M;
+    for (let A = 1; A < e - 1; A++)
+      h[A] =
+        (2 * L[A] - (1 - m) * g[A] + p * (L[A + 1] - 2 * L[A] + L[A - 1])) /
+        (1 + m);
+    const v = l.t + M;
+    if (
+      (l.left === "free" ? (h[0] = h[1]) : (h[0] = S(v)), l.right === "fixed")
+    )
+      h[e - 1] = d ? j(v) : 0;
+    else if (l.right === "free") h[e - 1] = h[e - 2];
+    else {
+      const A = (a * M - k) / (a * M + k);
+      h[e - 1] = L[e - 2] + A * (h[e - 2] - L[e - 1]);
+    }
+    ((g = L), (L = h), (l.y = L), (l.t = v));
+  }
+  return {
+    state: l,
+    get y() {
+      return L;
+    },
+    step(h) {
+      const m = Math.max(0, Math.floor((h + 1e-12) / M));
+      for (let v = 0; v < m; v++) f();
+      return m * M;
+    },
+    advanceTo(h) {
+      for (; l.t + M <= h + 1e-12;) f();
+    },
+    reset() {
+      ((L = new Float64Array(e)),
+        (g = new Float64Array(e)),
+        (l.y = L),
+        (l.t = 0));
+    },
+    x: (h) => h * k,
+    velocity: (h) => (L[h] - g[h]) / M,
+    energy() {
+      let h = 0;
+      for (let m = 1; m < e; m++) {
+        const v = (L[m] - g[m]) / M,
+          A = (L[m] - L[m - 1]) / k;
+        h += 0.5 * v * v * k + 0.5 * a * a * A * A * k;
+      }
+      return h;
+    },
+  };
+}
+const it = (t, e, a) => (t * e) / (2 * a),
+  fe = -0.6,
+  ae = 1.2,
+  _ = 0.16,
+  me = 31;
+function ds(t, e, a) {
+  const r = new xe(),
+    c = new Float32Array(t * 10 * 3),
+    u = [];
+  for (let d = 0; d < t - 1; d++)
+    for (let k = 0; k < 10; k++) {
+      const M = d * 10 + k,
+        L = d * 10 + ((k + 1) % 10),
+        g = (d + 1) * 10 + k,
+        l = (d + 1) * 10 + ((k + 1) % 10);
+      u.push(M, g, L, L, g, l);
+    }
+  (r.setIndex(u), r.setAttribute("position", new It(c, 3)));
+  const n = new $(
+    r,
+    new K({
+      color: a,
+      roughness: 0.75,
+    }),
+  );
+  ((n.castShadow = !0), (n.frustumCulled = !1));
+  const x = Array.from(
+    {
+      length: 10,
+    },
+    (d, k) => [
+      Math.cos((k / 10) * Math.PI * 2),
+      Math.sin((k / 10) * Math.PI * 2),
+    ],
+  );
+  return (
+    (n.update = (d, k) => {
+      for (let M = 0; M < t; M++) {
+        const L = Math.max(0, M - 1),
+          g = Math.min(t - 1, M + 1),
+          l = d[g] - d[L],
+          p = k[g] - k[L],
+          T = Math.hypot(l, p) || 1,
+          S = -p / T,
+          j = l / T;
+        for (let f = 0; f < 10; f++) {
+          const h = (M * 10 + f) * 3;
+          ((c[h] = d[M] + S * x[f][0] * e),
+            (c[h + 1] = k[M] + j * x[f][0] * e),
+            (c[h + 2] = x[f][1] * e));
+        }
+      }
+      ((r.attributes.position.needsUpdate = !0), r.computeVertexNormals());
+    }),
+    n
+  );
+}
+function ps() {
+  const t = U(),
+    e = new O(),
+    a = new $(
+      new G(0.08, 0.1, 0.08, 3, 0.008),
+      new ie({
+        color: "#c0392b",
+        metalness: 0.2,
+        roughness: 0.4,
+        clearcoat: 0.6,
+      }),
+    );
+  a.position.set(-0.05, 0.05, 0);
+  const o = new $(new D(0.022, 0.03, 0.01, 32), t.darkSteel);
+  ((o.rotation.z = Math.PI / 2), o.position.set(-0.0055, 0.05, 0));
+  const r = new $(new D(0.0025, 0.0025, 1, 12), t.chrome);
+  return (e.add(a, o, r), (e.rod = r), Q(e));
+}
+function us() {
+  const t = U(),
+    e = new O(),
+    a = new $(new D(0.008, 0.008, _ + 0.05, 20), t.chrome);
+  a.position.y = (_ + 0.05) / 2;
+  const o = new $(new G(0.07, 0.014, 0.07, 2, 0.003), t.darkSteel);
+  o.position.y = 0.007;
+  const r = new $(
+    new G(0.025, 0.025, 0.025, 2, 0.004),
+    new K({
+      color: "#3a3f47",
+      metalness: 0.7,
+      roughness: 0.35,
+    }),
+  );
+  return ((r.position.y = _), e.add(a, o, r), Q(e));
+}
+function hs() {
+  const t = U(),
+    e = new O(),
+    a = new $(new D(0.004, 0.004, _ * 2, 16), t.chrome);
+  a.position.y = _;
+  const o = new $(new G(0.07, 0.014, 0.07, 2, 0.003), t.darkSteel);
+  o.position.y = 0.007;
+  const r = new $(new Se(0.008, 0.0025, 10, 24), t.brass);
+  return ((r.rotation.x = Math.PI / 2), e.add(a, o, r), (e.ring = r), Q(e));
+}
+function fs() {
+  const t = new O(),
+    e = new $(
+      new G(0.1, 0.09, 0.08, 3, 0.01),
+      new K({
+        color: "#3d5f4f",
+        roughness: 1,
+      }),
+    );
+  e.position.set(0.05, _, 0);
+  const a = new $(new D(0.006, 0.006, _ - 0.045, 12), U().chrome);
+  return (a.position.set(0.05, (_ - 0.045) / 2, 0), t.add(e, a), Q(t));
+}
+function ms(t) {
+  const e = t.params,
+    a = e.view === "beads",
+    o = a ? null : t.add(ds(241, 0.0045, "#e8b04a")),
+    r = t.add(ps());
+  r.position.set(fe, 0, 0);
+  const c = t.add(us()),
+    u = t.add(hs()),
+    n = t.add(fs());
+  for (const I of [c, u, n]) I.position.set(fe + ae, 0, 0);
+  const x = U(),
+    d = a ? new _e(new ge(0.009, 20, 14), x.steel, me) : null,
+    k = a
+      ? new $(
+          new ge(0.0105, 20, 14),
+          new ie({
+            color: "#e0453a",
+            roughness: 0.3,
+            clearcoat: 0.6,
+          }),
+        )
+      : null,
+    M = a
+      ? new _e(
+          new D(0.0016, 0.0016, 1, 6),
+          new K({
+            color: "#9aa3ad",
+            metalness: 0.8,
+            roughness: 0.3,
+          }),
+          me - 1,
+        )
+      : null,
+    L = a
+      ? new Be(
+          new xe(),
+          new Ee({
+            color: "#5d5b57",
+            transparent: !0,
+            opacity: 0.5,
+          }),
+        )
+      : null;
+  if (a) {
+    ((d.castShadow = M.castShadow = !0), t.add(d), t.add(k), t.add(M));
+    const I = [];
+    for (let q = 0; q < me; q++) {
+      const R = fe + (q / (me - 1)) * ae;
+      I.push(R, _ - 0.06, 0, R, _ + 0.06, 0);
+    }
+    (L.geometry.setAttribute("position", new jt(I, 3)), t.add(L));
+  }
+  const g = 10,
+    l = t.add(
+      new ht(
+        new xe(),
+        new Ee({
+          color: "#ffd25a",
+          toneMapped: !1,
+        }),
+      ),
+    );
+  let p = null,
+    T = 0;
+  const S = [];
+  function j() {
+    const I = e.mode2 === "pulses",
+      q = I ? "pulse" : e.left,
+      R = I ? "fixed" : e.right;
+    ((p = ls({
+      L: ae,
+      N: 241,
+      c: e.c,
+      gamma: I ? 0 : e.gamma,
+      left: q,
+      right: R,
+      A: I ? 0.04 : e.A,
+      f: e.f,
+      pulseW: 0.16,
+      rightPulse: I,
+    })),
+      (T = 0),
+      (S.length = 0),
+      (c.visible = R === "fixed"),
+      (u.visible = R === "free"),
+      (n.visible = R === "absorb"));
+  }
+  j();
+  const f = new Float64Array(241),
+    h = new Float64Array(241),
+    m = new pt(),
+    v = new zt(),
+    A = new C(0, 1, 0),
+    F = new C();
+  function z() {
+    const I = p.y,
+      q = e.pol === "longitudinal";
+    if (o) {
+      for (let ee = 0; ee < 241; ee++)
+        ((f[ee] = fe + ee * p.state.dx), (h[ee] = _ + I[ee]));
+      o.update(f, h);
+    }
+    if (a) {
+      const ee = [];
+      for (let W = 0; W < me; W++) {
+        const te = Math.round((W / (me - 1)) * 240),
+          X = fe + te * p.state.dx,
+          Z = q ? [X + I[te] * 0.8, _] : [X, _ + I[te]];
+        (ee.push(Z),
+          m.makeTranslation(Z[0], Z[1], 0),
+          d.setMatrixAt(W, m),
+          W === g && k.position.set(Z[0], Z[1], 0));
+      }
+      d.instanceMatrix.needsUpdate = !0;
+      for (let W = 0; W < me - 1; W++) {
+        const te = ee[W],
+          X = ee[W + 1];
+        F.set(X[0] - te[0], X[1] - te[1], 0);
+        const Z = F.length();
+        (v.setFromUnitVectors(A, F.normalize()),
+          m.compose(
+            new C((te[0] + X[0]) / 2, (te[1] + X[1]) / 2, 0),
+            v,
+            new C(1, Z, 1),
+          ),
+          M.setMatrixAt(W, m));
+      }
+      M.instanceMatrix.needsUpdate = !0;
+    }
+    const R = I[0],
+      V = Math.max(0.001, _ + R - 0.1);
+    ((r.rod.scale.y = V),
+      r.rod.position.set(0, 0.1 + V / 2, 0),
+      u.visible && (u.ring.position.y = _ + I[240]));
+  }
+  function B() {
+    if (
+      ((l.visible = !1),
+      e.left !== "driven" || e.mode2 === "standing" || e.mode2 === "pulses")
+    )
+      return;
+    const I = e.c / e.f;
+    if (I > ae * 0.8) return;
+    const q = p.y;
+    let R = -1,
+      V = -1;
+    const ee =
+      Math.min(240, Math.round(((e.c * T) / ae) * 240)) -
+      Math.round((I / ae) * 240);
+    for (let Z = 5; Z < ee; Z++)
+      if (q[Z] > q[Z - 1] && q[Z] >= q[Z + 1] && q[Z] > R) {
+        ((R = q[Z]), (V = Z));
+        break;
+      }
+    if (V < 0) return;
+    const W = fe + V * p.state.dx,
+      te = W + I,
+      X = _ + Math.max(e.A, 0.02) + 0.03;
+    (l.geometry.setFromPoints([
+      new C(W, X - 0.01, 0),
+      new C(W, X, 0),
+      new C(te, X, 0),
+      new C(te, X - 0.01, 0),
+    ]),
+      (l.visible = !0),
+      t.tag(
+        "lam",
+        new C((W + te) / 2, X + 0.012, 0),
+        `λ = ${b(I * 100, 1)} cm`,
+        "gold",
+      ));
+  }
+  const N = () => (e.f * 2 * ae) / e.c;
+  return {
+    update(I, q, R) {
+      if (
+        (R &&
+          ((p.state.f = e.f), (p.state.A = e.mode2 === "pulses" ? 0.04 : e.A)),
+        I > 0 &&
+          ((T += I),
+          p.advanceTo(T),
+          S.push([T, p.y[0], p.y[Math.round((g / (me - 1)) * 240)]]),
+          S.length > 1200 && S.shift()),
+        z(),
+        B(),
+        a &&
+          t.tag(
+            "red",
+            k.position.clone().add(new C(0, 0.03, 0)),
+            translate("这个质点只在原地振动"),
+            "warn",
+          ),
+        e.right === "fixed" &&
+          e.mode2 !== "pulses" &&
+          !a &&
+          t.tag("end", new C(fe + ae, _ + 0.07, 0), translate("固定端"), "dim"),
+        e.right === "free" &&
+          e.mode2 !== "pulses" &&
+          t.tag("end", new C(fe + ae, _ + 0.2, 0), translate("自由端"), "dim"),
+        e.mode2 === "standing")
+      ) {
+        const V = N();
+        Math.abs(V - Math.round(V)) < 0.04 &&
+          Math.round(V) >= 1 &&
+          t.tag(
+            "sw",
+            new C(0, _ + 0.12, 0),
+            translate("第 {0} 阶驻波", [Math.round(V)]),
+            "ok",
+          );
+      }
+    },
+    onParam(I) {
+      ["left", "right", "c", "gamma", "mode2", "pol"].includes(I) && j();
+    },
+    actions: () => [
+      {
+        label:
+          e.left === "pulse" || e.mode2 === "pulses"
+            ? translate("发出脉冲")
+            : translate("重新开始"),
+        run: () => j(),
+      },
+    ],
+    readouts() {
+      const I = e.c / e.f,
+        q = [
+          [translate("波速 v"), `${b(e.c, 2)} m/s`],
+          [translate("频率 f"), `${b(e.f, 2)} Hz`],
+          [translate("周期 T"), `${b(1 / e.f, 3)} s`],
+          [translate("波长 λ = v / f"), `${b(I * 100, 1)} cm`],
+        ];
+      return (
+        (e.mode2 === "standing" ||
+          (e.left === "driven" && e.right === "fixed")) &&
+          q.push([translate("基频 f₁ = v / 2L"), `${b(it(1, e.c, ae), 3)} Hz`]),
+        q
+      );
+    },
+    hud: () => [
+      ["t", b(T, 2), "s"],
+      ["λ", b((e.c / e.f) * 100, 1), "cm"],
+      ["v", b(e.c, 2), "m/s"],
+    ],
+    dock(I) {
+      if (I === "wave") {
+        const q = [];
+        for (let R = 0; R < 241; R += 2)
+          q.push([R * p.state.dx * 100, p.y[R] * 100]);
+        return {
+          chart: {
+            series: [
+              {
+                pts: q,
+                color: "#e8b04a",
+                name: translate("此刻的波形"),
+              },
+            ],
+            x: [0, ae * 100],
+            y: [-8, 8],
+            xLabel: translate("位置 x / cm"),
+            yLabel: translate("位移 y / cm"),
+            xName: "x",
+          },
+        };
+      }
+      if (I === "history") {
+        const q = S.length ? S[S.length - 1][0] : 0;
+        return {
+          chart: {
+            series: [
+              {
+                pts: S.map((R) => [R[0], R[1] * 100]),
+                color: "#8fd3ff",
+                name: translate("波源"),
+              },
+              {
+                pts: S.map((R) => [R[0], R[2] * 100]),
+                color: "#e0453a",
+                name: translate("红色质点"),
+              },
+            ],
+            x: [Math.max(0, q - 8), Math.max(8, q)],
+            y: [-6, 6],
+            xLabel: "t / s",
+            yLabel: translate("位移 y / cm"),
+            xName: "t",
+          },
+        };
+      }
+      if (I === "harmonics") {
+        const q = [1, 2, 3, 4, 5].map((R) => {
+          const V = it(R, e.c, ae);
+          return `<tr class="${Math.abs(e.f - V) < 0.03 ? "cur" : ""}"><td>n = ${R}</td><td>${b(V, 3)} Hz</td><td>${b(((2 * ae) / R) * 100, 1)} cm</td><td>${R + 1}</td><td>${R}</td></tr>`;
+        });
+        return {
+          html: `<div class="gview"><table class="tbl cases"><thead><tr><th></th><th>fₙ = nv/2L</th><th>λₙ = 2L/n</th><th>${translate("波节数")}</th><th>${translate("波腹数")}</th></tr></thead><tbody>${q.join("")}</tbody></table><div class="kv2"><span>${translate("当前频率")}</span><b class="hi">${b(e.f, 3)} Hz</b><span>2Lf / v</span><b>${b(N(), 2)}</b></div></div>`,
+        };
+      }
+      return {
+        html: `<div class="gview"><div class="kv2"><span>${translate("右端")}</span><b class="hi">${
+          {
+            fixed: translate("固定端"),
+            free: translate("自由端"),
+            absorb: translate("吸收"),
+          }[e.right]
+        }</b><span>${translate("反射波")}</span><b>${
+          {
+            fixed: translate("反相（半波损失）"),
+            free: translate("同相"),
+            absorb: translate("几乎没有"),
+          }[e.right]
+        }</b></div><p class="tnote">${translate("固定端处绳不能动，入射波与反射波在端点的位移必须相互抵消，所以反射波倒过来；自由端处位移可以最大，反射波与入射波同相。")}</p></div>`,
+      };
+    },
+    csv() {
+      const I = [["x/m", "y/m"]];
+      for (let q = 0; q < 241; q++)
+        I.push([+(q * p.state.dx).toFixed(4), +p.y[q].toFixed(6)]);
+      return I;
+    },
+  };
+}
+const ne = 0.56,
+  le = 0.44,
+  ce = 0.07,
+  be = 0.24,
+  re = -0.17,
+  We = -0.04,
+  bs = 0.0022,
+  gs = `
+uniform float uT, uK, uW, uA, uMode, uD, uSlit, uZs, uZb, uV;
+varying float vH; varying vec3 vN; varying vec3 vP;
+const int M = 24;
+void wave(vec2 src, vec2 p, float amp, float phase0, float tStart, inout float h, inout vec2 g){
+  vec2 d = p - src; float r = length(d) + 1e-4;
+  float front = smoothstep(0.0, 0.01, uV * (uT - tStart) - r);
+  float a = amp / sqrt(uK * r * 0.5 + 1.0) * front;
+  float ph = uW * uT - uK * r + phase0;
+  h += a * sin(ph);
+  g += -a * uK * cos(ph) * d / r;
+}
+void main(){
+  // 平面绕 x 轴转 −90° 放平后，本地 y 对应世界 −z；p 用世界坐标 (x, z)
+  vec2 p = vec2(position.x, -position.y);
+  float h = 0.0; vec2 g = vec2(0.0);
+  if (uMode < 0.5) {
+    wave(vec2(-uD * 0.5, uZs), p, uA, 0.0, 0.0, h, g);
+    wave(vec2( uD * 0.5, uZs), p, uA, 0.0, 0.0, h, g);
+  } else {
+    if (p.y < uZb) {
+      float r = p.y - uZs;
+      float front = smoothstep(0.0, 0.01, uV * uT - r) * step(0.0, r);
+      float ph = uW * uT - uK * r;
+      h = uA * 0.8 * sin(ph) * front;
+      g = vec2(0.0, -uA * 0.8 * uK * cos(ph) * front);
+    } else if (true) {
+      float t0 = (uZb - uZs) / uV;
+      for (int i = 0; i < M; i++) {
+        float x = (float(i) / float(M - 1) - 0.5) * uSlit;
+        wave(vec2(x, uZb), p, uA * 2.2 * uSlit / float(M) / 0.02, -uK * (uZb - uZs), t0, h, g);
+      }
+    }
+  }
+  vH = h;
+  vec3 pos = vec3(position.x, position.y, h);
+  vN = normalize(vec3(-g.x * 0.35, 1.0, -g.y * 0.35)); // 世界坐标法线（坡度放大显示时适当压低）
+  vec4 wp = modelMatrix * vec4(pos, 1.0);
+  vP = wp.xyz;
+  gl_Position = projectionMatrix * viewMatrix * wp;
+}`,
+  ws = `
+uniform float uA; uniform vec3 uCam;
+varying float vH; varying vec3 vN; varying vec3 vP;
+void main(){
+  vec3 n = normalize(vN);
+  vec3 L = normalize(vec3(-0.4, 1.0, 0.5));
+  vec3 V = normalize(uCam - vP);
+  float diff = max(dot(n, L), 0.0);
+  float spec = pow(max(dot(reflect(-L, n), V), 0.0), 60.0);
+  float fres = pow(1.0 - max(dot(n, V), 0.0), 3.0);
+  // 波动演示仪的投影效果：波峰会聚光线变亮，波谷变暗
+  float band = clamp(0.5 + 0.55 * vH / uA, 0.0, 1.4);
+  vec3 deep = vec3(0.02, 0.09, 0.11), lite = vec3(0.32, 0.75, 0.78);
+  vec3 col = mix(deep, lite, band * 0.85) * (0.55 + 0.6 * diff) + vec3(0.9, 0.97, 1.0) * spec * 0.9 + vec3(0.25, 0.35, 0.4) * fres * 0.6;
+  gl_FragColor = vec4(col, 0.94);
+}`;
+function vs() {
+  const t = U(),
+    e = new O(),
+    a = new ie({
+      color: "#e6f4ff",
+      roughness: 0.04,
+      transmission: 0.9,
+      thickness: 0.006,
+      transparent: !0,
+      opacity: 0.35,
+      depthWrite: !1,
+    }),
+    o = new K({
+      color: "#2b2f36",
+      metalness: 0.7,
+      roughness: 0.4,
+    }),
+    r = new $(
+      new G(ne + 0.03, 0.012, le + 0.03, 2, 0.003),
+      new K({
+        color: "#d8dde2",
+        roughness: 0.6,
+      }),
+    );
+  ((r.position.y = 0.006), e.add(r));
+  for (const [n, x, d, k] of [
+    [ne + 0.03, 0.006, 0, le / 2 + 0.012],
+    [ne + 0.03, 0.006, 0, -le / 2 - 0.012],
+    [0.006, le + 0.03, ne / 2 + 0.012, 0],
+    [0.006, le + 0.03, -ne / 2 - 0.012, 0],
+  ]) {
+    const M = new $(new ye(n, 0.1, x), a);
+    (M.position.set(d, 0.05, k), e.add(M));
+    const L = new $(new ye(n + 0.004, 0.008, x + 0.004), o);
+    (L.position.set(d, 0.104, k), e.add(L));
+  }
+  for (const n of [-ne / 2 - 0.012, ne / 2 + 0.012])
+    for (const x of [-le / 2 - 0.012, le / 2 + 0.012]) {
+      const d = new $(new ye(0.012, 0.11, 0.012), o);
+      (d.position.set(n, 0.055, x), e.add(d));
+    }
+  const c = new $(new G(ne + 0.08, 0.018, 0.03, 2, 0.004), o);
+  c.position.set(0, 0.2, re);
+  const u = new $(
+    new G(0.07, 0.045, 0.05, 3, 0.006),
+    new ie({
+      color: "#2f5d8a",
+      metalness: 0.3,
+      roughness: 0.4,
+      clearcoat: 0.6,
+    }),
+  );
+  (u.position.set(0.18, 0.2, re), e.add(c, u));
+  for (const n of [-ne / 2 - 0.03, ne / 2 + 0.03]) {
+    const x = new $(new D(0.005, 0.005, 0.2, 12), t.chrome);
+    (x.position.set(n, 0.1, re), e.add(x));
+  }
+  return Q(e);
+}
+function ys(t) {
+  const e = t.params;
+  t.add(vs());
+  const a = new Ht({
+      vertexShader: gs,
+      fragmentShader: ws,
+      uniforms: {
+        uT: {
+          value: 0,
+        },
+        uK: {
+          value: 1,
+        },
+        uW: {
+          value: 1,
+        },
+        uA: {
+          value: bs,
+        },
+        uMode: {
+          value: 0,
+        },
+        uD: {
+          value: 0.08,
+        },
+        uSlit: {
+          value: 0.05,
+        },
+        uZs: {
+          value: re,
+        },
+        uZb: {
+          value: We,
+        },
+        uV: {
+          value: be,
+        },
+        uCam: {
+          value: new C(),
+        },
+      },
+      transparent: !0,
+    }),
+    o = new $(new $e(ne, le, 300, 240), a);
+  ((o.rotation.x = -Math.PI / 2), (o.position.y = ce), t.add(o));
+  const r = U(),
+    c = [0, 1].map(() => {
+      const l = new O(),
+        p = new $(new D(0.0025, 0.0025, 0.13, 12), r.chrome);
+      p.position.y = 0.065;
+      const T = new $(new ge(0.006, 16, 12), r.plastic);
+      return (l.add(p, T), t.add(Q(l)));
+    }),
+    u = t.add(new $(new G(ne - 0.04, 0.012, 0.012, 2, 0.003), r.plastic)),
+    n = [0, 1].map(() =>
+      t.add(
+        new $(
+          new G(1, 0.05, 0.012, 2, 0.003),
+          new K({
+            color: "#c9cfd6",
+            roughness: 0.5,
+          }),
+        ),
+      ),
+    ),
+    x = t.add(
+      new Be(
+        new xe(),
+        new Ee({
+          color: "#ffd25a",
+          transparent: !0,
+          opacity: 0.8,
+          toneMapped: !1,
+        }),
+      ),
+    ),
+    d = t.add(
+      new Be(
+        new xe(),
+        new Ft({
+          color: "#6cc8ff",
+          dashSize: 0.008,
+          gapSize: 0.006,
+          transparent: !0,
+          opacity: 0.9,
+          toneMapped: !1,
+        }),
+      ),
+    );
+  let k = 0;
+  t.draggable(c[1], {
+    pos: () => [e.d / 2, re],
+    move(l) {
+      t.setParam(
+        "d",
+        Math.max(0.03, Math.min(0.2, Math.round(l[0] * 2 * 200) / 200)),
+      );
+    },
+  });
+  function M(l, p) {
+    const T = e.d / 2,
+      S = Math.abs(l) / 2;
+    if (S >= T - 1e-6) return;
+    const j = Math.sqrt(T * T - S * S),
+      f = Math.sign(l) || 1;
+    let h = null;
+    for (let m = 0; m <= 3.5; m += 0.04) {
+      const v = f * S * Math.cosh(m),
+        A = re + j * Math.sinh(m);
+      if (A > le / 2 - 0.01 || Math.abs(v) > ne / 2 - 0.01) break;
+      const F = new C(l === 0 ? 0 : v, ce + 0.004, l === 0 ? re + m * 0.12 : A);
+      if (l === 0 && F.z > le / 2 - 0.01) break;
+      (h && p.push(h, F), (h = F));
+    }
+  }
+  function L() {
+    const l = e.lines && e.rmode === "two";
+    if (((x.visible = d.visible = l), !l)) return;
+    const p = be / e.fr,
+      T = [],
+      S = [];
+    for (let j = -8; j <= 8; j++) {
+      Math.abs(j * p) < e.d && M(j * p, T);
+      const f = (j + 0.5) * p;
+      Math.abs(f) < e.d && M(f, S);
+    }
+    (x.geometry.setFromPoints(T),
+      d.geometry.setFromPoints(S),
+      d.computeLineDistances());
+  }
+  function g() {
+    const l = e.rmode === "two";
+    (c.forEach((p, T) => {
+      ((p.visible = l), p.position.set((T ? 1 : -1) * (e.d / 2), ce, re));
+    }),
+      (u.visible = !l),
+      u.position.set(0, ce + 0.004, re),
+      n.forEach((p, T) => {
+        p.visible = !l;
+        const S = (ne - e.slit) / 2;
+        ((p.scale.x = S),
+          p.position.set((T ? 1 : -1) * (e.slit / 2 + S / 2), ce + 0.01, We));
+      }),
+      L(),
+      (k = 0));
+  }
+  return (
+    g(),
+    {
+      update(l, p, T) {
+        (T && L(), (k += l));
+        const S = a.uniforms;
+        ((S.uT.value = k),
+          (S.uK.value = (2 * Math.PI * e.fr) / be),
+          (S.uW.value = 2 * Math.PI * e.fr),
+          (S.uMode.value = e.rmode === "two" ? 0 : 1),
+          (S.uD.value = e.d),
+          (S.uSlit.value = e.slit),
+          S.uCam.value.copy(t.camera.position));
+        const j = Math.sin(2 * Math.PI * e.fr * k) * 0.002;
+        (c.forEach((h) => (h.position.y = ce + j)),
+          (u.position.y = ce + 0.004 + j));
+        const f = be / e.fr;
+        e.rmode === "two"
+          ? (t.tag("s1", new C(-e.d / 2, ce + 0.15, re), "S₁", "gold"),
+            t.tag("s2", new C(e.d / 2, ce + 0.15, re), "S₂", "gold"))
+          : t.tag(
+              "slit",
+              new C(0, ce + 0.05, We),
+              translate("缝宽 / 波长 = {0}", [b(e.slit / f, 2)]),
+              e.slit < f * 1.5 ? "ok" : "dim",
+            );
+      },
+      onParam(l) {
+        (l === "rmode" || l === "d" || l === "slit") && g();
+      },
+      readouts() {
+        const l = be / e.fr,
+          p = [
+            [translate("水波波速"), `${b(be * 100, 0)} cm/s`],
+            [translate("频率 f"), `${b(e.fr, 1)} Hz`],
+            [translate("波长 λ"), `${b(l * 100, 2)} cm`],
+          ];
+        return (
+          e.rmode === "two"
+            ? (p.push([translate("波源间距 d"), `${b(e.d * 100, 1)} cm`]),
+              p.push([
+                translate("加强线条数"),
+                String(2 * Math.floor(e.d / l - 1e-9) + 1),
+              ]))
+            : p.push([translate("缝宽 / 波长"), b(e.slit / l, 2)]),
+          p
+        );
+      },
+      hud: () => [
+        ["f", b(e.fr, 1), "Hz"],
+        ["λ", b((be / e.fr) * 100, 2), "cm"],
+        e.rmode === "two"
+          ? ["d", b(e.d * 100, 1), "cm"]
+          : ["a", b(e.slit * 100, 1), "cm"],
+      ],
+      dock() {
+        const l = be / e.fr;
+        if (e.rmode === "two") {
+          const p = [];
+          for (let T = 0; T * l < e.d; T++) p.push(T);
+          return {
+            html: `<div class="gview"><div class="kv2"><span>λ</span><b>${b(l * 100, 2)} cm</b><span>d</span><b>${b(e.d * 100, 1)} cm</b><span>d / λ</span><b class="hi">${b(e.d / l, 2)}</b><span>${translate("加强线")}</span><b>Δr = 0, ±λ … ±${p[p.length - 1]}λ</b></div><p class="tnote">${translate("两波源连线上的加强线条数由 d/λ 决定：频率越高（波长越短）或两波源越远，加强线越密。黄色实线为加强线，蓝色虚线为减弱线。")}</p></div>`,
+          };
+        }
+        return {
+          html: `<div class="gview"><div class="kv2"><span>${translate("缝宽 a")}</span><b>${b(e.slit * 100, 1)} cm</b><span>λ</span><b>${b(l * 100, 2)} cm</b><span>a / λ</span><b class="hi">${b(e.slit / l, 2)}</b><span>${translate("衍射现象")}</span><b>${e.slit < l * 1.5 ? translate("明显") : e.slit < l * 4 ? translate("较明显") : translate("不明显")}</b></div><p class="tnote">${translate("缝宽比波长小或与波长差不多时，水波绕过挡板向各个方向传播；缝宽远大于波长时，水波几乎沿直线通过。")}</p></div>`,
+        };
+      },
+    }
+  );
+}
+const Ve = 0.16,
+  Ms = 2.6,
+  ct = -0.72,
+  xs = 0.72,
+  Fe = 0.012,
+  Ge = 340;
+function ks() {
+  const t = document.createElement("canvas");
+  ((t.width = 1024), (t.height = 600));
+  const e = t.getContext("2d");
+  ((e.fillStyle = "#0e1418"),
+    e.fillRect(0, 0, 1024, 600),
+    (e.strokeStyle = "rgba(94,224,184,.07)"));
+  for (let o = 0; o <= 1024; o += 32)
+    (e.beginPath(), e.moveTo(o, 0), e.lineTo(o, 600), e.stroke());
+  for (let o = 0; o <= 600; o += 32)
+    (e.beginPath(), e.moveTo(0, o), e.lineTo(1024, o), e.stroke());
+  const a = new Ae(t);
+  return (
+    (a.colorSpace = je),
+    new $(
+      new $e(1.6, 0.94),
+      new K({
+        map: a,
+        roughness: 0.9,
+      }),
+    )
+  );
+}
+function Ls() {
+  const t = U(),
+    e = new O(),
+    a = new $(
+      new D(0.03, 0.034, 0.03, 40),
+      new ie({
+        color: "#d64a3a",
+        roughness: 0.35,
+        clearcoat: 0.8,
+      }),
+    );
+  a.position.y = 0.015;
+  const o = new $(new D(0.022, 0.012, 0.01, 32, 1, !0), t.darkSteel);
+  o.position.y = 0.035;
+  const r = new $(new ft(0.012, 24), t.chrome);
+  ((r.rotation.x = -Math.PI / 2), (r.position.y = 0.032));
+  const c = new $(
+    new ge(0.005, 12, 8),
+    new Me({
+      color: "#ffd25a",
+      toneMapped: !1,
+    }),
+  );
+  return (c.position.set(0.024, 0.032, 0), e.add(a, o, r, c), Q(e));
+}
+function Oe(t) {
+  const e = U(),
+    a = new O(),
+    o = new $(new D(0.004, 0.004, 0.08, 12), e.chrome);
+  o.position.y = 0.04;
+  const r = new $(
+    new ge(0.014, 24, 16),
+    new K({
+      color: t,
+      metalness: 0.6,
+      roughness: 0.35,
+    }),
+  );
+  r.position.y = 0.09;
+  const c = new $(new G(0.04, 0.008, 0.04, 2, 0.002), e.darkSteel);
+  return ((c.position.y = 0.004), a.add(o, r, c), Q(a));
+}
+function $s(t) {
+  const e = t.params,
+    a = t.add(ks());
+  ((a.rotation.x = -Math.PI / 2), (a.position.y = 0.001));
+  const o = t.add(Ls()),
+    r = {
+      front: {
+        p: [0.6, 0],
+        obj: t.add(Oe("#5ee0b8")),
+      },
+      back: {
+        p: [-0.6, 0],
+        obj: t.add(Oe("#6cc8ff")),
+      },
+      side: {
+        p: [0, 0.34],
+        obj: t.add(Oe("#ffd25a")),
+      },
+    };
+  for (const j in r) r[j].obj.position.set(r[j].p[0], 0, r[j].p[1]);
+  const c = new xe().setFromPoints(
+      Array.from(
+        {
+          length: 129,
+        },
+        (j, f) =>
+          new C(
+            Math.cos((f / 128) * Math.PI * 2),
+            0,
+            Math.sin((f / 128) * Math.PI * 2),
+          ),
+      ),
+    ),
+    u = [],
+    n = t.add(new O()),
+    x = t.add(
+      new Be(
+        new xe(),
+        new Ee({
+          color: "#ff8a5a",
+          toneMapped: !1,
+        }),
+      ),
+    );
+  let d = 0,
+    k = ct,
+    M = -1,
+    L = [];
+  const g = [];
+  function l() {
+    ((k = ct), (L = []), (d = 0), (M = -1));
+  }
+  const p = () => e.vs * Ve;
+  function T(j) {
+    if (!u[j]) {
+      const f = new ht(
+        c,
+        new Ee({
+          color: "#8fe8d0",
+          transparent: !0,
+          opacity: 0.8,
+          toneMapped: !1,
+        }),
+      );
+      (n.add(f), (u[j] = f));
+    }
+    return u[j];
+  }
+  const S = (j) => Jt(e.f0, Ge, [k, 0], [e.vs * Ge, 0], r[j].p);
+  return {
+    update(j) {
+      ((d += j), (k += p() * j), k > xs + 0.05 && l());
+      const f = Math.floor(d * Ms);
+      f > M &&
+        ((M = f),
+        L.push({
+          x: k,
+          t: d,
+        }),
+        L.length > 90 && L.shift());
+      let h = 0;
+      for (const B of L) {
+        const N = Ve * (d - B.t);
+        if (N > 0.8) continue;
+        const I = T(h++);
+        ((I.visible = !0),
+          I.position.set(B.x, Fe, 0),
+          I.scale.setScalar(Math.max(5e-4, N)),
+          (I.material.opacity = Math.max(0, 0.85 - N * 0.7)));
+      }
+      for (; h < u.length; h++) u[h].visible = !1;
+      o.position.set(k, 0, 0);
+      const m = Xt(Ve, p());
+      if (((x.visible = !!m), m)) {
+        const N = new C(k, Fe + 0.002, 0);
+        x.geometry.setFromPoints([
+          N,
+          new C(k - Math.cos(m) * 0.9, Fe + 0.002, Math.sin(m) * 0.9),
+          N,
+          new C(k - Math.cos(m) * 0.9, Fe + 0.002, -Math.sin(m) * 0.9),
+        ]);
+      }
+      const v = e.listen,
+        A = Math.hypot(r[v].p[0] - k, r[v].p[1]),
+        F = S(v),
+        z = F > 0 && isFinite(F) && F < 2e4;
+      (t.tone.set({
+        f: z ? F : e.f0,
+        A: z ? Math.min(1, 0.12 / (A + 0.08)) : 0,
+        timbre: "flute",
+      }),
+        j > 0 &&
+          (g.push([d, S("front"), S("back")]), g.length > 900 && g.shift()));
+      for (const B of ["front", "back", "side"]) {
+        const N = r[B],
+          I = S(B);
+        t.tag(
+          B,
+          new C(N.p[0], 0.13, N.p[1]),
+          `${
+            {
+              front: translate("前方"),
+              back: translate("后方"),
+              side: translate("侧面"),
+            }[B]
+          } ${I > 0 && isFinite(I) ? b(I, 0) + " Hz" : "—"}`,
+          B === v ? "ok" : "dim",
+        );
+      }
+      (t.tag("src", new C(k, 0.07, 0), `${b(e.f0, 0)} Hz`, "gold"),
+        m &&
+          t.tag(
+            "mach",
+            new C(k - 0.25, 0.03, 0.2),
+            translate("马赫锥"),
+            "warn",
+          ));
+    },
+    onParam(j) {
+      j === "vs" && l();
+    },
+    actions: () => [
+      {
+        label: translate("重新开始"),
+        run: l,
+      },
+    ],
+    readouts: () => [
+      [translate("声源频率 f"), `${b(e.f0, 0)} Hz`],
+      [translate("声源速度"), `${b(e.vs, 2)} v = ${b(e.vs * Ge, 0)} m/s`],
+      [translate("前方听到"), `${b(S("front"), 0)} Hz`],
+      [translate("后方听到"), `${b(S("back"), 0)} Hz`],
+      [translate("侧面听到"), `${b(S("side"), 0)} Hz`],
+    ],
+    hud: () => [
+      ["f", b(e.f0, 0), "Hz"],
+      [translate("前方"), b(S("front"), 0), "Hz"],
+      [translate("后方"), b(S("back"), 0), "Hz"],
+    ],
+    dock(j) {
+      if (j === "doppler") {
+        const f = g.length ? g[g.length - 1][0] : 0;
+        return {
+          chart: {
+            series: [
+              {
+                pts: g
+                  .map((h) => [h[0], h[1]])
+                  .filter((h) => isFinite(h[1]) && h[1] > 0),
+                color: "#5ee0b8",
+                name: translate("前方"),
+              },
+              {
+                pts: g.map((h) => [h[0], h[2]]),
+                color: "#6cc8ff",
+                name: translate("后方"),
+              },
+              {
+                pts: [
+                  [Math.max(0, f - 10), e.f0],
+                  [Math.max(10, f), e.f0],
+                ],
+                color: "#5d5b57",
+                dashed: !0,
+                name: "f",
+                noHover: !0,
+              },
+            ],
+            x: [Math.max(0, f - 10), Math.max(10, f)],
+            y: [0, Math.min(4e3, Math.max(e.f0 * 2.2, 100))],
+            xLabel: "t / s",
+            yLabel: translate("听到的频率 / Hz"),
+            xName: "t",
+          },
+        };
+      }
+      return {
+        html: `<div class="gview"><div class="kv2"><span>${translate("靠近：f′ = f·v/(v − vₛ)")}</span><b>${e.vs < 1 ? b((e.f0 * 1) / (1 - e.vs), 0) + " Hz" : "—"}</b><span>${translate("远离：f′ = f·v/(v + vₛ)")}</span><b>${b(e.f0 / (1 + e.vs), 0)} Hz</b><span>${translate("马赫角 sinμ = v/vₛ")}</span><b class="hi">${e.vs > 1 ? b((Math.asin(1 / e.vs) * 180) / Math.PI, 1) + "°" : "—"}</b></div><p class="tnote">${translate("台面上的波面按缩小的声速绘制（示意）；频率按真实声速 340 m/s 计算。救护车驶近时音调变高、驶离时变低，测速雷达、彩超也利用了多普勒效应。")}</p></div>`,
+      };
+    },
+    dispose() {
+      t.tone.stop();
+    },
+  };
+}
+const Ue = 340,
+  se = 0.92,
+  Ce = 0.04,
+  ke = 0.026,
+  Ze = 0.01;
+function Ss() {
+  const t = U(),
+    e = new O(),
+    a = new $(new D(0.004, 0.004, 0.07, 16), t.steel);
+  a.position.y = 0.035;
+  const o = new $(new Se(0.01, 0.0035, 10, 24, Math.PI), t.chrome);
+  ((o.rotation.z = Math.PI), (o.position.y = 0.07));
+  const r = [-1, 1].map((c) => {
+    const u = new $(new ye(0.007, 0.11, 0.007), t.chrome);
+    return (u.position.set(c * 0.01, 0.07 + 0.055, 0), e.add(u), u);
+  });
+  return (e.add(a, o), (e.prongs = r), Q(e));
+}
+function Ts() {
+  const t = U(),
+    e = new O(),
+    a = new $(
+      new G(0.08, 0.06, 0.08, 3, 0.008),
+      new K({
+        color: "#1d2025",
+        roughness: 0.5,
+      }),
+    ),
+    o = new $(new D(0.028, 0.012, 0.012, 32, 1, !0), t.darkSteel);
+  return ((o.position.y = -0.033), e.add(a, o), (e.cone = o), Q(e));
+}
+function Ps() {
+  const t = U(),
+    e = new O(),
+    a = new $(
+      new G(0.3, 0.17, 0.2, 3, 0.012),
+      new ie({
+        color: "#d9d6cf",
+        roughness: 0.45,
+        clearcoat: 0.4,
+      }),
+    );
+  a.position.y = 0.085;
+  const o = document.createElement("canvas");
+  ((o.width = 640), (o.height = 400));
+  const r = new Ae(o);
+  r.colorSpace = je;
+  const c = new $(
+    new $e(0.17, 0.106),
+    new Me({
+      map: r,
+      toneMapped: !1,
+    }),
+  );
+  c.position.set(-0.04, 0.09, 0.1005);
+  const u = [0, 1, 2, 3].map((n) => {
+    const x = new $(new D(0.009, 0.009, 0.01, 20), n === 3 ? t.red : t.plastic);
+    return (
+      (x.rotation.x = Math.PI / 2),
+      x.position.set(
+        0.085 + (n % 2) * 0.03,
+        0.13 - Math.floor(n / 2) * 0.05,
+        0.105,
+      ),
+      x
+    );
+  });
+  return (e.add(a, c, ...u), (e.canvas = o), (e.texture = r), Q(e));
+}
+function Es(t) {
+  const e = t.params,
+    a = U(),
+    o = new $(
+      new D(ke, ke, se - Ce, 48, 1, !0),
+      new ie({
+        color: "#eef7ff",
+        roughness: 0.04,
+        transmission: 0.92,
+        thickness: 0.003,
+        transparent: !0,
+        opacity: 0.4,
+        side: ut,
+        depthWrite: !1,
+      }),
+    );
+  o.position.set(0, (se + Ce) / 2, 0);
+  const r = new ie({
+      color: "#3d9bd6",
+      roughness: 0.1,
+      transmission: 0.5,
+      transparent: !0,
+      opacity: 0.75,
+    }),
+    c = new $(new D(ke - 0.002, ke - 0.002, 1, 40), r),
+    u = new $(
+      new ft(ke - 0.002, 40),
+      new ie({
+        color: "#8fd0ff",
+        roughness: 0.05,
+        transparent: !0,
+        opacity: 0.8,
+      }),
+    );
+  u.rotation.x = -Math.PI / 2;
+  const n = new $(new G(0.14, 0.03, 0.14, 2, 0.004), a.darkSteel);
+  n.position.y = 0.015;
+  const x = new $(new Se(ke, 0.002, 8, 40), a.chrome);
+  ((x.rotation.x = Math.PI / 2), (x.position.y = se));
+  const d = t.add(new O());
+  (d.add(o, c, u, n, x), t.add(gt(0.88)).position.set(0.05, se, 0));
+  const M = t.add(Ss());
+  M.position.set(0, se + 0.03, 0);
+  const L = t.add(Ts());
+  L.position.set(0, se + 0.08, 0);
+  const g = new $(new Ct(0.008, 0.03, 6, 16), a.darkSteel);
+  ((g.rotation.z = Math.PI / 2), g.position.set(-0.06, se + 0.01, 0), t.add(g));
+  const l = t.add(Ps());
+  (l.position.set(-0.36, 0, 0.05), (l.rotation.y = 0.35));
+  const p = new $(
+    new lt(
+      new dt([
+        new C(-0.075, se + 0.01, 0),
+        new C(-0.14, se - 0.2, 0.02),
+        new C(-0.24, 0.2, 0.08),
+        new C(-0.3, 0.06, 0.1),
+      ]),
+      40,
+      0.002,
+      6,
+    ),
+    a.wire,
+  );
+  t.add(p);
+  let T = 0;
+  const S = () => se - e.water;
+  t.draggable(d, {
+    plane: Xe,
+    pos: () => [0, 0],
+    move(m, v) {
+      t.setParam("water", Le(Math.round((se - v.y) * 500) / 500, 0.05, 0.85));
+    },
+  });
+  const j = () => Yt(e.water, e.fs, Ue),
+    f = () => e.loud * (0.22 + 0.78 * j());
+  function h() {
+    const m = l.canvas,
+      v = m.getContext("2d"),
+      A = m.width,
+      F = m.height;
+    ((v.fillStyle = "#06120c"),
+      v.fillRect(0, 0, A, F),
+      (v.strokeStyle = "rgba(94,224,184,.16)"),
+      (v.lineWidth = 1));
+    for (let z = 1; z < 10; z++)
+      (v.beginPath(),
+        v.moveTo((z * A) / 10, 0),
+        v.lineTo((z * A) / 10, F),
+        v.stroke());
+    for (let z = 1; z < 8; z++)
+      (v.beginPath(),
+        v.moveTo(0, (z * F) / 8),
+        v.lineTo(A, (z * F) / 8),
+        v.stroke());
+    ((v.strokeStyle = "#7dffcf"),
+      (v.lineWidth = 3),
+      (v.shadowColor = "#5ee0b8"),
+      (v.shadowBlur = 10),
+      v.beginPath());
+    for (let z = 0; z <= A; z++) {
+      const B = (z / A) * Ze,
+        N = F / 2 - st(e.instrument, e.fs, f(), B) * F * 0.42;
+      z ? v.lineTo(z, N) : v.moveTo(z, N);
+    }
+    (v.stroke(),
+      (v.shadowBlur = 0),
+      (v.fillStyle = "rgba(125,255,207,.7)"),
+      (v.font = "600 18px 'JetBrains Mono', monospace"),
+      v.fillText(`1 ms/div   f = ${e.fs} Hz`, 14, 26),
+      (l.texture.needsUpdate = !0));
+  }
+  return {
+    update(m, v, A) {
+      T += m;
+      const F = S();
+      ((c.scale.y = Math.max(0.001, F - Ce - 0.03)),
+        (c.position.y = Ce + 0.03 + c.scale.y / 2),
+        (u.position.y = F),
+        (M.visible = e.instrument === "fork"),
+        (L.visible = !M.visible));
+      const z = Math.sin(T * 60) * 0.0012 * e.loud;
+      ((M.prongs[0].position.x = -0.01 - z),
+        (M.prongs[1].position.x = 0.01 + z),
+        (L.cone.position.y = -0.033 + z),
+        (A || Math.floor(v * 10) !== Math.floor((v - 0.016) * 10)) && h(),
+        t.tone.set({
+          f: e.fs,
+          A: f() * 0.9,
+          timbre: e.instrument,
+        }));
+      const B = j();
+      (t.tag(
+        "L",
+        new C(0.1, (se + F) / 2, 0),
+        `L = ${b(e.water * 100, 1)} cm`,
+        "gold",
+      ),
+        B > 0.85 &&
+          t.tag(
+            "res",
+            new C(0, se + 0.2, 0),
+            translate("共鸣！声音明显变响"),
+            "ok",
+          ));
+      for (const [N, I] of Ke(Ue / e.fss, 3).entries())
+        I < 0.86 &&
+          t.tag(`r${N}`, new C(-0.06, se - I, 0), `L${"₁₂₃"[N]}`, "dim");
+    },
+    onParam() {},
+    readouts() {
+      const m = Ue / e.fs,
+        [v, A] = Ke(m, 2);
+      return [
+        [translate("频率 f"), `${e.fs} Hz`],
+        [translate("波长 λ = v / f"), `${b(m * 100, 1)} cm`],
+        [translate("第一次共鸣 L₁ = λ/4"), `${b(v * 100, 1)} cm`],
+        [translate("第二次共鸣 L₂ = 3λ/4"), `${b(A * 100, 1)} cm`],
+        [translate("空气柱长度 L"), `${b(e.water * 100, 1)} cm`],
+        [translate("共鸣程度"), `${b(j() * 100, 0)}%`],
+      ];
+    },
+    hud: () => [
+      ["f", String(e.fs), "Hz"],
+      ["L", b(e.water * 100, 1), "cm"],
+      [translate("响度"), b(f() * 100, 0), "%"],
+    ],
+    inset: () => ({
+      canvas: l.canvas,
+      label: translate("示波器"),
+    }),
+    dock(m) {
+      if (m === "scope") {
+        const F = [];
+        for (let z = 0; z <= 600; z++) {
+          const B = (z / 600) * Ze;
+          F.push([B * 1e3, st(e.instrument, e.fs, f(), B)]);
+        }
+        return {
+          chart: {
+            series: [
+              {
+                pts: F,
+                color: "#7dffcf",
+                name: translate("波形"),
+              },
+            ],
+            x: [0, Ze * 1e3],
+            y: [-1, 1],
+            xLabel: "t / ms",
+            yLabel: translate("相对振幅"),
+            xName: "t",
+          },
+        };
+      }
+      return {
+        chart: {
+          series: Je[e.instrument].map((F, z) => ({
+            pts: [
+              [(z + 1) * e.fss, 0],
+              [(z + 1) * e.fss, F],
+            ],
+            color: z ? "#ffd25a" : "#5ee0b8",
+            width: 6,
+            noHover: !0,
+          })),
+          x: [0, e.fs * 10],
+          y: [0, 1.1],
+          xLabel: translate("频率 / Hz"),
+          yLabel: translate("各次谐波的相对振幅"),
+          xName: "f",
+        },
+      };
+    },
+  };
+}
+const As = {
+    spring: as,
+    pendulum: cs,
+    rope: ms,
+    ripple: ys,
+    doppler: $s,
+    sound: Es,
+  },
+  qe = [1, 0.25, 0.1],
+  js = {
+    xt: "x-t",
+    vt: "v-t",
+    energy: translate("能量"),
+    record: translate("数据表"),
+    fitT: "T²-L",
+    fitM: "T-√m",
+    resonance: "A-f",
+    wave: translate("波形"),
+    history: translate("质点振动图"),
+    harmonics: translate("谐波"),
+    info: translate("说明"),
+    scope: translate("示波器"),
+    spectrum: translate("频谱"),
+    doppler: translate("频率"),
+  };
+function zs() {
+  const t = (i) => document.getElementById(i),
+    e = Nt(t("c3")),
+    { scene: a, camera: o, controls: r } = e;
+  ((e.key.intensity = 26), (a.fog.near = 4), (a.fog.far = 14));
+  const c = Ot(a),
+    u = Qt(),
+    n = {
+      li: 0,
+      lesson: null,
+      params: {},
+      scene: null,
+      objects: [],
+      handlers: new Map(),
+      records: {},
+      selected: null,
+      paused: !1,
+      speed: 0,
+    },
+    x = t("labels"),
+    d = new Map(),
+    k = (i) => {
+      const w = new $(
+        new Se(i, 0.0016, 8, 64),
+        new Me({
+          color: "#ffc857",
+          transparent: !0,
+          opacity: 0.3,
+          toneMapped: !1,
+          depthWrite: !1,
+        }),
+      );
+      w.rotation.x = Math.PI / 2;
+      const y = new $(
+        new ge(0.0055, 16, 12),
+        new Me({
+          color: "#ffc857",
+          toneMapped: !1,
+        }),
+      );
+      return (y.position.set(i, 0, 0), w.add(y), (w.knob = y), w);
+    },
+    M = {
+      THREE: qt,
+      stage: e,
+      scene: a,
+      camera: o,
+      lab: c,
+      tone: u,
+      TABLE_H: Vt,
+      get params() {
+        return n.params;
+      },
+      get lesson() {
+        return n.lesson;
+      },
+      add(i) {
+        return (a.add(i), n.objects.push(i), i);
+      },
+      remove(i) {
+        (a.remove(i), (n.objects = n.objects.filter((w) => w !== i)), ze());
+      },
+      draggable(i, w) {
+        return (
+          (i.userData.drag = "el"),
+          (i.userData.hid = i.uuid),
+          n.handlers.set(i.uuid, w),
+          ze(),
+          i
+        );
+      },
+      rotator(
+        i,
+        { radius: w = 0.06, height: y = 0.055, get: P, set: H, end: oe },
+      ) {
+        const J = k(w);
+        return (
+          (J.position.y = y),
+          i.add(J),
+          (J.userData.drag = "rot"),
+          (J.userData.hid = J.uuid),
+          n.handlers.set(J.uuid, {
+            rotate: !0,
+            obj: i,
+            get: P,
+            set: H,
+            end: oe,
+          }),
+          ze(),
+          J
+        );
+      },
+      tag(i, w, y, P = "") {
+        let H = d.get(i);
+        (H ||
+          ((H = document.createElement("div")),
+          (H.className = "otag"),
+          x.appendChild(H),
+          d.set(i, H)),
+          (H.dataset.seen = "1"));
+        const oe = e.project(w);
+        if (oe.behind) {
+          H.style.display = "none";
+          return;
+        }
+        ((H.style.display = ""),
+          H.textContent !== y && (H.textContent = y),
+          H.className !== `otag ${P}` && (H.className = `otag ${P}`),
+          (H.style.transform = `translate(${oe.x.toFixed(1)}px, ${oe.y.toFixed(1)}px)`));
+      },
+      setParam(i, w, y = !1) {
+        ((n.params[i] = w),
+          l(i, w),
+          y && n.scene.onParam?.(i, w),
+          (n.dirty = !0));
+      },
+      changed() {
+        n.dirty = !0;
+      },
+      flash: Z,
+      get records() {
+        return (n.records[n.lesson.id] ||= []);
+      },
+      refreshDock: () => W(!0),
+      get speed() {
+        return qe[n.speed];
+      },
+      get paused() {
+        return n.paused;
+      },
+    };
+  function L() {
+    n.scene?.dispose?.();
+    for (const i of n.objects) a.remove(i);
+    ((n.objects = []), n.handlers.clear());
+    for (const i of d.values()) i.remove();
+    (d.clear(), u.stop());
+  }
+  function g(i) {
+    ((i = (i + ve.length) % ve.length),
+      L(),
+      (n.li = i),
+      (n.lesson = ve[i]),
+      (n.params = {
+        ...n.lesson.params,
+      }),
+      (n.selected = null),
+      T(),
+      ee(),
+      (n.scene = As[n.lesson.scene](M)),
+      S(),
+      (n.dirty = !0),
+      ze(),
+      e.fly(...n.lesson.cam, 1.2));
+    try {
+      history.replaceState(null, "", `#${n.lesson.id}`);
+    } catch {}
+    W(!0);
+  }
+  let l = () => {};
+  function p() {
+    const i = t("nav");
+    ((i.innerHTML = `<div class="navh">${translate("实验课题")}</div>`),
+      ve.forEach((y, P) => {
+        P === 4 &&
+          i.insertAdjacentHTML(
+            "beforeend",
+            `<div class="navh sub">${translate("机械波")}</div>`,
+          );
+        const H = document.createElement("button");
+        ((H.className = "ni"),
+          (H.innerHTML = `<em>${String(P + 1).padStart(2, "0")}</em><b></b><small></small>`),
+          (H.querySelector("b").textContent = y.title),
+          (H.querySelector("small").textContent = y.sub),
+          H.addEventListener("click", () => g(P)),
+          i.appendChild(H));
+      }));
+    const w = document.createElement("div");
+    ((w.className = "navf"),
+      (w.innerHTML = `<kbd>${translate("空格")}</kbd> ${translate("暂停 / 继续")}<br><kbd>S</kbd> ${translate("慢动作")}<br><kbd>←</kbd><kbd>→</kbd> ${translate("切换课题")}`),
+      i.appendChild(w),
+      (t("prog").innerHTML = ve.map(() => "<i></i>").join("")));
+  }
+  function T() {
+    const i = n.lesson;
+    (document.querySelectorAll("#nav .ni").forEach((P, H) => {
+      (P.classList.toggle("on", H === n.li),
+        H === n.li && P.classList.add("seen"));
+    }),
+      document.querySelectorAll("#prog i").forEach((P, H) => {
+        (P.classList.toggle("cur", H === n.li),
+          P.classList.toggle("on", H < n.li));
+      }));
+    const w = t("chapter");
+    (w.classList.remove("in"),
+      w.offsetWidth,
+      w.classList.add("in"),
+      (w.querySelector(".n").textContent =
+        `LESSON ${String(n.li + 1).padStart(2, "0")}`),
+      (w.querySelector("h1").textContent = i.title),
+      (w.querySelector("p").textContent = i.sub),
+      (t("lesson").innerHTML =
+        `<div class="lh"><em>${String(n.li + 1).padStart(2, "0")}</em><div><h2></h2><small></small></div></div><div class="body"></div><ol class="steps"></ol>`),
+      (t("lesson").querySelector("h2").textContent = i.title),
+      (t("lesson").querySelector("small").textContent = i.sub),
+      (t("lesson").querySelector(".body").innerHTML = i.body),
+      (t("lesson").querySelector(".steps").innerHTML = i.steps
+        .map((P) => `<li>${P}</li>`)
+        .join("")),
+      (l = Kt(t("controls"), i.controls, n.params, (P, H) => {
+        ((n.params[P] = H), n.scene?.onParam?.(P, H), (n.dirty = !0), W(!0));
+      })),
+      (t("ctrlH").hidden = !i.controls.length),
+      S());
+    const y = t("tgs");
+    ((y.innerHTML = `<button class="tg" data-k="pause"><i></i>${translate("暂停")}</button><button class="tg" data-k="sound"><i></i>${translate("声音")}</button><div class="speed" id="speed">${qe.map((P, H) => `<button data-i="${H}">${P === 1 ? "1×" : P === 0.25 ? "¼×" : "⅒×"}</button>`).join("")}</div>`),
+      y
+        .querySelectorAll(".tg")
+        .forEach((P) => P.addEventListener("click", () => j(P.dataset.k))),
+      y.querySelectorAll("#speed button").forEach((P) =>
+        P.addEventListener("click", () => {
+          ((n.speed = +P.dataset.i), f());
+        }),
+      ),
+      f());
+  }
+  function S() {
+    const i = t("acts"),
+      w = n.scene?.actions?.() || [],
+      y = n.lesson.record;
+    ((i.innerHTML = `${w.map((P, H) => `<button class="${H === 0 && !y ? "go" : "ghost wide"}" data-a="${H}">${P.label}</button>`).join("")}${y ? `<button class="go" id="aRec">● ${translate("记录数据")}</button>` : ""}`),
+      (i.hidden = !w.length && !y),
+      i.querySelectorAll("[data-a]").forEach((P) =>
+        P.addEventListener("click", () => {
+          (w[+P.dataset.a].run(), (n.dirty = !0), W(!0));
+        }),
+      ),
+      t("aRec")?.addEventListener("click", () => {
+        n.scene?.record?.() !== !1 && W(!0);
+      }));
+  }
+  M.renderActs = () => S();
+  function j(i) {
+    (i === "pause"
+      ? (n.paused = !n.paused)
+      : (u.unlock(), u.setMuted(!u.muted)),
+      f());
+  }
+  function f() {
+    (document
+      .querySelectorAll("#tgs .tg")
+      .forEach((i) =>
+        i.classList.toggle("on", i.dataset.k === "pause" ? n.paused : !u.muted),
+      ),
+      document
+        .querySelectorAll("#speed button")
+        .forEach((i) => i.classList.toggle("on", +i.dataset.i === n.speed)));
+  }
+  let h = 0;
+  function m(i) {
+    if (i - h < 80) return;
+    h = i;
+    const w = n.scene?.readouts?.() || [],
+      y = t("readouts");
+    ((t("roH").hidden = !w.length),
+      (y.hidden = !w.length),
+      y.childElementCount !== w.length * 2 &&
+        (y.innerHTML = w.map(() => "<span></span><b></b>").join("")));
+    const P = (J, pe) => {
+      J.textContent !== pe && (J.textContent = pe);
+    };
+    w.forEach(([J, pe], we) => {
+      (P(y.children[we * 2], J), P(y.children[we * 2 + 1], pe));
+    });
+    const H = n.scene?.hud?.() || [],
+      oe = t("hud");
+    ((oe.hidden = !H.length),
+      oe.childElementCount !== H.length &&
+        (oe.innerHTML = H.map(
+          () => '<div class="g"><span></span><b></b><small></small></div>',
+        ).join("")),
+      H.forEach(([J, pe, we], Lt) => {
+        const Ne = oe.children[Lt];
+        (P(Ne.children[0], J),
+          P(Ne.children[1], pe),
+          P(Ne.children[2], we || ""));
+      }));
+  }
+  const v = t("inset"),
+    A = v.querySelector("canvas"),
+    F = A.getContext("2d");
+  let z = 0;
+  function B(i) {
+    const w = n.scene?.inset?.();
+    if (((v.hidden = !w), !w || i - z < 60)) return;
+    z = i;
+    const y = w.canvas,
+      P = 300,
+      H = Math.round((300 * y.height) / y.width);
+    (A.width !== P || A.height !== H) && ((A.width = P), (A.height = H));
+    const oe = w.crop || 1,
+      J = y.width * oe,
+      pe = y.height * Math.max(oe, 0.5);
+    (F.drawImage(y, (y.width - J) / 2, (y.height - pe) / 2, J, pe, 0, 0, P, H),
+      v.classList.toggle("round", !!w.round));
+    const we = v.querySelector("span");
+    we.textContent !== w.label && (we.textContent = w.label);
+  }
+  let N = null,
+    I = null,
+    q = null,
+    R = 0,
+    V = null;
+  function ee() {
+    const i = n.lesson;
+    N = i.tabs[0];
+    const w = t("tabs");
+    ((w.innerHTML = i.tabs
+      .map(
+        (y) =>
+          `<button data-t="${y}" class="${y === N ? "on" : ""}">${js[y]}</button>`,
+      )
+      .join("")),
+      w.querySelectorAll("button").forEach((y) =>
+        y.addEventListener("click", () => {
+          ((N = y.dataset.t),
+            w
+              .querySelectorAll("button")
+              .forEach((P) => P.classList.toggle("on", P === y)),
+            (V = null),
+            W(!0));
+        }),
+      ),
+      (V = null));
+  }
+  function W(i) {
+    const w = performance.now();
+    if (!i && w - R < 120) return;
+    R = w;
+    const y = t("dockBody"),
+      P = n.scene?.dock?.(N);
+    if (!P) {
+      ((y.innerHTML = ""), (V = null));
+      return;
+    }
+    if (P.chart) {
+      if (
+        ((V !== "chart" || !!P.side != !!y.querySelector(".side")) &&
+          ((y.innerHTML = `<div class="dv${P.side ? " split" : ""}"><div class="chost"></div>${P.side ? '<div class="side"></div>' : ""}</div>`),
+          (q = y.querySelector(".chost")),
+          (I = Dt(q)),
+          (V = "chart")),
+        I.draw(P.chart),
+        P.side)
+      ) {
+        const H = y.querySelector(".side");
+        H.innerHTML !== P.side && (H.innerHTML = P.side);
+      }
+    } else
+      ((V = "html"),
+        y.dataset.html !== P.html &&
+          ((y.innerHTML = P.html), (y.dataset.html = P.html), P.bind?.(y)));
+  }
+  function te() {
+    const i = n.scene?.csv?.(N);
+    if (!i?.length) {
+      Z(translate("当前没有可导出的数据"));
+      return;
+    }
+    const w =
+        "\uFEFF" +
+        i.map((P) => P.join(",")).join(`
+`),
+      y = document.createElement("a");
+    ((y.href = URL.createObjectURL(
+      new Blob([w], {
+        type: "text/csv",
+      }),
+    )),
+      (y.download = `wavelab-${n.lesson.id}.csv`),
+      y.click(),
+      setTimeout(() => URL.revokeObjectURL(y.href), 1e3));
+  }
+  let X = 0;
+  function Z(i) {
+    const w = t("toast");
+    ((w.textContent = i),
+      w.classList.add("show"),
+      clearTimeout(X),
+      (X = setTimeout(() => w.classList.remove("show"), 1800)));
+  }
+  const kt = Wt(e, {
+    planeFor: (i) =>
+      n.handlers.get(i.obj.userData.hid)?.plane || new C(0, 1, 0),
+    start(i) {
+      const w = n.handlers.get(i.obj.userData.hid);
+      if (((i.h = w), w?.rotate)) {
+        const y = new C();
+        (w.obj.getWorldPosition(y),
+          (i.center = y),
+          (i.a0 = w.get()),
+          (i.start = Math.atan2(i.point.z - y.z, i.point.x - y.x)));
+        return;
+      }
+      if (w?.pos) {
+        const y = w.pos();
+        i.off = [y[0] - i.point.x, y[1] - i.point.z];
+      }
+      n.selected = w || null;
+    },
+    move(i, w) {
+      const y = i.h;
+      if (y) {
+        if (y.rotate) {
+          const P = Math.atan2(w.z - i.center.z, w.x - i.center.x);
+          y.set(i.a0 + (P - i.start));
+        } else if (y.move) {
+          const P = i.off || [0, 0];
+          y.move([w.x + P[0], w.z + P[1]], w, i);
+        }
+        n.dirty = !0;
+      }
+    },
+    end(i) {
+      (i.h?.end?.(), (n.dirty = !0), W(!0));
+    },
+    click(i) {
+      ((n.selected = i.h || null), i.h?.click?.(), (n.dirty = !0));
+    },
+    hover(i) {
+      for (const w of n.objects)
+        w.traverse?.((y) => {
+          y.userData.drag === "rot" &&
+            (y.material.opacity = i && i.obj === y ? 0.95 : 0.3);
+        });
+    },
+  });
+  function ze() {
+    const i = [];
+    for (const w of n.objects)
+      w.traverse((y) => {
+        y.userData.drag && i.push(y);
+      });
+    kt.setTargets(i);
+  }
+  (t("bPrev").addEventListener("click", () => g(n.li - 1)),
+    t("bNext").addEventListener("click", () => g(n.li + 1)),
+    t("bReset").addEventListener("click", () => e.fly(...n.lesson.cam, 0.9)),
+    t("bFull").addEventListener("click", () =>
+      document.fullscreenElement
+        ? document.exitFullscreen()
+        : document.documentElement.requestFullscreen?.(),
+    ),
+    t("bCsv").addEventListener("click", te),
+    t("bDock").addEventListener("click", () => {
+      (document.body.classList.toggle("dock-min"),
+        setTimeout(() => I?.redraw(), 320));
+    }),
+    window.addEventListener("keydown", (i) => {
+      i.target.closest?.("input, textarea") ||
+        (i.key === "ArrowRight"
+          ? g(n.li + 1)
+          : i.key === "ArrowLeft"
+            ? g(n.li - 1)
+            : i.code === "Space"
+              ? (i.preventDefault(), j("pause"))
+              : i.key === "s" || i.key === "S"
+                ? ((n.speed = (n.speed + 1) % qe.length), f())
+                : i.key === "r" || i.key === "R"
+                  ? e.fly(...n.lesson.cam, 0.9)
+                  : i.key === "f" || i.key === "F"
+                    ? t("bFull").click()
+                    : (i.key === "Delete" || i.key === "Backspace") &&
+                      n.selected?.remove &&
+                      (i.preventDefault(),
+                      n.selected.remove(),
+                      (n.selected = null),
+                      (n.dirty = !0)));
+    }),
+    window.addEventListener("hashchange", () => {
+      const i = ve.findIndex((w) => `#${w.id}` === location.hash);
+      i >= 0 && i !== n.li && g(i);
+    }),
+    new ResizeObserver(() => I?.redraw()).observe(t("dockBody")),
+    p());
+  const Ye = ve.findIndex((i) => `#${i.id}` === location.hash);
+  g(Ye >= 0 ? Ye : 0);
+  let Qe = performance.now(),
+    et = 0;
+  function tt(i) {
+    const w = Math.min(0.05, (i - Qe) / 1e3);
+    ((Qe = i), (et += w));
+    for (const H of d.values()) H.dataset.seen = "";
+    const y = n.dirty;
+    n.dirty = !1;
+    const P = n.paused ? 0 : w * qe[n.speed];
+    n.scene?.update?.(P, et, y, w);
+    for (const H of d.values()) H.dataset.seen || (H.style.display = "none");
+    (m(i), B(i), W(!1), e.render(w), requestAnimationFrame(tt));
+  }
+  (requestAnimationFrame(tt),
+    document.body.classList.add("ready"),
+    (window.__waves = {
+      S: n,
+      goLesson: g,
+      stage: e,
+      ctx: M,
+    }),
+    window.addEventListener("pointerdown", () => u.unlock(), {
+      once: !0,
+    }));
+}
+function wavesLabPage() {
+  return (
+    React.useLayoutEffect(() => {
+      ((document.title = translate("振动与波 · WaveLab")), zs());
+    }, []),
+    jsxRuntime.jsxs("div", {
+      id: "app",
+      children: [
+        jsxRuntime.jsxs("header", {
+          id: "top",
+          children: [
+            jsxRuntime.jsx("a", {
+              className: "back",
+              href: localizedUrl("/"),
+              children: "← WEDULAB",
+            }),
+            jsxRuntime.jsxs("div", {
+              className: "brand",
+              children: [
+                jsxRuntime.jsxs("svg", {
+                  viewBox: "0 0 32 32",
+                  fill: "none",
+                  "aria-hidden": "true",
+                  children: [
+                    jsxRuntime.jsx("path", {
+                      d: "M2 16c2.5-7 5-7 7.5 0s5 7 7.5 0 5-7 7.5 0 5 7 5.5 2",
+                      stroke: "#5ee0b8",
+                      strokeWidth: "1.6",
+                      strokeLinecap: "round",
+                    }),
+                    jsxRuntime.jsx("path", {
+                      d: "M2 16h28",
+                      stroke: "currentColor",
+                      strokeWidth: ".8",
+                      opacity: ".35",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "9.5",
+                      cy: "16",
+                      r: "1.6",
+                      fill: "currentColor",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "24.5",
+                      cy: "16",
+                      r: "1.6",
+                      fill: "currentColor",
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  children: [
+                    jsxRuntime.jsxs("b", {
+                      children: [
+                        "WAVE",
+                        jsxRuntime.jsx("i", {
+                          children: "LAB",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("span", {
+                      children: translate("振动与波"),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("div", {
+              className: "prog",
+              id: "prog",
+            }),
+            jsxRuntime.jsx(Tt, {}),
+            jsxRuntime.jsxs("div", {
+              className: "tbtns",
+              children: [
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bPrev",
+                  title: translate("上一个课题 (←)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M10 3L5 8l5 5",
+                    }),
+                  }),
+                }),
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bNext",
+                  title: translate("下一个课题 (→)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M6 3l5 5-5 5",
+                    }),
+                  }),
+                }),
+                jsxRuntime.jsxs("button", {
+                  className: "tb",
+                  id: "bReset",
+                  title: translate("重置视角 (R)"),
+                  children: [
+                    jsxRuntime.jsxs("svg", {
+                      viewBox: "0 0 16 16",
+                      children: [
+                        jsxRuntime.jsx("path", {
+                          d: "M2.5 8a5.5 5.5 0 1 0 1.8-4.1",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M2.5 2.5v3h3",
+                        }),
+                      ],
+                    }),
+                    translate("视角"),
+                  ],
+                }),
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bFull",
+                  title: translate("全屏 (F)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4",
+                    }),
+                  }),
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsxRuntime.jsx("nav", {
+          id: "nav",
+        }),
+        jsxRuntime.jsxs("main", {
+          id: "main",
+          children: [
+            jsxRuntime.jsxs("section", {
+              id: "stage",
+              children: [
+                jsxRuntime.jsx("canvas", {
+                  id: "c3",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "labels",
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "chapter",
+                  children: [
+                    jsxRuntime.jsx("div", {
+                      className: "n",
+                    }),
+                    jsxRuntime.jsx("h1", {}),
+                    jsxRuntime.jsx("p", {}),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "hudWrap",
+                  children: jsxRuntime.jsx("div", {
+                    id: "hud",
+                  }),
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "inset",
+                  hidden: !0,
+                  children: [
+                    jsxRuntime.jsx("span", {}),
+                    jsxRuntime.jsx("canvas", {}),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "toast",
+                }),
+              ],
+            }),
+            jsxRuntime.jsxs("section", {
+              id: "dock",
+              children: [
+                jsxRuntime.jsxs("div", {
+                  className: "dh",
+                  children: [
+                    jsxRuntime.jsx("div", {
+                      className: "tabs",
+                      id: "tabs",
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      className: "dacts",
+                      children: [
+                        jsxRuntime.jsxs("button", {
+                          id: "bCsv",
+                          title: translate("导出 CSV 数据"),
+                          children: [
+                            jsxRuntime.jsx("svg", {
+                              viewBox: "0 0 16 16",
+                              children: jsxRuntime.jsx("path", {
+                                d: "M8 2.5v8M4.5 7L8 10.5 11.5 7M3 13.5h10",
+                              }),
+                            }),
+                            "CSV",
+                          ],
+                        }),
+                        jsxRuntime.jsx("button", {
+                          id: "bDock",
+                          className: "mini",
+                          title: translate("收起 / 展开数据坞"),
+                          children: jsxRuntime.jsx("svg", {
+                            viewBox: "0 0 16 16",
+                            children: jsxRuntime.jsx("path", {
+                              d: "M4 6l4 4 4-4",
+                            }),
+                          }),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "dockBody",
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsxRuntime.jsxs("aside", {
+          id: "panel",
+          children: [
+            jsxRuntime.jsx("div", {
+              id: "lesson",
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "ctrl",
+              children: [
+                jsxRuntime.jsx("div", {
+                  className: "vh",
+                  id: "ctrlH",
+                  children: translate("SETUP · 实验参数"),
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "controls",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "acts",
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "vh",
+                  id: "roH",
+                  children: translate("READOUT · 实时读数"),
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "readouts",
+                  className: "kv",
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "vh",
+                  children: translate("VIEW · 显示"),
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "tgs",
+                  id: "tgs",
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    })
+  );
+}
+export { wavesLabPage as default };

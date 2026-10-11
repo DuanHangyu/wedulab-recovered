@@ -1,0 +1,10 @@
+{
+  "wedulab-production-backup.zip": {
+    "bytes": 52103803,
+    "sha256": "ea6e19fa16a6aabf1f56a6551917b0d546cda23e4205adbcb05559dd785d4dc8"
+  },
+  "wedulab-restored.zip": {
+    "bytes": 53191368,
+    "sha256": "d2a318b05c4c741a3d96694520979e28bd98fda5da8e7675f04ae398c286988c"
+  }
+}

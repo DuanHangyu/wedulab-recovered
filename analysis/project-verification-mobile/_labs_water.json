@@ -1,0 +1,747 @@
+{
+  "route": "/labs/water",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 329160,
+  "states": [
+    {
+      "title": "水循环三维沙盘 · WaterCycle",
+      "text": "①\n蒸发\n②\n水汽输送\n③\n降水\n④\n地表径流\n⑤\n下渗\n⑥\n地下径流\n⑦\n植物蒸腾\n海面蒸发\n海上降水\n湖面蒸发\n内陆降水\n内流河\n土壤层\n透水层（含水层）\n隔水层\n潜水面\n基岩\n← WEDULAB\n简体中文\nWATER·CYCLE\n01\n地球上的水体\nWater on Earth\n\n地球上的水以海洋水为主，约占全球总水量的 96.5%。陆地上的冰川、地下水、湖泊、河流，大气中的水汽，还有生物体内的水，合起来只占 3.5% 左右。\n\n淡水只占约 2.5%，其中近七成是两极和高山的冰川。人类容易利用的河流水、淡水湖泊水和浅层地下水，不到淡水总量的 0.3%。\n\n点击右侧的水体，沙盘上会标出它的位置。注意比较各水体的更新周期：大气水约 8 天就更新一次，地下水要上千年。\n\n对比海洋水与淡水的比例\n找到冰川、地下水、湖泊和河流\n比较各水体的更新周期\n第 4 天\n夏季\n1×\n3×\n8×\n全球水体储量\n海水 96.5%\n淡水 2.5%\n咸水湖与咸地下水 1%\n水体\n占全球水量 %（对数刻度）\n更新周期\n海洋水\n96.5\n2,500 年\n冰川与永久积雪\n1.7\n9,700 年\n地下水\n1.7\n1,400 年\n永冻土底冰\n0.022\n10,000 年\n湖泊水\n0.013\n17 年\n土壤水\n0.0012\n1 年\n大气水\n0.0009\n8 天\n沼泽水\n0.0008\n5 年\n河流水\n0.0002\n16 天\n生物水\n0.0001\n12 小时\n各环节水量\nmm/天\n①\n蒸发\n13.8\n②\n水汽输送\n14.0\n③\n降水\n18.3\n④\n地表径流\n2.1\n⑤\n下渗\n13.4\n⑥\n地下径流\n8.3\n⑦\n植物蒸腾\n4.1\n海面气温\n27 °C\n平原气温\n29 °C\n山顶气温\n2 °C\n雪线高度\n高于山顶\n河口流量\n8.1 mm/d\n地下水储量\n1012 mm\n云层透明度\n0%\n环节标注L\n复位视角R\n问题反馈\n作者：WY",
+      "randomCalls": 3490,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at ta (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:5:176)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:1561)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Jo (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:1:1019)\n    at ta (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:5:441)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:1561)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at da (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:656)\n    at fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:2862)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:1810)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at da (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:745)\n    at fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:2862)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:1810)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ua (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:2212)\n    at fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:4512)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:1810)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ma (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:7723)\n    at ga (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:121:10175)\n    at ba (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:121:4322)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:2684)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:133:489)\n    at ba (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:121:8536)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:2684)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Aa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:133:2889)\n    at Ra (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:2740)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2385)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:8370)\n    at Et (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:4914)\n    at Fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:246:627)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2399)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:8370)\n    at Et (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:4914)\n    at Fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:246:642)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2399)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:8370)\n    at Et (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:4914)\n    at Fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:246:657)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2399)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:8370)\n    at Et (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:4914)\n    at Fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:246:673)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2399)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:113:8370)\n    at Et (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:238:4914)\n    at Fa (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:246:688)\n    at Ka (http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:311:2399)\n    at http://127.0.0.1:4173/assets/Page-C7ATjR3d.js:320:10289\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-C7ATjR3d.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4173/assets/Page-CgFkwjK4.css",
+        "http://127.0.0.1:4173/assets/BufferGeometryUtils--VnzLiDd.js",
+        "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01地球上的水体Water on Earth",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02水的三态变化Three states of water",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03海陆间循环Sea–land cycle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04三类水循环Three types of cycle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05下渗与地表径流Infiltration vs runoff",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06水循环的地理意义Why the cycle matters",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07城市化与海绵城市Urbanisation & sponge city",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08人类活动的影响Human impacts",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09水量平衡Water balance",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10随堂检测Check yourself",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11自由探索Sandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "lPick",
+          "text": "01\n地球上的水体\nWater on Earth",
+          "type": "submit",
+          "title": "选择课题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (,)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (.)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFold",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPlay",
+          "text": "",
+          "type": "submit",
+          "title": "暂停 (空格)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "3×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "8×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "海洋水\n96.5\n2,500 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "冰川与永久积雪\n1.7\n9,700 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "地下水\n1.7\n1,400 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "永冻土底冰\n0.022\n10,000 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "湖泊水\n0.013\n17 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "土壤水\n0.0012\n1 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "大气水\n0.0009\n8 天",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "沼泽水\n0.0008\n5 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "河流水\n0.0002\n16 天",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "生物水\n0.0001\n12 小时",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "cloudOp",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bLabels",
+          "text": "环节标注L",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "复位视角R",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "结束",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "水循环三维沙盘 · WaterCycle",
+      "text": "①\n蒸发\n②\n水汽输送\n③\n降水\n④\n地表径流\n⑤\n下渗\n⑥\n地下径流\n⑦\n植物蒸腾\n海面蒸发\n海上降水\n湖面蒸发\n内陆降水\n内流河\n土壤层\n透水层（含水层）\n隔水层\n潜水面\n基岩\n← WEDULAB\n简体中文\nWATER·CYCLE\n01\n地球上的水体\nWater on Earth\n\n地球上的水以海洋水为主，约占全球总水量的 96.5%。陆地上的冰川、地下水、湖泊、河流，大气中的水汽，还有生物体内的水，合起来只占 3.5% 左右。\n\n淡水只占约 2.5%，其中近七成是两极和高山的冰川。人类容易利用的河流水、淡水湖泊水和浅层地下水，不到淡水总量的 0.3%。\n\n点击右侧的水体，沙盘上会标出它的位置。注意比较各水体的更新周期：大气水约 8 天就更新一次，地下水要上千年。\n\n对比海洋水与淡水的比例\n找到冰川、地下水、湖泊和河流\n比较各水体的更新周期\n第 4 天\n夏季\n1×\n3×\n8×\n全球水体储量\n海水 96.5%\n淡水 2.5%\n咸水湖与咸地下水 1%\n水体\n占全球水量 %（对数刻度）\n更新周期\n海洋水\n96.5\n2,500 年\n冰川与永久积雪\n1.7\n9,700 年\n地下水\n1.7\n1,400 年\n永冻土底冰\n0.022\n10,000 年\n湖泊水\n0.013\n17 年\n土壤水\n0.0012\n1 年\n大气水\n0.0009\n8 天\n沼泽水\n0.0008\n5 年\n河流水\n0.0002\n16 天\n生物水\n0.0001\n12 小时\n各环节水量\nmm/天\n①\n蒸发\n13.8\n②\n水汽输送\n14.0\n③\n降水\n18.3\n④\n地表径流\n2.1\n⑤\n下渗\n13.4\n⑥\n地下径流\n8.3\n⑦\n植物蒸腾\n4.1\n海面气温\n27 °C\n平原气温\n29 °C\n山顶气温\n2 °C\n雪线高度\n高于山顶\n河口流量\n8.1 mm/d\n地下水储量\n1012 mm\n云层透明度\n0%\n环节标注L\n复位视角R\n问题反馈\n作者：WY",
+      "randomCalls": 3490,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20565:17)\n    at new _d (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20590:57)\n    at ta (http://127.0.0.1:4174/src/labs/water/Page.js:139:13)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3488:13)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Jo (http://127.0.0.1:4174/src/labs/water/Page.js:95:15)\n    at ta (http://127.0.0.1:4174/src/labs/water/Page.js:152:20)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3488:13)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at da (http://127.0.0.1:4174/src/labs/water/Page.js:1502:15)\n    at fa (http://127.0.0.1:4174/src/labs/water/Page.js:1624:28)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3510:26)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at da (http://127.0.0.1:4174/src/labs/water/Page.js:1505:15)\n    at fa (http://127.0.0.1:4174/src/labs/water/Page.js:1624:28)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3510:26)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ua (http://127.0.0.1:4174/src/labs/water/Page.js:1591:15)\n    at fa (http://127.0.0.1:4174/src/labs/water/Page.js:1705:12)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3510:26)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ma (http://127.0.0.1:4174/src/labs/water/Page.js:1909:15)\n    at ga (http://127.0.0.1:4174/src/labs/water/Page.js:2698:9)\n    at ba (http://127.0.0.1:4174/src/labs/water/Page.js:2275:10)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3579:13)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ka (http://127.0.0.1:4174/src/labs/water/Page.js:2962:15)\n    at ba (http://127.0.0.1:4174/src/labs/water/Page.js:2593:13)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3579:13)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Aa (http://127.0.0.1:4174/src/labs/water/Page.js:3113:15)\n    at Ra (http://127.0.0.1:4174/src/labs/water/Page.js:3584:9)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6390:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4174/src/labs/water/Page.js:1937:15)\n    at Et (http://127.0.0.1:4174/src/labs/water/Page.js:3713:18)\n    at Fa (http://127.0.0.1:4174/src/labs/water/Page.js:3858:9)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6391:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4174/src/labs/water/Page.js:1937:15)\n    at Et (http://127.0.0.1:4174/src/labs/water/Page.js:3713:18)\n    at Fa (http://127.0.0.1:4174/src/labs/water/Page.js:3859:9)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6391:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4174/src/labs/water/Page.js:1937:15)\n    at Et (http://127.0.0.1:4174/src/labs/water/Page.js:3713:18)\n    at Fa (http://127.0.0.1:4174/src/labs/water/Page.js:3860:9)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6391:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4174/src/labs/water/Page.js:1937:15)\n    at Et (http://127.0.0.1:4174/src/labs/water/Page.js:3713:18)\n    at Fa (http://127.0.0.1:4174/src/labs/water/Page.js:3861:9)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6391:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at va (http://127.0.0.1:4174/src/labs/water/Page.js:1937:15)\n    at Et (http://127.0.0.1:4174/src/labs/water/Page.js:3713:18)\n    at Fa (http://127.0.0.1:4174/src/labs/water/Page.js:3862:9)\n    at Ka (http://127.0.0.1:4174/src/labs/water/Page.js:6391:9)\n    at http://127.0.0.1:4174/src/labs/water/Page.js:7660:62\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/labs/water/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4174/src/vendor/BufferGeometryUtils--VnzLiDd.js",
+        "http://127.0.0.1:4174/assets/Page-CgFkwjK4.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-bf05358c20e0.css",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7RcrCWv.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SCqyWv.ttf",
+        "http://127.0.0.1:4174/fonts/-F6qfjptAgt5VM-kVkqdyU8n3twJ8lc.ttf",
+        "http://127.0.0.1:4174/fonts/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+        "http://127.0.0.1:4174/fonts/-F63fjptAgt5VM-kVkqdyU8n5ig.ttf",
+        "http://127.0.0.1:4174/fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjw.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01地球上的水体Water on Earth",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02水的三态变化Three states of water",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03海陆间循环Sea–land cycle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04三类水循环Three types of cycle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05下渗与地表径流Infiltration vs runoff",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06水循环的地理意义Why the cycle matters",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07城市化与海绵城市Urbanisation & sponge city",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08人类活动的影响Human impacts",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09水量平衡Water balance",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10随堂检测Check yourself",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11自由探索Sandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "lPick",
+          "text": "01\n地球上的水体\nWater on Earth",
+          "type": "submit",
+          "title": "选择课题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (,)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (.)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFold",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPlay",
+          "text": "",
+          "type": "submit",
+          "title": "暂停 (空格)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "3×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "8×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "海洋水\n96.5\n2,500 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "冰川与永久积雪\n1.7\n9,700 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "地下水\n1.7\n1,400 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "永冻土底冰\n0.022\n10,000 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "湖泊水\n0.013\n17 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "土壤水\n0.0012\n1 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "大气水\n0.0009\n8 天",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "沼泽水\n0.0008\n5 年",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "河流水\n0.0002\n16 天",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "生物水\n0.0001\n12 小时",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "cloudOp",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bLabels",
+          "text": "环节标注L",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "复位视角R",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "结束",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

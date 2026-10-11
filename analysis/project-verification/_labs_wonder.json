@@ -1,0 +1,480 @@
+{
+  "route": "/labs/wonder",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "趣味数学 · WonderLab",
+      "text": "← WEDULAB\nWONDERLAB\n趣味数学\n简体中文\n纸面\n视角\n章节\n01\n谢尔宾斯基三角形\nSierpiński triangle\n02\n科赫雪花\nKoch snowflake\n03\n分形树\nFractal tree\n04\n莫比乌斯带\nMöbius strip\n05\n黄金分割\nThe golden ratio\n06\n向日葵的种子\nPhyllotaxis\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n谢尔宾斯基三角形\n\nSierpiński triangle\n\n暂停\n慢动作重来\n01\n谢尔宾斯基三角形\nSierpiński triangle\n\n玩一个游戏：在三角形里随便取一点，然后不断重复——随机选一个顶点，向它跳一半的距离，打一个点。\n\n每一步都是随机的，可几万个点打下来，出现的却是一个精致而规整的图形：谢尔宾斯基三角形。它的每一小块都和整体一模一样，这叫自相似，是分形的标志。\n\n混沌游戏\n递归删除\n三角形\n正方形\n五边形\n跳跃比例\n0.500\n混沌游戏\n已打 12 个点\n\n规则只有一条：随机选一个顶点，向它跳一半的距离，点一下。重复几万次，谢尔宾斯基三角形就自己出现了——尽管每一步都是随机的。\n\n拖动顶点可以改变形状。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Ce (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:1318)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17428)\n    at Ot (http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:15:10615)\n    at http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:15:10868\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "ov",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Oe (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:5573)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17450)\n    at Ot (http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:15:10615)\n    at http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:15:10868\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:9022)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17472)\n    at Ot (http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:15:10615)\n    at http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:15:10868\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Object.draw2D (http://127.0.0.1:4173/assets/Page-BHNjPbNx.js:1:7432)\n    at R (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:22184)\n    at <anonymous>:8:199\n    at Array.forEach (<anonymous>)\n    at window.__advanceFrames (<anonymous>:8:187)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:24)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-BHNjPbNx.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/math-_7kWGBgE.js",
+        "http://127.0.0.1:4173/assets/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4173/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4173/assets/confetti-D_DoZ5bY.js",
+        "http://127.0.0.1:4173/assets/Page-BUeo7GFe.css",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n谢尔宾斯基三角形\nSierpiński triangle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n科赫雪花\nKoch snowflake",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n分形树\nFractal tree",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n莫比乌斯带\nMöbius strip",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n黄金分割\nThe golden ratio",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n向日葵的种子\nPhyllotaxis",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暂停",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "慢动作重来",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "混沌游戏",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "递归删除",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "三角形",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "正方形",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "五边形",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "趣味数学 · WonderLab",
+      "text": "← WEDULAB\nWONDERLAB\n趣味数学\n简体中文\n纸面\n视角\n章节\n01\n谢尔宾斯基三角形\nSierpiński triangle\n02\n科赫雪花\nKoch snowflake\n03\n分形树\nFractal tree\n04\n莫比乌斯带\nMöbius strip\n05\n黄金分割\nThe golden ratio\n06\n向日葵的种子\nPhyllotaxis\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n谢尔宾斯基三角形\n\nSierpiński triangle\n\n暂停\n慢动作重来\n01\n谢尔宾斯基三角形\nSierpiński triangle\n\n玩一个游戏：在三角形里随便取一点，然后不断重复——随机选一个顶点，向它跳一半的距离，打一个点。\n\n每一步都是随机的，可几万个点打下来，出现的却是一个精致而规整的图形：谢尔宾斯基三角形。它的每一小块都和整体一模一样，这叫自相似，是分形的标志。\n\n混沌游戏\n递归删除\n三角形\n正方形\n五边形\n跳跃比例\n0.500\n混沌游戏\n已打 12 个点\n\n规则只有一条：随机选一个顶点，向它跳一半的距离，点一下。重复几万次，谢尔宾斯基三角形就自己出现了——尽管每一步都是随机的。\n\n拖动顶点可以改变形状。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20565:17)\n    at new _d (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20590:57)\n    at Ce (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:82:13)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1177:13)\n    at Ot (http://127.0.0.1:4174/src/labs/wonder/Page.js:1669:3)\n    at http://127.0.0.1:4174/src/labs/wonder/Page.js:1692:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "ov",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Oe (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:366:15)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1178:13)\n    at Ot (http://127.0.0.1:4174/src/labs/wonder/Page.js:1669:3)\n    at http://127.0.0.1:4174/src/labs/wonder/Page.js:1692:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:596:15)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1179:9)\n    at Ot (http://127.0.0.1:4174/src/labs/wonder/Page.js:1669:3)\n    at http://127.0.0.1:4174/src/labs/wonder/Page.js:1692:58\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Object.draw2D (http://127.0.0.1:4174/src/labs/wonder/Page.js:544:19)\n    at R (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1400:21)\n    at <anonymous>:8:199\n    at Array.forEach (<anonymous>)\n    at window.__advanceFrames (<anonymous>:8:187)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:24)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/labs/wonder/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4174/src/vendor/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4174/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4174/src/vendor/confetti-D_DoZ5bY.js",
+        "http://127.0.0.1:4174/assets/Page-BUeo7GFe.css",
+        "http://127.0.0.1:4174/assets/theme-CtpKaZpm.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-4de47f548de6.css",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7RlrCWv.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWv.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n谢尔宾斯基三角形\nSierpiński triangle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n科赫雪花\nKoch snowflake",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n分形树\nFractal tree",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n莫比乌斯带\nMöbius strip",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n黄金分割\nThe golden ratio",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n向日葵的种子\nPhyllotaxis",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暂停",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "慢动作重来",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "混沌游戏",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "递归删除",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "三角形",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "正方形",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "五边形",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

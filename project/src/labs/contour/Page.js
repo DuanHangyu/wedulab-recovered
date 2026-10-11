@@ -1,0 +1,3557 @@
+// Recovered from public deployment: Page-CCiHCD5r.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  t as translate,
+  r as React,
+  j as jsxRuntime,
+  b as localizedUrl,
+} from "../../core/runtime.js";
+import { L as Dn } from "../../components/LanguageSwitcher.js";
+import { T as Vn, O as Yn } from "../../vendor/OrbitControls-D-zZTbsE.js";
+const o = {
+  ...Vn,
+  OrbitControls: Yn,
+};
+function Un() {
+  const w = (e) => document.querySelector(e),
+    E = (e, t, n) => Math.max(t, Math.min(n, e)),
+    ce = (e, t, n) => {
+      const s = E((n - e) / (t - e), 0, 1);
+      return s * s * (3 - 2 * s);
+    },
+    bt = (e) => (e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2),
+    ve = (e, t, n, s, a) => {
+      const r = e - n,
+        d = t - s;
+      return Math.exp(-(r * r + d * d) / (2 * a * a));
+    };
+  function me(e, t, n, s, a, r) {
+    const d = a - n,
+      c = r - s,
+      h = E(((e - n) * d + (t - s) * c) / (d * d + c * c), 0, 1);
+    return [Math.hypot(n + d * h - e, s + c * h - t), h];
+  }
+  function gt(e, t, n) {
+    let s = 1 / 0,
+      a = 0,
+      r = 0,
+      d = 0;
+    const c = [];
+    for (let h = 1; h < n.length; h++)
+      (c.push(Math.hypot(n[h][0] - n[h - 1][0], n[h][1] - n[h - 1][1])),
+        (d += c[h - 1]));
+    for (let h = 1; h < n.length; h++) {
+      const [m, b] = me(e, t, n[h - 1][0], n[h - 1][1], n[h][0], n[h][1]);
+      (m < s && ((s = m), (a = (r + b * c[h - 1]) / d)), (r += c[h - 1]));
+    }
+    return [s, a];
+  }
+  const xt = [
+      [-0.27, -0.47],
+      [-0.24, -0.2],
+      [-0.17, 0.08],
+      [-0.04, 0.36],
+      [0.04, 0.66],
+      [0, 1.04],
+    ],
+    yt = [
+      [0.2, -0.47],
+      [0.21, -0.22],
+      [0.12, 0.08],
+      [-0.04, 0.36],
+    ],
+    C = {
+      c: [0.521, -0.429],
+      n: [Math.SQRT1_2, Math.SQRT1_2],
+      d: [Math.SQRT1_2, -Math.SQRT1_2],
+      half: 0.3,
+    };
+  function cn(e, t) {
+    let n = 250 - 110 * t + 18 * e;
+    ((n +=
+      16 * Math.sin(3.1 * e + 1.3) * Math.sin(2.6 * t + 0.4) +
+      10 * Math.sin(5.7 * e - 4.1 * t + 2.2) +
+      7 * Math.cos(7.3 * t + 3.1 * e) +
+      4 * Math.sin(11 * e + 3) * Math.cos(9 * t)),
+      (n += 1050 * ve(e, t, -0.52, -0.5, 0.165)),
+      (n += 720 * ve(e, t, 0, -0.64, 0.125)));
+    {
+      const b = (e - C.c[0]) * C.n[0] + (t - C.c[1]) * C.n[1],
+        u =
+          ((e - C.c[0]) * C.d[0] + (t - C.c[1]) * C.d[1] + C.half) /
+          (2 * C.half),
+        v =
+          (ce(0, 0.22, u) * (1 - ce(0.78, 1, u))) / (1 + Math.exp(-b / 0.006));
+      n += 820 * ve(e, t, 0.45, -0.5, 0.16) * (1 - 0.5 * v);
+    }
+    let [s, a] = me(e, t, -0.5, -0.5, -0.03, -0.63);
+    ((n += 140 * Math.exp((-s * s) / 0.0072) * Math.sin(Math.PI * a)),
+      ([s, a] = me(e, t, -0.03, -0.63, 0.45, -0.5)),
+      (n += 120 * Math.exp((-s * s) / 0.0072) * Math.sin(Math.PI * a)),
+      ([s, a] = me(e, t, -0.62, -0.38, -1.02, 0.02)),
+      (n += 380 * (1 - 0.72 * a) * Math.exp((-s * s) / (2 * 0.065 * 0.065))),
+      ([s, a] = me(e, t, 0.55, -0.58, 1.02, -0.86)),
+      (n += 300 * (1 - 0.7 * a) * Math.exp((-s * s) / 0.0072)));
+    const [r, d] = gt(e, t, xt),
+      [c, h] = gt(e, t, yt);
+    ((n -= Math.max(
+      (25 + 75 * ce(0, 0.45, d)) * Math.exp((-r * r) / (2 * 0.055 * 0.055)),
+      (25 + 60 * ce(0, 0.6, h)) * Math.exp((-c * c) / (2 * 0.05 * 0.05)),
+    )),
+      (n += 190 * ve(e, t, 0.66, 0.34, 0.12)),
+      (n += 250 * ve(e, t, 0.36, 0.76, 0.085)),
+      (n += 120 * ve(e, t, -0.3, 0.82, 0.1)));
+    const m = Math.hypot(e + 0.6, t - 0.52);
+    return (
+      (n +=
+        -140 * Math.exp((-m * m) / (2 * 0.085 * 0.085)) +
+        90 * Math.exp(-((m - 0.17) * (m - 0.17)) / (2 * 0.06 * 0.06))),
+      n
+    );
+  }
+  const z = new Float32Array(361 * 361);
+  let $e = 1 / 0,
+    Le = -1 / 0;
+  for (let e = 0; e < 361; e++)
+    for (let t = 0; t < 361; t++) {
+      const n = cn(-1 + (2 * t) / 360, -1 + (2 * e) / 360);
+      ((z[e * 361 + t] = n), ($e = Math.min($e, n)), (Le = Math.max(Le, n)));
+    }
+  function j(e, t) {
+    const n = E(((e + 1) / 2) * 360, 0, 359.999999),
+      s = E(((t + 1) / 2) * 360, 0, 360 - 1e-6),
+      a = Math.floor(n),
+      r = Math.floor(s),
+      d = n - a,
+      c = s - r,
+      h = z[r * 361 + a],
+      m = z[r * 361 + a + 1],
+      b = z[(r + 1) * 361 + a],
+      u = z[(r + 1) * 361 + a + 1];
+    return (
+      h * (1 - d) * (1 - c) + m * d * (1 - c) + b * (1 - d) * c + u * d * c
+    );
+  }
+  function ot(e, t) {
+    const n = 0.003333333333333333;
+    return [
+      (j(e + n, t) - j(e - n, t)) / (2 * n * 4e3),
+      (j(e, t + n) - j(e, t - n)) / (2 * n * 4e3),
+    ];
+  }
+  const Oe = (e, t) => {
+      const [n, s] = ot(e, t);
+      return (Math.atan(Math.hypot(n, s)) * 180) / Math.PI;
+    },
+    Mt = new Float32Array(361 * 361);
+  for (let e = 0; e < 361; e++)
+    for (let t = 0; t < 361; t++)
+      Mt[e * 361 + t] = Oe(-1 + (2 * t) / 360, -1 + (2 * e) / 360);
+  function ke(e, t, n, s) {
+    let a = e,
+      r = t,
+      d = -1 / 0;
+    for (let c = -n; c <= n; c += 0.004)
+      for (let h = -n; h <= n; h += 0.004) {
+        const m = j(e + c, t + h) * s;
+        m > d && ((d = m), (a = e + c), (r = t + h));
+      }
+    return {
+      u: a,
+      v: r,
+      h: d * s,
+    };
+  }
+  function _e(e, t, n, s, a, r, d) {
+    const c = [],
+      h = n - e,
+      m = s - t,
+      b = Math.hypot(h, m),
+      u = -m / b,
+      v = h / b;
+    for (let p = 0; p <= a; p++) {
+      const g = p / a,
+        A = e + h * g,
+        S = t + m * g;
+      let M = null;
+      for (let H = -r; H <= r; H += 0.003) {
+        const B = A + u * H,
+          N = S + v * H,
+          T = j(B, N) * d;
+        (!M || T > M.h) &&
+          (M = {
+            u: B,
+            v: N,
+            h: T,
+          });
+      }
+      c.push({
+        u: M.u,
+        v: M.v,
+        h: M.h * d,
+      });
+    }
+    return c;
+  }
+  function St(e) {
+    const t = [];
+    for (let n = 1; n < e.length; n++)
+      t.push(
+        ..._e(e[n - 1][0], e[n - 1][1], e[n][0], e[n][1], 18, 0.045, -1).slice(
+          n > 1 ? 1 : 0,
+        ),
+      );
+    return t.filter((n) => Math.abs(n.v) < 0.995);
+  }
+  const wt = (e, t) => (t.h < e.h ? t : e),
+    x = {};
+  ((x.main = ke(-0.52, -0.5, 0.08, 1)),
+    (x.mid = ke(0, -0.64, 0.08, 1)),
+    (x.east = ke(0.45, -0.5, 0.08, 1)),
+    (x.hill = ke(0.36, 0.76, 0.06, 1)),
+    (x.saddle = _e(x.main.u, x.main.v, x.mid.u, x.mid.v, 80, 0.12, 1).reduce(
+      wt,
+    )),
+    (x.saddle2 = _e(x.mid.u, x.mid.v, x.east.u, x.east.v, 80, 0.12, 1).reduce(
+      wt,
+    )));
+  const At = _e(x.main.u, x.main.v, -0.99, 0, 70, 0.08, 1).filter(
+      (e) => e.u > -0.95,
+    ),
+    be = [St(xt).slice(4), St(yt).slice(4)],
+    dn = [
+      [0.045, 0.1],
+      [0.035, 0.045],
+    ];
+  ((x.ridge = At[36]),
+    (x.valley = be[0][Math.round(be[0].length * 0.3)]),
+    (x.basin = ke(-0.6, 0.52, 0.08, -1)));
+  const J = (e, t = 0) => [
+    C.c[0] + C.d[0] * e + C.n[0] * t,
+    C.c[1] + C.d[1] * e + C.n[1] * t,
+  ];
+  x.cliff = {
+    u: J(0.03)[0],
+    v: J(0.03)[1],
+    h: j(...J(0.03)),
+  };
+  const Te = {
+      top: j(...J(0.03, -0.02)),
+      bot: j(...J(0.03, 0.025)),
+    },
+    _ = {
+      main: {
+        name: translate("主峰"),
+        en: "SUMMIT",
+        type: translate("山顶"),
+        dir: [-0.35, 1],
+        dist: 12,
+        up: 0.7,
+      },
+      mid: {
+        name: translate("中峰"),
+        en: "PEAK",
+        type: translate("山顶"),
+        dir: [0.1, 1],
+        dist: 10,
+        up: 0.65,
+      },
+      east: {
+        name: translate("东峰"),
+        en: "PEAK",
+        type: translate("山顶"),
+        dir: [0.6, 1],
+        dist: 11,
+        up: 0.65,
+      },
+      saddle: {
+        name: translate("鞍部"),
+        en: "SADDLE",
+        type: translate("鞍部"),
+        dir: [-0.1, 1],
+        dist: 9,
+        up: 0.6,
+      },
+      saddle2: {
+        name: translate("鞍部"),
+        en: "SADDLE",
+        type: translate("鞍部"),
+        dir: [0.15, 1],
+        dist: 9,
+        up: 0.6,
+      },
+      ridge: {
+        name: translate("山脊"),
+        en: "RIDGE",
+        type: translate("山脊"),
+        dir: [-1, 0.6],
+        dist: 10,
+        up: 0.75,
+      },
+      valley: {
+        name: translate("山谷"),
+        en: "VALLEY",
+        type: translate("山谷"),
+        dir: [0.2, 1],
+        dist: 10,
+        up: 0.7,
+      },
+      cliff: {
+        name: translate("陡崖"),
+        en: "CLIFF",
+        type: translate("陡崖"),
+        dir: [0.15, 1],
+        dist: 10,
+        up: 0.38,
+      },
+      basin: {
+        name: translate("盆地"),
+        en: "BASIN",
+        type: translate("盆地"),
+        dir: [-0.3, 1],
+        dist: 8.5,
+        up: 0.8,
+      },
+      hill: {
+        name: translate("孤丘"),
+        en: "HILL",
+        type: translate("山顶"),
+        dir: [0.3, 1],
+        dist: 7.5,
+        up: 0.6,
+      },
+    };
+  for (const e in _) Object.assign(_[e], x[e]);
+  const Fe = Math.round(x.basin.h + 20),
+    un = (2 * 4e3) / 360,
+    Lt = new Float32Array(361 * 361);
+  {
+    const e = [2, 4, 7, 12, 20],
+      t = [];
+    for (let n = 0; n < 8; n++)
+      t.push([Math.cos((n * Math.PI) / 4), Math.sin((n * Math.PI) / 4)]);
+    for (let n = 0; n < 361; n++)
+      for (let s = 0; s < 361; s++) {
+        const a = z[n * 361 + s];
+        let r = 0;
+        for (const [d, c] of t) {
+          let h = 0;
+          for (const m of e) {
+            const b = Math.round(s + d * m),
+              u = Math.round(n + c * m);
+            if (b < 0 || u < 0 || b > 360 || u > 360) break;
+            h = Math.max(
+              h,
+              (z[u * 361 + b] - a) / (Math.hypot(b - s, u - n) * un),
+            );
+          }
+          r += h / Math.sqrt(1 + h * h);
+        }
+        Lt[n * 361 + s] = E(1 - (r / 8) * 1.7, 0.3, 1);
+      }
+  }
+  function kt(e, t) {
+    let n = 1 / 0;
+    for (const s of be)
+      for (let a = 1; a < s.length; a++) {
+        const r = s[a - 1],
+          d = s[a];
+        n = Math.min(n, me(e, t, r.u, r.v, d.u, d.v)[0]);
+      }
+    return n;
+  }
+  const Tt = new Float32Array(361 * 361);
+  for (let e = 0; e < 361; e++)
+    for (let t = 0; t < 361; t++) {
+      const n = -1 + (2 * t) / 360,
+        s = -1 + (2 * e) / 360;
+      n < -0.4 ||
+        n > 0.35 ||
+        s < -0.5 ||
+        (Tt[e * 361 + t] = 1 - ce(0.008, 0.045, kt(n, s)));
+    }
+  const qe = (e, t) => {
+    const n = Math.sin(e * 127.1 + t * 311.7) * 43758.5453;
+    return n - Math.floor(n);
+  };
+  function it(e, t) {
+    const n = Math.floor(e),
+      s = Math.floor(t),
+      a = e - n,
+      r = t - s,
+      d = a * a * (3 - 2 * a),
+      c = r * r * (3 - 2 * r),
+      h = qe(n, s),
+      m = qe(n + 1, s),
+      b = qe(n, s + 1),
+      u = qe(n + 1, s + 1);
+    return h + (m - h) * d + (b - h) * c + (h - m - b + u) * d * c;
+  }
+  const fn = (e, t) =>
+    it(e, t) * 0.5 + it(e * 2.03, t * 2.03) * 0.3 + it(e * 4.1, t * 4.1) * 0.2;
+  function hn(e) {
+    return () => {
+      ((e |= 0), (e = (e + 1831565813) | 0));
+      let t = Math.imul(e ^ (e >>> 15), 1 | e);
+      return (
+        (t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t),
+        ((t ^ (t >>> 14)) >>> 0) / 4294967296
+      );
+    };
+  }
+  const Ge = [];
+  {
+    const e = hn(20260929);
+    for (let t = 0; t < 12e4 && Ge.length < 3800; t++) {
+      const n = e() * 1.88 - 0.94,
+        s = e() * 1.88 - 0.94,
+        a = j(n, s);
+      if (
+        a < Fe + 14 ||
+        a > 980 ||
+        Oe(n, s) > 34 ||
+        (n > -0.4 && n < 0.35 && s > -0.5 && kt(n, s) < 0.025)
+      )
+        continue;
+      const r = fn(n * 4.2 + 11, s * 4.2 + 3);
+      e() > ce(0.45, 0.62, r) * (1 - ce(780, 980, a)) + 0.03 ||
+        Ge.push({
+          u: n,
+          v: s,
+          conifer: a > 500 ? e() < 0.85 : e() < 0.2,
+          s: 0.6 + e() * 0.5,
+          r: e() * 6.283,
+          c: e(),
+        });
+    }
+  }
+  const pn = (e) => [
+      parseInt(e.slice(1, 3), 16),
+      parseInt(e.slice(3, 5), 16),
+      parseInt(e.slice(5, 7), 16),
+    ],
+    lt = (e) => e.map(([t, n]) => [t, pn(n)]);
+  function Ft(e, t) {
+    if (t <= e[0][0]) return e[0][1];
+    for (let n = 1; n < e.length; n++)
+      if (t <= e[n][0]) {
+        const [s, a] = e[n - 1],
+          [r, d] = e[n],
+          c = (t - s) / (r - s);
+        return [
+          a[0] + (d[0] - a[0]) * c,
+          a[1] + (d[1] - a[1]) * c,
+          a[2] + (d[2] - a[2]) * c,
+        ];
+      }
+    return e[e.length - 1][1];
+  }
+  const rt = lt([
+      [0, "#1f4a55"],
+      [150, "#2d654f"],
+      [290, "#4d7f4b"],
+      [460, "#879a58"],
+      [640, "#bba463"],
+      [830, "#b67e4e"],
+      [1020, "#8a5a43"],
+      [1200, "#b3a79a"],
+      [1420, "#efe9df"],
+    ]),
+    vn = lt([
+      [0, "#a9cbc7"],
+      [170, "#bfd8bb"],
+      [320, "#d3e1b5"],
+      [500, "#e7e0b1"],
+      [680, "#ebcf9f"],
+      [880, "#ddb38c"],
+      [1080, "#cda285"],
+      [1320, "#eee6dc"],
+    ]),
+    jt = lt([
+      [0, "#2c6b93"],
+      [8, "#3a9a7a"],
+      [16, "#b6c25a"],
+      [26, "#e39a45"],
+      [38, "#d24a3c"],
+      [60, "#7d1d3a"],
+    ]),
+    Ht = (e) => `rgb(${e.map(Math.round).join(",")})`,
+    De = w("#stage"),
+    O = new o.WebGLRenderer({
+      canvas: w("#gl"),
+      antialias: !0,
+      alpha: !0,
+    });
+  (O.setPixelRatio(Math.min(devicePixelRatio, 2)),
+    (O.outputEncoding = o.sRGBEncoding),
+    (O.toneMapping = o.ACESFilmicToneMapping),
+    (O.toneMappingExposure = 1.08),
+    (O.shadowMap.enabled = !0),
+    (O.shadowMap.type = o.PCFSoftShadowMap));
+  const F = new o.Scene(),
+    q = new o.PerspectiveCamera(36, 1, 0.1, 300);
+  q.position.set(30, 28, 40);
+  const W = new o.OrbitControls(q, O.domElement);
+  ((W.enableDamping = !0),
+    (W.dampingFactor = 0.07),
+    (W.maxPolarAngle = 1.48),
+    (W.minDistance = 6),
+    (W.maxDistance = 70),
+    W.target.set(0, -0.8, 0),
+    (W.autoRotateSpeed = 0.6),
+    (F.fog = new o.Fog(922651, 48, 120)),
+    F.add(new o.HemisphereLight(12900607, 3812380, 0.58)));
+  const te = new o.DirectionalLight(16770756, 1.75);
+  (te.position.set(-17, 15, -9),
+    (te.castShadow = !0),
+    te.shadow.mapSize.set(2048, 2048),
+    Object.assign(te.shadow.camera, {
+      left: -15,
+      right: 15,
+      top: 15,
+      bottom: -15,
+      near: 1,
+      far: 70,
+    }),
+    (te.shadow.bias = -6e-4),
+    (te.shadow.normalBias = 0.02),
+    F.add(te));
+  const Bt = new o.DirectionalLight(10470655, 0.5);
+  (Bt.position.set(12, 6, 14), F.add(Bt));
+  function Pt(e, t) {
+    const n = new Uint8Array(1024);
+    for (let a = 0; a < 256; a++) {
+      const r = Ft(e, (a / 255) * t);
+      ((n[a * 4] = r[0]),
+        (n[a * 4 + 1] = r[1]),
+        (n[a * 4 + 2] = r[2]),
+        (n[a * 4 + 3] = 255));
+    }
+    const s = new o.DataTexture(n, 256, 1, o.RGBAFormat);
+    return (
+      (s.magFilter = s.minFilter = o.LinearFilter),
+      (s.needsUpdate = !0),
+      s
+    );
+  }
+  const i = {
+      interval: 100,
+      exag: 1.5,
+      lines: !0,
+      surf: "real",
+      surfPref: "real",
+      terr: !1,
+      labels: !0,
+      plane: !0,
+      river: !0,
+      trees: !0,
+      clouds: !0,
+      rotate: !1,
+      slice: !1,
+      sliceH: 400,
+      cut: !1,
+      proj: 0,
+      sea: !1,
+      ridge: !1,
+      focus: null,
+      section: null,
+      quiz: null,
+      lesson: 0,
+    },
+    R = () => i.exag / 400,
+    L = {
+      uInterval: {
+        value: 50,
+      },
+      uYS: {
+        value: R(),
+      },
+      uTerr: {
+        value: 0,
+      },
+      uSlice: {
+        value: 400,
+      },
+      uSliceOn: {
+        value: 0,
+      },
+      uCut: {
+        value: 0,
+      },
+      uLineA: {
+        value: 1,
+      },
+      uMode: {
+        value: 0,
+      },
+      uReal: {
+        value: 1,
+      },
+      uCloud: {
+        value: 1,
+      },
+      uTime: {
+        value: 0,
+      },
+      uLake: {
+        value: Fe,
+      },
+      uHyp: {
+        value: Pt(rt, 1500),
+      },
+      uSlp: {
+        value: Pt(jt, 60),
+      },
+      uFocus: {
+        value: new o.Vector3(0, 0, 3),
+      },
+      uFocusAmt: {
+        value: 0,
+      },
+    },
+    G = new o.BufferGeometry();
+  {
+    const e = new Float32Array(390963),
+      t = new Float32Array(361 * 361),
+      n = new Float32Array(361 * 361);
+    for (let r = 0; r < 361; r++)
+      for (let d = 0; d < 361; d++) {
+        const c = r * 361 + d;
+        ((e[c * 3] = -10 + (20 * d) / 360),
+          (e[c * 3 + 2] = -10 + (20 * r) / 360),
+          (t[c] = z[c]),
+          (n[c] = Mt[c]));
+      }
+    const s = new Uint32Array(360 * 360 * 6);
+    let a = 0;
+    for (let r = 0; r < 360; r++)
+      for (let d = 0; d < 360; d++) {
+        const c = r * 361 + d,
+          h = c + 1,
+          m = c + 361,
+          b = m + 1;
+        ((s[a++] = c),
+          (s[a++] = m),
+          (s[a++] = h),
+          (s[a++] = h),
+          (s[a++] = m),
+          (s[a++] = b));
+      }
+    (G.setAttribute("position", new o.BufferAttribute(e, 3)),
+      G.setAttribute("aH", new o.BufferAttribute(t, 1)),
+      G.setAttribute("aS", new o.BufferAttribute(n, 1)),
+      G.setAttribute("aAO", new o.BufferAttribute(Lt, 1)),
+      G.setAttribute("aWet", new o.BufferAttribute(Tt, 1)),
+      G.setIndex(new o.BufferAttribute(s, 1)));
+  }
+  const ct = new o.MeshStandardMaterial({
+    roughness: 0.9,
+    metalness: 0,
+  });
+  ((ct.extensions = {
+    derivatives: !0,
+  }),
+    (ct.onBeforeCompile = (e) => {
+      (Object.assign(e.uniforms, L),
+        (e.vertexShader =
+          `attribute float aH;attribute float aS;attribute float aAO;attribute float aWet;uniform float uInterval,uTerr,uYS;varying float vH,vS,vAO,vWet;varying vec2 vXZ;
+` +
+          e.vertexShader
+            .replace(
+              "#include <beginnormal_vertex>",
+              `#include <beginnormal_vertex>
+objectNormal=normalize(mix(objectNormal,vec3(0.,1.,0.),uTerr*.8));`,
+            )
+            .replace(
+              "#include <begin_vertex>",
+              `#include <begin_vertex>
+float hq=floor(aH/uInterval+1e-4)*uInterval;float hh=mix(aH,hq,uTerr);transformed.y=hh*uYS;vH=hh;vS=aS;vAO=aAO;vWet=aWet;vXZ=position.xz;`,
+            )),
+        (e.fragmentShader =
+          `uniform float uInterval,uSlice,uSliceOn,uCut,uLineA,uMode,uReal,uCloud,uTime,uLake,uFocusAmt;uniform sampler2D uHyp,uSlp;uniform vec3 uFocus;varying float vH,vS,vAO,vWet;varying vec2 vXZ;
+float hs(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float vn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(hs(i),hs(i+vec2(1.,0.)),u.x),mix(hs(i+vec2(0.,1.)),hs(i+vec2(1.,1.)),u.x),u.y);}float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<4;i++){s+=a*vn(p);p=p*2.03+17.;a*=.5;}return s;}
+` +
+          e.fragmentShader
+            .replace(
+              "#include <color_fragment>",
+              `#include <color_fragment>
+      if(uCut>.5&&vH>uSlice+.5)discard;
+      vec3 ch=pow(texture2D(uHyp,vec2(clamp(vH/1500.,0.,1.),.5)).rgb,vec3(2.2));
+      vec3 cs=pow(texture2D(uSlp,vec2(clamp(vS/60.,0.,1.),.5)).rgb,vec3(2.2));
+      float n1=fbm(vXZ*.55),n2=fbm(vXZ*2.4+7.),n3=vn(vXZ*16.);
+      vec3 g=mix(vec3(.30,.42,.19),vec3(.45,.55,.27),smoothstep(.3,.7,n1));
+      g=mix(g,vec3(.56,.54,.34),smoothstep(480.,820.,vH+(n2-.5)*180.));
+      g=mix(g,vec3(.50,.44,.35),smoothstep(840.,1040.,vH+(n2-.5)*200.));
+      g=mix(g,mix(vec3(.33,.31,.29),vec3(.53,.50,.46),n3),smoothstep(33.,47.,vS+(n2-.5)*14.));
+      g=mix(g,vec3(.21,.29,.16),vWet*.75);
+      g=mix(g,vec3(.50,.46,.36),(1.-smoothstep(uLake,uLake+10.,vH))*.8);
+      g=mix(g,vec3(.92,.94,.97),smoothstep(1170.,1230.,vH+(n2-.5)*80.)*(1.-smoothstep(36.,50.,vS)));
+      g*=.9+.2*n3;
+      vec3 base=mix(ch,pow(g,vec3(2.2)),uReal);
+      float rk=smoothstep(55.,68.,vS)*(1.-uMode);
+      vec3 rock=vec3(.16,.12,.095)*(.75+.25*step(.5,fract(vH/9.)))*(.85+.15*sin(vXZ.y*9.));
+      base=mix(base,rock,rk*.85);
+      base=mix(base,cs,uMode);
+      base*=mix(1.,vAO,.9);
+      base*=1.-.3*uReal*uCloud*smoothstep(.48,.72,fbm(vXZ*.075+vec2(uTime*.01,uTime*.004)));
+      float fo=smoothstep(uFocus.z,uFocus.z*1.7+.6,length(vXZ-uFocus.xy));
+      base*=1.-uFocusAmt*.66*fo;
+      diffuseColor.rgb=base;`,
+            )
+            .replace(
+              "#include <normal_fragment_maps>",
+              `#include <normal_fragment_maps>
+      {
+        vec2 q=vXZ*3.;float c0=fbm(q),cx=fbm(q+vec2(.08,0.)),cz=fbm(q+vec2(0.,.08));
+        normal=normalize(normal+(viewMatrix*vec4(vec3(c0-cx,0.,c0-cz)*uReal*2.,0.)).xyz);
+      }`,
+            )
+            .replace(
+              "#include <tonemapping_fragment>",
+              `
+      {
+        float f=vH/uInterval,w=max(fwidth(f),1e-4),d=abs(fract(f+.5)-.5);
+        float ln=(1.-smoothstep(w*.45,w*1.35,d))*(1.-smoothstep(.18,.4,w));
+        float fi=vH/(uInterval*5.),wi=max(fwidth(fi),1e-5),di=abs(fract(fi+.5)-.5);
+        float li=(1.-smoothstep(wi*.9,wi*2.1,di))*(1.-smoothstep(.12,.3,wi));
+        float fo=smoothstep(uFocus.z,uFocus.z*1.7+.6,length(vXZ-uFocus.xy));
+        float la=uLineA*(1.-uFocusAmt*.55*fo)*(1.-.22*uReal);
+        gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(.95,.93,.88),ln*.55*la);
+        gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(1.,.84,.56),li*.9*la);
+        if(uSliceOn>.5){
+          float ds=abs(vH-uSlice),ws=max(fwidth(vH),1e-3);
+          float sl=1.-smoothstep(ws*.9,ws*2.8,ds);
+          if(vH<uSlice)gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(.03,.16,.22),.42);
+          gl_FragColor.rgb+=vec3(.25,.85,1.)*(sl*1.6+exp(-ds/14.)*.22);
+        }
+      }
+      #include <tonemapping_fragment>`,
+            )));
+    }));
+  const Ve = new o.Mesh(G, ct);
+  ((Ve.castShadow = Ve.receiveShadow = !0), F.add(Ve));
+  const Et = new o.MeshStandardMaterial({
+    roughness: 1,
+    side: o.DoubleSide,
+  });
+  Et.onBeforeCompile = (e) => {
+    ((e.vertexShader =
+      `attribute float aTop;varying float vWY,vTop;
+` +
+      e.vertexShader.replace(
+        "#include <begin_vertex>",
+        `#include <begin_vertex>
+vWY=transformed.y;vTop=aTop;`,
+      )),
+      (e.fragmentShader =
+        `varying float vWY,vTop;
+` +
+        e.fragmentShader.replace(
+          "#include <color_fragment>",
+          `#include <color_fragment>
+    float s1=step(.5,fract(vWY*1.6)),s2=step(.62,fract(vWY*.53+.17));
+    vec3 c=mix(vec3(.19,.145,.105),vec3(.26,.2,.145),s1*.55+s2*.35);
+    c*=.45+.55*smoothstep(${(-0.6).toFixed(2)},vTop,vWY);
+    c=mix(c,vec3(.31,.34,.2),smoothstep(vTop-.1,vTop-.01,vWY)*.85);
+    diffuseColor.rgb=pow(c,vec3(2.2));`,
+        )));
+  };
+  const Nt = [];
+  {
+    const e = [
+      {
+        n: [0, 0, -1],
+        f: (t) => [t, 0],
+      },
+      {
+        n: [1, 0, 0],
+        f: (t) => [360, t],
+      },
+      {
+        n: [0, 0, 1],
+        f: (t) => [360 - t, 360],
+      },
+      {
+        n: [-1, 0, 0],
+        f: (t) => [0, 360 - t],
+      },
+    ];
+    for (const t of e) {
+      const n = new Float32Array(2166),
+        s = new Float32Array(361 * 6),
+        a = new Float32Array(361 * 2),
+        r = [],
+        d = [];
+      for (let m = 0; m < 361; m++) {
+        const [b, u] = t.f(m);
+        d.push(u * 361 + b);
+        const v = -10 + (20 * b) / 360,
+          p = -10 + (20 * u) / 360;
+        if (
+          (n.set([v, 0, p, v, -0.6, p], m * 6),
+          s.set([...t.n, ...t.n], m * 6),
+          m < 360)
+        ) {
+          const g = m * 2;
+          r.push(g, g + 1, g + 2, g + 2, g + 1, g + 3);
+        }
+      }
+      const c = new o.BufferGeometry();
+      (c.setAttribute("position", new o.BufferAttribute(n, 3)),
+        c.setAttribute("normal", new o.BufferAttribute(s, 3)),
+        c.setAttribute("aTop", new o.BufferAttribute(a, 1)),
+        c.setIndex(r));
+      const h = new o.Mesh(c, Et);
+      (F.add(h),
+        Nt.push({
+          g: c,
+          ij: d,
+        }));
+    }
+  }
+  {
+    const e = new o.Mesh(
+      new o.BoxGeometry(20.5, 0.45, 20.5),
+      new o.MeshStandardMaterial({
+        color: 790033,
+        roughness: 0.55,
+        metalness: 0.4,
+      }),
+    );
+    ((e.position.y = -0.6 - 0.225), (e.receiveShadow = !0), F.add(e));
+    const t = new o.LineSegments(
+      new o.EdgesGeometry(e.geometry),
+      new o.LineBasicMaterial({
+        color: 14201450,
+        transparent: !0,
+        opacity: 0.45,
+      }),
+    );
+    (t.position.copy(e.position), F.add(t));
+  }
+  function Ct() {
+    const e = R(),
+      t = G.attributes.position.array;
+    for (let n = 0; n < 361 * 361; n++) t[n * 3 + 1] = z[n] * e;
+    ((G.attributes.position.needsUpdate = !0),
+      G.computeVertexNormals(),
+      G.computeBoundingSphere(),
+      G.computeBoundingBox());
+    for (const n of Nt) {
+      const s = n.g.attributes.position.array,
+        a = n.g.attributes.aTop.array;
+      (n.ij.forEach((r, d) => {
+        const c = z[r] * e;
+        ((s[d * 6 + 1] = c), (a[d * 2] = a[d * 2 + 1] = c));
+      }),
+        (n.g.attributes.position.needsUpdate = !0),
+        (n.g.attributes.aTop.needsUpdate = !0),
+        n.g.computeBoundingSphere());
+    }
+    ((L.uYS.value = e), (ge.uYS.value = e), Tn(), ut(), Hn());
+  }
+  const je = document.createElement("canvas");
+  je.width = je.height = 1024;
+  const Ye = new o.CanvasTexture(je);
+  ((Ye.encoding = o.sRGBEncoding),
+    (Ye.anisotropy = O.capabilities.getMaxAnisotropy()));
+  const He = new o.Group();
+  F.add(He);
+  const Ue = new o.MeshBasicMaterial({
+      map: Ye,
+      transparent: !0,
+      opacity: 0.9,
+      toneMapped: !1,
+    }),
+    Xe = new o.Mesh(new o.PlaneGeometry(20, 20), Ue);
+  ((Xe.rotation.x = -Math.PI / 2),
+    (Xe.position.y = -3.6),
+    (Xe.receiveShadow = !1),
+    He.add(Xe));
+  {
+    const e = new o.LineLoop(
+      new o.BufferGeometry().setFromPoints(
+        [
+          [-10.3, -10.3],
+          [10.3, -10.3],
+          [10.3, 10.3],
+          [-10.3, 10.3],
+        ].map(([s, a]) => new o.Vector3(s, -3.6, a)),
+      ),
+      new o.LineBasicMaterial({
+        color: 14201450,
+        transparent: !0,
+        opacity: 0.55,
+      }),
+    );
+    He.add(e);
+    const t = [];
+    for (const [s, a] of [
+      [-10, -10],
+      [10, -10],
+      [10, 10],
+      [-10, 10],
+    ])
+      t.push(new o.Vector3(s, -0.6 - 0.45, a), new o.Vector3(s, -3.6, a));
+    const n = new o.LineSegments(
+      new o.BufferGeometry().setFromPoints(t),
+      new o.LineDashedMaterial({
+        color: 14201450,
+        dashSize: 0.18,
+        gapSize: 0.14,
+        transparent: !0,
+        opacity: 0.4,
+      }),
+    );
+    (n.computeLineDistances(), He.add(n));
+  }
+  const ge = {
+      uYS: {
+        value: R(),
+      },
+      uProg: {
+        value: 0,
+      },
+      uPlaneY: {
+        value: -3.6,
+      },
+      uHMax: {
+        value: Le,
+      },
+      uAlpha: {
+        value: 0.95,
+      },
+    },
+    mn = new o.ShaderMaterial({
+      uniforms: ge,
+      transparent: !0,
+      depthWrite: !1,
+      vertexShader: `attribute float aH;attribute vec3 aC;uniform float uYS,uProg,uPlaneY,uHMax;varying vec3 vC;varying float vP;
+    void main(){float delay=(1.-aH/uHMax)*.45;float p=clamp((uProg-delay)/.55,0.,1.);p=p*p*(3.-2.*p);
+    vec3 q=position;q.y=mix(aH*uYS+.02,uPlaneY+.02,p);vC=aC;vP=p;gl_Position=projectionMatrix*modelViewMatrix*vec4(q,1.);}`,
+      fragmentShader:
+        "uniform float uAlpha;varying vec3 vC;varying float vP;void main(){gl_FragColor=vec4(vC,uAlpha*(.55+.45*sin(vP*3.14159)*.8+.2*vP));}",
+    }),
+    Qe = new o.LineSegments(new o.BufferGeometry(), mn);
+  ((Qe.frustumCulled = !1), F.add(Qe));
+  const Be = new o.Group();
+  F.add(Be);
+  const Rt = new o.Mesh(
+    new o.PlaneGeometry(21.4, 21.4),
+    new o.MeshBasicMaterial({
+      color: 6283519,
+      transparent: !0,
+      opacity: 0.1,
+      depthWrite: !1,
+      side: o.DoubleSide,
+      toneMapped: !1,
+    }),
+  );
+  ((Rt.rotation.x = -Math.PI / 2), Be.add(Rt));
+  const bn = new o.LineLoop(
+    new o.BufferGeometry().setFromPoints(
+      [
+        [-10.7, -10.7],
+        [10.7, -10.7],
+        [10.7, 10.7],
+        [-10.7, 10.7],
+      ].map(([e, t]) => new o.Vector3(e, 0, t)),
+    ),
+    new o.LineBasicMaterial({
+      color: 6283519,
+      transparent: !0,
+      opacity: 0.7,
+      toneMapped: !1,
+    }),
+  );
+  Be.add(bn);
+  const Ze = document.createElement("canvas");
+  ((Ze.width = 2048), (Ze.height = 96));
+  const Je = new o.CanvasTexture(Ze);
+  ((Je.encoding = o.sRGBEncoding),
+    (Je.anisotropy = O.capabilities.getMaxAnisotropy()));
+  function It() {
+    const e = Ze.getContext("2d"),
+      t = e.createLinearGradient(0, 0, 0, 96);
+    (t.addColorStop(0, "#2b2418"),
+      t.addColorStop(1, "#14110b"),
+      (e.fillStyle = t),
+      e.fillRect(0, 0, 2048, 96),
+      (e.strokeStyle = "rgba(216,178,106,.65)"),
+      (e.lineWidth = 3),
+      e.strokeRect(8, 10, 2032, 76),
+      (e.fillStyle = "#e2c078"),
+      (e.font = '600 40px "Noto Serif SC", "Songti SC", serif'),
+      (e.textAlign = "center"),
+      (e.textBaseline = "middle"),
+      e.fillText(
+        translate(
+          "WEDULAB   ·   等高线地形模型   ·   比例尺 1 : 50 000   ·   8 km × 8 km",
+        ),
+        1024,
+        50,
+      ),
+      (Je.needsUpdate = !0));
+  }
+  It();
+  {
+    const e = new o.Mesh(
+      new o.PlaneGeometry(9, 0.421875),
+      new o.MeshStandardMaterial({
+        map: Je,
+        roughness: 0.45,
+        metalness: 0.25,
+      }),
+    );
+    (e.position.set(0, -0.6 - 0.225, 10.256), F.add(e));
+  }
+  const zt = `float hs(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float vn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(hs(i),hs(i+vec2(1.,0.)),u.x),mix(hs(i+vec2(0.,1.)),hs(i+vec2(1.,1.)),u.x),u.y);}float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<4;i++){s+=a*vn(p);p=p*2.03+17.;a*=.5;}return s;}
+`,
+    gn = (() => {
+      const e = new Uint8Array(521284);
+      for (let n = 0; n < 361 * 361; n++) {
+        const s = E((z[n] / 1500) * 255, 0, 255);
+        ((e[n * 4] = e[n * 4 + 1] = e[n * 4 + 2] = s), (e[n * 4 + 3] = 255));
+      }
+      const t = new o.DataTexture(e, 361, 361, o.RGBAFormat);
+      return (
+        (t.magFilter = t.minFilter = o.LinearFilter),
+        (t.needsUpdate = !0),
+        t
+      );
+    })(),
+    Pe = {
+      uTime: L.uTime,
+      uOp: {
+        value: 1,
+      },
+      uSun: {
+        value: te.position.clone().normalize(),
+      },
+      uHT: {
+        value: gn,
+      },
+      uLevel: {
+        value: Fe,
+      },
+    },
+    xn = new o.ShaderMaterial({
+      uniforms: Pe,
+      transparent: !0,
+      depthWrite: !1,
+      vertexShader:
+        "varying vec3 vW;void main(){vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}",
+      fragmentShader: `uniform float uTime,uOp,uLevel;uniform vec3 uSun;uniform sampler2D uHT;varying vec3 vW;${zt}
+    void main(){
+      float d=uLevel-texture2D(uHT,vW.xz/20.+.5).r*1500.;
+      vec2 p=vW.xz*2.2+vec2(uTime*.35,uTime*.2);
+      float n0=fbm(p),nx=fbm(p+vec2(.05,0.)),nz=fbm(p+vec2(0.,.05));
+      vec3 N=normalize(vec3((n0-nx)*1.4,1.,(n0-nz)*1.4)),V=normalize(cameraPosition-vW);
+      float fr=pow(1.-max(dot(N,V),0.),3.);
+      vec3 col=mix(vec3(.17,.42,.44),vec3(.04,.16,.21),smoothstep(0.,22.,d));
+      col=mix(col,vec3(.55,.66,.76),fr*.6);
+      col+=vec3(1.,.93,.8)*pow(max(dot(N,normalize(uSun+V)),0.),160.)*1.3;
+      col=mix(col,vec3(.86,.9,.9),(1.-smoothstep(0.,3.5,d))*.4);
+      gl_FragColor=vec4(col,mix(.55,.92,smoothstep(0.,10.,d))*uOp);
+    }`,
+    }),
+    de = new o.Mesh(new o.CircleGeometry(1.9, 64), xn);
+  ((de.rotation.x = -Math.PI / 2),
+    de.position.set(x.basin.u * 10, 0, x.basin.v * 10),
+    (de.renderOrder = 1),
+    F.add(de));
+  const yn = new o.ShaderMaterial({
+      uniforms: Pe,
+      transparent: !0,
+      depthWrite: !1,
+      side: o.DoubleSide,
+      vertexShader:
+        "varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}",
+      fragmentShader: `uniform float uTime,uOp;varying vec2 vUv;${zt}
+    void main(){
+      float a=vUv.y,edge=smoothstep(0.,.32,a)*smoothstep(1.,.68,a);
+      vec3 col=mix(vec3(.10,.33,.47),vec3(.30,.62,.78),fbm(vec2(vUv.x*6.-uTime*1.2,a*2.5)));
+      col+=vec3(.9,.95,1.)*smoothstep(.6,.8,fbm(vec2(vUv.x*14.-uTime*2.4,a*5.)))*.4;
+      gl_FragColor=vec4(col,edge*smoothstep(0.,.6,vUv.x)*.95*uOp);
+    }`,
+    }),
+    Wt = be.map(() => {
+      const e = new o.Mesh(new o.BufferGeometry(), yn);
+      return ((e.renderOrder = 1), F.add(e), e);
+    });
+  function Mn() {
+    be.forEach((e, t) => Sn(e, dn[t], Wt[t]));
+  }
+  function Sn(e, [t, n], s) {
+    const a = new o.CatmullRomCurve3(e.map((v) => new o.Vector3(v.u, 0, v.v))),
+      r = 240,
+      d = [],
+      c = [],
+      h = [];
+    let m = 0,
+      b = null;
+    for (let v = 0; v <= r; v++) {
+      const p = v / r,
+        g = a.getPoint(p),
+        A = a.getTangent(p),
+        S = (t + (n - t) * p) / 10 / 2,
+        M = -A.z,
+        H = A.x,
+        B = Math.hypot(M, H),
+        N = j(g.x, g.z) * R() + 0.018;
+      if (
+        (b && (m += Math.hypot(g.x - b.x, g.z - b.z) * 10),
+        (b = g),
+        d.push(
+          (g.x + (M / B) * S) * 10,
+          N,
+          (g.z + (H / B) * S) * 10,
+          (g.x - (M / B) * S) * 10,
+          N,
+          (g.z - (H / B) * S) * 10,
+        ),
+        c.push(m, 0, m, 1),
+        v < r)
+      ) {
+        const T = v * 2;
+        h.push(T, T + 1, T + 2, T + 2, T + 1, T + 3);
+      }
+    }
+    const u = new o.BufferGeometry();
+    (u.setAttribute("position", new o.Float32BufferAttribute(d, 3)),
+      u.setAttribute("uv", new o.Float32BufferAttribute(c, 2)),
+      u.setIndex(h),
+      s.geometry.dispose(),
+      (s.geometry = u));
+  }
+  function $t(e) {
+    const t = [],
+      n = [];
+    for (const a of e) {
+      const r = a.index ? a.toNonIndexed() : a;
+      (t.push(...r.attributes.position.array),
+        n.push(...r.attributes.normal.array));
+    }
+    const s = new o.BufferGeometry();
+    return (
+      s.setAttribute("position", new o.Float32BufferAttribute(t, 3)),
+      s.setAttribute("normal", new o.Float32BufferAttribute(n, 3)),
+      s
+    );
+  }
+  const Ot = new o.MeshStandardMaterial({
+      roughness: 0.85,
+      flatShading: !0,
+    }),
+    wn = $t([
+      new o.ConeGeometry(0.075, 0.19, 6).translate(0, 0.15, 0),
+      new o.ConeGeometry(0.056, 0.15, 6).translate(0, 0.24, 0),
+      new o.CylinderGeometry(0.01, 0.013, 0.07, 4).translate(0, 0.035, 0),
+    ]),
+    An = $t([
+      new o.IcosahedronGeometry(0.075, 0)
+        .scale(1, 1.15, 1)
+        .translate(0, 0.15, 0),
+      new o.CylinderGeometry(0.01, 0.013, 0.08, 4).translate(0, 0.04, 0),
+    ]),
+    _t = Ge.filter((e) => e.conifer),
+    qt = Ge.filter((e) => !e.conifer),
+    dt = [
+      [
+        new o.InstancedMesh(wn, Ot, _t.length),
+        _t,
+        ["#2c4527", "#34502c", "#263d23", "#3b5530"],
+      ],
+      [
+        new o.InstancedMesh(An, Ot, qt.length),
+        qt,
+        ["#4d6a2c", "#5b7833", "#667a36", "#7d7a38"],
+      ],
+    ];
+  for (const [e, t, n] of dt)
+    (t.forEach((s, a) =>
+      e.setColorAt(
+        a,
+        new o.Color(n[Math.floor(s.c * n.length)]).convertSRGBToLinear(),
+      ),
+    ),
+      (e.castShadow = e.receiveShadow = !0),
+      (e.frustumCulled = !1),
+      F.add(e));
+  function Ln() {
+    const e = new o.Matrix4(),
+      t = new o.Quaternion(),
+      n = new o.Vector3(),
+      s = new o.Vector3(),
+      a = new o.Vector3(0, 1, 0);
+    for (const [r, d] of dt)
+      (d.forEach((c, h) => {
+        (s.set(c.u * 10, j(c.u, c.v) * R() - 0.01, c.v * 10),
+          t.setFromAxisAngle(a, c.r),
+          n.setScalar(c.s),
+          r.setMatrixAt(h, e.compose(s, t, n)));
+      }),
+        (r.instanceMatrix.needsUpdate = !0));
+  }
+  const Ke = new o.MeshBasicMaterial({
+    color: 15976825,
+    toneMapped: !1,
+    transparent: !0,
+    opacity: 0,
+  });
+  let xe = null;
+  function kn(e, t, n, s) {
+    const a = new o.CatmullRomCurve3(
+        e.map((d) => new o.Vector3(d.u * 10, j(d.u, d.v) * R() + s, d.v * 10)),
+      ),
+      r = new o.Mesh(new o.TubeGeometry(a, e.length * 3, t, 6, !1), n);
+    return (F.add(r), r);
+  }
+  function Tn() {
+    (xe && (F.remove(xe), xe.geometry.dispose()),
+      (xe = kn(At, 0.045, Ke, 0.07)),
+      Mn(),
+      Ln(),
+      (de.position.y = Fe * R() + 0.004));
+  }
+  const Ee = new o.Group();
+  F.add(Ee);
+  const Fn = new o.ShaderMaterial({
+    transparent: !0,
+    depthWrite: !1,
+    side: o.DoubleSide,
+    vertexShader:
+      "attribute float aT;varying float vT;void main(){vT=aT;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}",
+    fragmentShader:
+      "varying float vT;void main(){gl_FragColor=vec4(.95,.78,.45,.06+.34*pow(vT,3.));}",
+  });
+  function ut() {
+    for (; Ee.children.length;) Ee.children.pop().geometry.dispose();
+    if (!i.section) return;
+    const { a: e, b: t } = i.section,
+      n = 220,
+      s = [],
+      a = [],
+      r = [],
+      d = [];
+    for (let h = 0; h <= n; h++) {
+      const m = h / n,
+        b = e[0] + (t[0] - e[0]) * m,
+        u = e[1] + (t[1] - e[1]) * m,
+        v = j(b, u) * R();
+      if (
+        (s.push(b * 10, v + 0.02, u * 10, b * 10, -0.6, u * 10),
+        a.push(1, 0),
+        d.push(new o.Vector3(b * 10, v + 0.04, u * 10)),
+        h < n)
+      ) {
+        const p = h * 2;
+        r.push(p, p + 1, p + 2, p + 2, p + 1, p + 3);
+      }
+    }
+    const c = new o.BufferGeometry();
+    (c.setAttribute("position", new o.Float32BufferAttribute(s, 3)),
+      c.setAttribute("aT", new o.Float32BufferAttribute(a, 1)),
+      c.setIndex(r),
+      Ee.add(new o.Mesh(c, Fn)),
+      Ee.add(
+        new o.Line(
+          new o.BufferGeometry().setFromPoints(d),
+          new o.LineBasicMaterial({
+            color: 16767370,
+            toneMapped: !1,
+          }),
+        ),
+      ));
+  }
+  const ye = new o.Group();
+  F.add(ye);
+  const jn = (() => {
+      const e = document.createElement("canvas");
+      e.width = e.height = 256;
+      const t = e.getContext("2d"),
+        n = t.createRadialGradient(128, 128, 30, 128, 128, 128);
+      (n.addColorStop(0, "rgba(70,150,200,.55)"),
+        n.addColorStop(0.6, "rgba(50,120,170,.3)"),
+        n.addColorStop(1, "rgba(40,100,150,0)"),
+        (t.fillStyle = n),
+        t.fillRect(0, 0, 256, 256),
+        (t.strokeStyle = "rgba(160,220,255,.12)"));
+      for (let s = 0; s <= 256; s += 16)
+        (t.beginPath(),
+          t.moveTo(s, 0),
+          t.lineTo(s, 256),
+          t.moveTo(0, s),
+          t.lineTo(256, s),
+          t.stroke());
+      return new o.CanvasTexture(e);
+    })(),
+    Me = new o.Mesh(
+      new o.PlaneGeometry(48, 48),
+      new o.MeshBasicMaterial({
+        map: jn,
+        transparent: !0,
+        depthWrite: !1,
+        toneMapped: !1,
+        opacity: 0,
+      }),
+    );
+  ((Me.rotation.x = -Math.PI / 2), (Me.renderOrder = 2), F.add(Me));
+  function Hn() {
+    for (; ye.children.length;) ye.children.pop().geometry.dispose();
+    const e = R(),
+      t = x.main,
+      n = x.east,
+      s = t.u * 10,
+      a = t.v * 10,
+      r = n.u * 10,
+      d = n.v * 10,
+      c = (b, u, v) => {
+        const p = new o.Line(
+          new o.BufferGeometry().setFromPoints(b),
+          new o.LineDashedMaterial({
+            color: u,
+            dashSize: 0.16,
+            gapSize: 0.1,
+            depthTest: !1,
+            transparent: !0,
+            opacity: v,
+            toneMapped: !1,
+          }),
+        );
+        (p.computeLineDistances(), (p.renderOrder = 9), ye.add(p));
+      },
+      h = (b, u, v) => new o.Vector3(b, u, v);
+    (c([h(s, 0, a), h(s, t.h * e, a)], 16777215, 0.8),
+      c([h(r, 0, d), h(r, n.h * e, d)], 16777215, 0.8),
+      c([h(r, n.h * e, d), h(s, n.h * e, a)], 10476799, 0.75));
+    const m = new o.Line(
+      new o.BufferGeometry().setFromPoints([
+        h(s, n.h * e, a),
+        h(s, t.h * e, a),
+      ]),
+      new o.LineBasicMaterial({
+        color: 15980962,
+        depthTest: !1,
+        toneMapped: !1,
+      }),
+    );
+    ((m.renderOrder = 10), ye.add(m));
+  }
+  const X = new o.Group();
+  (F.add(X), (X.visible = !1));
+  {
+    const e = new o.Mesh(
+      new o.RingGeometry(0.14, 0.2, 40),
+      new o.MeshBasicMaterial({
+        color: 16777215,
+        transparent: !0,
+        opacity: 0.9,
+        depthTest: !1,
+        toneMapped: !1,
+      }),
+    );
+    ((e.rotation.x = -Math.PI / 2), (e.renderOrder = 11), X.add(e));
+    const t = new o.Line(
+      new o.BufferGeometry().setFromPoints([
+        new o.Vector3(0, 0, 0),
+        new o.Vector3(0, 1.4, 0),
+      ]),
+      new o.LineBasicMaterial({
+        color: 16777215,
+        transparent: !0,
+        opacity: 0.5,
+        depthTest: !1,
+      }),
+    );
+    ((t.renderOrder = 11), X.add(t));
+  }
+  const ue = new o.Group();
+  (F.add(ue), (ue.visible = !1));
+  {
+    const e = new o.Mesh(
+      new o.CylinderGeometry(0.07, 0.07, 4, 12, 1, !0),
+      new o.MeshBasicMaterial({
+        color: 16762726,
+        transparent: !0,
+        opacity: 0.95,
+        depthTest: !1,
+        toneMapped: !1,
+      }),
+    );
+    ((e.position.y = 2), (e.renderOrder = 12), ue.add(e));
+    for (let t = 0; t < 2; t++) {
+      const n = new o.Mesh(
+        new o.RingGeometry(0.34, 0.48, 48),
+        new o.MeshBasicMaterial({
+          color: 16762726,
+          transparent: !0,
+          opacity: 0.8,
+          depthTest: !1,
+          side: o.DoubleSide,
+          toneMapped: !1,
+        }),
+      );
+      ((n.rotation.x = -Math.PI / 2),
+        (n.renderOrder = 12),
+        (n.userData.ph = t * 0.5),
+        ue.add(n));
+    }
+  }
+  function Gt(e) {
+    const t = [];
+    for (let n = 0; n < 360; n++)
+      for (let s = 0; s < 360; s++) {
+        const a = z[n * 361 + s],
+          r = z[n * 361 + s + 1],
+          d = z[(n + 1) * 361 + s + 1],
+          c = z[(n + 1) * 361 + s],
+          h =
+            (a > e ? 8 : 0) |
+            (r > e ? 4 : 0) |
+            (d > e ? 2 : 0) |
+            (c > e ? 1 : 0);
+        if (h === 0 || h === 15) continue;
+        const m = () => [s + (e - a) / (r - a), n],
+          b = () => [s + 1, n + (e - r) / (d - r)],
+          u = () => [s + (e - c) / (d - c), n + 1],
+          v = () => [s, n + (e - a) / (c - a)],
+          p = (A, S) => t.push(A[0], A[1], S[0], S[1]),
+          g = (a + r + d + c) / 4 > e;
+        switch (h) {
+          case 1:
+          case 14:
+            p(v(), u());
+            break;
+          case 2:
+          case 13:
+            p(u(), b());
+            break;
+          case 3:
+          case 12:
+            p(v(), b());
+            break;
+          case 4:
+          case 11:
+            p(m(), b());
+            break;
+          case 6:
+          case 9:
+            p(m(), u());
+            break;
+          case 7:
+          case 8:
+            p(m(), v());
+            break;
+          case 5:
+            g ? (p(m(), v()), p(u(), b())) : (p(m(), b()), p(v(), u()));
+            break;
+          case 10:
+            g ? (p(m(), b()), p(v(), u())) : (p(m(), v()), p(u(), b()));
+            break;
+        }
+      }
+    return new Float32Array(t);
+  }
+  let Se = [];
+  const ft = new Map();
+  function Dt(e) {
+    return (ft.has(e) || ft.set(e, Gt(e)), ft.get(e));
+  }
+  function Vt() {
+    const e = i.interval;
+    Se = [];
+    for (let c = Math.ceil($e / e) * e; c <= Le; c += e)
+      Se.push({
+        L: c,
+        segs: Dt(c),
+        idx: c % (e * 5) === 0,
+      });
+    let t = 0;
+    for (const c of Se) t += c.segs.length / 2;
+    const n = new Float32Array(t * 3),
+      s = new Float32Array(t),
+      a = new Float32Array(t * 3);
+    let r = 0;
+    for (const c of Se) {
+      const h = c.idx ? [1, 0.82, 0.5] : [0.72, 0.9, 1];
+      for (let m = 0; m < c.segs.length; m += 2)
+        ((n[r * 3] = -10 + (20 * c.segs[m]) / 360),
+          (n[r * 3 + 2] = -10 + (20 * c.segs[m + 1]) / 360),
+          (s[r] = c.L),
+          a.set(h, r * 3),
+          r++);
+    }
+    const d = Qe.geometry;
+    (d.setAttribute("position", new o.BufferAttribute(n, 3)),
+      d.setAttribute("aH", new o.BufferAttribute(s, 1)),
+      d.setAttribute("aC", new o.BufferAttribute(a, 3)),
+      (L.uInterval.value = e),
+      Yt());
+  }
+  const et = (e) => -1 + (2 * e) / 360;
+  function Yt() {
+    const t = je.getContext("2d"),
+      n = i.interval,
+      s = (u) => ((u + 1) / 2) * 1024,
+      a = document.createElement("canvas");
+    a.width = a.height = 361;
+    const r = a.getContext("2d"),
+      d = r.createImageData(361, 361);
+    for (let u = 0; u < 361; u++)
+      for (let v = 0; v < 361; v++) {
+        const p = u * 361 + v,
+          g = z[p],
+          A = Math.floor(g / n) * n + n / 2,
+          S = Ft(vn, A).slice(),
+          [M, H] = ot(et(v), et(u)),
+          B = -M * 2.2,
+          N = 1,
+          T = -H * 2.2,
+          I = Math.hypot(B, N, T),
+          V =
+            0.72 +
+            0.36 * E((B * -0.55 + N * 0.7 + T * -0.55) / I / 0.98, 0, 1.2);
+        (g < Fe && ((S[0] = 156 / V), (S[1] = 200 / V), (S[2] = 216 / V)),
+          (d.data[p * 4] = E(S[0] * V, 0, 255)),
+          (d.data[p * 4 + 1] = E(S[1] * V, 0, 255)),
+          (d.data[p * 4 + 2] = E(S[2] * V, 0, 255)),
+          (d.data[p * 4 + 3] = 255));
+      }
+    (r.putImageData(d, 0, 0),
+      (t.imageSmoothingEnabled = !0),
+      (t.imageSmoothingQuality = "high"),
+      t.drawImage(a, 0, 0, 1024, 1024),
+      (t.strokeStyle = "rgba(60,70,80,.13)"),
+      (t.lineWidth = 1));
+    for (let u = 1; u < 4; u++) {
+      const v = (u * 1024) / 4;
+      (t.beginPath(),
+        t.moveTo(v, 0),
+        t.lineTo(v, 1024),
+        t.moveTo(0, v),
+        t.lineTo(1024, v),
+        t.stroke());
+    }
+    const c = (u) => (u / 360) * 1024;
+    t.lineJoin = t.lineCap = "round";
+    for (const u of Se) {
+      ((t.strokeStyle = u.idx ? "rgba(104,58,26,.95)" : "rgba(120,72,38,.72)"),
+        (t.lineWidth = u.idx ? 2.6 : 1.3),
+        t.beginPath());
+      const v = u.segs;
+      for (let p = 0; p < v.length; p += 4)
+        (t.moveTo(c(v[p]), c(v[p + 1])), t.lineTo(c(v[p + 2]), c(v[p + 3])));
+      t.stroke();
+    }
+    ((t.strokeStyle = "#2f7fc4"),
+      be.forEach((u, v) => {
+        ((t.lineWidth = v ? 2.4 : 3.2),
+          t.beginPath(),
+          u.forEach((p, g) =>
+            g ? t.lineTo(s(p.u), s(p.v)) : t.moveTo(s(p.u), s(p.v)),
+          ),
+          t.stroke());
+      }));
+    {
+      const [u, v] = J(-0.216),
+        [p, g] = J(C.half * 0.72);
+      ((t.strokeStyle = "#5a2e14"),
+        (t.lineWidth = 3),
+        t.beginPath(),
+        t.moveTo(s(u), s(v)),
+        t.lineTo(s(p), s(g)),
+        t.stroke(),
+        (t.lineWidth = 2));
+      const A = Math.hypot(s(p) - s(u), s(g) - s(v)),
+        S = Math.floor(A / 11);
+      for (let M = 1; M < S; M++) {
+        const H = s(u) + ((s(p) - s(u)) * M) / S,
+          B = s(v) + ((s(g) - s(v)) * M) / S;
+        (t.beginPath(),
+          t.moveTo(H, B),
+          t.lineTo(H + C.n[0] * 8, B + C.n[1] * 8),
+          t.stroke());
+      }
+    }
+    const h = (u, v) => {
+      const p =
+          v > 0 ? Math.floor((u.h - 1) / n) * n : Math.ceil((u.h + 1) / n) * n,
+        g = Dt(p);
+      ((t.strokeStyle = "rgba(104,58,26,.95)"), (t.lineWidth = 2));
+      for (let A = 0; A < 6; A++) {
+        const S = (A / 6) * Math.PI * 2 + 0.3;
+        let M = null,
+          H = 1e9;
+        for (let I = 0; I < g.length; I += 4) {
+          const Z = et((g[I] + g[I + 2]) / 2),
+            V = et((g[I + 1] + g[I + 3]) / 2),
+            st = Z - u.u,
+            y = V - u.v;
+          if (Math.hypot(st, y) > 0.3) continue;
+          let $ = Math.abs(Math.atan2(y, st) - S);
+          (($ = Math.min($, Math.PI * 2 - $)),
+            $ < H &&
+              ((H = $),
+              (M = {
+                u: Z,
+                v: V,
+              })));
+        }
+        if (!M || H > 0.3) continue;
+        const [B, N] = ot(M.u, M.v),
+          T = Math.hypot(B, N) || 1;
+        (t.beginPath(),
+          t.moveTo(s(M.u), s(M.v)),
+          t.lineTo(s(M.u) - (B / T) * 11, s(M.v) - (N / T) * 11),
+          t.stroke());
+      }
+    };
+    (h(x.main, 1),
+      h(x.mid, 1),
+      h(x.east, 1),
+      h(x.hill, 1),
+      h(x.basin, -1),
+      (t.font = "600 21px JetBrains Mono, monospace"),
+      (t.textAlign = "center"),
+      (t.textBaseline = "middle"));
+    const m = [];
+    for (const u of Se) {
+      if (!u.idx) continue;
+      const v = u.segs;
+      let p = 0;
+      const g = Math.max(4, Math.floor(v.length / 4 / 9) * 4);
+      for (let A = ((g / 2) | 0) & -4; A < v.length && p < 3; A += g) {
+        const S = c(v[A]),
+          M = c(v[A + 1]),
+          H = c(v[A + 2]),
+          B = c(v[A + 3]),
+          N = (S + H) / 2,
+          T = (M + B) / 2;
+        if (
+          N < 60 ||
+          T < 60 ||
+          N > 964 ||
+          T > 964 ||
+          m.some((Z) => Math.hypot(Z[0] - N, Z[1] - T) < 150)
+        )
+          continue;
+        let I = Math.atan2(B - M, H - S);
+        (I > Math.PI / 2 && (I -= Math.PI),
+          I < -Math.PI / 2 && (I += Math.PI),
+          t.save(),
+          t.translate(N, T),
+          t.rotate(I),
+          (t.lineWidth = 5),
+          (t.strokeStyle = "rgba(240,232,214,.95)"),
+          t.strokeText(u.L, 0, 0),
+          (t.fillStyle = "#6a3a1a"),
+          t.fillText(u.L, 0, 0),
+          t.restore(),
+          m.push([N, T]),
+          p++);
+      }
+    }
+    const b = (u, v) => {
+      const p = s(u.u),
+        g = s(u.v);
+      ((t.fillStyle = "#2a1a0e"),
+        v
+          ? (t.beginPath(),
+            t.moveTo(p, g - 8),
+            t.lineTo(p + 7, g + 5),
+            t.lineTo(p - 7, g + 5),
+            t.closePath(),
+            t.fill())
+          : (t.beginPath(), t.arc(p, g, 4, 0, 7), t.fill()),
+        (t.font = "700 24px JetBrains Mono, monospace"),
+        (t.textAlign = "left"),
+        (t.lineWidth = 5),
+        (t.strokeStyle = "rgba(240,232,214,.95)"));
+      const A = Math.round(u.h);
+      (t.strokeText(A, p + 10, g),
+        t.fillText(A, p + 10, g),
+        (t.textAlign = "center"));
+    };
+    (b(x.main, 1),
+      b(x.mid, 1),
+      b(x.east, 1),
+      b(x.hill, 1),
+      b(x.saddle, 0),
+      b(x.saddle2, 0),
+      b(x.basin, 0),
+      (t.strokeStyle = "#2a1a0e"),
+      (t.lineWidth = 6),
+      t.strokeRect(3, 3, 1018, 1018),
+      (t.lineWidth = 1.5),
+      t.strokeRect(14, 14, 996, 996),
+      t.save(),
+      t.translate(962, 70),
+      (t.fillStyle = "rgba(245,238,224,.85)"),
+      t.beginPath(),
+      t.arc(0, 0, 32, 0, 7),
+      t.fill(),
+      (t.fillStyle = "#2a1a0e"),
+      t.beginPath(),
+      t.moveTo(0, -24),
+      t.lineTo(9, 10),
+      t.lineTo(0, 4),
+      t.lineTo(-9, 10),
+      t.closePath(),
+      t.fill(),
+      (t.font = "700 16px JetBrains Mono"),
+      t.fillText("N", 0, -28),
+      t.restore(),
+      t.save(),
+      t.translate(40, 974),
+      (t.fillStyle = "rgba(245,238,224,.85)"),
+      t.fillRect(-12, -26, 300, 50));
+    for (let u = 0; u < 4; u++)
+      ((t.fillStyle = u % 2 ? "#f5eee0" : "#2a1a0e"),
+        t.fillRect(u * 64, 0, 64, 8));
+    ((t.strokeStyle = "#2a1a0e"),
+      (t.lineWidth = 1.2),
+      t.strokeRect(0, 0, 256, 8),
+      (t.fillStyle = "#2a1a0e"),
+      (t.font = "600 14px JetBrains Mono"),
+      (t.textAlign = "left"),
+      t.fillText("0", -3, -12),
+      t.fillText("2 km", 244, -12),
+      t.fillText(translate("等高距 {0} m", [n]), 142, -12),
+      t.restore(),
+      (Ye.needsUpdate = !0));
+  }
+  const Y = w("#map"),
+    Bn = Y.getContext("2d");
+  let ne = null,
+    ae = null;
+  function Pn(e) {
+    const t = Y.getBoundingClientRect(),
+      n = Math.min(devicePixelRatio, 2),
+      s = Math.round(t.width * n);
+    if (!s) return;
+    Y.width !== s && (Y.width = Y.height = s);
+    const a = Bn,
+      r = (u) => ((u + 1) / 2) * s;
+    (a.clearRect(0, 0, s, s), a.drawImage(je, 0, 0, s, s));
+    const d = W.target,
+      c = q.position,
+      h = Math.atan2(d.z - c.z, d.x - c.x),
+      m = r(E(d.x / 10, -1, 1)),
+      b = r(E(d.z / 10, -1, 1));
+    if (
+      ((a.fillStyle = "rgba(30,40,50,.08)"),
+      (a.strokeStyle = "rgba(30,40,50,.35)"),
+      (a.lineWidth = n),
+      a.beginPath(),
+      a.moveTo(m - Math.cos(h) * s * 0.12, b - Math.sin(h) * s * 0.12),
+      a.arc(
+        m - Math.cos(h) * s * 0.12,
+        b - Math.sin(h) * s * 0.12,
+        s * 0.12,
+        h - 0.32,
+        h + 0.32,
+      ),
+      a.closePath(),
+      a.fill(),
+      a.stroke(),
+      i.slice)
+    ) {
+      const u = Gt(i.sliceH),
+        v = (p) => (p / 360) * s;
+      (a.save(),
+        (a.shadowColor = "#5fe0ff"),
+        (a.shadowBlur = 6 * n),
+        (a.strokeStyle = "#1ec6f2"),
+        (a.lineWidth = 2.4 * n),
+        a.beginPath());
+      for (let p = 0; p < u.length; p += 4)
+        (a.moveTo(v(u[p]), v(u[p + 1])), a.lineTo(v(u[p + 2]), v(u[p + 3])));
+      (a.stroke(), a.restore());
+    }
+    if (i.focus) {
+      const u = _[i.focus],
+        v = ((i.focus === "main" ? 0.22 : 0.16) * s) / 2;
+      (a.save(),
+        (a.strokeStyle = "#b8862e"),
+        (a.lineWidth = 2 * n),
+        a.setLineDash([6 * n, 4 * n]),
+        (a.lineDashOffset = -e / 60),
+        a.beginPath(),
+        a.arc(r(u.u), r(u.v), v, 0, 7),
+        a.stroke(),
+        a.restore());
+    }
+    if (i.quiz && i.quiz.cur && i.quiz.cur.at) {
+      const [u, v] = i.quiz.cur.at,
+        p = (e / 1200) % 1;
+      ((a.strokeStyle = `rgba(200,120,20,${1 - p})`),
+        (a.lineWidth = 3 * n),
+        a.beginPath(),
+        a.arc(r(u), r(v), (6 + p * 22) * n, 0, 7),
+        a.stroke(),
+        (a.fillStyle = "#c87814"),
+        a.beginPath(),
+        a.arc(r(u), r(v), 4.5 * n, 0, 7),
+        a.fill());
+    }
+    if (i.section) {
+      const { a: u, b: v } = i.section;
+      (a.save(),
+        (a.strokeStyle = "#b3261e"),
+        (a.lineWidth = 2.4 * n),
+        a.beginPath(),
+        a.moveTo(r(u[0]), r(u[1])),
+        a.lineTo(r(v[0]), r(v[1])),
+        a.stroke(),
+        (a.font = `700 ${11 * n}px JetBrains Mono`),
+        (a.textAlign = "center"),
+        (a.textBaseline = "middle"));
+      for (const [p, g] of [
+        [u, "A"],
+        [v, "B"],
+      ])
+        ((a.fillStyle = "#b3261e"),
+          a.beginPath(),
+          a.arc(r(p[0]), r(p[1]), 8 * n, 0, 7),
+          a.fill(),
+          (a.fillStyle = "#fff"),
+          a.fillText(g, r(p[0]), r(p[1]) + 0.5));
+      a.restore();
+    }
+    if (ne) {
+      const u = r(ne[0]),
+        v = r(ne[1]);
+      ((a.strokeStyle = "rgba(20,20,20,.55)"),
+        (a.lineWidth = n),
+        a.setLineDash([3 * n, 3 * n]),
+        a.beginPath(),
+        a.moveTo(u, 0),
+        a.lineTo(u, s),
+        a.moveTo(0, v),
+        a.lineTo(s, v),
+        a.stroke(),
+        a.setLineDash([]),
+        (a.fillStyle = "#111"),
+        a.beginPath(),
+        a.arc(u, v, 3 * n, 0, 7),
+        a.fill());
+    }
+  }
+  function Ut(e) {
+    const t = Y.getBoundingClientRect();
+    return [
+      E(((e.clientX - t.left) / t.width) * 2 - 1, -1, 1),
+      E(((e.clientY - t.top) / t.height) * 2 - 1, -1, 1),
+    ];
+  }
+  (Y.addEventListener("pointerdown", (e) => {
+    (Y.setPointerCapture(e.pointerId),
+      (ae = {
+        a: Ut(e),
+        moved: !1,
+      }));
+  }),
+    Y.addEventListener("pointermove", (e) => {
+      const t = Ut(e);
+      if (((ne = t), ht(t[0], t[1]), ae)) {
+        const [n, s] = ae.a;
+        Math.hypot(t[0] - n, t[1] - s) > 0.06 &&
+          ((ae.moved = !0), pt([n, s], t));
+      }
+    }),
+    Y.addEventListener("pointerup", (e) => {
+      if (ae && !ae.moved) {
+        const [t, n] = ae.a,
+          s = q.position.clone().sub(W.target),
+          a = j(t, n) * R();
+        oe(new o.Vector3(t * 10, a, n * 10).add(s), [t * 10, a, n * 10], 1e3);
+      }
+      ae = null;
+    }),
+    Y.addEventListener("pointerleave", () => {
+      ((ne = null),
+        (X.visible = !1),
+        (w("#mapRead").innerHTML = translate("悬停读取海拔")));
+    }));
+  function ht(e, t) {
+    const n = j(e, t),
+      s = Oe(e, t);
+    ((w("#mapRead").innerHTML = translate(
+      "海拔 <b>{0}</b> m · 坡度 <b>{1}°</b>",
+      [Math.round(n), s.toFixed(0)],
+    )),
+      (X.visible = !0),
+      X.position.set(e * 10, n * R(), t * 10));
+  }
+  w("#mapExp").onclick = () => w("#mapbox").classList.toggle("big");
+  const fe = w("#prof"),
+    En = fe.getContext("2d");
+  let Ne = null;
+  function pt(e, t) {
+    ((i.section = {
+      a: e,
+      b: t,
+    }),
+      ut(),
+      w("#profile").classList.remove("hide"),
+      Ce(),
+      K());
+  }
+  function Xt() {
+    ((i.section = null), ut(), w("#profile").classList.add("hide"), K());
+  }
+  w("#profClose").onclick = Xt;
+  function Nn() {
+    const { a: e, b: t } = i.section,
+      n = 360,
+      s = Math.hypot(t[0] - e[0], t[1] - e[1]) * 4e3,
+      a = [];
+    for (let r = 0; r <= n; r++) {
+      const d = r / n;
+      a.push({
+        d: d * s,
+        h: j(e[0] + (t[0] - e[0]) * d, e[1] + (t[1] - e[1]) * d),
+        t: d,
+      });
+    }
+    return {
+      out: a,
+      len: s,
+    };
+  }
+  function Ce() {
+    if (!i.section) return;
+    const e = fe.getBoundingClientRect(),
+      t = Math.min(devicePixelRatio, 2);
+    if (!e.width) return;
+    ((fe.width = Math.round(e.width * t)),
+      (fe.height = Math.round(e.height * t)));
+    const n = En;
+    n.setTransform(t, 0, 0, t, 0, 0);
+    const s = e.width,
+      a = e.height,
+      r = 50,
+      d = 18,
+      c = 16,
+      h = 26,
+      m = i.interval;
+    n.clearRect(0, 0, s, a);
+    const { out: b, len: u } = Nn();
+    let v = 1 / 0,
+      p = -1 / 0;
+    for (const y of b) ((v = Math.min(v, y.h)), (p = Math.max(p, y.h)));
+    const g = Math.max(0, Math.floor(v / m) * m - m),
+      A = Math.ceil(p / m) * m + m,
+      S = (y) => r + (y / u) * (s - r - d),
+      M = (y) => c + (1 - (y - g) / (A - g)) * (a - c - h);
+    ((n.font = "500 10px JetBrains Mono"),
+      (n.textAlign = "right"),
+      (n.textBaseline = "middle"));
+    const H = Math.max(1, Math.ceil((A - g) / m / 7));
+    for (let y = g, P = 0; y <= A; y += m, P++) {
+      const $ = y % (m * 5) === 0;
+      ((n.strokeStyle = $ ? "rgba(216,178,106,.28)" : "rgba(255,255,255,.06)"),
+        (n.lineWidth = 1),
+        n.beginPath(),
+        n.moveTo(r, M(y) + 0.5),
+        n.lineTo(s - d, M(y) + 0.5),
+        n.stroke(),
+        (P % H === 0 || $) &&
+          ((n.fillStyle = $ ? "#d8b26a" : "#6c7078"),
+          n.fillText(y, r - 7, M(y))));
+    }
+    ((n.textAlign = "center"),
+      (n.textBaseline = "top"),
+      (n.fillStyle = "#6c7078"));
+    const B = u > 6e3 ? 2e3 : u > 3e3 ? 1e3 : 500;
+    for (let y = 0; y <= u + 1; y += B)
+      n.fillText(`${(y / 1e3).toFixed(B < 1e3 ? 1 : 0)} km`, S(y), a - h + 7);
+    const N = n.createLinearGradient(0, M(A), 0, M(g));
+    for (const [y, P] of rt)
+      y >= g - 150 &&
+        y <= A + 150 &&
+        N.addColorStop(
+          E(1 - (y - g) / (A - g), 0, 1),
+          `rgba(${P.join(",")},.8)`,
+        );
+    (n.beginPath(), n.moveTo(S(0), M(g)));
+    for (const y of b) n.lineTo(S(y.d), M(y.h));
+    (n.lineTo(S(u), M(g)),
+      n.closePath(),
+      (n.fillStyle = N),
+      n.fill(),
+      n.beginPath());
+    for (const [y, P] of b.entries())
+      y ? n.lineTo(S(P.d), M(P.h)) : n.moveTo(S(P.d), M(P.h));
+    ((n.strokeStyle = "#f5efe3"),
+      (n.lineWidth = 1.8),
+      n.stroke(),
+      (n.fillStyle = "#f3d9a2"));
+    for (let y = 1; y < b.length; y++) {
+      const P = b[y - 1],
+        $ = b[y];
+      for (
+        let Ae = Math.ceil(Math.min(P.h, $.h) / m) * m;
+        Ae <= Math.max(P.h, $.h);
+        Ae += m
+      ) {
+        if (Ae === Math.min(P.h, $.h)) continue;
+        const mt = P.d + (($.d - P.d) * (Ae - P.h)) / ($.h - P.h);
+        ((n.strokeStyle = "rgba(243,217,162,.18)"),
+          n.setLineDash([2, 3]),
+          n.beginPath(),
+          n.moveTo(S(mt), c),
+          n.lineTo(S(mt), M(Ae)),
+          n.stroke(),
+          n.setLineDash([]),
+          n.beginPath(),
+          n.arc(S(mt), M(Ae), 2.2, 0, 7),
+          n.fill());
+      }
+    }
+    const T = b[0].h + 2,
+      I = b[b.length - 1].h + 2,
+      Z = b.some((y) => y.t > 0.01 && y.t < 0.99 && y.h > T + (I - T) * y.t);
+    ((n.strokeStyle = Z ? "#ff8f73" : "#8fe0aa"),
+      n.setLineDash([5, 4]),
+      (n.lineWidth = 1.4),
+      n.beginPath(),
+      n.moveTo(S(0), M(T)),
+      n.lineTo(S(u), M(I)),
+      n.stroke(),
+      n.setLineDash([]));
+    const V = w("#profLos");
+    ((V.className = "los " + (Z ? "no" : "ok")),
+      (V.textContent = Z
+        ? translate("A、B 不可通视")
+        : translate("A、B 可通视")),
+      (n.font = "700 11px JetBrains Mono"),
+      (n.textBaseline = "middle"));
+    for (const [y, P] of [
+      [b[0], "A"],
+      [b[b.length - 1], "B"],
+    ])
+      ((n.fillStyle = "#d8b26a"),
+        n.beginPath(),
+        n.arc(S(y.d), M(y.h), 8, 0, 7),
+        n.fill(),
+        (n.fillStyle = "#1a1206"),
+        n.fillText(P, S(y.d), M(y.h) + 0.5));
+    if (Ne != null) {
+      const y = b[Math.round(E(Ne, 0, 1) * (b.length - 1))];
+      ((n.strokeStyle = "rgba(255,255,255,.5)"),
+        n.beginPath(),
+        n.moveTo(S(y.d), c),
+        n.lineTo(S(y.d), a - h),
+        n.stroke(),
+        (n.fillStyle = "#fff"),
+        n.beginPath(),
+        n.arc(S(y.d), M(y.h), 3.5, 0, 7),
+        n.fill());
+      const P = `${Math.round(y.h)} m`;
+      ((n.font = "600 11px JetBrains Mono"),
+        (n.textAlign = S(y.d) > s - 80 ? "right" : "left"),
+        n.fillText(
+          P,
+          S(y.d) + (n.textAlign === "right" ? -8 : 8),
+          M(y.h) - 12,
+        ));
+    }
+    const st = (a - c - h) / (A - g) / ((s - r - d) / u);
+    w("#profInfo").textContent = translate(
+      "长 {0} km · 最高 {1} m · 最低 {2} m · 垂直夸张 ×{3}",
+      [(u / 1e3).toFixed(2), Math.round(p), Math.round(v), st.toFixed(1)],
+    );
+  }
+  (fe.addEventListener("pointermove", (e) => {
+    const t = fe.getBoundingClientRect();
+    if (((Ne = (e.clientX - t.left - 50) / (t.width - 68)), i.section)) {
+      const { a: n, b: s } = i.section,
+        a = E(Ne, 0, 1);
+      ht(n[0] + (s[0] - n[0]) * a, n[1] + (s[1] - n[1]) * a);
+    }
+    Ce();
+  }),
+    fe.addEventListener("pointerleave", () => {
+      ((Ne = null), (X.visible = !1), Ce());
+    }));
+  const Qt = w("#labels");
+  let tt = [];
+  function se(e, t, n, s) {
+    const a = document.createElement("div");
+    return (
+      (a.className = "lb " + e),
+      (a.innerHTML = `<div class="in"><div class="tag"><b>${t}</b>${n ? `<span>${n}</span>` : ""}</div><div class="stem"></div></div><i class="dot"></i>`),
+      Qt.appendChild(a),
+      tt.push({
+        el: a,
+        getPos: s,
+      }),
+      a
+    );
+  }
+  const Re = (e, t, n, s = 0) => new o.Vector3(e * 10, n * R() + s, t * 10);
+  function K() {
+    if (((Qt.innerHTML = ""), (tt = []), i.labels && !i.quiz))
+      for (const e in _) {
+        const t = _[e],
+          n = [
+            "main",
+            "mid",
+            "east",
+            "saddle",
+            "saddle2",
+            "basin",
+            "hill",
+          ].includes(e);
+        se(
+          i.focus === e ? "gold" : "",
+          t.name,
+          n ? `${Math.round(t.h)} m` : t.en,
+          () => Re(t.u, t.v, t.h, 0.05),
+        );
+      }
+    if (
+      (i.slice &&
+        se(
+          "cyan mini",
+          translate("等高面 {0} m", [Math.round(i.sliceH)]),
+          "",
+          () => new o.Vector3(-10.7, i.sliceH * R(), 10.7),
+        ),
+      i.sea)
+    ) {
+      const e = x.main,
+        t = x.east;
+      (se(
+        "cyan mini",
+        translate("海平面 0 m"),
+        "",
+        () => new o.Vector3(12, 0, 12),
+      ),
+        se("mini", translate("海拔"), `${Math.round(e.h)} m`, () =>
+          Re(e.u, e.v, e.h * 0.45),
+        ),
+        se("mini", translate("海拔"), `${Math.round(t.h)} m`, () =>
+          Re(t.u, t.v, t.h * 0.45),
+        ),
+        se(
+          "gold mini",
+          translate("相对高度"),
+          `${Math.round(e.h - t.h)} m`,
+          () =>
+            new o.Vector3(e.u * 10 - 1.3, ((e.h + t.h) / 2) * R(), e.v * 10),
+        ));
+    }
+    if (i.section) {
+      const { a: e, b: t } = i.section;
+      (se("sec", "A", "", () => Re(e[0], e[1], j(e[0], e[1]), 0.05)),
+        se("sec", "B", "", () => Re(t[0], t[1], j(t[0], t[1]), 0.05)));
+    }
+  }
+  const we = new o.Vector3();
+  function Cn() {
+    const e = De.getBoundingClientRect();
+    for (const t of tt) {
+      if (
+        (we.copy(t.getPos()).project(q),
+        we.z > 1 || Math.abs(we.x) > 1.1 || Math.abs(we.y) > 1.1)
+      ) {
+        t.el.style.opacity = 0;
+        continue;
+      }
+      ((t.el.style.opacity = 1),
+        (t.el.style.transform = `translate(${((we.x + 1) / 2) * e.width}px,${((1 - we.y) / 2) * e.height}px)`));
+    }
+  }
+  let Q = null;
+  function oe(e, t, n = 1600) {
+    Q = {
+      p0: q.position.clone(),
+      t0: W.target.clone(),
+      p1: e.isVector3 ? e : new o.Vector3(...e),
+      t1: new o.Vector3(...t),
+      s: performance.now(),
+      d: n,
+    };
+  }
+  W.addEventListener("start", () => {
+    Q = null;
+  });
+  function Ie(e) {
+    const t = _[e],
+      n = t.dir,
+      s = Math.hypot(n[0], n[1]),
+      a = t.h * R(),
+      r = [t.u * 10, a * 0.8, t.v * 10];
+    (oe(
+      [
+        r[0] + (n[0] / s) * t.dist,
+        a + t.dist * t.up,
+        r[2] + (n[1] / s) * t.dist,
+      ],
+      r,
+    ),
+      (i.focus = e),
+      K());
+  }
+  const ie = {
+      home: [
+        [23, 21, 31],
+        [0, -1.4, 0],
+      ],
+      form: [
+        [27, 9, 27],
+        [0, -1.2, 0],
+      ],
+      elev: [
+        [1, 6, 24],
+        [0, 2.8, -3],
+      ],
+      slope: [
+        [25, 15, 10],
+        [1, 0, -1],
+      ],
+      top: [
+        [0, 33, 17],
+        [0, -1, 1.5],
+      ],
+    },
+    Rn = {
+      play: '<svg viewBox="0 0 14 14"><path d="M3.5 2.5l8 4.5-8 4.5z"/></svg>',
+      down: '<svg viewBox="0 0 14 14"><path d="M7 2v9M3 7.5L7 11l4-3.5"/></svg>',
+      eye: '<svg viewBox="0 0 14 14"><path d="M1 7s2.2-4 6-4 6 4 6 4-2.2 4-6 4-6-4-6-4z"/><circle cx="7" cy="7" r="1.8"/></svg>',
+      layer:
+        '<svg viewBox="0 0 14 14"><path d="M7 1.5l5.5 3L7 7.5 1.5 4.5zM1.5 7.5L7 10.5l5.5-3M1.5 10L7 13l5.5-3"/></svg>',
+      cut: '<svg viewBox="0 0 14 14"><path d="M1 7h12M3 4h8M5 1.5h4"/></svg>',
+      arrow: '<svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>',
+      rot: '<svg viewBox="0 0 14 14"><path d="M12 7a5 5 0 1 1-1.5-3.6"/><path d="M11 1v3H8"/></svg>',
+      prof: '<svg viewBox="0 0 14 14"><path d="M1 11l3-5 3 3 2-5 4 7"/></svg>',
+    },
+    k = (e, t, n = "", s = !1, a = "") =>
+      `<button class="btn ${a}${s ? " on" : ""}" data-act="${e}">${Rn[n] || ""}${t}</button>`,
+    D = (e) => Math.round(e);
+  function Zt() {
+    const e = i.interval,
+      t = Math.floor(Te.top / e) - Math.floor(Te.bot / e),
+      n = Math.floor(Te.top / e) * e,
+      s = n - (t - 1) * e;
+    return {
+      d: e,
+      n: t,
+      hi: n,
+      lo: s,
+      min: (t - 1) * e,
+      max: (t + 1) * e,
+    };
+  }
+  const nt = {
+      peaks: {
+        name: translate("穿越山脉"),
+        a: [-0.95, -0.52],
+        b: [0.95, -0.52],
+      },
+      valley: {
+        name: translate("横切两条河谷"),
+        a: [-0.55, 0.08],
+        b: [0.4, 0.08],
+      },
+      ridge: {
+        name: translate("纵贯山脊"),
+        a: [x.main.u, x.main.v],
+        b: [-0.97, 0],
+      },
+      basin: {
+        name: translate("穿过盆地"),
+        a: [-0.95, 0.52],
+        b: [-0.2, 0.52],
+      },
+      cliff: {
+        name: translate("穿过断层崖"),
+        a: J(0.03, -0.3),
+        b: J(0.03, 0.3),
+      },
+      saddle: {
+        name: translate("主峰—中峰"),
+        a: [x.main.u, x.main.v],
+        b: [x.mid.u, x.mid.v],
+      },
+    },
+    at = (e) => e.map((t) => k("sec:" + t, nt[t].name, "prof")).join(""),
+    ee = [
+      {
+        t: translate("认识等高线地形图"),
+        en: "Overview",
+        cam: "home",
+        body: () =>
+          translate(
+            `
+      <p class="lead"><b>等高线</b>是地面上海拔相同的各点连成的闭合曲线。把立体的地表“压”成平面上的一圈圈线条，就能在一张纸上读出山的高低、坡的陡缓和地形的起伏。</p>
+      <div class="rule" data-k="THIS MODEL"><p>8 km × 8 km 虚拟山区<small>北部三座山峰连成东西向山脉，两条支流从鞍部南侧发源、在中南部汇合；东峰东南翼被断层切出一道陡崖；西南有盆地湖泊，南部还有一座孤丘。下方悬浮的是同一地区的等高线地形图。</small></p></div>
+      <div class="sec">操作</div>
+      <ul class="pts">
+        <li><b>拖动</b>旋转视角，<b>滚轮</b>缩放，<b>右键</b>平移。</li>
+        <li>鼠标<b>悬停地表</b>可读取该点海拔与坡度，左下角地形图同步显示位置。</li>
+        <li>在左下角地形图上<b>拖动</b>可绘制剖面线；<b>单击</b>可让镜头飞到该处。</li>
+        <li>键盘 <b>← →</b> 切换章节，适合投屏讲解。</li>
+      </ul>
+      <div class="sec">开始</div>
+      <div class="acts">{0}{1}</div>`,
+            [
+              k("rotate", translate("环绕观察"), "rot", i.rotate),
+              k("next", translate("进入第一节"), "arrow", !1, "pri"),
+            ],
+          ),
+      },
+      {
+        t: translate("等高线的形成"),
+        en: "How contours form",
+        cam: "form",
+        enter() {
+          ((i.slice = !0), (i.sliceH = 450));
+        },
+        body: () =>
+          translate(
+            `
+      <p class="lead">用一组<b>间隔相等的水平面</b>去截切地表，每个水平面与地表的交线就是一条等高线；再把这些交线<b>垂直投影</b>到同一平面上，便得到等高线地形图。</p>
+      <div class="rng"><label>等高面海拔</label><input type="range" id="sliceR" min="0" max="950" step="1" value="{0}"><output id="sliceO">{1} m</output></div>
+      <div class="acts">
+        {2}{3}
+        {4}{5}
+      </div>
+      <div class="note">“<b>阶梯模型</b>”把每两条等高线之间的地表压平，就像把一层层等厚的硬纸板叠成山——这正是等高线的本质。</div>
+      <div class="sec">等高线的特征</div>
+      <ul class="pts">
+        <li><b>同线等高</b>：同一条等高线上各点的海拔相等。</li>
+        <li><b>同图等距</b>：同一幅图中，相邻等高线的高差（等高距）相同。</li>
+        <li><b>闭合曲线</b>：每条等高线都是闭合的，可能在图幅外闭合。</li>
+        <li><b>一般不相交</b>：只有在陡崖处才会重合。</li>
+      </ul>`,
+            [
+              D(i.sliceH),
+              D(i.sliceH),
+              k("sweep", translate("扫描切面"), "play"),
+              k("proj", translate("投影到平面"), "down", i.proj > 0.5),
+              k("terr", translate("阶梯模型"), "layer", i.terr),
+              k("cut", translate("切除上方"), "cut", i.cut),
+            ],
+          ),
+      },
+      {
+        t: translate("海拔与相对高度"),
+        en: "Elevation",
+        cam: "elev",
+        enter() {
+          ((i.sea = !0), (i.plane = !1));
+        },
+        body: () => {
+          const e = x.main,
+            t = x.east,
+            n = i.interval,
+            s = Math.floor(e.h / n) * n,
+            a = Math.floor(t.h / n) * n;
+          return translate(
+            `
+      <p class="lead"><b>海拔</b>（绝对高度）是地面某点高出海平面的垂直距离；<b>相对高度</b>是两个地点之间的海拔差。</p>
+      <div class="rule" data-k="FORMULA"><p>相对高度 = 海拔高 − 海拔低</p></div>
+      <div class="kv">
+        <div><small>主峰海拔</small><b>{0}<i>m</i></b></div>
+        <div><small>东峰海拔</small><b>{1}<i>m</i></b></div>
+        <div class="hl"><small>主峰 − 东峰</small><b>{2}<i>m</i></b></div>
+        <div><small>主峰 − 鞍部</small><b>{3}<i>m</i></b></div>
+      </div>
+      <div class="sec">读图估算</div>
+      <div class="formula">(a − b) − d &lt; ΔH &lt; (a − b) + d<small>某点位于 a～a+d、另一点位于 b～b+d 两条等高线之间</small></div>
+      <div class="note">等高距 d = {4} m 时：主峰落在 {5}～{6} m，东峰落在 {7}～{8} m，两峰相对高度范围 <b>{9}～{10} m</b>，真实值 {11} m 在其中。</div>
+      <div class="acts" style="margin-top:14px">{12}</div>`,
+            [
+              D(e.h),
+              D(t.h),
+              D(e.h - t.h),
+              D(e.h - x.saddle.h),
+              n,
+              s,
+              s + n,
+              a,
+              a + n,
+              Math.max(0, s - a - n),
+              s - a + n,
+              D(e.h - t.h),
+              k("sea", translate("显示海平面"), "eye", i.sea),
+            ],
+          );
+        },
+      },
+      {
+        t: translate("等高距与坡度"),
+        en: "Interval & slope",
+        cam: "slope",
+        enter() {
+          i.surf = "slope";
+        },
+        body: () =>
+          translate(
+            `
+      <p class="lead">相邻两条等高线之间的高差叫<b>等高距</b>。在同一幅图中，等高线越<b>密集</b>，坡度越陡；越<b>稀疏</b>，坡度越缓。</p>
+      <div class="rule" data-k="MNEMONIC"><p>密陡 · 疏缓<small>水平距离越短、升高同样的等高距，坡就越陡。</small></p></div>
+      <div class="sec">等高距</div>
+      <div class="seg" id="segInt2">{0}</div>
+      <div class="note">等高距越小，线条越多，地形表达越细致；较大的等高距只保留大致轮廓。每隔 4 条加粗的一条叫<b>计曲线</b>（本图为 {1} m 的整倍数）。</div>
+      <div class="sec">对比</div>
+      <div class="acts">{2}{3}{4}</div>
+      <div class="note">开启坡度着色后，蓝绿为缓坡、橙红为陡坡。把鼠标移到地表，对照左下角地形图上线条的疏密。</div>`,
+            [
+              [50, 100, 200]
+                .map(
+                  (e) =>
+                    `<button data-act="int:${e}" class="${i.interval === e ? "on" : ""}">${e} m</button>`,
+                )
+                .join(""),
+              i.interval * 5,
+              k("slope", translate("坡度着色"), "layer", i.surf === "slope"),
+              k("fly:cliff", translate("看最陡处"), "eye"),
+              k("camsouth", translate("看缓坡"), "eye"),
+            ],
+          ),
+      },
+      {
+        t: translate("山顶与盆地"),
+        en: "Summit & basin",
+        cam: null,
+        enter() {
+          Ie("main");
+        },
+        body: () =>
+          translate(
+            `
+      <p class="lead">两者都表现为一组<b>闭合等高线</b>。数值<b>内高外低</b>为山顶，<b>内低外高</b>为盆地（洼地）。</p>
+      <div class="rule" data-k="MNEMONIC"><p>内高外低 → 山顶<br>内低外高 → 盆地</p></div>
+      <div class="kv"><div class="hl"><small>主峰海拔</small><b>{0}<i>m</i></b></div><div><small>盆地最低处</small><b>{1}<i>m</i></b></div></div>
+      <div class="sec">示坡线</div>
+      <ul class="pts">
+        <li>垂直于等高线的短线，<b>指向海拔较低的一侧</b>。</li>
+        <li>山顶的示坡线画在闭合线<b>外侧</b>，盆地的画在<b>内侧</b>——在左下角地形图中可以看到。</li>
+      </ul>
+      <div class="acts" style="margin-top:14px">{2}{3}{4}{5}{6}</div>`,
+            [
+              D(x.main.h),
+              D(x.basin.h),
+              k("fly:main", translate("看主峰"), "eye", i.focus === "main"),
+              k("fly:east", translate("看东峰"), "eye", i.focus === "east"),
+              k("fly:hill", translate("看孤丘"), "eye", i.focus === "hill"),
+              k("fly:basin", translate("看盆地"), "eye", i.focus === "basin"),
+              k("sec:basin", translate("盆地剖面"), "prof"),
+            ],
+          ),
+      },
+      {
+        t: translate("山脊与山谷"),
+        en: "Ridge & valley",
+        cam: null,
+        enter() {
+          ((i.ridge = !0), Ie("ridge"));
+        },
+        body: () =>
+          translate(
+            `
+      <p class="lead">等高线向同一方向弯曲时：弯曲部分<b>凸向低处</b>为山脊，<b>凸向高处</b>为山谷。</p>
+      <div class="rule" data-k="MNEMONIC"><p>凸低为脊 · 凸高为谷</p></div>
+      <ul class="pts">
+        <li><b>山脊线</b>（金色）是<b>分水线</b>：雨水沿它向两侧分流。</li>
+        <li><b>山谷线</b>是<b>集水线</b>，河流多发育在山谷中（蓝色河流）。</li>
+        <li>河流的流向与山谷处等高线的<b>凸出方向相反</b>；本图两条支流都发源于北部鞍部，<b>自北向南</b>流，在中南部<b>汇合</b>。</li>
+      </ul>
+      <div class="acts" style="margin-top:14px">{0}{1}{2}</div>
+      <div class="sec">剖面对比</div>
+      <div class="acts">{3}</div>`,
+            [
+              k("fly:ridge", translate("看山脊"), "eye", i.focus === "ridge"),
+              k("fly:valley", translate("看山谷"), "eye", i.focus === "valley"),
+              k("ridge", translate("山脊线"), "layer", i.ridge),
+              at(["valley", "ridge"]),
+            ],
+          ),
+      },
+      {
+        t: translate("鞍部"),
+        en: "Saddle",
+        cam: null,
+        enter() {
+          Ie("saddle");
+        },
+        body: () =>
+          translate(
+            `
+      <p class="lead"><b>鞍部</b>是相邻两个山顶之间相对低洼的部位，形似马鞍。在图上表现为<b>两组闭合等高线之间</b>的部分。</p>
+      <div class="rule" data-k="FEATURE"><p>两山夹一低<small>比两侧山顶低，又比两侧山谷高。</small></p></div>
+      <div class="kv">
+        <div class="hl"><small>鞍部海拔</small><b>{0}<i>m</i></b></div>
+        <div><small>比主峰低</small><b>{1}<i>m</i></b></div>
+      </div>
+      <div class="note">本图山脉上有<b>两个鞍部</b>：主峰—中峰之间、中峰—东峰之间。鞍部是翻越山岭最省力的位置（常称“垭口”），也是修建翻山公路的首选；它常是山谷的源头——图中两条支流就发源于这两个鞍部南侧。</div>
+      <div class="acts" style="margin-top:14px">{2}{3}{4}</div>`,
+            [
+              D(x.saddle.h),
+              D(x.main.h - x.saddle.h),
+              k(
+                "fly:saddle",
+                translate("主峰—中峰鞍部"),
+                "eye",
+                i.focus === "saddle",
+              ),
+              k(
+                "fly:saddle2",
+                translate("中峰—东峰鞍部"),
+                "eye",
+                i.focus === "saddle2",
+              ),
+              at(["saddle"]),
+            ],
+          ),
+      },
+      {
+        t: translate("陡崖"),
+        en: "Cliff",
+        cam: null,
+        enter() {
+          Ie("cliff");
+        },
+        body: () => {
+          const e = Zt();
+          return translate(
+            `
+      <p class="lead">多条等高线在某处<b>重合</b>的地方是陡崖。图上常用专门的陡崖符号表示，短齿指向崖下低处。本图<b>东峰</b>的东南翼被一条东北—西南走向的<b>断层</b>切断，下降盘一侧沉落，留下高耸的<b>断层崖</b>：崖高在中段最大，向两端逐渐消失，等高线也只在中段重合。</p>
+      <div class="formula">(n − 1)·d ≤ ΔH &lt; (n + 1)·d<small>n：重合的等高线条数　d：等高距</small></div>
+      <div class="kv">
+        <div><small>等高距 d</small><b>{0}<i>m</i></b></div>
+        <div><small>重合条数 n</small><b>{1}</b></div>
+        <div class="hl full"><small>陡崖相对高度范围</small><b>{2} ≤ ΔH &lt; {3}<i>m</i></b></div>
+      </div>
+      <div class="note">崖顶海拔：{4} ≤ H顶 &lt; {5} m；崖底海拔：{6} &lt; H底 ≤ {7} m。<br>本模型实际崖高约 <b>{8} m</b>，切换等高距看看 n 和范围怎样变化。</div>
+      <div class="acts" style="margin-top:14px">{9}{10}</div>`,
+            [
+              e.d,
+              e.n,
+              e.min,
+              e.max,
+              e.hi,
+              e.hi + e.d,
+              e.lo - e.d,
+              e.lo,
+              D(Te.top - Te.bot),
+              k("fly:cliff", translate("看陡崖"), "eye", i.focus === "cliff"),
+              at(["cliff"]),
+            ],
+          );
+        },
+      },
+      {
+        t: translate("地形剖面图"),
+        en: "Topographic profile",
+        cam: "top",
+        enter() {
+          pt(nt.peaks.a, nt.peaks.b);
+        },
+        body: () =>
+          translate(
+            `
+      <p class="lead">剖面图反映沿某条直线方向的地势起伏。在地形图上确定剖面线，找出它与各等高线的<b>交点</b>，按比例标出交点海拔，再用平滑曲线连接。</p>
+      <ol class="steps"><li><i>01</i>定剖面线</li><li><i>02</i>找交点</li><li><i>03</i>定海拔</li><li><i>04</i>连曲线</li></ol>
+      <div class="note">剖面图中的金色小点，就是剖面线与各条等高线的交点。<br>在左下角地形图上<b>拖动</b>即可画出任意剖面。</div>
+      <div class="sec">通视判断</div>
+      <div class="note">从 A 点看 B 点，若两点连线被中间凸起的地形挡住，就<b>不能通视</b>；凸坡挡视线，凹坡则可以看到。</div>
+      <div class="sec">预设剖面</div>
+      <div class="acts">{0}</div>`,
+            [at(["peaks", "valley", "ridge", "basin", "cliff"])],
+          ),
+      },
+      {
+        t: translate("随堂检测"),
+        en: "Quiz",
+        cam: "top",
+        enter() {
+          Kt();
+        },
+        body: () => zn(),
+      },
+    ],
+    In = [
+      translate("山顶"),
+      translate("山脊"),
+      translate("山谷"),
+      translate("鞍部"),
+      translate("陡崖"),
+      translate("盆地"),
+    ],
+    Jt = (e) => {
+      for (let t = e.length - 1; t > 0; t--) {
+        const n = (Math.random() * (t + 1)) | 0;
+        [e[t], e[n]] = [e[n], e[t]];
+      }
+      return e;
+    };
+  function Kt() {
+    const e = Jt(["hill", "ridge", "valley", "saddle2", "cliff", "basin"]).map(
+        (n) => ({
+          q: translate("闪烁标记处是哪种地形部位？"),
+          at: [_[n].u, _[n].v],
+          feat: n,
+          opts: In,
+          ans: _[n].type,
+          why: {
+            山顶: translate("一组闭合等高线，数值内高外低。"),
+            山脊: translate("等高线弯曲部分凸向低处。"),
+            山谷: translate("等高线弯曲部分凸向高处，谷底发育河流。"),
+            鞍部: translate("位于两个山顶之间的相对低处。"),
+            陡崖: translate("多条等高线在此重合。"),
+            盆地: translate("闭合等高线，数值内低外高。"),
+          }[_[n].type],
+        }),
+      ),
+      t = Zt();
+    (e.push({
+      q: translate(
+        "东侧陡崖处有 {0} 条等高线重合，等高距为 {1} m，陡崖的相对高度范围是？",
+        [t.n, t.d],
+      ),
+      at: [x.cliff.u, x.cliff.v],
+      feat: "cliff",
+      opts: Jt([
+        `${t.min} ≤ ΔH < ${t.max} m`,
+        `${t.n * t.d} ≤ ΔH < ${(t.n + 2) * t.d} m`,
+        `${(t.n - 2) * t.d} ≤ ΔH < ${t.n * t.d} m`,
+        `ΔH = ${t.n * t.d} m`,
+      ]),
+      ans: `${t.min} ≤ ΔH < ${t.max} m`,
+      why: "(n−1)d ≤ ΔH < (n+1)d。",
+    }),
+      e.push({
+        q: translate("图中河流大致的流向是？"),
+        at: [x.valley.u, x.valley.v],
+        feat: "valley",
+        opts: [
+          translate("自北向南"),
+          translate("自南向北"),
+          translate("自西向东"),
+          translate("自东向西"),
+        ],
+        ans: translate("自北向南"),
+        why: translate(
+          "两条支流都发源于北部鞍部南侧，山谷处等高线凸向北（高处），河流流向与凸出方向相反，向南汇合后流出图幅。",
+        ),
+      }),
+      (i.quiz = {
+        list: e,
+        i: 0,
+        score: 0,
+        picked: null,
+        cur: e[0],
+      }),
+      (i.labels = !1),
+      pe());
+  }
+  function zn() {
+    const e = i.quiz;
+    if (!e) return "";
+    if (e.i >= e.list.length) {
+      const s = e.score / e.list.length;
+      return `<div class="score"><b>${e.score}/${e.list.length}</b><span>${s === 1 ? translate("全对！读图能力很扎实。") : s >= 0.6 ? translate("不错，回看错题对应的章节巩固一下。") : translate("建议从第 04 节开始再复习一遍。")}</span></div>
+      <div class="acts">${k("quizRestart", translate("再测一次"), "rot", !1, "pri")}</div>`;
+    }
+    const t = e.cur,
+      n = e.picked != null;
+    return translate(
+      `<div class="qcard"><div class="qn">QUESTION {0} / {1} · 得分 {2}</div>
+    <h3>{3}</h3>
+    <div class="opts">{4}</div>
+    {5}
+  </div>
+  <div class="acts" style="margin-top:14px">{6}{7}</div>
+  <div class="note">标记会同时出现在三维模型与左下角的地形图上，可以对照两者判断。</div>`,
+      [
+        String(e.i + 1).padStart(2, "0"),
+        String(e.list.length).padStart(2, "0"),
+        e.score,
+        t.q,
+        t.opts
+          .map(
+            (s, a) =>
+              `<button class="opt ${n && s === t.ans ? "ok" : ""} ${n && a === e.picked && s !== t.ans ? "bad" : ""}" data-act="ans:${a}" ${n ? "disabled" : ""}>${s}</button>`,
+          )
+          .join(""),
+        n
+          ? `<div class="fb"><b class="${t.opts[e.picked] === t.ans ? "ok" : "bad"}">${t.opts[e.picked] === t.ans ? translate("回答正确") : translate("答案：") + t.ans}</b> —— ${t.why}</div>`
+          : "",
+        n
+          ? k(
+              "quizNext",
+              e.i + 1 < e.list.length
+                ? translate("下一题")
+                : translate("查看成绩"),
+              "arrow",
+              !1,
+              "pri",
+            )
+          : "",
+        k("quizPeek", translate("在三维中查看"), "eye"),
+      ],
+    );
+  }
+  function Wn() {
+    (Object.assign(i, {
+      slice: !1,
+      cut: !1,
+      proj: 0,
+      sea: !1,
+      ridge: !1,
+      focus: null,
+      surf: i.surfPref,
+      terr: !1,
+      quiz: null,
+      plane: !0,
+      labels: !0,
+    }),
+      i.section && Xt());
+  }
+  function ze() {
+    ((w("#lesson").innerHTML = $n() + ee[i.lesson].body()), On());
+  }
+  function $n() {
+    const e = ee[i.lesson];
+    return `<div class="lh"><span class="no">${String(i.lesson).padStart(2, "0")}</span><div><h2>${e.t}</h2><em>${e.en}</em></div></div>`;
+  }
+  function he(e) {
+    ((e = E(e, 0, ee.length - 1)), (i.lesson = e));
+    const t = ee[e];
+    (Wn(),
+      t.cam && oe(ie[t.cam][0], ie[t.cam][1]),
+      t.enter && t.enter(),
+      pe(),
+      K(),
+      ze(),
+      document
+        .querySelectorAll(".ni")
+        .forEach((s, a) => s.classList.toggle("on", a === e)),
+      document.querySelectorAll("#prog i").forEach((s, a) => {
+        s.className = a < e ? "on" : a === e ? "cur" : "";
+      }));
+    const n = w("#chapter");
+    ((n.querySelector(".n").innerHTML =
+      `CHAPTER ${String(e).padStart(2, "0")} <span>/ ${String(ee.length - 1).padStart(2, "0")}</span>`),
+      (n.querySelector("h1").textContent = t.t),
+      (n.querySelector("p").textContent = t.en),
+      n.classList.remove("anim"),
+      n.offsetWidth,
+      n.classList.add("anim"),
+      (w("#lesson").scrollTop = 0),
+      history.replaceState(null, "", "#" + e));
+  }
+  function On() {
+    const e = w("#sliceR");
+    e &&
+      (e.oninput = () => {
+        ((le = null),
+          (i.sliceH = +e.value),
+          (w("#sliceO").textContent = e.value + " m"),
+          K());
+      });
+  }
+  let le = null;
+  w("#lesson").addEventListener("click", (e) => {
+    const t = e.target.closest("[data-act]");
+    if (!t) return;
+    const [n, s] = t.dataset.act.split(":");
+    switch (n) {
+      case "next":
+        he(i.lesson + 1);
+        return;
+      case "rotate":
+        i.rotate = !i.rotate;
+        break;
+      case "sweep":
+        ((i.slice = !0),
+          (le = {
+            s: performance.now(),
+            from: Math.max(0, $e - 20),
+            to: Le + 10,
+          }),
+          K());
+        break;
+      case "proj":
+        ((i.proj = i.proj > 0.5 ? 0 : 1),
+          i.proj && ((i.plane = !0), oe(ie.form[0], ie.form[1], 1200)));
+        break;
+      case "terr":
+        i.terr = !i.terr;
+        break;
+      case "cut":
+        i.cut = !i.cut;
+        break;
+      case "sea":
+        ((i.sea = !i.sea), K());
+        break;
+      case "slope":
+        i.surf =
+          i.surf === "slope"
+            ? i.surfPref === "slope"
+              ? "hyps"
+              : i.surfPref
+            : "slope";
+        break;
+      case "ridge":
+        i.ridge = !i.ridge;
+        break;
+      case "fly":
+        Ie(s);
+        break;
+      case "camsouth":
+        ((i.focus = null), K(), oe([-2, 5, 22], [-1, 1, 5]));
+        break;
+      case "sec": {
+        const a = nt[s];
+        pt(a.a, a.b);
+        break;
+      }
+      case "int":
+        en(+s);
+        return;
+      case "ans": {
+        const a = i.quiz;
+        if (a.picked != null) return;
+        ((a.picked = +s), a.cur.opts[a.picked] === a.cur.ans && a.score++);
+        break;
+      }
+      case "quizNext": {
+        const a = i.quiz;
+        (a.i++,
+          (a.picked = null),
+          (a.cur = a.list[a.i] || null),
+          a.cur && oe(ie.top[0], ie.top[1], 1e3));
+        break;
+      }
+      case "quizRestart":
+        Kt();
+        break;
+      case "quizPeek": {
+        const a = i.quiz && i.quiz.cur;
+        if (a) {
+          const r = _[a.feat],
+            d = r.dir,
+            c = Math.hypot(...d),
+            h = j(...a.at) * R();
+          oe(
+            [
+              a.at[0] * 10 + (d[0] / c) * r.dist,
+              h + r.dist * r.up,
+              a.at[1] * 10 + (d[1] / c) * r.dist,
+            ],
+            [a.at[0] * 10, h, a.at[1] * 10],
+          );
+        }
+        break;
+      }
+    }
+    (pe(), ze());
+  });
+  function en(e) {
+    ((i.interval = e), Vt(), i.section && Ce(), pe(), ze());
+  }
+  (w("#segInt").addEventListener("click", (e) => {
+    const t = e.target.closest("button");
+    t && en(+t.dataset.v);
+  }),
+    w("#segSurf").addEventListener("click", (e) => {
+      const t = e.target.closest("button");
+      t && ((i.surf = i.surfPref = t.dataset.v), pe(), ze());
+    }),
+    w("#tgs").addEventListener("click", (e) => {
+      const t = e.target.closest(".tg");
+      if (!t) return;
+      const n = t.dataset.k;
+      ((i[n] = !i[n]), n === "labels" && K(), pe(), ze());
+    }));
+  let vt = !1;
+  (w("#exR").addEventListener("input", (e) => {
+    ((i.exag = +e.target.value),
+      (w("#exO").textContent = i.exag.toFixed(1) + "×"),
+      vt ||
+        ((vt = !0),
+        requestAnimationFrame(() => {
+          ((vt = !1), Ct());
+        })));
+  }),
+    (w("#viewH").onclick = () => w("#view").classList.toggle("shut")));
+  function pe() {
+    (document
+      .querySelectorAll("#segInt button")
+      .forEach((e) => e.classList.toggle("on", +e.dataset.v === i.interval)),
+      document
+        .querySelectorAll(".tg")
+        .forEach((e) => e.classList.toggle("on", !!i[e.dataset.k])),
+      (W.autoRotate = i.rotate),
+      document
+        .querySelectorAll("#segSurf button")
+        .forEach((e) => e.classList.toggle("on", e.dataset.v === i.surf)),
+      (w("#legend").innerHTML =
+        i.surf === "real"
+          ? ""
+          : i.surf === "slope"
+            ? translate(
+                '<div class="bar" style="background:linear-gradient(to top,{0})"></div><div class="ticks">{1}</div><div class="cap">SLOPE 坡度</div>',
+                [
+                  jt.map(([e, t]) => `${Ht(t)} ${(e / 60) * 100}%`).join(","),
+                  [0, 15, 30, 45, 60].map((e) => `<span>${e}°</span>`).join(""),
+                ],
+              )
+            : translate(
+                '<div class="bar" style="background:linear-gradient(to top,{0})"></div><div class="ticks">{1}</div><div class="cap">ELEVATION 海拔 m</div>',
+                [
+                  rt.map(([e, t]) => `${Ht(t)} ${e / 15}%`).join(","),
+                  [0, 300, 600, 900, 1200, 1500]
+                    .map((e) => `<span>${e}</span>`)
+                    .join(""),
+                ],
+              )));
+  }
+  ((w("#nav").innerHTML =
+    translate('<div class="navh">CHAPTERS · 章节</div>') +
+    ee
+      .map(
+        (e, t) =>
+          `<button class="ni" data-i="${t}"><em>${String(t).padStart(2, "0")}</em><b>${e.t}</b><small>${e.en}</small></button>`,
+      )
+      .join("") +
+    translate(
+      '<div class="navf"><kbd>←</kbd> <kbd>→</kbd> 切换章节<br><kbd>R</kbd> 重置视角　<kbd>F</kbd> 全屏</div>',
+    )),
+    w("#nav").addEventListener("click", (e) => {
+      const t = e.target.closest(".ni");
+      t && he(+t.dataset.i);
+    }),
+    (w("#prog").innerHTML = ee.map(() => "<i></i>").join("")),
+    (w("#bPrev").onclick = () => he(i.lesson - 1)),
+    (w("#bNext").onclick = () => he(i.lesson + 1)));
+  const tn = () => {
+    const e = ee[i.lesson].cam || "home";
+    oe(ie[e][0], ie[e][1]);
+  };
+  w("#bReset").onclick = tn;
+  const nn = () =>
+    document.fullscreenElement
+      ? document.exitFullscreen()
+      : document.documentElement.requestFullscreen().catch(() => {});
+  ((w("#bFull").onclick = nn),
+    addEventListener("keydown", (e) => {
+      e.target.tagName !== "INPUT" &&
+        (e.key === "ArrowRight"
+          ? he(i.lesson + 1)
+          : e.key === "ArrowLeft"
+            ? he(i.lesson - 1)
+            : e.key === "r" || e.key === "R"
+              ? tn()
+              : (e.key === "f" || e.key === "F") && nn());
+    }));
+  const an = new o.Raycaster(),
+    sn = new o.Vector2(),
+    re = w("#tip");
+  let We = null;
+  (O.domElement.addEventListener("pointermove", (e) => {
+    We = e;
+  }),
+    O.domElement.addEventListener("pointerleave", () => {
+      ((We = null), (re.style.opacity = 0), (X.visible = !1), (ne = null));
+    }));
+  function _n() {
+    if (!We) return;
+    const e = We;
+    if (((We = null), e.buttons)) {
+      re.style.opacity = 0;
+      return;
+    }
+    const t = De.getBoundingClientRect();
+    (sn.set(
+      ((e.clientX - t.left) / t.width) * 2 - 1,
+      (-(e.clientY - t.top) / t.height) * 2 + 1,
+    ),
+      an.setFromCamera(sn, q));
+    const n = an.intersectObject(Ve)[0];
+    if (!n) {
+      ((re.style.opacity = 0), (X.visible = !1), (ne = null));
+      return;
+    }
+    const s = n.point.x / 10,
+      a = n.point.z / 10,
+      r = j(s, a);
+    ((ne = [s, a]),
+      ht(s, a),
+      (re.innerHTML = translate("海拔 <b>{0} m</b><br>坡度 <b>{1}°</b>", [
+        Math.round(r),
+        Oe(s, a).toFixed(0),
+      ])),
+      (re.style.opacity = 1),
+      (re.style.transform = `translate(${e.clientX - t.left + 16}px,${e.clientY - t.top + 14}px)`),
+      (re.style.left = re.style.top = "0"));
+  }
+  function on() {
+    const e = De.getBoundingClientRect();
+    (O.setSize(e.width, e.height, !1),
+      (q.aspect = e.width / e.height),
+      q.updateProjectionMatrix(),
+      i.section && Ce());
+  }
+  new ResizeObserver(on).observe(De);
+  const U = (e, t, n, s) => {
+    const a = t - e,
+      r = n / s;
+    return Math.abs(a) <= r ? t : e + Math.sign(a) * r;
+  };
+  let ln = performance.now();
+  function rn(e) {
+    requestAnimationFrame(rn);
+    const t = E((e - ln) / 1e3, 0, 0.05);
+    if (((ln = e), Q)) {
+      const d = E((e - Q.s) / Q.d, 0, 1),
+        c = bt(d);
+      (q.position.lerpVectors(Q.p0, Q.p1, c),
+        W.target.lerpVectors(Q.t0, Q.t1, c),
+        d >= 1 && (Q = null));
+    }
+    if (le) {
+      const d = E((e - le.s) / 7e3, 0, 1);
+      i.sliceH = le.from + (le.to - le.from) * bt(d);
+      const c = w("#sliceR");
+      c &&
+        ((c.value = i.sliceH),
+        (w("#sliceO").textContent = Math.round(i.sliceH) + " m"));
+      const h = tt.find((m) => m.el.classList.contains("cyan"));
+      (h &&
+        (h.el.querySelector("b").textContent = translate("等高面 {0} m", [
+          Math.round(i.sliceH),
+        ])),
+        d >= 1 && (le = null));
+    }
+    if (
+      (W.update(),
+      (L.uTerr.value = U(L.uTerr.value, i.terr ? 1 : 0, t, 0.6)),
+      (L.uTime.value = e / 1e3),
+      (L.uMode.value = U(L.uMode.value, i.surf === "slope" ? 1 : 0, t, 0.5)),
+      (L.uReal.value = U(L.uReal.value, i.surf === "real" ? 1 : 0, t, 0.6)),
+      (L.uCloud.value = U(L.uCloud.value, i.clouds ? 1 : 0, t, 0.6)),
+      (L.uLineA.value = U(L.uLineA.value, i.lines ? 1 : 0, t, 0.4)),
+      (L.uFocusAmt.value = U(L.uFocusAmt.value, i.focus ? 1 : 0, t, 0.6)),
+      i.focus)
+    ) {
+      const d = _[i.focus];
+      L.uFocus.value.set(d.u * 10, d.v * 10, i.focus === "main" ? 2.4 : 1.8);
+    }
+    ((L.uSliceOn.value = i.slice ? 1 : 0),
+      (L.uSlice.value = i.sliceH),
+      (L.uCut.value = i.slice && i.cut ? 1 : 0),
+      (ge.uProg.value = U(ge.uProg.value, i.proj, t, 2.6)),
+      (Qe.visible = ge.uProg.value > 0.001),
+      (Be.visible = i.slice),
+      (Be.position.y = i.sliceH * R()),
+      (Ue.opacity = U(
+        Ue.opacity,
+        i.plane ? (i.proj > 0.5 ? 0.55 + 0.4 * ge.uProg.value : 0.9) : 0,
+        t,
+        0.6,
+      )),
+      (He.visible = Ue.opacity > 0.01),
+      (Me.material.opacity = U(Me.material.opacity, i.sea ? 1 : 0, t, 0.6)),
+      (ye.visible = Me.material.opacity > 0.5),
+      (Ke.opacity = U(Ke.opacity, i.ridge ? 0.95 : 0, t, 0.5)),
+      (xe.visible = Ke.opacity > 0.01));
+    const n = i.terr || L.uTerr.value > 0.01;
+    ((Pe.uOp.value = U(Pe.uOp.value, i.river && !n ? 1 : 0, t, 0.4)),
+      (de.visible = Pe.uOp.value > 0.01));
+    for (const d of Wt) d.visible = de.visible;
+    xe.position.y = -L.uTerr.value * 0.1;
+    for (const [d] of dt)
+      d.visible = i.trees && L.uReal.value > 0.5 && !n && !(i.slice && i.cut);
+    const s = i.quiz && i.quiz.cur;
+    ((ue.visible = !!s && i.lesson === ee.length - 1),
+      s &&
+        (ue.position.set(s.at[0] * 10, j(...s.at) * R() + 0.05, s.at[1] * 10),
+        ue.children.slice(1).forEach((d) => {
+          const c = (e / 1400 + d.userData.ph) % 1;
+          (d.scale.setScalar(0.6 + c * 2.2), (d.material.opacity = 1 - c));
+        })),
+      _n());
+    const a = W.target,
+      r = q.position;
+    (w("#cneedle").setAttribute(
+      "transform",
+      `rotate(${(-Math.atan2(a.x - r.x, -(a.z - r.z)) * 180) / Math.PI} 30 30)`,
+    ),
+      O.render(F, q),
+      Cn(),
+      Pn(e));
+  }
+  (Vt(), Ct(), pe());
+  {
+    const e = parseInt(location.hash.slice(1), 10);
+    he(isNaN(e) ? 0 : e);
+  }
+  (on(),
+    (L.uReal.value = i.surf === "real" ? 1 : 0),
+    (L.uMode.value = i.surf === "slope" ? 1 : 0),
+    (L.uTerr.value = i.terr ? 1 : 0),
+    requestAnimationFrame(rn),
+    document.fonts &&
+      document.fonts.ready.then(() => {
+        (It(), Yt());
+      }),
+    setTimeout(() => w("#loading").classList.add("done"), 250),
+    setTimeout(() => w("#loading").remove(), 1200));
+}
+function contourLabPage() {
+  return (
+    React.useLayoutEffect(() => {
+      ((document.title = translate("等高线 3D 课堂")), Un());
+    }, []),
+    jsxRuntime.jsxs(jsxRuntime.Fragment, {
+      children: [
+        jsxRuntime.jsx("div", {
+          id: "loading",
+          children: jsxRuntime.jsxs("div", {
+            children: [
+              jsxRuntime.jsx("b", {
+                children: translate("等高线"),
+              }),
+              jsxRuntime.jsx("span", {
+                children: "BUILDING TERRAIN …",
+              }),
+            ],
+          }),
+        }),
+        jsxRuntime.jsxs("div", {
+          id: "app",
+          children: [
+            jsxRuntime.jsxs("header", {
+              id: "top",
+              children: [
+                jsxRuntime.jsx("a", {
+                  className: "back",
+                  href: localizedUrl("/"),
+                  children: "← WEDULAB",
+                }),
+                jsxRuntime.jsxs("div", {
+                  className: "brand",
+                  children: [
+                    jsxRuntime.jsxs("svg", {
+                      viewBox: "0 0 32 32",
+                      fill: "none",
+                      children: [
+                        jsxRuntime.jsx("path", {
+                          d: "M3 24c4-2 6-9 13-9s9 7 13 9",
+                          stroke: "#d8b26a",
+                          strokeWidth: "1.4",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M8 24c3-1.5 4-6 8-6s5 4.5 8 6",
+                          stroke: "#d8b26a",
+                          strokeOpacity: ".6",
+                          strokeWidth: "1.2",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M12 24c1.5-1 2-3 4-3s2.5 2 4 3",
+                          stroke: "#d8b26a",
+                          strokeOpacity: ".35",
+                          strokeWidth: "1",
+                        }),
+                        jsxRuntime.jsx("circle", {
+                          cx: "16",
+                          cy: "8",
+                          r: "2",
+                          fill: "#f3d9a2",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      children: [
+                        jsxRuntime.jsxs("b", {
+                          children: [
+                            "CONTOUR",
+                            jsxRuntime.jsx("i", {
+                              children: "·3D",
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsx("span", {
+                          children: translate("等高线地形 · 三维教学演示"),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "prog",
+                  id: "prog",
+                }),
+                jsxRuntime.jsx(Dn, {}),
+                jsxRuntime.jsxs("div", {
+                  className: "tbtns",
+                  children: [
+                    jsxRuntime.jsx("button", {
+                      className: "tb",
+                      id: "bPrev",
+                      title: translate("上一节 (←)"),
+                      children: jsxRuntime.jsx("svg", {
+                        viewBox: "0 0 16 16",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M10 3L5 8l5 5",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "tb",
+                      id: "bNext",
+                      title: translate("下一节 (→)"),
+                      children: jsxRuntime.jsx("svg", {
+                        viewBox: "0 0 16 16",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M6 3l5 5-5 5",
+                        }),
+                      }),
+                    }),
+                    jsxRuntime.jsxs("button", {
+                      className: "tb",
+                      id: "bReset",
+                      title: translate("重置视角"),
+                      children: [
+                        jsxRuntime.jsxs("svg", {
+                          viewBox: "0 0 16 16",
+                          children: [
+                            jsxRuntime.jsx("path", {
+                              d: "M2.5 8a5.5 5.5 0 1 0 1.8-4.1",
+                            }),
+                            jsxRuntime.jsx("path", {
+                              d: "M2.5 2.5v3h3",
+                            }),
+                          ],
+                        }),
+                        translate("视角"),
+                      ],
+                    }),
+                    jsxRuntime.jsx("button", {
+                      className: "tb",
+                      id: "bFull",
+                      title: translate("全屏"),
+                      children: jsxRuntime.jsx("svg", {
+                        viewBox: "0 0 16 16",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4",
+                        }),
+                      }),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("nav", {
+              id: "nav",
+            }),
+            jsxRuntime.jsxs("main", {
+              id: "stage",
+              children: [
+                jsxRuntime.jsx("canvas", {
+                  id: "gl",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "labels",
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "chapter",
+                  children: [
+                    jsxRuntime.jsx("div", {
+                      className: "n",
+                    }),
+                    jsxRuntime.jsx("h1", {}),
+                    jsxRuntime.jsx("p", {}),
+                  ],
+                }),
+                jsxRuntime.jsxs("svg", {
+                  id: "compass",
+                  viewBox: "0 0 60 60",
+                  children: [
+                    jsxRuntime.jsx("circle", {
+                      cx: "30",
+                      cy: "30",
+                      r: "27",
+                      fill: "rgba(9,12,16,.6)",
+                      stroke: "rgba(255,255,255,.14)",
+                    }),
+                    jsxRuntime.jsxs("g", {
+                      id: "cneedle",
+                      children: [
+                        jsxRuntime.jsx("path", {
+                          d: "M30 8l5 22h-10z",
+                          fill: "#d8b26a",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M30 52l5-22h-10z",
+                          fill: "rgba(255,255,255,.25)",
+                        }),
+                        jsxRuntime.jsx("text", {
+                          x: "30",
+                          y: "7",
+                          fill: "#f3d9a2",
+                          fontFamily: "JetBrains Mono",
+                          fontSize: "8",
+                          fontWeight: "700",
+                          textAnchor: "middle",
+                          dy: "-1",
+                          children: "N",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "30",
+                      cy: "30",
+                      r: "2",
+                      fill: "#0b0e13",
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "legend",
+                }),
+                jsxRuntime.jsx("div", {
+                  id: "tip",
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "mapbox",
+                  children: [
+                    jsxRuntime.jsxs("div", {
+                      className: "mh",
+                      children: [
+                        jsxRuntime.jsx("b", {
+                          children: translate("等高线地形图"),
+                        }),
+                        jsxRuntime.jsx("small", {
+                          children: translate("拖动绘制剖面线"),
+                        }),
+                        jsxRuntime.jsx("button", {
+                          id: "mapExp",
+                          title: translate("放大"),
+                          children: jsxRuntime.jsx("svg", {
+                            viewBox: "0 0 12 12",
+                            children: jsxRuntime.jsx("path", {
+                              d: "M7 1h4v4M5 11H1V7M11 1L7 5M1 11l4-4",
+                            }),
+                          }),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("canvas", {
+                      id: "map",
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      className: "mf",
+                      children: [
+                        jsxRuntime.jsx("span", {
+                          id: "mapRead",
+                          children: translate("悬停读取海拔"),
+                        }),
+                        jsxRuntime.jsx("span", {
+                          children: translate("比例 1:50 000"),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "profile",
+                  className: "hide",
+                  children: [
+                    jsxRuntime.jsxs("div", {
+                      className: "ph",
+                      children: [
+                        jsxRuntime.jsx("b", {
+                          children: translate("地形剖面图"),
+                        }),
+                        jsxRuntime.jsx("span", {
+                          id: "profInfo",
+                        }),
+                        jsxRuntime.jsx("span", {
+                          className: "sp",
+                        }),
+                        jsxRuntime.jsx("span", {
+                          id: "profLos",
+                          className: "los",
+                        }),
+                        jsxRuntime.jsx("button", {
+                          id: "profClose",
+                          title: translate("关闭"),
+                          children: "×",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("canvas", {
+                      id: "prof",
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsxs("aside", {
+              id: "panel",
+              children: [
+                jsxRuntime.jsx("div", {
+                  id: "lesson",
+                }),
+                jsxRuntime.jsxs("div", {
+                  id: "view",
+                  children: [
+                    jsxRuntime.jsxs("div", {
+                      className: "vh",
+                      id: "viewH",
+                      children: [
+                        jsxRuntime.jsx("span", {
+                          children: translate("VIEW · 显示设置"),
+                        }),
+                        jsxRuntime.jsx("svg", {
+                          viewBox: "0 0 12 12",
+                          children: jsxRuntime.jsx("path", {
+                            d: "M2 8l4-4 4 4",
+                          }),
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsxs("div", {
+                      className: "vb",
+                      children: [
+                        jsxRuntime.jsxs("div", {
+                          className: "vrow",
+                          children: [
+                            jsxRuntime.jsx("label", {
+                              children: translate("等高距"),
+                            }),
+                            jsxRuntime.jsxs("div", {
+                              className: "seg",
+                              id: "segInt",
+                              children: [
+                                jsxRuntime.jsx("button", {
+                                  "data-v": "50",
+                                  children: "50 m",
+                                }),
+                                jsxRuntime.jsx("button", {
+                                  "data-v": "100",
+                                  children: "100 m",
+                                }),
+                                jsxRuntime.jsx("button", {
+                                  "data-v": "200",
+                                  children: "200 m",
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("div", {
+                          className: "vrow",
+                          children: [
+                            jsxRuntime.jsx("label", {
+                              children: translate("地表"),
+                            }),
+                            jsxRuntime.jsxs("div", {
+                              className: "seg",
+                              id: "segSurf",
+                              children: [
+                                jsxRuntime.jsx("button", {
+                                  "data-v": "real",
+                                  children: translate("实景"),
+                                }),
+                                jsxRuntime.jsx("button", {
+                                  "data-v": "hyps",
+                                  children: translate("分层设色"),
+                                }),
+                                jsxRuntime.jsx("button", {
+                                  "data-v": "slope",
+                                  children: translate("坡度"),
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("div", {
+                          className: "vrow",
+                          children: [
+                            jsxRuntime.jsx("label", {
+                              children: translate("垂直夸张"),
+                            }),
+                            jsxRuntime.jsx("input", {
+                              type: "range",
+                              id: "exR",
+                              min: "0.5",
+                              max: "3",
+                              step: "0.1",
+                              defaultValue: "1.5",
+                            }),
+                            jsxRuntime.jsx("output", {
+                              id: "exO",
+                              children: "1.5×",
+                            }),
+                          ],
+                        }),
+                        jsxRuntime.jsxs("div", {
+                          className: "tgs",
+                          id: "tgs",
+                          children: [
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "lines",
+                              children: translate("等高线"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "terr",
+                              children: translate("阶梯模型"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "labels",
+                              children: translate("地貌标注"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "plane",
+                              children: translate("投影底图"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "river",
+                              children: translate("河湖"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "trees",
+                              children: translate("植被"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "clouds",
+                              children: translate("云影"),
+                            }),
+                            jsxRuntime.jsx("button", {
+                              className: "tg",
+                              "data-k": "rotate",
+                              children: translate("自动旋转"),
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    })
+  );
+}
+export { contourLabPage as default };

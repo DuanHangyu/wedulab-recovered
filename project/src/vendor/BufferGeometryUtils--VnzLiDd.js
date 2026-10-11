@@ -1,0 +1,267 @@
+// Recovered from public deployment: BufferGeometryUtils--VnzLiDd.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import { y as O, z as w } from "./OutputPass-B-cSf-Py.js";
+function N(t, h = !1) {
+  const f = t[0].index !== null,
+    c = new Set(Object.keys(t[0].attributes)),
+    A = new Set(Object.keys(t[0].morphAttributes)),
+    d = {},
+    n = {},
+    b = t[0].morphTargetsRelative,
+    u = new O();
+  let s = 0;
+  for (let e = 0; e < t.length; ++e) {
+    const i = t[e];
+    let m = 0;
+    if (f !== (i.index !== null))
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " +
+            e +
+            ". All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.",
+        ),
+        null
+      );
+    for (const r in i.attributes) {
+      if (!c.has(r))
+        return (
+          console.error(
+            "THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " +
+              e +
+              '. All geometries must have compatible attributes; make sure "' +
+              r +
+              '" attribute exists among all geometries, or in none of them.',
+          ),
+          null
+        );
+      (d[r] === void 0 && (d[r] = []), d[r].push(i.attributes[r]), m++);
+    }
+    if (m !== c.size)
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " +
+            e +
+            ". Make sure all geometries have the same number of attributes.",
+        ),
+        null
+      );
+    if (b !== i.morphTargetsRelative)
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " +
+            e +
+            ". .morphTargetsRelative must be consistent throughout all geometries.",
+        ),
+        null
+      );
+    for (const r in i.morphAttributes) {
+      if (!A.has(r))
+        return (
+          console.error(
+            "THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " +
+              e +
+              ".  .morphAttributes must be consistent throughout all geometries.",
+          ),
+          null
+        );
+      (n[r] === void 0 && (n[r] = []), n[r].push(i.morphAttributes[r]));
+    }
+    if (h) {
+      let r;
+      if (f) r = i.index.count;
+      else if (i.attributes.position !== void 0)
+        r = i.attributes.position.count;
+      else
+        return (
+          console.error(
+            "THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " +
+              e +
+              ". The geometry must have either an index or a position attribute",
+          ),
+          null
+        );
+      (u.addGroup(s, r, e), (s += r));
+    }
+  }
+  if (f) {
+    let e = 0;
+    const i = [];
+    for (let m = 0; m < t.length; ++m) {
+      const r = t[m].index;
+      for (let y = 0; y < r.count; ++y) i.push(r.getX(y) + e);
+      e += t[m].attributes.position.count;
+    }
+    u.setIndex(i);
+  }
+  for (const e in d) {
+    const i = v(d[e]);
+    if (!i)
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeGeometries() failed while trying to merge the " +
+            e +
+            " attribute.",
+        ),
+        null
+      );
+    u.setAttribute(e, i);
+  }
+  for (const e in n) {
+    const i = n[e][0].length;
+    if (i === 0) break;
+    ((u.morphAttributes = u.morphAttributes || {}),
+      (u.morphAttributes[e] = []));
+    for (let m = 0; m < i; ++m) {
+      const r = [];
+      for (let x = 0; x < n[e].length; ++x) r.push(n[e][x][m]);
+      const y = v(r);
+      if (!y)
+        return (
+          console.error(
+            "THREE.BufferGeometryUtils: .mergeGeometries() failed while trying to merge the " +
+              e +
+              " morphAttribute.",
+          ),
+          null
+        );
+      u.morphAttributes[e].push(y);
+    }
+  }
+  return u;
+}
+function v(t) {
+  let h,
+    f,
+    c,
+    A = -1,
+    d = 0;
+  for (let s = 0; s < t.length; ++s) {
+    const e = t[s];
+    if (e.isInterleavedBufferAttribute)
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeAttributes() failed. InterleavedBufferAttributes are not supported.",
+        ),
+        null
+      );
+    if ((h === void 0 && (h = e.array.constructor), h !== e.array.constructor))
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.array must be of consistent array types across matching attributes.",
+        ),
+        null
+      );
+    if ((f === void 0 && (f = e.itemSize), f !== e.itemSize))
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.itemSize must be consistent across matching attributes.",
+        ),
+        null
+      );
+    if ((c === void 0 && (c = e.normalized), c !== e.normalized))
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.normalized must be consistent across matching attributes.",
+        ),
+        null
+      );
+    if ((A === -1 && (A = e.gpuType), A !== e.gpuType))
+      return (
+        console.error(
+          "THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.gpuType must be consistent across matching attributes.",
+        ),
+        null
+      );
+    d += e.array.length;
+  }
+  const n = new h(d);
+  let b = 0;
+  for (let s = 0; s < t.length; ++s)
+    (n.set(t[s].array, b), (b += t[s].array.length));
+  const u = new w(n, f, c);
+  return (A !== void 0 && (u.gpuType = A), u);
+}
+function C(t, h = 1e-4) {
+  h = Math.max(h, Number.EPSILON);
+  const f = {},
+    c = t.getIndex(),
+    A = t.getAttribute("position"),
+    d = c ? c.count : A.count;
+  let n = 0;
+  const b = Object.keys(t.attributes),
+    u = {},
+    s = {},
+    e = [],
+    i = ["getX", "getY", "getZ", "getW"],
+    m = ["setX", "setY", "setZ", "setW"];
+  for (let l = 0, g = b.length; l < g; l++) {
+    const a = b[l],
+      o = t.attributes[a];
+    u[a] = new w(
+      new o.array.constructor(o.count * o.itemSize),
+      o.itemSize,
+      o.normalized,
+    );
+    const p = t.morphAttributes[a];
+    p &&
+      (s[a] = new w(
+        new p.array.constructor(p.count * p.itemSize),
+        p.itemSize,
+        p.normalized,
+      ));
+  }
+  const r = h * 0.5,
+    y = Math.log10(1 / h),
+    x = Math.pow(10, y),
+    I = r * x;
+  for (let l = 0; l < d; l++) {
+    const g = c ? c.getX(l) : l;
+    let a = "";
+    for (let o = 0, p = b.length; o < p; o++) {
+      const T = b[o],
+        E = t.getAttribute(T),
+        z = E.itemSize;
+      for (let G = 0; G < z; G++) a += `${~~(E[i[G]](g) * x + I)},`;
+    }
+    if (a in f) e.push(f[a]);
+    else {
+      for (let o = 0, p = b.length; o < p; o++) {
+        const T = b[o],
+          E = t.getAttribute(T),
+          z = t.morphAttributes[T],
+          G = E.itemSize,
+          M = u[T],
+          k = s[T];
+        for (let S = 0; S < G; S++) {
+          const U = i[S],
+            H = m[S];
+          if ((M[H](n, E[U](g)), z))
+            for (let R = 0, j = z.length; R < j; R++) k[R][H](n, z[R][U](g));
+        }
+      }
+      ((f[a] = n), e.push(n), n++);
+    }
+  }
+  const B = t.clone();
+  for (const l in t.attributes) {
+    const g = u[l];
+    if (
+      (B.setAttribute(
+        l,
+        new w(g.array.slice(0, n * g.itemSize), g.itemSize, g.normalized),
+      ),
+      l in s)
+    )
+      for (let a = 0; a < s[l].length; a++) {
+        const o = s[l][a];
+        B.morphAttributes[l][a] = new w(
+          o.array.slice(0, n * o.itemSize),
+          o.itemSize,
+          o.normalized,
+        );
+      }
+  }
+  return (B.setIndex(e), B);
+}
+export { C as a, N as m };

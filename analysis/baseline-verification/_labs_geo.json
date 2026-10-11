@@ -1,0 +1,618 @@
+{
+  "route": "/labs/geo",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "立体几何 · GeoSpace",
+      "text": "← WEDULAB\nGEOSPACE\n立体几何\n简体中文\n纸面\n视角\n章节\n01\n几何体认识\nSolids\n02\n展开与折叠\nNets\n03\n三视图与直观图\nViews & oblique drawing\n04\n截面\nCross sections\n05\n空间角\nAngles in space\n06\n空间向量与坐标\nVectors & coordinates\n07\n外接球与内切球\nCircumscribed & inscribed spheres\n08\n正四面体\nRegular tetrahedron\n09\n随堂检测\nQuick check\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 09\n几何体认识\n\nSolids\n\n01\n几何体认识\nSolids\n\n由若干个平面多边形围成的几何体叫多面体；由平面图形绕一条直线旋转形成的几何体叫旋转体。\n\n拖动舞台旋转几何体：看不见的棱画成虚线，这是立体图形的画法约定。\n\n数一数多面体的顶点数 V、棱数 E、面数 F，它们总满足欧拉公式 V − E + F = 2。\n\n棱柱\n棱锥\n棱台\n正方体\n正四面体\n圆柱\n圆锥\n圆台\n球\n底面边数\n6\n高\n2.40\n直棱柱\n斜棱柱\n六棱柱\n多面体\n顶点数 V\n12\n棱数 E\n18\n面数 F\n8\nV − E + F\n12 − 18 + 8 = 2\n表面积与体积\n底面积\n4.39\n表面积\nS=2S\n′\n+S\n侧\n\t​\n\n=27.50\n体积\nV=S\n′\nh=10.54\nVIEW · 显示设置\n面填充\n被遮挡的棱\n顶点字母\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 252,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Ce (https://wedulab.com/assets/math-_7kWGBgE.js:1:1318)\n    at et (https://wedulab.com/assets/math-_7kWGBgE.js:1:17428)\n    at T4 (https://wedulab.com/assets/Page-B-ZrcdrO.js:257:81735)\n    at https://wedulab.com/assets/Page-B-ZrcdrO.js:257:81901\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "ov",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Oe (https://wedulab.com/assets/math-_7kWGBgE.js:1:5573)\n    at et (https://wedulab.com/assets/math-_7kWGBgE.js:1:17450)\n    at T4 (https://wedulab.com/assets/Page-B-ZrcdrO.js:257:81735)\n    at https://wedulab.com/assets/Page-B-ZrcdrO.js:257:81901\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (https://wedulab.com/assets/math-_7kWGBgE.js:1:9022)\n    at et (https://wedulab.com/assets/math-_7kWGBgE.js:1:17472)\n    at T4 (https://wedulab.com/assets/Page-B-ZrcdrO.js:257:81735)\n    at https://wedulab.com/assets/Page-B-ZrcdrO.js:257:81901\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-B-ZrcdrO.js",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/math-_7kWGBgE.js",
+        "https://wedulab.com/assets/studio-DdpeYmJn.js",
+        "https://wedulab.com/assets/OutputPass-B-cSf-Py.js",
+        "https://wedulab.com/assets/LineSegments2-CF4-EQBa.js",
+        "https://wedulab.com/assets/math-CnOtOUG7.css",
+        "https://wedulab.com/assets/Page-DSUG_-HG.css",
+        "https://wedulab.com/assets/outline-B5slIcEP.js",
+        "https://wedulab.com/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "https://wedulab.com/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+        "https://wedulab.com/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n几何体认识\nSolids",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n展开与折叠\nNets",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n三视图与直观图\nViews & oblique drawing",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n截面\nCross sections",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n空间角\nAngles in space",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n空间向量与坐标\nVectors & coordinates",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n外接球与内切球\nCircumscribed & inscribed spheres",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n正四面体\nRegular tetrahedron",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n随堂检测\nQuick check",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "棱柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "棱锥",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "棱台",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "正方体",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "正四面体",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆锥",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆台",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "球",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "直棱柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "斜棱柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "面填充",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "被遮挡的棱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "顶点字母",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "立体几何 · GeoSpace",
+      "text": "← WEDULAB\nGEOSPACE\n立体几何\n简体中文\n纸面\n视角\n章节\n01\n几何体认识\nSolids\n02\n展开与折叠\nNets\n03\n三视图与直观图\nViews & oblique drawing\n04\n截面\nCross sections\n05\n空间角\nAngles in space\n06\n空间向量与坐标\nVectors & coordinates\n07\n外接球与内切球\nCircumscribed & inscribed spheres\n08\n正四面体\nRegular tetrahedron\n09\n随堂检测\nQuick check\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 09\n几何体认识\n\nSolids\n\n01\n几何体认识\nSolids\n\n由若干个平面多边形围成的几何体叫多面体；由平面图形绕一条直线旋转形成的几何体叫旋转体。\n\n拖动舞台旋转几何体：看不见的棱画成虚线，这是立体图形的画法约定。\n\n数一数多面体的顶点数 V、棱数 E、面数 F，它们总满足欧拉公式 V − E + F = 2。\n\n棱柱\n棱锥\n棱台\n正方体\n正四面体\n圆柱\n圆锥\n圆台\n球\n底面边数\n6\n高\n2.40\n直棱柱\n斜棱柱\n六棱柱\n多面体\n顶点数 V\n12\n棱数 E\n18\n面数 F\n8\nV − E + F\n12 − 18 + 8 = 2\n表面积与体积\n底面积\n4.39\n表面积\nS=2S\n′\n+S\n侧\n\t​\n\n=27.50\n体积\nV=S\n′\nh=10.54\nVIEW · 显示设置\n面填充\n被遮挡的棱\n顶点字母\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 252,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Ce (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:1318)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17428)\n    at T4 (http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js:257:81735)\n    at http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js:257:81901\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "ov",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Oe (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:5573)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17450)\n    at T4 (http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js:257:81735)\n    at http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js:257:81901\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:9022)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17472)\n    at T4 (http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js:257:81735)\n    at http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js:257:81901\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-B-ZrcdrO.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/math-_7kWGBgE.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4173/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4173/assets/outline-B5slIcEP.js",
+        "http://127.0.0.1:4173/assets/Page-DSUG_-HG.css",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+        "http://127.0.0.1:4173/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n几何体认识\nSolids",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n展开与折叠\nNets",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n三视图与直观图\nViews & oblique drawing",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n截面\nCross sections",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n空间角\nAngles in space",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n空间向量与坐标\nVectors & coordinates",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n外接球与内切球\nCircumscribed & inscribed spheres",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n正四面体\nRegular tetrahedron",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n随堂检测\nQuick check",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "棱柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "棱锥",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "棱台",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "正方体",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "正四面体",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆锥",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "圆台",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "球",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "直棱柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "斜棱柱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "面填充",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "被遮挡的棱",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "顶点字母",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

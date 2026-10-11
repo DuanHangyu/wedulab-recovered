@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 3,
+  "state": "COMPLETE",
+  "gateStatus": {
+    "targetAttributed": true,
+    "targetLocked": true,
+    "replayReady": true,
+    "baselineVerified": true,
+    "projectVerified": true
+  },
+  "strategy": {
+    "primaryTraceRoute": "preserved public ESM deployment modules",
+    "replayRoute": "SOURCE_REPLAY",
+    "toolProfile": "navigation, evaluate, preload, network bodies, screenshot, pointer, resize, local-run"
+  },
+  "attempts": [],
+  "targetSet": [
+    {
+      "selector": "#gl",
+      "backend": "webgl2",
+      "owner": "main-thread Un in Page-CCiHCD5r.js"
+    },
+    {
+      "selector": "#map",
+      "backend": "2d",
+      "owner": "same initializer"
+    },
+    {
+      "selector": "#prof",
+      "backend": "2d",
+      "owner": "same initializer"
+    }
+  ],
+  "unknowns": {
+    "blocking": [],
+    "important": [],
+    "deferred": [],
+    "external": []
+  },
+  "evidenceIndex": [
+    "../deployment-manifest.json",
+    "../semantic-equivalence.json",
+    "../baseline-verification/_labs_contour.json",
+    "../project-verification/_labs_contour.json",
+    "../all-lab-interactions.json",
+    "../interaction-results.json"
+  ],
+  "allowedGateArtifactStatuses": [
+    "missing",
+    "incomplete",
+    "passed",
+    "blocked"
+  ],
+  "artifacts": {
+    "scoutCard": "scout-card.json",
+    "manifest": "replay-manifest.json",
+    "qaReport": "qa-report.md",
+    "knownGaps": "known-gaps.md"
+  },
+  "gateArtifacts": {
+    "targetAttribution": {
+      "artifact": "scout-card.json",
+      "status": "passed"
+    },
+    "targetLock": {
+      "artifact": "scout-card.json",
+      "status": "passed"
+    },
+    "replayReady": {
+      "artifact": "replay-manifest.json",
+      "status": "passed"
+    },
+    "baselineVerify": {
+      "artifact": "qa-report.md",
+      "status": "passed"
+    },
+    "projectVerify": {
+      "artifact": "qa-report.md",
+      "status": "passed"
+    }
+  },
+  "budgets": {
+    "sameStrategyMax": 2,
+    "captureStrategyCategoriesMax": 3,
+    "repairRoundsMax": 6,
+    "plateauRoundsMax": 2
+  },
+  "plateau": {
+    "roundsWithoutProgress": 0,
+    "lastProgress": ""
+  },
+  "nextAction": {
+    "state": "COMPLETE",
+    "unknown": "",
+    "action": "retain evidence and original source snapshot",
+    "expectedEvidence": "all target gates passed"
+  },
+  "replayTier": "SOURCE_REPLAY",
+  "qa": {
+    "sourceToBaseline": [
+      {
+        "route": "/labs/contour",
+        "differentPixels": 0,
+        "textMatch": true,
+        "errors": []
+      }
+    ],
+    "baselineToEditable": [
+      {
+        "route": "/labs/contour",
+        "differentPixels": 0,
+        "textMatch": true,
+        "errors": []
+      }
+    ],
+    "interactionEvidence": "../interaction-results.json"
+  }
+}

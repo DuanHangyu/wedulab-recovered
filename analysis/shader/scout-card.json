@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 3,
+  "source": {
+    "url": "https://wedulab.com/labs/contour?lang=zh-CN",
+    "canonicalUrl": "https://wedulab.com/labs/contour",
+    "route": "/labs/contour",
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "dpr": 1
+    },
+    "browser": "Playwright Chromium",
+    "backend": "WebGL2 and Canvas2D",
+    "capturedAt": "2026-10-11"
+  },
+  "candidates": [
+    "#gl",
+    "#map",
+    "#prof"
+  ],
+  "lockStatus": "locked",
+  "allowedLockStatus": [
+    "unlocked",
+    "provisional",
+    "attributed",
+    "locked"
+  ],
+  "allowedTruth": [
+    "SOURCE",
+    "PARTIAL",
+    "GUESS"
+  ],
+  "targetSet": [
+    {
+      "selector": "#gl",
+      "backend": "webgl2",
+      "owner": "main-thread Un in Page-CCiHCD5r.js"
+    },
+    {
+      "selector": "#map",
+      "backend": "2d",
+      "owner": "same initializer"
+    },
+    {
+      "selector": "#prof",
+      "backend": "2d",
+      "owner": "same initializer"
+    }
+  ],
+  "alternatives": [
+    {
+      "surface": "DOM labels",
+      "result": "Labels survive #gl ablation; retained as composition layer rather than terrain renderer."
+    }
+  ],
+  "effectBoundary": "terrain, contour map, profile, DOM labels, input controls",
+  "hypotheses": [
+    {
+      "id": "canvas-terrain",
+      "statement": "#gl owns rendered terrain",
+      "status": "supported",
+      "evidenceFor": [
+        "contour-owner-and-ablation"
+      ],
+      "evidenceAgainst": [],
+      "truth": "SOURCE"
+    },
+    {
+      "id": "dom-terrain",
+      "statement": "DOM creates terrain pixels",
+      "status": "contradicted",
+      "evidenceFor": [],
+      "evidenceAgainst": [
+        "contour-owner-and-ablation"
+      ],
+      "truth": "SOURCE"
+    }
+  ],
+  "allowedHypothesisStatus": [
+    "untested",
+    "supported",
+    "contradicted"
+  ],
+  "interactions": [],
+  "scopeRisk": "low",
+  "blockingUnknowns": [],
+  "nextProbe": {
+    "type": "source-trace",
+    "target": "Page-CCiHCD5r.js",
+    "resolves": [
+      "resource graph and update loop"
+    ],
+    "distinguishes": [
+      "complete deployed scene vs missing remote definitions"
+    ],
+    "expectedOutcomes": [
+      "self-contained source allows source replay",
+      "remote resources require targeted retrieval"
+    ]
+  },
+  "evidence": [
+    {
+      "status": "passed",
+      "evidenceId": "contour-owner-and-ablation",
+      "path": "../contour-runtime.json",
+      "truth": "SOURCE",
+      "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+    }
+  ],
+  "gateDecision": {
+    "targetAttributed": true,
+    "targetLocked": true,
+    "requiredEvidence": {
+      "visualAttribution": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ],
+      "targetSet": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ],
+      "contextAndOwner": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ],
+      "targetBoundSourceOrFramework": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ],
+      "effectBoundary": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ],
+      "primaryTraceRoute": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ],
+      "alternativesExcluded": [
+        {
+          "status": "passed",
+          "evidenceId": "contour-owner-and-ablation",
+          "path": "../contour-runtime.json",
+          "truth": "SOURCE",
+          "notes": "Canvas creation stack and before/hidden captures bind the visual and owner; deployed module is preserved byte for byte."
+        }
+      ]
+    },
+    "blockers": [],
+    "decidedAt": "2026-10-11"
+  },
+  "truthNotes": {
+    "source": [
+      "Before/hidden comparison shows terrain removed with #gl; map and labels remain.",
+      "Context creation stack originates in route module and Three renderer."
+    ],
+    "partial": [],
+    "guess": []
+  }
+}

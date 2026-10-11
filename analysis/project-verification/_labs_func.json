@@ -1,0 +1,630 @@
+{
+  "route": "/labs/func",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "函数图像 · FuncLab",
+      "text": "← WEDULAB\nFUNCLAB\n函数图像\n简体中文\n纸面\n视角\n章节\n01\n图像变换\nTransformations\n02\n指数与对数\nExponentials & logarithms\n03\n单位圆与三角函数\nThe unit circle\n04\n正弦型函数\ny = A sin(ωx + φ)\n05\n导数的几何意义\nSecant to tangent\n06\n单调性与极值\nMonotonicity & extrema\n07\n零点与二分法\nBisection method\n08\n定积分（拓展）\nRiemann sums\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n图像变换\n\nTransformations\n\n01\n图像变换\nTransformations\n\n从基本函数 y = f(x) 出发，y = a·f(b(x − h)) + k 的图像可以由四步变换得到：\n\nh 左右平移（“左加右减”），k 上下平移，a 纵向伸缩（a < 0 时还要关于 x 轴翻折），b 横向伸缩为原来的 1/b。\n\n淡色是原函数，圆点标出一个特征点在变换前后的位置。\n\ny = x²\ny = x³\ny = √x\ny = |x|\ny = 1/x\ny = 2ˣ\ny = log₂x\ny = sin x\n左右平移 h\n0\n上下平移 k\n0\n纵向伸缩 a\n1\n横向伸缩 b\n1\n对称变换\n无\ny = −f(x)\ny = f(−x)\ny = |f(x)|\ny = f(|x|)\n恢复原函数\ny = x²\n左右平移\n—\n上下平移\n—\n纵坐标\n—\n横坐标\n—\n特征点\n(1, 1) → (1, 1)\n\n“左加右减”：y = f(x − h) 的图像是把 y = f(x) 向右平移 h（h > 0）。横向伸缩时，x 的系数 b 越大，图像越“窄”。\n\nVIEW · 显示设置\n图上标注\n辅助线\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:9022)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17472)\n    at Mt (http://127.0.0.1:4173/assets/Page-tKxVWO0n.js:1:27711)\n    at http://127.0.0.1:4173/assets/Page-tKxVWO0n.js:1:27910\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-tKxVWO0n.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/math-_7kWGBgE.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4173/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4173/assets/Page-Cr2PYwGd.css",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n图像变换\nTransformations",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n指数与对数\nExponentials & logarithms",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n单位圆与三角函数\nThe unit circle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n正弦型函数\ny = A sin(ωx + φ)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n导数的几何意义\nSecant to tangent",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n单调性与极值\nMonotonicity & extrema",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n零点与二分法\nBisection method",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n定积分（拓展）\nRiemann sums",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = x²",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = x³",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = √x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = |x|",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = 1/x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = 2ˣ",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = log₂x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = sin x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "无",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = −f(x)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = f(−x)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = |f(x)|",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = f(|x|)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "恢复原函数",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "辅助线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "函数图像 · FuncLab",
+      "text": "← WEDULAB\nFUNCLAB\n函数图像\n简体中文\n纸面\n视角\n章节\n01\n图像变换\nTransformations\n02\n指数与对数\nExponentials & logarithms\n03\n单位圆与三角函数\nThe unit circle\n04\n正弦型函数\ny = A sin(ωx + φ)\n05\n导数的几何意义\nSecant to tangent\n06\n单调性与极值\nMonotonicity & extrema\n07\n零点与二分法\nBisection method\n08\n定积分（拓展）\nRiemann sums\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n图像变换\n\nTransformations\n\n01\n图像变换\nTransformations\n\n从基本函数 y = f(x) 出发，y = a·f(b(x − h)) + k 的图像可以由四步变换得到：\n\nh 左右平移（“左加右减”），k 上下平移，a 纵向伸缩（a < 0 时还要关于 x 轴翻折），b 横向伸缩为原来的 1/b。\n\n淡色是原函数，圆点标出一个特征点在变换前后的位置。\n\ny = x²\ny = x³\ny = √x\ny = |x|\ny = 1/x\ny = 2ˣ\ny = log₂x\ny = sin x\n左右平移 h\n0\n上下平移 k\n0\n纵向伸缩 a\n1\n横向伸缩 b\n1\n对称变换\n无\ny = −f(x)\ny = f(−x)\ny = |f(x)|\ny = f(|x|)\n恢复原函数\ny = x²\n左右平移\n—\n上下平移\n—\n纵坐标\n—\n横坐标\n—\n特征点\n(1, 1) → (1, 1)\n\n“左加右减”：y = f(x − h) 的图像是把 y = f(x) 向右平移 h（h > 0）。横向伸缩时，x 的系数 b 越大，图像越“窄”。\n\nVIEW · 显示设置\n图上标注\n辅助线\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:596:15)\n    at et (http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js:1179:9)\n    at Mt (http://127.0.0.1:4174/src/labs/func/Page.js:2024:3)\n    at http://127.0.0.1:4174/src/labs/func/Page.js:2041:56\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/labs/func/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/math-_7kWGBgE.js",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4174/src/vendor/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4174/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4174/assets/Page-Cr2PYwGd.css",
+        "http://127.0.0.1:4174/assets/theme-CtpKaZpm.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-4de47f548de6.css",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7RlrCWv.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWv.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n图像变换\nTransformations",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n指数与对数\nExponentials & logarithms",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n单位圆与三角函数\nThe unit circle",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n正弦型函数\ny = A sin(ωx + φ)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n导数的几何意义\nSecant to tangent",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n单调性与极值\nMonotonicity & extrema",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n零点与二分法\nBisection method",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n定积分（拓展）\nRiemann sums",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = x²",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = x³",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = √x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = |x|",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = 1/x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = 2ˣ",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = log₂x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = sin x",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "无",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = −f(x)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = f(−x)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = |f(x)|",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "y = f(|x|)",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "恢复原函数",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "辅助线",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

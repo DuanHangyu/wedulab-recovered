@@ -1,0 +1,210 @@
+// Recovered from public deployment: LanguageSwitcher-K4pSOXN-.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  c as k,
+  r as React,
+  l as supportedLocales,
+  a as currentLocale,
+  j as jsxRuntime,
+  d as M,
+} from "../core/runtime.js";
+var R = k();
+const j = {
+  "zh-CN": "语言",
+  "zh-Hant": "語言",
+  ja: "言語",
+  ko: "언어",
+  tr: "Dil",
+  en: "Language",
+};
+function D(t) {
+  const o = t.getBoundingClientRect(),
+    c = Math.max(176, o.width),
+    s = 12 + supportedLocales.length * 40;
+  let r = o.right - c;
+  (r < 8 && (r = Math.min(o.left, window.innerWidth - c - 8)),
+    (r = Math.max(8, Math.min(r, window.innerWidth - c - 8))));
+  let u = o.bottom + 6;
+  return (
+    u + s > window.innerHeight - 8 && (u = Math.max(8, o.top - s - 6)),
+    {
+      top: u,
+      left: r,
+      width: c,
+    }
+  );
+}
+function I() {
+  const [t, o] = React.useState(!1),
+    [c, s] = React.useState(0),
+    [r, u] = React.useState(null),
+    g = React.useRef(null),
+    d = React.useRef(null),
+    p = React.useRef(null),
+    x = React.useId(),
+    m = (e) => `${x}-option-${e}`,
+    y =
+      supportedLocales.find((e) => e.id === currentLocale) ??
+      supportedLocales[0];
+  function v() {
+    (s(
+      Math.max(
+        0,
+        supportedLocales.findIndex((e) => e.id === currentLocale),
+      ),
+    ),
+      u(D(d.current)),
+      o(!0));
+  }
+  function b(e) {
+    (o(!1), e !== currentLocale ? M(e) : d.current?.focus());
+  }
+  (React.useEffect(() => {
+    if (!t) return;
+    function e(w) {
+      g.current?.contains(w.target) || p.current?.contains(w.target) || o(!1);
+    }
+    function a(w) {
+      w.key === "Escape" && (o(!1), d.current?.focus());
+    }
+    function h() {
+      d.current && u(D(d.current));
+    }
+    return (
+      document.addEventListener("pointerdown", e),
+      document.addEventListener("keydown", a),
+      window.addEventListener("resize", h),
+      window.addEventListener("scroll", h, !0),
+      () => {
+        (document.removeEventListener("pointerdown", e),
+          document.removeEventListener("keydown", a),
+          window.removeEventListener("resize", h),
+          window.removeEventListener("scroll", h, !0));
+      }
+    );
+  }, [t]),
+    React.useEffect(() => {
+      t && p.current?.focus();
+    }, [t]));
+  function E(e) {
+    (e.key === "ArrowDown" || e.key === "ArrowUp") && (e.preventDefault(), v());
+  }
+  function L(e) {
+    e.key === "ArrowDown"
+      ? (e.preventDefault(), s((a) => (a + 1) % supportedLocales.length))
+      : e.key === "ArrowUp"
+        ? (e.preventDefault(),
+          s((a) => (a - 1 + supportedLocales.length) % supportedLocales.length))
+        : e.key === "Home"
+          ? (e.preventDefault(), s(0))
+          : e.key === "End"
+            ? (e.preventDefault(), s(supportedLocales.length - 1))
+            : (e.key === "Enter" || e.key === " ") &&
+              (e.preventDefault(), b(supportedLocales[c].id));
+  }
+  return jsxRuntime.jsxs("div", {
+    className: `language-switcher${t ? " is-open" : ""}`,
+    ref: g,
+    children: [
+      jsxRuntime.jsxs("button", {
+        ref: d,
+        type: "button",
+        "aria-haspopup": "listbox",
+        "aria-expanded": t,
+        "aria-controls": t ? x : void 0,
+        "aria-label": j[currentLocale] ?? "Language",
+        onClick: () => (t ? o(!1) : v()),
+        onKeyDown: E,
+        children: [
+          jsxRuntime.jsxs("svg", {
+            className: "language-globe",
+            viewBox: "0 0 16 16",
+            "aria-hidden": "true",
+            children: [
+              jsxRuntime.jsx("circle", {
+                cx: "8",
+                cy: "8",
+                r: "6.25",
+              }),
+              jsxRuntime.jsx("ellipse", {
+                cx: "8",
+                cy: "8",
+                rx: "2.7",
+                ry: "6.25",
+              }),
+              jsxRuntime.jsx("path", {
+                d: "M2.1 8h11.8M3.1 5.15h9.8M3.1 10.85h9.8",
+              }),
+            ],
+          }),
+          jsxRuntime.jsx("span", {
+            lang: y.id,
+            children: y.label,
+          }),
+          jsxRuntime.jsx("svg", {
+            className: "language-chevron",
+            viewBox: "0 0 16 16",
+            "aria-hidden": "true",
+            children: jsxRuntime.jsx("path", {
+              d: "M3.5 6.2 8 10.4l4.5-4.2",
+            }),
+          }),
+        ],
+      }),
+      t &&
+        r &&
+        R.createPortal(
+          jsxRuntime.jsx("ul", {
+            ref: p,
+            id: x,
+            className: "language-menu",
+            role: "listbox",
+            tabIndex: -1,
+            "aria-label": j[currentLocale] ?? "Language",
+            "aria-activedescendant": m(c),
+            style: {
+              top: r.top,
+              left: r.left,
+              width: r.width,
+            },
+            onKeyDown: L,
+            children: supportedLocales.map((e, a) =>
+              jsxRuntime.jsx(
+                "li",
+                {
+                  role: "none",
+                  children: jsxRuntime.jsxs("button", {
+                    id: m(a),
+                    type: "button",
+                    role: "option",
+                    tabIndex: -1,
+                    lang: e.id,
+                    "aria-selected": e.id === currentLocale,
+                    "data-active": a === c,
+                    onMouseEnter: () => s(a),
+                    onClick: () => b(e.id),
+                    children: [
+                      jsxRuntime.jsx("span", {
+                        children: e.label,
+                      }),
+                      jsxRuntime.jsx("svg", {
+                        viewBox: "0 0 16 16",
+                        "aria-hidden": "true",
+                        children: jsxRuntime.jsx("path", {
+                          d: "M3.2 8.2 6.4 11.4 12.8 4.6",
+                        }),
+                      }),
+                    ],
+                  }),
+                },
+                e.id,
+              ),
+            ),
+          }),
+          document.body,
+        ),
+    ],
+  });
+}
+export { I as L };

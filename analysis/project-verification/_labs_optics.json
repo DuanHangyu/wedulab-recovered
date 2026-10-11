@@ -1,0 +1,596 @@
+{
+  "route": "/labs/optics",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "光学实验台 · OpticsLab",
+      "text": "← WEDULAB\nOPTICSLAB\n光学实验台\n简体中文\n视角\n实验课题\n01\n光的反射定律\nReflection\n02\n平面镜成像\nPlane mirror image\n03\n光的折射\nRefraction\n04\n全反射与光纤\nTotal internal reflection\n05\n棱镜色散\nDispersion\n06\n凸透镜成像规律\nConverging lens\n07\n眼睛与视力矫正\nThe eye\n波动光学\n08\n双缝干涉\nYoung's double slit\n09\n单缝衍射与光栅\nDiffraction\n10\n薄膜干涉\nThin films\n11\n光的偏振\nPolarization\n12\n自由光学台\nSandbox\n拖动元件移动，拖动金色圆环旋转\nD 暗室开关\n←→ 切换课题\ni = 40.0°\nr = 40.0°\nLESSON 01\n光的反射定律\n\nReflection\n\ni\n40.0\n°\nr\n40.0\n°\n数据表\nr-i\nCSV\n调整入射角后按“记录数据”。\n01\n光的反射定律\nReflection\n\n激光沿量角盘射向平面镜的中心 O。过入射点作垂直于镜面的法线（盘上的竖直虚线），入射光线与法线的夹角叫入射角 i，反射光线与法线的夹角叫反射角 r。\n\nr = i\n\n反射光线、入射光线和法线在同一平面内，反射光线和入射光线分居法线两侧。\n\n拖动激光笔绕盘转动，或用滑块改变入射角，按记录数据保存每组 i 和 r。让光逆着反射光射入，会沿原入射光射出——光路可逆。\n\n拖动激光笔改变入射角\n读出量角盘上的反射角\n记录 4~6 组数据\n观察 i = 0 时光沿原路返回\nSETUP · 实验参数\n入射角 i\n40.0°\n波长 λ\n650 nm\n● 记录数据\nREADOUT · 实时读数\n入射角 i\n40.0°\n反射角 r\n40.0°\nVIEW · 显示\n暗室\n烟雾显示光路\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:7247)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16655)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at St (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1988)\n    at Bt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:8262)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16655)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Ht (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:1653)\n    at B (http://127.0.0.1:4173/assets/theme-aLwyR9RG.js:1:883)\n    at xn (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:9356)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16784)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ln (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:7377)\n    at xn (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:9385)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16784)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ln (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:7466)\n    at xn (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:9385)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16784)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at Tt (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:2551)\n    at xn (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:10505)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16784)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at En (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:8302)\n    at xn (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:10900)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:16784)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:22341)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:432)\n    at $t (http://127.0.0.1:4173/assets/charts-CzzpgoDB.js:1:4195)\n    at nt (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:1:23132)\n    at Object.ds [as disk] (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:52:8222)\n    at b (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:74:18635)\n    at Es (http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2292)\n    at http://127.0.0.1:4173/assets/Page-DwZTQJtf.js:75:2810\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-DwZTQJtf.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4173/assets/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4173/assets/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4173/assets/Page-CrUrCqRl.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n光的反射定律\nReflection",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n平面镜成像\nPlane mirror image",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n光的折射\nRefraction",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n全反射与光纤\nTotal internal reflection",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n棱镜色散\nDispersion",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n凸透镜成像规律\nConverging lens",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n眼睛与视力矫正\nThe eye",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n双缝干涉\nYoung's double slit",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n单缝衍射与光栅\nDiffraction",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n薄膜干涉\nThin films",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n光的偏振\nPolarization",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "12\n自由光学台\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "数据表",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "r-i",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aRec",
+          "text": "● 记录数据",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暗室",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "烟雾显示光路",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "光学实验台 · OpticsLab",
+      "text": "← WEDULAB\nOPTICSLAB\n光学实验台\n简体中文\n视角\n实验课题\n01\n光的反射定律\nReflection\n02\n平面镜成像\nPlane mirror image\n03\n光的折射\nRefraction\n04\n全反射与光纤\nTotal internal reflection\n05\n棱镜色散\nDispersion\n06\n凸透镜成像规律\nConverging lens\n07\n眼睛与视力矫正\nThe eye\n波动光学\n08\n双缝干涉\nYoung's double slit\n09\n单缝衍射与光栅\nDiffraction\n10\n薄膜干涉\nThin films\n11\n光的偏振\nPolarization\n12\n自由光学台\nSandbox\n拖动元件移动，拖动金色圆环旋转\nD 暗室开关\n←→ 切换课题\ni = 40.0°\nr = 40.0°\nLESSON 01\n光的反射定律\n\nReflection\n\ni\n40.0\n°\nr\n40.0\n°\n数据表\nr-i\nCSV\n调整入射角后按“记录数据”。\n01\n光的反射定律\nReflection\n\n激光沿量角盘射向平面镜的中心 O。过入射点作垂直于镜面的法线（盘上的竖直虚线），入射光线与法线的夹角叫入射角 i，反射光线与法线的夹角叫反射角 r。\n\nr = i\n\n反射光线、入射光线和法线在同一平面内，反射光线和入射光线分居法线两侧。\n\n拖动激光笔绕盘转动，或用滑块改变入射角，按记录数据保存每组 i 和 r。让光逆着反射光射入，会沿原入射光射出——光路可逆。\n\n拖动激光笔改变入射角\n读出量角盘上的反射角\n记录 4~6 组数据\n观察 i = 0 时光沿原路返回\nSETUP · 实验参数\n入射角 i\n40.0°\n波长 λ\n650 nm\n● 记录数据\nREADOUT · 实时读数\n入射角 i\n40.0°\n反射角 r\n40.0°\nVIEW · 显示\n暗室\n烟雾显示光路\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20565:17)\n    at new _d (http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js:20590:57)\n    at Bt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:433:13)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5323:9)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at St (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:138:18)\n    at Bt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:475:13)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5323:9)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Ht (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:118:18)\n    at B (http://127.0.0.1:4174/src/vendor/theme-aLwyR9RG.js:67:13)\n    at xn (http://127.0.0.1:4174/src/labs/optics/Page.js:511:13)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5329:13)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ln (http://127.0.0.1:4174/src/labs/optics/Page.js:406:15)\n    at xn (http://127.0.0.1:4174/src/labs/optics/Page.js:514:13)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5329:13)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Ln (http://127.0.0.1:4174/src/labs/optics/Page.js:409:15)\n    at xn (http://127.0.0.1:4174/src/labs/optics/Page.js:514:13)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5329:13)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at Tt (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:170:14)\n    at xn (http://127.0.0.1:4174/src/labs/optics/Page.js:586:16)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5329:13)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at En (http://127.0.0.1:4174/src/labs/optics/Page.js:459:15)\n    at xn (http://127.0.0.1:4174/src/labs/optics/Page.js:609:14)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5329:13)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5607:11)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at D (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:41:48)\n    at $t (http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js:249:18)\n    at nt (http://127.0.0.1:4174/src/labs/optics/Page.js:1513:12)\n    at Object.ds [as disk] (http://127.0.0.1:4174/src/labs/optics/Page.js:2583:19)\n    at b (http://127.0.0.1:4174/src/labs/optics/Page.js:5469:36)\n    at Es (http://127.0.0.1:4174/src/labs/optics/Page.js:5801:3)\n    at http://127.0.0.1:4174/src/labs/optics/Page.js:5825:59\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/labs/optics/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4174/src/vendor/charts-CzzpgoDB.js",
+        "http://127.0.0.1:4174/src/vendor/theme-aLwyR9RG.js",
+        "http://127.0.0.1:4174/src/vendor/RoundedBoxGeometry-BuxEdaMS.js",
+        "http://127.0.0.1:4174/assets/theme-BwshCFgs.css",
+        "http://127.0.0.1:4174/assets/Page-CrUrCqRl.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/fonts/theme-24066da46699.css",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjPQ.ttf",
+        "http://127.0.0.1:4174/api/v1/analytics/events",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个课题 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个课题 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n光的反射定律\nReflection",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n平面镜成像\nPlane mirror image",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n光的折射\nRefraction",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n全反射与光纤\nTotal internal reflection",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n棱镜色散\nDispersion",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n凸透镜成像规律\nConverging lens",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n眼睛与视力矫正\nThe eye",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n双缝干涉\nYoung's double slit",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n单缝衍射与光栅\nDiffraction",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n薄膜干涉\nThin films",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n光的偏振\nPolarization",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "12\n自由光学台\nSandbox",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "数据表",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "r-i",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bCsv",
+          "text": "CSV",
+          "type": "submit",
+          "title": "导出 CSV 数据"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bDock",
+          "text": "",
+          "type": "submit",
+          "title": "收起 / 展开数据坞"
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "aRec",
+          "text": "● 记录数据",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "暗室",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "烟雾显示光路",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

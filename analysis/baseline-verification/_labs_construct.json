@@ -1,0 +1,566 @@
+{
+  "route": "/labs/construct",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "尺规作图 · ConstructLab",
+      "text": "← WEDULAB\nCONSTRUCTLAB\n尺规作图与全等相似\n简体中文\n纸面\n视角\n章节\n01\n尺规闯关\nCompass & straightedge\n02\n作图回放\nStep-by-step replay\n03\n全等判定\nCongruent triangles\n04\n相似与位似\nSimilarity & homothety\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 04\n尺规闯关\n\nCompass & straightedge\n\n 圆规\n 直尺\n撤销\n重来\n提示\n看解法\n01\n尺规闯关\nCompass & straightedge\n\n古希腊人只用两件工具作图：圆规（以一点为圆心、过另一点画圆）和没有刻度的直尺（过两点画直线）。\n\n先选工具，再依次点两个已有的点。新的交点会自动出现，之后就可以在它们上面落笔。\n\n用尽量少的步数完成目标，拿到三颗星。\n\n1. 等边三角形\n\n以 AB 为边作等边三角形。\n\n步数\n0\n三星步数\n4\n目标\n0 / 2\n1\n等边三角形\n☆☆☆\n2\n中垂线\n☆☆☆\n3\n中点\n☆☆☆\n4\n角平分线\n☆☆☆\n5\n过线上一点作垂线\n☆☆☆\n6\n过线外一点作垂线\n☆☆☆\n7\n平行线\n☆☆☆\n8\n圆内接正六边形\n☆☆☆\n9\n正方形\n☆☆☆\n10\n找圆心\n☆☆☆\n11\n黄金分割点\n☆☆☆\n12\n30° 角\n☆☆☆\n自由作图\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "randomCalls": 90,
+      "canvas": [
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (https://wedulab.com/assets/math-_7kWGBgE.js:1:9022)\n    at et (https://wedulab.com/assets/math-_7kWGBgE.js:1:17472)\n    at ie (https://wedulab.com/assets/Page-DbWcpJ3P.js:1:25904)\n    at https://wedulab.com/assets/Page-DbWcpJ3P.js:1:26123\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)\n    at Ja (https://wedulab.com/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-DbWcpJ3P.js",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/math-_7kWGBgE.js",
+        "https://wedulab.com/assets/LineSegments2-CF4-EQBa.js",
+        "https://wedulab.com/assets/OutputPass-B-cSf-Py.js",
+        "https://wedulab.com/assets/studio-DdpeYmJn.js",
+        "https://wedulab.com/assets/math-CnOtOUG7.css",
+        "https://wedulab.com/assets/confetti-D_DoZ5bY.js",
+        "https://wedulab.com/assets/Page-DTutw72u.css",
+        "https://wedulab.com/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n尺规闯关\nCompass & straightedge",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n作图回放\nStep-by-step replay",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n全等判定\nCongruent triangles",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n相似与位似\nSimilarity & homothety",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": " 圆规",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": " 直尺",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "撤销",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "重来",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提示",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "看解法",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1\n等边三角形\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "2\n中垂线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "3\n中点\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "4\n角平分线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "5\n过线上一点作垂线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "6\n过线外一点作垂线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "7\n平行线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "8\n圆内接正六边形\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "9\n正方形\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n找圆心\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n黄金分割点\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "12\n30° 角\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自由作图",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "尺规作图 · ConstructLab",
+      "text": "← WEDULAB\nCONSTRUCTLAB\n尺规作图与全等相似\n简体中文\n纸面\n视角\n章节\n01\n尺规闯关\nCompass & straightedge\n02\n作图回放\nStep-by-step replay\n03\n全等判定\nCongruent triangles\n04\n相似与位似\nSimilarity & homothety\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 04\n尺规闯关\n\nCompass & straightedge\n\n 圆规\n 直尺\n撤销\n重来\n提示\n看解法\n01\n尺规闯关\nCompass & straightedge\n\n古希腊人只用两件工具作图：圆规（以一点为圆心、过另一点画圆）和没有刻度的直尺（过两点画直线）。\n\n先选工具，再依次点两个已有的点。新的交点会自动出现，之后就可以在它们上面落笔。\n\n用尽量少的步数完成目标，拿到三颗星。\n\n1. 等边三角形\n\n以 AB 为边作等边三角形。\n\n步数\n0\n三星步数\n4\n目标\n0 / 2\n1\n等边三角形\n☆☆☆\n2\n中垂线\n☆☆☆\n3\n中点\n☆☆☆\n4\n角平分线\n☆☆☆\n5\n过线上一点作垂线\n☆☆☆\n6\n过线外一点作垂线\n☆☆☆\n7\n平行线\n☆☆☆\n8\n圆内接正六边形\n☆☆☆\n9\n正方形\n☆☆☆\n10\n找圆心\n☆☆☆\n11\n黄金分割点\n☆☆☆\n12\n30° 角\n☆☆☆\n自由作图\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "randomCalls": 90,
+      "canvas": [
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at Re (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:9022)\n    at et (http://127.0.0.1:4173/assets/math-_7kWGBgE.js:1:17472)\n    at ie (http://127.0.0.1:4173/assets/Page-DbWcpJ3P.js:1:25904)\n    at http://127.0.0.1:4173/assets/Page-DbWcpJ3P.js:1:26123\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-DbWcpJ3P.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/math-_7kWGBgE.js",
+        "http://127.0.0.1:4173/assets/LineSegments2-CF4-EQBa.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/math-CnOtOUG7.css",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4173/assets/confetti-D_DoZ5bY.js",
+        "http://127.0.0.1:4173/assets/Page-DTutw72u.css",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bTheme",
+          "text": "纸面",
+          "type": "submit",
+          "title": "切换纸面 / Studio 风格 (T)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n尺规闯关\nCompass & straightedge",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n作图回放\nStep-by-step replay",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n全等判定\nCongruent triangles",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n相似与位似\nSimilarity & homothety",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": " 圆规",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": " 直尺",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "撤销",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "重来",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提示",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "看解法",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1\n等边三角形\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "2\n中垂线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "3\n中点\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "4\n角平分线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "5\n过线上一点作垂线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "6\n过线外一点作垂线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "7\n平行线\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "8\n圆内接正六边形\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "9\n正方形\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n找圆心\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n黄金分割点\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "12\n30° 角\n☆☆☆",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自由作图",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "图上标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

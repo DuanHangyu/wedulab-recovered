@@ -1,0 +1,14281 @@
+// Recovered from public deployment: Page-DpQvKtp-.js
+// Scene mathematics, shaders, timing and event handlers are preserved.
+// Original TS/JSX names and comments were unavailable; see recovery-map.json.
+import {
+  t as translate,
+  r as React,
+  j as jsxRuntime,
+  b as localizedUrl,
+} from "../../core/runtime.js";
+import { L as jr } from "../../components/LanguageSwitcher.js";
+import {
+  a2 as ja,
+  N as Yo,
+  o as Fs,
+  C as he,
+  v as Or,
+  c as js,
+  ab as Cr,
+  W as Lr,
+  x as Oa,
+  A as _r,
+  S as Ca,
+  D as Qs,
+  H as Hr,
+  j as Gr,
+  r as Ur,
+  E as Br,
+  q as Kr,
+  U as Wr,
+  V as en,
+  O as Xr,
+  aC as Yr,
+  G as qt,
+  R as Zr,
+  f as k,
+  i as Qr,
+  w as Jr,
+  b as mt,
+  l as tc,
+  ay as ec,
+  ar as pe,
+  I as an,
+  d as oo,
+  Q as Me,
+  K as nn,
+  u as ln,
+  y as qn,
+  a8 as Os,
+  z as bo,
+  T as Zo,
+  L as Ae,
+  a0 as nc,
+  _ as Js,
+  aD as oc,
+  B as La,
+  aE as vn,
+  m as Xn,
+  at as ks,
+  av as jo,
+  a6 as sc,
+  ac as Vn,
+  aB as ac,
+  e as So,
+  g as ta,
+  aA as rc,
+} from "../../vendor/OutputPass-B-cSf-Py.js";
+import {
+  a as Qo,
+  m as ue,
+} from "../../vendor/BufferGeometryUtils--VnzLiDd.js"; /* empty css              */ /* empty css               */
+const B = {
+    membrane: "#f2c9a0",
+    cytosol: "#2f5c62",
+    envelope: "#9d84e6",
+    nucleoplasm: "#4a3a8c",
+    chromatin: "#c9a0ff",
+    nucleolus: "#5b2fa6",
+    pore: "#efe6ff",
+    rer: "#3fb8cc",
+    ser: "#62d6b4",
+    ribosome: "#f6e3a6",
+    golgi: "#f2a83c",
+    golgiCis: "#e8c45a",
+    golgiTrans: "#f08a2c",
+    mitoOuter: "#ff8a66",
+    mitoInner: "#e8503c",
+    mitoMatrix: "#ffbf98",
+    chloroplast: "#4cb84f",
+    thylakoid: "#1f7d33",
+    stroma: "#bfe39a",
+    starch: "#f4f0e2",
+    lysosome: "#e85f9e",
+    peroxisome: "#d4b04a",
+    vesicle: "#ffd98a",
+    vacuole: "#7cc6ff",
+    tonoplast: "#a8dcff",
+    cellWall: "#b8da6c",
+    centriole: "#e8ecf6",
+    microtubule: "#7ad8ff",
+    actin: "#ff7ab8",
+    intermediate: "#e0c48e",
+    dna: "#c9a0ff",
+    plasmid: "#ff9ad5",
+    capsule: "#9ee0d0",
+    flagellum: "#e8e0c8",
+    protein: "#8fd14f",
+    glyco: "#ffd36a",
+    lipidHead: "#f2c9a0",
+    lipidTail: "#f6efd8",
+  },
+  je = [];
+function ko(t) {
+  je.length = 0;
+  for (const e of t) je.push(e);
+}
+const _a = `
+vec3 cl_hash3(vec3 p){ p = vec3(dot(p,vec3(127.1,311.7,74.7)), dot(p,vec3(269.5,183.3,246.1)), dot(p,vec3(113.5,271.9,124.6))); return -1.0 + 2.0*fract(sin(p)*43758.5453123); }
+float cl_noise(vec3 p){
+  vec3 i = floor(p); vec3 f = fract(p); vec3 u = f*f*(3.0-2.0*f);
+  return mix(mix(mix(dot(cl_hash3(i+vec3(0,0,0)),f-vec3(0,0,0)), dot(cl_hash3(i+vec3(1,0,0)),f-vec3(1,0,0)),u.x),
+                 mix(dot(cl_hash3(i+vec3(0,1,0)),f-vec3(0,1,0)), dot(cl_hash3(i+vec3(1,1,0)),f-vec3(1,1,0)),u.x),u.y),
+             mix(mix(dot(cl_hash3(i+vec3(0,0,1)),f-vec3(0,0,1)), dot(cl_hash3(i+vec3(1,0,1)),f-vec3(1,0,1)),u.x),
+                 mix(dot(cl_hash3(i+vec3(0,1,1)),f-vec3(0,1,1)), dot(cl_hash3(i+vec3(1,1,1)),f-vec3(1,1,1)),u.x),u.y),u.z);
+}
+float cl_fbm(vec3 p){ return 0.6*cl_noise(p) + 0.28*cl_noise(p*2.07+3.1) + 0.12*cl_noise(p*4.13+7.7); }
+// 未归一化的屏幕空间导数：凹凸强度与缩放无关，等于真实的高度梯度
+vec3 cl_perturb(vec3 surf_pos, vec3 surf_norm, vec2 dHdxy, float faceDir){
+  vec3 sx = dFdx(surf_pos); vec3 sy = dFdy(surf_pos);
+  vec3 r1 = cross(sy, surf_norm); vec3 r2 = cross(surf_norm, sx);
+  float det = dot(sx, r1) * faceDir;
+  vec3 grad = sign(det) * (dHdxy.x * r1 + dHdxy.y * r2);
+  return normalize(abs(det) * surf_norm - grad);
+}`,
+  cc = `
+float cl_sectionEdge(float w){
+  float e = 0.0;
+  #if NUM_CLIPPING_PLANES > 0
+  for (int i = 0; i < NUM_CLIPPING_PLANES; i++) {
+    float di = dot(vClipPosition, clippingPlanes[i].xyz) - clippingPlanes[i].w;
+    if (abs(di) < w) {
+      bool inside = true;
+      for (int j = 0; j < NUM_CLIPPING_PLANES; j++) {
+        if (j == i) continue;
+        if (dot(vClipPosition, clippingPlanes[j].xyz) - clippingPlanes[j].w < -w) inside = false;
+      }
+      if (inside) e = max(e, 1.0 - abs(di) / w);
+    }
+  }
+  #endif
+  return e;
+}`,
+  Yn = new Map(),
+  ic = (t, e) => new he(t).multiplyScalar(e);
+function et(t, e = {}) {
+  const o = {
+      roughness: 0.5,
+      sheen: 0.7,
+      clearcoat: 0.25,
+      bump: 0.025,
+      freq: 5,
+      rim: 0.35,
+      opacity: 1,
+      cap: void 0,
+      edge: 0.06,
+      emissive: "#000000",
+      emissiveIntensity: 0,
+      metalness: 0,
+      depthWrite: void 0,
+      flat: !1,
+      inner: null,
+      ...e,
+    },
+    s = `org|${t}|${JSON.stringify(o)}`;
+  if (Yn.has(s)) return Yn.get(s);
+  const n = new he(t),
+    a =
+      o.cap === null
+        ? null
+        : new he(o.cap ?? n.clone().lerp(new he("#ffffff"), 0.28)),
+    r = o.opacity < 1,
+    i = new Or({
+      color: n,
+      roughness: o.roughness,
+      metalness: o.metalness,
+      sheen: o.sheen,
+      sheenRoughness: 0.45,
+      sheenColor: n.clone().lerp(new he("#ffffff"), 0.55),
+      clearcoat: o.clearcoat,
+      clearcoatRoughness: 0.35,
+      emissive: new he(o.emissive),
+      emissiveIntensity: o.emissiveIntensity,
+      transparent: r,
+      opacity: o.opacity,
+      depthWrite: o.depthWrite ?? !r,
+      side: Yo,
+      clippingPlanes: je,
+      clipIntersection: !0,
+      flatShading: o.flat,
+    }),
+    c = {
+      uBump: {
+        value: o.bump,
+      },
+      uFreq: {
+        value: o.freq,
+      },
+      uRim: {
+        value: ic(n.clone().lerp(new he("#ffffff"), 0.5), o.rim),
+      },
+      uCap: {
+        value: a || new he(),
+      },
+      uCapOn: {
+        value: a ? 1 : 0,
+      },
+      uEdgeW: {
+        value: o.edge,
+      },
+      uEdgeColor: {
+        value: (a || n).clone().lerp(new he("#ffffff"), 0.55),
+      },
+      uInner: {
+        value: new he(o.inner || "#000000"),
+      },
+      uInnerOn: {
+        value: o.inner ? 1 : 0,
+      },
+    };
+  return (
+    (i.userData.uniforms = c),
+    (i.onBeforeCompile = (l) => {
+      (Object.assign(l.uniforms, c),
+        (l.vertexShader = l.vertexShader
+          .replace(
+            "#include <common>",
+            `#include <common>
+varying vec3 vObjPos;`,
+          )
+          .replace(
+            "#include <begin_vertex>",
+            `#include <begin_vertex>
+        #ifdef USE_INSTANCING
+          vObjPos = (instanceMatrix * vec4(transformed, 1.0)).xyz;
+        #else
+          vObjPos = transformed;
+        #endif`,
+          )),
+        (l.fragmentShader = l.fragmentShader
+          .replace(
+            "#include <common>",
+            `#include <common>
+        varying vec3 vObjPos;
+        uniform float uBump; uniform float uFreq; uniform vec3 uRim; uniform vec3 uCap; uniform float uCapOn; uniform float uEdgeW; uniform vec3 uEdgeColor; uniform vec3 uInner; uniform float uInnerOn;
+        ${_a}`,
+          )
+          .replace(
+            "#include <clipping_planes_pars_fragment>",
+            `#include <clipping_planes_pars_fragment>
+${cc}`,
+          )
+          .replace(
+            "#include <normal_fragment_maps>",
+            `#include <normal_fragment_maps>
+        if (uBump > 0.0) {
+          float hgt = cl_fbm(vObjPos * uFreq) * uBump;
+          normal = cl_perturb(-vViewPosition, normal, vec2(dFdx(hgt), dFdy(hgt)), faceDirection);
+        }`,
+          )
+          .replace(
+            "#include <opaque_fragment>",
+            `float fres = pow(1.0 - saturate(abs(dot(normal, normalize(vViewPosition)))), 3.0);
+        outgoingLight += uRim * fres;
+        if (!gl_FrontFacing && uCapOn > 0.5) {
+          float grain = 0.86 + 0.14 * cl_fbm(vObjPos * uFreq * 1.7);
+          outgoingLight = uCap * grain * 0.55;
+          diffuseColor.a = 1.0;
+        }
+        if (!gl_FrontFacing && uInnerOn > 0.5) {
+          float lum = dot(outgoingLight, vec3(0.299, 0.587, 0.114));
+          outgoingLight = uInner * (0.55 + 1.6 * lum) * (0.85 + 0.3 * cl_fbm(vObjPos * uFreq * 0.6));
+        }
+        float sEdge = cl_sectionEdge(uEdgeW);
+        outgoingLight = mix(outgoingLight, uEdgeColor * 0.9, sEdge * 0.85);
+        #include <opaque_fragment>`,
+          )));
+    }),
+    (i.customProgramCacheKey = () => "cell-organic"),
+    Yn.set(s, i),
+    i
+  );
+}
+function Zn(t, e = {}) {
+  return et(t, {
+    opacity: 0.38,
+    cap: null,
+    sheen: 0.9,
+    rim: 0.8,
+    roughness: 0.35,
+    clearcoat: 0.6,
+    bump: 0.012,
+    ...e,
+  });
+}
+function Ao(t, { opacity: e = 1, additive: o = !1 } = {}) {
+  const s = `flat|${t}|${e}|${o}`;
+  if (Yn.has(s)) return Yn.get(s);
+  const n = new js({
+    color: t,
+    transparent: e < 1 || o,
+    opacity: e,
+    depthWrite: !(e < 1 || o),
+    blending: o ? Fs : Cr,
+    clippingPlanes: je,
+    clipIntersection: !0,
+  });
+  return (Yn.set(s, n), n);
+}
+const me = {
+    dna: {
+      color: "#3f6cff",
+      edge: 0.5,
+      fill: 0.55,
+      label: "DAPI",
+    },
+    nucleolus: {
+      color: "#2a3fd0",
+      edge: 0.2,
+      fill: 0.15,
+      label: "DAPI",
+    },
+    mito: {
+      color: "#ff3b2f",
+      edge: 1.1,
+      fill: 0.25,
+      label: "MitoTracker",
+    },
+    er: {
+      color: "#27f07a",
+      edge: 0.9,
+      fill: 0.12,
+      label: "ER-Tracker",
+    },
+    golgi: {
+      color: "#ffc832",
+      edge: 1,
+      fill: 0.3,
+      label: "GM130",
+    },
+    lyso: {
+      color: "#ff4fa0",
+      edge: 0.6,
+      fill: 0.6,
+      label: "LysoTracker",
+    },
+    perox: {
+      color: "#ffa04a",
+      edge: 0.5,
+      fill: 0.5,
+      label: "PMP70",
+    },
+    actin: {
+      color: "#ff3ad0",
+      edge: 0.5,
+      fill: 0.7,
+      label: "Phalloidin",
+    },
+    tubulin: {
+      color: "#32e6ff",
+      edge: 0.4,
+      fill: 0.55,
+      label: "α-tubulin",
+    },
+    membrane: {
+      color: "#8f9cff",
+      edge: 0.22,
+      fill: 0,
+      label: "CellMask",
+    },
+    chloro: {
+      color: "#ff1f3d",
+      edge: 0.6,
+      fill: 0.55,
+      label: "Chlorophyll",
+    },
+    wall: {
+      color: "#7fb2ff",
+      edge: 0.5,
+      fill: 0.05,
+      label: "Calcofluor",
+    },
+    vesicle: {
+      color: "#ffe27a",
+      edge: 0.7,
+      fill: 0.35,
+      label: "",
+    },
+    protein: {
+      color: "#c8ff5a",
+      edge: 0.4,
+      fill: 0.9,
+      label: "GFP",
+    },
+    faint: {
+      color: "#4a5a80",
+      edge: 0.18,
+      fill: 0.02,
+      label: "",
+    },
+  },
+  Oo = new Map();
+function lc(t) {
+  if (Oo.has(t)) return Oo.get(t);
+  const e = me[t] || me.faint,
+    o = new ja({
+      uniforms: {
+        uColor: {
+          value: new he(e.color),
+        },
+        uEdge: {
+          value: e.edge,
+        },
+        uFill: {
+          value: e.fill,
+        },
+        uGain: {
+          value: 1,
+        },
+        uFocus: {
+          value: 30,
+        },
+        uDof: {
+          value: 14,
+        },
+      },
+      vertexShader: `
+      #include <common>
+      #include <clipping_planes_pars_vertex>
+      varying vec3 vN; varying vec3 vV; varying vec3 vObj; varying float vDepth;
+      void main(){
+        #include <beginnormal_vertex>
+        #include <defaultnormal_vertex>
+        #include <begin_vertex>
+        #include <project_vertex>
+        #include <clipping_planes_vertex>
+        vN = normalize(transformedNormal); vV = -mvPosition.xyz; vDepth = -mvPosition.z;
+        #ifdef USE_INSTANCING
+          vObj = (instanceMatrix * vec4(position, 1.0)).xyz;
+        #else
+          vObj = position;
+        #endif
+      }`,
+      fragmentShader: `
+      #include <common>
+      #include <clipping_planes_pars_fragment>
+      uniform vec3 uColor; uniform float uEdge; uniform float uFill; uniform float uGain; uniform float uFocus; uniform float uDof;
+      varying vec3 vN; varying vec3 vV; varying vec3 vObj; varying float vDepth;
+      ${_a}
+      void main(){
+        #include <clipping_planes_fragment>
+        // 退化三角形的法线长度为 0，normalize 会产生 NaN，经辉光模糊后会染黑整个画面
+        float ln = length(vN);
+        float f = ln > 1e-6 ? 1.0 - abs(dot(vN / ln, normalize(vV))) : 0.0;
+        float speckle = 0.75 + 0.5 * cl_fbm(vObj * 9.0);
+        // 光学切片：离焦平面越远越暗（模拟共聚焦的层切效果）
+        float z = (vDepth - uFocus) / uDof;
+        float focus = 0.25 + 0.75 * exp(-z * z);
+        float a = clamp((pow(max(f, 0.0), 2.2) * uEdge + uFill * 0.35) * speckle * focus * uGain, 0.0, 8.0);
+        gl_FragColor = vec4(uColor * a, 1.0);
+      }`,
+      transparent: !0,
+      depthWrite: !1,
+      blending: Fs,
+      side: Yo,
+      clipping: !0,
+      clippingPlanes: je,
+      clipIntersection: !0,
+    });
+  return (Oo.set(t, o), o);
+}
+const uc = () => [...Oo.values()];
+function xt(t, e) {
+  return ((t.userData.stain = e), t);
+}
+function ea(t, e) {
+  const o = (n, a) => {
+    const r = n.userData.stain ?? a;
+    n.userData.overlay || s(n, r);
+    for (const i of n.children) o(i, r);
+  };
+  o(t, void 0);
+  function s(n, a) {
+    (!n.isMesh && !n.isLine && !n.isPoints) ||
+      (n.userData.illus || (n.userData.illus = n.material),
+      e === "fluor"
+        ? !a || a === "none"
+          ? ((n.visible = !1), (n.userData.hiddenByMode = !0))
+          : (n.material = lc(a))
+        : ((n.material = n.userData.illus),
+          n.userData.hiddenByMode &&
+            ((n.visible = !0), (n.userData.hiddenByMode = !1))));
+  }
+}
+const Ha = {
+    uPulse: {
+      value: 1,
+    },
+  },
+  ns = new Map();
+function dc(t, e) {
+  if (!e && ns.has(t)) return ns.get(t);
+  const o = new ja({
+    uniforms: {
+      uColor: {
+        value: new he(t),
+      },
+      uPulse: e || Ha.uPulse,
+    },
+    vertexShader: `
+      #include <common>
+      #include <clipping_planes_pars_vertex>
+      varying vec3 vN; varying vec3 vV;
+      void main(){
+        #include <beginnormal_vertex>
+        #include <defaultnormal_vertex>
+        #include <begin_vertex>
+        #include <project_vertex>
+        #include <clipping_planes_vertex>
+        vN = normalize(transformedNormal); vV = -mvPosition.xyz;
+      }`,
+    fragmentShader: `
+      #include <common>
+      #include <clipping_planes_pars_fragment>
+      uniform vec3 uColor; uniform float uPulse; varying vec3 vN; varying vec3 vV;
+      void main(){
+        #include <clipping_planes_fragment>
+        float ln = length(vN);
+        float f = ln > 1e-6 ? 1.0 - abs(dot(vN / ln, normalize(vV))) : 0.0;
+        float a = clamp((pow(max(f, 0.0), 1.8) * 1.6 + 0.12) * uPulse, 0.0, 8.0);
+        gl_FragColor = vec4(uColor * a, 1.0);
+      }`,
+    transparent: !0,
+    depthWrite: !1,
+    blending: Fs,
+    side: Yo,
+    clipping: !0,
+    clippingPlanes: je,
+    clipIntersection: !0,
+  });
+  return (e || ns.set(t, o), o);
+}
+function pc(t) {
+  const e = new Ca();
+  e.background = new he("#020304");
+  const o = (n, a, r, i, c) => {
+    const l = new mt(
+      new tc(n, a),
+      new js({
+        color: new he(r).multiplyScalar(i),
+        side: Yo,
+      }),
+    );
+    (l.position.set(...c), l.lookAt(0, 0, 0), e.add(l));
+  };
+  (o(7, 4.5, "#fff8ee", 2.6, [-3, 6, 6]),
+    o(1.4, 7, "#ffffff", 1.6, [7, 1, 2]),
+    o(1.4, 7, "#bfe8d6", 1.1, [-7, 0, -3]),
+    o(9, 1.2, "#ffffff", 0.6, [0, -6, 4]),
+    o(4, 4, "#9fc8ff", 0.7, [0, 2, -8]));
+  const s = new Qr(t).fromScene(e, 0.02).texture;
+  return (e.traverse((n) => n.geometry?.dispose()), s);
+}
+function fc(t, e, o) {
+  const s = document.createElement("canvas");
+  s.width = s.height = 512;
+  const n = s.getContext("2d"),
+    a = n.createRadialGradient(256, 236, 10, 256, 256, 390);
+  (a.addColorStop(0, t),
+    a.addColorStop(0.45, e),
+    a.addColorStop(1, o),
+    (n.fillStyle = a),
+    n.fillRect(0, 0, 512, 512));
+  const r = n.getImageData(0, 0, 512, 512);
+  for (let c = 0; c < r.data.length; c += 4) {
+    const l = (Math.random() - 0.5) * 5;
+    ((r.data[c] += l), (r.data[c + 1] += l), (r.data[c + 2] += l));
+  }
+  n.putImageData(r, 0, 0);
+  const i = new Jr(s);
+  return ((i.colorSpace = Oa), i);
+}
+const hc = {
+    uniforms: {
+      tDiffuse: {
+        value: null,
+      },
+      uTime: {
+        value: 0,
+      },
+      uVignette: {
+        value: 0.35,
+      },
+      uGrain: {
+        value: 0.025,
+      },
+      uAberration: {
+        value: 0,
+      },
+      uRes: {
+        value: new en(1, 1),
+      },
+    },
+    vertexShader:
+      "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }",
+    fragmentShader: `
+    uniform sampler2D tDiffuse; uniform float uTime; uniform float uVignette; uniform float uGrain; uniform float uAberration; uniform vec2 uRes;
+    varying vec2 vUv;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
+    void main(){
+      vec2 d = vUv - 0.5;
+      vec3 col;
+      if (uAberration > 0.0) {
+        vec2 off = d * uAberration / uRes * 900.0;
+        col = vec3(texture2D(tDiffuse, vUv + off).r, texture2D(tDiffuse, vUv).g, texture2D(tDiffuse, vUv - off).b);
+      } else col = texture2D(tDiffuse, vUv).rgb;
+      float v = smoothstep(0.9, 0.2, length(d * vec2(1.0, 0.85)));
+      col *= mix(1.0, v, uVignette);
+      float g = hash(vUv * uRes + fract(uTime) * 91.7) - 0.5;
+      col += g * uGrain;
+      gl_FragColor = vec4(col, 1.0);
+    }`,
+  },
+  mc = {
+    illus: {
+      exposure: 1.05,
+      bloom: [0.45, 0.6, 0.86],
+      vignette: 0.38,
+      grain: 0.022,
+      aberration: 0,
+    },
+    fluor: {
+      exposure: 1.2,
+      bloom: [0.85, 0.7, 0.08],
+      vignette: 0.55,
+      grain: 0.05,
+      aberration: 0.0016,
+    },
+  };
+function gc(t) {
+  const e = new Lr({
+    canvas: t,
+    antialias: !0,
+    preserveDrawingBuffer: !0,
+  });
+  (e.setPixelRatio(Math.min(window.devicePixelRatio, 2)),
+    (e.outputColorSpace = Oa),
+    (e.toneMapping = _r),
+    (e.localClippingEnabled = !0));
+  const o = new Ca(),
+    s = pc(e),
+    n = {
+      illus: fc("#16201d", "#0b100f", "#030404"),
+      fluor: new he("#000000"),
+    },
+    a = new Qs(16774374, 1.25);
+  a.position.set(-6, 10, 8);
+  const r = new Qs(11065599, 1.2);
+  r.position.set(8, 3, -9);
+  const i = new Hr(11126976, 526602, 0.45);
+  o.add(a, r, i);
+  const c = new Gr(32, 1, 0.05, 600);
+  c.position.set(0, 8, 40);
+  const l = new Ur(c, t);
+  ((l.enableDamping = !0),
+    (l.dampingFactor = 0.07),
+    (l.screenSpacePanning = !0),
+    (l.minDistance = 0.4),
+    (l.maxDistance = 220),
+    (l.autoRotateSpeed = 0.5));
+  const u = new Br(e);
+  u.addPass(new Kr(o, c));
+  const d = new Wr(new en(512, 512), 0.45, 0.6, 0.86);
+  (u.addPass(d), u.addPass(new Xr()));
+  const h = new Yr(hc);
+  u.addPass(h);
+  const m = new qt();
+  o.add(m);
+  let g = "illus";
+  function p(A) {
+    g = A;
+    const G = mc[A];
+    ((o.background = n[A]),
+      (o.environment = A === "illus" ? s : null),
+      (a.visible = r.visible = i.visible = A === "illus"),
+      (e.toneMappingExposure = G.exposure),
+      ([d.strength, d.radius, d.threshold] = G.bloom),
+      (h.uniforms.uVignette.value = G.vignette),
+      (h.uniforms.uGrain.value = G.grain),
+      (h.uniforms.uAberration.value = G.aberration),
+      ea(m, A));
+  }
+  p("illus");
+  function x(A, G = m) {
+    return (G.add(A), ea(A, g), A);
+  }
+  let b = null;
+  const v = (A) => (A < 0.5 ? 4 * A * A * A : 1 - Math.pow(-2 * A + 2, 3) / 2);
+  function V(A, G, { dir: ct, duration: kt = 1.1 } = {}) {
+    const At = A.clone(),
+      yt = (ct ? ct.clone() : c.position.clone().sub(l.target)).normalize();
+    b = {
+      t: 0,
+      duration: kt,
+      fromPos: c.position.clone(),
+      fromTarget: l.target.clone(),
+      toPos: At.clone().addScaledVector(yt, G),
+      toTarget: At,
+    };
+  }
+  function D(A, G, ct) {
+    b = null;
+    const kt = (ct || new k(0.35, 0.3, 1)).clone().normalize();
+    (l.target.copy(A), c.position.copy(A).addScaledVector(kt, G), l.update());
+  }
+  function T(A) {
+    if (!b) return;
+    b.t = Math.min(1, b.t + A / b.duration);
+    const G = v(b.t);
+    (l.target.lerpVectors(b.fromTarget, b.toTarget, G),
+      c.position.lerpVectors(b.fromPos, b.toPos, G));
+    const ct = Math.sin(Math.PI * G) * b.fromPos.distanceTo(b.toPos) * 0.12;
+    (c.position.addScaledVector(
+      c.position.clone().sub(l.target).normalize(),
+      ct,
+    ),
+      b.t >= 1 && (b = null));
+  }
+  const E = () => !!b,
+    F = new Zr(),
+    O = new en();
+  function X(A, G, ct) {
+    const kt = t.getBoundingClientRect();
+    return (
+      O.set(
+        ((A - kt.left) / kt.width) * 2 - 1,
+        -((G - kt.top) / kt.height) * 2 + 1,
+      ),
+      F.setFromCamera(O, c),
+      F.intersectObjects(ct, !0)
+    );
+  }
+  function H() {
+    const { clientWidth: A, clientHeight: G } = t;
+    !A ||
+      !G ||
+      (e.setSize(A, G, !1),
+      u.setSize(A, G),
+      d.resolution.set(A, G),
+      h.uniforms.uRes.value.set(A, G),
+      (c.aspect = A / G),
+      c.updateProjectionMatrix());
+  }
+  const N = new k();
+  function y(A) {
+    return (
+      N.copy(A).project(c),
+      {
+        x: (N.x * 0.5 + 0.5) * t.clientWidth,
+        y: (-N.y * 0.5 + 0.5) * t.clientHeight,
+        visible: N.z < 1 && N.z > -1,
+      }
+    );
+  }
+  let P = 0;
+  function S(A) {
+    if (((P += A), T(A), l.update(), g === "fluor")) {
+      const G = c.position.distanceTo(l.target);
+      for (const ct of uc())
+        ((ct.uniforms.uFocus.value = G),
+          (ct.uniforms.uDof.value = Math.max(1.5, G * 0.32)));
+    }
+    ((h.uniforms.uTime.value = P), u.render());
+  }
+  return (
+    H(),
+    {
+      renderer: e,
+      scene: o,
+      camera: c,
+      controls: l,
+      root: m,
+      bloom: d,
+      get mode() {
+        return g;
+      },
+      setMode: p,
+      adopt: x,
+      flyTo: V,
+      jumpTo: D,
+      flying: E,
+      pick: X,
+      resize: H,
+      project: y,
+      render: S,
+    }
+  );
+}
+const yn = {
+    nucleus: {
+      name: translate("细胞核"),
+      en: "Nucleus",
+      membrane: 2,
+      where: "both",
+      role: translate("遗传信息库，细胞代谢和遗传的控制中心"),
+      body: translate(
+        "<p><b>核膜</b>是双层膜，把核内物质与细胞质分开。外膜与内质网相连，表面也附着核糖体。</p><p><b>核孔</b>贯穿双层核膜，实现核质之间频繁的物质交换和信息交流：mRNA 从这里出核，组装核糖体的蛋白质从这里入核。核孔是有选择性的，DNA 不能通过。</p><p><b>核仁</b>与某种 RNA（rRNA）的合成以及核糖体的形成有关。</p><p><b>染色质</b>主要由 DNA 和蛋白质组成，是遗传信息的载体。它与染色体是同一物质在细胞不同时期的两种存在状态。</p>",
+      ),
+    },
+    mitochondrion: {
+      name: translate("线粒体"),
+      en: "Mitochondrion",
+      membrane: 2,
+      where: "both",
+      role: translate("有氧呼吸的主要场所，细胞的“动力车间”"),
+      body: translate(
+        "<p>线粒体有内、外两层膜。<b>内膜</b>向内折叠形成<b>嵴</b>，大大增加了膜面积，有氧呼吸第三阶段的酶就分布在内膜上。</p><p><b>基质</b>中含有与有氧呼吸第二阶段有关的酶，还有少量 DNA 和核糖体，能合成一部分自身的蛋白质。</p><p>细胞生命活动所需的能量，大约 95% 来自线粒体。代谢旺盛的细胞（如心肌细胞）中线粒体特别多。</p>",
+      ),
+    },
+    chloroplast: {
+      name: translate("叶绿体"),
+      en: "Chloroplast",
+      membrane: 2,
+      where: "plant",
+      role: translate("光合作用的场所，“养料制造车间”和“能量转换站”"),
+      body: translate(
+        "<p>叶绿体呈扁平的椭球形或球形，有双层膜。</p><p>内部有许多<b>基粒</b>，每个基粒由一个个圆饼状的<b>类囊体</b>堆叠而成，基粒之间由片层相连。吸收光能的色素和光反应所需的酶都分布在类囊体膜上，极大地扩展了受光面积。</p><p><b>基质</b>中有暗反应所需的酶，也含少量 DNA 和核糖体。光合作用的产物可暂时以<b>淀粉粒</b>的形式贮存。</p>",
+      ),
+    },
+    rer: {
+      name: translate("粗面内质网"),
+      en: "Rough ER",
+      membrane: 1,
+      where: "both",
+      role: translate("蛋白质合成和加工的场所"),
+      body: translate(
+        "<p>内质网是由膜围成的管状、泡状或扁平囊状结构连接形成的网状结构，内腔彼此相通，是蛋白质等大分子物质合成、加工和运输的通道。</p><p><b>粗面内质网</b>的膜上附着大量核糖体。分泌蛋白在这些核糖体上合成后进入内质网腔，经过折叠、糖基化等初步加工。</p><p>内质网膜向内与核膜外膜相连，向外可与细胞膜相连。</p>",
+      ),
+    },
+    ser: {
+      name: translate("光面内质网"),
+      en: "Smooth ER",
+      membrane: 1,
+      where: "both",
+      role: translate("脂质合成的“车间”"),
+      body: translate(
+        "<p>光面内质网的膜上没有核糖体，多呈分支的小管状。</p><p>它是合成脂质（如磷脂、固醇类激素）的场所。在肝细胞中参与解毒，在肌细胞中（肌质网）储存钙离子。</p>",
+      ),
+    },
+    golgi: {
+      name: translate("高尔基体"),
+      en: "Golgi apparatus",
+      membrane: 1,
+      where: "both",
+      role: translate("对蛋白质进行加工、分类和包装的“车间”及“发送站”"),
+      body: translate(
+        "<p>高尔基体由一摞弯曲的扁平囊（潴泡）和周围的囊泡组成，有明确的方向：<b>顺面</b>朝向内质网，接收运来的囊泡；<b>反面</b>朝向细胞膜，分选并包装产物，出芽形成新的囊泡。</p><p>来自内质网的蛋白质在这里进一步修饰加工，再被运往细胞膜、溶酶体或分泌到细胞外。</p><p>在植物细胞中，高尔基体还与<b>细胞壁的形成</b>有关。</p>",
+      ),
+    },
+    lysosome: {
+      name: translate("溶酶体"),
+      en: "Lysosome",
+      membrane: 1,
+      where: "animal",
+      role: translate("细胞的“消化车间”"),
+      body: translate(
+        "<p>溶酶体内含多种<b>水解酶</b>，能分解衰老、损伤的细胞器，吞噬并杀死侵入细胞的病毒或细菌。</p><p>溶酶体膜上的质子泵把 H⁺ 泵入腔内，使腔内保持酸性（pH≈5），水解酶在这一酸度下活性最高；即使少量酶泄漏到中性的细胞质基质中，也基本失去活性。</p>",
+      ),
+    },
+    peroxisome: {
+      name: translate("过氧化物酶体"),
+      en: "Peroxisome",
+      membrane: 1,
+      where: "both",
+      extended: !0,
+      role: translate("分解过氧化氢与脂肪酸（大学拓展）"),
+      body: translate(
+        "<p>过氧化物酶体是单层膜的小泡，内含过氧化氢酶等多种氧化酶，常见尿酸氧化酶形成的晶体状核心。</p><p>它把有毒的 H₂O₂ 分解为水和氧气，并参与脂肪酸的氧化。</p>",
+      ),
+    },
+    vacuole: {
+      name: translate("液泡"),
+      en: "Vacuole",
+      membrane: 1,
+      where: "plant",
+      role: translate("调节细胞内的环境，使植物细胞保持坚挺"),
+      body: translate(
+        "<p>液泡由单层的<b>液泡膜</b>围成，内有<b>细胞液</b>，含糖类、无机盐、色素和蛋白质等。花瓣、果实的颜色多来自液泡中的花青素。</p><p>成熟植物细胞的中央大液泡可占细胞体积的 90%，把细胞质和细胞核挤到贴近细胞壁的一薄层中。液泡吸水膨胀产生的膨压使植物细胞保持坚挺。</p>",
+      ),
+    },
+    ribosome: {
+      name: translate("核糖体"),
+      en: "Ribosome",
+      membrane: 0,
+      where: "both",
+      role: translate("“生产蛋白质的机器”"),
+      body: translate(
+        "<p>核糖体没有膜结构，由 rRNA 和蛋白质构成，分为<b>大亚基</b>和<b>小亚基</b>，mRNA 从两个亚基之间穿过。</p><p>有的核糖体附着在内质网上（合成分泌蛋白、膜蛋白），有的游离在细胞质基质中（合成胞内蛋白）。原核细胞也有核糖体，是原核细胞唯一的细胞器。</p>",
+      ),
+    },
+    centrosome: {
+      name: translate("中心体"),
+      en: "Centrosome",
+      membrane: 0,
+      where: "animal",
+      role: translate("与细胞的有丝分裂有关"),
+      body: translate(
+        "<p>中心体见于动物和某些低等植物细胞，由两个<b>互相垂直</b>排列的中心粒及周围物质组成，没有膜。</p><p>每个中心粒由 <b>9 组三联体微管</b>围成筒状（“9×3”结构）。中心体是微管组织中心，分裂间期发出放射状的微管，分裂期发出星射线形成纺锤体。</p>",
+      ),
+    },
+    membrane: {
+      name: translate("细胞膜"),
+      en: "Plasma membrane",
+      membrane: 1,
+      where: "both",
+      role: translate("系统的边界"),
+      body: translate(
+        "<p>细胞膜主要由<b>脂质</b>（磷脂最丰富）和<b>蛋白质</b>组成，还有少量糖类。</p><p>它有三项功能：将细胞与外界环境分隔开；控制物质进出细胞；进行细胞间的信息交流。</p><p>结构特点是具有一定的<b>流动性</b>，功能特性是<b>选择透过性</b>。第 5、6 章会放大到分子尺度详细观察。</p>",
+      ),
+    },
+    cellwall: {
+      name: translate("细胞壁"),
+      en: "Cell wall",
+      membrane: 0,
+      where: "plant",
+      role: translate("支持和保护"),
+      body: translate(
+        "<p>植物细胞壁的主要成分是<b>纤维素和果胶</b>，具有<b>全透性</b>，对细胞起支持和保护作用。</p><p>相邻细胞之间通过<b>胞间连丝</b>相互连通，这是植物细胞间信息交流的一种方式。</p>",
+      ),
+    },
+    cytoskeleton: {
+      name: translate("细胞骨架"),
+      en: "Cytoskeleton",
+      membrane: 0,
+      where: "both",
+      role: translate("维持细胞形态，锚定并支撑细胞器"),
+      body: translate(
+        "<p>细胞骨架是由<b>蛋白质纤维</b>组成的网架结构，包括微管、微丝和中间纤维。</p><p>它维持着细胞的形态，锚定并支撑着许多细胞器，与细胞运动、分裂、分化以及物质运输、能量转化、信息传递等生命活动密切相关。</p>",
+      ),
+    },
+    vesicle: {
+      name: translate("囊泡"),
+      en: "Vesicle",
+      membrane: 1,
+      where: "both",
+      role: translate("在细胞器之间运输物质"),
+      body: translate(
+        "<p>囊泡是由单层膜包裹的小泡，从内质网、高尔基体或细胞膜上“出芽”形成，再与目标膜融合，把内含物送到目的地。</p><p>囊泡运输使各种生物膜在结构和功能上紧密联系，构成<b>生物膜系统</b>。</p>",
+      ),
+    },
+    nucleoid: {
+      name: translate("拟核"),
+      en: "Nucleoid",
+      membrane: 0,
+      where: "prokaryote",
+      role: translate("原核细胞 DNA 集中的区域"),
+      body: translate(
+        "<p>原核细胞没有以核膜为界限的细胞核。它的 DNA 是一个<b>大型环状</b>分子，盘绕折叠在细胞中央的一个区域，叫作<b>拟核</b>。</p><p>原核细胞的 DNA 不与蛋白质结合形成染色体。</p>",
+      ),
+    },
+    plasmid: {
+      name: translate("质粒"),
+      en: "Plasmid",
+      membrane: 0,
+      where: "prokaryote",
+      role: translate("拟核之外的小型环状 DNA"),
+      body: translate(
+        "<p>质粒是存在于拟核之外的小型环状 DNA 分子，能自主复制，常携带抗药性等基因。</p><p>基因工程中常用质粒作为运载目的基因的<b>载体</b>。</p>",
+      ),
+    },
+    capsule: {
+      name: translate("荚膜"),
+      en: "Capsule",
+      membrane: 0,
+      where: "prokaryote",
+      role: translate("保护细菌，增强致病性"),
+      body: translate(
+        "<p>某些细菌在细胞壁外有一层黏液状的荚膜，主要由多糖构成，能保护细菌、帮助其黏附在物体表面，并抵抗宿主的吞噬作用。</p>",
+      ),
+    },
+    flagellum: {
+      name: translate("鞭毛"),
+      en: "Flagellum",
+      membrane: 0,
+      where: "prokaryote",
+      role: translate("细菌的运动器官"),
+      body: translate(
+        "<p>细菌鞭毛是由鞭毛蛋白组成的螺旋状细丝，基部的“分子马达”嵌在细胞膜中，借助膜两侧的 H⁺ 浓度差驱动鞭毛像螺旋桨一样旋转，每秒可达数百转。</p><p>它与真核细胞的鞭毛（9+2 微管结构）结构完全不同。</p>",
+      ),
+    },
+    pili: {
+      name: translate("菌毛"),
+      en: "Pili",
+      membrane: 0,
+      where: "prokaryote",
+      role: translate("黏附与遗传物质的传递"),
+      body: translate(
+        "<p>菌毛比鞭毛短而直、数量多，帮助细菌黏附在宿主细胞表面；性菌毛还能在细菌之间传递质粒。</p>",
+      ),
+    },
+    bacterialWall: {
+      name: translate("细胞壁（细菌）"),
+      en: "Bacterial cell wall",
+      membrane: 0,
+      where: "prokaryote",
+      role: translate("维持细菌的形态"),
+      body: translate(
+        "<p>细菌细胞壁的主要成分是<b>肽聚糖</b>，与植物细胞壁（纤维素和果胶）不同。青霉素能抑制肽聚糖的合成，因此能杀死细菌而不伤害人体细胞。</p>",
+      ),
+    },
+  },
+  na = [translate("无膜"), translate("单层膜"), translate("双层膜")],
+  oa = [
+    "nucleus",
+    "mitochondrion",
+    "chloroplast",
+    "rer",
+    "ser",
+    "golgi",
+    "lysosome",
+    "ribosome",
+    "centrosome",
+    "vacuole",
+    "peroxisome",
+  ],
+  xn = [
+    {
+      id: "overview",
+      title: translate("细胞全景"),
+      sub: "The eukaryotic cell",
+      mode: "overview",
+      view: {
+        cut: !0,
+        labels: !0,
+        spin: !1,
+      },
+      body: translate(
+        "<p>这是一个切去四分之一的<b>动物细胞</b>，直径约 20 µm。外面是<b>细胞膜</b>，中央是<b>细胞核</b>，两者之间是<b>细胞质</b>：半透明的细胞质基质中悬浮着各种细胞器。</p><p><b>点击</b>任意结构，镜头会飞过去，右侧显示它的名称与功能；也可以从下方列表中选择。</p><p>右下角可以切换<b>荧光显微</b>模式：用不同颜色的荧光染料分别标记细胞核、线粒体、内质网等，这就是科研中观察活细胞的方式。</p>",
+      ),
+    },
+    {
+      id: "detail",
+      title: translate("细胞器详解"),
+      sub: "Organelles up close",
+      mode: "detail",
+      view: {
+        cut: !0,
+        labels: !0,
+        spin: !0,
+      },
+      body: translate(
+        "<p>逐个放大观察各种细胞器的内部结构。打开<b>剖切</b>可以看到双层膜之间的间隙、线粒体的嵴、叶绿体的基粒等。</p><p>按膜结构分类：</p><p><b>双层膜</b>：线粒体、叶绿体（还有细胞核的核膜）<br><b>单层膜</b>：内质网、高尔基体、溶酶体、液泡<br><b>无膜</b>：核糖体、中心体</p>",
+      ),
+    },
+    {
+      id: "compare",
+      title: translate("动物细胞与植物细胞"),
+      sub: "Animal vs. plant cell",
+      mode: "compare",
+      view: {
+        cut: !0,
+        labels: !0,
+        spin: !1,
+        diff: !0,
+      },
+      body: translate(
+        "<p>动物细胞与植物细胞都有细胞膜、细胞质和细胞核，也都有线粒体、内质网、高尔基体、核糖体等细胞器。</p><p><b>植物细胞特有</b>：细胞壁、叶绿体（绿色部位的细胞）、中央大液泡。</p><p><b>动物细胞特有</b>：中心体（低等植物细胞也有）；溶酶体主要见于动物细胞。</p><p>打开“突出差异”，两者的特有结构会闪烁标出。</p>",
+      ),
+    },
+    {
+      id: "prokaryote",
+      title: translate("原核细胞与真核细胞"),
+      sub: "Prokaryote vs. eukaryote",
+      mode: "prokaryote",
+      view: {
+        cut: !0,
+        labels: !0,
+        spin: !0,
+      },
+      body: translate(
+        "<p>根据有无<b>以核膜为界限的细胞核</b>，细胞分为原核细胞和真核细胞。细菌、蓝细菌（蓝藻）是原核生物；动物、植物、真菌是真核生物。</p><p>原核细胞的 DNA 集中在<b>拟核</b>，没有核膜和核仁；唯一的细胞器是<b>核糖体</b>。</p><p>切换到“尺度对比”：一个大肠杆菌只有约 2 µm 长，放在动物细胞旁边就像一粒米。</p>",
+      ),
+    },
+    {
+      id: "membrane",
+      title: translate("流动镶嵌模型"),
+      sub: "Fluid mosaic model",
+      mode: "membrane",
+      view: {
+        cut: !1,
+        labels: !0,
+        spin: !1,
+      },
+      body: translate(
+        "<p>放大到分子尺度（约 1 亿倍），细胞膜的基本支架是<b>磷脂双分子层</b>：磷脂分子的<b>亲水头部</b>朝向膜两侧的水环境，<b>疏水尾部</b>朝内相对排列。</p><p><b>蛋白质</b>有的镶在表面，有的部分或全部嵌入，有的贯穿整个磷脂双分子层。</p><p>细胞膜外表面的糖类分子与蛋白质结合形成<b>糖蛋白</b>，与脂质结合形成<b>糖脂</b>，统称<b>糖被</b>，与细胞识别和信息传递密切相关。</p><p>注意观察：磷脂分子在不停地侧向移动，大多数蛋白质也能运动，所以膜具有<b>流动性</b>。</p>",
+      ),
+    },
+    {
+      id: "transport",
+      title: translate("物质进出细胞"),
+      sub: "Membrane transport",
+      mode: "transport",
+      chart: !0,
+      view: {
+        cut: !1,
+        labels: !0,
+        spin: !1,
+      },
+      body: translate(
+        "<p><b>被动运输</b>：顺浓度梯度，不消耗能量。<br>· <b>自由扩散</b>：O₂、CO₂、甘油、乙醇等直接穿过磷脂双分子层。<br>· <b>协助扩散</b>：借助<b>通道蛋白</b>（水、K⁺）或<b>载体蛋白</b>（葡萄糖进入红细胞）。</p><p><b>主动运输</b>：逆浓度梯度，需要载体蛋白，消耗 ATP，如钠钾泵。</p><p><b>胞吞与胞吐</b>：大分子和颗粒物依靠膜的流动性进出细胞，消耗能量。</p><p>下方图表显示各方式的运输速率与浓度差、O₂ 浓度的关系。</p>",
+      ),
+    },
+    {
+      id: "secretion",
+      title: translate("分泌蛋白的合成与运输"),
+      sub: "The secretory pathway",
+      mode: "secretion",
+      chart: !0,
+      view: {
+        cut: !0,
+        labels: !0,
+        spin: !1,
+      },
+      body: translate(
+        "<p>科学家用 <b>³H 标记的亮氨酸</b>注射豚鼠胰腺腺泡细胞，追踪放射性依次出现的位置（同位素标记法）。</p><p><b>核糖体</b>上合成肽链 → 进入<b>粗面内质网</b>加工折叠 → 内质网出芽形成<b>囊泡</b> → 与<b>高尔基体</b>融合，进一步修饰加工 → 高尔基体出芽形成囊泡 → 与<b>细胞膜</b>融合，以<b>胞吐</b>方式分泌到细胞外。</p><p>全过程所需能量主要由<b>线粒体</b>提供。</p><p>图表记录各结构的放射性变化，以及内质网膜、高尔基体膜、细胞膜面积的变化：内质网膜减少，高尔基体膜先增后减（基本不变），细胞膜增加。</p>",
+      ),
+    },
+    {
+      id: "skeleton",
+      title: translate("细胞骨架与胞质环流"),
+      sub: "Cytoskeleton & motor proteins",
+      mode: "skeleton",
+      view: {
+        cut: !0,
+        labels: !0,
+        spin: !1,
+        mt: !0,
+        actin: !0,
+        ift: !0,
+      },
+      body: translate(
+        "<p>细胞骨架由三类蛋白质纤维组成：<b>微管</b>（最粗，约 25 nm，从中心体放射发出）、<b>微丝</b>（最细，约 7 nm，即肌动蛋白丝，在细胞膜下密集成网）、<b>中间纤维</b>（约 10 nm，像绳索一样增强韧性）。</p><p><b>马达蛋白</b>沿着细胞骨架“行走”运送货物：驱动蛋白沿微管走向正端（细胞外周），动力蛋白走向负端（中心体）。每走一步水解一个 ATP。</p><p>在植物细胞中，肌球蛋白沿微丝拖动细胞质流动，叶绿体随之绕着中央液泡环流，这就是观察<b>胞质环流</b>的实验现象。</p>",
+      ),
+    },
+  ],
+  sa = [
+    {
+      id: "simple",
+      short: translate("自由扩散"),
+      name: translate("自由扩散"),
+      kind: translate("被动运输"),
+      desc: translate(
+        "O₂、CO₂ 等小分子直接穿过磷脂双分子层，从高浓度一侧扩散到低浓度一侧。不需要转运蛋白，不消耗能量，速率与浓度差成正比。",
+      ),
+    },
+    {
+      id: "channel",
+      short: translate("通道蛋白"),
+      name: translate("协助扩散 · 通道蛋白"),
+      kind: translate("被动运输"),
+      desc: translate(
+        "水分子经<b>水通道蛋白</b>单行通过，K⁺ 经离子通道顺浓度梯度流出。通道蛋白只容许大小和电荷合适的分子通过，分子<b>不需要与通道蛋白结合</b>。",
+      ),
+    },
+    {
+      id: "carrier",
+      short: translate("载体蛋白"),
+      name: translate("协助扩散 · 载体蛋白"),
+      kind: translate("被动运输"),
+      desc: translate(
+        "葡萄糖进入红细胞时，先与<b>载体蛋白</b>结合，载体蛋白构象改变，把它转到膜的另一侧释放。载体数量有限，浓度差很大时运输速率达到饱和。",
+      ),
+    },
+    {
+      id: "active",
+      short: translate("钠钾泵"),
+      name: translate("主动运输 · 钠钾泵"),
+      kind: translate("主动运输"),
+      desc: translate(
+        "钠钾泵每水解 1 个 ATP，就把 <b>3 个 Na⁺ 泵出</b>、<b>2 个 K⁺ 泵入</b>细胞，两者都是<b>逆浓度梯度</b>。主动运输需要载体蛋白，还要消耗细胞呼吸提供的能量。",
+      ),
+    },
+    {
+      id: "endo",
+      short: translate("胞吞"),
+      name: translate("胞吞"),
+      kind: translate("胞吞与胞吐"),
+      desc: translate(
+        "大分子或颗粒先与膜上的蛋白质结合，这部分细胞膜内陷形成小囊，把它包围起来，再从细胞膜上分离下来形成囊泡，进入细胞内部。依赖膜的流动性，消耗能量。",
+      ),
+    },
+    {
+      id: "exo",
+      short: translate("胞吐"),
+      name: translate("胞吐"),
+      kind: translate("胞吞与胞吐"),
+      desc: translate(
+        "细胞内的囊泡移动到细胞膜处，与细胞膜融合，把内含的大分子排出细胞，如分泌蛋白、神经递质的释放。囊泡膜成为细胞膜的一部分。",
+      ),
+    },
+  ],
+  aa = [
+    {
+      id: "network",
+      name: translate("细胞骨架"),
+      desc: translate(
+        "微管从中心体向四周放射，像铁轨一样为囊泡和细胞器的运输铺路；微丝在细胞膜下交织成皮层网，维持细胞形状、参与变形运动；中间纤维像绳索一样环绕细胞核，增强细胞的韧性。可在下方分别开关三种纤维。",
+      ),
+    },
+    {
+      id: "motor",
+      name: translate("马达蛋白"),
+      desc: translate(
+        "放大到分子尺度（单位 nm）：微管由 13 列 α/β-微管蛋白二聚体围成中空的管。<b>驱动蛋白</b>的两个“头”交替向前迈步，每步 8 nm、消耗 1 个 ATP，把囊泡运往正端；<b>动力蛋白</b>向负端运输。",
+      ),
+    },
+    {
+      id: "streaming",
+      name: translate("胞质环流"),
+      desc: translate(
+        "这是黑藻叶片细胞的模型：叶绿体在贴近细胞壁的细胞质中，围绕中央液泡循环流动。实验中可以以叶绿体的运动作为标志，观察细胞质的流动；温度适宜、光照充足时流动更快。",
+      ),
+    },
+  ],
+  be = new ec(),
+  Po = new k(),
+  ra = new en(),
+  ca = new en(),
+  ia = new en();
+class bc {
+  constructor(e) {
+    ((this.geometry = e.geometry),
+      (this.randomFunction = Math.random),
+      (this.indexAttribute = this.geometry.index),
+      (this.positionAttribute = this.geometry.getAttribute("position")),
+      (this.normalAttribute = this.geometry.getAttribute("normal")),
+      (this.colorAttribute = this.geometry.getAttribute("color")),
+      (this.uvAttribute = this.geometry.getAttribute("uv")),
+      (this.weightAttribute = null),
+      (this.distribution = null));
+  }
+  setWeightAttribute(e) {
+    return (
+      (this.weightAttribute = e ? this.geometry.getAttribute(e) : null),
+      this
+    );
+  }
+  build() {
+    const e = this.indexAttribute,
+      o = this.positionAttribute,
+      s = this.weightAttribute,
+      n = e ? e.count / 3 : o.count / 3,
+      a = new Float32Array(n);
+    for (let c = 0; c < n; c++) {
+      let l = 1,
+        u = 3 * c,
+        d = 3 * c + 1,
+        h = 3 * c + 2;
+      (e && ((u = e.getX(u)), (d = e.getX(d)), (h = e.getX(h))),
+        s && (l = s.getX(u) + s.getX(d) + s.getX(h)),
+        be.a.fromBufferAttribute(o, u),
+        be.b.fromBufferAttribute(o, d),
+        be.c.fromBufferAttribute(o, h),
+        (l *= be.getArea()),
+        (a[c] = l));
+    }
+    const r = new Float32Array(n);
+    let i = 0;
+    for (let c = 0; c < n; c++) ((i += a[c]), (r[c] = i));
+    return ((this.distribution = r), this);
+  }
+  setRandomGenerator(e) {
+    return ((this.randomFunction = e), this);
+  }
+  sample(e, o, s, n) {
+    const a = this.sampleFaceIndex();
+    return this.sampleFace(a, e, o, s, n);
+  }
+  sampleFaceIndex() {
+    const e = this.distribution[this.distribution.length - 1];
+    return this.binarySearch(this.randomFunction() * e);
+  }
+  binarySearch(e) {
+    const o = this.distribution;
+    let s = 0,
+      n = o.length - 1,
+      a = -1;
+    for (; s <= n;) {
+      const r = Math.ceil((s + n) / 2);
+      if (r === 0 || (o[r - 1] <= e && o[r] > e)) {
+        a = r;
+        break;
+      } else e < o[r] ? (n = r - 1) : (s = r + 1);
+    }
+    return a;
+  }
+  sampleFace(e, o, s, n, a) {
+    let r = this.randomFunction(),
+      i = this.randomFunction();
+    r + i > 1 && ((r = 1 - r), (i = 1 - i));
+    const c = this.indexAttribute;
+    let l = e * 3,
+      u = e * 3 + 1,
+      d = e * 3 + 2;
+    return (
+      c && ((l = c.getX(l)), (u = c.getX(u)), (d = c.getX(d))),
+      be.a.fromBufferAttribute(this.positionAttribute, l),
+      be.b.fromBufferAttribute(this.positionAttribute, u),
+      be.c.fromBufferAttribute(this.positionAttribute, d),
+      o
+        .set(0, 0, 0)
+        .addScaledVector(be.a, r)
+        .addScaledVector(be.b, i)
+        .addScaledVector(be.c, 1 - (r + i)),
+      s !== void 0 &&
+        (this.normalAttribute !== void 0
+          ? (be.a.fromBufferAttribute(this.normalAttribute, l),
+            be.b.fromBufferAttribute(this.normalAttribute, u),
+            be.c.fromBufferAttribute(this.normalAttribute, d),
+            s
+              .set(0, 0, 0)
+              .addScaledVector(be.a, r)
+              .addScaledVector(be.b, i)
+              .addScaledVector(be.c, 1 - (r + i))
+              .normalize())
+          : be.getNormal(s)),
+      n !== void 0 &&
+        this.colorAttribute !== void 0 &&
+        (be.a.fromBufferAttribute(this.colorAttribute, l),
+        be.b.fromBufferAttribute(this.colorAttribute, u),
+        be.c.fromBufferAttribute(this.colorAttribute, d),
+        Po.set(0, 0, 0)
+          .addScaledVector(be.a, r)
+          .addScaledVector(be.b, i)
+          .addScaledVector(be.c, 1 - (r + i)),
+        (n.r = Po.x),
+        (n.g = Po.y),
+        (n.b = Po.z)),
+      a !== void 0 &&
+        this.uvAttribute !== void 0 &&
+        (ra.fromBufferAttribute(this.uvAttribute, l),
+        ca.fromBufferAttribute(this.uvAttribute, u),
+        ia.fromBufferAttribute(this.uvAttribute, d),
+        a
+          .set(0, 0)
+          .addScaledVector(ra, r)
+          .addScaledVector(ca, i)
+          .addScaledVector(ia, 1 - (r + i))),
+      this
+    );
+  }
+}
+function Jt(t) {
+  let e = t >>> 0;
+  return function () {
+    e = (e + 1831565813) >>> 0;
+    let o = e;
+    return (
+      (o = Math.imul(o ^ (o >>> 15), o | 1)),
+      (o ^= o + Math.imul(o ^ (o >>> 7), o | 61)),
+      ((o ^ (o >>> 14)) >>> 0) / 4294967296
+    );
+  };
+}
+const q = (t, e, o) => e + (o - e) * t();
+function le(t) {
+  const e = t() * 2 - 1,
+    o = t() * Math.PI * 2,
+    s = Math.sqrt(1 - e * e);
+  return [s * Math.cos(o), s * Math.sin(o), e];
+}
+function ie(t) {
+  const e = Math.max(1e-9, t());
+  return Math.sqrt(-2 * Math.log(e)) * Math.cos(2 * Math.PI * t());
+}
+const yc = [
+  [1, 1, 0],
+  [-1, 1, 0],
+  [1, -1, 0],
+  [-1, -1, 0],
+  [1, 0, 1],
+  [-1, 0, 1],
+  [1, 0, -1],
+  [-1, 0, -1],
+  [0, 1, 1],
+  [0, -1, 1],
+  [0, 1, -1],
+  [0, -1, -1],
+];
+function xc(t = 1) {
+  const e = Jt(t),
+    o = new Uint8Array(256);
+  for (let r = 0; r < 256; r++) o[r] = r;
+  for (let r = 255; r > 0; r--) {
+    const i = Math.floor(e() * (r + 1));
+    [o[r], o[i]] = [o[i], o[r]];
+  }
+  const s = new Uint8Array(512);
+  for (let r = 0; r < 512; r++) s[r] = o[r & 255];
+  const n = 1 / 3,
+    a = 1 / 6;
+  return function (i, c, l) {
+    const u = (i + c + l) * n,
+      d = Math.floor(i + u),
+      h = Math.floor(c + u),
+      m = Math.floor(l + u),
+      g = (d + h + m) * a,
+      p = i - (d - g),
+      x = c - (h - g),
+      b = l - (m - g);
+    let v, V, D, T, E, F;
+    p >= x
+      ? x >= b
+        ? ((v = 1), (V = 0), (D = 0), (T = 1), (E = 1), (F = 0))
+        : p >= b
+          ? ((v = 1), (V = 0), (D = 0), (T = 1), (E = 0), (F = 1))
+          : ((v = 0), (V = 0), (D = 1), (T = 1), (E = 0), (F = 1))
+      : x < b
+        ? ((v = 0), (V = 0), (D = 1), (T = 0), (E = 1), (F = 1))
+        : p < b
+          ? ((v = 0), (V = 1), (D = 0), (T = 0), (E = 1), (F = 1))
+          : ((v = 0), (V = 1), (D = 0), (T = 1), (E = 1), (F = 0));
+    const O = p - v + a,
+      X = x - V + a,
+      H = b - D + a,
+      N = p - T + 2 * a,
+      y = x - E + 2 * a,
+      P = b - F + 2 * a,
+      S = p - 1 + 3 * a,
+      A = x - 1 + 3 * a,
+      G = b - 1 + 3 * a,
+      ct = d & 255,
+      kt = h & 255,
+      At = m & 255,
+      yt = (at, Z, U, I) => {
+        let Q = 0.6 - Z * Z - U * U - I * I;
+        if (Q < 0) return 0;
+        const z = yc[at % 12];
+        return ((Q *= Q), Q * Q * (z[0] * Z + z[1] * U + z[2] * I));
+      },
+      ft = yt(s[ct + s[kt + s[At]]], p, x, b),
+      Nt = yt(s[ct + v + s[kt + V + s[At + D]]], O, X, H),
+      M = yt(s[ct + T + s[kt + E + s[At + F]]], N, y, P),
+      L = yt(s[ct + 1 + s[kt + 1 + s[At + 1]]], S, A, G);
+    return 32 * (ft + Nt + M + L);
+  };
+}
+function Be(t, e, o, s, n = 3) {
+  let a = 0,
+    r = 0.5,
+    i = 1,
+    c = 0;
+  for (let l = 0; l < n; l++)
+    ((a += r * t(e * i, o * i, s * i)), (c += r), (r *= 0.5), (i *= 2));
+  return a / c;
+}
+const os = new Map();
+function on(t) {
+  return (os.has(t) || os.set(t, xc(t)), os.get(t));
+}
+function Mc(t) {
+  return (t.deleteAttribute("normal"), t.deleteAttribute("uv"), Qo(t, 1e-5));
+}
+function Ga(
+  t,
+  { amp: e = 0.1, freq: o = 1, octaves: s = 3, seed: n = 1, mask: a } = {},
+) {
+  const r = Mc(t);
+  r.computeVertexNormals();
+  const i = on(n),
+    c = r.attributes.position,
+    l = r.attributes.normal;
+  for (let u = 0; u < c.count; u++) {
+    const d = c.getX(u),
+      h = c.getY(u),
+      m = c.getZ(u);
+    let g = Be(i, d * o, h * o, m * o, s) * e;
+    (a && (g *= a(d, h, m)),
+      c.setXYZ(u, d + l.getX(u) * g, h + l.getY(u) * g, m + l.getZ(u) * g));
+  }
+  return (r.computeVertexNormals(), r);
+}
+function Gt(
+  t,
+  {
+    detail: e = 32,
+    scale: o = [1, 1, 1],
+    amp: s = t * 0.08,
+    freq: n = 1.2 / t,
+    octaves: a = 3,
+    seed: r = 1,
+    mask: i,
+  } = {},
+) {
+  const c = new pe(t, e);
+  return (
+    c.scale(...o),
+    Ga(c, {
+      amp: s,
+      freq: n,
+      octaves: a,
+      seed: r,
+      mask: i,
+    })
+  );
+}
+function De(
+  t,
+  e,
+  {
+    tubular: o = Math.max(16, t.length * 6),
+    radial: s = 10,
+    closed: n = !1,
+    tension: a = 0.5,
+  } = {},
+) {
+  const r = new nn(t, n, "catmullrom", a);
+  if (typeof e == "number") return new ln(r, o, e, s, n);
+  const i = new ln(r, o, 1, s, n),
+    c = i.attributes.position;
+  for (let l = 0; l <= o; l++) {
+    const u = l / o,
+      d = r.getPointAt(u),
+      h = e(u);
+    for (let m = 0; m <= s; m++) {
+      const g = l * (s + 1) + m;
+      c.setXYZ(
+        g,
+        d.x + (c.getX(g) - d.x) * h,
+        d.y + (c.getY(g) - d.y) * h,
+        d.z + (c.getZ(g) - d.z) * h,
+      );
+    }
+  }
+  return (i.computeVertexNormals(), i);
+}
+function wc(t, e, o, s, { bound: n = () => !0, persistence: a = 0.75 } = {}) {
+  const r = [e.clone()];
+  let i = new k(t() - 0.5, t() - 0.5, t() - 0.5).normalize();
+  for (let c = 0; c < o; c++)
+    for (let l = 0; l < 12; l++) {
+      const u = new k(t() - 0.5, t() - 0.5, t() - 0.5).normalize(),
+        d = i
+          .clone()
+          .multiplyScalar(a)
+          .add(u.multiplyScalar(1 - a))
+          .normalize(),
+        h = r[r.length - 1].clone().addScaledVector(d, s);
+      if (n(h)) {
+        (r.push(h), (i = d));
+        break;
+      }
+      i.negate()
+        .add(new k(t() - 0.5, t() - 0.5, t() - 0.5))
+        .normalize();
+    }
+  return r;
+}
+function Co(t, e, o = 1) {
+  const s = new mt(t),
+    n = Jt(o),
+    a = new bc(s).setRandomGenerator(n).build(),
+    r = [];
+  for (let i = 0; i < e; i++) {
+    const c = new k(),
+      l = new k();
+    (a.sample(c, l),
+      r.push({
+        position: c,
+        normal: l,
+      }));
+  }
+  return r;
+}
+const la = new k(0, 1, 0);
+function ee(t, e, o, { spin: s = !0, seed: n = 7 } = {}) {
+  const a = new an(t, e, Math.max(1, o.length));
+  a.count = o.length;
+  const r = Jt(n),
+    i = new oo(),
+    c = new Me(),
+    l = new k(),
+    u = new Me();
+  return (
+    o.forEach((d, h) => {
+      (d.quaternion
+        ? c.copy(d.quaternion)
+        : d.normal
+          ? c.setFromUnitVectors(la, d.normal)
+          : c.set(r() - 0.5, r() - 0.5, r() - 0.5, r() - 0.5).normalize(),
+        s && d.normal && c.multiply(u.setFromAxisAngle(la, r() * Math.PI * 2)));
+      const m = d.scale ?? 1;
+      (typeof m == "number" ? l.setScalar(m) : l.copy(m),
+        a.setMatrixAt(h, i.compose(d.position, c, l)));
+    }),
+    (a.instanceMatrix.needsUpdate = !0),
+    a.computeBoundingSphere(),
+    a
+  );
+}
+const rn = (t, e) => [t[0] + e[0], t[1] + e[1], t[2] + e[2]],
+  Ke = (t, e) => [t[0] - e[0], t[1] - e[1], t[2] - e[2]],
+  un = (t, e) => [t[0] * e, t[1] * e, t[2] * e],
+  Nn = (t, e) => t[0] * e[0] + t[1] * e[1] + t[2] * e[2],
+  jn = (t) => Math.hypot(t[0], t[1], t[2]),
+  En = (t) => un(t, 1 / (jn(t) || 1)),
+  Ua = (t, e) => [
+    t[1] * e[2] - t[2] * e[1],
+    t[2] * e[0] - t[0] * e[2],
+    t[0] * e[1] - t[1] * e[0],
+  ],
+  cn = {
+    add: rn,
+    sub: Ke,
+    mul: un,
+    dot: Nn,
+    len: jn,
+    norm: En,
+    cross: Ua,
+  };
+function vc(t, e, o, s) {
+  const n = Ke(e, t),
+    a = Ke(s, o),
+    r = Ke(t, o),
+    i = Nn(n, n),
+    c = Nn(a, a),
+    l = Nn(a, r);
+  let u, d;
+  if (i < 1e-12 && c < 1e-12) return jn(r);
+  if (i < 1e-12) ((u = 0), (d = Math.min(1, Math.max(0, l / c))));
+  else {
+    const h = Nn(n, r);
+    if (c < 1e-12) ((d = 0), (u = Math.min(1, Math.max(0, -h / i))));
+    else {
+      const m = Nn(n, a),
+        g = i * c - m * m;
+      ((u = g > 1e-12 ? Math.min(1, Math.max(0, (m * l - h * c) / g)) : 0),
+        (d = (m * u + l) / c),
+        d < 0
+          ? ((d = 0), (u = Math.min(1, Math.max(0, -h / i))))
+          : d > 1 && ((d = 1), (u = Math.min(1, Math.max(0, (m - h) / i)))));
+    }
+  }
+  return jn(Ke(rn(t, un(n, u)), rn(o, un(a, d))));
+}
+function yo(t) {
+  const e = t.half || 0;
+  return [
+    Ke(t.position, un(t.axis || [0, 1, 0], e)),
+    rn(t.position, un(t.axis || [0, 1, 0], e)),
+  ];
+}
+function Sc(t, e, o = 0) {
+  const [s, n] = yo(t),
+    [a, r] = yo(e);
+  return vc(s, n, a, r) < t.radius + e.radius + o;
+}
+function Jo(t, e, o) {
+  const s = Ke(t, e),
+    n = Math.hypot(s[0] / o[0], s[1] / o[1], s[2] / o[2]),
+    a = Math.hypot(
+      s[0] / (o[0] * o[0]),
+      s[1] / (o[1] * o[1]),
+      s[2] / (o[2] * o[2]),
+    );
+  return a < 1e-9 ? -Math.min(...o) : (n * (n - 1)) / a;
+}
+function As(t, e, o, s) {
+  const n = Ke(t, e).map((r, i) => Math.abs(r) - (o[i] - s));
+  return (
+    Math.hypot(Math.max(n[0], 0), Math.max(n[1], 0), Math.max(n[2], 0)) +
+    Math.min(Math.max(n[0], n[1], n[2]), 0) -
+    s
+  );
+}
+function fo(t, e, o) {
+  const [s, n] = yo(t);
+  let a = o === "max" ? -1 / 0 : 1 / 0;
+  for (let r = 0; r <= 4; r++) {
+    const i = e(rn(s, un(Ke(n, s), r / 4)));
+    a = o === "max" ? Math.max(a, i) : Math.min(a, i);
+  }
+  return a;
+}
+const kc = {
+    semi: [10, 8.2, 10],
+    nucleus: {
+      center: [-1.4, 0.4, -0.8],
+      radius: 3.2,
+    },
+    rerSide: En([1, 0.15, 0.6]),
+    rerThickness: 2.4,
+    serReach: 7,
+  },
+  Ac = {
+    half: [13, 8, 8],
+    corner: 2.4,
+    wall: 0.55,
+    vacuole: {
+      center: [0.6, 0, -0.5],
+      semi: [10.2, 5.4, 5],
+    },
+    nucleus: {
+      center: [-9.4, -0.4, 5],
+      radius: 2.4,
+    },
+  };
+function gn(t, e, o, s, n, { gap: a = 0.15, tries: r = 900 } = {}) {
+  let i = 0;
+  for (let c = 0; c < e.count; c++)
+    for (let l = 0; l < r; l++) {
+      const u = typeof e.radius == "function" ? e.radius(t) : q(t, ...e.radius),
+        d = n(t),
+        h = e.half ? e.half(t, u) : 0,
+        m = e.axisFn ? e.axisFn(t, d) : le(t),
+        g = {
+          kind: e.kind,
+          position: d,
+          radius: u,
+          half: h,
+          axis: m,
+          seed: Math.floor(t() * 1e6),
+          ...(e.extra ? e.extra(t, d, m) : {}),
+        };
+      if (o(g) && !s.some((p) => Sc(g, p, a))) {
+        (s.push(g), i++);
+        break;
+      }
+    }
+  return i;
+}
+function Pc(t = 1, e = kc) {
+  const o = Jt(t),
+    { semi: s, nucleus: n } = e,
+    a = n.center,
+    r = [],
+    i = (b) => Jo(b, [0, 0, 0], s),
+    c = (b) => jn(Ke(b, a)) - n.radius,
+    l = (b, v) => {
+      const V = Ke(b, a),
+        D = jn(V);
+      return Nn(En(V), e.rerSide) > 0.15 && D - v < n.radius + e.rerThickness;
+    },
+    u = 0.35,
+    d = (b) => {
+      if (
+        fo(b, i, "max") > -(b.radius + u) ||
+        fo(b, c, "min") < b.radius + 0.35
+      )
+        return !1;
+      const [v, V] = yo(b);
+      return !(l(v, b.radius) || l(V, b.radius) || l(b.position, b.radius));
+    },
+    h = (b) => [q(b, -s[0], s[0]), q(b, -s[1], s[1]), q(b, -s[2], s[2])],
+    m = En(rn(e.rerSide, [-0.1, 0.55, -0.9])),
+    p = {
+      kind: "golgi",
+      position: rn(a, un(m, n.radius + 2.1)),
+      radius: 1.45,
+      half: 0.2,
+      axis: m,
+      seed: Math.floor(o() * 1e6),
+    };
+  r.push(p);
+  const x = rn(a, un(En(rn(m, [0, -0.6, 0.3])), n.radius + 0.8));
+  return (
+    r.push({
+      kind: "centrosome",
+      position: x,
+      radius: 0.45,
+      half: 0,
+      axis: [0, 1, 0],
+      seed: 11,
+    }),
+    gn(
+      o,
+      {
+        kind: "mitochondrion",
+        count: 22,
+        radius: [0.34, 0.44],
+        half: (b, v) => q(b, 0.55, 1.05) - v * 0.2,
+        extra: (b) => ({
+          bend: q(b, -0.35, 0.35),
+        }),
+      },
+      d,
+      r,
+      h,
+      {
+        gap: 0.2,
+      },
+    ),
+    gn(
+      o,
+      {
+        kind: "lysosome",
+        count: 12,
+        radius: [0.25, 0.48],
+      },
+      d,
+      r,
+      h,
+    ),
+    gn(
+      o,
+      {
+        kind: "peroxisome",
+        count: 8,
+        radius: [0.2, 0.32],
+      },
+      d,
+      r,
+      h,
+    ),
+    gn(
+      o,
+      {
+        kind: "vesicle",
+        count: 26,
+        radius: [0.08, 0.16],
+      },
+      d,
+      r,
+      h,
+      {
+        gap: 0.08,
+      },
+    ),
+    {
+      type: "animal",
+      seed: t,
+      semi: s,
+      nucleus: n,
+      rerSide: e.rerSide,
+      rerThickness: e.rerThickness,
+      serReach: e.serReach,
+      golgi: p,
+      centrosome: r[1],
+      items: r,
+    }
+  );
+}
+function zc(t = 2, e = Ac) {
+  const o = Jt(t),
+    { half: s, corner: n, vacuole: a, nucleus: r } = e,
+    i = [],
+    c = (p) => As(p, [0, 0, 0], s, n),
+    l = (p) => Jo(p, a.center, a.semi),
+    u = (p) => jn(Ke(p, r.center)) - r.radius,
+    d = (p) =>
+      fo(p, c, "max") < -(p.radius + 0.25) &&
+      fo(p, l, "min") > p.radius + 0.15 &&
+      fo(p, u, "min") > p.radius + 0.3,
+    h = (p) => [q(p, -s[0], s[0]), q(p, -s[1], s[1]), q(p, -s[2], s[2])],
+    m = (p) => {
+      const x = [0, 1, 2].map((b) => {
+        const v = [0, 0, 0];
+        return ((v[b] = 0.01), (c(rn(p, v)) - c(Ke(p, v))) / 0.02);
+      });
+      return En(x);
+    },
+    g = (p, x) => {
+      const b = m(x);
+      return En(Ua(b, le(p)));
+    };
+  return (
+    gn(
+      o,
+      {
+        kind: "golgi",
+        count: 3,
+        radius: [1, 1],
+        half: () => 0.15,
+        axisFn: (p, x) => un(m(x), -1),
+      },
+      d,
+      i,
+      h,
+      {
+        gap: 0.4,
+      },
+    ),
+    gn(
+      o,
+      {
+        kind: "chloroplast",
+        count: 30,
+        radius: [0.8, 0.8],
+        half: () => 1.55,
+        axisFn: g,
+        extra: (p, x) => ({
+          normal: m(x),
+        }),
+      },
+      d,
+      i,
+      h,
+      {
+        gap: 0.25,
+        tries: 2500,
+      },
+    ),
+    gn(
+      o,
+      {
+        kind: "mitochondrion",
+        count: 12,
+        radius: [0.3, 0.38],
+        half: (p, x) => q(p, 0.45, 0.8) - x * 0.2,
+        axisFn: g,
+        extra: (p) => ({
+          bend: q(p, -0.3, 0.3),
+        }),
+      },
+      d,
+      i,
+      h,
+      {
+        gap: 0.15,
+        tries: 2500,
+      },
+    ),
+    gn(
+      o,
+      {
+        kind: "peroxisome",
+        count: 6,
+        radius: [0.2, 0.3],
+      },
+      d,
+      i,
+      h,
+      {
+        tries: 2500,
+      },
+    ),
+    gn(
+      o,
+      {
+        kind: "vesicle",
+        count: 14,
+        radius: [0.08, 0.14],
+      },
+      d,
+      i,
+      h,
+      {
+        tries: 2500,
+      },
+    ),
+    {
+      type: "plant",
+      seed: t,
+      half: s,
+      corner: n,
+      wall: e.wall,
+      vacuole: a,
+      nucleus: r,
+      items: i,
+    }
+  );
+}
+const Fe = 0.08,
+  fn = [1.06, 0.93, 1],
+  se = (t, e, o) => new k(t, e, o),
+  Qn = new Map(),
+  Ic = (t) => {
+    t = t.index ? t.toNonIndexed() : t;
+    for (const e of Object.keys(t.attributes))
+      e !== "position" && e !== "normal" && t.deleteAttribute(e);
+    return (t.attributes.normal || t.computeVertexNormals(), t);
+  },
+  Tn = (t) => ue(t.map(Ic)),
+  ua = (t, e) =>
+    t.applyQuaternion(
+      new Me().setFromUnitVectors(se(0, 1, 0), e.clone().normalize()),
+    );
+function da(t, e, o, s, n = 0) {
+  const a = new Zo(t, e, o, s).rotateX(Math.PI / 2),
+    r = a.attributes.position;
+  for (let i = 0; i < r.count; i++) {
+    const c = r.getX(i),
+      l = r.getY(i),
+      u = r.getZ(i),
+      d = Math.atan2(u, c),
+      h = Math.cos(d) * t,
+      m = Math.sin(d) * t,
+      g = 0.62 + 0.75 * Math.pow(0.5 + 0.5 * Math.cos(8 * d + n), 1.5);
+    r.setXYZ(i, h + (c - h) * g, l * g, m + (u - m) * g);
+  }
+  return (a.computeVertexNormals(), a);
+}
+function $c(t) {
+  const e = `npc|${t}`;
+  if (Qn.has(e)) return Qn.get(e);
+  const o = 0.062,
+    s = Fe / 2 + 0.008,
+    n = [];
+  if ((n.push(da(o, 0.015, t ? 4 : 3, t ? 32 : 24).translate(0, s, 0)), t)) {
+    n.push(da(o, 0.012, 3, 16, 0.4).translate(0, -s, 0));
+    for (let c = 0; c < 8; c++) {
+      const l = (c / 8) * Math.PI * 2,
+        u = se(Math.cos(l), 0, Math.sin(l)),
+        d = se(-Math.sin(l), 0, Math.cos(l)),
+        h = u
+          .clone()
+          .multiplyScalar(o)
+          .add(se(0, s, 0));
+      n.push(
+        De(
+          [
+            h.clone().add(se(0, 0.01, 0)),
+            h
+              .clone()
+              .addScaledVector(u, 0.012)
+              .add(se(0, 0.028, 0))
+              .addScaledVector(d, 0.008),
+            h
+              .clone()
+              .addScaledVector(u, 0.016)
+              .add(se(0, 0.046, 0))
+              .addScaledVector(d, -0.006),
+          ],
+          0.0032,
+          {
+            tubular: 2,
+            radial: 3,
+          },
+        ),
+      );
+      const m = u
+        .clone()
+        .multiplyScalar(o)
+        .add(se(0, -s, 0));
+      n.push(
+        De(
+          [
+            m,
+            se(Math.cos(l) * o * 0.8, -0.058, Math.sin(l) * o * 0.8),
+            se(Math.cos(l) * 0.028, -0.064, Math.sin(l) * 0.028),
+          ],
+          0.0032,
+          {
+            tubular: 2,
+            radial: 3,
+          },
+        ),
+      );
+    }
+    n.push(
+      new Zo(0.028, 0.0035, 3, 10).rotateX(Math.PI / 2).translate(0, -0.064, 0),
+    );
+  }
+  const a = Tn(n),
+    r = Tn([
+      new Ae(0.036, 0.036, Fe * 0.85, t ? 12 : 6, 1, !t),
+      Gt(0.016, {
+        detail: 0,
+        amp: 0.002,
+        freq: 60,
+        seed: 5,
+      }).translate(0, Fe * 0.34, 0),
+    ]),
+    i = {
+      ring: a,
+      plug: r,
+    };
+  return (Qn.set(e, i), i);
+}
+function Dc(t, e, o) {
+  const s = `nuc|${t}|${e}|${o}`;
+  if (Qn.has(s)) return Qn.get(s);
+  const n = Jt(e * 977 + 13),
+    a = on(e * 31 + 7),
+    r = (j) =>
+      t *
+      (1 +
+        0.055 * Be(a, j.x * 1.1, j.y * 1.1, j.z * 1.1, 3) +
+        0.018 * Be(a, j.x * 3.2 + 5, j.y * 3.2, j.z * 3.2, 2)),
+    i = (j) => {
+      const $ = se(j.x / fn[0], j.y / fn[1], j.z / fn[2]).normalize();
+      return se($.x * fn[0], $.y * fn[1], $.z * fn[2]).length() * r($);
+    },
+    c = o ? 36 : 14;
+  let l = new pe(1, c);
+  (l.deleteAttribute("normal"), l.deleteAttribute("uv"), (l = Qo(l, 1e-6)));
+  const u = l.attributes.position,
+    d = u.count,
+    h = l.index.array,
+    m = [];
+  for (let j = 0; j < d; j++) {
+    const $ = se(u.getX(j), u.getY(j), u.getZ(j)).normalize();
+    m.push(se($.x * fn[0], $.y * fn[1], $.z * fn[2]).multiplyScalar(r($)));
+  }
+  const g = Array.from(
+    {
+      length: d,
+    },
+    () => new Map(),
+  );
+  for (let j = 0; j < h.length; j += 3)
+    for (let $ = 0; $ < 3; $++)
+      g[h[j + $]].set(h[j + (($ + 1) % 3)], h[j + (($ + 2) % 3)]);
+  const p = (j) => {
+      const $ = g[j],
+        W = $.keys().next().value,
+        dt = [W];
+      let Dt = $.get(W);
+      for (; Dt !== W && dt.length < 8;) (dt.push(Dt), (Dt = $.get(Dt)));
+      return dt;
+    },
+    x = o ? 230 : 90,
+    b = o ? 0.42 : 0.75,
+    v = [...Array(d).keys()].sort(() => n() - 0.5),
+    V = [],
+    D = new Uint8Array(d);
+  for (const j of v) {
+    if (V.length >= x) break;
+    if (D[j] || V.some((W) => m[W].distanceToSquared(m[j]) < b * b)) continue;
+    const $ = p(j);
+    $.some((W) => D[W]) ||
+      (V.push(j), (D[j] = 2), $.forEach((W) => (D[W] = 1)));
+  }
+  const T = new qn(),
+    E = () => {
+      const j = new Float32Array(d * 3);
+      (m.forEach((W, dt) => j.set([W.x, W.y, W.z], dt * 3)),
+        T.setAttribute("position", new bo(j, 3)),
+        T.setIndex([...h]),
+        T.computeVertexNormals());
+      const $ = T.attributes.normal;
+      return m.map((W, dt) => se($.getX(dt), $.getY(dt), $.getZ(dt)));
+    };
+  let F = E();
+  const O = o ? 0.066 : 0.11,
+    X = new Map();
+  for (const j of V) {
+    const $ = p(j);
+    X.set(j, $);
+    for (const W of $) {
+      const dt = m[W].clone().sub(m[j]),
+        Dt = F[j].dot(dt),
+        gt = dt.addScaledVector(F[j], -Dt).normalize();
+      m[W].copy(m[j]).addScaledVector(F[j], Dt).addScaledVector(gt, O);
+    }
+  }
+  F = E();
+  const H = [],
+    N = [];
+  for (const j of [1, -1])
+    m.forEach(($, W) =>
+      H.push(
+        $.x + (F[W].x * j * Fe) / 2,
+        $.y + (F[W].y * j * Fe) / 2,
+        $.z + (F[W].z * j * Fe) / 2,
+      ),
+    );
+  for (let j = 0; j < h.length; j += 3) {
+    const $ = h[j],
+      W = h[j + 1],
+      dt = h[j + 2];
+    D[$] === 2 ||
+      D[W] === 2 ||
+      D[dt] === 2 ||
+      N.push($, W, dt, d + $, d + dt, d + W);
+  }
+  const y = 4,
+    P = O * 0.32;
+  let S = 2 * d;
+  for (const j of V) {
+    const $ = X.get(j),
+      W = $.length,
+      dt = $.map((Ct) => [Ct]);
+    $.forEach((Ct, ot) => {
+      const J = m[j].clone().sub(m[Ct]);
+      J.addScaledVector(F[Ct], -J.dot(F[Ct])).normalize();
+      for (let bt = 1; bt < y; bt++) {
+        const It = (Math.PI * bt) / y,
+          ht = m[Ct].clone()
+            .addScaledVector(F[Ct], (Math.cos(It) * Fe) / 2)
+            .addScaledVector(J, Math.sin(It) * P);
+        (H.push(ht.x, ht.y, ht.z), dt[ot].push(S++));
+      }
+      dt[ot].push(d + Ct);
+    });
+    const Dt = se(...H.slice(dt[0][1] * 3, dt[0][1] * 3 + 3)),
+      gt = se(...H.slice(dt[1][1] * 3, dt[1][1] * 3 + 3)),
+      rt = se(...H.slice(dt[1][2] * 3, dt[1][2] * 3 + 3)),
+      Bt =
+        gt.clone().sub(Dt).cross(rt.clone().sub(Dt)).dot(m[j].clone().sub(Dt)) <
+        0;
+    for (let Ct = 0; Ct < W; Ct++)
+      for (let ot = 0; ot < y; ot++) {
+        const J = dt[Ct][ot],
+          bt = dt[(Ct + 1) % W][ot],
+          It = dt[(Ct + 1) % W][ot + 1],
+          ht = dt[Ct][ot + 1];
+        Bt ? N.push(J, It, bt, J, ht, It) : N.push(J, bt, It, J, It, ht);
+      }
+  }
+  const A = new qn();
+  (A.setAttribute("position", new Os(H, 3)),
+    A.setIndex(N),
+    A.computeVertexNormals());
+  const G = new qn(),
+    ct = new Float32Array(d * 3);
+  (m.forEach((j, $) =>
+    ct.set(
+      [
+        j.x - F[$].x * (Fe / 2 + 0.034),
+        j.y - F[$].y * (Fe / 2 + 0.034),
+        j.z - F[$].z * (Fe / 2 + 0.034),
+      ],
+      $ * 3,
+    ),
+  ),
+    G.setAttribute("position", new bo(ct, 3)),
+    G.setIndex([...h]),
+    G.computeVertexNormals());
+  const kt = V.map((j) => ({
+      position: m[j].clone(),
+      normal: F[j].clone(),
+      scale: O / 0.066,
+    })),
+    At = V.slice(0, 20).map((j) =>
+      m[j].clone().addScaledVector(F[j], Fe / 2 + 0.04),
+    ),
+    yt = t * (o ? 0.29 : 0.3),
+    ft = se(0.95, 0.55, -0.35).multiplyScalar(t / 3.2),
+    Nt = Gt(yt, {
+      detail: o ? 30 : 10,
+      amp: yt * 0.2,
+      freq: 1.7 / yt,
+      octaves: 4,
+      seed: e + 3,
+      scale: [1.1, 0.92, 1],
+    }).translate(ft.x, ft.y, ft.z),
+    M = [],
+    L = [],
+    at = [];
+  if (o)
+    for (let j = 0; j < 6; j++) {
+      const $ = se(...le(n))
+          .multiplyScalar(yt * q(n, 0.15, 0.55))
+          .add(ft),
+        W = yt * q(n, 0.1, 0.16);
+      at.some((dt) => dt.p.distanceTo($) < (dt.r + W) * 1.7) ||
+        (at.push({
+          p: $,
+          r: W,
+        }),
+        M.push(
+          Gt(W, {
+            detail: 8,
+            amp: W * 0.12,
+            freq: 2 / W,
+            seed: e + 50 + j,
+          }).translate($.x, $.y, $.z),
+        ),
+        L.push(
+          Gt(W * 1.55, {
+            detail: 10,
+            amp: W * 0.25,
+            freq: 1.5 / W,
+            seed: e + 70 + j,
+          }).translate($.x, $.y, $.z),
+        ));
+    }
+  const Z = [];
+  if (o)
+    for (let j = 0; j < 1700; j++) {
+      const $ = se(...le(n))
+        .multiplyScalar(yt * Math.cbrt(n()) * 0.86)
+        .add(ft);
+      at.some((W) => W.p.distanceTo($) < W.r * 1.6) ||
+        Z.push({
+          position: $,
+          scale: q(n, 0.014, 0.024),
+        });
+    }
+  const U = (j, $) => j.length() < i(j) - $ && j.distanceTo(ft) > yt * 1.15,
+    I = o ? 52 : 18,
+    Q = o ? 72 : 46,
+    z = o ? 0.014 : 0.03,
+    K = [];
+  for (let j = 0; j < I; j++) {
+    let $;
+    do $ = se(...le(n)).multiplyScalar(t * 0.92 * Math.cbrt(n()));
+    while (!U($, 0.35));
+    const W = wc(n, $, Q, o ? 0.085 : 0.16, {
+      bound: (dt) => U(dt, 0.16),
+      persistence: 0.5,
+    });
+    W.length > 4 &&
+      K.push(
+        De(W, z, {
+          tubular: Math.round(W.length * (o ? 2.2 : 1.4)),
+          radial: o ? 4 : 3,
+        }),
+      );
+  }
+  const _ = Tn(K),
+    nt = [],
+    ut = o ? 60 : 16;
+  for (let j = 0; j < ut; j++) {
+    const $ = se(...le(n)),
+      W = q(n, 0.2, 0.42) * (t / 3.2),
+      dt = $.clone().multiplyScalar(i($) - Fe / 2 - 0.045 - W * 0.32);
+    nt.push(
+      ua(
+        Gt(W, {
+          detail: o ? 5 : 2,
+          scale: [1.7, 0.36, 1.35],
+          amp: W * 0.25,
+          freq: 2.2 / W,
+          seed: e + 100 + j,
+        }),
+        $,
+      ).translate(dt.x, dt.y, dt.z),
+    );
+  }
+  for (let j = 0; j < (o ? 9 : 3); j++) {
+    const $ = se(...le(n)),
+      W = q(n, 0.12, 0.22) * (t / 3.2),
+      dt = $.clone()
+        .multiplyScalar(yt * 1.02)
+        .add(ft);
+    nt.push(
+      ua(
+        Gt(W, {
+          detail: o ? 4 : 2,
+          scale: [1.4, 0.6, 1.2],
+          amp: W * 0.25,
+          freq: 2.2 / W,
+          seed: e + 200 + j,
+        }),
+        $,
+      ).translate(dt.x, dt.y, dt.z),
+    );
+  }
+  const zt = Tn(nt);
+  let Et = null;
+  if (o) {
+    const j = [];
+    for (let $ = 0; $ < 260; $++) {
+      let W = se(...le(n)),
+        dt = se(...le(n))
+          .cross(W)
+          .normalize();
+      const Dt = [];
+      for (let gt = 0; gt < 6; gt++)
+        (Dt.push(W.clone().multiplyScalar(i(W) - Fe / 2 - 0.016)),
+          (W = W.clone().addScaledVector(dt, 0.05).normalize()),
+          (dt = dt
+            .clone()
+            .addScaledVector(se(...le(n)), 0.25)
+            .cross(W)
+            .cross(W)
+            .negate()
+            .normalize()));
+      j.push(
+        De(Dt, 0.0055, {
+          tubular: 8,
+          radial: 3,
+        }),
+      );
+    }
+    Et = Tn(j);
+  }
+  const jt = {
+    env: A,
+    npl: G,
+    npcItems: kt,
+    poreAnchors: At,
+    nucleolus: Nt,
+    nucC: ft,
+    nucR: yt,
+    fc: M.length ? Tn(M) : null,
+    dfc: L.length ? Tn(L) : null,
+    granules: Z,
+    euchromatin: _,
+    heterochromatin: zt,
+    lamina: Et,
+    clumpAt: (nt.length, null),
+    surfR: i,
+  };
+  return (
+    (jt.hetAt = (() => {
+      const j = nt[0];
+      return (j.computeBoundingSphere(), j.boundingSphere.center.clone());
+    })()),
+    Qn.set(s, jt),
+    jt
+  );
+}
+function Lo({ radius: t = 3.2, seed: e = 1, detail: o = "high" } = {}) {
+  const s = o === "high",
+    n = Dc(t, e, s),
+    a = new qt(),
+    r = new mt(
+      n.env,
+      et(B.envelope, {
+        cap: "#7464c8",
+        bump: 0.01,
+        freq: 7,
+        sheen: 0.8,
+        rim: 0.45,
+        edge: 0.02,
+        clearcoat: 0.4,
+      }),
+    );
+  a.add(xt(r, "membrane"));
+  const i = new mt(
+    n.npl,
+    et(B.nucleoplasm, {
+      cap: "#5c4aa6",
+      bump: 0,
+      rim: 0,
+      edge: 0.001,
+    }),
+  );
+  a.add(xt(i, "nucleolus"));
+  const c = $c(s);
+  (a.add(
+    xt(
+      ee(
+        c.ring,
+        et(B.pore, {
+          bump: 0,
+          cap: "#cfc2f0",
+          sheen: 0.4,
+          rim: 0.4,
+          edge: 0.004,
+        }),
+        n.npcItems,
+        {
+          seed: e,
+        },
+      ),
+      "membrane",
+    ),
+  ),
+    s &&
+      a.add(
+        ee(
+          c.plug,
+          et("#2a1c52", {
+            bump: 0,
+            cap: "#22163f",
+            sheen: 0.2,
+            rim: 0.1,
+            edge: 0.003,
+          }),
+          n.npcItems,
+          {
+            seed: e,
+          },
+        ),
+      ),
+    a.add(
+      new mt(
+        n.euchromatin,
+        et(B.chromatin, {
+          cap: "#b48ef0",
+          bump: 0,
+          rim: 0.4,
+          edge: 0.006,
+        }),
+      ),
+    ),
+    a.add(
+      xt(
+        new mt(
+          n.heterochromatin,
+          et("#9a72e0", {
+            cap: "#7a52c8",
+            bump: 0.03,
+            freq: 22,
+            edge: 0.01,
+            rim: 0.25,
+          }),
+        ),
+        "dna",
+      ),
+    ));
+  const l = new mt(
+    n.nucleolus,
+    et(B.nucleolus, {
+      cap: "#6a3cb8",
+      bump: 0.035,
+      freq: 16,
+      sheen: 0.6,
+      edge: 0.014,
+    }),
+  );
+  (a.add(xt(l, "nucleolus")),
+    n.dfc &&
+      a.add(
+        xt(
+          new mt(
+            n.dfc,
+            et("#3f1d84", {
+              cap: "#43208c",
+              bump: 0.01,
+              freq: 30,
+              edge: 0.006,
+            }),
+          ),
+          "nucleolus",
+        ),
+      ),
+    n.fc &&
+      a.add(
+        xt(
+          new mt(
+            n.fc,
+            et("#d8c6ff", {
+              cap: "#e4d6ff",
+              bump: 0,
+              edge: 0.004,
+            }),
+          ),
+          "nucleolus",
+        ),
+      ),
+    n.granules.length &&
+      a.add(
+        xt(
+          ee(
+            new pe(1, 0),
+            et("#9a6ce0", {
+              bump: 0,
+              cap: "#9a6ce0",
+              edge: 0.002,
+            }),
+            n.granules,
+            {
+              seed: e,
+            },
+          ),
+          "nucleolus",
+        ),
+      ),
+    n.lamina &&
+      a.add(
+        xt(
+          new mt(
+            n.lamina,
+            et(B.intermediate, {
+              bump: 0,
+              cap: B.intermediate,
+              edge: 0.003,
+              opacity: 0.8,
+            }),
+          ),
+          "faint",
+        ),
+      ));
+  const u = se(-0.45, 0.75, 0.5).normalize(),
+    d = [
+      {
+        text: translate("核膜（双层）"),
+        at: u.clone().multiplyScalar(n.surfR(u) + Fe / 2),
+      },
+      {
+        text: translate("核孔"),
+        at: n.poreAnchors[0].clone(),
+      },
+      {
+        text: translate("核仁"),
+        at: n.nucC.clone(),
+      },
+      {
+        text: translate("染色质"),
+        at: n.hetAt.clone(),
+      },
+      {
+        text: translate("核基质"),
+        at: se(-1.2, -0.6, 0.4).multiplyScalar(t / 3.2),
+      },
+    ];
+  if (s) {
+    const h = se(0.3, -0.7, 0.65).normalize();
+    d.push({
+      text: translate("核纤层"),
+      at: h.multiplyScalar(n.surfR(h) - Fe / 2 - 0.03),
+    });
+  }
+  return (
+    (a.userData = {
+      kind: "nucleus",
+      radius: t * 1.1,
+      labels: d,
+      pores: n.poreAnchors.map((h) => h.clone()),
+    }),
+    a
+  );
+}
+const ss = new Map(),
+  We = (t, e) => (ss.has(t) || ss.set(t, e()), ss.get(t)),
+  Qt = (t, e, o) => new k(t, e, o),
+  Vc = Qt(0, 1, 0),
+  Bn = (t) => {
+    t = t.index ? t.toNonIndexed() : t;
+    for (const e of Object.keys(t.attributes))
+      e !== "position" && e !== "normal" && t.deleteAttribute(e);
+    return (t.attributes.normal || t.computeVertexNormals(), t);
+  },
+  Sn = (t) => ue(t.map(Bn));
+function Wn(t, e) {
+  const [o, s, n] = le(t),
+    a = e * Math.cbrt(t());
+  return Qt(o * a, s * a, n * a);
+}
+function Ba(t) {
+  return We(`ribo|${t}`, () => {
+    const e = t === "high",
+      o = e ? 7 : 0;
+    if (t === "tiny") {
+      const a = Bn(new ks(0.0105).scale(1.15, 0.8, 1).translate(0, 0.0086, 0)),
+        r = Bn(
+          new ks(0.0076).scale(1.3, 0.6, 0.86).translate(-0.0012, 0.0205, 0),
+        );
+      return {
+        large: a,
+        small: r,
+      };
+    }
+    let s = Gt(0.0105, {
+      detail: o,
+      scale: [1.18, 0.8, 1],
+      amp: e ? 0.0012 : 6e-4,
+      freq: 160,
+      seed: 11,
+    });
+    s.translate(0, 0.0086, 0);
+    let n = Gt(0.0076, {
+      detail: o,
+      scale: [1.32, 0.6, 0.86],
+      amp: e ? 0.001 : 5e-4,
+      freq: 190,
+      seed: 12,
+    });
+    if ((n.rotateZ(0.22), n.translate(-0.0012, 0.0205, 4e-4), e)) {
+      const a = [
+        [0, 0.0168, -0.0055, 0.0034],
+        [0.0098, 0.0128, 0.0018, 0.0032],
+        [-0.0105, 0.0118, -0.0012, 0.0028],
+      ].map(([r, i, c, l], u) =>
+        Gt(l, {
+          detail: 4,
+          amp: l * 0.12,
+          freq: 1 / l,
+          seed: 30 + u,
+        }).translate(r, i, c),
+      );
+      ((s = Sn([s, ...a])), (n = Bn(n)));
+    } else ((s = Bn(s)), (n = Bn(n)));
+    return {
+      large: s,
+      small: n,
+    };
+  });
+}
+function Ka(t = "low") {
+  return We(`riboMerged|${t}`, () => {
+    const { large: e, small: o } = Ba(t);
+    return ue([e, o]);
+  });
+}
+const Nc = () =>
+  et(B.ribosome, {
+    bump: 0,
+    sheen: 0.5,
+    rim: 0.4,
+    cap: "#c9b47a",
+  });
+function Tc({ detail: t = "high", seed: e = 1, scale: o = 1 } = {}) {
+  const { large: s, small: n } = Ba(t),
+    a = new qt(),
+    r = -0.013,
+    i = new mt(
+      s,
+      et(B.ribosome, {
+        bump: 8e-4,
+        freq: 400,
+        cap: "#c9b47a",
+      }),
+    ),
+    c = new mt(
+      n,
+      et("#f9efc8", {
+        bump: 8e-4,
+        freq: 400,
+        cap: "#d8cc9a",
+      }),
+    );
+  ((i.position.y = c.position.y = r), a.add(xt(i, "faint"), xt(c, "faint")));
+  const l = We(`mrna|${e}`, () => {
+      const m = Jt(e),
+        g = [];
+      for (let p = 0; p <= 14; p++) {
+        const x = -0.034 + p * 0.0049,
+          b = Math.abs(x) < 0.011;
+        g.push(
+          Qt(
+            x,
+            0.0158 + (b ? 0 : Math.sin(p * 1.3) * 0.003),
+            (b ? 0 : q(m, -0.004, 0.004)) + 0.0025,
+          ),
+        );
+      }
+      return De(g, 0.0011, {
+        tubular: 90,
+        radial: 6,
+      });
+    }),
+    u = new mt(
+      l,
+      et(B.plasmid, {
+        bump: 0,
+        emissive: B.plasmid,
+        emissiveIntensity: 0.25,
+      }),
+    );
+  ((u.position.y = r), a.add(xt(u, "nucleolus")));
+  const d = We(`pep|${e}`, () => {
+      const m = Jt(e + 5),
+        g = [Qt(0.002, 0.004, 0)];
+      for (let p = 0; p < 8; p++)
+        g.push(
+          g[g.length - 1]
+            .clone()
+            .add(Qt(q(m, -0.003, 0.003), -0.0035, q(m, -0.003, 0.003))),
+        );
+      return De(g, 0.0012, {
+        tubular: 50,
+        radial: 6,
+      });
+    }),
+    h = new mt(
+      d,
+      et(B.protein, {
+        bump: 0,
+      }),
+    );
+  return (
+    (h.position.y = r),
+    a.add(xt(h, "protein")),
+    a.scale.setScalar(o),
+    (a.userData = {
+      kind: "ribosome",
+      radius: 0.036 * o,
+      labels: [
+        {
+          text: translate("大亚基"),
+          at: Qt(0.006, r + 0.006, 0.01).multiplyScalar(o),
+        },
+        {
+          text: translate("小亚基"),
+          at: Qt(-0.006, r + 0.024, 0.005).multiplyScalar(o),
+        },
+        {
+          text: translate("mRNA"),
+          at: Qt(0.028, r + 0.016, 0.003).multiplyScalar(o),
+        },
+      ],
+    }),
+    a
+  );
+}
+function Wa({ radius: t = 0.4, seed: e = 1, detail: o = "high" } = {}) {
+  const s = o === "high",
+    n = We(`lyso|${t}|${e}|${o}`, () => {
+      const c = Jt(e * 7 + 3),
+        l = Gt(t, {
+          detail: s ? 30 : 9,
+          amp: t * 0.07,
+          freq: 1.4 / t,
+          seed: e,
+          scale: [1.06, 0.95, 1],
+        }),
+        u = {
+          body: l,
+        },
+        d = s ? 1400 : 40,
+        h = [],
+        m = [];
+      for (let g = 0; g < d; g++) {
+        const p = Wn(c, t * 0.8),
+          x = (s ? q(c, 0.25, 1) ** 2 * 0.075 : q(c, 0.6, 1.4) * 0.05) * t;
+        (c() < 0.6 ? h : m).push({
+          position: p,
+          scale: x,
+        });
+      }
+      if (
+        ((u.dark = h),
+        (u.pale = m),
+        (u.grain = Gt(1, {
+          detail: 0,
+          amp: 0.18,
+          freq: 1.5,
+          seed: e + 2,
+        })),
+        s)
+      ) {
+        const g = [];
+        for (let D = 0; D < 7; D++) {
+          const T = Wn(c, t * 0.55),
+            E = q(c, 0.05, 0.09) * t;
+          g.push(
+            Gt(E, {
+              detail: 6,
+              amp: E * 0.08,
+              freq: 2 / E,
+              seed: e + 40 + D,
+            }).translate(T.x, T.y, T.z),
+          );
+        }
+        const p = Wn(c, t * 0.3);
+        for (let D = 0; D < 4; D++) {
+          const T = t * (0.12 + D * 0.05),
+            E = new Xn(T, 24, 12, 0, Math.PI * 2, 0.3 + D * 0.1, Math.PI * 0.7);
+          g.push(
+            Ga(E, {
+              amp: T * 0.05,
+              freq: 3 / T,
+              seed: e + D,
+            }).translate(p.x, p.y, p.z),
+          );
+        }
+        u.ilv = Sn(g);
+        const x = Wn(c, t * 0.4);
+        u.lipid = Gt(t * 0.17, {
+          detail: 8,
+          amp: 0.003,
+          freq: 4,
+          seed: e,
+        }).translate(x.x, x.y, x.z);
+        const b = 1.15;
+        ((u.pump = Sn([
+          new Ae(0.0065 * b, 0.0065 * b, 0.008 * b, 8).translate(0, 0, 0),
+          new Ae(0.0018 * b, 0.0018 * b, 0.012 * b, 6).translate(
+            0,
+            0.009 * b,
+            0,
+          ),
+          Gt(0.0075 * b, {
+            detail: 1,
+            scale: [1, 1.15, 1],
+            amp: 8e-4,
+            freq: 300,
+            seed: 3,
+          }).translate(0, 0.019 * b, 0),
+        ])),
+          (u.pumps = []));
+        const v = l.attributes.position,
+          V = l.attributes.normal;
+        for (let D = 0; D < 320; D++) {
+          const T = Math.floor(c() * v.count),
+            E = Qt(V.getX(T), V.getY(T), V.getZ(T));
+          u.pumps.push({
+            position: Qt(v.getX(T), v.getY(T), v.getZ(T)),
+            normal: E,
+          });
+        }
+      }
+      return u;
+    }),
+    a = new qt(),
+    r = new mt(
+      n.body,
+      et(B.lysosome, {
+        cap: "#8a3a63",
+        bump: t * 0.015,
+        freq: 9 / t,
+        sheen: 0.8,
+        edge: 0.012,
+      }),
+    );
+  (a.add(xt(r, "lyso")),
+    a.add(
+      ee(
+        n.grain,
+        et("#5c1f42", {
+          bump: 0,
+          cap: "#4a1534",
+          edge: 0.003,
+        }),
+        n.dark,
+        {
+          seed: e,
+        },
+      ),
+    ),
+    a.add(
+      ee(
+        n.grain,
+        et("#f4b3d2", {
+          bump: 0,
+          cap: "#e59cc0",
+          edge: 0.003,
+        }),
+        n.pale,
+        {
+          seed: e + 1,
+        },
+      ),
+    ),
+    s &&
+      (a.add(
+        new mt(
+          n.ilv,
+          et("#f7c6dc", {
+            cap: "#d88aae",
+            bump: 0,
+            sheen: 0.4,
+            edge: 0.004,
+          }),
+        ),
+      ),
+      a.add(
+        new mt(
+          n.lipid,
+          et("#fff0d2", {
+            cap: "#ffe6b8",
+            bump: 0,
+            clearcoat: 0.8,
+            edge: 0.004,
+          }),
+        ),
+      ),
+      a.add(
+        ee(
+          n.pump,
+          et("#f6a2c8", {
+            bump: 0,
+            cap: "#e8a8c4",
+            edge: 0.002,
+          }),
+          n.pumps,
+          {
+            seed: e,
+          },
+        ),
+      )));
+  const i = Qt(0.55, 0.6, 0.58).normalize();
+  return (
+    (a.userData = {
+      kind: "lysosome",
+      radius: t * 1.12,
+      labels: [
+        {
+          text: translate("溶酶体膜"),
+          at: i.clone().multiplyScalar(t),
+        },
+        {
+          text: translate("水解酶"),
+          at: (n.dark[0]?.position ?? Qt(0, 0, 0)).clone(),
+        },
+      ],
+    }),
+    a
+  );
+}
+function Xa({ radius: t = 0.3, seed: e = 1, detail: o = "high" } = {}) {
+  const s = o === "high",
+    n = We(`perox|${t}|${e}|${o}`, () => {
+      const r = Jt(e * 13 + 1),
+        i = Gt(t, {
+          detail: s ? 28 : 9,
+          amp: t * 0.06,
+          freq: 1.3 / t,
+          seed: e + 9,
+          scale: [1.08, 0.94, 1],
+        }),
+        c = [t * 0.58, t * 0.36, t * 0.36],
+        l = new La(...c, 1, 1, 1),
+        u = new Me().setFromEuler(new vn(0.3, 0.5, 0.2)),
+        d = Qt(t * 0.12, -t * 0.08, 0);
+      l.applyQuaternion(u).translate(d.x, d.y, d.z);
+      const h = {
+        body: i,
+        core: l,
+      };
+      if (s) {
+        const m = t * 0.04,
+          g = [];
+        for (let p = -c[0] / 2 + m; p <= c[0] / 2 - m * 0.6; p += m)
+          for (let x = -c[1] / 2 + m; x <= c[1] / 2 - m * 0.6; x += m)
+            for (let b = -c[2] / 2 + m; b <= c[2] / 2 - m * 0.6; b += m)
+              g.push({
+                position: Qt(p, x, b).applyQuaternion(u).add(d),
+                quaternion: u,
+                scale: m * 0.34,
+              });
+        ((h.lattice = g), (h.matrix = []));
+        for (let p = 0; p < 220; p++)
+          h.matrix.push({
+            position: Wn(r, t * 0.85),
+            scale: q(r, 0.004, 0.009),
+          });
+        h.dot = new pe(1, 0);
+      }
+      return h;
+    }),
+    a = new qt();
+  return (
+    a.add(
+      xt(
+        new mt(
+          n.body,
+          et(B.peroxisome, {
+            cap: "#b89a4e",
+            bump: t * 0.012,
+            freq: 10 / t,
+            edge: 0.01,
+          }),
+        ),
+        "perox",
+      ),
+    ),
+    a.add(
+      new mt(
+        n.core,
+        et("#8a6a24", {
+          cap: "#6e5218",
+          flat: !0,
+          bump: 0,
+          clearcoat: 0.9,
+          roughness: 0.3,
+          edge: 0.004,
+        }),
+      ),
+    ),
+    s &&
+      (a.add(
+        ee(
+          n.dot,
+          et("#ffe9a8", {
+            bump: 0,
+            cap: "#ffe9a8",
+            edge: 0.001,
+          }),
+          n.lattice,
+        ),
+      ),
+      a.add(
+        ee(
+          n.dot,
+          et("#e8d08a", {
+            bump: 0,
+            edge: 0.001,
+          }),
+          n.matrix,
+          {
+            seed: e,
+          },
+        ),
+      )),
+    (a.userData = {
+      kind: "peroxisome",
+      radius: t * 1.1,
+      labels: [
+        {
+          text: translate("单层膜"),
+          at: Qt(-0.5, 0.6, 0.6).normalize().multiplyScalar(t),
+        },
+        {
+          text: translate("尿酸氧化酶晶体"),
+          at: Qt(t * 0.12, -t * 0.08, 0),
+        },
+      ],
+    }),
+    a
+  );
+}
+function Ya(t = "high") {
+  return We(`clathrin|${t}`, () => {
+    const e = t === "high",
+      s = new pe(1, 1).toNonIndexed().attributes.position,
+      n = (u, d, h) => `${u.toFixed(4)},${d.toFixed(4)},${h.toFixed(4)}`,
+      a = 1.36,
+      r = [],
+      i = new Map();
+    for (let u = 0; u < s.count / 3; u++) {
+      const d = [0, 1, 2].map((h) =>
+        Qt(s.getX(u * 3 + h), s.getY(u * 3 + h), s.getZ(u * 3 + h)),
+      );
+      r.push(d[0].clone().add(d[1]).add(d[2]).normalize().multiplyScalar(a));
+      for (let h = 0; h < 3; h++) {
+        const m = n(d[h].x, d[h].y, d[h].z),
+          g = n(d[(h + 1) % 3].x, d[(h + 1) % 3].y, d[(h + 1) % 3].z),
+          p = m < g ? m + "|" + g : g + "|" + m;
+        (i.has(p) || i.set(p, []), i.get(p).push(u));
+      }
+    }
+    const c = [],
+      l = e ? 0.075 : 0.09;
+    for (const [, [u, d]] of i) {
+      const h = r[u],
+        m = r[d],
+        g = h
+          .clone()
+          .add(m)
+          .normalize()
+          .multiplyScalar(a * 1.01);
+      c.push(
+        De([h, g, m], l, {
+          tubular: e ? 6 : 2,
+          radial: e ? 6 : 4,
+        }),
+      );
+    }
+    for (const u of r)
+      (c.push(new pe(l * 1.45, e ? 1 : 0).translate(u.x, u.y, u.z)),
+        e &&
+          c.push(
+            De(
+              [
+                u.clone(),
+                u.clone().multiplyScalar(0.9),
+                u.clone().multiplyScalar(0.8),
+              ],
+              0.04,
+              {
+                tubular: 3,
+                radial: 4,
+              },
+            ),
+          ));
+    return Sn(c);
+  });
+}
+function Cs(t = "high") {
+  return We(`copii|${t}`, () => {
+    const e = t === "high",
+      o = 1.32,
+      s = [];
+    for (const [i, c] of [
+      [1, 1],
+      [1, -1],
+      [-1, 1],
+      [-1, -1],
+    ])
+      s.push(Qt(i, c, 0), Qt(i, 0, c), Qt(0, i, c));
+    const n = s.map((i) => i.normalize().multiplyScalar(o)),
+      a = [];
+    for (let i = 0; i < n.length; i++)
+      for (let c = i + 1; c < n.length; c++)
+        if (n[i].distanceTo(n[c]) < o * 1.05) {
+          const l = n[i]
+            .clone()
+            .add(n[c])
+            .normalize()
+            .multiplyScalar(o * 1.02);
+          a.push(
+            De([n[i], l, n[c]], 0.07, {
+              tubular: e ? 8 : 3,
+              radial: e ? 6 : 4,
+            }),
+          );
+        }
+    for (const i of n) a.push(new pe(0.11, e ? 1 : 0).translate(i.x, i.y, i.z));
+    const r = Jt(77);
+    for (let i = 0; i < (e ? 34 : 14); i++) {
+      const [c, l, u] = le(r);
+      a.push(
+        Gt(0.13, {
+          detail: e ? 2 : 0,
+          scale: [1.2, 0.6, 1],
+          amp: 0.02,
+          freq: 8,
+          seed: i + 3,
+        })
+          .applyQuaternion(new Me().setFromUnitVectors(Vc, Qt(c, l, u)))
+          .translate(c * 1.12, l * 1.12, u * 1.12),
+      );
+    }
+    return Sn(a);
+  });
+}
+function Ls(t = "high", e = 1) {
+  return We(`vesG|${t}|${e}`, () =>
+    Gt(1, {
+      detail:
+        {
+          high: 14,
+          mid: 5,
+        }[t] ?? 2,
+      amp: 0.05,
+      freq: 1.4,
+      seed: e,
+    }),
+  );
+}
+const _o = (t = B.vesicle, e = "#d9a64a") =>
+    et(t, {
+      cap: e,
+      bump: 0,
+      sheen: 0.8,
+      clearcoat: 0.5,
+      rim: 0.5,
+      edge: 0.006,
+    }),
+  Za = () =>
+    et("#e9eef8", {
+      bump: 0,
+      cap: "#c8d0e0",
+      sheen: 0.3,
+      roughness: 0.45,
+      edge: 0.003,
+    }),
+  _s = () =>
+    et("#b8e6a0", {
+      bump: 0,
+      cap: "#98c880",
+      sheen: 0.3,
+      edge: 0.003,
+    });
+function Ps({
+  radius: t = 0.06,
+  coat: e = "none",
+  cargo: o = !0,
+  seed: s = 1,
+  detail: n = "high",
+} = {}) {
+  const a = new qt(),
+    r = new mt(Ls(n, s), _o());
+  if (
+    (r.scale.setScalar(t),
+    a.add(xt(r, "vesicle")),
+    e === "clathrin" || e === "copii")
+  ) {
+    const c = new mt(
+      e === "clathrin" ? Ya(n) : Cs(n),
+      e === "clathrin" ? Za() : _s(),
+    );
+    (c.scale.setScalar(t), c.rotation.set(s * 0.7, s * 1.3, 0), a.add(c));
+  }
+  if (o) {
+    const c = We(`cargo|${s}|${n}`, () => {
+        const u = Jt(s + 99),
+          d = [];
+        for (let h = 0; h < (n === "high" ? 14 : 5); h++) {
+          const m = Wn(u, 0.62);
+          d.push(
+            Gt(q(u, 0.1, 0.17), {
+              detail: n === "high" ? 2 : 0,
+              amp: 0.02,
+              freq: 9,
+              seed: h + s,
+            }).translate(m.x, m.y, m.z),
+          );
+        }
+        return Sn(d);
+      }),
+      l = new mt(
+        c,
+        et(B.protein, {
+          bump: 0,
+          cap: "#6aa838",
+          edge: 0.002,
+        }),
+      );
+    (l.scale.setScalar(t), a.add(xt(l, "protein")));
+  }
+  const i = [
+    {
+      text: translate("囊泡膜"),
+      at: Qt(0.6, 0.6, 0.5).normalize().multiplyScalar(t),
+    },
+  ];
+  return (
+    e === "clathrin" &&
+      i.push({
+        text: translate("网格蛋白外被"),
+        at: Qt(-0.6, 0.5, 0.6)
+          .normalize()
+          .multiplyScalar(t * 1.38),
+      }),
+    e === "copii" &&
+      i.push({
+        text: translate("COPII 外被"),
+        at: Qt(-0.6, 0.5, 0.6)
+          .normalize()
+          .multiplyScalar(t * 1.35),
+      }),
+    o &&
+      i.push({
+        text: translate("货物蛋白"),
+        at: Qt(0, 0, 0),
+      }),
+    (a.userData = {
+      kind: "vesicle",
+      radius: t * (e === "none" ? 1.05 : 1.45),
+      labels: i,
+    }),
+    a
+  );
+}
+function as(t, e, o, s, n, a) {
+  if (a - n >= Math.PI * 2 - 1e-6) {
+    const i = new Js().absarc(t, e, o, 0, Math.PI * 2, !1);
+    return (i.holes.push(new oc().absarc(t, e, s, 0, Math.PI * 2, !0)), i);
+  }
+  const r = new Js();
+  return (
+    r.absarc(t, e, o, n, a, !1),
+    r.absarc(t, e, s, a, n, !0),
+    r.closePath(),
+    r
+  );
+}
+function pa(t, e) {
+  return We(`centriole|${t}|${e}`, () => {
+    const a = t ? 14 : 6,
+      r = [],
+      i = 0.072;
+    for (let c = 0; c < 9; c++) {
+      const l = (c / 9) * Math.PI * 2,
+        u = l + Math.PI / 2 - 0.85,
+        d = Math.cos(u) * 0.019,
+        h = Math.sin(u) * 0.019,
+        m = Math.cos(l) * i,
+        g = Math.sin(l) * i,
+        p = [
+          [as(m, g, 0.0125, 0.0075, 0, Math.PI * 2), 0.45, 0],
+          [
+            as(m + d, g + h, 0.0125, 0.0075, u - 2.65, u + 2.65),
+            0.45 * 0.94,
+            0,
+          ],
+          [
+            as(m + 2 * d, g + 2 * h, 0.0125, 0.0075, u - 2.65, u + 2.65),
+            0.45 * 0.66,
+            0,
+          ],
+        ];
+      for (const [x, b] of p) {
+        const v = new nc(x, {
+          depth: b,
+          bevelEnabled: !1,
+          curveSegments: a,
+        });
+        (v.rotateX(-Math.PI / 2).translate(0, -0.45 / 2, 0), r.push(v));
+      }
+    }
+    if (t) {
+      for (let c = 0; c < 3; c++) {
+        const l = -0.2 + c * 0.035;
+        r.push(
+          new Zo(0.011, 0.0035, 6, 18).rotateX(Math.PI / 2).translate(0, l, 0),
+        );
+        for (let u = 0; u < 9; u++) {
+          const d = (u / 9) * Math.PI * 2;
+          (r.push(
+            new Ae(0.0022, 0.0022, i - 0.024, 5)
+              .rotateZ(Math.PI / 2)
+              .rotateY(d)
+              .translate(
+                Math.cos(d) * (i / 2 + 0.002),
+                l,
+                -Math.sin(d) * (i / 2 + 0.002),
+              ),
+          ),
+            r.push(
+              new pe(0.006, 1).translate(
+                Math.cos(d) * (i - 0.012),
+                l,
+                -Math.sin(d) * (i - 0.012),
+              ),
+            ));
+        }
+      }
+      if (e)
+        for (let c = 0; c < 9; c++) {
+          const l = ((c + 0.5) / 9) * Math.PI * 2,
+            u = [
+              Qt(Math.cos(l) * 0.1, 0.45 / 2 - 0.05, Math.sin(l) * 0.1),
+              Qt(Math.cos(l) * 0.15, 0.45 / 2 - 0.02, Math.sin(l) * 0.15),
+              Qt(
+                Math.cos(l + 0.12) * 0.19,
+                0.45 / 2 + 0.005,
+                Math.sin(l + 0.12) * 0.19,
+              ),
+            ];
+          r.push(
+            De(u, (d) => 0.012 * (1 - d * 0.5), {
+              tubular: 8,
+              radial: 6,
+            }),
+          );
+        }
+    }
+    return Sn(r);
+  });
+}
+function Qa({ seed: t = 1, detail: e = "high" } = {}) {
+  const o = e === "high",
+    s = new qt(),
+    n = et(B.centriole, {
+      bump: 0,
+      cap: "#9fb4d8",
+      roughness: 0.4,
+      sheen: 0.5,
+      rim: 0.5,
+      edge: 0.004,
+    }),
+    a = new mt(pa(o, !0), n);
+  a.position.set(-0.08, 0.06, 0);
+  const r = new mt(pa(o, !1), n);
+  ((r.rotation.z = -Math.PI / 2),
+    r.position.set(0.19, -0.2, 0.04),
+    (r.rotation.y = 0.25),
+    s.add(xt(a, "tubulin"), xt(r, "tubulin")));
+  const i = We(`pcm|${t}|${e}`, () => {
+    const l = Jt(t + 17),
+      u = Gt(0.52, {
+        detail: o ? 22 : 8,
+        scale: [1.15, 1.05, 0.95],
+        amp: 0.06,
+        freq: 3,
+        seed: t + 3,
+      }),
+      d = [];
+    for (let m = 0; m < (o ? 160 : 40); m++) {
+      const [g, p, x] = le(l),
+        b = q(l, 0.25, 0.48);
+      d.push({
+        position: Qt(g * b * 1.1, p * b, x * b * 0.9),
+        normal: Qt(g, p, x),
+      });
+    }
+    const h = [];
+    for (let m = 0; m < (o ? 22 : 10); m++) {
+      const g = Qt(...le(l)),
+        p = g.clone().multiplyScalar(0.36),
+        x = q(l, 0.25, 0.5),
+        b = Qt(...le(l)).multiplyScalar(0.05);
+      h.push(
+        De(
+          [
+            p,
+            g
+              .clone()
+              .multiplyScalar(0.36 + x / 2)
+              .add(b),
+            g.clone().multiplyScalar(0.36 + x),
+          ],
+          0.0125,
+          {
+            tubular: o ? 14 : 6,
+            radial: o ? 8 : 5,
+          },
+        ),
+      );
+    }
+    return {
+      pcm: u,
+      rings: d,
+      mts: Sn(h),
+    };
+  });
+  s.add(
+    xt(
+      new mt(
+        i.pcm,
+        Zn("#9fb8e8", {
+          opacity: 0.16,
+          bump: 0.01,
+          freq: 18,
+          rim: 1.1,
+          depthWrite: !1,
+        }),
+      ),
+      "faint",
+    ),
+  );
+  const c = We(
+    `turc|${e}`,
+    () => new Ae(0.0125, 0.0095, 0.012, o ? 9 : 5, 1, !0),
+  );
+  return (
+    s.add(
+      xt(
+        ee(
+          c,
+          et("#a8e4ff", {
+            bump: 0,
+            emissive: "#3aa8ff",
+            emissiveIntensity: 0.25,
+            edge: 0.002,
+            cap: null,
+          }),
+          i.rings,
+          {
+            seed: t,
+          },
+        ),
+        "tubulin",
+      ),
+    ),
+    s.add(
+      xt(
+        new mt(
+          i.mts,
+          et(B.microtubule, {
+            bump: 0,
+            cap: "#4aa8d8",
+            opacity: 0.55,
+            rim: 0.8,
+            edge: 0.003,
+          }),
+        ),
+        "tubulin",
+      ),
+    ),
+    (s.userData = {
+      kind: "centrosome",
+      radius: 1,
+      labels: [
+        {
+          text: translate("中心粒"),
+          at: Qt(-0.08, 0.3, 0.1),
+        },
+        {
+          text: translate("三联体微管"),
+          at: Qt(-0.08 + 0.072, 0.06 - 0.2, 0),
+        },
+        {
+          text: translate("中心粒周围物质"),
+          at: Qt(-0.35, -0.3, 0.3),
+        },
+      ],
+    }),
+    s
+  );
+}
+const ho = (t, e, o) => new k(t, e, o),
+  zo = new Map(),
+  Ja = (t, e) => (zo.has(t) || zo.set(t, e()), zo.get(t)),
+  Rc = (t) => {
+    t = t.index ? t.toNonIndexed() : t;
+    for (const e of Object.keys(t.attributes))
+      e !== "position" && e !== "normal" && t.deleteAttribute(e);
+    return (t.attributes.normal || t.computeVertexNormals(), t);
+  },
+  tr = (t) => ue(t.map(Rc));
+function er({ mid: t, mask: e, half: o, nu: s = 64, nv: n = s }) {
+  const a = s + 1,
+    r = n + 1,
+    i = (F, O) => O * a + F,
+    c = new Float32Array(a * r),
+    l = new Float32Array(a * r),
+    u = new Float32Array(a * r),
+    d = new Uint8Array(a * r);
+  for (let F = 0; F < r; F++)
+    for (let O = 0; O < a; O++) {
+      const X = i(O, F);
+      ((c[X] = -1 + (2 * O) / s),
+        (l[X] = -1 + (2 * F) / n),
+        (u[X] = O === 0 || F === 0 || O === s || F === n ? -1 : e(c[X], l[X])),
+        u[X] > 0 && (d[X] = 1));
+    }
+  const h = 2 / s,
+    m = 2 / n,
+    g = h * 0.25,
+    p = m * 0.25;
+  for (let F = 0; F < r; F++)
+    for (let O = 0; O < a; O++) {
+      const X = i(O, F);
+      if (d[X]) continue;
+      let H = !1;
+      for (let S = -1; S <= 1 && !H; S++)
+        for (let A = -1; A <= 1; A++) {
+          const G = O + A,
+            ct = F + S;
+          G >= 0 &&
+            ct >= 0 &&
+            G <= s &&
+            ct <= n &&
+            d[i(G, ct)] === 1 &&
+            (H = !0);
+        }
+      if (!H) continue;
+      let N = c[X],
+        y = l[X],
+        P = u[X];
+      for (let S = 0; S < 4; S++) {
+        const A = (e(N + g, y) - e(N - g, y)) / (2 * g),
+          G = (e(N, y + p) - e(N, y - p)) / (2 * p),
+          ct = A * A + G * G;
+        if (ct < 1e-12) break;
+        ((N -= (P * A) / ct),
+          (y -= (P * G) / ct),
+          (N = Math.min(c[X] + h * 1.5, Math.max(c[X] - h * 1.5, N))),
+          (y = Math.min(l[X] + m * 1.5, Math.max(l[X] - m * 1.5, y))),
+          (P = e(N, y)));
+      }
+      ((c[X] = N), (l[X] = y), (d[X] = 2));
+    }
+  const x = [],
+    b = new Int32Array(a * r).fill(-1),
+    v = new Int32Array(a * r).fill(-1),
+    V = 0.001;
+  for (let F = 0; F < a * r; F++) {
+    if (!d[F]) continue;
+    const O = t(c[F], l[F]);
+    if (d[F] === 2) {
+      ((b[F] = v[F] = x.length / 3), x.push(O.x, O.y, O.z));
+      continue;
+    }
+    const X = t(c[F] + V, l[F]).sub(t(c[F] - V, l[F])),
+      H = t(c[F], l[F] + V).sub(t(c[F], l[F] - V)),
+      N = X.cross(H).normalize(),
+      y = o(u[F]);
+    ((b[F] = x.length / 3),
+      x.push(O.x + N.x * y, O.y + N.y * y, O.z + N.z * y),
+      (v[F] = x.length / 3),
+      x.push(O.x - N.x * y, O.y - N.y * y, O.z - N.z * y));
+  }
+  const D = [],
+    T = (F, O, X) => {
+      !d[F] ||
+        !d[O] ||
+        !d[X] ||
+        (d[F] !== 1 && d[O] !== 1 && d[X] !== 1) ||
+        D.push(b[F], b[O], b[X], v[F], v[X], v[O]);
+    };
+  for (let F = 0; F < n; F++)
+    for (let O = 0; O < s; O++) {
+      const X = i(O, F),
+        H = i(O + 1, F),
+        N = i(O + 1, F + 1),
+        y = i(O, F + 1);
+      (O + F) & 1 ? (T(X, H, N), T(X, N, y)) : (T(X, H, y), T(H, N, y));
+    }
+  const E = new qn();
+  return (
+    E.setAttribute("position", new Os(x, 3)),
+    E.setIndex(D),
+    E.computeVertexNormals(),
+    E
+  );
+}
+const nr =
+    (t, e, o = 0.25) =>
+    (s) => {
+      const n = Math.min(1, s / e);
+      return (
+        t *
+        Math.sqrt(n) *
+        (1 + o * Math.exp(-(((s - e * 0.9) / (e * 0.9)) ** 2)))
+      );
+    },
+  Hs = (t) =>
+    t?.isVector3
+      ? t.clone()
+      : Array.isArray(t)
+        ? new k(...t)
+        : new k(t?.x ?? 1, t?.y ?? 0, t?.z ?? 0);
+function or(t) {
+  const e = Hs(t).normalize(),
+    o =
+      Math.abs(e.y) < 0.9
+        ? ho(0, 1, 0).cross(e).normalize()
+        : ho(1, 0, 0).cross(e).normalize(),
+    s = e.clone().cross(o);
+  return {
+    a: e,
+    b: o,
+    c: s,
+  };
+}
+const Pn = (t, e, o) => {
+    const s = Math.hypot(e, o),
+      n = Math.atan2(o, e);
+    return t.a
+      .clone()
+      .multiplyScalar(Math.cos(s))
+      .addScaledVector(t.b, Math.sin(s) * Math.cos(n))
+      .addScaledVector(t.c, Math.sin(s) * Math.sin(n));
+  },
+  zs = "#52b8c6";
+function qc(t, e, o, s, n) {
+  return Ja(`rer|${t}|${e}|${o}|${Hs(s).toArray()}|${n}`, () => {
+    const a = Jt(e * 131 + 7),
+      r = on(e * 17 + 3),
+      i = on(e * 19 + 11),
+      c = or(s),
+      l = o ? 5 : 3,
+      u = 0.42,
+      d = t + 0.5,
+      h = 1.5,
+      m = [],
+      g = (y, P) =>
+        d +
+        y * u +
+        0.16 * Be(r, P.x * 0.45, P.y * 0.45, P.z * 0.45, 2) +
+        0.05 * Be(i, P.x * 1.3 + y, P.y * 1.3, P.z * 1.3, 2),
+      p = [],
+      x = [];
+    for (let y = 0; y < l; y++)
+      x.push([q(a, -0.12, 0.12) * y, q(a, -0.12, 0.12) * y]);
+    for (let y = 0; y < l; y++) {
+      const P = d + y * u,
+        S = 1.12 - y * 0.11,
+        [A, G] = x[y],
+        ct = (At, yt) => {
+          const ft = At * h,
+            Nt = yt * h,
+            M = Math.hypot(ft - A, Nt - G),
+            L = Math.atan2(Nt - G, ft - A),
+            at = Pn(c, ft, Nt),
+            Z =
+              (S *
+                (0.8 +
+                  0.32 *
+                    Be(
+                      r,
+                      Math.cos(L) * 1.1 + y * 3.1,
+                      Math.sin(L) * 1.1,
+                      y,
+                      3,
+                    )) -
+                M) *
+              P,
+            U = 0.75,
+            I =
+              (0.3 -
+                0.22 * Math.min(1, M / S) -
+                Be(i, at.x * P * U + y * 7, at.y * P * U, at.z * P * U, 3)) /
+              U;
+          return Math.min(Z, I);
+        };
+      p.push(ct);
+      const kt = (At, yt) => {
+        const ft = Pn(c, At * h, yt * h);
+        return ft.multiplyScalar(g(y, ft));
+      };
+      m.push(
+        er({
+          mid: kt,
+          mask: ct,
+          half: nr(0.034, 0.17, 0.3),
+          nu: o ? 170 : 56,
+        }),
+      );
+    }
+    const b = [],
+      v = (y, P) => {
+        const S = P.angleTo(c.a);
+        if (S > h * 0.98) return !1;
+        const A = Math.atan2(P.dot(c.c), P.dot(c.b));
+        return p[y](Math.cos(A) * (S / h), Math.sin(A) * (S / h)) > 0.12;
+      };
+    for (let y = 0, P = 0; y < 400 && P < (o ? 5 : 3); y++) {
+      const S = Pn(c, q(a, -0.8, 0.8), q(a, -0.8, 0.8));
+      if (!v(0, S)) continue;
+      const A = S.clone().multiplyScalar(t - 0.05),
+        G = S.clone().multiplyScalar(g(0, S));
+      (b.push(
+        De(
+          [A, A.clone().lerp(G, 0.5), G],
+          (ct) => 0.06 + 0.06 * (1 - Math.sin(ct * Math.PI)),
+          {
+            tubular: 10,
+            radial: 12,
+          },
+        ),
+      ),
+        P++);
+    }
+    for (let y = 0; y < l - 1; y++)
+      for (let P = 0, S = 0; P < 300 && S < (o ? 4 : 2); P++) {
+        const A = Pn(c, q(a, -1, 1), q(a, -1, 1));
+        if (!v(y, A) || !v(y + 1, A)) continue;
+        const G = A.clone().multiplyScalar(g(y, A)),
+          ct = A.clone().multiplyScalar(g(y + 1, A));
+        (b.push(
+          De(
+            [G, G.clone().lerp(ct, 0.5), ct],
+            (kt) => 0.05 + 0.04 * (1 - Math.sin(kt * Math.PI)),
+            {
+              tubular: 8,
+              radial: 10,
+            },
+          ),
+        ),
+          S++);
+      }
+    const V = tr([...m, ...b]),
+      D = m[l - 1],
+      E = Co(D, 200, e + 5)
+        .filter((y) => y.normal.dot(y.position.clone().normalize()) > 0.85)
+        .slice(0, o ? 10 : 5),
+      O = Co(V, o ? 7e3 : 900, e + 9)
+        .filter(
+          (y) =>
+            !E.some((P) => P.position.distanceToSquared(y.position) < 0.12),
+        )
+        .map((y) => ({
+          position: y.position,
+          normal: y.normal,
+          scale: 1.2 * n * q(a, 0.9, 1.1),
+        })),
+      X = E.map((y) => ({
+        position: y.position.clone().addScaledVector(y.normal, 0.03),
+        scale: 0.035,
+      })),
+      H = E.map((y) => y.position.clone().addScaledVector(y.normal, 0.08)),
+      N = Pn(c, 0.25, 0.15);
+    return {
+      sheet: V,
+      ribos: O,
+      buds: X,
+      exitSites: H,
+      labelSheet: N.clone().multiplyScalar(g(l - 1, N) + 0.04),
+      labelLumen: Pn(c, -0.1, 0.35).multiplyScalar(g(1, Pn(c, -0.1, 0.35))),
+      labelRibo: O[0]?.position.clone() ?? N.clone(),
+    };
+  });
+}
+function Gs({
+  nucleusRadius: t = 3.2,
+  seed: e = 1,
+  detail: o = "high",
+  ribosomeScale: s = 1,
+  side: n = new k(1, 0, 0),
+} = {}) {
+  const a = o === "high",
+    r = qc(t, e, a, n, s),
+    i = new qt(),
+    c = et(B.rer, {
+      cap: zs,
+      bump: 0.006,
+      freq: 24,
+      sheen: 0.8,
+      rim: 0.4,
+      clearcoat: 0.35,
+      edge: 0.012,
+    });
+  return (
+    i.add(xt(new mt(r.sheet, c), "er")),
+    i.add(
+      ee(Ka(a ? "low" : "tiny"), Nc(), r.ribos, {
+        seed: e,
+      }),
+    ),
+    r.buds.length &&
+      (i.add(
+        xt(
+          ee(Ls("low", e), _o(B.rer, zs), r.buds, {
+            seed: e,
+          }),
+          "er",
+        ),
+      ),
+      i.add(
+        ee(Cs("low"), _s(), r.buds, {
+          seed: e,
+        }),
+      )),
+    (i.userData = {
+      kind: "roughER",
+      radius: t + 0.5 + (a ? 5 : 3) * 0.42,
+      exitSites: r.exitSites.map((l) => l.clone()),
+      labels: [
+        {
+          text: translate("粗面内质网"),
+          at: r.labelSheet.clone(),
+        },
+        {
+          text: translate("核糖体"),
+          at: r.labelRibo.clone(),
+        },
+        {
+          text: translate("内质网腔"),
+          at: r.labelLumen.clone(),
+        },
+      ],
+    }),
+    i
+  );
+}
+function sr({
+  nucleusRadius: t = 3.2,
+  reach: e = 7,
+  seed: o = 1,
+  detail: s = "high",
+  side: n = new k(1, 0, 0),
+  tubeRadius: a,
+} = {}) {
+  const r = s === "high",
+    i = a ?? (r ? 0.04 : 0.06),
+    c = Ja(`ser|${t}|${e}|${o}|${r}|${Hs(n).toArray()}|${i}`, () => {
+      const u = Jt(o * 71 + 5),
+        d = or(n),
+        h = t + 0.5 + (r ? 5 : 3) * 0.42 - 0.2,
+        m = on(o * 23 + 1),
+        g = r ? 4 : 3,
+        p = r ? 0.36 : 0.62,
+        x = [],
+        b = [];
+      for (let E = 0; E < g; E++) {
+        const F = h + 0.35 + ((e - h - 0.45) * E) / Math.max(1, g - 1),
+          O = Math.round((r ? 230 : 70) * (F / e) ** 2);
+        for (let X = 0, H = 0; X < O * 60 && H < O; X++) {
+          const N = ho(...le(u)),
+            y = N.dot(d.a);
+          if (
+            y < 0.05 ||
+            Be(m, N.x * 1.6 + E * 5, N.y * 1.6, N.z * 1.6, 2) +
+              (y - 0.5) * 0.5 <
+              -0.05
+          )
+            continue;
+          const S = N.multiplyScalar(
+            F + 0.18 * Be(m, N.x * 2 + 9, N.y * 2, N.z * 2 + E, 2),
+          );
+          x.some((A) => A.distanceToSquared(S) < p * p) ||
+            (x.push(S), b.push(E), H++);
+        }
+      }
+      const v = [],
+        V = p * 2.1;
+      for (let E = 0; E < x.length; E++)
+        for (let F = E + 1; F < x.length; F++) {
+          const O = x[E].distanceTo(x[F]);
+          O < V && (b[E] === b[F] || u() < 0.04) && v.push([O, E, F]);
+        }
+      v.sort((E, F) => E[0] - F[0]);
+      const D = new Uint8Array(x.length),
+        T = [];
+      for (const [, E, F] of v) {
+        if (D[E] >= 3 || D[F] >= 3) continue;
+        (D[E]++, D[F]++);
+        const O = x[E],
+          X = x[F],
+          H = O.distanceTo(X),
+          N = O.clone()
+            .lerp(X, 0.33)
+            .add(ho(...le(u)).multiplyScalar(H * 0.1)),
+          y = O.clone()
+            .lerp(X, 0.67)
+            .add(ho(...le(u)).multiplyScalar(H * 0.1));
+        T.push(
+          De([O, N, y, X], (P) => i * (1 + 0.3 * Math.cos(P * Math.PI * 2)), {
+            tubular: r ? 8 : 4,
+            radial: r ? 6 : 4,
+          }),
+        );
+      }
+      return (
+        x.forEach(
+          (E, F) =>
+            D[F] && T.push(new pe(i * 1.5, r ? 1 : 0).translate(E.x, E.y, E.z)),
+        ),
+        {
+          geo: tr(T),
+          label: x[Math.floor(x.length / 2)].clone(),
+        }
+      );
+    }),
+    l = new qt();
+  return (
+    l.add(
+      xt(
+        new mt(
+          c.geo,
+          et(B.ser, {
+            cap: zs,
+            bump: 0,
+            sheen: 0.8,
+            rim: 0.45,
+            clearcoat: 0.35,
+            edge: i * 0.4,
+          }),
+        ),
+        "er",
+      ),
+    ),
+    (l.userData = {
+      kind: "smoothER",
+      radius: e + 0.1,
+      labels: [
+        {
+          text: translate("光面内质网"),
+          at: c.label,
+        },
+      ],
+    }),
+    l
+  );
+}
+const Ue = (t, e, o) => new k(t, e, o),
+  rs = new Map(),
+  Ec = (t) => {
+    t = t.index ? t.toNonIndexed() : t;
+    for (const e of Object.keys(t.attributes))
+      e !== "position" && e !== "normal" && t.deleteAttribute(e);
+    return (t.attributes.normal || t.computeVertexNormals(), t);
+  },
+  cs = (t, e, o) => "#" + new he(t).lerp(new he(e), o).getHexString();
+function Fc(t, e) {
+  const o = `golgi|${t}|${e}`;
+  if (rs.has(o)) return rs.get(o);
+  const s = Jt(t * 53 + 9),
+    n = on(t * 41 + 2),
+    a = on(t * 43 + 5),
+    r = e ? 6 : 5,
+    i = 0.16,
+    c = 2,
+    l = -((r - 1) * i) / 2,
+    u = 1.55,
+    d = 1,
+    h = (O, X, H) => {
+      const N = l + O * i,
+        y = c - N,
+        P = Math.hypot(X, H),
+        S = P / y,
+        A = Math.atan2(H, X),
+        G = 0.03 * Be(n, X * 1.2, O * 0.3, H * 1.2, 2);
+      return Ue(
+        Math.sin(S) * Math.cos(A) * y,
+        c - Math.cos(S) * y + G,
+        Math.sin(S) * Math.sin(A) * y,
+      );
+    },
+    m = (O) =>
+      1 +
+      0.22 * Math.sin((Math.PI * (O + 0.6)) / (r + 0.2)) +
+      (O === r - 1 ? -0.08 : 0),
+    g = (O) => m(O) * 0.62,
+    p = [];
+  for (let O = 0; O < r; O++) {
+    const X = O / (r - 1),
+      H = m(O),
+      N = g(O),
+      y = (P, S) => {
+        const A = P * u,
+          G = S * d,
+          ct = Math.hypot(A / H, G / N),
+          kt = Math.atan2(G / N, A / H),
+          At =
+            (1 +
+              0.08 *
+                Be(n, Math.cos(kt) * 1.2 + O * 2.3, Math.sin(kt) * 1.2, O, 2) -
+              ct) *
+            N,
+          yt = 2.6,
+          ft =
+            (0.5 -
+              0.3 * X +
+              2 * Math.max(0, 0.74 - ct) -
+              Be(a, A * yt + O * 5, G * yt, O * 1.7, 1)) /
+            (yt * 0.8);
+        return Math.min(At, ft);
+      };
+    p.push(
+      er({
+        mid: (P, S) => h(O, P * u, S * d),
+        mask: y,
+        half: nr(0.018, 0.09, 1.7),
+        nu: e ? 96 : 44,
+        nv: e ? 62 : 28,
+      }),
+    );
+  }
+  const x = (O, X, H = 1) =>
+      h(O, Math.cos(X) * m(O) * H, Math.sin(X) * g(O) * H),
+    b = [],
+    v = [],
+    V = [],
+    D = [];
+  for (let O = 0; O < (e ? 48 : 16); O++) {
+    const X = q(s, -1.15, 1.15),
+      H = q(s, -0.7, 0.7),
+      y = {
+        position: h(0, X, H).add(Ue(0, -q(s, 0.09, 0.5), 0)),
+        scale: q(s, 0.032, 0.044),
+      };
+    (s() < 0.55 ? b : v).push(y);
+  }
+  for (let O = 0; O < (e ? 22 : 8); O++) {
+    const X = Math.floor(s() * r),
+      H = x(X, s() * Math.PI * 2, q(s, 1, 1.12));
+    v.push({
+      position: H,
+      scale: q(s, 0.03, 0.04),
+    });
+  }
+  const T = r - 1;
+  for (let O = 0; O < (e ? 16 : 6); O++) {
+    const H =
+      O < (e ? 6 : 2)
+        ? x(T, s() * Math.PI * 2, 1.05).add(Ue(0, 0.03, 0))
+        : h(T, q(s, -1, 1), q(s, -0.6, 0.6)).add(Ue(0, q(s, 0.12, 0.55), 0));
+    V.push({
+      position: H,
+      scale: q(s, 0.038, 0.048),
+    });
+  }
+  for (let O = 0; O < (e ? 10 : 4); O++) {
+    const X = h(T, q(s, -1, 1), q(s, -0.55, 0.55)).add(
+      Ue(0, q(s, 0.2, 0.75), 0),
+    );
+    D.push({
+      position: X,
+      scale: q(s, 0.07, 0.11),
+    });
+  }
+  const E = [];
+  for (let O = 0; O < (e ? 8 : 3); O++) {
+    const X = s() * Math.PI * 2,
+      H = x(T, X, 0.95),
+      N = Ue(Math.cos(X), 0, Math.sin(X)),
+      y = Ue(-Math.sin(X), 0, Math.cos(X)).multiplyScalar(q(s, -0.1, 0.1)),
+      P = [
+        H,
+        H.clone()
+          .addScaledVector(N, 0.12)
+          .add(Ue(0, 0.03, 0))
+          .add(y),
+        H.clone()
+          .addScaledVector(N, 0.24)
+          .add(Ue(0, 0.08, 0)),
+        H.clone()
+          .addScaledVector(N, 0.32)
+          .add(Ue(0, 0.12, 0))
+          .sub(y),
+      ];
+    E.push(
+      De(P, (A) => 0.024 * (1 + 0.5 * Math.max(0, Math.sin(A * Math.PI * 4))), {
+        tubular: e ? 26 : 10,
+        radial: e ? 8 : 5,
+      }),
+    );
+    const S = P[3]
+      .clone()
+      .addScaledVector(N, 0.04)
+      .add(Ue(0, 0.03, 0));
+    D.length < (e ? 14 : 5) &&
+      V.push({
+        position: S,
+        scale: 0.042,
+      });
+  }
+  const F = {
+    K: r,
+    sheets: p,
+    copii: b,
+    plainV: v,
+    clathrin: V,
+    secretory: D,
+    tgn: E.length ? ue(E.map(Ec)) : null,
+    cis: h(0, 0, 0).add(Ue(0, -0.45, 0)),
+    trans: h(T, 0, 0).add(Ue(0, 0.45, 0)),
+    rimLabel: x(Math.floor(r / 2), 0.3, 1),
+  };
+  return (rs.set(o, F), F);
+}
+function ar({ seed: t = 1, detail: e = "high" } = {}) {
+  const o = e === "high",
+    s = Fc(t, o),
+    n = new qt(),
+    a = [];
+  (s.sheets.forEach((l, u) => {
+    const d = u / (s.K - 1),
+      h =
+        d < 0.5
+          ? cs(B.golgiCis, B.golgi, d * 2)
+          : cs(B.golgi, B.golgiTrans, d * 2 - 1),
+      m = et(h, {
+        cap: cs(h, "#5a2400", 0.55),
+        bump: 0.004,
+        freq: 30,
+        sheen: 0.8,
+        rim: 0.45,
+        clearcoat: 0.4,
+        edge: 0.012,
+        emissive: h,
+        emissiveIntensity: 0,
+        golgiId: `${t}-${u}-${e}`,
+      }),
+      g = new mt(l, m);
+    (u < 2 && xt(g, "golgi"), (g.userData.cisterna = u), n.add(g), a.push(g));
+  }),
+    s.tgn &&
+      n.add(
+        new mt(
+          s.tgn,
+          et(B.golgiTrans, {
+            cap: "#7a3a08",
+            bump: 0,
+            sheen: 0.8,
+            rim: 0.45,
+            edge: 0.006,
+          }),
+        ),
+      ));
+  const r = Ls(o ? "mid" : "low", t + 3),
+    i = _o(),
+    c = [...s.copii, ...s.plainV, ...s.clathrin];
+  return (
+    n.add(
+      xt(
+        ee(r, i, c, {
+          seed: t,
+        }),
+        "vesicle",
+      ),
+    ),
+    n.add(
+      xt(
+        ee(r, _o("#ffc46a", "#9a5a1a"), s.secretory, {
+          seed: t + 1,
+        }),
+        "vesicle",
+      ),
+    ),
+    n.add(
+      ee(Cs("low"), _s(), s.copii, {
+        seed: t + 2,
+      }),
+    ),
+    n.add(
+      ee(Ya("low"), Za(), s.clathrin, {
+        seed: t + 3,
+      }),
+    ),
+    (n.userData = {
+      kind: "golgi",
+      radius: 1.7,
+      cis: s.cis.clone(),
+      trans: s.trans.clone(),
+      labels: [
+        {
+          text: translate("顺面"),
+          at: s.cis.clone(),
+        },
+        {
+          text: translate("反面"),
+          at: s.trans.clone(),
+        },
+        {
+          text: translate("扁平囊（潴泡）"),
+          at: s.rimLabel.clone(),
+        },
+        {
+          text: translate("囊泡"),
+          at: (s.secretory[0]?.position ?? s.trans).clone(),
+        },
+      ],
+    }),
+    Object.defineProperty(n.userData, "cisternae", {
+      value: a,
+      enumerable: !1,
+    }),
+    Object.defineProperty(n.userData, "glow", {
+      enumerable: !1,
+      value(l, u) {
+        const d = a[l];
+        d && ((d.userData.illus ?? d.material).emissiveIntensity = u);
+      },
+    }),
+    n
+  );
+}
+function Us(t, e) {
+  const o = new qn();
+  return (
+    o.setAttribute("position", new Os(t, 3)),
+    o.setIndex(e),
+    o.computeVertexNormals(),
+    o
+  );
+}
+function Is(
+  t,
+  e,
+  { southPole: o, northPole: s, radialNoise: n, warp: a } = {},
+) {
+  const r = [],
+    i = [],
+    c = new k(),
+    l = (h, m, g) => {
+      (c.set(h, m, g), a && a(c), r.push(c.x, c.y, c.z));
+    };
+  for (const [h, m] of t)
+    for (let g = 0; g < e; g++) {
+      const p = (g / e) * Math.PI * 2;
+      let x = Math.cos(p) * h,
+        b = Math.sin(p) * h;
+      const v = n ? 1 + n(x, m, b) : 1;
+      l(x * v, m, b * v);
+    }
+  const u = t.length;
+  for (let h = 0; h < u - 1; h++)
+    for (let m = 0; m < e; m++) {
+      const g = h * e + m,
+        p = h * e + ((m + 1) % e),
+        x = g + e,
+        b = p + e;
+      i.push(g, x, p, p, x, b);
+    }
+  const d = u * e;
+  (l(0, o, 0), l(0, s, 0));
+  for (let h = 0; h < e; h++) {
+    const m = (h + 1) % e;
+    (i.push(d, h, m), i.push(d + 1, (u - 1) * e + m, (u - 1) * e + h));
+  }
+  return Us(r, i);
+}
+function $s(t, e, o) {
+  const s = 2 * (t - e),
+    n = (Math.PI / 2) * e,
+    a = s + 2 * n,
+    r = [];
+  for (let i = 1; i < o; i++) {
+    const c = (i / o) * a;
+    if (c < n) {
+      const l = c / e;
+      r.push([Math.sin(l) * e, -t + e - Math.cos(l) * e]);
+    } else if (c < n + s) r.push([e, -t + e + (c - n)]);
+    else {
+      const l = (c - n - s) / e;
+      r.push([Math.cos(l) * e, t - e + Math.sin(l) * e]);
+    }
+  }
+  return r;
+}
+function Ds(
+  t,
+  { nPhi: e = 48, nT: o = 4, nR: s = 6, half: n = () => 0.02, map: a } = {},
+) {
+  const r = [];
+  for (let g = 1; g <= o; g++) r.push([g / o, 1, 0]);
+  for (let g = 1; g < s; g++) {
+    const p = (g / s) * Math.PI;
+    r.push([1, Math.cos(p), Math.sin(p)]);
+  }
+  for (let g = o; g >= 1; g--) r.push([g / o, -1, 0]);
+  const i = [],
+    c = [],
+    l = new k(),
+    u = [];
+  for (let g = 0; g < e; g++) u.push(t((g / e) * Math.PI * 2));
+  const d = (g, p, x, b, v) => {
+    (l.set(g, p, x), a && a(l, b, v), i.push(l.x, l.y, l.z));
+  };
+  for (const [g, p, x] of r)
+    for (let b = 0; b < e; b++) {
+      const v = u[b],
+        V = (b / e) * Math.PI * 2,
+        D = v.length(),
+        T = n(V, g),
+        E = Math.max(0, D - T) * g + T * x,
+        F = D > 1e-6 ? E / D : 0;
+      d(v.x * F, T * p, v.y * F, V, p);
+    }
+  const h = r.length;
+  for (let g = 0; g < h - 1; g++)
+    for (let p = 0; p < e; p++) {
+      const x = g * e + p,
+        b = g * e + ((p + 1) % e),
+        v = x + e,
+        V = b + e;
+      c.push(x, b, v, b, V, v);
+    }
+  const m = h * e;
+  (d(0, n(0, 0), 0, 0, 1), d(0, -n(0, 0), 0, 0, -1));
+  for (let g = 0; g < e; g++) {
+    const p = (g + 1) % e;
+    (c.push(m, p, g), c.push(m + 1, (h - 1) * e + g, (h - 1) * e + p));
+  }
+  return Us(i, c);
+}
+function jc(
+  t,
+  e,
+  o,
+  {
+    segments: s = 24,
+    radial: n = 10,
+    up: a = new k(0, 1, 0),
+    closed: r = !1,
+  } = {},
+) {
+  const i = new nn(t, r),
+    c = typeof e == "function" ? e : () => e,
+    l = () => o,
+    u = [],
+    d = [],
+    h = new k(),
+    m = new k(),
+    g = new k(),
+    p = new k(),
+    x = s;
+  for (let b = 0; b <= x; b++) {
+    const v = b / x;
+    (i.getPointAt(v, p),
+      i.getTangentAt(v, h),
+      m.crossVectors(h, a),
+      m.lengthSq() < 1e-6 && m.set(1, 0, 0),
+      m.normalize(),
+      g.crossVectors(m, h).normalize());
+    const V = c(v) / 2,
+      D = l() / 2;
+    for (let T = 0; T < n; T++) {
+      const E = (T / n) * Math.PI * 2,
+        F = Math.cos(E),
+        O = Math.sin(E),
+        X = Math.sign(F) * Math.pow(Math.abs(F), 0.45),
+        H = Math.sign(O) * Math.pow(Math.abs(O), 0.8);
+      u.push(
+        p.x + m.x * X * V + g.x * H * D,
+        p.y + m.y * X * V + g.y * H * D,
+        p.z + m.z * X * V + g.z * H * D,
+      );
+    }
+  }
+  for (let b = 0; b < x; b++)
+    for (let v = 0; v < n; v++) {
+      const V = b * n + v,
+        D = b * n + ((v + 1) % n),
+        T = V + n,
+        E = D + n;
+      d.push(V, T, D, D, T, E);
+    }
+  if (!r) {
+    const b = u.length / 3,
+      v = i.getPointAt(0),
+      V = i.getPointAt(1);
+    u.push(v.x, v.y, v.z, V.x, V.y, V.z);
+    for (let D = 0; D < n; D++) {
+      const T = (D + 1) % n;
+      (d.push(b, D, T), d.push(b + 1, x * n + T, x * n + D));
+    }
+  }
+  return Us(u, d);
+}
+function Bs(
+  t,
+  {
+    modes: e = 40,
+    samples: o = 400,
+    decay: s = 1,
+    axes: n = [1, 1, 1],
+    center: a = new k(),
+  } = {},
+) {
+  const r = [];
+  for (let l = 1; l <= e; l++) {
+    const u = 1 / Math.pow(l, s),
+      d = () => (t() * 2 - 1) * u;
+    r.push([d(), d(), d(), d(), d(), d()]);
+  }
+  const i = [],
+    c = [1e-6, 1e-6, 1e-6];
+  for (let l = 0; l < o; l++) {
+    const u = (l / o) * Math.PI * 2;
+    let d = 0,
+      h = 0,
+      m = 0;
+    for (let g = 1; g <= e; g++) {
+      const p = Math.cos(g * u),
+        x = Math.sin(g * u),
+        b = r[g - 1];
+      ((d += b[0] * p + b[1] * x),
+        (h += b[2] * p + b[3] * x),
+        (m += b[4] * p + b[5] * x));
+    }
+    (i.push(new k(d, h, m)),
+      (c[0] = Math.max(c[0], Math.abs(d))),
+      (c[1] = Math.max(c[1], Math.abs(h))),
+      (c[2] = Math.max(c[2], Math.abs(m))));
+  }
+  for (const l of i)
+    l.set((l.x / c[0]) * n[0], (l.y / c[1]) * n[1], (l.z / c[2]) * n[2]).add(a);
+  return i;
+}
+function Oc({
+  length: t = 0.2,
+  coil: e = 0.025,
+  turns: o = 4,
+  bend: s = 0.4,
+  samples: n = 160,
+} = {}) {
+  const a = [];
+  for (let r = 0; r < n; r++) {
+    const i = (r / n) * Math.PI * 2,
+      c = (t / 2) * Math.cos(i),
+      l = (c / t) * o * Math.PI * 2,
+      u = e * Math.sin(i),
+      d = new k(c, (s * (c * c)) / t, 0);
+    a.push(d.add(new k(0, Math.cos(l) * u, Math.sin(l) * u)));
+  }
+  return a;
+}
+function Ho(t, e, { radial: o = 5, perPoint: s = 2, closed: n = !0 } = {}) {
+  const a = new nn(t, n, "centripetal");
+  return new ln(a, Math.max(8, Math.round(t.length * s)), e, o, n);
+}
+const is = "#f3a07e",
+  ls = "#c23a2c",
+  Cc = "#8a3a2c",
+  us = new Map();
+function Lc({ length: t, radius: e, bend: o, seed: s, detail: n }) {
+  const a = n !== "low",
+    r = Jt(s * 7919 + 13),
+    i = t / 2,
+    c = e,
+    l = Math.max(0.035, c * 0.12),
+    u = i - l,
+    d = c - l,
+    h = on(s + 101),
+    m = q(r, 0.03, 0.08),
+    g = (I) => 1 + 0.07 * h(I * 0.9, 0.3, 1.7) + 0.03 * h(I * 2.3, 4.1, 0.2),
+    p = (I) =>
+      o * t * 0.2 * ((I / i) ** 2 - 1 / 3) + 0.1 * c * h(I * 0.7, 5.5, 2.2),
+    x = (I) => 0.1 * c * h(I * 0.7, 9.1, 7.3),
+    b = (I) => {
+      const Q = g(I.y);
+      return (
+        I.set(I.x * Q * (1 + m) + p(I.y), I.y, I.z * Q * (1 - m) + x(I.y)),
+        I
+      );
+    },
+    v = (I, Q, z) => (K, _, nt) => I * h(K * Q + z, _ * Q, nt * Q - z),
+    V = (I) => {
+      const Q = Math.abs(I) - (u - d);
+      return Q <= 0 ? d : Math.sqrt(Math.max(0, d * d - Q * Q));
+    },
+    D = a ? 72 : 22,
+    T = a ? 72 : 24,
+    E = Math.max(0.011, c * 0.032),
+    F = (I, Q, z) =>
+      Is($s(I, Q, T), D, {
+        southPole: -I,
+        northPole: I,
+        radialNoise: v(0.018, 6, z),
+        warp: b,
+      }),
+    O = F(i, c, 0),
+    X = F(i - E, c - E, 0),
+    H = F(u, d, 3),
+    N = F(u - E, d - E, 3),
+    y = [],
+    P = [],
+    S = [],
+    A = u - d * 0.68,
+    G = a ? 0.13 : 0.16;
+  let ct = r() < 0.5 ? 0 : 1;
+  for (let I = -A + q(r, 0.03, 0.08); I < A - 0.02; I += G * q(r, 0.8, 1.25)) {
+    const Q = V(I) * 0.99;
+    if (Q < d * 0.45) continue;
+    ct ^= 1;
+    const z = (ct ? Math.PI / 2 : -Math.PI / 2) + ie(r) * (a ? 0.4 : 0.15),
+      K = new k(Math.cos(z), 0, Math.sin(z)),
+      _ = new k(-Math.sin(z), 0, Math.cos(z)),
+      nt = Q * q(r, 1.05, 1.6),
+      ut = -Q + nt / 2,
+      zt = nt / 2 + Q * 0.1,
+      Et = Q * q(r, 0.7, 0.92),
+      jt = a ? q(r, 0.18, 0.5) : q(r, 0.9, 1.2),
+      j = r() * 10,
+      $ = y.length,
+      W = ie(r) * 0.08,
+      dt = ie(r) * 0.08,
+      Dt = q(r, 0.018, 0.024),
+      gt = (J) => {
+        const bt =
+            1 +
+            0.07 * Math.sin(3 * J + j) +
+            0.06 * h(Math.cos(J) * 1.6 + $, Math.sin(J) * 1.6, j),
+          It = new en(ut + zt * Math.cos(J) * bt, Et * Math.sin(J) * bt);
+        let ht = Math.abs(
+          ((J - Math.PI + Math.PI * 3) % (Math.PI * 2)) - Math.PI,
+        );
+        const Ut = Math.exp(-((ht / jt) ** 4)),
+          Xt = Q * 0.86,
+          Zt = It.length(),
+          te = Math.min(Zt, Xt) * (1 - Ut) + Q * 1.035 * Ut;
+        return It.multiplyScalar(te / Math.max(1e-6, Zt));
+      },
+      rt = (J, bt) =>
+        I + W * J + dt * bt + 0.02 * h(J * 4 + $ * 3, bt * 4, 2.2),
+      Ot = (J, bt, It) =>
+        K.clone()
+          .multiplyScalar(J)
+          .addScaledVector(_, bt)
+          .setY(rt(J, bt) + It),
+      Bt = (J) => {
+        const bt = Ot(ut + J.x, J.z, J.y);
+        J.copy(b(bt));
+      },
+      Ct = (J, bt) => Dt * (0.8 + 0.4 * bt ** 3),
+      ot = (J) => gt(J).sub(new en(ut, 0));
+    (y.push(
+      Ds(ot, {
+        nPhi: a ? 64 : 24,
+        nT: a ? 4 : 2,
+        nR: a ? 6 : 3,
+        half: Ct,
+        map: Bt,
+      }),
+    ),
+      a &&
+        P.push(
+          Ds(
+            (J) => {
+              const bt = ot(J);
+              return bt.setLength(Math.max(0.001, bt.length() - E * 0.8));
+            },
+            {
+              nPhi: 64,
+              nT: 3,
+              nR: 5,
+              half: (J, bt) => Math.max(0.004, Ct(J, bt) - E * 0.75),
+              map: Bt,
+            },
+          ),
+        ),
+      S.push({
+        y: I,
+        absOutline: gt,
+        toMito: Ot,
+        height: rt,
+        hc: Dt,
+        Rl: Q,
+        uc: ut,
+      }));
+  }
+  const kt = ue(y),
+    At = P.length ? ue(P) : null;
+  y.concat(P).forEach((I) => I.dispose());
+  const yt = {
+    outer: O,
+    outer2: X,
+    inner: H,
+    inner2: N,
+    cristaGeo: kt,
+    lumenGeo: At,
+    gap: l,
+    H: i,
+    Hi: u,
+    Ri: d,
+    sheets: S,
+    warp: b,
+  };
+  if (!a) return yt;
+  const ft = [],
+    Nt = 0.004,
+    M = (I) => b(I.clone());
+  for (const I of S) {
+    for (let z = 0; z < 180; z++) {
+      const K = (z / 180) * Math.PI * 2,
+        _ = I.absOutline(K);
+      if (_.length() > I.Rl * 0.84 || z % 2) continue;
+      const nt = _.clone().sub(new en(I.uc, 0)).normalize(),
+        ut = I.toMito(_.x, _.y, 0),
+        zt = M(ut),
+        Et = M(I.toMito(_.x + nt.x * Nt, _.y + nt.y * Nt, 0))
+          .sub(zt)
+          .normalize(),
+        jt = M(I.toMito(_.x, _.y, Nt))
+          .sub(zt)
+          .normalize();
+      for (const j of [-1, 1]) {
+        const $ = Et.clone()
+          .addScaledVector(jt, j * 0.7)
+          .normalize();
+        ft.push({
+          position: zt
+            .clone()
+            .addScaledVector(jt, j * I.hc * 0.75)
+            .addScaledVector(Et, -I.hc * 0.35),
+          normal: $,
+          scale: q(r, 0.9, 1.1),
+        });
+      }
+    }
+    for (let z = 0; z < 30; z++) {
+      const K = r() * Math.PI * 2,
+        _ = q(r, 0.2, 0.85),
+        nt = I.absOutline(K),
+        ut = new en(I.uc, 0).lerp(nt, _),
+        zt = r() < 0.5 ? -1 : 1,
+        Et = M(I.toMito(ut.x, ut.y, zt * I.hc * 0.82)),
+        jt = M(I.toMito(ut.x, ut.y, zt * (I.hc * 0.82 + Nt)))
+          .sub(Et)
+          .normalize();
+      ft.push({
+        position: Et,
+        normal: jt,
+        scale: q(r, 0.85, 1.05),
+      });
+    }
+  }
+  yt.atp = ft;
+  const L = (I) => {
+      for (let Q = 0; Q < 60; Q++) {
+        const z = q(r, -u + d * 0.5, u - d * 0.5),
+          K = V(z) * 0.8,
+          _ = Math.sqrt(r()) * K,
+          nt = r() * Math.PI * 2,
+          ut = Math.cos(nt) * _,
+          zt = Math.sin(nt) * _,
+          Et = new k(ut, z, zt);
+        let jt = !0;
+        for (const j of S) {
+          const $ = j.height(Et.x, Et.z);
+          if (Math.abs(Et.y - $) < j.hc + I) {
+            jt = !1;
+            break;
+          }
+        }
+        if (jt) return Et;
+      }
+      return null;
+    },
+    at = [],
+    Z = [],
+    U = [];
+  for (let I = 0; I < 14; I++) {
+    const Q = L(0.035);
+    Q &&
+      at.push({
+        position: b(Q),
+        scale: q(r, 0.7, 1.4),
+      });
+  }
+  for (let I = 0; I < 220; I++) {
+    const Q = L(0.018);
+    Q &&
+      Z.push({
+        position: b(Q),
+        scale: q(r, 0.8, 1.15),
+      });
+  }
+  for (let I = 0; I < 4; I++) {
+    const Q = L(0.05);
+    if (!Q) continue;
+    const z = Bs(r, {
+      modes: 9,
+      samples: 110,
+      decay: 1.1,
+      axes: [0.07, 0.03, 0.07],
+      center: Q,
+    });
+    (U.push(
+      Ho(
+        z.map((K) => b(K)),
+        0.0055,
+        {
+          radial: 4,
+          perPoint: 2,
+        },
+      ),
+    ),
+      (yt.dnaAt = yt.dnaAt || b(Q.clone())));
+  }
+  return (
+    (yt.granules = at),
+    (yt.ribos = Z),
+    (yt.dna = U.length ? ue(U) : null),
+    yt
+  );
+}
+let Io = null;
+function _c() {
+  if (Io) return Io;
+  const t = new Ae(0.0032, 0.0038, 0.016, 5, 1, !0).translate(0, 0.008, 0),
+    e = new pe(0.0095, 1).scale(1, 0.9, 1).translate(0, 0.022, 0);
+  return (
+    t.deleteAttribute("uv"),
+    e.deleteAttribute("uv"),
+    (Io = ue([t.toNonIndexed(), e])),
+    Io
+  );
+}
+function rr({
+  length: t = 2,
+  radius: e = 0.42,
+  bend: o = 0,
+  seed: s = 1,
+  detail: n = "high",
+  membranes: a = !0,
+} = {}) {
+  const r = n !== "low",
+    i = JSON.stringify([t, e, o, s, r]);
+  us.has(i) ||
+    us.set(
+      i,
+      Lc({
+        length: t,
+        radius: e,
+        bend: o,
+        seed: s,
+        detail: n,
+      }),
+    );
+  const c = us.get(i),
+    l = new qt();
+  l.name = "mitochondrion";
+  const u = 0.009,
+    d = et(B.mitoOuter, {
+      cap: ls,
+      bump: 0.008,
+      freq: 16,
+      sheen: 0.8,
+      clearcoat: 0.35,
+      rim: 0.45,
+      roughness: 0.42,
+      edge: u,
+    }),
+    h = et(B.mitoOuter, {
+      cap: is,
+      bump: 0,
+      rim: 0,
+      edge: u,
+    }),
+    m = et(B.mitoInner, {
+      cap: ls,
+      bump: 0.006,
+      freq: 20,
+      sheen: 0.6,
+      rim: 0.3,
+      edge: u,
+    }),
+    g = et(B.mitoInner, {
+      cap: B.mitoMatrix,
+      bump: 0.006,
+      freq: 20,
+      sheen: 0.6,
+      rim: 0.3,
+      edge: u,
+    }),
+    p = et(B.mitoInner, {
+      cap: r ? ls : is,
+      bump: 0.004,
+      freq: 30,
+      sheen: 0.7,
+      rim: 0.4,
+      roughness: 0.45,
+      edge: 0.007,
+    }),
+    x = (D, T, E, F) => {
+      const O = new mt(D, T);
+      return (F && xt(O, F), (O.name = E), l.add(O), O);
+    };
+  (a &&
+    (x(c.outer, d, "outerMembrane", "mito"),
+    x(c.outer2, h, "intermembraneSpace"),
+    x(c.inner, m, "innerMembrane", "mito"),
+    x(c.inner2, g, "matrix")),
+    x(c.cristaGeo, p, "cristae", "mito"),
+    c.lumenGeo &&
+      x(
+        c.lumenGeo,
+        et(B.mitoInner, {
+          cap: is,
+          bump: 0,
+          rim: 0,
+          edge: 0.005,
+        }),
+        "cristaLumen",
+      ));
+  const b = (D, T, E) => c.warp(new k(D, T, E)),
+    v = c.sheets[Math.floor(c.sheets.length / 2)] || c.sheets[0],
+    V = [
+      {
+        text: translate("外膜"),
+        at: b(e * 0.72, t * 0.3, e * 0.7),
+      },
+      {
+        text: translate("内膜"),
+        at: b(c.Ri * 0.98, -t * 0.12, 0),
+      },
+      {
+        text: translate("膜间隙"),
+        at: b(0, t * 0.08, -(e - c.gap / 2)),
+      },
+      {
+        text: translate("嵴"),
+        at: v ? c.warp(v.toMito(v.uc, 0, 0)) : b(0, 0, 0),
+      },
+      {
+        text: translate("基质"),
+        at: b(0, (c.sheets[1]?.y ?? 0) + 0.06, 0),
+      },
+    ];
+  if (r) {
+    l.add(
+      ee(
+        _c(),
+        et("#ffd88a", {
+          bump: 0,
+          rim: 0.25,
+          sheen: 0.3,
+          roughness: 0.4,
+          edge: 0.002,
+        }),
+        c.atp,
+        {
+          seed: s,
+        },
+      ),
+    );
+    const D = new pe(0.018, 1);
+    l.add(
+      ee(
+        D,
+        et(Cc, {
+          bump: 0,
+          roughness: 0.3,
+          clearcoat: 0.6,
+          edge: 0.004,
+        }),
+        c.granules,
+        {
+          seed: s + 1,
+        },
+      ),
+    );
+    const T = new pe(0.0095, 1);
+    if (
+      (l.add(
+        ee(
+          T,
+          et(B.ribosome, {
+            bump: 0,
+            rim: 0.3,
+            edge: 0.002,
+          }),
+          c.ribos,
+          {
+            seed: s + 2,
+          },
+        ),
+      ),
+      c.dna)
+    ) {
+      const E = xt(
+        new mt(
+          c.dna,
+          et(B.dna, {
+            bump: 0,
+            emissive: B.dna,
+            emissiveIntensity: 0.25,
+            edge: 0.003,
+          }),
+        ),
+        "dna",
+      );
+      ((E.name = "mtDNA"),
+        l.add(E),
+        V.push({
+          text: translate("线粒体DNA"),
+          at: c.dnaAt,
+        }));
+    }
+    c.atp.length &&
+      V.push({
+        text: translate("ATP合酶"),
+        at: c.atp[Math.floor(c.atp.length * 0.4)].position.clone(),
+      });
+  }
+  return (
+    (l.userData.kind = "mitochondrion"),
+    (l.userData.radius = t / 2 + e * 0.4 + Math.abs(o) * t * 0.15),
+    (l.userData.labels = V),
+    l
+  );
+}
+const fa = "#2c7a34",
+  ha = "#d6ecb8",
+  ma = "#a6d47e",
+  Hc = "#2a9140",
+  Gc = "#6e5428",
+  ds = new Map();
+function $o(t, e, o) {
+  let s = new pe(1, e);
+  (s.deleteAttribute("normal"), s.deleteAttribute("uv"), (s = Qo(s, 1e-6)));
+  const n = s.attributes.position,
+    a = new k();
+  for (let r = 0; r < n.count; r++)
+    (a.fromBufferAttribute(n, r).normalize(),
+      o(a.set(a.x * t[0], a.y * t[1], a.z * t[2]), t),
+      n.setXYZ(r, a.x, a.y, a.z));
+  return (s.computeVertexNormals(), s);
+}
+function Uc(t, e) {
+  const o = Jt(t * 4241 + 77),
+    s = on(t + 303),
+    n = [
+      2.5 * q(o, 0.94, 1.04),
+      0.8 * q(o, 0.92, 1.05),
+      1.25 * q(o, 0.92, 1.06),
+    ],
+    a = 0.05,
+    r = 0.013,
+    i = q(o, 0.08, 0.18),
+    c = (N) => i * ((N / n[0]) ** 2 - 0.35),
+    l = (N) => {
+      const y = N.x / n[0];
+      ((N.y *= 1 - 0.22 * y * y), (N.y += c(N.x)));
+      const P = 0.035 * s(N.x * 0.8, N.y * 0.8, N.z * 0.8),
+        S = Math.hypot(N.x / n[0], N.y / n[1], N.z / n[2]) || 1;
+      return ((N.x += (N.x / n[0] / S) * P), (N.z += (N.z / n[2] / S) * P), N);
+    },
+    u = (N) => n.map((y) => y - N),
+    d = e ? 30 : 12,
+    h = {
+      outer: $o(n, d, l),
+      outer2: e ? $o(u(r), d, l) : null,
+      inner: $o(u(a), d, l),
+      inner2: e ? $o(u(a + r), d, l) : null,
+      A: n,
+    },
+    m = u(a + r + 0.04),
+    g = (N, y) => {
+      const P = 1 - (N / m[0]) ** 2 - (y / m[2]) ** 2;
+      return P <= 0 ? 0 : m[1] * Math.sqrt(P) * (1 - 0.22 * (N / n[0]) ** 2);
+    },
+    p = [],
+    x = e ? 0.14 : 0.17,
+    b = 0.25,
+    v = e ? 46 : 15;
+  for (let N = 0; N < 8e3 && p.length < v; N++) {
+    const y = q(o, -1, 1) * m[0] * 0.94,
+      P = q(o, -1, 1) * m[2] * 0.92,
+      S = q(o, x, b),
+      A = g(Math.abs(y) + S * 0.7, Math.abs(P) + S * 0.7);
+    if (
+      A < 0.12 ||
+      p.some(
+        (yt) => Math.hypot(yt.x - y, yt.z - P) < yt.r + S + (e ? 0.035 : 0.12),
+      )
+    )
+      continue;
+    const G = 0.05;
+    let ct = Math.min(
+      15,
+      Math.floor((A * 2 * 0.85) / G),
+      Math.round(q(o, 6, 15)),
+    );
+    if (ct < 4) continue;
+    const kt = c(y) + ie(o) * Math.max(0, A - (ct * G) / 2) * 0.3,
+      At = new k(ie(o) * 0.06, 1, ie(o) * 0.06).normalize();
+    p.push({
+      x: y,
+      z: P,
+      r: S,
+      count: ct,
+      pitch: G,
+      yc: kt,
+      tilt: At,
+      y0: kt - ((ct - 1) * G) / 2,
+    });
+  }
+  h.grana = p;
+  const V = (N, y) =>
+      new k(N.x, N.y0 + y * N.pitch, N.z).addScaledVector(
+        new k(N.tilt.x, 0, N.tilt.z),
+        (y - (N.count - 1) / 2) * N.pitch,
+      ),
+    D = [],
+    T = 0.017;
+  for (let N = 0; N < p.length; N++) {
+    const y = p[N],
+      P = p
+        .map((S, A) => ({
+          b: S,
+          j: A,
+          d: Math.hypot(S.x - y.x, S.z - y.z),
+        }))
+        .filter((S) => S.j > N && S.d < y.r + S.b.r + (e ? 0.5 : 0.45))
+        .sort((S, A) => S.d - A.d)
+        .slice(0, 3);
+    for (const { b: S } of P) {
+      const A = e && o() < 0.6 ? 2 : 1;
+      for (let G = 0; G < A; G++) {
+        const ct = G % 2 ? -1 : 1,
+          kt = Math.floor(o() * y.count),
+          At = Math.floor(o() * S.count),
+          yt = V(y, kt),
+          ft = V(S, At),
+          Nt = Math.atan2(S.z - y.z, S.x - y.x),
+          M = Nt + ct * q(o, 0.5, 0.9),
+          L = Nt + Math.PI + ct * q(o, 0.5, 0.9),
+          at = (_) => new k(Math.cos(_), 0, Math.sin(_)),
+          Z = yt.clone().addScaledVector(at(M), y.r - 0.03),
+          U = yt
+            .clone()
+            .addScaledVector(at(M + ct * 0.45), y.r + 0.07)
+            .setY(yt.y + (ft.y - yt.y) * 0.15),
+          I = ft.clone().addScaledVector(at(L), S.r - 0.03),
+          Q = ft
+            .clone()
+            .addScaledVector(at(L + ct * 0.45), S.r + 0.07)
+            .setY(ft.y + (yt.y - ft.y) * 0.15),
+          z = U.clone().lerp(Q, 0.5);
+        z.y += ie(o) * 0.03;
+        const K = q(o, 0.12, 0.2);
+        D.push(
+          jc(
+            [Z, U, z, Q, I],
+            (_) => K * (0.85 + 0.3 * Math.sin(Math.PI * _)),
+            T * 2,
+            {
+              segments: e ? 22 : 7,
+              radial: e ? 8 : 6,
+            },
+          ),
+        );
+      }
+    }
+  }
+  if (!e) {
+    const N = [];
+    for (const y of p) {
+      const P = new Ae(y.r, y.r, 0.036, 12, 1, !1);
+      P.deleteAttribute("uv");
+      for (let S = 0; S < y.count; S++) {
+        const A = V(y, S);
+        N.push(P.clone().translate(A.x, A.y, A.z));
+      }
+    }
+    return (
+      (h.grana = ue(
+        N.map((y) => y.toNonIndexed()).concat(D.map((y) => y.toNonIndexed())),
+      )),
+      h
+    );
+  }
+  const E = 6;
+  ((h.discGeos = []), (h.discItems = []));
+  for (let N = 0; N < E; N++) {
+    const y = x + ((N + 0.5) / E) * (b - x),
+      P = o() * 9,
+      S = (A) =>
+        new en(Math.cos(A), Math.sin(A)).multiplyScalar(
+          y * (1 + 0.035 * s(Math.cos(A) * 1.5 + P, Math.sin(A) * 1.5, N)),
+        );
+    (h.discGeos.push(
+      Ds(S, {
+        nPhi: 26,
+        nT: 1,
+        nR: 5,
+        half: (A, G) => 0.0165 * (0.9 + 0.2 * G),
+      }),
+    ),
+      h.discItems.push([], []));
+  }
+  for (const N of p)
+    for (let y = 0; y < N.count; y++) {
+      const P = q(o, 0.92, 1.05) * (y === 0 || y === N.count - 1 ? 0.95 : 1),
+        S = N.r * P,
+        A = Math.max(0, Math.min(E - 1, Math.floor(((S - x) / (b - x)) * E))),
+        G = x + ((A + 0.5) / E) * (b - x);
+      h.discItems[A * 2 + (y % 3 === 1 ? 0 : 1)].push({
+        position: V(N, y),
+        normal: N.tilt,
+        scale: new k(S / G, 1, S / G),
+      });
+    }
+  ((h.frets = ue(D)), D.forEach((N) => N.dispose()));
+  const F = (N, y) =>
+      g(Math.abs(N.x) + y, Math.abs(N.z) + y) < Math.abs(N.y - c(N.x)) + y
+        ? !1
+        : !p.some(
+            (P) =>
+              Math.hypot(P.x - N.x, P.z - N.z) < P.r + y + 0.03 &&
+              Math.abs(N.y - P.yc) < (P.count * P.pitch) / 2 + y,
+          ),
+    O = () =>
+      new k(q(o, -1, 1) * m[0] * 0.92, 0, q(o, -1, 1) * m[2] * 0.9).setY(0),
+    X = (N, y = 300) => {
+      for (let P = 0; P < y; P++) {
+        const S = O(),
+          A = g(Math.abs(S.x), Math.abs(S.z));
+        if (((S.y = c(S.x) + q(o, -1, 1) * Math.max(0, A - N)), F(S, N)))
+          return S;
+      }
+      return null;
+    };
+  h.starch = [];
+  for (let N = 0, y = 0; N < 3 && y < 20; y++) {
+    const P = q(o, 0.22, 0.34),
+      S = X(P * 0.75, 600);
+    if (!S) continue;
+    const A = Gt(P, {
+      detail: 10,
+      scale: [1.35, 0.7, 1],
+      amp: P * 0.06,
+      seed: t + N * 13,
+    });
+    (A.rotateY(o() * Math.PI),
+      A.translate(S.x, S.y, S.z),
+      h.starch.push(A),
+      (h.starchAt = h.starchAt || S),
+      N++);
+  }
+  ((h.starch = h.starch.length ? ue(h.starch) : null), (h.globules = []));
+  for (let N = 0; N < 24; N++) {
+    const y = q(o, 0.025, 0.06),
+      P = X(y);
+    P &&
+      h.globules.push({
+        position: P,
+        scale: y,
+      });
+  }
+  h.ribos = [];
+  for (let N = 0; N < 420; N++) {
+    const y = X(0.015, 40);
+    y &&
+      h.ribos.push({
+        position: y,
+        scale: q(o, 0.85, 1.15),
+      });
+  }
+  const H = [];
+  for (let N = 0; N < 4; N++) {
+    const y = X(0.1);
+    y &&
+      (H.push(
+        Ho(
+          Bs(o, {
+            modes: 10,
+            samples: 120,
+            decay: 1.1,
+            axes: [0.12, 0.05, 0.12],
+            center: y,
+          }),
+          0.007,
+          {
+            radial: 4,
+          },
+        ),
+      ),
+      (h.dnaAt = h.dnaAt || y));
+  }
+  return ((h.dna = H.length ? ue(H) : null), h);
+}
+function cr({ seed: t = 1, detail: e = "high" } = {}) {
+  const o = e !== "low",
+    s = `${t}|${o}`;
+  ds.has(s) || ds.set(s, Uc(t, o));
+  const n = ds.get(s),
+    a = new qt();
+  a.name = "chloroplast";
+  const r = 0.012,
+    i = (m, g, p, x) => {
+      const b = new mt(m, g);
+      return ((b.name = p), x && xt(b, x), a.add(b), b);
+    },
+    c = et(B.chloroplast, {
+      cap: o ? fa : ha,
+      bump: 0.012,
+      freq: 9,
+      sheen: 0.8,
+      clearcoat: 0.45,
+      rim: 0.5,
+      roughness: 0.38,
+      edge: r,
+    });
+  (i(n.outer, c, "outerMembrane", "faint"),
+    n.outer2 &&
+      i(
+        n.outer2,
+        et(B.chloroplast, {
+          cap: ha,
+          bump: 0,
+          rim: 0,
+          edge: r,
+        }),
+        "intermembraneSpace",
+      ),
+    i(
+      n.inner,
+      et(B.chloroplast, {
+        cap: o ? fa : B.stroma,
+        bump: 0.008,
+        freq: 12,
+        rim: 0.3,
+        edge: r,
+      }),
+      "innerMembrane",
+    ),
+    n.inner2 &&
+      i(
+        n.inner2,
+        et(B.chloroplast, {
+          cap: B.stroma,
+          bump: 0,
+          rim: 0.2,
+          edge: r,
+        }),
+        "stroma",
+      ));
+  const l = et(B.thylakoid, {
+    cap: ma,
+    bump: 0.004,
+    freq: 30,
+    sheen: 0.7,
+    clearcoat: 0.05,
+    rim: 0.45,
+    roughness: 0.6,
+    edge: 0.006,
+  });
+  o
+    ? (n.discGeos.forEach((m, g) => {
+        [0, 1].forEach((p) => {
+          const x = n.discItems[g * 2 + p];
+          if (!x.length) return;
+          const b = ee(m, l, x, {
+            seed: t + g * 2 + p,
+          });
+          (p === 0 && xt(b, "chloro"), (b.name = "thylakoids"), a.add(b));
+        });
+      }),
+      i(
+        n.frets,
+        et(Hc, {
+          cap: ma,
+          bump: 0.004,
+          freq: 30,
+          sheen: 0.7,
+          clearcoat: 0.05,
+          roughness: 0.6,
+          rim: 0.4,
+          edge: 0.006,
+        }),
+        "stromaLamellae",
+      ),
+      n.starch &&
+        i(
+          n.starch,
+          et(B.starch, {
+            cap: "#efe6cc",
+            bump: 0.01,
+            freq: 14,
+            sheen: 0.3,
+            clearcoat: 0.6,
+            roughness: 0.3,
+            edge: 0.008,
+          }),
+          "starch",
+        ),
+      a.add(
+        ee(
+          new pe(1, 2),
+          et(Gc, {
+            cap: "#8a6a34",
+            bump: 0,
+            clearcoat: 0.9,
+            roughness: 0.2,
+            rim: 0.4,
+            edge: 0.004,
+          }),
+          n.globules,
+          {
+            seed: t,
+          },
+        ),
+      ),
+      a.add(
+        ee(
+          new pe(0.011, 1),
+          et(B.ribosome, {
+            bump: 0,
+            rim: 0.3,
+            edge: 0.002,
+          }),
+          n.ribos,
+          {
+            seed: t + 3,
+          },
+        ),
+      ),
+      n.dna &&
+        i(
+          n.dna,
+          et(B.dna, {
+            bump: 0,
+            emissive: B.dna,
+            emissiveIntensity: 0.25,
+            edge: 0.003,
+          }),
+          "cpDNA",
+          "dna",
+        ))
+    : i(n.grana, l, "grana", "chloro");
+  const u = n.A,
+    d = [
+      {
+        text: translate("外膜"),
+        at: new k(-u[0] * 0.45, u[1] * 0.92, u[2] * 0.25),
+      },
+      {
+        text: translate("内膜"),
+        at: new k(u[0] * 0.55, u[1] * 0.62, -u[2] * 0.3),
+      },
+      {
+        text: translate("叶绿体基质"),
+        at: new k(u[0] * 0.25, 0.05, u[2] * 0.62),
+      },
+    ],
+    h = (m) =>
+      m.reduce(
+        (g, p) => (Math.hypot(p.x, p.z) < Math.hypot(g.x, g.z) ? p : g),
+        m[0],
+      );
+  if (o && n.grana.length) {
+    const m = h(n.grana);
+    d.push({
+      text: translate("基粒"),
+      at: new k(m.x, m.y0 + m.count * m.pitch, m.z),
+    });
+    const g = n.grana[Math.floor(n.grana.length / 3)];
+    (d.push({
+      text: translate("类囊体"),
+      at: new k(g.x + g.r, g.y0 + g.pitch * Math.floor(g.count / 2), g.z),
+    }),
+      n.starchAt &&
+        d.push({
+          text: translate("淀粉粒"),
+          at: n.starchAt.clone(),
+        }));
+  } else
+    (d.push({
+      text: translate("基粒"),
+      at: new k(0, 0.1, 0),
+    }),
+      d.push({
+        text: translate("类囊体"),
+        at: new k(u[0] * 0.3, 0, 0),
+      }));
+  return (
+    (a.userData.kind = "chloroplast"),
+    (a.userData.granaCount = o ? n.grana.length : void 0),
+    (a.userData.radius = u[0] + 0.1),
+    (a.userData.labels = d),
+    a
+  );
+}
+const Bc = "#d05cbc",
+  Kc = "#eef6ff",
+  ps = new Map();
+function ga(
+  t,
+  { detail: e, seed: o, boxy: s = 2.6, amp: n = 0.06, dents: a = [] },
+) {
+  let r = new pe(1, e);
+  (r.deleteAttribute("normal"), r.deleteAttribute("uv"), (r = Qo(r, 1e-6)));
+  const i = on(o),
+    c = r.attributes.position,
+    l = new k(),
+    u = new k();
+  for (let d = 0; d < c.count; d++) {
+    l.fromBufferAttribute(c, d).normalize();
+    const h = Math.pow(
+      Math.pow(Math.abs(l.x), s) +
+        Math.pow(Math.abs(l.y), s) +
+        Math.pow(Math.abs(l.z), s),
+      -1 / s,
+    );
+    l.multiplyScalar(h);
+    const m = l.clone().normalize();
+    let g = 1 + n * Be(i, l.x * 1.1, l.y * 1.1, l.z * 1.1, 3);
+    for (const p of a)
+      g -=
+        p.depth *
+        Math.exp(-u.copy(m).sub(p.dir).lengthSq() / (p.width * p.width));
+    (l.set(l.x * t[0], l.y * t[1], l.z * t[2]).multiplyScalar(g),
+      c.setXYZ(d, l.x, l.y, l.z));
+  }
+  return (r.computeVertexNormals(), r);
+}
+function Wc({ size: t, seed: e, detail: o, crystals: s }) {
+  const n = o !== "low",
+    a = Jt(e * 911 + 5),
+    r = t.map((d) => d / 2),
+    i = [];
+  for (let d = 0; d < (n ? 5 : 3); d++)
+    i.push({
+      dir: new k(...le(a)),
+      depth: q(a, 0.04, 0.1),
+      width: q(a, 0.25, 0.45),
+    });
+  const c = n ? 40 : 14,
+    l = Math.min(...r) * 0.012,
+    u = {
+      tonoplast: ga(r, {
+        detail: c,
+        seed: e,
+        dents: i,
+      }),
+      sap: ga(
+        r.map((d) => d - l),
+        {
+          detail: c,
+          seed: e,
+          dents: i,
+        },
+      ),
+      semi: r,
+    };
+  if (s > 0) {
+    const d = [];
+    for (let h = 0; h < s; h++) {
+      const m = new k(
+          q(a, -0.6, 0.6) * r[0],
+          -r[1] * q(a, 0.55, 0.75),
+          q(a, -0.5, 0.5) * r[2],
+        ),
+        g = q(a, 0.25, 0.45),
+        p = n ? 9 : 5;
+      for (let x = 0; x < p; x++) {
+        const b = new ks(g * q(a, 0.5, 1), 0);
+        (b.scale(0.45, 1.6, 0.45),
+          b.lookAt(new k(...le(a))),
+          b.translate(m.x, m.y, m.z),
+          d.push(b));
+      }
+      u.crystalAt = u.crystalAt || m;
+    }
+    u.crystals = ue(d);
+  }
+  return u;
+}
+function ir({
+  size: t = [18, 10, 10],
+  seed: e = 1,
+  detail: o = "high",
+  pigment: s = !1,
+  crystals: n = 0,
+} = {}) {
+  const a = JSON.stringify([t, e, o, n]);
+  ps.has(a) ||
+    ps.set(
+      a,
+      Wc({
+        size: t,
+        seed: e,
+        detail: o,
+        crystals: n,
+      }),
+    );
+  const r = ps.get(a),
+    i = s ? (typeof s == "string" ? s : Bc) : B.vacuole,
+    c = new qt();
+  c.name = "vacuole";
+  const l = xt(
+    new mt(
+      r.tonoplast,
+      Zn(B.tonoplast, {
+        opacity: 0.22,
+        clearcoat: 1,
+        roughness: 0.15,
+        rim: 0.9,
+        edge: 0.05,
+      }),
+    ),
+    "faint",
+  );
+  ((l.name = "tonoplast"), (l.renderOrder = 2));
+  const u = new mt(
+    r.sap,
+    et(i, {
+      opacity: 0.16,
+      cap: s ? i : new he(i).lerp(new he("#ffffff"), 0.45).getStyle(),
+      sheen: 0.2,
+      clearcoat: 0.8,
+      roughness: 0.1,
+      rim: 0.6,
+      bump: 0,
+      emissive: i,
+      emissiveIntensity: 0.05,
+      edge: 0.06,
+    }),
+  );
+  ((u.name = "cellSap"), (u.renderOrder = 1), c.add(u, l));
+  const [d, h, m] = r.semi,
+    g = [
+      {
+        text: translate("液泡膜"),
+        at: new k(-d * 0.35, h * 0.97, m * 0.3),
+      },
+      {
+        text: translate("细胞液"),
+        at: new k(d * 0.15, 0, 0),
+      },
+    ];
+  return (
+    r.crystals &&
+      (c.add(
+        new mt(
+          r.crystals,
+          et(Kc, {
+            cap: "#ffffff",
+            clearcoat: 1,
+            roughness: 0.08,
+            sheen: 0,
+            rim: 0.8,
+            bump: 0,
+            flat: !0,
+            edge: 0.02,
+          }),
+        ),
+      ),
+      g.push({
+        text: translate("晶体"),
+        at: r.crystalAt.clone(),
+      })),
+    (c.userData.kind = "vacuole"),
+    (c.userData.radius = Math.max(d, h, m) * 1.05),
+    (c.userData.labels = g),
+    c
+  );
+}
+const fs = new Map(),
+  sn = (t) => new k(...t);
+function _n(t, e, o, s = 2) {
+  const n = new nn(t, !1, "centripetal"),
+    a = new ln(n, Math.max(3, Math.round(t.length * s)), e, o, !1);
+  return (a.deleteAttribute("uv"), a);
+}
+function Xc({ ellipsoid: t, centrosome: e, nucleus: o, seed: s, hi: n }) {
+  const a = Jt(s * 6151 + 3),
+    [r, i, c] = t,
+    l = (P) => Math.sqrt((P.x / r) ** 2 + (P.y / i) ** 2 + (P.z / c) ** 2),
+    u = (P) => new k(P.x / (r * r), P.y / (i * i), P.z / (c * c)).normalize(),
+    d = (P, S) => P.multiplyScalar(S / Math.max(1e-6, l(P))),
+    h = o.center,
+    m = o.radius,
+    g = (P) => new k(ie(a), ie(a), ie(a)).multiplyScalar(P),
+    p = {
+      tracks: [],
+    },
+    x = [],
+    b = n ? 80 : 44;
+  for (let P = 0; P < b; P++) {
+    let S = sn(le(a));
+    const A = h.clone().sub(e).normalize();
+    S.dot(A) > 0.5 && S.addScaledVector(A, -S.dot(A) * 1.2).normalize();
+    let G = e.clone().addScaledVector(S, 0.25);
+    const ct = [e.clone().addScaledVector(S, 0.12), G.clone()],
+      kt = 0.45;
+    let At = 0;
+    const yt = Math.floor(q(a, 1, n ? 9 : 6));
+    for (let ft = 0; ft < 80; ft++) {
+      S.add(g(0.07)).normalize();
+      const Nt = G.clone().addScaledVector(S, kt),
+        M = Nt.clone().sub(h);
+      if (M.length() < m + 0.45) {
+        const L = M.normalize();
+        S.addScaledVector(L, -Math.min(0, S.dot(L)) * 1 + 0.15).normalize();
+      }
+      if (l(Nt) > 0.9) {
+        const L = u(Nt);
+        (S.addScaledVector(L, -Math.max(0, S.dot(L)) * 1.05).normalize(), At++);
+      }
+      if (
+        (G.addScaledVector(S, kt),
+        l(G) > 0.94 && d(G, 0.94),
+        ct.push(G.clone()),
+        At > yt)
+      )
+        break;
+    }
+    (p.tracks.push(ct),
+      x.push(_n(ct, n ? 0.04 : 0.05, n ? 5 : 3, n ? 2 : 1.2)));
+  }
+  p.microtubules = ue(x);
+  const v = [],
+    V = n ? 700 : 260;
+  for (let P = 0; P < V; P++) {
+    const S = q(a, 0.94, 0.985);
+    let A = d(sn(le(a)).multiply(sn([r, i, c])), S);
+    const G = u(A);
+    let ct = sn(le(a));
+    ct.addScaledVector(G, -ct.dot(G)).normalize();
+    const kt = q(a, 1.5, 3.5),
+      At = n ? 6 : 3,
+      yt = [A.clone()];
+    for (let ft = 0; ft < At; ft++) {
+      ct.add(g(0.25)).normalize();
+      const Nt = u(A);
+      (ct.addScaledVector(Nt, -ct.dot(Nt)).normalize(),
+        (A = d(A.addScaledVector(ct, kt / At), S)),
+        yt.push(A.clone()));
+    }
+    v.push(_n(yt, n ? 0.022 : 0.03, 3, n ? 1.6 : 1));
+  }
+  const D = n ? 9 : 6,
+    T = -i * 0.82,
+    E = r * Math.sqrt(1 - 0.82 * 0.82) * 0.92;
+  for (let P = 0; P < D; P++) {
+    const S = q(a, 0, Math.PI),
+      A = q(a, -0.6, 0.6) * E,
+      G = new k(Math.cos(S), 0, Math.sin(S)),
+      ct = new k(-G.z, 0, G.x),
+      kt = Math.sqrt(Math.max(0.5, E * E - A * A)) * q(a, 0.75, 0.95),
+      At = ct.clone().multiplyScalar(A).setY(T),
+      yt = n ? 5 : 3;
+    for (let ft = 0; ft < yt; ft++) {
+      const Nt = ct
+          .clone()
+          .multiplyScalar(ie(a) * 0.08)
+          .setY(ie(a) * 0.05),
+        M = [];
+      for (let L = 0; L <= 4; L++) {
+        const at = L / 4 - 0.5,
+          Z = At.clone()
+            .addScaledVector(G, at * 2 * kt)
+            .add(Nt);
+        ((Z.y += 0.15 * Math.sin(at * Math.PI + P)),
+          l(Z) > 0.96 && d(Z, 0.96),
+          M.push(Z));
+      }
+      v.push(_n(M, n ? 0.032 : 0.04, 3, n ? 3 : 2));
+    }
+  }
+  const F = n ? 10 : 6;
+  for (let P = 0; P < F; P++) {
+    const S = q(a, 0, Math.PI * 2),
+      A = new k(Math.cos(S), q(a, -0.25, 0.25), Math.sin(S)).normalize(),
+      G = d(A.clone().multiply(sn([r, i, c])), 0.82),
+      ct = d(A.clone().multiply(sn([r, i, c])), 0.995);
+    for (let kt = 0; kt < (n ? 6 : 3); kt++) {
+      const At = g(0.05);
+      v.push(
+        _n(
+          [
+            G.clone().add(g(0.12)),
+            G.clone().lerp(ct, 0.5).add(At),
+            ct.clone().add(At.multiplyScalar(0.5)),
+          ],
+          n ? 0.026 : 0.032,
+          3,
+          2,
+        ),
+      );
+    }
+  }
+  p.actin = ue(v);
+  const O = [],
+    X = m * 1.13,
+    H = (P) => (S) => Math.sin(S * P),
+    N = n ? 26 : 14;
+  for (let P = 0; P < N; P++) {
+    const S = sn(le(a)),
+      A = sn(le(a)).cross(S).normalize(),
+      G = S.clone().cross(A),
+      ct = q(a, 1.6, 3.6),
+      kt = a() * Math.PI * 2,
+      At = n ? 16 : 8,
+      yt = q(a, -0.5, 0.5),
+      ft = H(q(a, 8, 14)),
+      Nt = a() * 6,
+      M = [];
+    for (let L = 0; L <= At; L++) {
+      const at = kt + (L / At) * ct,
+        Z = A.clone()
+          .multiplyScalar(Math.cos(at))
+          .addScaledVector(G, Math.sin(at))
+          .addScaledVector(S, yt + 0.08 * ft(at + Nt))
+          .normalize();
+      M.push(
+        h.clone().addScaledVector(Z, X * (1 + 0.05 * Math.sin(at * 5 + Nt))),
+      );
+    }
+    O.push(_n(M, n ? 0.045 : 0.05, 4, n ? 2 : 1.2));
+  }
+  const y = n ? 34 : 16;
+  for (let P = 0; P < y; P++) {
+    let S = sn(le(a)),
+      A = h.clone().addScaledVector(S, X);
+    const G = [A.clone()],
+      ct = sn(le(a)).cross(S).normalize(),
+      kt = a() * 6,
+      At = q(a, 1.2, 2);
+    for (let yt = 0; yt < 40; yt++) {
+      S.add(g(0.12)).normalize();
+      const ft = A.clone().addScaledVector(S, 0.5);
+      if (l(ft) > 0.92) break;
+      ((A = ft),
+        G.push(A.clone().addScaledVector(ct, 0.18 * Math.sin(yt * At + kt))));
+    }
+    G.length > 2 && O.push(_n(G, n ? 0.042 : 0.05, 4, n ? 2 : 1.2));
+  }
+  return (
+    (p.intermediate = ue(O)),
+    [...x, ...v, ...O].forEach((P) => P.dispose()),
+    p
+  );
+}
+function Yc({
+  ellipsoid: t = [10, 8.2, 10],
+  centrosome: e = new k(3.4, 0.8, 1.2),
+  nucleus: o = {
+    center: new k(-0.6, 0, 0),
+    radius: 3.2,
+  },
+  seed: s = 1,
+  detail: n = "high",
+  pcm: a = !0,
+} = {}) {
+  const r = n !== "low",
+    i = (D) => (Array.isArray(D) ? new k().fromArray(D) : new k().copy(D));
+  ((e = i(e)),
+    (o = {
+      center: i(o.center),
+      radius: o.radius,
+    }));
+  const c = JSON.stringify([
+    t,
+    e.toArray(),
+    o.center.toArray(),
+    o.radius,
+    s,
+    r,
+  ]);
+  fs.has(c) ||
+    fs.set(
+      c,
+      Xc({
+        ellipsoid: t,
+        centrosome: e,
+        nucleus: o,
+        seed: s,
+        hi: r,
+      }),
+    );
+  const l = fs.get(c),
+    u = new qt();
+  u.name = "cytoskeleton";
+  const d = (D, T, E, F, O = {}) => {
+      const X = new qt();
+      ((X.name = D), xt(X, F));
+      const H = new mt(
+        T,
+        et(E, {
+          bump: 0,
+          sheen: 0.4,
+          rim: 0.6,
+          roughness: 0.4,
+          emissive: E,
+          emissiveIntensity: 0.12,
+          edge: 0.01,
+          ...O,
+        }),
+      );
+      return ((H.name = D), X.add(H), u.add(X), X);
+    },
+    h = d("microtubules", l.microtubules, B.microtubule, "tubulin");
+  if (
+    (d("actin", l.actin, B.actin, "actin"),
+    d("intermediate", l.intermediate, B.intermediate, "protein", {
+      emissiveIntensity: 0.05,
+    }),
+    a)
+  ) {
+    const D = new mt(
+      new pe(0.42, 3),
+      et(B.centriole, {
+        opacity: 0.35,
+        cap: null,
+        bump: 0.05,
+        freq: 6,
+        rim: 1,
+        emissive: B.microtubule,
+        emissiveIntensity: 0.2,
+      }),
+    );
+    (D.position.copy(e), (D.name = "pcm"), h.add(D));
+  }
+  const m = l.tracks,
+    g = (D, T) =>
+      m[D % m.length][Math.floor(m[D % m.length].length * T)].clone(),
+    [p, x, b] = t,
+    v = new k(-p * 0.62, x * 0.7, b * 0.2).normalize();
+  v.multiplyScalar(
+    0.96 / Math.sqrt((v.x / p) ** 2 + (v.y / x) ** 2 + (v.z / b) ** 2),
+  );
+  const V = o.center
+    .clone()
+    .add(new k(-0.4, 0.75, 0.5).normalize().multiplyScalar(o.radius * 1.13));
+  return (
+    (u.userData.kind = "cytoskeleton"),
+    (u.userData.radius = Math.max(p, x, b)),
+    (u.userData.tracks = m),
+    (u.userData.labels = [
+      {
+        text: translate("微管"),
+        at: g(3, 0.45),
+      },
+      {
+        text: translate("微丝"),
+        at: v,
+      },
+      {
+        text: translate("中间纤维"),
+        at: V,
+      },
+      {
+        text: translate("中心体"),
+        at: e.clone(),
+      },
+    ]),
+    u
+  );
+}
+const Te = (t) => new k(t[0], t[1], t[2]),
+  Go = new k(0, 1, 0),
+  hs = new Map();
+function ro(t, e) {
+  return (hs.has(t) || hs.set(t, e()), hs.get(t));
+}
+const Do = {
+    length: 2,
+    radius: 0.42,
+  },
+  ba = 0.4,
+  ya = 0.3,
+  xa = 0.06;
+function zn(t, e, o, s) {
+  const n = Te(e).normalize();
+  if (s) {
+    const a = Te(s).normalize(),
+      r = new k().crossVectors(n, a).normalize();
+    t.quaternion.setFromRotationMatrix(new oo().makeBasis(n, a, r));
+  } else
+    (t.quaternion.setFromUnitVectors(Go, n),
+      t.quaternion.multiply(new Me().setFromAxisAngle(Go, o() * Math.PI * 2)));
+}
+const xo = new js({
+  visible: !1,
+});
+function Zc(t, e, o) {
+  const [s, n] = yo(e),
+    a = cn.len(cn.sub(n, s)),
+    r = a > 0.001 ? new sc(e.radius, a, 4, 8) : new Xn(e.radius, 12, 8),
+    i = new mt(r, xo);
+  return (
+    i.position.copy(Te(e.position)),
+    a > 0.001 && i.quaternion.setFromUnitVectors(Go, Te(e.axis).normalize()),
+    (i.userData = {
+      kind: t,
+      target: o,
+      focus: Te(e.position),
+      size: e.radius + e.half,
+    }),
+    i
+  );
+}
+function lr() {
+  const t = new Map(),
+    e = new qt();
+  return (
+    (e.visible = !1),
+    {
+      byKind: t,
+      pick: e,
+      add(o, s, n) {
+        (t.has(o) || t.set(o, []), t.get(o).push(s), n && e.add(Zc(o, n, s)));
+      },
+    }
+  );
+}
+function ur(t, e) {
+  let o;
+  const s = t.seed % 4;
+  if (t.kind === "mitochondrion") {
+    o = ro(`mito${s}`, () =>
+      rr({
+        ...Do,
+        bend: [0, 0.25, -0.2, 0.4][s],
+        seed: 11 + s,
+        detail: "low",
+      }),
+    ).clone();
+    const n = 2 * (t.half + t.radius);
+    (o.scale.set(t.radius / Do.radius, n / Do.length, t.radius / Do.radius),
+      zn(o, t.axis, e));
+  } else if (t.kind === "lysosome")
+    ((o = ro(`lyso${s}`, () =>
+      Wa({
+        radius: ba,
+        seed: 21 + s,
+        detail: "low",
+      }),
+    ).clone()),
+      o.scale.setScalar(t.radius / ba),
+      zn(o, t.axis, e));
+  else if (t.kind === "peroxisome")
+    ((o = ro(`perox${s}`, () =>
+      Xa({
+        radius: ya,
+        seed: 31 + s,
+        detail: "low",
+      }),
+    ).clone()),
+      o.scale.setScalar(t.radius / ya),
+      zn(o, t.axis, e));
+  else if (t.kind === "vesicle") {
+    const n = ["none", "none", "clathrin", "copii"][s];
+    ((o = ro(`ves${s}`, () =>
+      Ps({
+        radius: xa,
+        coat: n,
+        seed: 41 + s,
+        detail: "low",
+      }),
+    ).clone()),
+      o.scale.setScalar(t.radius / xa),
+      zn(o, t.axis, e));
+  } else
+    t.kind === "golgi"
+      ? ((o = ar({
+          seed: 51 + s,
+          detail: "low",
+        })),
+        zn(o, t.axis, e))
+      : t.kind === "centrosome"
+        ? ((o = Qa({
+            seed: 61,
+            detail: "low",
+          })),
+          o.scale.setScalar(2.4),
+          zn(o, [0.3, 1, 0.2], e))
+        : t.kind === "chloroplast" &&
+          ((o = ro(`chl${s}`, () =>
+            cr({
+              seed: 71 + s,
+              detail: "low",
+            }),
+          ).clone()),
+          zn(o, t.axis, e, t.normal));
+  return (o.position.copy(Te(t.position)), o);
+}
+function dr(t, e, o, s = 3.4) {
+  const n = Jt(o),
+    a = [];
+  for (let c = 0; a.length < t && c < t * 30; c++) {
+    const l = [q(n, -1, 1), q(n, -1, 1), q(n, -1, 1)],
+      u = e(l);
+    u &&
+      a.push({
+        position: Te(u),
+        scale: s,
+      });
+  }
+  const r = ee(
+    Ka("low"),
+    et(B.ribosome, {
+      bump: 0,
+      rim: 0.2,
+      sheen: 0.3,
+    }),
+    a,
+  );
+  r.userData.stain = "none";
+  const i = new qt();
+  return (i.add(r), i);
+}
+function Vs(t, e, o) {
+  const s = new qt(),
+    n = dc(e, o);
+  t.updateWorldMatrix(!0, !0);
+  const a = new oo().copy(t.matrixWorld).invert();
+  return (
+    t.traverse((r) => {
+      if (
+        !r.isMesh ||
+        r.isInstancedMesh ||
+        !r.geometry ||
+        r.material === xo ||
+        r.geometry.attributes.position.count < 60
+      )
+        return;
+      const i = new mt(r.geometry, n);
+      ((i.matrixAutoUpdate = !1),
+        i.matrix.multiplyMatrices(a, r.matrixWorld),
+        (i.userData.overlay = !0),
+        (i.renderOrder = 5),
+        s.add(i));
+    }),
+    (s.userData.overlay = !0),
+    t.add(s),
+    s
+  );
+}
+function Qc({ seed: t = 1 } = {}) {
+  const e = Pc(t),
+    o = Jt(t * 977),
+    s = new qt(),
+    n = lr(),
+    a = Te(e.nucleus.center),
+    r = Gt(1, {
+      detail: 72,
+      scale: e.semi,
+      amp: 0.32,
+      freq: 0.17,
+      seed: t + 3,
+    }),
+    i = xt(
+      new mt(
+        r,
+        et(B.membrane, {
+          cap: null,
+          bump: 0.09,
+          freq: 1.1,
+          rim: 0.55,
+          sheen: 0.8,
+          inner: B.cytosol,
+        }),
+      ),
+      "membrane",
+    );
+  (s.add(i), n.add("membrane", i));
+  const c = new mt(r, xo);
+  ((c.userData = {
+    kind: "membrane",
+    target: i,
+    focus: new k(e.semi[0] * 0.8, e.semi[1] * 0.45, e.semi[2] * 0.3),
+    size: 2.5,
+  }),
+    n.pick.add(c));
+  const l = Lo({
+    radius: e.nucleus.radius,
+    seed: t + 5,
+    detail: "low",
+  });
+  (l.position.copy(a),
+    s.add(l),
+    n.add("nucleus", l, {
+      position: e.nucleus.center,
+      radius: e.nucleus.radius,
+      half: 0,
+    }));
+  const u = Gs({
+    nucleusRadius: e.nucleus.radius,
+    side: Te(e.rerSide),
+    seed: t + 7,
+    detail: "low",
+    ribosomeScale: 3,
+  });
+  (u.position.copy(a), s.add(u), n.add("rer", u));
+  const d = Te(
+      cn.add(e.nucleus.center, cn.mul(e.rerSide, e.nucleus.radius + 1.2)),
+    ),
+    h = new mt(new Xn(e.nucleus.radius + e.rerThickness, 24, 16), xo);
+  (h.position.copy(a),
+    (h.userData = {
+      kind: "rer",
+      target: u,
+      focus: d,
+      size: 2.2,
+      shell: e.nucleus.radius,
+    }),
+    n.pick.add(h));
+  const m = sr({
+    nucleusRadius: e.nucleus.radius,
+    reach: e.serReach,
+    seed: t + 9,
+    detail: "low",
+  });
+  (m.position.copy(a), s.add(m), n.add("ser", m));
+  for (const b of e.items) {
+    const v = ur(b, o);
+    (s.add(v), n.add(b.kind, v, b));
+  }
+  const p = dr(
+    2600,
+    (b) => {
+      const v = [b[0] * e.semi[0], b[1] * e.semi[1], b[2] * e.semi[2]];
+      return Jo(v, [0, 0, 0], e.semi) > -0.4 ||
+        cn.len(cn.sub(v, e.nucleus.center)) < e.nucleus.radius + 0.25
+        ? null
+        : v;
+    },
+    t + 13,
+  );
+  s.add(p);
+  const x = Yc({
+    ellipsoid: e.semi.map((b) => b * 0.97),
+    centrosome: Te(e.centrosome.position),
+    nucleus: {
+      center: a,
+      radius: e.nucleus.radius,
+    },
+    seed: t + 17,
+    detail: "low",
+  });
+  return (
+    s.add(x),
+    n.add("cytoskeleton", x),
+    s.add(n.pick),
+    {
+      type: "animal",
+      group: s,
+      layout: e,
+      byKind: n.byKind,
+      pick: n.pick,
+      nucleus: l,
+      rer: u,
+      ser: m,
+      golgi: n.byKind.get("golgi")[0],
+      skeleton: x,
+      membrane: i,
+      ribosomes: p,
+    }
+  );
+}
+function Uo(t, e, o = 28) {
+  const s = new La(2, 2, 2, o, Math.round(o * 0.75), Math.round(o * 0.75)),
+    n = s.attributes.position,
+    a = t.map((c) => c - e),
+    r = new k(),
+    i = new k();
+  for (let c = 0; c < n.count; c++) {
+    (r.set(n.getX(c) * t[0], n.getY(c) * t[1], n.getZ(c) * t[2]),
+      i.set(
+        jo.clamp(r.x, -a[0], a[0]),
+        jo.clamp(r.y, -a[1], a[1]),
+        jo.clamp(r.z, -a[2], a[2]),
+      ));
+    const l = r.clone().sub(i);
+    (l.lengthSq() < 1e-9 && l.set(Math.sign(n.getX(c)), 0, 0),
+      r.copy(i).addScaledVector(l.normalize(), e),
+      n.setXYZ(c, r.x, r.y, r.z));
+  }
+  return (s.deleteAttribute("uv"), s.deleteAttribute("normal"), s);
+}
+function Jc(t, e, o) {
+  const s = Uo(
+      t.map((l) => l + o),
+      e + o,
+      30,
+    ),
+    n = Uo(t, e, 30),
+    a = n.index.array;
+  for (let l = 0; l < a.length; l += 3)
+    [a[l + 1], a[l + 2]] = [a[l + 2], a[l + 1]];
+  const r = new Float32Array(
+    s.attributes.position.count * 3 + n.attributes.position.count * 3,
+  );
+  (r.set(s.attributes.position.array, 0),
+    r.set(n.attributes.position.array, s.attributes.position.count * 3));
+  const i = [
+      ...s.index.array,
+      ...Array.from(a, (l) => l + s.attributes.position.count),
+    ],
+    c = new qn();
+  return (
+    c.setAttribute("position", new bo(r, 3)),
+    c.setIndex(i),
+    c.computeVertexNormals(),
+    c
+  );
+}
+function ti({ seed: t = 2 } = {}) {
+  const e = zc(t),
+    o = Jt(t * 733),
+    s = new qt(),
+    n = lr(),
+    a = Jc(e.half, e.corner, e.wall),
+    r = xt(
+      new mt(
+        a,
+        et(B.cellWall, {
+          bump: 0.05,
+          freq: 3.2,
+          roughness: 0.75,
+          sheen: 0.35,
+          rim: 0.3,
+          cap: "#dcefa8",
+        }),
+      ),
+      "wall",
+    );
+  (s.add(r), n.add("cellwall", r));
+  const i = new mt(
+    Uo(
+      e.half.map((v) => v + e.wall),
+      e.corner + e.wall,
+      8,
+    ),
+    xo,
+  );
+  ((i.userData = {
+    kind: "cellwall",
+    target: r,
+    focus: new k(e.half[0] * 0.7, e.half[1], e.half[2] * 0.4),
+    size: 3,
+  }),
+    n.pick.add(i));
+  const c = [],
+    l = Jt(t + 101);
+  for (let v = 0; v < 6; v++) {
+    const V = v >> 1,
+      D = v & 1 ? 1 : -1;
+    for (let T = 0; T < 3; T++) {
+      const E = [q(l, -0.6, 0.6), q(l, -0.6, 0.6), q(l, -0.6, 0.6)];
+      for (let F = 0; F < 9; F++) {
+        const O = E.map(
+          (H, N) => (H + q(l, -0.06, 0.06)) * (e.half[N] - e.corner),
+        );
+        O[V] = D * (e.half[V] + e.wall / 2);
+        const X = [0, 0, 0];
+        ((X[V] = D),
+          c.push({
+            position: Te(O),
+            normal: Te(X),
+            scale: new k(1, 1, 1),
+          }));
+      }
+    }
+  }
+  const u = ee(
+    new Ae(0.07, 0.07, e.wall + 0.12, 8, 1),
+    et(B.membrane, {
+      bump: 0,
+      rim: 0.5,
+    }),
+    c,
+  );
+  ((u.userData.stain = "membrane"), s.add(u));
+  const d = xt(
+    new mt(
+      Uo(
+        e.half.map((v) => v - 0.02),
+        e.corner - 0.02,
+        30,
+      ),
+      et(B.membrane, {
+        cap: null,
+        bump: 0.02,
+        rim: 0.5,
+        opacity: 0.55,
+        inner: B.cytosol,
+      }),
+    ),
+    "membrane",
+  );
+  (d.geometry.computeVertexNormals(), s.add(d), n.add("membrane", d));
+  const h = ir({
+    size: e.vacuole.semi.map((v) => v * 2),
+    seed: t + 3,
+    detail: "low",
+  });
+  (h.position.copy(Te(e.vacuole.center)),
+    s.add(h),
+    n.add("vacuole", h, {
+      position: e.vacuole.center,
+      radius: Math.min(...e.vacuole.semi),
+      half: 0,
+    }));
+  const m = Lo({
+    radius: e.nucleus.radius,
+    seed: t + 5,
+    detail: "low",
+  });
+  (m.position.copy(Te(e.nucleus.center)),
+    s.add(m),
+    n.add("nucleus", m, {
+      position: e.nucleus.center,
+      radius: e.nucleus.radius,
+      half: 0,
+    }));
+  const g = Te(cn.norm(cn.sub([0, 0, 0], e.nucleus.center))),
+    p = Gs({
+      nucleusRadius: e.nucleus.radius,
+      side: g,
+      seed: t + 7,
+      detail: "low",
+      ribosomeScale: 3,
+    });
+  (p.position.copy(m.position), s.add(p), n.add("rer", p));
+  for (const v of e.items) {
+    const V = ur(v, o);
+    (v.kind === "golgi" &&
+      V.quaternion.setFromUnitVectors(Go, Te(v.axis).negate()),
+      s.add(V),
+      n.add(v.kind, V, v));
+  }
+  const b = dr(
+    1400,
+    (v) => {
+      const V = [v[0] * e.half[0], v[1] * e.half[1], v[2] * e.half[2]];
+      return Jo(V, e.vacuole.center, e.vacuole.semi) < 0.3 ||
+        Math.max(...V.map((D, T) => Math.abs(D) - e.half[T])) > -0.4 ||
+        cn.len(cn.sub(V, e.nucleus.center)) < e.nucleus.radius + 0.2
+        ? null
+        : V;
+    },
+    t + 13,
+  );
+  return (
+    s.add(b),
+    s.add(n.pick),
+    {
+      type: "plant",
+      group: s,
+      layout: e,
+      byKind: n.byKind,
+      pick: n.pick,
+      nucleus: m,
+      vacuole: h,
+      wall: r,
+      membrane: d,
+      ribosomes: b,
+    }
+  );
+}
+const bn = {
+  k1: 0.06,
+  k2: 0.045,
+  k3: 0.035,
+  pulse: 3,
+  duration: 160,
+  areaPerUnit: 18,
+  area0: {
+    er: 100,
+    golgi: 40,
+    plasma: 60,
+  },
+};
+function ei(t, e) {
+  const o = e.k1,
+    s = Math.abs(e.k2 - o) < 1e-6 ? o * 1.0001 : e.k2,
+    n =
+      Math.abs(e.k3 - o) < 1e-6 || Math.abs(e.k3 - s) < 1e-6
+        ? e.k3 * 1.0003
+        : e.k3;
+  if (t <= 0)
+    return {
+      rer: 0,
+      golgi: 0,
+      vesicle: 0,
+      secreted: 0,
+    };
+  const a = Math.exp(-o * t),
+    r = Math.exp(-s * t),
+    i = Math.exp(-n * t),
+    c = a,
+    l = (o / (s - o)) * (a - r),
+    u =
+      o *
+      s *
+      (a / ((s - o) * (n - o)) +
+        r / ((o - s) * (n - s)) +
+        i / ((o - n) * (s - n))),
+    d = Math.max(0, 1 - c - l - u);
+  return {
+    rer: c,
+    golgi: l,
+    vesicle: u,
+    secreted: d,
+  };
+}
+function Bo(t, e = bn) {
+  const s = {
+    rer: 0,
+    golgi: 0,
+    vesicle: 0,
+    secreted: 0,
+  };
+  for (let n = 0; n < 12; n++) {
+    const a = ((n + 0.5) / 12) * e.pulse;
+    if (t < a) continue;
+    const r = ei(t - a, e);
+    for (const i in s) s[i] += r[i] / 12;
+  }
+  return s;
+}
+function pr(t, e = bn) {
+  const o = Bo(t, e),
+    s = Math.min(1, Math.max(0, t / e.pulse));
+  return {
+    erOut: s - o.rer,
+    golgiOut: s - o.rer - o.golgi,
+    exocytosed: o.secreted,
+  };
+}
+function Ma(t, e = bn) {
+  const o = pr(t, e),
+    s = e.areaPerUnit;
+  return {
+    er: e.area0.er - s * o.erOut,
+    golgi: e.area0.golgi + s * (o.erOut - o.golgiOut),
+    plasma: e.area0.plasma + s * o.golgiOut,
+  };
+}
+function ni(t = bn, { quanta: e = 9, dt: o = 0.25 } = {}) {
+  const s = [],
+    n = {
+      "er-golgi": 0,
+      "golgi-pm": 0,
+      exo: 0,
+    };
+  for (let a = 0; a <= t.duration; a += o) {
+    const r = pr(a, t),
+      i = {
+        "er-golgi": r.erOut,
+        "golgi-pm": r.golgiOut,
+        exo: r.exocytosed,
+      };
+    for (const c in i)
+      for (; n[c] < Math.floor(i[c] * e + 1e-9);)
+        (n[c]++,
+          s.push({
+            t: a,
+            type: c,
+          }));
+  }
+  return s;
+}
+const Hn = 4,
+  oi = 2.5,
+  co = "#c8ff5a";
+function ms(t, e) {
+  const o = {
+    value: 0,
+  };
+  return {
+    shells: Vs(t, e, o),
+    pulse: o,
+  };
+}
+const si = (t, e, o, s) => {
+    const n = 1 - s;
+    return new k()
+      .addScaledVector(t, n * n)
+      .addScaledVector(e, 2 * n * s)
+      .addScaledVector(o, s * s);
+  },
+  gs = (t) => t * t * (3 - 2 * t),
+  Vo = (t, e) => t.localToWorld(e.clone());
+function ai(t) {
+  const e = new qt();
+  ((e.userData.overlay = !1), t.group.updateMatrixWorld(!0));
+  const { nucleus: o, rer: s, golgi: n, layout: a } = t,
+    r = o.position.clone(),
+    i = new k(0, 1, 0).applyQuaternion(n.quaternion),
+    c = Vo(n, n.userData.cis || new k(0, -0.5, 0)),
+    l = Vo(n, n.userData.trans || new k(0, 0.5, 0)),
+    d = (o.userData.pores || [new k(0, 0, a.nucleus.radius)])
+      .map((z) => Vo(o, z))
+      .reduce((z, K) =>
+        K.clone().sub(r).normalize().dot(i) >
+        z.clone().sub(r).normalize().dot(i)
+          ? K
+          : z,
+      ),
+    h = (s.userData.exitSites || [])
+      .map((z) => Vo(s, z))
+      .sort((z, K) => z.distanceTo(c) - K.distanceTo(c))
+      .slice(0, 5);
+  h.length || h.push(r.clone().addScaledVector(i, a.nucleus.radius + 1));
+  const m = h[0].clone().lerp(d, 0.25),
+    g = a.semi,
+    p = (z, K) => {
+      const _ =
+          (K.x * K.x) / g[0] ** 2 +
+          (K.y * K.y) / g[1] ** 2 +
+          (K.z * K.z) / g[2] ** 2,
+        nt =
+          2 *
+          ((z.x * K.x) / g[0] ** 2 +
+            (z.y * K.y) / g[1] ** 2 +
+            (z.z * K.z) / g[2] ** 2),
+        ut =
+          (z.x * z.x) / g[0] ** 2 +
+          (z.y * z.y) / g[1] ** 2 +
+          (z.z * z.z) / g[2] ** 2 -
+          1,
+        zt = (-nt + Math.sqrt(nt * nt - 4 * _ * ut)) / (2 * _);
+      return z.clone().addScaledVector(K, zt);
+    },
+    b = [0, 1, 2, 3]
+      .map((z) =>
+        i
+          .clone()
+          .add(
+            new k(
+              Math.sin(z * 2.1) * 0.35,
+              Math.cos(z * 1.7) * 0.3,
+              Math.sin(z * 1.3 + 1) * 0.35,
+            ),
+          )
+          .normalize(),
+      )
+      .map((z) => p(l, z)),
+    v = b.map((z) =>
+      new k(z.x / g[0] ** 2, z.y / g[1] ** 2, z.z / g[2] ** 2).normalize(),
+    ),
+    V = ms(s, co),
+    D = n.userData.cisternae?.length ? n.userData.cisternae : [n],
+    T = D.map((z) => ms(z, co)),
+    E = (t.byKind.get("mitochondrion") || [])
+      .slice()
+      .sort((z, K) => z.position.distanceTo(c) - K.position.distanceTo(c))
+      .slice(0, 5),
+    F = E.map((z) => ms(z, "#ffb347")),
+    O = [d, d.clone().lerp(m, 0.35).addScaledVector(i, 0.5), m],
+    X = new nn(O),
+    H = xt(
+      new mt(
+        De(
+          Array.from(
+            {
+              length: 10,
+            },
+            (z, K) => new k(K * 0.09, Math.sin(K * 1.3) * 0.04, 0),
+          ),
+          0.028,
+          {
+            radial: 6,
+          },
+        ),
+        Ao("#ff6fb5"),
+      ),
+      "protein",
+    );
+  ((H.userData.overlay = !0), e.add(H));
+  const N = xt(
+    new mt(
+      new Xn(0.11, 16, 12),
+      Ao(co, {
+        additive: !0,
+      }),
+    ),
+    "protein",
+  );
+  (N.position.copy(m), (N.userData.overlay = !0), e.add(N));
+  const y = ni(bn, {
+      quanta: 10,
+    }),
+    P = Ps({
+      radius: 0.11,
+      coat: "copii",
+      seed: 81,
+      detail: "low",
+    }),
+    S = Ps({
+      radius: 0.2,
+      coat: "none",
+      seed: 82,
+      detail: "low",
+    }),
+    A = new Xn(1, 16, 12),
+    G = [];
+  function ct(z, K) {
+    const _ = z === "er-golgi",
+      nt = (_ ? P : S).clone(),
+      ut = xt(
+        new mt(
+          A,
+          Ao(co, {
+            additive: !0,
+            opacity: 0.55,
+          }),
+        ),
+        "protein",
+      );
+    (ut.scale.setScalar(_ ? 0.13 : 0.22),
+      (ut.userData.overlay = !0),
+      nt.add(ut));
+    const zt = G.length;
+    let Et,
+      jt,
+      j = null;
+    _
+      ? ((Et = h[zt % h.length]),
+        (jt = c
+          .clone()
+          .add(
+            new k(
+              Math.sin(zt * 2.3),
+              Math.cos(zt * 1.9),
+              Math.sin(zt * 0.7),
+            ).multiplyScalar(0.35),
+          )))
+      : ((j = zt % b.length),
+        (Et = l
+          .clone()
+          .add(
+            new k(
+              Math.sin(zt * 1.7),
+              Math.cos(zt * 2.9),
+              Math.sin(zt * 1.1),
+            ).multiplyScalar(0.3),
+          )),
+        (jt = b[j].clone().addScaledVector(v[j], -0.22)));
+    const $ = Et.clone()
+      .lerp(jt, 0.5)
+      .add(
+        new k(
+          Math.sin(zt * 3.1),
+          Math.cos(zt * 2.2),
+          Math.sin(zt * 1.4),
+        ).multiplyScalar(Et.distanceTo(jt) * 0.18),
+      );
+    return (
+      nt.position.copy(Et),
+      nt.scale.setScalar(0.01),
+      e.add(nt),
+      G.push({
+        obj: nt,
+        type: z,
+        t0: K,
+        dur: _ ? 2.4 : 3.6,
+        from: Et,
+        ctrl: $,
+        to: jt,
+        site: j,
+      }),
+      nt
+    );
+  }
+  const kt = new Xn(0.045, 8, 6),
+    At = [];
+  function yt(z, K) {
+    const _ = [];
+    for (let nt = 0; nt < 14; nt++) {
+      const ut = xt(
+        new mt(
+          kt,
+          Ao(co, {
+            additive: !0,
+          }),
+        ),
+        "protein",
+      );
+      ut.userData.overlay = !0;
+      const zt = v[z]
+        .clone()
+        .add(
+          new k(
+            Math.sin(nt * 2.4),
+            Math.cos(nt * 1.7),
+            Math.sin(nt * 0.9 + 2),
+          ).multiplyScalar(0.7),
+        )
+        .normalize();
+      (ut.position.copy(b[z]),
+        e.add(ut),
+        _.push({
+          m: ut,
+          dir: zt,
+          speed: 0.5 + (nt % 5) * 0.12,
+        }));
+    }
+    At.push({
+      t0: K,
+      pts: _,
+    });
+  }
+  const ft = {
+    anim: 0,
+    playing: !0,
+    speed: 1,
+    next: 0,
+  };
+  function Nt() {
+    ((ft.anim = 0), (ft.next = 0));
+    for (const z of G) e.remove(z.obj);
+    G.length = 0;
+    for (const z of At) z.pts.forEach((K) => e.remove(K.m));
+    At.length = 0;
+  }
+  const M = () => Math.max(0, (ft.anim - Hn) * oi);
+  function L(z, K) {
+    ft.playing && (ft.anim += K * ft.speed);
+    const _ = ft.anim,
+      nt = M(),
+      ut = Math.min(1, Math.max(0, _ / (Hn * 0.7)));
+    ((H.visible = _ < Hn + 6),
+      H.position.copy(X.getPoint(gs(ut))),
+      H.lookAt(X.getPoint(Math.min(1, gs(ut) + 0.02))),
+      (N.visible = _ > Hn * 0.65 && nt < bn.pulse + 4),
+      N.scale.setScalar(1 + 0.25 * Math.sin(z * 8)));
+    const zt = Bo(nt);
+    V.pulse.value = Math.min(1.4, zt.rer * 1.6);
+    const Et = Math.min(1, Math.max(0, (nt - 6) / 34)),
+      jt = D.map(($, W) =>
+        Math.exp(-(((D.length > 1 ? W / (D.length - 1) : 0) - Et) ** 2) / 0.08),
+      ),
+      j = jt.reduce(($, W) => $ + W, 0) || 1;
+    for (
+      T.forEach(
+        ($, W) =>
+          ($.pulse.value = Math.min(
+            1.4,
+            (zt.golgi * 2.4 * jt[W] * D.length) / j / 2,
+          )),
+      ),
+        F.forEach(
+          ($, W) => ($.pulse.value = 0.35 + 0.2 * Math.sin(z * 2.4 + W)),
+        );
+      ft.next < y.length && y[ft.next].t <= nt;
+    ) {
+      const $ = y[ft.next++];
+      $.type !== "exo" && ct($.type, _);
+    }
+    for (let $ = G.length - 1; $ >= 0; $--) {
+      const W = G[$],
+        dt = (_ - W.t0) / W.dur;
+      if (dt >= 1) {
+        (e.remove(W.obj),
+          W.type === "golgi-pm" && yt(W.site, _),
+          G.splice($, 1));
+        continue;
+      }
+      const Dt = gs(Math.max(0, dt));
+      W.obj.position.copy(si(W.from, W.ctrl, W.to, Dt));
+      const gt = Math.min(1, dt / 0.12),
+        rt = dt > 0.88 ? 1 - (dt - 0.88) / 0.12 : 1;
+      W.obj.scale.setScalar(Math.max(0.01, gt * rt));
+    }
+    for (let $ = At.length - 1; $ >= 0; $--) {
+      const W = At[$],
+        dt = _ - W.t0;
+      if (dt > 3) {
+        (W.pts.forEach((Dt) => e.remove(Dt.m)), At.splice($, 1));
+        continue;
+      }
+      W.pts.forEach((Dt) => {
+        (Dt.m.position.addScaledVector(Dt.dir, Dt.speed * K * ft.speed),
+          Dt.m.scale.setScalar(Math.max(0.01, 1 - dt / 3)));
+      });
+    }
+    nt > bn.duration + 6 && Nt();
+  }
+  function at() {
+    const z = ft.anim,
+      K = M();
+    return z < Hn
+      ? translate("细胞核中转录出的 mRNA 通过核孔进入细胞质，与核糖体结合")
+      : K < bn.pulse + 2
+        ? translate(
+            "核糖体上合成肽链，³H-亮氨酸被掺入；肽链边合成边进入内质网腔",
+          )
+        : K < 14
+          ? translate("在粗面内质网中折叠、初步加工，内质网出芽形成囊泡")
+          : K < 35
+            ? translate(
+                "囊泡与高尔基体顺面融合；蛋白质在潴泡间由顺面向反面推进，被进一步修饰加工",
+              )
+            : K < 70
+              ? translate("高尔基体反面出芽形成分泌小泡，向细胞膜移动")
+              : translate(
+                  "分泌小泡与细胞膜融合，以胞吐方式把蛋白质释放到细胞外",
+                );
+  }
+  const Z = () => {
+      const z = [
+        {
+          text: translate("核孔"),
+          at: d,
+        },
+        {
+          text: translate("粗面内质网"),
+          at: h[Math.min(2, h.length - 1)],
+        },
+        {
+          text: translate("高尔基体"),
+          at: c.clone().lerp(l, 0.5),
+        },
+        {
+          text: translate("细胞膜"),
+          at: b[0],
+        },
+      ];
+      (H.visible &&
+        ft.anim < Hn + 1 &&
+        z.push({
+          text: "mRNA",
+          at: H.position.clone(),
+        }),
+        N.visible &&
+          z.push({
+            text: translate("核糖体"),
+            at: m,
+          }));
+      const K = G.find((nt) => nt.type === "er-golgi");
+      K &&
+        z.push({
+          text: translate("囊泡"),
+          at: K.obj.position.clone(),
+        });
+      const _ = G.find((nt) => nt.type === "golgi-pm");
+      return (
+        _ &&
+          z.push({
+            text: translate("分泌小泡"),
+            at: _.obj.position.clone(),
+          }),
+        E[0] &&
+          z.push({
+            text: translate("线粒体（供能）"),
+            at: E[0].position.clone(),
+          }),
+        z
+      );
+    },
+    U = d
+      .clone()
+      .add(c)
+      .add(b[0])
+      .multiplyScalar(1 / 3),
+    I = {
+      target: U,
+      dir: new k()
+        .crossVectors(i, new k(0, 1, 0))
+        .normalize()
+        .add(new k(0, 0.45, 0))
+        .normalize(),
+      dist: d.distanceTo(b[0]) * 2.1,
+      planePoint: U,
+    };
+  I.dir.z < 0 && ((I.dir.x *= -1), (I.dir.z *= -1));
+  function Q() {
+    (Nt(),
+      V.shells.removeFromParent(),
+      T.forEach((z) => z.shells.removeFromParent()),
+      F.forEach((z) => z.shells.removeFromParent()),
+      e.removeFromParent());
+  }
+  return {
+    group: e,
+    update: L,
+    reset: Nt,
+    step: at,
+    labels: Z,
+    view: I,
+    dispose: Q,
+    minutes: M,
+    get playing() {
+      return ft.playing;
+    },
+    set playing(z) {
+      ft.playing = z;
+    },
+    set speed(z) {
+      ft.speed = z;
+    },
+    get speed() {
+      return ft.speed;
+    },
+  };
+}
+const Kn = "#e9edf2",
+  fr = "rgba(225,231,238,.55)",
+  hr = "rgba(207,214,222,.16)",
+  Mn = {
+    rer: "#3fb8cc",
+    golgi: "#f2a83c",
+    vesicle: "#ffd98a",
+    plasma: "#f2c9a0",
+    secreted: "#c8ff5a",
+  };
+function mr(t) {
+  const e = Math.min(window.devicePixelRatio || 1, 2),
+    o = t.clientWidth,
+    s = t.clientHeight;
+  (t.width !== Math.round(o * e) || t.height !== Math.round(s * e)) &&
+    ((t.width = Math.round(o * e)), (t.height = Math.round(s * e)));
+  const n = t.getContext("2d");
+  return (
+    n.setTransform(e, 0, 0, e, 0, 0),
+    n.clearRect(0, 0, o, s),
+    {
+      ctx: n,
+      w: o,
+      h: s,
+    }
+  );
+}
+const gr = (t, e = 500) => `${e} ${t}px 'JetBrains Mono', monospace`,
+  Jn = (t, e = 500) =>
+    `${e} ${t}px 'PingFang SC','Noto Sans SC',system-ui,sans-serif`;
+function br(t, e, { xTicks: o = [], xLabel: s = "", yLabel: n = "" }) {
+  const { x: a, y: r, w: i, h: c } = e;
+  ((t.strokeStyle = hr),
+    (t.lineWidth = 1),
+    t.beginPath(),
+    t.moveTo(a, r),
+    t.lineTo(a, r + c),
+    t.lineTo(a + i, r + c),
+    t.stroke(),
+    (t.fillStyle = fr),
+    (t.font = gr(9.5)),
+    (t.textAlign = "center"));
+  for (const [l, u] of o)
+    (t.fillText(String(l), u, r + c + 13), t.fillRect(u, r + c, 1, 3));
+  ((t.font = Jn(10.5)),
+    (t.textAlign = "right"),
+    t.fillText(s, a + i, r + c + 26),
+    t.save(),
+    t.translate(a - 10, r + c / 2),
+    t.rotate(-Math.PI / 2),
+    (t.textAlign = "center"),
+    t.fillText(n, 0, 0),
+    t.restore());
+}
+function Ns(t, e, o, { width: s = 2, alpha: n = 1, dash: a = null } = {}) {
+  (t.save(),
+    (t.strokeStyle = o),
+    (t.globalAlpha = n),
+    (t.lineWidth = s),
+    (t.lineJoin = "round"),
+    a && t.setLineDash(a),
+    t.beginPath(),
+    e.forEach(([r, i], c) => (c ? t.lineTo(r, i) : t.moveTo(r, i))),
+    t.stroke(),
+    t.restore());
+}
+function ri(t, e, o) {
+  const { ctx: s, w: n, h: a } = mr(t),
+    r = Math.round(n * 0.62),
+    i = {
+      x: 30,
+      y: 22,
+      w: r - 44,
+      h: a - 56,
+    },
+    c = bn.duration,
+    l = (H) => i.x + (H / c) * i.w,
+    u = (H) => i.y + i.h - (H / 0.75) * i.h;
+  br(s, i, {
+    xTicks: [0, 40, 80, 120, 160].map((H) => [H, l(H)]),
+    xLabel: o.time,
+    yLabel: o.radio,
+  });
+  const d = ["rer", "golgi", "vesicle"],
+    h = {
+      rer: [],
+      golgi: [],
+      vesicle: [],
+    };
+  for (let H = 0; H <= c; H += 1) {
+    const N = Bo(H);
+    for (const y of d) h[y].push([l(H), u(N[y])]);
+  }
+  for (const H of d)
+    (Ns(s, h[H], Mn[H], {
+      width: 1.2,
+      alpha: 0.22,
+    }),
+      Ns(s, h[H].slice(0, Math.floor(e) + 1), Mn[H], {
+        width: 2.2,
+      }));
+  const m = l(Math.min(c, e));
+  ((s.strokeStyle = "rgba(255,255,255,.5)"),
+    s.setLineDash([3, 4]),
+    s.beginPath(),
+    s.moveTo(m, i.y),
+    s.lineTo(m, i.y + i.h),
+    s.stroke(),
+    s.setLineDash([]));
+  const g = Bo(e);
+  for (const H of d)
+    ((s.fillStyle = Mn[H]),
+      s.beginPath(),
+      s.arc(m, u(g[H]), 3.2, 0, Math.PI * 2),
+      s.fill());
+  ((s.font = Jn(10.5)), (s.textAlign = "left"));
+  let p = i.x + 8;
+  for (const H of d)
+    ((s.fillStyle = Mn[H]),
+      s.fillRect(p, i.y - 13, 10, 2.5),
+      (s.fillStyle = Kn),
+      s.fillText(o[H], p + 14, i.y - 9),
+      (p += s.measureText(o[H]).width + 30));
+  const x = r + 18,
+    b = n - x - 10,
+    v = 22,
+    V = a - 56,
+    D = Ma(0),
+    T = Ma(e),
+    E = 130,
+    F = [
+      ["er", Mn.rer],
+      ["golgi", Mn.golgi],
+      ["plasma", Mn.plasma],
+    ],
+    O = b / F.length;
+  ((s.strokeStyle = hr),
+    s.beginPath(),
+    s.moveTo(x, v + V),
+    s.lineTo(x + b, v + V),
+    s.stroke(),
+    F.forEach(([H, N], y) => {
+      const P = x + y * O + O * 0.16,
+        S = O * 0.3,
+        A = (D[H] / E) * V,
+        G = (T[H] / E) * V;
+      ((s.fillStyle = "rgba(225,231,238,.14)"),
+        s.fillRect(P, v + V - A, S, A),
+        (s.fillStyle = N),
+        s.fillRect(P + S + 3, v + V - G, S, G),
+        (s.fillStyle = fr),
+        (s.font = Jn(10.5)),
+        (s.textAlign = "center"),
+        s.fillText(
+          o[H === "plasma" ? "plasma" : H + "M"],
+          P + S + 1.5,
+          v + V + 14,
+        ));
+      const ct = T[H] - D[H];
+      Math.abs(ct) > 0.5 &&
+        ((s.fillStyle = Kn),
+        (s.font = gr(9.5)),
+        s.fillText(
+          `${ct > 0 ? "+" : "−"}${Math.abs(ct).toFixed(0)}`,
+          P + S * 1.5 + 3,
+          v + V - G - 5,
+        ));
+    }),
+    (s.fillStyle = Kn),
+    (s.font = Jn(10.5)),
+    (s.textAlign = "left"),
+    (s.fillStyle = "rgba(225,231,238,.3)"),
+    s.fillRect(x, v - 13, 10, 2.5),
+    (s.fillStyle = Kn),
+    s.fillText(o.before, x + 14, v - 9));
+  const X = s.measureText(o.before).width;
+  ((s.fillStyle = Mn.golgi),
+    s.fillRect(x + X + 26, v - 13, 10, 2.5),
+    (s.fillStyle = Kn),
+    s.fillText(o.now, x + X + 40, v - 9));
+}
+function ci(t, e, o, s) {
+  const { ctx: n, w: a, h: r } = mr(t),
+    i = a / 2,
+    c = [
+      {
+        x: 30,
+        title: s.vsConc,
+        xLabel: s.conc,
+        curves: [
+          ["simple", s.simple],
+          ["facilitated", s.facilitated],
+        ],
+      },
+      {
+        x: i + 26,
+        title: s.vsO2,
+        xLabel: s.o2,
+        curves: [
+          ["passiveO2", s.passive],
+          ["activeO2", s.active],
+        ],
+      },
+    ],
+    l = {
+      simple: "#7fe0c4",
+      facilitated: "#6fb2ff",
+      passiveO2: "#7fe0c4",
+      activeO2: "#ff9a5a",
+    },
+    u =
+      {
+        simple: ["simple", "passiveO2"],
+        channel: ["facilitated", "passiveO2"],
+        carrier: ["facilitated", "passiveO2"],
+        active: ["activeO2"],
+        endo: ["activeO2"],
+        exo: ["activeO2"],
+      }[e] || [];
+  for (const d of c) {
+    const h = {
+      x: d.x,
+      y: 26,
+      w: i - 44,
+      h: r - 60,
+    };
+    (br(n, h, {
+      xLabel: d.xLabel,
+      yLabel: s.rate,
+    }),
+      (n.fillStyle = Kn),
+      (n.font = Jn(11, 600)),
+      (n.textAlign = "left"),
+      n.fillText(d.title, h.x, 14),
+      d.curves.forEach(([m, g], p) => {
+        const x = [];
+        for (let V = 0; V <= 60; V++) {
+          const D = V / 60;
+          x.push([h.x + D * h.w, h.y + h.h - o(m, D) * h.h * 0.92]);
+        }
+        const b = u.includes(m);
+        Ns(n, x, l[m], {
+          width: b ? 2.4 : 1.3,
+          alpha: b ? 1 : 0.35,
+        });
+        const v = x[x.length - 1];
+        ((n.fillStyle = l[m]),
+          (n.globalAlpha = b ? 1 : 0.5),
+          (n.font = Jn(10.5, b ? 600 : 500)),
+          (n.textAlign = "right"),
+          n.fillText(g, v[0], v[1] - 6 - p * 0),
+          (n.globalAlpha = 1));
+      }));
+  }
+}
+const ii = "#8ccad2",
+  wa = "#5f7f86",
+  bs = "#d6c98a",
+  li = "#3a2f4a",
+  va = "#f1ead2",
+  ys = new Map(),
+  Sa = new k(0, 1, 0);
+function ui(t, e, o) {
+  const s = Jt(t * 2713 + 9),
+    n = on(t + 707),
+    a = 2.2 * q(s, 0.94, 1.06),
+    r = 0.4,
+    i = a / 2,
+    c = e ? 64 : 20,
+    l = e ? 56 : 18,
+    u = (y) => (P, S, A) => y * n(P * 4, S * 4, A * 4),
+    d = (y) => 0.025 * n(y * 0.9, 3.3, 1.1),
+    h = (y) => y.set(y.x + d(y.y), y.y, y.z),
+    m = (y, P = 0.006) =>
+      Is($s(i - (r - y), y, l), c, {
+        southPole: -(i - (r - y)),
+        northPole: i - (r - y),
+        radialNoise: u(P / y),
+        warp: h,
+      }),
+    g = r + 0.16,
+    p = {
+      L: a,
+      R: r,
+      capsule: Is($s(i + 0.16, g, l), c, {
+        southPole: -i - 0.16,
+        northPole: i + 0.16,
+        radialNoise: (y, P, S) => 0.05 * n(y * 2.5 + 7, P * 2.5, S * 2.5),
+        warp: h,
+      }),
+      om: m(0.4),
+      om2: m(0.389),
+      pg: m(0.374),
+      pg2: m(0.364),
+      im: m(0.347),
+      im2: m(0.336),
+    },
+    x = 0.31,
+    b = (y, P = 0) => {
+      const S = Math.max(0, Math.abs(y.y) - (i - r));
+      return Math.hypot(y.x, y.z, S) < x - P;
+    },
+    v = [0.2, i * 0.52, 0.2],
+    V = Bs(s, {
+      modes: e ? 160 : 60,
+      samples: e ? 2400 : 600,
+      decay: e ? 0.6 : 0.7,
+      axes: v,
+    });
+  for (const y of V) {
+    const P = 1 + 0.35 * n(y.x * 3 + 1, y.y * 3, y.z * 3);
+    (y.set(y.x * P, y.y, y.z * P), b(y, 0.02) || y.multiplyScalar(0.92));
+  }
+  p.nucleoid = Ho(V, e ? 0.0085 : 0.013, {
+    radial: e ? 5 : 4,
+    perPoint: e ? 1.5 : 1,
+  });
+  const D = (y) =>
+      (y.x / (v[0] * 1.2)) ** 2 +
+        (y.y / v[1]) ** 2 +
+        (y.z / (v[2] * 1.2)) ** 2 <
+      1,
+    T = (y) => {
+      for (let P = 0; P < 200; P++) {
+        const S = new k(q(s, -1, 1) * x, q(s, -1, 1) * i, q(s, -1, 1) * x);
+        if (b(S, y)) return S;
+      }
+      return new k();
+    },
+    E = [],
+    F = e ? 4 : 2;
+  for (let y = 0; y < F; y++) {
+    let P;
+    for (let A = 0; A < 50 && ((P = T(0.12)), !!D(P)); A++);
+    const S = Ho(
+      Oc({
+        length: q(s, 0.14, 0.22),
+        coil: 0.016,
+        turns: q(s, 4, 6),
+        bend: q(s, 0.3, 0.8),
+      }),
+      e ? 0.0065 : 0.009,
+      {
+        radial: e ? 5 : 3,
+        perPoint: e ? 1.2 : 0.6,
+      },
+    );
+    (S.applyQuaternion(
+      new Me().setFromEuler(new vn(s() * 6, s() * 6, s() * 6)),
+    ),
+      S.translate(P.x, P.y, P.z),
+      E.push(S),
+      (p.plasmidAt = p.plasmidAt || P));
+  }
+  p.plasmids = ue(E);
+  const O = [],
+    X = e ? 1100 : 300;
+  for (let y = 0; O.length < X && y < X * 4; y++) {
+    const P = T(0.015);
+    (D(P) && s() < 0.8) ||
+      O.push({
+        position: P,
+        scale: q(s, 0.7, 0.95),
+      });
+  }
+  ((p.ribos = O), (p.granules = []));
+  for (let y = 0; y < (e ? 5 : 2); y++) {
+    const P = T(0.1);
+    D(P) ||
+      p.granules.push({
+        position: P,
+        scale: q(s, 0.035, 0.075),
+        phb: y % 2 === 1,
+      });
+  }
+  ((p.pili = Co(p.om, e ? 150 : 60, t + 5).map(
+    ({ position: y, normal: P }) => ({
+      position: y,
+      normal: P.clone()
+        .add(new k(ie(s), ie(s), ie(s)).multiplyScalar(0.18))
+        .normalize(),
+      scale: new k(1, q(s, 0.45, 1), 1),
+    }),
+  )),
+    (p.flagella = []));
+  const H = 1 + Math.floor(s() * 4),
+    N = o ?? H;
+  for (let y = 0; y < N; y++) {
+    const P = q(s, -i * 0.85, i * 0.6),
+      S = s() * Math.PI * 2,
+      A = Math.max(0, Math.abs(P) - (i - r)),
+      G = new k(
+        Math.cos(S) * Math.sqrt(Math.max(0, r * r - A * A)),
+        Math.sign(P) * A,
+        Math.sin(S) * Math.sqrt(Math.max(0, r * r - A * A)),
+      ).normalize(),
+      ct = 0.347 * (A ? Math.sqrt(Math.max(0, 1 - (A / r) ** 2)) : 1),
+      kt = new k(
+        Math.cos(S) * ct,
+        P + Math.sign(P) * A * (0.347 / r - 1),
+        Math.sin(S) * ct,
+      ),
+      At = new k(0, -1, 0)
+        .addScaledVector(G, 0.5)
+        .add(new k(ie(s), 0, ie(s)).multiplyScalar(0.25))
+        .normalize();
+    p.flagella.push({
+      anchor: kt,
+      nrm: G,
+      trail: At,
+      len: q(s, 4.5, 7),
+      phase: s() * 6,
+      speed: q(s, 9, 12),
+    });
+  }
+  return p;
+}
+let No = null;
+function di() {
+  if (No) return No;
+  const t = [],
+    e = (s, n, a) =>
+      t.push(
+        new Zo(s, n, 6, 20)
+          .rotateX(Math.PI / 2)
+          .translate(0, a, 0)
+          .toNonIndexed(),
+      ),
+    o = (s, n, a) =>
+      t.push(new Ae(s, s, n, 20, 1).translate(0, a, 0).toNonIndexed());
+  return (
+    o(0.034, 0.03, -0.03),
+    e(0.03, 0.006, -0.012),
+    o(0.022, 0.012, 0),
+    o(0.017, 0.008, 0.024),
+    o(0.019, 0.008, 0.048),
+    t.push(
+      new Ae(0.0075, 0.0075, 0.075, 8, 1).translate(0, 0.022, 0).toNonIndexed(),
+    ),
+    t.forEach((s) => s.deleteAttribute("uv")),
+    (No = ue(t)),
+    No
+  );
+}
+function pi({
+  seed: t = 1,
+  detail: e = "high",
+  inclusions: o = !0,
+  flagella: s,
+} = {}) {
+  const n = e !== "low",
+    a = `${t}|${n}|${s}`;
+  ys.has(a) || ys.set(a, ui(t, n, s));
+  const r = ys.get(a),
+    i = new qt();
+  i.name = "bacterium";
+  const c = new qt();
+  ((c.rotation.z = -Math.PI / 2), i.add(c));
+  const l = (V, D, T, E) => {
+      const F = new mt(V, D);
+      return ((F.name = T), E && xt(F, E), c.add(F), F);
+    },
+    u = 0.008,
+    d = l(
+      r.capsule,
+      Zn(B.capsule, {
+        opacity: 0.2,
+        bump: 0.02,
+        freq: 8,
+        rim: 0.9,
+        clearcoat: 0.3,
+        roughness: 0.5,
+        edge: 0.012,
+      }),
+      "capsule",
+      "faint",
+    );
+  ((d.renderOrder = 3),
+    l(
+      r.om,
+      et(bs, {
+        cap: bs,
+        bump: 0.008,
+        freq: 22,
+        sheen: 0.7,
+        rim: 0.4,
+        roughness: 0.45,
+        edge: u,
+      }),
+      "outerMembrane",
+      "wall",
+    ),
+    l(
+      r.om2,
+      et(bs, {
+        cap: wa,
+        bump: 0,
+        rim: 0,
+        edge: u,
+      }),
+      "periplasm",
+    ),
+    l(
+      r.pg,
+      et(B.cellWall, {
+        cap: B.cellWall,
+        bump: 0,
+        rim: 0.2,
+        edge: u,
+      }),
+      "peptidoglycan",
+      "wall",
+    ),
+    l(
+      r.pg2,
+      et(B.cellWall, {
+        cap: wa,
+        bump: 0,
+        rim: 0,
+        edge: u,
+      }),
+      "periplasm2",
+    ),
+    l(
+      r.im,
+      et(B.membrane, {
+        cap: B.membrane,
+        bump: 0,
+        rim: 0.2,
+        edge: u,
+      }),
+      "cellMembrane",
+      "membrane",
+    ),
+    l(
+      r.im2,
+      et(B.membrane, {
+        cap: ii,
+        bump: 0.004,
+        freq: 20,
+        rim: 0.2,
+        edge: u,
+      }),
+      "cytoplasm",
+    ),
+    l(
+      r.nucleoid,
+      et(B.dna, {
+        bump: 0,
+        sheen: 0.4,
+        rim: 0.5,
+        emissive: B.dna,
+        emissiveIntensity: 0.2,
+        edge: 0.003,
+      }),
+      "nucleoid",
+      "dna",
+    ),
+    l(
+      r.plasmids,
+      et(B.plasmid, {
+        bump: 0,
+        sheen: 0.4,
+        rim: 0.5,
+        emissive: B.plasmid,
+        emissiveIntensity: 0.25,
+        edge: 0.003,
+      }),
+      "plasmids",
+      "dna",
+    ));
+  const h = ue([
+    new pe(0.0125, n ? 1 : 0),
+    new pe(0.0095, 0).translate(0.006, 0.011, 0),
+  ]);
+  if (
+    (c.add(
+      ee(
+        h,
+        et(B.ribosome, {
+          bump: 0,
+          rim: 0.35,
+          sheen: 0.3,
+          edge: 0.002,
+        }),
+        r.ribos,
+        {
+          seed: t,
+        },
+      ),
+    ),
+    o && r.granules.length)
+  ) {
+    const V = new pe(1, 2),
+      D = r.granules.filter((E) => !E.phb),
+      T = r.granules.filter((E) => E.phb);
+    (D.length &&
+      c.add(
+        ee(
+          V,
+          et(li, {
+            cap: "#4a3d5e",
+            bump: 0,
+            clearcoat: 0.8,
+            roughness: 0.25,
+            edge: 0.004,
+          }),
+          D,
+          {
+            seed: t + 1,
+          },
+        ),
+      ),
+      T.length &&
+        c.add(
+          ee(
+            V,
+            et(va, {
+              cap: va,
+              bump: 0.004,
+              freq: 40,
+              roughness: 0.4,
+              edge: 0.004,
+            }),
+            T,
+            {
+              seed: t + 2,
+            },
+          ),
+        ));
+  }
+  const m = new Ae(0.0045, 0.005, 0.36, 4, 1, !0).translate(0, 0.18, 0),
+    g = et(B.flagellum, {
+      bump: 0,
+      sheen: 0.5,
+      rim: 0.6,
+      roughness: 0.4,
+      edge: 0.003,
+    });
+  c.add(
+    ee(m, g, r.pili, {
+      seed: t + 3,
+    }),
+  );
+  const p = [];
+  for (const V of r.flagella) {
+    const D = new Me().setFromUnitVectors(Sa, V.nrm),
+      T = new mt(
+        di(),
+        et("#c9b8ff", {
+          cap: "#a898e0",
+          bump: 0,
+          rim: 0.4,
+          edge: 0.003,
+        }),
+      );
+    (T.position.copy(V.anchor),
+      T.quaternion.copy(D),
+      (T.name = "basalBody"),
+      xt(T, "protein"),
+      c.add(T));
+    const E = V.anchor.clone().addScaledVector(V.nrm, 0.07),
+      F = E.clone().addScaledVector(V.nrm, 0.06).addScaledVector(V.trail, 0.07),
+      O = new nn([
+        V.anchor.clone().addScaledVector(V.nrm, 0.05),
+        E,
+        E.clone().addScaledVector(V.nrm, 0.04).addScaledVector(V.trail, 0.025),
+        F,
+      ]),
+      X = new mt(new ln(O, 12, 0.012, 6, !1), g);
+    ((X.name = "hook"), xt(X, "protein"), c.add(X));
+    const H = [],
+      N = n ? 260 : 90,
+      y = 2.3,
+      P = 0.2;
+    for (let ct = 0; ct <= N; ct++) {
+      const kt = (ct / N) * V.len,
+        At = P * Math.min(1, kt / 0.9) ** 1.5,
+        yt = (-2 * Math.PI * kt) / y;
+      H.push(new k(Math.cos(yt) * At, kt, Math.sin(yt) * At));
+    }
+    const S = new mt(
+      new ln(new nn(H), n ? N * 2 : N, n ? 0.014 : 0.018, n ? 6 : 4, !1),
+      g,
+    );
+    ((S.name = "flagellum"), xt(S, "protein"));
+    const A = new qt();
+    (A.position.copy(F), A.quaternion.setFromUnitVectors(Sa, V.trail));
+    const G = new qt();
+    (G.add(S),
+      A.add(G),
+      c.add(A),
+      p.push({
+        spin: G,
+        f: V,
+      }));
+  }
+  i.userData.update = (V) => {
+    for (const { spin: D, f: T } of p) D.rotation.y = T.phase + V * T.speed;
+  };
+  const x = (V) => V.applyAxisAngle(new k(0, 0, 1), -Math.PI / 2),
+    b = r.L / 2,
+    v = [
+      {
+        text: translate("荚膜"),
+        at: x(new k(0.1, b * 0.35, 0.53)),
+      },
+      {
+        text: translate("细胞壁"),
+        at: x(new k(0, -b * 0.3, 0.39)),
+      },
+      {
+        text: translate("细胞膜"),
+        at: x(new k(0, b * 0.05, -0.345)),
+      },
+      {
+        text: translate("细胞质"),
+        at: x(new k(0.2, b * 0.72, 0.05)),
+      },
+      {
+        text: translate("拟核"),
+        at: x(new k(0, 0, 0)),
+      },
+      {
+        text: translate("质粒"),
+        at: x(r.plasmidAt.clone()),
+      },
+      {
+        text: translate("核糖体"),
+        at: x(r.ribos[0].position.clone()),
+      },
+      {
+        text: translate("菌毛"),
+        at: x(
+          r.pili[0].position.clone().addScaledVector(r.pili[0].normal, 0.3),
+        ),
+      },
+    ];
+  if (r.flagella.length) {
+    const V = r.flagella[0];
+    v.push({
+      text: translate("鞭毛"),
+      at: x(
+        V.anchor
+          .clone()
+          .addScaledVector(V.nrm, 0.13)
+          .addScaledVector(V.trail, 1.2),
+      ),
+    });
+  }
+  return (
+    (i.userData.kind = "bacterium"),
+    (i.userData.length = r.L),
+    (i.userData.radius = b + 0.2),
+    (i.userData.reach = b + Math.max(0, ...r.flagella.map((V) => V.len))),
+    (i.userData.labels = v),
+    i
+  );
+}
+me.protein_nm ??= {
+  color: me.protein.color,
+  edge: 0.24,
+  fill: 0.015,
+  label: me.protein.label,
+};
+me.membrane_nm ??= {
+  color: me.membrane.color,
+  edge: 0.1,
+  fill: 0,
+  label: me.membrane.label,
+};
+me.glyco_nm ??= {
+  color: me.golgi.color,
+  edge: 0.5,
+  fill: 0.1,
+  label: "WGA",
+};
+const kn = "protein_nm",
+  Ko = "glyco_nm",
+  Ts = "membrane_nm",
+  _e = {
+    origin: 1.72,
+    headTop: 2.72,
+    spacing: 0.82,
+  },
+  Rn = 2.7,
+  mn = {
+    O: "#e8503c",
+    C: "#3b4048",
+    H: "#eef2f6",
+    P: "#ff9a3a",
+  };
+function $e(t) {
+  return ue(
+    t.map((e) => {
+      const o = e.index ? e.toNonIndexed() : e;
+      for (const s of Object.keys(o.attributes))
+        s !== "position" && s !== "normal" && o.deleteAttribute(s);
+      return o;
+    }),
+  );
+}
+const To = new Map(),
+  ts = (t, e) => (To.has(t) || To.set(t, e()), To.get(t));
+function to(t, e, o, s, n) {
+  const a = new pe(t, e);
+  return (a.translate(o, s, n), a);
+}
+function Rs(t = "high") {
+  return ts(`head|${t}`, () => {
+    const e = t === "low" ? 0 : 1;
+    return $e([
+      to(0.26, 0, 0, 0.1, 0),
+      to(0.3, e, 0.07, 0.48, 0.05),
+      to(0.33, 1, -0.05, 0.86, -0.04),
+    ]);
+  });
+}
+function yr(t = 0, e = "high") {
+  return ts(`tail|${t}|${e}`, () => {
+    const o = Jt(31 + t * 7),
+      s = e === "low" ? 4 : 5,
+      n = e === "low" ? 6 : 8,
+      a = (h, m) => {
+        const g = new nn(h),
+          p = new ln(g, n, 1, s, !1),
+          x = p.attributes.position;
+        for (let b = 0; b <= n; b++) {
+          const v = g.getPointAt(b / n),
+            V = m * (1 - 0.35 * (b / n));
+          for (let D = 0; D <= s; D++) {
+            const T = b * (s + 1) + D;
+            x.setXYZ(
+              T,
+              v.x + (x.getX(T) - v.x) * V,
+              v.y + (x.getY(T) - v.y) * V,
+              v.z + (x.getZ(T) - v.z) * V,
+            );
+          }
+        }
+        return (p.computeVertexNormals(), p);
+      },
+      r = (h, m, g) => new k(h, m, g),
+      i = q(o, -0.04, 0.04),
+      c = a(
+        [
+          r(0.17, 0, 0),
+          r(0.19 + i, -1.6199999999999999 * 0.35, 0.03),
+          r(0.16, -1.6199999999999999 * 0.7, -0.02),
+          r(0.2 + i, -1.6199999999999999, 0.02),
+        ],
+        0.135,
+      ),
+      l = q(o, 0.42, 0.55),
+      u = o() < 0.5 ? -1 : 1,
+      d = a(
+        [
+          r(-0.17, 0, 0),
+          r(-0.19, -1.6199999999999999 * l * 0.5, 0),
+          r(-0.2, -1.6199999999999999 * l, 0),
+          r(-0.36, -1.6199999999999999 * (l + 0.2), 0.12 * u),
+          r(-0.5, -1.6199999999999999 * 0.98, 0.2 * u),
+        ],
+        0.135,
+      );
+    return $e([c, d]);
+  });
+}
+function fi(t = "high") {
+  return ts(`chol|${t}`, () => {
+    const e = [to(0.2, 1, 0, 0.3, 0)],
+      o = (r, i, c) => {
+        const l = new Ae(r, r, 0.2, 6);
+        return (l.rotateX(Math.PI / 2), l.translate(i, c, 0), l);
+      };
+    e.push(o(0.3, 0.02, -0.05), o(0.3, -0.1, -0.5), o(0.3, 0.04, -0.94));
+    const s = new Ae(0.26, 0.26, 0.2, 5);
+    (s.rotateX(Math.PI / 2), s.translate(-0.06, -1.33, 0), e.push(s));
+    const n = new nn([
+      new k(-0.06, -1.5, 0),
+      new k(0.05, -1.65, 0.05),
+      new k(-0.05, -1.85, 0),
+    ]);
+    e.push(new ln(n, 6, 0.1, 5, !1));
+    const a = $e(e.map((r) => (r.index ? r.toNonIndexed() : r)));
+    return (a.computeVertexNormals(), a);
+  });
+}
+function Wo(t = 1, { size: e = 1, antennae: o = 2, detail: s = "high" } = {}) {
+  return ts(`gly|${t}|${e}|${o}|${s}`, () => {
+    const n = Jt(t * 17 + 3),
+      a = [],
+      r = 0.56 * e,
+      i = new k(0, 1, 0),
+      c = (d, h) => {
+        const m = new Ae(0.25 * e, 0.25 * e, 0.17 * e, 6);
+        (m.rotateZ(Math.PI / 2),
+          m.rotateY(n() * Math.PI),
+          m.applyQuaternion(new Me().setFromUnitVectors(i, h)),
+          m.translate(d.x, d.y, d.z),
+          a.push(m));
+      },
+      l = (d, h) => {
+        const m = h.clone().sub(d),
+          g = m.length(),
+          p = new Ae(0.075 * e, 0.075 * e, g, 5, 1, !0);
+        (p.applyQuaternion(new Me().setFromUnitVectors(i, m.normalize())),
+          p.translate((d.x + h.x) / 2, (d.y + h.y) / 2, (d.z + h.z) / 2),
+          a.push(p));
+      },
+      u = (d, h, m, g) => {
+        let p = d.clone(),
+          x = h.clone();
+        for (let b = 0; b < m; b++) {
+          (x
+            .add(new k(q(n, -0.4, 0.4), q(n, -0.1, 0.2), q(n, -0.4, 0.4)))
+            .normalize(),
+            x.y < 0.3 && ((x.y = 0.3), x.normalize()));
+          const v = p.clone().addScaledVector(x, r);
+          if ((l(p, v), c(v, x), (p = v), g > 0 && b === m - 1))
+            for (let V = 0; V < o; V++) {
+              const D = (V / o) * Math.PI * 2 + n();
+              u(
+                p,
+                new k(Math.cos(D), 0.8, Math.sin(D)).normalize(),
+                Math.round(q(n, 2, 4)),
+                g - 1,
+              );
+            }
+        }
+      };
+    return (
+      u(new k(0, 0, 0), new k(0, 1, 0), Math.round(q(n, 2, 3)), 1),
+      $e(a)
+    );
+  });
+}
+function Mo(
+  t,
+  e = 0.5,
+  { radial: o = 12, pitch: s = 0.85, groove: n = 0.13 } = {},
+) {
+  const a = new nn(t),
+    r = a.getLength(),
+    i = Math.max(8, Math.round(r * 7)),
+    c = new ln(a, i, 1, o, !1),
+    l = c.attributes.position;
+  for (let h = 0; h <= i; h++) {
+    const m = a.getPointAt(h / i),
+      g = (h / i) * r,
+      p = Math.min(1, Math.min(g, r - g) / 0.35) * 0.35 + 0.65;
+    for (let x = 0; x <= o; x++) {
+      const b = h * (o + 1) + x,
+        v =
+          e *
+          p *
+          (1 + n * Math.sin((x / o) * Math.PI * 2 + (g / s) * Math.PI * 2));
+      l.setXYZ(
+        b,
+        m.x + (l.getX(b) - m.x) * v,
+        m.y + (l.getY(b) - m.y) * v,
+        m.z + (l.getZ(b) - m.z) * v,
+      );
+    }
+  }
+  c.computeVertexNormals();
+  const u = a.getPointAt(0),
+    d = a.getPointAt(1);
+  return $e([
+    c.toNonIndexed(),
+    to(e * 0.66, 1, u.x, u.y, u.z),
+    to(e * 0.66, 1, d.x, d.y, d.z),
+  ]);
+}
+const Fn = (t, e = {}) =>
+    et(t, {
+      bump: 0.07,
+      freq: 2.2,
+      sheen: 0.6,
+      clearcoat: 0.35,
+      rim: 0.45,
+      roughness: 0.48,
+      edge: 0.18,
+      ...e,
+    }),
+  no = (t, e = 14) => (t === "low" ? Math.round(e * 0.5) : e);
+function hi({ seed: t = 3, color: e = B.protein, detail: o = "high" } = {}) {
+  const s = Jt(t),
+    n = new qt(),
+    a = [],
+    r = 7,
+    i = 1.45,
+    c = [];
+  for (let p = 0; p < r; p++) {
+    const x = (p / r) * Math.PI * 2 + q(s, -0.12, 0.12),
+      b = q(s, 0.1, 0.32) * (p % 2 ? 1 : -1),
+      v = Math.cos(x) * i,
+      V = Math.sin(x) * i,
+      D = q(s, 2.4, 2.9),
+      T = new k(
+        v + Math.cos(x + 1.6) * b * D,
+        D,
+        V + Math.sin(x + 1.6) * b * D,
+      ),
+      E = new k(
+        v - Math.cos(x + 1.6) * b * D,
+        -D,
+        V - Math.sin(x + 1.6) * b * D,
+      ),
+      F = T.clone()
+        .add(E)
+        .multiplyScalar(0.5)
+        .add(new k(Math.cos(x) * 0.15, 0, Math.sin(x) * 0.15));
+    (a.push(
+      Mo(p % 2 ? [E, F, T] : [T, F, E], 0.5, {
+        radial: o === "low" ? 8 : 12,
+      }),
+    ),
+      c.push(p % 2 ? [E, T] : [T, E]));
+  }
+  const l = 0.22;
+  for (let p = 0; p < r - 1; p++) {
+    const x = c[p][1],
+      b = c[p + 1][0],
+      v = x.clone().add(b).multiplyScalar(0.5);
+    ((v.y += Math.sign(x.y) * q(s, 0.7, 1.3)),
+      (v.x *= 1.25),
+      (v.z *= 1.25),
+      a.push(new ln(new nn([x, v, b]), 12, l, 6, !1).toNonIndexed()));
+  }
+  const u = Gt(1.7, {
+    detail: no(o, 18),
+    scale: [1.25, 0.8, 1.15],
+    seed: t + 5,
+    amp: 0.18,
+  });
+  u.translate(0.2, 4.1, 0.1);
+  const d = Gt(1.5, {
+    detail: no(o, 16),
+    scale: [1.3, 0.75, 1.1],
+    seed: t + 6,
+    amp: 0.16,
+  });
+  (d.translate(-0.4, -3.9, -0.3), a.push(d), a.push(u.toNonIndexed()));
+  const h = c[r - 1][1];
+  a.push(
+    Mo(
+      [
+        h,
+        h.clone().add(new k(1.2, -0.25, 0.6)),
+        h.clone().add(new k(2.4, -0.2, 1.4)),
+      ],
+      0.42,
+      {
+        radial: 8,
+      },
+    ),
+  );
+  const m = $e(a.map((p) => (p.index ? p.toNonIndexed() : p)));
+  m.deleteAttribute("uv");
+  const g = new mt(m, Fn(e));
+  return (
+    n.add(xt(g, kn)),
+    (n.userData.top = new k(0.2, 5.3, 0.1)),
+    (n.userData.radius = 2.4),
+    n
+  );
+}
+function Gn({
+  seed: t = 5,
+  color: e = B.protein,
+  detail: o = "high",
+  lobes: s,
+} = {}) {
+  const n = s || [
+      {
+        r: 1.9,
+        y: 0,
+        scale: [1, 1.75, 0.95],
+      },
+      {
+        r: 2.9,
+        y: 5.6,
+        scale: [1.1, 0.85, 1],
+      },
+      {
+        r: 1.7,
+        y: -4.6,
+        scale: [1.15, 0.75, 1],
+      },
+    ],
+    a = n.map((l, u) => {
+      const d = Gt(l.r, {
+        detail: no(o, l.r > 1.8 ? 26 : 20),
+        scale: l.scale,
+        seed: t * 13 + u,
+        amp: l.r * 0.13,
+        freq: 0.75 / l.r,
+      });
+      return (d.translate(l.x || 0, l.y, l.z || 0), d);
+    }),
+    r = $e(a.map((l) => l.toNonIndexed()));
+  r.computeVertexNormals();
+  const i = new qt();
+  i.add(xt(new mt(r, Fn(e)), kn));
+  const c = n.reduce((l, u) => Math.max(l, u.y + u.r * u.scale[1]), 0);
+  return (
+    (i.userData.top = new k(0, c, 0)),
+    (i.userData.radius =
+      Math.max(
+        ...n
+          .filter((l) => Math.abs(l.y) < 2.5)
+          .map((l) => l.r * Math.max(l.scale[0], l.scale[2])),
+      ) + 0.3),
+    i
+  );
+}
+function po({
+  seed: t = 7,
+  color: e = B.rer,
+  subunits: o = 4,
+  pore: s = 0.7,
+  detail: n = "high",
+  height: a = 7.6,
+} = {}) {
+  const r = new qt(),
+    i = [],
+    c = 1.4,
+    l = s + c * 0.92;
+  for (let d = 0; d < o; d++) {
+    const h = (d / o) * Math.PI * 2,
+      m = Gt(c, {
+        detail: no(n, 18),
+        scale: [1, a / 2 / c, 1.15],
+        seed: t * 7 + d,
+        amp: 0.12,
+        freq: 0.9,
+      });
+    (m.rotateZ(-0.12),
+      m.translate(l, 0, 0),
+      m.rotateY(-h),
+      i.push(m.toNonIndexed()));
+    for (let g = 0; g < 2; g++) {
+      const p = (g - 0.5) * 0.9,
+        x = Math.cos(h),
+        b = Math.sin(h),
+        v = -b,
+        V = x,
+        D = l + c * 0.75,
+        T = new k(x * D + v * p, -a * 0.42, b * D + V * p),
+        E = new k(
+          x * (D + 0.35) + v * (p + 0.3),
+          a * 0.42,
+          b * (D + 0.35) + V * (p + 0.3),
+        );
+      i.push(
+        Mo(
+          [
+            T,
+            T.clone()
+              .lerp(E, 0.5)
+              .add(new k(x * 0.15, 0, b * 0.15)),
+            E,
+          ],
+          0.42,
+          {
+            radial: n === "low" ? 6 : 10,
+          },
+        ),
+      );
+    }
+  }
+  const u = $e(i);
+  return (
+    u.deleteAttribute("uv"),
+    r.add(xt(new mt(u, Fn(e)), kn)),
+    (r.userData.radius = l + c + 0.2),
+    (r.userData.top = new k(0, a / 2 + 0.3, 0)),
+    (r.userData.pore = s),
+    (r.userData.height = a),
+    r
+  );
+}
+function Ks({ seed: t = 11, color: e = B.envelope, detail: o = "high" } = {}) {
+  const s = new qt(),
+    n = [];
+  for (const r of [-1, 1]) {
+    const i = new qt(),
+      c = [],
+      l = Gt(1.8, {
+        detail: no(o, 22),
+        scale: [0.95, 2.35, 1.35],
+        seed: t * 5 + (r > 0 ? 1 : 0),
+        amp: 0.17,
+        freq: 0.7,
+      });
+    (l.translate(r * 1.35, 0, 0), c.push(l.toNonIndexed()));
+    for (let h = 0; h < 3; h++) {
+      const m = (h - 1) * 1.2,
+        g = r * (2.05 + (h === 1 ? 0.35 : 0));
+      c.push(
+        Mo(
+          [
+            new k(g - r * 0.2, -3.7, m),
+            new k(g + r * 0.1, 0, m * 1.1),
+            new k(g - r * 0.1, 3.7, m),
+          ],
+          0.45,
+          {
+            radial: o === "low" ? 6 : 10,
+          },
+        ),
+      );
+    }
+    const u = $e(c);
+    u.deleteAttribute("uv");
+    const d = xt(new mt(u, Fn(e)), kn);
+    (i.add(d),
+      s.add(i),
+      n.push({
+        pivot: i,
+        s: r,
+      }));
+  }
+  const a = (r) => {
+    const i = 0.24 * (1 - 2 * r);
+    for (const c of n)
+      ((c.pivot.rotation.z = c.s * -i),
+        (c.pivot.position.x = c.s * 0.12 * Math.abs(1 - 2 * r)));
+  };
+  return (
+    a(0),
+    (s.userData.radius = 3.6),
+    (s.userData.top = new k(0, 4.2, 0)),
+    {
+      group: s,
+      setState: a,
+    }
+  );
+}
+function mi({ seed: t = 21, color: e = B.envelope, detail: o = "high" } = {}) {
+  const s = new qt(),
+    n = Ks({
+      seed: t,
+      color: e,
+      detail: o,
+    });
+  (n.group.scale.set(1.12, 1.05, 1.1), s.add(n.group));
+  const a = (g, p, x, b, v, V, D = e) => {
+      const T = xt(
+        new mt(
+          Gt(g, {
+            detail: no(o, 20),
+            scale: p,
+            seed: x,
+            amp: g * 0.12,
+            freq: 0.9 / g,
+          }),
+          Fn(D),
+        ),
+        kn,
+      );
+      return (T.position.set(b, v, V), T);
+    },
+    r = a(1.7, [1.2, 0.9, 1.1], t + 1, 0.2, -4.6, 0.2),
+    i = a(1.5, [1, 0.9, 1], t + 2, -2.9, -4, -0.4),
+    c = new qt();
+  c.position.set(1.6, -4.4, 0.3);
+  const l = a(1.55, [1, 1, 1], t + 3, 1.9, -1.4, 0);
+  (c.add(l), s.add(r, i, c));
+  const u = new qt();
+  (u.add(
+    xt(
+      new mt(
+        Mo([new k(0, -2.8, 0), new k(0.15, 0, 0), new k(0, 3, 0)], 0.45),
+        Fn(B.rer),
+      ),
+      kn,
+    ),
+  ),
+    u.add(a(1.5, [1.1, 0.8, 1.1], t + 4, 0.2, 4.2, 0, B.rer)));
+  const d = xt(
+    new mt(
+      Wo(t + 9, {
+        antennae: 2,
+        detail: o,
+      }),
+      Fn(B.glyco, {
+        bump: 0,
+        rim: 0.3,
+      }),
+    ),
+    Ko,
+  );
+  (d.position.set(0.5, 5.2, 0.3),
+    u.add(d),
+    u.position.set(0.6, 0, -3.2),
+    s.add(u));
+  const h = ({ c: g = 0, n: p = 0 } = {}) => {
+    (n.setState(g), (c.rotation.z = 0.55 - 0.75 * p));
+  };
+  h({
+    c: 1,
+    n: 0,
+  });
+  const m = new k();
+  return (
+    (s.userData.atpSite = () => l.getWorldPosition(m).clone()),
+    (s.userData.nDomain = l),
+    (s.userData.pDomainSite = new k(0.6, -3.3, 0.9)),
+    (s.userData.radius = 3.6),
+    (s.userData.top = new k(0.6, 5.6, -3.2)),
+    {
+      group: s,
+      setState: h,
+      N: l,
+    }
+  );
+}
+function xr({
+  sizeX: t = 44,
+  sizeZ: e = 44,
+  seed: o = 1,
+  detail: s = "high",
+  cholesterol: n = 0.13,
+  glycolipid: a = 0.025,
+  flow: r = 1,
+  flipEvery: i = 22,
+} = {}) {
+  const c = Jt(o * 101 + 7),
+    l = s === "low" ? 0.9 : _e.spacing,
+    u = new qt();
+  u.userData.kind = "bilayer";
+  const d = -t / 2 + l * 0.5,
+    h = t / 2 - l * 0.5,
+    m = -e / 2 + l * 0.5,
+    g = e / 2 - l * 0.5,
+    p = [];
+  for (const ot of [1, -1]) {
+    const J = (l * Math.sqrt(3)) / 2;
+    let bt = 0;
+    for (let It = m + (ot < 0 ? J * 0.5 : 0); It <= g + 1e-6; It += J, bt++)
+      for (
+        let ht = d + (bt % 2 ? l * 0.5 : 0) + (ot < 0 ? l * 0.25 : 0);
+        ht <= h + 1e-6;
+        ht += l
+      )
+        p.push({
+          x: ht + q(c, -0.07, 0.07) * l,
+          z: It + q(c, -0.07, 0.07) * l,
+          leaf: ot,
+        });
+  }
+  const x = p.length,
+    b = new Float32Array(x),
+    v = new Float32Array(x),
+    V = new Float32Array(x),
+    D = new Float32Array(x),
+    T = new Float32Array(x * 4),
+    E = new Uint8Array(x),
+    F = new Int32Array(x),
+    O = new Float32Array(x),
+    X = new Uint8Array(x),
+    H = new Int32Array(x).fill(-1);
+  let N = 0;
+  const y = 3,
+    P = [0, 0, 0],
+    S = [];
+  p.forEach((ot, J) => {
+    ((b[J] = ot.x),
+      (v[J] = ot.z),
+      (V[J] = ot.leaf),
+      (D[J] = c() * Math.PI * 2));
+    for (let bt = 0; bt < 4; bt++) T[J * 4 + bt] = c() * Math.PI * 2;
+    if (((O[J] = q(c, 0.86, 1.05)), c() < n)) ((E[J] = 1), (F[J] = N++));
+    else {
+      E[J] = 0;
+      const bt = Math.floor(c() * y);
+      ((X[J] = bt),
+        (F[J] = P[bt]++),
+        ot.leaf > 0 && c() < a && (H[J] = S.push(J) - 1));
+    }
+  });
+  const A = x - N,
+    G = et(B.lipidHead, {
+      bump: 0,
+      sheen: 0.55,
+      clearcoat: 0.45,
+      rim: 0.32,
+      roughness: 0.42,
+      edge: 0.15,
+    }),
+    ct = et(B.lipidTail, {
+      bump: 0,
+      sheen: 0.35,
+      clearcoat: 0.15,
+      rim: 0.2,
+      roughness: 0.6,
+      edge: 0.15,
+    }),
+    kt = et(B.tonoplast, {
+      bump: 0,
+      sheen: 0.4,
+      clearcoat: 0.5,
+      rim: 0.35,
+      roughness: 0.35,
+      edge: 0.15,
+    }),
+    At = et(B.glyco, {
+      bump: 0,
+      sheen: 0.6,
+      clearcoat: 0.4,
+      rim: 0.35,
+      roughness: 0.45,
+      edge: 0.15,
+    }),
+    yt = (ot, J, bt, It) => {
+      const ht = new an(ot, J, Math.max(1, bt));
+      return (
+        (ht.count = bt),
+        ht.instanceMatrix.setUsage(Vn),
+        (ht.frustumCulled = !1),
+        xt(ht, It)
+      );
+    },
+    ft = yt(Rs(s), G, A, Ts),
+    Nt = [0, 1, 2].map((ot) => yt(yr(ot, s), ct, P[ot], "none")),
+    M = yt(fi(s), kt, N, "none"),
+    L = 3,
+    at = [0, 0, 0],
+    Z = S.map((ot, J) => [J % L, at[J % L]++]),
+    U = [0, 1, 2].map((ot) =>
+      yt(
+        Wo(40 + ot, {
+          antennae: ot === 2 ? 1 : 2,
+          size: 1.2,
+          detail: s,
+        }),
+        At,
+        at[ot],
+        Ko,
+      ),
+    );
+  u.add(ft, ...Nt, M, ...U);
+  let I = 0;
+  const Q = new he();
+  for (let ot = 0; ot < x; ot++) {
+    if (E[ot]) continue;
+    const J = O[ot];
+    (Q.setRGB(
+      J * (V[ot] > 0 ? 1 : 0.94),
+      J * (V[ot] > 0 ? 0.97 : 0.96),
+      J * (V[ot] > 0 ? 0.92 : 1.02),
+    ),
+      ft.setColorAt(I, Q),
+      (F[ot] = I++));
+  }
+  const z = new Int32Array(x);
+  P.fill(0);
+  for (let ot = 0; ot < x; ot++) E[ot] || (z[ot] = P[X[ot]]++);
+  ft.instanceColor.needsUpdate = !0;
+  const K = [];
+  for (let ot = 0; ot < 5; ot++) {
+    const J = q(c, 11, 26),
+      bt = c() * Math.PI * 2,
+      It = (Math.PI * 2) / J;
+    K.push({
+      kx: Math.cos(bt) * It,
+      kz: Math.sin(bt) * It,
+      A: (0.55 / It) * r,
+      w: q(c, 0.05, 0.14) * (c() < 0.5 ? -1 : 1),
+      p: c() * 6.283,
+    });
+  }
+  const _ = Math.min(6, Math.min(t, e) * 0.22);
+  let nt = 0,
+    ut = 0;
+  const zt = (ot) => {
+      const J = ot / _;
+      J >= 1
+        ? ((nt = 1), (ut = 0))
+        : J <= 0
+          ? ((nt = 0), (ut = 0))
+          : ((nt = J * J * (3 - 2 * J)), (ut = (6 * J * (1 - J)) / _));
+    },
+    Et = [],
+    jt = new Float64Array(5),
+    j = {
+      speed: 1,
+      time: 0,
+      flipT: q(c, i * 0.4, i),
+      flip: null,
+    };
+  function $(ot, J, bt, It, ht, Ut, Xt, Zt, te, de, we, Pe, Oe, qe, re) {
+    ((ot[J] = bt * re),
+      (ot[J + 1] = It * re),
+      (ot[J + 2] = ht * re),
+      (ot[J + 3] = 0),
+      (ot[J + 4] = Ut * re),
+      (ot[J + 5] = Xt * re),
+      (ot[J + 6] = Zt * re),
+      (ot[J + 7] = 0),
+      (ot[J + 8] = te * re),
+      (ot[J + 9] = de * re),
+      (ot[J + 10] = we * re),
+      (ot[J + 11] = 0),
+      (ot[J + 12] = Pe),
+      (ot[J + 13] = Oe),
+      (ot[J + 14] = qe),
+      (ot[J + 15] = 1));
+  }
+  function W(ot, J, bt, It, ht, Ut, Xt, Zt, te, de) {
+    const we = Math.hypot(bt, It, ht) || 1;
+    ((bt /= we), (It /= we), (ht /= we));
+    let Pe = Math.cos(Ut),
+      Oe = Math.sin(Ut);
+    const qe = Pe * bt + Oe * ht;
+    let re = Pe - bt * qe,
+      Ee = -It * qe,
+      ve = Oe - ht * qe;
+    const Se = Math.hypot(re, Ee, ve) || 1;
+    ((re /= Se), (Ee /= Se), (ve /= Se));
+    const w = Ee * ht - ve * It,
+      R = ve * bt - re * ht,
+      C = re * It - Ee * bt;
+    $(ot, J, re, Ee, ve, bt, It, ht, w, R, C, Xt, Zt, te, de);
+  }
+  const dt = ft.instanceMatrix.array,
+    Dt = M.instanceMatrix.array,
+    gt = Nt.map((ot) => ot.instanceMatrix.array),
+    rt = U.map((ot) => ot.instanceMatrix.array);
+  function Ot(ot, J) {
+    ((J = Math.max(0, Math.min(J, 0.1)) * j.speed), (j.time += J));
+    const bt = j.time;
+    for (let ht = 0; ht < K.length; ht++) jt[ht] = K[ht].w * bt + K[ht].p;
+    if (((j.flipT -= J), j.flipT <= 0 && !j.flip)) {
+      j.flipT = q(c, i * 0.6, i * 1.4);
+      for (let ht = 0; ht < 20; ht++) {
+        const Ut = Math.floor(c() * x);
+        if (
+          !E[Ut] &&
+          H[Ut] < 0 &&
+          Math.abs(b[Ut]) < t * 0.3 &&
+          Math.abs(v[Ut]) < e * 0.3
+        ) {
+          j.flip = {
+            i: Ut,
+            t: 0,
+            from: V[Ut],
+            dirx: Math.cos(D[Ut]),
+            dirz: Math.sin(D[Ut]),
+          };
+          break;
+        }
+      }
+    }
+    j.flip &&
+      ((j.flip.t += J / 2.2),
+      j.flip.t >= 1 && ((V[j.flip.i] = -j.flip.from), (j.flip = null)));
+    const It = 0.11 * l;
+    for (let ht = 0; ht < x; ht++) {
+      let Ut = b[ht],
+        Xt = v[ht];
+      zt(Math.min(Ut - d + l, h + l - Ut));
+      const Zt = nt,
+        te = ut;
+      zt(Math.min(Xt - m + l, g + l - Xt));
+      const de = Zt * nt;
+      if (de > 0 && r > 0 && J > 0) {
+        const pt = Ut - d + l < h + l - Ut ? 1 : -1,
+          _t = Xt - m + l < g + l - Xt ? 1 : -1,
+          ae = te * pt * nt,
+          xe = ut * _t * Zt;
+        let ne = 0,
+          ze = 0,
+          He = 0;
+        for (let Ge = 0; Ge < K.length; Ge++) {
+          const Ye = K[Ge],
+            On = Ye.kx * Ut + Ye.kz * Xt + jt[Ge],
+            An = Math.sin(On),
+            vo = Math.cos(On);
+          ((ne += Ye.A * An),
+            (ze += Ye.A * Ye.kx * vo),
+            (He += Ye.A * Ye.kz * vo));
+        }
+        const dn = V[ht] > 0 ? 1 : -0.8;
+        ((Ut += (xe * ne + de * He) * J * dn),
+          (Xt -= (ae * ne + de * ze) * J * dn),
+          (b[ht] = Ut),
+          (v[ht] = Xt));
+      }
+      const we = T[ht * 4],
+        Pe = T[ht * 4 + 1],
+        Oe = T[ht * 4 + 2],
+        qe = T[ht * 4 + 3];
+      let re = It * (Math.sin(bt * 5.3 + we) + 0.6 * Math.sin(bt * 8.9 + Pe)),
+        Ee = It * (Math.sin(bt * 6.1 + Oe) + 0.6 * Math.sin(bt * 9.7 + qe)),
+        ve = Ut + re,
+        Se = Xt + Ee,
+        w = V[ht],
+        R = 1;
+      for (let pt = 0; pt < Et.length; pt++) {
+        const _t = Et[pt];
+        if (_t.leaf && _t.leaf !== w) continue;
+        const ae = ve - _t.x,
+          xe = Se - _t.z;
+        if (_t.front && xe > 0 && ae < _t.r * 0.8 && ae > -_t.r * 0.8) {
+          R = 0;
+          break;
+        }
+        const ne = _t.r + 0.75;
+        if (ae > ne || ae < -ne || xe > ne || xe < -ne) continue;
+        const ze = Math.hypot(ae, xe);
+        if (ze >= ne) continue;
+        if (ze < _t.r * 0.86) {
+          R = 0;
+          break;
+        }
+        const He = _t.r + ((ze - _t.r * 0.86) * 0.75) / (_t.r * 0.14 + 0.75);
+        ((ve = _t.x + (ae / ze) * He), (Se = _t.z + (xe / ze) * He));
+      }
+      const C = D[ht] + 0.3 * Math.sin(bt * 0.7 + Pe);
+      let tt = 0.07 * Math.sin(bt * 3.1 + Oe),
+        it = 0.07 * Math.sin(bt * 2.7 + qe),
+        wt = w,
+        Ft = w * _e.origin;
+      if (j.flip && j.flip.i === ht) {
+        const pt = j.flip,
+          _t = Math.PI * (pt.t * pt.t * (3 - 2 * pt.t));
+        ((wt = pt.from * Math.cos(_t)),
+          (tt = pt.dirx * Math.sin(_t)),
+          (it = pt.dirz * Math.sin(_t)),
+          (Ft = pt.from * _e.origin * Math.cos(_t)));
+      }
+      const Wt = F[ht] * 16;
+      if (E[ht] === 1) {
+        W(Dt, Wt, tt, wt, it, C, ve, Ft - w * 0.3, Se, R);
+        continue;
+      }
+      W(dt, Wt, tt, wt, it, C, ve, Ft, Se, R);
+      const Tt = 0.2 * Math.sin(bt * 2.3 + we) + 0.1 * Math.sin(bt * 4.7 + qe),
+        Pt = 0.2 * Math.sin(bt * 2 + Pe) + 0.1 * Math.sin(bt * 5.1 + Oe);
+      if (
+        (W(gt[X[ht]], z[ht] * 16, tt + Tt, wt, it + Pt, C, ve, Ft, Se, R),
+        H[ht] >= 0)
+      ) {
+        const [pt, _t] = Z[H[ht]];
+        W(
+          rt[pt],
+          _t * 16,
+          tt * 2 + 0.12 * Math.sin(bt * 0.9 + we),
+          wt,
+          it * 2 + 0.12 * Math.sin(bt * 0.8 + Oe),
+          C,
+          ve + tt * 1,
+          Ft + wt * 1.05,
+          Se + it * 1,
+          R,
+        );
+      }
+    }
+    ((ft.instanceMatrix.needsUpdate = !0),
+      (M.instanceMatrix.needsUpdate = !0),
+      Nt.forEach((ht) => (ht.instanceMatrix.needsUpdate = !0)),
+      U.forEach((ht) => (ht.instanceMatrix.needsUpdate = !0)));
+  }
+  Ot(0, 0);
+  let Bt = new k(0, 1, e / 2),
+    Ct = 1 / 0;
+  for (let ot = 0; ot < x; ot++) {
+    if (E[ot] !== 1 || V[ot] < 0) continue;
+    const J = Math.abs(v[ot] - (g - l)) * 4 + Math.abs(b[ot] + t * 0.12);
+    J < Ct && ((Ct = J), (Bt = new k(b[ot], _e.origin - 0.6, v[ot])));
+  }
+  return {
+    group: u,
+    update: Ot,
+    holes: Et,
+    count: x,
+    cholesterolAnchor: Bt,
+    sizeX: t,
+    sizeZ: e,
+    get speed() {
+      return j.speed;
+    },
+    set speed(ot) {
+      j.speed = ot;
+    },
+  };
+}
+function gi({ size: t = 44, seed: e = 1, detail: o = "high" } = {}) {
+  const s = Jt(e * 7 + 1),
+    n = new qt();
+  n.userData.kind = "membrane";
+  const a = xr({
+    sizeX: t,
+    sizeZ: t,
+    seed: e,
+    detail: o,
+  });
+  n.add(a.group);
+  const r = t / 44,
+    i = [],
+    c = (
+      y,
+      P,
+      S,
+      {
+        hole: A,
+        leaf: G = 0,
+        drift: ct = 1.6,
+        spin: kt = 0.05,
+        y: At = 0,
+        scale: yt = 1.22,
+      } = {},
+    ) => {
+      const ft = y.isObject3D ? y : y.group;
+      (ft.scale.setScalar(yt),
+        ft.position.set(P * r, At, S * r),
+        (ft.rotation.y = s() * Math.PI * 2),
+        n.add(ft));
+      const Nt = {
+        x: P * r,
+        z: S * r,
+        r: (A ?? ft.userData.radius) * yt,
+        leaf: G,
+      };
+      a.holes.push(Nt);
+      const M = {
+        g: ft,
+        H: Nt,
+        hx: P * r,
+        hz: S * r,
+        dx: 0,
+        dz: 0,
+        vx: 0,
+        vz: 0,
+        drift: ct,
+        spin: kt * (s() < 0.5 ? -1 : 1),
+        y: At,
+      };
+      return (i.push(M), M);
+    },
+    l = Gn({
+      seed: e + 2,
+      color: B.envelope,
+      detail: o,
+    });
+  for (const [y, P, S, A] of [
+    [0.9, 0.4, 3, 3],
+    [-1, -0.5, 5, 2],
+    [0.1, -1.3, 8, 2],
+  ]) {
+    const G = xt(
+      new mt(
+        Wo(e * 3 + S, {
+          antennae: A,
+          size: 1.35,
+          detail: o,
+        }),
+        et(B.glyco, {
+          bump: 0,
+          sheen: 0.6,
+          clearcoat: 0.4,
+          rim: 0.35,
+          edge: 0.15,
+        }),
+      ),
+      Ko,
+    );
+    (G.position.set(y, l.userData.top.y - 0.6, P), l.add(G));
+  }
+  l.userData.glycanTip = new k(0.9, l.userData.top.y + 2.6, 0.4);
+  const u = c(l, -11, -7),
+    d = hi({
+      seed: e + 4,
+      color: B.protein,
+      detail: o,
+    }),
+    h = xt(
+      new mt(
+        Wo(e * 5 + 1, {
+          antennae: 2,
+          size: 1.3,
+          detail: o,
+        }),
+        et(B.glyco, {
+          bump: 0,
+          sheen: 0.6,
+          clearcoat: 0.4,
+          rim: 0.35,
+          edge: 0.15,
+        }),
+      ),
+      Ko,
+    );
+  (h.position.set(0.4, 4.9, 0.2), d.add(h));
+  const m = c(d, 9, -9),
+    g = po({
+      seed: e + 6,
+      color: B.rer,
+      detail: o,
+      subunits: 5,
+    });
+  c(g, -4, 11);
+  const p = Ks({
+      seed: e + 8,
+      color: B.lysosome,
+      detail: o,
+    }),
+    x = c(p, 12, 10),
+    b = Gn({
+      seed: e + 10,
+      color: B.protein,
+      detail: o,
+      lobes: [
+        {
+          r: 1.6,
+          y: 0.2,
+          x: -1.2,
+          scale: [1, 2.1, 1],
+        },
+        {
+          r: 1.6,
+          y: -0.2,
+          x: 1.3,
+          scale: [1, 2.05, 1],
+        },
+        {
+          r: 2.2,
+          y: -4.8,
+          scale: [1.5, 0.75, 1.1],
+        },
+        {
+          r: 1.5,
+          y: 4,
+          x: -0.6,
+          scale: [1.3, 0.7, 1],
+        },
+        {
+          r: 1.3,
+          y: 4.3,
+          x: 1.4,
+          scale: [1, 0.8, 1],
+        },
+      ],
+    });
+  c(b, 2, 2);
+  const v = Gn({
+    seed: e + 12,
+    color: B.rer,
+    detail: o,
+    lobes: [
+      {
+        r: 2.4,
+        y: 2.9,
+        scale: [1.2, 0.95, 1.1],
+      },
+    ],
+  });
+  c(v, -16, 4, {
+    leaf: 1,
+    hole: 2.7,
+  });
+  const V = Gn({
+    seed: e + 14,
+    color: B.golgiCis,
+    detail: o,
+    lobes: [
+      {
+        r: 1.6,
+        y: 0,
+        scale: [1.3, 0.9, 1.1],
+      },
+      {
+        r: 1.2,
+        y: -0.7,
+        x: 1.6,
+        scale: [1, 0.9, 1],
+      },
+    ],
+  });
+  (V.position.set(0.8, -6.6, 1.2), m.g.add(V));
+  const D = Gn({
+      seed: e + 16,
+      color: B.golgiCis,
+      detail: o,
+      lobes: [
+        {
+          r: 1.8,
+          y: 0,
+          scale: [1.4, 0.85, 1.2],
+        },
+        {
+          r: 1.3,
+          y: -0.5,
+          x: -1.9,
+          z: 0.6,
+          scale: [1, 0.9, 1],
+        },
+      ],
+    }),
+    T = c(D, 5, 14, {
+      leaf: 0,
+      hole: 0,
+      y: -Rn - 1.45,
+      drift: 1.2,
+    });
+  a.holes.splice(a.holes.indexOf(T.H), 1);
+  const E = Gn({
+      seed: e + 18,
+      color: B.golgiCis,
+      detail: o,
+      lobes: [
+        {
+          r: 1.5,
+          y: 0,
+          scale: [1.2, 0.85, 1.2],
+        },
+      ],
+    }),
+    F = c(E, -14, -14, {
+      hole: 0,
+      y: -Rn - 1.2,
+    });
+  a.holes.splice(a.holes.indexOf(F.H), 1);
+  const O = {
+      speed: 1,
+    },
+    X = [
+      {
+        text: translate("磷脂双分子层"),
+        at: new k(t * 0.32, 0, t / 2),
+      },
+      {
+        text: translate("亲水头部"),
+        at: new k(-t * 0.2, _e.origin + 0.7, t / 2),
+      },
+      {
+        text: translate("疏水尾部"),
+        at: new k(-t * 0.2, 0.9, t / 2),
+      },
+      {
+        text: translate("蛋白质（贯穿）"),
+        at: new k(),
+      },
+      {
+        text: translate("蛋白质（镶在表面）"),
+        at: new k(),
+      },
+      {
+        text: translate("糖蛋白（糖被）"),
+        at: new k(),
+      },
+      {
+        text: translate("胆固醇"),
+        at: a.cholesterolAnchor.clone(),
+      },
+      {
+        text: translate("细胞外侧"),
+        at: new k(-t * 0.42, 9, -t * 0.1),
+      },
+      {
+        text: translate("细胞内侧"),
+        at: new k(-t * 0.42, -8, -t * 0.1),
+      },
+    ],
+    H = () => {
+      (X[3].at.copy(m.g.userData.top).applyMatrix4(m.g.matrix),
+        X[4].at.set(0, -1.2, 0).applyMatrix4(T.g.matrix),
+        X[5].at.copy(l.userData.glycanTip).applyMatrix4(u.g.matrix));
+    };
+  function N(y, P) {
+    const S = Math.max(0, Math.min(P, 0.1)) * O.speed;
+    ((a.speed = O.speed), a.update(y, P));
+    for (const A of i) {
+      const G = A.drift * 0.55;
+      ((A.vx +=
+        (-0.12 * A.dx - 0.6 * A.vx) * S + G * Math.sqrt(S) * ie(s) * 0.3),
+        (A.vz +=
+          (-0.12 * A.dz - 0.6 * A.vz) * S + G * Math.sqrt(S) * ie(s) * 0.3),
+        (A.dx += A.vx * S),
+        (A.dz += A.vz * S),
+        A.g.position.set(A.hx + A.dx, A.y, A.hz + A.dz),
+        (A.g.rotation.y += A.spin * S),
+        A.g.updateMatrix(),
+        (A.H.x = A.g.position.x),
+        (A.H.z = A.g.position.z));
+    }
+    ((x.g.userData.c = 0.5 + 0.5 * Math.sin(y * O.speed * 0.6)),
+      p.setState(x.g.userData.c),
+      H());
+  }
+  return (
+    N(0, 0),
+    (n.userData.update = N),
+    (n.userData.labels = X),
+    (n.userData.radius = t * 0.75),
+    {
+      group: n,
+      update: N,
+      labels: X,
+      bilayer: a,
+      get speed() {
+        return O.speed;
+      },
+      set speed(y) {
+        O.speed = y;
+      },
+    }
+  );
+}
+const bi = {
+  simple: {
+    solutes: {
+      O2: {
+        in: 6,
+        out: 36,
+      },
+      CO2: {
+        in: 34,
+        out: 6,
+      },
+    },
+    passive: {
+      O2: {
+        law: "linear",
+        k: 0.035,
+        route: "bilayer",
+      },
+      CO2: {
+        law: "linear",
+        k: 0.035,
+        route: "bilayer",
+      },
+    },
+    exchange: 0.012,
+  },
+  channel: {
+    solutes: {
+      H2O: {
+        in: 16,
+        out: 40,
+      },
+      K: {
+        in: 34,
+        out: 8,
+      },
+    },
+    passive: {
+      H2O: {
+        law: "channel",
+        k: 0.06,
+        sat: 80,
+        route: "aquaporin",
+      },
+      K: {
+        law: "channel",
+        k: 0.055,
+        sat: 60,
+        route: "channel",
+      },
+    },
+    exchange: 0.01,
+  },
+  carrier: {
+    solutes: {
+      glucose: {
+        in: 6,
+        out: 34,
+      },
+    },
+    passive: {
+      glucose: {
+        law: "carrier",
+        carriers: 2,
+        turnover: 0.75,
+        K: 8,
+        route: "carrier",
+      },
+    },
+    exchange: 0,
+  },
+  active: {
+    solutes: {
+      Na: {
+        in: 10,
+        out: 30,
+      },
+      K: {
+        in: 30,
+        out: 10,
+      },
+    },
+    passive: {
+      Na: {
+        law: "linear",
+        k: 0.006,
+        route: "leak",
+      },
+      K: {
+        law: "linear",
+        k: 0.006,
+        route: "leak",
+      },
+    },
+    pump: {
+      pumps: 1,
+      turnover: 0.3,
+      Katp: 2,
+      KNa: 3,
+      KK: 2,
+    },
+    exchange: 0,
+  },
+  endo: {
+    solutes: {
+      cargo: {
+        in: 0,
+        out: 12,
+      },
+    },
+    passive: {},
+    bulk: {
+      dir: "in",
+      period: 10,
+      packet: 3,
+      cost: 2,
+      transferAt: 0.62,
+    },
+    exchange: 0,
+  },
+  exo: {
+    solutes: {
+      cargo: {
+        in: 12,
+        out: 0,
+      },
+    },
+    passive: {},
+    bulk: {
+      dir: "out",
+      period: 10,
+      packet: 3,
+      cost: 2,
+      transferAt: 0.52,
+    },
+    exchange: 0,
+  },
+};
+function yi(t = "simple", e = {}) {
+  const o = bi[t];
+  if (!o) throw new Error(`unknown transport mode ${t}`);
+  const s = {};
+  for (const [a, r] of Object.entries({
+    ...o.solutes,
+    ...(e.solutes || {}),
+  }))
+    s[a] = {
+      in: r.in,
+      out: r.out,
+    };
+  const n = {};
+  for (const [a, r] of Object.entries(o.passive))
+    n[a] = {
+      ...r,
+      ...(e.passive?.[a] || {}),
+    };
+  return {
+    mode: t,
+    time: 0,
+    volIn: e.volIn ?? 1,
+    volOut: e.volOut ?? 1,
+    solutes: s,
+    passive: n,
+    pump: o.pump
+      ? {
+          ...o.pump,
+          ...(e.pump || {}),
+        }
+      : null,
+    bulk: o.bulk
+      ? {
+          ...o.bulk,
+          ...(e.bulk || {}),
+        }
+      : null,
+    exchange: e.exchange ?? o.exchange,
+    atp: e.atp ?? 12,
+    adp: e.adp ?? 0,
+    pi: e.pi ?? 0,
+    o2: e.o2 ?? 1,
+    regen: e.regen ?? 0.6,
+    acc: {},
+    phase: 0,
+    loaded: 0,
+    cycles: 0,
+    stalled: !1,
+  };
+}
+const ka = (t, e, o) => t.solutes[e][o] / (o === "in" ? t.volIn : t.volOut);
+function xi(t, e) {
+  const o = t.passive[e];
+  if (!o) return 0;
+  const s = ka(t, e, "in"),
+    n = ka(t, e, "out"),
+    a = n - s;
+  return o.law === "linear"
+    ? o.k * a
+    : o.law === "channel"
+      ? (o.k * a) / (1 + Math.abs(a) / o.sat)
+      : o.law === "carrier"
+        ? o.carriers * o.turnover * (n / (o.K + n) - s / (o.K + s))
+        : 0;
+}
+function Mi(t) {
+  const e = t.pump;
+  if (!e) return 0;
+  const o = t.solutes.Na.in,
+    s = t.solutes.K.out;
+  return t.atp < 1 || o < 3 || s < 2
+    ? 0
+    : e.pumps *
+        e.turnover *
+        (t.atp / (e.Katp + t.atp)) *
+        (o / (e.KNa + o)) *
+        (s / (e.KK + s));
+}
+function wi(t) {
+  return t.adp < 1 || t.pi < 1
+    ? 0
+    : t.regen * Mr("active-o2", t.o2) * (t.adp / (t.adp + 2));
+}
+const xs = (t, e, o, s) => {
+  const n = (t.acc[e] || 0) + o * s,
+    a = Math.floor(n);
+  return ((t.acc[e] = n - a), a);
+};
+function vi(t, e) {
+  const o = [];
+  t.time += e;
+  const s = (n) => (n === "in" ? t.volIn : t.volOut);
+  for (const n of Object.keys(t.passive)) {
+    const a = xi(t, n),
+      r = `p|${n}`;
+    for (
+      (a === 0 || Math.sign(a) !== Math.sign(t.acc[r] || a)) && (t.acc[r] = 0),
+        t.acc[r] = (t.acc[r] || 0) + a * e;
+      Math.abs(t.acc[r]) >= 1;
+    ) {
+      const i = t.acc[r] > 0 ? "in" : "out",
+        c = i === "in" ? "out" : "in",
+        l = t.solutes[n];
+      if (l[c] < 1 || (l[c] - 1) / s(c) < (l[i] + 1) / s(i)) {
+        t.acc[r] = 0;
+        break;
+      }
+      (l[c]--,
+        l[i]++,
+        (t.acc[r] -= Math.sign(t.acc[r])),
+        o.push({
+          type: "cross",
+          solute: n,
+          dir: i,
+          route: t.passive[n].route,
+        }));
+    }
+    if (t.exchange > 0) {
+      const i = Math.min(t.solutes[n].in, t.solutes[n].out);
+      for (let c = xs(t, `x|${n}`, t.exchange * i, e); c > 0; c--)
+        o.push({
+          type: "exchange",
+          solute: n,
+          route: t.passive[n].route,
+        });
+    }
+  }
+  if (t.pump) {
+    const n = Mi(t);
+    n === 0 && (t.acc.pump = 0);
+    for (let a = xs(t, "pump", n, e); a > 0; a--) {
+      const r = t.solutes.Na,
+        i = t.solutes.K;
+      if (t.atp < 1 || r.in < 3 || i.out < 2) break;
+      ((r.in -= 3),
+        (r.out += 3),
+        (i.out -= 2),
+        (i.in += 2),
+        t.atp--,
+        t.adp++,
+        t.pi++,
+        t.cycles++,
+        o.push({
+          type: "pump",
+        }));
+    }
+  }
+  for (let n = xs(t, "regen", wi(t), e); n > 0 && t.adp >= 1 && t.pi >= 1; n--)
+    (t.adp--,
+      t.pi--,
+      t.atp++,
+      o.push({
+        type: "regen",
+      }));
+  if (t.bulk) {
+    const n = t.bulk,
+      a = "cargo",
+      r = n.dir === "in" ? "out" : "in";
+    if (t.phase === 0) {
+      const i = Math.min(n.packet, t.solutes[a][r]);
+      t.atp >= n.cost && i > 0
+        ? ((t.atp -= n.cost),
+          (t.adp += n.cost),
+          (t.pi += n.cost),
+          (t.loaded = i),
+          (t.stalled = !1),
+          (t.phase = 1e-6),
+          o.push({
+            type: "cycle",
+            n: i,
+          }))
+        : (t.stalled = !0);
+    } else {
+      const i = t.phase;
+      if (
+        ((t.phase += e / n.period), i < n.transferAt && t.phase >= n.transferAt)
+      ) {
+        const c = Math.min(t.loaded, t.solutes[a][r]);
+        ((t.solutes[a][r] -= c),
+          (t.solutes[a][n.dir] += c),
+          t.cycles++,
+          o.push({
+            type: "bulk",
+            solute: a,
+            dir: n.dir,
+            n: c,
+          }));
+      }
+      t.phase >= 1 && (t.phase = 0);
+    }
+  }
+  return o;
+}
+function Mr(t, e) {
+  switch (((e = Math.max(0, e)), t)) {
+    case "simple-dc":
+      return e;
+    case "channel-dc":
+      return (0.96 * e) / (1 + 0.6 * e);
+    case "carrier-dc":
+    case "active-dc":
+      return (0.62 * e) / (0.14 + e);
+    case "passive-o2":
+      return 0.55;
+    case "active-o2":
+    case "bulk-o2":
+      return 0.18 + (0.82 * 1.16 * e) / (0.16 + e);
+    default:
+      throw new Error(`unknown curve ${t}`);
+  }
+}
+const Aa = ["simple", "channel", "carrier", "active", "endo", "exo"],
+  Rt = (t, e, o) => new k(t, e, o),
+  Ro = new Map(),
+  wr = (t, e) => (Ro.has(t) || Ro.set(t, e()), Ro.get(t)),
+  ye = (t, e = 0, o = 0, s = 0, n = 2) => {
+    const a = new pe(t, n);
+    return (a.translate(e, o, s), a);
+  },
+  Xe = (t) =>
+    et(t, {
+      bump: 0,
+      sheen: 0.3,
+      clearcoat: 0.8,
+      roughness: 0.28,
+      rim: 0.4,
+      edge: 0.1,
+    }),
+  Pa = (t) =>
+    et(t, {
+      bump: 0,
+      sheen: 0.2,
+      clearcoat: 1,
+      roughness: 0.2,
+      rim: 0.9,
+      emissive: t,
+      emissiveIntensity: 0.75,
+      edge: 0.1,
+    }),
+  Ms = (t, e, o, s, n, a, r = Math.PI / 2) => {
+    const i = new Ae(t, t, e, o);
+    return (i.rotateX(r), i.translate(s, n, a), i);
+  },
+  mo = (t, e, o) => {
+    const s = e.clone().sub(t),
+      n = s.length(),
+      a = new Ae(o, o, n, 6, 1, !0);
+    return (
+      a.applyQuaternion(
+        new Me().setFromUnitVectors(Rt(0, 1, 0), s.normalize()),
+      ),
+      a.translate((t.x + e.x) / 2, (t.y + e.y) / 2, (t.z + e.z) / 2),
+      a
+    );
+  },
+  Si = {
+    O2: () => ({
+      r: 0.7,
+      v: 1.2,
+      parts: [[$e([ye(0.36, -0.3), ye(0.36, 0.3)]), Xe(mn.O), "mito"]],
+    }),
+    CO2: () => ({
+      r: 0.9,
+      v: 1.1,
+      parts: [
+        [ye(0.34), Xe(mn.C), "tubulin"],
+        [$e([ye(0.33, -0.6), ye(0.33, 0.6)]), Xe(mn.O), "tubulin"],
+      ],
+    }),
+    H2O: () => {
+      const t = 52.25 * (Math.PI / 180);
+      return {
+        r: 0.55,
+        v: 1.2,
+        parts: [
+          [ye(0.34), Xe(mn.O), "tubulin"],
+          [
+            $e([
+              ye(0.21, Math.sin(t) * 0.4, Math.cos(t) * 0.4),
+              ye(0.21, -Math.sin(t) * 0.4, Math.cos(t) * 0.4),
+            ]),
+            Xe(mn.H),
+            "tubulin",
+          ],
+        ],
+      };
+    },
+    K: () => ({
+      r: 0.6,
+      v: 1,
+      parts: [[ye(0.56, 0, 0, 0, 3), Pa("#ff9a3a"), "perox"]],
+    }),
+    Na: () => ({
+      r: 0.5,
+      v: 1,
+      parts: [[ye(0.44, 0, 0, 0, 3), Pa("#b07cff"), "lyso"]],
+    }),
+    glucose: () => {
+      const t = [],
+        e = [];
+      for (let n = 0; n < 6; n++)
+        e.push(
+          Rt(
+            Math.cos((n / 6) * Math.PI * 2) * 0.6,
+            Math.sin((n / 6) * Math.PI * 2) * 0.6 * 0.35,
+            Math.sin((n / 6) * Math.PI * 2) * 0.6,
+          ),
+        );
+      for (let n = 0; n < 6; n++)
+        n && t.push(ye(0.2, e[n].x, e[n].y, e[n].z, 1));
+      for (let n = 0; n < 6; n++) t.push(mo(e[n], e[(n + 1) % 6], 0.09));
+      const o = Rt(e[1].x * 1.9, e[1].y + 0.5, e[1].z * 1.9);
+      t.push(mo(e[1], o, 0.09), ye(0.18, o.x, o.y, o.z, 1));
+      const s = [ye(0.24, e[0].x, e[0].y, e[0].z, 1)];
+      for (const n of [2, 3, 4, 5]) {
+        const a = e[n]
+          .clone()
+          .multiplyScalar(1.65)
+          .add(Rt(0, n % 2 ? 0.35 : -0.35, 0));
+        (t.push(mo(e[n], a, 0.07)), s.push(ye(0.16, a.x, a.y, a.z, 1)));
+      }
+      return (
+        s.push(ye(0.16, o.x + 0.3, o.y + 0.25, o.z, 1)),
+        {
+          r: 1.1,
+          v: 0.8,
+          parts: [
+            [$e(t), Xe(B.ser), "er"],
+            [$e(s), Xe(mn.O), "er"],
+          ],
+        }
+      );
+    },
+    ATP: () => za(3),
+    ADP: () => za(2),
+    Pi: () => ({
+      r: 0.6,
+      v: 0.9,
+      parts: [
+        [ye(0.3), Xe(mn.P), "vesicle"],
+        [
+          $e([
+            ye(0.2, 0.36, 0.2),
+            ye(0.2, -0.36, 0.2),
+            ye(0.2, 0, -0.4),
+            ye(0.2, 0, 0.2, 0.4),
+          ]),
+          Xe(mn.O),
+          "vesicle",
+        ],
+      ],
+    }),
+  };
+function za(t) {
+  const e = $e([
+      Ms(0.42, 0.2, 6, -1.2, 0.2, 0),
+      Ms(0.36, 0.2, 5, -1.85, 0.45, 0),
+    ]),
+    o = $e([
+      Ms(0.36, 0.22, 5, -0.4, -0.15, 0),
+      mo(Rt(-0.85, 0.05, 0), Rt(-0.55, -0.05, 0), 0.08),
+    ]),
+    s = [];
+  for (let n = 0; n < t; n++)
+    s.push(
+      ye(0.3, 0.2 + n * 0.62, -0.2 + (n % 2) * 0.12, 0, 1),
+      mo(Rt(-0.1 + n * 0.62, -0.2, 0), Rt(0.2 + n * 0.62, -0.2, 0), 0.08),
+    );
+  return {
+    r: 1.2,
+    v: 0.6,
+    parts: [
+      [e, Xe("#6f8dff"), "vesicle"],
+      [o, Xe(B.ribosome), "vesicle"],
+      [$e(s), Xe(mn.P), "vesicle"],
+    ],
+  };
+}
+const ki = (t) => wr(`sp|${t}`, Si[t]),
+  $n = 0,
+  In = 1,
+  wn = 2,
+  Le = 3,
+  Dn = 4;
+function Ai(t, e, o, s) {
+  const n = ki(t),
+    a = n.parts.map(([i, c, l]) => {
+      const u = new an(i, c, e);
+      return (
+        (u.count = 0),
+        (u.frustumCulled = !1),
+        u.instanceMatrix.setUsage(Vn),
+        o.add(xt(u, l)),
+        u
+      );
+    }),
+    r = {
+      kind: t,
+      def: n,
+      meshes: a,
+      n: 0,
+      cap: e,
+      P: new Float32Array(e * 3),
+      Vl: new Float32Array(e * 3),
+      Q: new Float32Array(e * 4),
+      W: new Float32Array(e * 3),
+      S: new Float32Array(e),
+      St: new Float32Array(e),
+      side: new Int8Array(e),
+      state: new Uint8Array(e),
+      from: new Int8Array(e),
+      path: [],
+      s: new Float32Array(e),
+      route: [],
+      target: [],
+      life: new Float32Array(e),
+      onArrive: [],
+    };
+  return (
+    (r.add = (i, c, l, u, { scale: d = 1, fadeIn: h = !1 } = {}) => {
+      if (r.n >= e) return -1;
+      const m = r.n++;
+      (r.P.set([i, c, l], m * 3), r.Vl.set([0, 0, 0], m * 3));
+      const g = new Me().setFromEuler(new vn(s() * 6, s() * 6, s() * 6));
+      return (
+        r.Q.set([g.x, g.y, g.z, g.w], m * 4),
+        r.W.set([ie(s), ie(s), ie(s)], m * 3),
+        (r.S[m] = h ? 0 : d),
+        (r.St[m] = d),
+        (r.side[m] = u),
+        (r.state[m] = $n),
+        (r.life[m] = 1 / 0),
+        m
+      );
+    }),
+    r
+  );
+}
+function Ia(t) {
+  const e = t.meshes.map((o) => o.instanceMatrix.array);
+  for (let o = 0; o < t.n; o++) {
+    const s = t.Q[o * 4],
+      n = t.Q[o * 4 + 1],
+      a = t.Q[o * 4 + 2],
+      r = t.Q[o * 4 + 3],
+      i = t.state[o] === Dn ? 0 : t.S[o],
+      c = s + s,
+      l = n + n,
+      u = a + a,
+      d = s * c,
+      h = s * l,
+      m = s * u,
+      g = n * l,
+      p = n * u,
+      x = a * u,
+      b = r * c,
+      v = r * l,
+      V = r * u,
+      D = o * 16;
+    for (const T of e)
+      ((T[D] = (1 - (g + x)) * i),
+        (T[D + 1] = (h + V) * i),
+        (T[D + 2] = (m - v) * i),
+        (T[D + 3] = 0),
+        (T[D + 4] = (h - V) * i),
+        (T[D + 5] = (1 - (d + x)) * i),
+        (T[D + 6] = (p + b) * i),
+        (T[D + 7] = 0),
+        (T[D + 8] = (m + v) * i),
+        (T[D + 9] = (p - b) * i),
+        (T[D + 10] = (1 - (d + g)) * i),
+        (T[D + 11] = 0),
+        (T[D + 12] = t.P[o * 3]),
+        (T[D + 13] = t.P[o * 3 + 1]),
+        (T[D + 14] = t.P[o * 3 + 2]),
+        (T[D + 15] = 1));
+  }
+  for (const o of t.meshes)
+    ((o.count = t.n), (o.instanceMatrix.needsUpdate = !0));
+}
+function Pi(t, e, o, s, n, a, r, i, c, l) {
+  const u = Math.hypot(o, s, n) || 1;
+  ((o /= u), (s /= u), (n /= u));
+  const d = Math.cos(a),
+    h = Math.sin(a),
+    m = d * o + h * n;
+  let g = d - o * m,
+    p = -s * m,
+    x = h - n * m;
+  const b = Math.hypot(g, p, x) || 1;
+  ((g /= b), (p /= b), (x /= b));
+  const v = p * n - x * s,
+    V = x * o - g * n,
+    D = g * s - p * o;
+  ((t[e] = g * l),
+    (t[e + 1] = p * l),
+    (t[e + 2] = x * l),
+    (t[e + 3] = 0),
+    (t[e + 4] = o * l),
+    (t[e + 5] = s * l),
+    (t[e + 6] = n * l),
+    (t[e + 7] = 0),
+    (t[e + 8] = v * l),
+    (t[e + 9] = V * l),
+    (t[e + 10] = D * l),
+    (t[e + 11] = 0),
+    (t[e + 12] = r),
+    (t[e + 13] = i),
+    (t[e + 14] = c),
+    (t[e + 15] = 1));
+}
+function hn(t) {
+  const e = [0];
+  for (let o = 1; o < t.length; o++)
+    e.push(e[o - 1] + t[o].distanceTo(t[o - 1]));
+  return {
+    points: t,
+    L: e,
+    length: e[e.length - 1],
+  };
+}
+function zi(t, e, o) {
+  const { points: s, L: n } = t;
+  if (e <= 0) return o.copy(s[0]);
+  if (e >= t.length) return o.copy(s[s.length - 1]);
+  let a = 1;
+  for (; n[a] < e;) a++;
+  const r = (e - n[a - 1]) / (n[a] - n[a - 1] || 1);
+  return o.copy(s[a - 1]).lerp(s[a], r);
+}
+function Ii({
+  seed: t = 1,
+  detail: e = "high",
+  mode: o = "simple",
+  speed: s = 1,
+  o2: n = 1,
+} = {}) {
+  const a = Jt(t * 977 + 13),
+    r = new qt();
+  r.userData.kind = "transport";
+  const i = 46,
+    c = 20,
+    l = i / 2 - 1.5,
+    u = c / 2 - 1.2,
+    d = 15,
+    h = Rn + 1,
+    m = xr({
+      sizeX: i,
+      sizeZ: c,
+      seed: t + 3,
+      detail: e,
+      glycolipid: 0.007,
+      flow: 0.6,
+    });
+  r.add(m.group);
+  let g = new qt();
+  r.add(g);
+  const p = {
+      mode: null,
+      speed: s,
+      o2: n,
+      kin: null,
+      swarms: {},
+      routes: {},
+      machines: [],
+      obstacles: [],
+      labels: [],
+      staticHoles: [],
+      idle: 0,
+      time: 0,
+      bulk: null,
+    },
+    x = new k();
+  function b(M, L) {
+    const at = M.def.v * 2.4,
+      Z = 1.6,
+      U = at * Math.sqrt(2 * Z);
+    for (let I = 0; I < M.n; I++) {
+      const Q = M.state[I];
+      if (
+        ((M.S[I] += (M.St[I] - M.S[I]) * Math.min(1, L * 3)),
+        M.life[I] !== 1 / 0 &&
+          ((M.life[I] -= L),
+          M.life[I] < 0.8 && (M.St[I] = 0),
+          M.life[I] <= 0 && (M.state[I] = Dn)),
+        Q === Dn || Q === Le)
+      )
+        continue;
+      const z = I * 3,
+        K = I * 4,
+        _ = M.W[z] * 1.2 * L,
+        nt = M.W[z + 1] * 1.2 * L,
+        ut = M.W[z + 2] * 1.2 * L,
+        zt = M.Q[K],
+        Et = M.Q[K + 1],
+        jt = M.Q[K + 2],
+        j = M.Q[K + 3];
+      let $ = zt + 0.5 * (_ * j + nt * jt - ut * Et),
+        W = Et + 0.5 * (nt * j + ut * zt - _ * jt),
+        dt = jt + 0.5 * (ut * j + _ * Et - nt * zt),
+        Dt = j - 0.5 * (_ * zt + nt * Et + ut * jt);
+      const gt = Math.hypot($, W, dt, Dt);
+      if (
+        ((M.Q[K] = $ / gt),
+        (M.Q[K + 1] = W / gt),
+        (M.Q[K + 2] = dt / gt),
+        (M.Q[K + 3] = Dt / gt),
+        Q === wn)
+      ) {
+        const It = M.path[I],
+          ht = M.route[I];
+        let Ut = ht?.speed ?? 1.6,
+          Xt = M.s[I] + Ut * L;
+        (ht?.gate && (Xt = Math.min(Xt, ht.gate(M, I, Xt))),
+          (M.s[I] = Xt),
+          zi(It, Xt, x));
+        const Zt = ht?.jitter ?? 0.08;
+        if (
+          ((M.P[z] = x.x + Zt * Math.sin(p.time * 7 + I)),
+          (M.P[z + 1] = x.y),
+          (M.P[z + 2] = x.z + Zt * Math.cos(p.time * 6 + I * 1.7)),
+          Xt >= It.length)
+        ) {
+          ((M.state[I] = $n), (M.Vl[z + 1] = M.side[I] * at * 0.8));
+          const te = M.onArrive[I];
+          ((M.onArrive[I] = null), te && te(I));
+        }
+        continue;
+      }
+      for (let It = 0; It < 3; It++)
+        M.Vl[z + It] += -Z * M.Vl[z + It] * L + U * Math.sqrt(L) * ie(a);
+      if (Q === In) {
+        const It = M.target[I],
+          ht = It.x - M.P[z],
+          Ut = It.y - M.P[z + 1],
+          Xt = It.z - M.P[z + 2],
+          Zt = Math.hypot(ht, Ut, Xt),
+          te = Math.min(5, 1.2 + Zt * 0.6);
+        if (
+          ((M.Vl[z] += (ht / Zt) * te * L * 4 - M.Vl[z] * L * 2),
+          (M.Vl[z + 1] += (Ut / Zt) * te * L * 4 - M.Vl[z + 1] * L * 2),
+          (M.Vl[z + 2] += (Xt / Zt) * te * L * 4 - M.Vl[z + 2] * L * 2),
+          Zt < 0.5)
+        ) {
+          const de = M.route[I];
+          if (!de?.canEnter || de.canEnter(M, I)) {
+            ((M.state[I] = wn), (M.s[I] = 0));
+            continue;
+          }
+        }
+      }
+      let rt = M.P[z] + M.Vl[z] * L,
+        Ot = M.P[z + 1] + M.Vl[z + 1] * L,
+        Bt = M.P[z + 2] + M.Vl[z + 2] * L;
+      const Ct = M.side[I],
+        ot = Q === In ? M.from[I] : Ct,
+        J = ot > 0 ? h + M.def.r * 0.5 : -d,
+        bt = ot > 0 ? d : -h - M.def.r * 0.5;
+      (rt < -l && ((rt = -l), (M.Vl[z] *= -1)),
+        rt > l && ((rt = l), (M.Vl[z] *= -1)),
+        Bt < -u && ((Bt = -u), (M.Vl[z + 2] *= -1)),
+        Bt > u && ((Bt = u), (M.Vl[z + 2] *= -1)),
+        (Q !== In || Math.abs(M.target[I].y) > Math.abs(Ot)) &&
+          (Ot < J && ((Ot = J), (M.Vl[z + 1] = Math.abs(M.Vl[z + 1]))),
+          Ot > bt && ((Ot = bt), (M.Vl[z + 1] = -Math.abs(M.Vl[z + 1])))));
+      for (const It of p.obstacles) {
+        const ht = rt - It.x,
+          Ut = Ot - It.y,
+          Xt = Bt - It.z,
+          Zt = It.r + M.def.r,
+          te = ht * ht + Ut * Ut + Xt * Xt;
+        if (te < Zt * Zt && Q !== In) {
+          const de = Math.sqrt(te) || 1;
+          ((rt = It.x + (ht / de) * Zt),
+            (Ot = It.y + (Ut / de) * Zt),
+            (Bt = It.z + (Xt / de) * Zt));
+        }
+      }
+      ((M.P[z] = rt), (M.P[z + 1] = Ot), (M.P[z + 2] = Bt));
+    }
+  }
+  function v(M, L, at) {
+    let Z = -1,
+      U = 1 / 0;
+    for (let I = 0; I < M.n; I++) {
+      if (M.state[I] !== $n || M.side[I] !== L) continue;
+      const Q = I * 3,
+        z = at
+          ? Math.hypot(M.P[Q] - at.x, M.P[Q + 1] - at.y, M.P[Q + 2] - at.z)
+          : Math.abs(M.P[Q + 1]) + a() * 4;
+      z < U && ((U = z), (Z = I));
+    }
+    return Z;
+  }
+  const V = (M, L) => Rt(M.P[L * 3], M.P[L * 3 + 1], M.P[L * 3 + 2]);
+  function D(M, L, at, Z, U) {
+    ((M.from[L] = M.side[L]),
+      (M.side[L] = -M.side[L]),
+      (M.state[L] = In),
+      (M.path[L] = at),
+      (M.route[L] = Z),
+      (M.target[L] = at.points[0]),
+      (M.onArrive[L] = U || null));
+  }
+  function T(
+    M,
+    L,
+    { top: at = 5.8, speed: Z = 1.8, gap: U = 1, jitter: I = 0.05 } = {},
+  ) {
+    const Q = {
+      x: M,
+      z: L,
+      speed: Z,
+      jitter: I,
+      path(z) {
+        const K = z === "in" ? 1 : -1;
+        return hn([
+          Rt(M, K * (at + 1.2), L),
+          Rt(M, K * at, L),
+          Rt(M, 0, L),
+          Rt(M, -K * at, L),
+          Rt(M, -K * (at + 1.6), L + q(a, -0.6, 0.6)),
+        ]);
+      },
+      gate(z, K, _) {
+        let nt = 1 / 0;
+        for (const ut of Q.users) {
+          if (
+            (ut.sw === z && ut.i === K) ||
+            ut.sw.state[ut.i] !== wn ||
+            ut.sw.route[ut.i] !== Q ||
+            ut.sw.from[ut.i] !== z.from[K]
+          )
+            continue;
+          const zt = ut.sw.s[ut.i];
+          zt > z.s[K] && (nt = Math.min(nt, zt - U));
+        }
+        return nt;
+      },
+      users: [],
+    };
+    return Q;
+  }
+  function E(M, L, at) {
+    ((M.users = M.users.filter(
+      (Z) => Z.sw.state[Z.i] === In || Z.sw.state[Z.i] === wn,
+    )),
+      M.users.push({
+        sw: L,
+        i: at,
+      }));
+  }
+  function F(M, L, at, Z) {
+    const U = {
+        c: 0,
+        queue: [],
+        task: null,
+        x: L,
+        z: at,
+        sw: Z,
+      },
+      I = Rt(L, 0, at);
+    return (
+      (U.update = (Q) => {
+        if (!U.task && U.queue.length) {
+          const K = U.queue[0],
+            _ = K === "in" ? 1 : -1,
+            nt = v(Z, _, Rt(L, _ * 5, at));
+          if (nt >= 0) {
+            U.queue.shift();
+            const ut = (U.task = {
+                dir: K,
+                src: _,
+                i: nt,
+                phase: "open",
+                t: 0,
+              }),
+              zt = _ > 0 ? 0 : 1;
+            D(
+              Z,
+              nt,
+              hn([Rt(L, _ * 6.4, at), Rt(L, _ * 3, at), I.clone()]),
+              {
+                speed: 2.2,
+                jitter: 0.03,
+                canEnter: () => U.c === zt,
+              },
+              () => {
+                ((Z.state[nt] = Le), (ut.phase = "flip"), (ut.t = 0));
+              },
+            );
+          }
+        }
+        const z = U.task;
+        if (z) {
+          const K = z.src > 0 ? 0 : 1;
+          ((z.t += Q),
+            z.phase === "open"
+              ? (U.c +=
+                  Math.sign(K - U.c) * Math.min(Math.abs(K - U.c), Q / 0.6))
+              : z.phase === "flip" &&
+                ((U.c +=
+                  Math.sign(1 - K - U.c) *
+                  Math.min(Math.abs(1 - K - U.c), Q / 0.9)),
+                Z.P.set([L, Math.sin(z.t * 9) * 0.05, at], z.i * 3),
+                U.c === 1 - K &&
+                  ((z.phase = "release"),
+                  (Z.state[z.i] = wn),
+                  (Z.s[z.i] = 0),
+                  (Z.path[z.i] = hn([
+                    I.clone(),
+                    Rt(L, -z.src * 3.4, at),
+                    Rt(L + q(a, -1, 1), -z.src * 6.8, at + q(a, -1, 1)),
+                  ])),
+                  (Z.route[z.i] = {
+                    speed: 2,
+                    jitter: 0.04,
+                  }),
+                  (Z.onArrive[z.i] = () => (U.task = null)))));
+        }
+        M.setState(U.c);
+      }),
+      U
+    );
+  }
+  function O(M, L, at) {
+    const Z = p.swarms.Na,
+      U = p.swarms.K,
+      I = p.swarms.ATP,
+      Q = p.swarms.ADP,
+      z = p.swarms.Pi,
+      K = {
+        queue: 0,
+        task: null,
+        c: 1,
+        n: 0,
+        phosph: !1,
+      },
+      _ = M.group,
+      nt = (j, $, W) => Rt(j, $, W).applyMatrix4(_.matrix),
+      ut = [
+        [-0.55, -0.5, 0.45],
+        [0.5, -0.2, -0.4],
+        [0, 0.35, 0.3],
+      ],
+      zt = [
+        [-0.45, 0.2, 0.3],
+        [0.45, -0.1, -0.3],
+      ],
+      Et = M.N.parent,
+      jt = () =>
+        Rt(0.9, -1, 0.9)
+          .add(M.N.position)
+          .applyEuler(Et.rotation)
+          .add(Et.position)
+          .applyMatrix4(_.matrix);
+    return (
+      (K.update = (j) => {
+        (_.updateMatrix(),
+          !K.task &&
+            K.queue > 0 &&
+            (K.queue--,
+            (K.task = {
+              t: 0,
+              na: [],
+              k: [],
+              atp: -1,
+              adp: -1,
+              pi: -1,
+              stage: 0,
+            })));
+        const $ = K.task,
+          W = (dt, Dt, gt) => Math.min(1, Math.max(0, (gt - dt) / (Dt - dt)));
+        if ($) {
+          if ($.stage === 0) {
+            for (
+              K.c = Math.min(1, K.c + j / 0.6),
+                K.n = Math.max(0, K.n - j / 0.6);
+              $.na.length < 3;
+            ) {
+              const rt = v(Z, -1, nt(0, -4, 0));
+              if (rt < 0) break;
+              const Ot = nt(...ut[$.na.length]);
+              (D(
+                Z,
+                rt,
+                hn([
+                  nt(ut[$.na.length][0] * 1.5, -4.2, 0.4),
+                  nt(ut[$.na.length][0], -2.2, 0.2),
+                  Ot,
+                ]),
+                {
+                  speed: 2,
+                  jitter: 0.03,
+                },
+                () => (Z.state[rt] = Le),
+              ),
+                (Z.side[rt] = -1),
+                $.na.push(rt));
+            }
+            if ($.atp < 0) {
+              const rt = v(I, -1, jt());
+              rt >= 0 &&
+                (($.atp = rt),
+                (I.state[rt] = In),
+                (I.from[rt] = -1),
+                (I.target[rt] = jt()),
+                (I.path[rt] = hn([jt(), jt()])),
+                (I.route[rt] = {
+                  speed: 1,
+                }),
+                (I.onArrive[rt] = () => (I.state[rt] = Le)));
+            }
+            $.na.length === 3 &&
+              $.na.every((rt) => Z.state[rt] === Le) &&
+              $.atp >= 0 &&
+              I.state[$.atp] === Le &&
+              (($.stage = 1), ($.t = 0));
+          } else $.t += j;
+          const dt = $.t;
+          if (
+            $.stage >= 1 &&
+            ((K.n = W(0, 0.6, dt)), $.stage === 1 && dt > 0.7)
+          ) {
+            $.stage = 2;
+            const gt = I.P.slice($.atp * 3, $.atp * 3 + 3);
+            ((I.state[$.atp] = Dn), (I.St[$.atp] = 0));
+            const rt = Q.add(gt[0], gt[1], gt[2], -1);
+            (rt >= 0 && ((Q.life[rt] = 5), (Q.Vl[rt * 3 + 1] = -2.5)),
+              ($.pi = z.add(...nt(0.6, -3.3, 0.9).toArray(), -1)),
+              $.pi >= 0 && (z.state[$.pi] = Le),
+              (K.phosph = !0));
+          }
+          if (
+            $.stage >= 2 &&
+            ((K.c = 1 - W(0.8, 1.7, dt)),
+            (K.n = 1 - 0.6 * W(0.8, 1.7, dt)),
+            $.stage === 2 && dt > 1.7)
+          ) {
+            $.stage = 3;
+            for (const gt of $.na)
+              ((Z.side[gt] = -1),
+                D(
+                  Z,
+                  gt,
+                  hn([
+                    V(Z, gt),
+                    nt(q(a, -0.6, 0.6), 2.6, 0.2),
+                    nt(q(a, -2, 2), 5.6, q(a, -1, 1.5)),
+                  ]),
+                  {
+                    speed: 2.2,
+                    jitter: 0.03,
+                  },
+                ),
+                (Z.state[gt] = wn),
+                (Z.s[gt] = 0));
+          }
+          if ($.stage >= 3) {
+            for (; $.k.length < 2;) {
+              const gt = v(U, 1, nt(0, 4.5, 0));
+              if (gt < 0) break;
+              const rt = nt(...zt[$.k.length]);
+              (D(
+                U,
+                gt,
+                hn([
+                  nt(zt[$.k.length][0] * 1.6, 4.6, 0.4),
+                  nt(zt[$.k.length][0], 2.2, 0.2),
+                  rt,
+                ]),
+                {
+                  speed: 2,
+                  jitter: 0.03,
+                },
+                () => (U.state[gt] = Le),
+              ),
+                (U.side[gt] = 1),
+                $.k.push(gt));
+            }
+            $.stage === 3 &&
+              $.k.length === 2 &&
+              $.k.every((gt) => U.state[gt] === Le) &&
+              (($.stage = 4), ($.t4 = dt));
+          }
+          if ($.stage >= 4) {
+            const gt = dt - $.t4;
+            if (
+              (K.phosph &&
+                gt > 0.4 &&
+                ((K.phosph = !1),
+                $.pi >= 0 &&
+                  ((z.state[$.pi] = $n),
+                  (z.life[$.pi] = 4.5),
+                  (z.Vl[$.pi * 3 + 1] = -2))),
+              (K.c = W(0.5, 1.4, gt)),
+              (K.n = 0.4 * (1 - W(0.5, 1.4, gt))),
+              $.stage === 4 && gt > 1.4)
+            ) {
+              $.stage = 5;
+              for (const rt of $.k)
+                ((U.side[rt] = 1),
+                  D(
+                    U,
+                    rt,
+                    hn([
+                      V(U, rt),
+                      nt(q(a, -0.5, 0.5), -2.6, 0.2),
+                      nt(q(a, -2, 2), -5.8, q(a, -1, 1.5)),
+                    ]),
+                    {
+                      speed: 2,
+                      jitter: 0.03,
+                    },
+                  ),
+                  (U.state[rt] = wn),
+                  (U.s[rt] = 0));
+              K.task = null;
+            }
+          }
+          ($.atp >= 0 &&
+            I.state[$.atp] === Le &&
+            I.P.set(jt().toArray(), $.atp * 3),
+            $.pi >= 0 &&
+              z.state[$.pi] === Le &&
+              z.P.set(nt(0.6, -3.3, 0.9).toArray(), $.pi * 3));
+          const Dt = (1 - K.c) * 0.8;
+          ($.na.forEach(
+            (gt, rt) =>
+              Z.state[gt] === Le &&
+              Z.P.set(
+                nt(ut[rt][0], ut[rt][1] + Dt, ut[rt][2]).toArray(),
+                gt * 3,
+              ),
+          ),
+            $.k.forEach(
+              (gt, rt) =>
+                U.state[gt] === Le &&
+                U.P.set(
+                  nt(zt[rt][0], zt[rt][1] + Dt, zt[rt][2]).toArray(),
+                  gt * 3,
+                ),
+            ));
+        }
+        M.setState({
+          c: K.c,
+          n: K.n,
+        });
+      }),
+      K
+    );
+  }
+  function X() {
+    (r.remove(g),
+      g.traverse((M) => {
+        M.isInstancedMesh && M.dispose();
+      }),
+      (g = new qt()),
+      r.add(g),
+      (p.swarms = {}),
+      (p.routes = {}),
+      (p.machines = []),
+      (p.obstacles = []),
+      (p.labels = []),
+      (p.staticHoles = []),
+      (p.bulk = null),
+      (m.holes.length = 0));
+  }
+  const H = (M, L, at, Z = L + at + 8) => {
+      const U = Ai(M, Z, g, a);
+      for (let I = 0; I < at; I++)
+        U.add(q(a, -l, l), q(a, h + 0.5, d), q(a, -u, u), 1);
+      for (let I = 0; I < L; I++)
+        U.add(q(a, -l, l), q(a, -d, -h - 0.5), q(a, -u, u), -1);
+      return ((p.swarms[M] = U), U);
+    },
+    N = 1.3,
+    y = c / 2 - 4.2,
+    P = (M, L, at, Z = 0, U) => {
+      const I = M.isObject3D ? M : M.group;
+      return (
+        I.scale.setScalar(N),
+        I.position.set(L, 0, at),
+        (I.rotation.y = Z),
+        I.updateMatrix(),
+        g.add(I),
+        m.holes.push({
+          x: L,
+          z: at,
+          r: (U ?? I.userData.radius) * N,
+          leaf: 0,
+          front: !0,
+        }),
+        I
+      );
+    },
+    S = (M, L) =>
+      p.labels.push({
+        text: M,
+        fn: L,
+      }),
+    A = (M, L, at) => () => Rt(M, L, at);
+  function G(M) {
+    (X(),
+      (p.mode = M),
+      (p.idle = 0),
+      (m.group.visible = M !== "endo" && M !== "exo"));
+    const L = {
+      o2: p.o2,
+    };
+    (M === "channel" &&
+      (L.passive = {
+        H2O: {
+          k: 0.035,
+        },
+        K: {
+          k: 0.032,
+        },
+      }),
+      M === "carrier" &&
+        (L.passive = {
+          glucose: {
+            carriers: 2,
+            turnover: 1 / 3.2,
+          },
+        }),
+      M === "active" &&
+        (L.pump = {
+          turnover: 1 / 6.5,
+        }),
+      (p.kin = yi(M, L)));
+    const at = p.kin.solutes;
+    if (M === "simple")
+      (H("O2", at.O2.in, at.O2.out),
+        H("CO2", at.CO2.in, at.CO2.out),
+        S(translate("磷脂双分子层"), A(-i * 0.36, 0, c / 2)),
+        S("O₂", () => ct("O2", 1)),
+        S("CO₂", () => ct("CO2", -1)));
+    else if (M === "channel")
+      (P(
+        po({
+          seed: t + 31,
+          color: B.rer,
+          subunits: 4,
+          pore: 0.5,
+          detail: e,
+        }),
+        -8,
+        y,
+        0.3,
+      ),
+        P(
+          po({
+            seed: t + 37,
+            color: B.protein,
+            subunits: 4,
+            pore: 0.75,
+            detail: e,
+          }),
+          9,
+          y,
+          0.8,
+        ),
+        (p.routes.aquaporin = T(-8, y, {
+          speed: 3,
+          gap: 0.7,
+        })),
+        (p.routes.channel = T(9, y, {
+          speed: 2.6,
+          gap: 1.2,
+        })),
+        H("H2O", at.H2O.in, at.H2O.out),
+        H("K", at.K.in, at.K.out),
+        S(translate("水通道蛋白"), A(-8, 5.6, y)),
+        S(translate("通道蛋白"), A(9, 5.6, y)),
+        S("K⁺", () => ct("K", -1)),
+        S(translate("水分子"), () => ct("H2O", 1)));
+    else if (M === "carrier") {
+      const Z = H("glucose", at.glucose.in, at.glucose.out);
+      for (const [U, I, Q] of [
+        [-9, y, 41],
+        [9, y - 1, 43],
+      ]) {
+        const z = Ks({
+          seed: t + Q,
+          color: B.envelope,
+          detail: e,
+        });
+        (P(z, U, I, 0, 3.2), p.machines.push(F(z, U, I, Z)));
+      }
+      (S(translate("载体蛋白"), A(-9, 6.2, y)),
+        S(translate("葡萄糖"), () => ct("glucose", 1)));
+    } else if (M === "active") {
+      const Z = mi({
+        seed: t + 51,
+        color: B.envelope,
+        detail: e,
+      });
+      P(Z, 0, y - 0.5, -0.25, 4);
+      for (const [I, Q, z, K] of [
+        [0.2, -4.8, 0.2, 2.2],
+        [-2.9, -4.2, -0.4, 1.7],
+        [3, -6, 0.3, 1.8],
+        [0.8, 4.3, -3.2, 1.8],
+      ])
+        p.obstacles.push({
+          ...Rt(I, Q, z).applyMatrix4(Z.group.matrix),
+          r: K * N,
+        });
+      (P(
+        po({
+          seed: t + 57,
+          color: B.protein,
+          subunits: 4,
+          pore: 0.7,
+          detail: e,
+        }),
+        -14,
+        y,
+        0.4,
+      ),
+        P(
+          po({
+            seed: t + 59,
+            color: B.rer,
+            subunits: 4,
+            pore: 0.6,
+            detail: e,
+          }),
+          14,
+          y,
+          1.1,
+        ),
+        (p.routes.leakK = T(-14, y, {
+          speed: 1.8,
+        })),
+        (p.routes.leakNa = T(14, y, {
+          speed: 1.8,
+        })),
+        H("Na", at.Na.in, at.Na.out),
+        H("K", at.K.in, at.K.out));
+      const U = H("ATP", 0, 0, 40);
+      for (let I = 0; I < p.kin.atp; I++)
+        U.add(q(a, -l, l), q(a, -d, -h - 1), q(a, -u, u), -1);
+      (H("ADP", 0, 0, 30),
+        H("Pi", 0, 0, 30),
+        (p.pump = O(Z)),
+        p.machines.push(p.pump),
+        S(translate("钠钾泵"), A(0, 4.6, y + 1.5)),
+        S("ATP", () => ct("ATP", -1, !0)),
+        S("Na⁺", () => ct("Na", 1)),
+        S("K⁺", () => ct("K", -1)),
+        S(translate("通道蛋白"), A(-14, 5.6, y)));
+    } else At(M);
+    p.staticHoles = m.holes.slice();
+    for (const Z of Object.values(p.swarms)) Ia(Z);
+    (S(translate("细胞外侧"), A(-i * 0.42, d - 1, -c * 0.3)),
+      S(translate("细胞内侧"), A(-i * 0.42, -d + 1, -c * 0.3)),
+      (r.userData.labels = ft()));
+  }
+  function ct(M, L, at = !1) {
+    const Z = p.swarms[M];
+    if (!Z) return Rt();
+    let U = -1,
+      I = 1 / 0;
+    for (let Q = 0; Q < Z.n; Q++) {
+      if (Z.state[Q] === Dn) continue;
+      if (at && Z.state[Q] === Le)
+        return Rt(Z.P[Q * 3], Z.P[Q * 3 + 1], Z.P[Q * 3 + 2]);
+      if (Z.side[Q] !== L || Z.state[Q] !== $n) continue;
+      const z = Q * 3,
+        K = Math.hypot(Z.P[z] * 0.5, Z.P[z + 1] - L * 7, Z.P[z + 2] - 3);
+      K < I && ((I = K), (U = Q));
+    }
+    return U < 0 ? Rt() : Rt(Z.P[U * 3], Z.P[U * 3 + 1], Z.P[U * 3 + 2]);
+  }
+  function kt(M) {
+    if (M.type === "cross" || M.type === "exchange") {
+      const L = p.swarms[M.solute],
+        at = M.type === "exchange" ? ["in", "out"] : [M.dir];
+      for (const Z of at) {
+        const U = Z === "in" ? 1 : -1;
+        if (M.route === "bilayer") {
+          const I = v(L, U);
+          if (I < 0) continue;
+          let Q = Math.max(-l + 1, Math.min(l - 1, L.P[I * 3])),
+            z = Math.max(-u + 1, Math.min(u - 1, L.P[I * 3 + 2]));
+          const K = q(a, -0.8, 0.8),
+            _ = q(a, -0.8, 0.8),
+            nt = hn([
+              Rt(Q, U * (Rn + 1.2), z),
+              Rt(Q + K * 0.3, U * 1.4, z + _ * 0.3),
+              Rt(Q + K * 0.6, -U * 1.2, z + _ * 0.6),
+              Rt(Q + K, -U * (Rn + 1.6), z + _),
+            ]);
+          D(L, I, nt, {
+            speed: 1.5,
+            jitter: 0.12,
+            hole: !0,
+          });
+        } else if (M.route === "carrier") {
+          const I = p.machines.filter((Q) => Q.queue);
+          (I.sort(
+            (Q, z) =>
+              Q.queue.length +
+              (Q.task ? 1 : 0) -
+              (z.queue.length + (z.task ? 1 : 0)),
+          ),
+            I[0].queue.push(Z));
+        } else {
+          const I =
+              M.route === "leak"
+                ? M.solute === "K"
+                  ? p.routes.leakK
+                  : p.routes.leakNa
+                : p.routes[M.route],
+            Q = I.path(Z),
+            z = v(L, U, Q.points[0]);
+          if (z < 0) continue;
+          (D(L, z, Q, I), E(I, L, z));
+        }
+      }
+    } else if (M.type === "pump") p.pump.queue++;
+    else if (M.type === "regen" && p.swarms.ATP) {
+      const L = p.swarms.ATP;
+      let at = -1;
+      for (let U = 0; U < L.n; U++) L.state[U] === Dn && ((at = U), (U = L.n));
+      const Z = [q(a, -l, l), -d + q(a, 0, 2), q(a, -u, u)];
+      at < 0
+        ? (at = L.add(...Z, -1, {
+            fadeIn: !0,
+          }))
+        : (L.P.set(Z, at * 3),
+          (L.state[at] = $n),
+          (L.S[at] = 0),
+          (L.St[at] = 1),
+          (L.life[at] = 1 / 0));
+    } else (M.type === "cycle" || M.type === "bulk") && p.bulk?.event(M);
+  }
+  function At(M) {
+    const Z = _e.origin + 0.15,
+      U = 32,
+      I = U,
+      Q = _e.headTop,
+      z = Math.PI - Math.asin((4.2 + Q - 0.1) / (8.5 + 4.2)),
+      K = Math.PI - Math.asin((4.2 + Q + 1.8) / (8.5 + 4.2)),
+      _ = 150,
+      nt = 48,
+      ut = {
+        r: new Float32Array(_),
+        y: new Float32Array(_),
+        nr: new Float32Array(_),
+        ny: new Float32Array(_),
+      };
+    function zt(st, lt = 0, St = 4) {
+      const $t = [];
+      if (st > 0.001) {
+        const Mt = 12.7 * Math.cos(st) - 4.2,
+          vt = (8.5 + 4.2) * Math.sin(st);
+        ($t.push({
+          len: 8.5 * st,
+          at: (Yt) => {
+            const Y = Yt / 8.5;
+            return [
+              8.5 * Math.sin(Y),
+              Mt - 8.5 * Math.cos(Y),
+              -Math.sin(Y),
+              Math.cos(Y),
+            ];
+          },
+        }),
+          $t.push({
+            len: 4.2 * st,
+            at: (Yt) => {
+              const Y = Math.PI / 2 + st - Yt / 4.2;
+              return [
+                vt + 4.2 * Math.cos(Y),
+                -4.2 + 4.2 * Math.sin(Y),
+                Math.cos(Y),
+                Math.sin(Y),
+              ];
+            },
+          }),
+          $t.push({
+            len: U - vt,
+            at: (Yt) => [vt + Yt, 0, 0, 1],
+          }));
+      } else
+        $t.push({
+          len: U,
+          at: (Mt) => {
+            const vt = Math.exp(-(Mt * Mt) / (St * St)),
+              Yt = -lt * vt,
+              Y = (2 * lt * Mt * vt) / (St * St),
+              oe = Math.hypot(1, Y);
+            return [Mt, Yt, -Y / oe, 1 / oe];
+          },
+        });
+      const Ht = $t.reduce((Mt, vt) => Mt + vt.len, 0);
+      let Lt = 0,
+        ce = 0;
+      for (let Mt = 0; Mt < _; Mt++) {
+        let vt = (Mt / (_ - 1)) * Ht;
+        for (; Lt < $t.length - 1 && vt > ce + $t[Lt].len;)
+          ((ce += $t[Lt].len), Lt++);
+        const Yt = $t[Lt].at(Math.min($t[Lt].len, vt - ce));
+        ((ut.r[Mt] = Yt[0]),
+          (ut.y[Mt] = Yt[1]),
+          (ut.nr[Mt] = Yt[2]),
+          (ut.ny[Mt] = Yt[3]));
+      }
+    }
+    function Et(st, lt, St) {
+      const $t = new qn(),
+        Ht = new Float32Array(_ * (nt + 1) * 3),
+        Lt = new Float32Array(_ * (nt + 1) * 3);
+      ($t.setAttribute("position", new bo(Ht, 3).setUsage(Vn)),
+        $t.setAttribute("normal", new bo(Lt, 3).setUsage(Vn)));
+      const ce = [];
+      for (let vt = 0; vt < _ - 1; vt++)
+        for (let Yt = 0; Yt < nt; Yt++) {
+          const Y = vt * (nt + 1) + Yt,
+            oe = Y + nt + 1;
+          ce.push(Y, oe, Y + 1, oe, oe + 1, Y + 1);
+        }
+      $t.setIndex(ce);
+      const Mt = xt(new mt($t, lt), St);
+      return ((Mt.frustumCulled = !1), (Mt.userData.off = st), Mt);
+    }
+    function jt(st, lt = ut, St = null, $t = 1) {
+      const Ht = st.userData.off,
+        Lt = st.geometry.attributes.position.array,
+        ce = st.geometry.attributes.normal.array;
+      for (let Mt = 0; Mt < _; Mt++) {
+        const vt = lt.r[Mt] + Ht * lt.nr[Mt],
+          Yt = lt.y[Mt] + Ht * lt.ny[Mt];
+        for (let Y = 0; Y <= nt; Y++) {
+          const oe = Math.PI + (Y / nt) * Math.PI,
+            ge = Math.cos(oe),
+            pn = Math.sin(oe),
+            Ie = (Mt * (nt + 1) + Y) * 3;
+          ((Lt[Ie] = $t * vt * ge + (St ? St.x : 0)),
+            (Lt[Ie + 1] = $t * Yt + (St ? St.y : 0)),
+            (Lt[Ie + 2] = $t * vt * pn),
+            (ce[Ie] = lt.nr[Mt] * ge),
+            (ce[Ie + 1] = lt.ny[Mt]),
+            (ce[Ie + 2] = lt.nr[Mt] * pn));
+        }
+      }
+      ((st.geometry.attributes.position.needsUpdate = !0),
+        (st.geometry.attributes.normal.needsUpdate = !0));
+    }
+    const j = et(B.lipidTail, {
+        bump: 0.2,
+        freq: 1.6,
+        sheen: 0.3,
+        clearcoat: 0.1,
+        rim: 0.1,
+        roughness: 0.7,
+        cap: B.lipidTail,
+        edge: 0.2,
+      }),
+      $ = [Et(Z - 0.2, j, "none"), Et(-Z + 0.2, j, "none")];
+    g.add(...$);
+    const W = {
+      r: new Float32Array(_),
+      y: new Float32Array(_),
+      nr: new Float32Array(_),
+      ny: new Float32Array(_),
+    };
+    for (let st = 0; st < _; st++) {
+      const lt = (st / (_ - 1)) * Math.PI;
+      ((W.r[st] = 8.5 * Math.sin(lt)),
+        (W.y[st] = -8.5 * Math.cos(lt)),
+        (W.nr[st] = -Math.sin(lt)),
+        (W.ny[st] = Math.cos(lt)));
+    }
+    const dt = [Et(Z - 0.2, j, "none"), Et(-Z + 0.2, j, "none")];
+    g.add(...dt);
+    const Dt = et(B.lipidHead, {
+      bump: 0,
+      sheen: 0.55,
+      clearcoat: 0.45,
+      rim: 0.32,
+      roughness: 0.42,
+      edge: 0.15,
+    });
+    function gt(st, lt) {
+      const St = [],
+        $t = _e.spacing,
+        Ht = ($t * Math.sqrt(3)) / 2;
+      for (let Mt = -0.6, vt = 0; Mt >= -st; Mt -= Ht, vt++)
+        for (let Yt = -st + (vt % 2) * $t * 0.5; Yt <= st; Yt += $t) {
+          const Y = Yt + q(a, -0.07, 0.07),
+            oe = Mt + q(a, -0.07, 0.07),
+            ge = Math.hypot(Y, oe);
+          ge <= st &&
+            St.push([
+              (ge * ge) / 2,
+              Math.atan2(oe, Y),
+              a() * 6.283,
+              q(a, 0.88, 1.04),
+            ]);
+        }
+      St.sort((Mt, vt) => Mt[0] - vt[0]);
+      const Lt = new an(Rs("low"), Dt, St.length);
+      ((Lt.frustumCulled = !1), Lt.instanceMatrix.setUsage(Vn));
+      const ce = new he();
+      return (
+        St.forEach((Mt, vt) => Lt.setColorAt(vt, ce.setScalar(Mt[3]))),
+        g.add(xt(Lt, Ts)),
+        {
+          m: Lt,
+          A: Float32Array.from(St, (Mt) => Mt[0]),
+          PH: Float32Array.from(St, (Mt) => Mt[1]),
+          TW: Float32Array.from(St, (Mt) => Mt[2]),
+          sign: lt,
+        }
+      );
+    }
+    const rt = new Float32Array(_),
+      Ot = new Float32Array(_),
+      Bt = new Float32Array(_);
+    function Ct(st, lt, St, $t = 1 / 0, Ht = 1) {
+      const Lt = st.sign * _e.origin;
+      for (let vt = 0; vt < _; vt++)
+        ((rt[vt] = lt.r[vt] + Lt * lt.nr[vt]),
+          (Ot[vt] = lt.y[vt] + Lt * lt.ny[vt]),
+          (Bt[vt] = vt
+            ? Bt[vt - 1] +
+              0.5 *
+                (rt[vt] + rt[vt - 1]) *
+                Math.hypot(rt[vt] - rt[vt - 1], Ot[vt] - Ot[vt - 1])
+            : 0));
+      const ce = st.m.instanceMatrix.array;
+      let Mt = 1;
+      for (let vt = 0; vt < st.A.length; vt++) {
+        const Yt = st.A[vt];
+        for (; Mt < _ - 1 && Bt[Mt] < Yt;) Mt++;
+        const Y = vt * 16;
+        if (Yt > Bt[_ - 1]) {
+          (ce.fill(0, Y, Y + 15), (ce[Y + 15] = 1));
+          continue;
+        }
+        const oe = (Yt - Bt[Mt - 1]) / (Bt[Mt] - Bt[Mt - 1] || 1),
+          ge = rt[Mt - 1] + (rt[Mt] - rt[Mt - 1]) * oe;
+        if (ge > $t) {
+          (ce.fill(0, Y, Y + 15), (ce[Y + 15] = 1));
+          continue;
+        }
+        const pn = Ot[Mt - 1] + (Ot[Mt] - Ot[Mt - 1]) * oe,
+          Ie = (lt.nr[Mt - 1] + (lt.nr[Mt] - lt.nr[Mt - 1]) * oe) * st.sign,
+          so = (lt.ny[Mt - 1] + (lt.ny[Mt] - lt.ny[Mt - 1]) * oe) * st.sign,
+          Ln = Math.cos(st.PH[vt]),
+          ao = Math.sin(st.PH[vt]);
+        Pi(
+          ce,
+          Y,
+          Ie * Ln,
+          so,
+          Ie * ao,
+          st.TW[vt],
+          Ht * ge * Ln + St.x,
+          Ht * pn + St.y,
+          Ht * ge * ao + St.z,
+          Ht,
+        );
+      }
+      st.m.instanceMatrix.needsUpdate = !0;
+    }
+    const ot = 8.5 + _e.origin,
+      J = {
+        out: gt(Math.sqrt(U * U + 4 * ot * ot), 1),
+        inn: gt(Math.sqrt(U * U + 4 * ot * ot), -1),
+        vOut: gt(2 * (8.5 - _e.origin) + 0.6, 1),
+        vIn: gt(2 * ot + 0.6, -1),
+      },
+      bt = 900,
+      It = new an(
+        Rs(e),
+        et(B.lipidHead, {
+          bump: 0,
+          sheen: 0.55,
+          clearcoat: 0.45,
+          rim: 0.32,
+          roughness: 0.42,
+          edge: 0.15,
+        }),
+        bt,
+      ),
+      ht = new an(
+        yr(1, e),
+        et(B.lipidTail, {
+          bump: 0,
+          sheen: 0.35,
+          clearcoat: 0.15,
+          rim: 0.2,
+          roughness: 0.6,
+          edge: 0.15,
+        }),
+        bt,
+      );
+    for (const st of [It, ht])
+      ((st.frustumCulled = !1), st.instanceMatrix.setUsage(Vn));
+    g.add(xt(It, Ts), xt(ht, "none"));
+    let Ut = 0;
+    const Xt = new oo(),
+      Zt = new Me(),
+      te = new k(1, 1, 1),
+      de = Rt(0, 1, 0),
+      we = Rt(0, 0, 0),
+      Pe = Rt(0, 0, 0),
+      Oe = new Me();
+    function qe(st, lt, St, $t, Ht, Lt, ce = 0, Mt = 0, vt = 1) {
+      const Yt = Lt * _e.origin,
+        Y = _e.spacing * vt;
+      let oe = 0,
+        ge = (st[0] + St[0] * Yt) * vt,
+        pn = (lt[0] + $t[0] * Yt) * vt;
+      for (let Ie = 1; Ie < Ht && Ut < bt; Ie++) {
+        const so = (st[Ie] + St[Ie] * Yt) * vt,
+          Ln = (lt[Ie] + $t[Ie] * Yt) * vt,
+          ao = Math.hypot(so - ge, Ln - pn);
+        for (oe += ao; oe >= Y && Ut < bt;) {
+          oe -= Y;
+          const Zs = 1 - oe / (ao || 1),
+            Rr = ge + (so - ge) * Zs,
+            qr = pn + (Ln - pn) * Zs;
+          (we.set(St[Ie] * Lt, $t[Ie] * Lt, 0).normalize(),
+            Zt.setFromUnitVectors(de, we),
+            Zt.multiply(Oe.setFromAxisAngle(de, Ut * 2.39)),
+            Pe.set(Rr + ce, qr + Mt, 0),
+            te.setScalar(vt),
+            Xt.compose(Pe, Zt, te),
+            It.setMatrixAt(Ut, Xt),
+            ht.setMatrixAt(Ut, Xt),
+            Ut++);
+        }
+        ((ge = so), (pn = Ln));
+      }
+    }
+    const re = _ * 2 - 1,
+      Ee = new Float32Array(re),
+      ve = new Float32Array(re),
+      Se = new Float32Array(re),
+      w = new Float32Array(re);
+    function R() {
+      for (let $t = 0; $t < _; $t++) {
+        const Ht = _ - 1 - $t,
+          Lt = _ - 1 + $t;
+        ((Ee[Ht] = -ut.r[$t]),
+          (ve[Ht] = ut.y[$t]),
+          (Se[Ht] = -ut.nr[$t]),
+          (w[Ht] = ut.ny[$t]),
+          (Ee[Lt] = ut.r[$t]),
+          (ve[Lt] = ut.y[$t]),
+          (Se[Lt] = ut.nr[$t]),
+          (w[Lt] = ut.ny[$t]));
+      }
+      const st = I - 0.5;
+      let lt = 0,
+        St = re - 1;
+      for (; Ee[lt] < -st;) lt++;
+      for (; Ee[St] > st;) St--;
+      for (const $t of [1, -1])
+        qe(
+          Ee.subarray(lt, St + 1),
+          ve.subarray(lt, St + 1),
+          Se.subarray(lt, St + 1),
+          w.subarray(lt, St + 1),
+          St - lt + 1,
+          $t,
+        );
+    }
+    const C = new Float32Array(97),
+      tt = new Float32Array(97),
+      it = new Float32Array(97),
+      wt = new Float32Array(97);
+    for (let st = 0; st < 97; st++) {
+      const lt = (st / 96) * Math.PI * 2;
+      ((C[st] = 8.5 * Math.cos(lt)),
+        (tt[st] = 8.5 * Math.sin(lt)),
+        (it[st] = -Math.cos(lt)),
+        (wt[st] = -Math.sin(lt)));
+    }
+    const Ft = [],
+      Wt = 220;
+    for (let st = 0; st < Wt; st++) {
+      const lt = 1 - (2 * (st + 0.5)) / Wt,
+        St = Math.sqrt(1 - lt * lt),
+        $t = st * 2.39996;
+      Ft.push(Rt(Math.cos($t) * St, lt, Math.sin($t) * St));
+    }
+    const Tt = [];
+    for (let st = 0; st < Wt; st++)
+      for (let lt = st + 1; lt < Wt; lt++)
+        Ft[st].distanceTo(Ft[lt]) < 0.26 && Tt.push([st, lt]);
+    const Pt = et(B.rer, {
+        bump: 0,
+        sheen: 0.4,
+        clearcoat: 0.5,
+        rim: 0.5,
+        roughness: 0.4,
+        edge: 0.15,
+      }),
+      pt = new an(new pe(0.62, 1), Pt, Wt),
+      _t = new Ae(0.22, 0.22, 1, 6, 1),
+      ae = new an(_t, Pt, Tt.length);
+    for (const st of [pt, ae])
+      ((st.frustumCulled = !1),
+        st.instanceMatrix.setUsage(Vn),
+        g.add(xt(st, kn)));
+    pt.visible = ae.visible = M === "endo";
+    const xe = 8.5 + Z + 1.3;
+    function ne(st, lt, St) {
+      const $t = Ft.map((Ht) => {
+        const ce =
+          Math.acos(Math.max(-1, Math.min(1, -Ht.y))) < lt - 0.12 && Ht.z < 0.12
+            ? St
+            : 0;
+        return {
+          p: Ht.clone().multiplyScalar(xe).add(st),
+          on: ce,
+        };
+      });
+      ($t.forEach((Ht, Lt) => {
+        (te.setScalar(Ht.on),
+          pt.setMatrixAt(Lt, Xt.compose(Ht.p, Zt.identity(), te)));
+      }),
+        Tt.forEach(([Ht, Lt], ce) => {
+          const Mt = $t[Ht],
+            vt = $t[Lt],
+            Yt = Math.min(Mt.on, vt.on);
+          we.copy(vt.p).sub(Mt.p);
+          const Y = we.length();
+          (Zt.setFromUnitVectors(de, we.normalize()),
+            Pe.copy(Mt.p).add(vt.p).multiplyScalar(0.5),
+            te.set(Yt, Y * (Yt > 0 ? 1 : 0), Yt),
+            ae.setMatrixAt(ce, Xt.compose(Pe, Zt, te)));
+        }),
+        (pt.instanceMatrix.needsUpdate = ae.instanceMatrix.needsUpdate = !0));
+    }
+    const ze = 40,
+      He = new an(
+        new pe(0.62, 1),
+        et(B.golgi, {
+          bump: 0,
+          sheen: 0.4,
+          clearcoat: 0.5,
+          rim: 0.5,
+          edge: 0.15,
+        }),
+        ze,
+      );
+    ((He.frustumCulled = !1), g.add(xt(He, kn)));
+    function dn(st, lt) {
+      const St = 12.7 * Math.sin(st) - 4.2 + _e.headTop + 0.6;
+      for (let $t = 0; $t < ze; $t++) {
+        const Ht = $t / (ze - 1),
+          Lt = Math.PI + (($t % (ze / 2)) / (ze / 2 - 1)) * Math.PI;
+        (Pe.set(Math.cos(Lt) * St, -4.2 + (Ht - 0.5) * 2.2, Math.sin(Lt) * St),
+          te.setScalar(lt),
+          He.setMatrixAt($t, Xt.compose(Pe, Zt.identity(), te)));
+      }
+      He.instanceMatrix.needsUpdate = !0;
+    }
+    const Ge = M === "endo" ? 1.7 : 1.25,
+      Ye = wr(`cargo|${M}|${e}`, () =>
+        Gt(Ge, {
+          detail: e === "low" ? 6 : 12,
+          seed: M === "endo" ? 71 : 73,
+          amp: Ge * 0.14,
+          freq: 0.9 / Ge,
+        }),
+      ),
+      On = et(M === "endo" ? B.mitoOuter : B.vesicle, {
+        bump: 0.08,
+        freq: 2,
+        sheen: 0.6,
+        clearcoat: 0.5,
+        rim: 0.5,
+        edge: 0.15,
+      }),
+      An = new an(Ye, On, 24);
+    ((An.frustumCulled = !1), g.add(xt(An, M === "endo" ? "lyso" : "vesicle")));
+    const vo = p.kin.solutes.cargo,
+      Ce = [],
+      es = 8.5 - Z - Ge - 0.2,
+      Xs =
+        M === "endo"
+          ? [
+              Rt(-2.6, -es + 0.6, -1.4),
+              Rt(2.4, -es + 1, -2),
+              Rt(0.2, -es + 3, -3),
+            ]
+          : [
+              Rt(-2.3, -2.2, -1.4),
+              Rt(2.2, -1.6, -1.8),
+              Rt(0.1, 1.6, -2.4),
+              Rt(-1.2, 0.6, -3.4),
+            ],
+      Ve = {
+        x: 24,
+        y0: Rn + Ge + 0.6,
+        y1: 15,
+        z0: -18,
+        z1: -1.5,
+      },
+      Nr = (st) => ({
+        p: Rt(q(a, -24, Ve.x), q(a, Ve.y0 + 2, Ve.y1), q(a, Ve.z0, Ve.z1)),
+        v: Rt(),
+        s: st ? 0 : 1,
+        st: 1,
+        mode: "free",
+        rot: new Me().setFromEuler(new vn(a() * 6, a() * 6, a() * 6)),
+      });
+    if (M === "endo") for (let st = 0; st < vo.out; st++) Ce.push(Nr(!1));
+    const fe = {
+      cycleN: 0,
+      carried: [],
+      alpha: 0,
+    };
+    fe.event = (st) => {
+      if (st.type === "cycle") {
+        if (((fe.cycleN = st.n), M === "endo")) {
+          const lt = Ce.filter((St) => St.mode === "free").sort(
+            (St, $t) => St.p.lengthSq() - $t.p.lengthSq(),
+          );
+          ((fe.carried = lt.slice(0, st.n)),
+            fe.carried.forEach((St, $t) => {
+              ((St.mode = "carried"),
+                (St.spot = Xs[$t]),
+                (St.from = St.p.clone()));
+            }));
+        } else {
+          fe.carried = [];
+          for (let lt = 0; lt < st.n; lt++) {
+            const St = {
+              p: Rt(),
+              v: Rt(),
+              s: 1,
+              st: 1,
+              mode: "carried",
+              spot: Xs[lt],
+              rot: new Me().setFromEuler(new vn(a() * 6, a() * 6, a() * 6)),
+            };
+            (Ce.push(St), fe.carried.push(St));
+          }
+        }
+      } else st.type;
+    };
+    const Tr = (st) => (st <= 0 ? 0 : st >= 1 ? 1 : st * st * (3 - 2 * st)),
+      Re = (st, lt, St) => Tr((st - lt) / (St - lt)),
+      Cn = Rt(),
+      Ys = Rt();
+    ((fe.update = (st) => {
+      const lt = p.kin.phase;
+      let St = 0,
+        $t = 0,
+        Ht = 0,
+        Lt = Rt(0, -40, 0),
+        ce = 0,
+        Mt = 0,
+        vt = 1;
+      const Yt = (Y) => (8.5 + 4.2) * Math.cos(Y) - 4.2;
+      if (M === "endo") {
+        if (lt < 0.6)
+          ((St =
+            lt < 0.1
+              ? 0
+              : lt < 0.48
+                ? Re(lt, 0.1, 0.48) * K
+                : K + (z - K) * Re(lt, 0.5, 0.6)),
+            (ce = Re(lt, 0.08, 0.2)),
+            (Mt = Re(lt, 0.44, 0.5) * (1 - Re(lt, 0.585, 0.6))),
+            Cn.set(0, St > 0.001 ? Yt(St) : 8.5, 0));
+        else {
+          (($t = 4.2 * (1 - Re(lt, 0.6, 0.72))), (Ht = 1));
+          const Y = Yt(z);
+          (Lt.set(0, Y - Re(lt, 0.6, 0.86) * 9, -Re(lt, 0.6, 0.86) * 2),
+            (ce = 1 - Re(lt, 0.68, 0.82)),
+            (vt = 1 - Re(lt, 0.88, 0.985)),
+            vt < 0.02 && (Ht = 0),
+            Cn.copy(Lt));
+        }
+      } else {
+        const Y = Yt(z),
+          oe = -14.14;
+        if (lt < 0.38)
+          ((Ht = lt > 0 ? 1 : 0),
+            (vt = 0.02 + 0.98 * Re(lt, 0, 0.08)),
+            Lt.set(
+              0,
+              lt < 0.3
+                ? -28 + (oe + 28) * Re(lt, 0, 0.3)
+                : oe + (Y - oe) * Re(lt, 0.3, 0.38),
+              -3 * (1 - Re(lt, 0, 0.3)),
+            ),
+            ($t = 0.9 * Re(lt, 0.26, 0.38)),
+            Cn.copy(Lt));
+        else {
+          const ge = Math.min(1, Math.max(0, (lt - 0.38) / 0.5));
+          ((St = z * (1 - ge * ge * (3 - 2 * ge) * (0.35 + 0.65 * ge))),
+            Cn.set(0, St > 0.001 ? Yt(St) : 8.5, 0));
+        }
+      }
+      (zt(St, $t, 4.2 * 1.3), (fe.vesK = vt));
+      for (const Y of $) jt(Y);
+      (Ct(J.out, ut, Ys, U - 0.3), Ct(J.inn, ut, Ys, U - 0.3));
+      for (const Y of [J.vOut, J.vIn])
+        ((Y.m.visible = Ht > 0), Ht && Ct(Y, W, Lt, 1 / 0, vt));
+      ((Ut = 0), R());
+      for (const Y of dt) ((Y.visible = Ht > 0), Ht && jt(Y, W, Lt, vt));
+      if (Ht) for (const Y of [1, -1]) qe(C, tt, it, wt, 97, Y, Lt.x, Lt.y, vt);
+      for (let Y = Ut; Y < bt; Y++)
+        (It.setMatrixAt(Y, Xt.makeScale(0, 0, 0)),
+          ht.setMatrixAt(Y, Xt.makeScale(0, 0, 0)));
+      ((It.instanceMatrix.needsUpdate = ht.instanceMatrix.needsUpdate = !0),
+        M === "endo"
+          ? (ne(Ht ? Lt : Cn, Ht ? Math.PI + 0.2 : St, ce), dn(St || z, Mt))
+          : dn(z, 0),
+        (fe.alpha = St),
+        (fe.center = Cn.clone()),
+        (fe.vesC = Lt.clone()),
+        (fe.vesVis = Ht));
+      for (const Y of Ce) {
+        if (
+          ((Y.s += (Y.st - Y.s) * Math.min(1, st * 2.5)),
+          Y.mode === "free" || Y.mode === "release")
+        )
+          ((Y.v.x += -0.9 * Y.v.x * st + 1.4 * Math.sqrt(st) * ie(a)),
+            (Y.v.y += -0.9 * Y.v.y * st + 1.4 * Math.sqrt(st) * ie(a)),
+            (Y.v.z += -0.9 * Y.v.z * st + 1.4 * Math.sqrt(st) * ie(a)),
+            Y.p.addScaledVector(Y.v, st),
+            Y.mode === "release" && Y.p.y > Ve.y0 + 1 && (Y.mode = "free"),
+            Y.mode === "free" &&
+              ((Y.p.x < -24 || Y.p.x > Ve.x) && (Y.v.x *= -1),
+              (Y.p.z < Ve.z0 || Y.p.z > Ve.z1) && (Y.v.z *= -1),
+              (Y.p.x = Math.max(-24, Math.min(Ve.x, Y.p.x))),
+              (Y.p.z = Math.max(Ve.z0, Math.min(Ve.z1, Y.p.z))),
+              Y.p.y < Ve.y0 && ((Y.p.y = Ve.y0), (Y.v.y = Math.abs(Y.v.y))),
+              Y.p.y > Ve.y1 && ((Y.p.y = Ve.y1), (Y.v.y = -Math.abs(Y.v.y)))));
+        else if (Y.mode === "out")
+          (Y.v.set(Y.v.x * 0.9 + ie(a) * 0.3, 5.5, Y.v.z * 0.9 + ie(a) * 0.3),
+            (Y.p.x += (Y.spot.x * 1.6 - Y.p.x) * st * 0.8),
+            Y.p.addScaledVector(Y.v, st),
+            Y.p.y > Ve.y0 + 0.5 &&
+              ((Y.mode = "free"), Y.v.set(q(a, -1, 1), 1.5, q(a, -1, 0.3))));
+        else if (Y.mode === "carried") {
+          M === "exo" && lt >= 0.46 && (Y.mode = "out");
+          const oe = Ht ? vt : 1,
+            ge = (Ht ? fe.vesC : fe.center).clone().addScaledVector(Y.spot, oe);
+          (M === "endo" && lt < 0.14 && Y.from
+            ? Y.p.lerpVectors(Y.from, ge, Re(lt, 0, 0.12))
+            : Y.p.copy(ge),
+            Ht && (Y.s = Y.st = oe));
+        }
+        Y.rot.multiply(Zt.setFromEuler(new vn(st * 0.3, st * 0.2, st * 0.25)));
+      }
+      if (M === "endo")
+        for (let Y = Ce.length - 1; Y >= 0; Y--)
+          Ce[Y].mode === "carried" &&
+            (lt === 0 || lt > 0.985) &&
+            Ce.splice(Y, 1);
+      ((An.count = Ce.length),
+        Ce.forEach((Y, oe) => {
+          (te.setScalar(Y.s), An.setMatrixAt(oe, Xt.compose(Y.p, Y.rot, te)));
+        }),
+        (An.instanceMatrix.needsUpdate = !0));
+    }),
+      (p.bulk = fe),
+      fe.update(0),
+      M === "endo"
+        ? (S(translate("细胞膜"), A(-24, 0, 0)),
+          S(translate("被膜小窝"), () =>
+            fe.vesVis
+              ? fe.vesC.clone().add(Rt(0, -8.5 - Z - 1.4, 0))
+              : fe.center.clone().add(Rt(0, -8.5 - Z - 1.4, 0)),
+          ),
+          S(translate("囊泡"), () =>
+            fe.vesVis ? fe.vesC.clone().add(Rt(8.5 + Z, 0, -1)) : Rt(0, -6, 0),
+          ),
+          S(
+            translate("大分子"),
+            () =>
+              (Ce.find((st) => st.mode === "free") || Ce[0])?.p.clone() ??
+              Rt(0, 8, -6),
+          ))
+        : (S(translate("细胞膜"), A(-24, 0, 0)),
+          S(translate("囊泡"), () =>
+            fe.vesVis
+              ? fe.vesC.clone().add(Rt(8.5 + Z, 0, -1))
+              : fe.center.clone().add(Rt(0, -6, 0)),
+          ),
+          S(translate("分泌蛋白"), () =>
+            Ce.length ? Ce[Ce.length - 1].p.clone() : Rt(0, 8, -6),
+          )));
+  }
+  function yt() {
+    const M = {};
+    if (p.mode === "endo" || p.mode === "exo") {
+      const L = p.kin.solutes.cargo;
+      return (
+        (M.cargo = {
+          inside: L.in,
+          outside: L.out,
+        }),
+        M
+      );
+    }
+    for (const [L, at] of Object.entries(p.swarms)) {
+      if (L === "ATP" || L === "ADP" || L === "Pi") continue;
+      let Z = 0,
+        U = 0;
+      for (let I = 0; I < at.n; I++) {
+        const Q = at.state[I];
+        if (Q === Dn) continue;
+        (Q === $n ? Math.sign(at.P[I * 3 + 1]) : at.from[I]) > 0 ? U++ : Z++;
+      }
+      M[L] = {
+        inside: Z,
+        outside: U,
+      };
+    }
+    return M;
+  }
+  function ft() {
+    return p.labels.map((M) => ({
+      text: M.text,
+      at: M.fn(),
+    }));
+  }
+  function Nt(M, L) {
+    if (
+      ((L = Math.max(0, Math.min(L, 0.1)) * p.speed),
+      (p.time += L),
+      (m.speed = p.speed),
+      L > 0)
+    )
+      for (const U of vi(p.kin, L)) kt(U);
+    for (const U of p.machines) U.update(L);
+    if (m.group.visible) {
+      m.holes.length = 0;
+      for (const U of p.staticHoles) m.holes.push(U);
+      for (const U of Object.values(p.swarms))
+        for (let I = 0; I < U.n; I++) {
+          if (U.state[I] !== wn || !U.route[I]?.hole) continue;
+          const Q = U.P[I * 3 + 1];
+          Math.abs(Q) < Rn + 0.6 &&
+            m.holes.push({
+              x: U.P[I * 3],
+              z: U.P[I * 3 + 2],
+              r: 0.55,
+              leaf: Q > 0 ? 1 : -1,
+            });
+        }
+      m.update(M, L / Math.max(1e-6, p.speed));
+    }
+    for (const U of Object.values(p.swarms)) (b(U, L), Ia(U));
+    p.bulk && p.bulk.update(L);
+    const at = p.kin;
+    let Z = !1;
+    (p.mode === "endo" || p.mode === "exo"
+      ? (Z = at.stalled)
+      : p.mode !== "active" &&
+        (Z = Object.values(at.solutes).every(
+          (U) => Math.abs(U.in - U.out) <= 1,
+        )),
+      (p.idle = Z ? p.idle + L : 0),
+      p.loop && p.idle > 14 && G(p.mode),
+      (r.userData.labels = ft()));
+  }
+  return (
+    (p.loop = !0),
+    G(Aa.includes(o) ? o : "simple"),
+    (r.userData.update = Nt),
+    (r.userData.radius = 30),
+    Object.defineProperty(r.userData, "focus", {
+      get: () =>
+        p.mode === "endo" || p.mode === "exo" ? Rt(0, -6, -4) : Rt(0, 0, 2),
+      enumerable: !0,
+      configurable: !0,
+    }),
+    {
+      group: r,
+      update: Nt,
+      counts: yt,
+      labels: ft,
+      setMode: (M) => G(Aa.includes(M) ? M : "simple"),
+      get mode() {
+        return p.mode;
+      },
+      atp: () => p.kin.atp,
+      reset: () => G(p.mode),
+      setOxygen(M) {
+        ((p.o2 = M), (p.kin.o2 = M));
+      },
+      get kinetics() {
+        return p.kin;
+      },
+      get speed() {
+        return p.speed;
+      },
+      set speed(M) {
+        p.speed = M;
+      },
+      set loop(M) {
+        p.loop = M;
+      },
+    }
+  );
+}
+const $i = [
+    "atp-binding",
+    "neck-linker-zippering",
+    "trailing-head-swing",
+    "hydrolysis-release",
+  ],
+  Di = ["atp-binding", "detach-priming", "diffusive-search", "powerstroke"],
+  $a = 8,
+  vr = 6,
+  Vi = 4,
+  io = [0, 0.22, 0.38, 0.78, 1],
+  lo = [0, 0.2, 0.4, 0.75, 1],
+  Sr = (t) => Math.min(1, Math.max(0, t)),
+  kr = (t) => ((t = Sr(t)), t * t * t * (t * (6 * t - 15) + 10)),
+  Xo = (t, e, o) => Sr((t - e) / (o - e));
+function Ar(t, e = 0, o = vr) {
+  const s = Math.max(0, e || 0) / o;
+  return Math.max(0, t * (1 - s * s));
+}
+function Pr(t, e, o) {
+  let s = 0;
+  for (; s < o.length - 1 && t >= e[s + 1];) s++;
+  return {
+    phase: o[s],
+    phaseIndex: s,
+    phaseProgress: (t - e[s]) / (e[s + 1] - e[s]),
+  };
+}
+function Ni(t, { stepRate: e = 2, load: o = 0 } = {}) {
+  const s = Ar(e, o, vr),
+    n = Math.max(0, t) * s,
+    a = Math.floor(n),
+    r = n - a,
+    i = $a * a,
+    c = a % 2 === 0 ? 0 : 1,
+    l = 1 - c,
+    u = kr(Xo(r, io[2], io[3])),
+    d = Xo(r, 0.3, io[2]),
+    h = [];
+  return (
+    (h[c] = {
+      x: i + 4,
+      lift: 0,
+      z: 0,
+      bound: !0,
+      nucleotide: r < 0.11 ? "empty" : r < 0.86 ? "ATP" : "ADP·Pi",
+    }),
+    (h[l] = {
+      x: i - 4 + 16 * u,
+      lift: d * (1 - u) + 4.5 * Math.sin(Math.PI * u),
+      z: (l ? 1 : -1) * 6.5 * Math.sin(Math.PI * u),
+      bound: r < 0.3 || r >= io[3],
+      nucleotide: r < 0.3 ? "ADP·Pi" : r < 0.84 ? "ADP" : "empty",
+    }),
+    {
+      motor: "kinesin",
+      steps: a,
+      cycle: r,
+      stepRate: s,
+      position: i + $a * u,
+      leadingHead: h[0].x >= h[1].x ? 0 : 1,
+      movingHead: l,
+      swing: u,
+      atpUsed: a + (r >= 0.86 ? 1 : 0),
+      heads: h,
+      ...Pr(r, io, $i),
+    }
+  );
+}
+const Da = new Map();
+function Ti(t, e) {
+  let o = Da.get(t);
+  for (
+    o ||
+    ((o = {
+      rng: Jt(t * 7919 + 13),
+      g: [],
+      front: [-4],
+      rear: [4],
+    }),
+    Da.set(t, o));
+    o.g.length <= e;
+  ) {
+    const s = o.rng(),
+      n = o.g.length,
+      a = s < 0.72 ? 8 : s < 0.92 ? 16 : 24;
+    (o.g.push(a), o.front.push(o.front[n] - a), o.rear.push(o.front[n]));
+  }
+  return o;
+}
+function Ri(t, { stepRate: e = 1.6, load: o = 0, seed: s = 7 } = {}) {
+  const n = Ar(e, o, Vi),
+    a = Math.max(0, t) * n,
+    r = Math.floor(a),
+    i = a - r,
+    c = Ti(s, r),
+    l = c.front[r],
+    u = c.rear[r],
+    d = c.g[r],
+    h = r % 2 === 0 ? 0 : 1,
+    m = 1 - h,
+    g = kr(Xo(i, lo[2], lo[3])),
+    p = Xo(i, 0.22, lo[2]),
+    x = l - d,
+    b = [];
+  ((b[h] = {
+    x: l,
+    lift: 0,
+    z: 0,
+    bound: !0,
+    nucleotide: "empty",
+  }),
+    (b[m] = {
+      x: u + (x - u) * g,
+      lift: 2 * p * (1 - g) + 9 * Math.sin(Math.PI * g),
+      z: (m ? 1 : -1) * 2 * Math.sin(Math.PI * g),
+      bound: i < 0.24 || i >= lo[3],
+      nucleotide:
+        i < 0.1
+          ? "empty"
+          : i < 0.3
+            ? "ATP"
+            : i < 0.86
+              ? "ADP·Pi"
+              : i < 0.95
+                ? "ADP"
+                : "empty",
+    }));
+  const v = (l + u) / 2,
+    V = (l + x) / 2;
+  return {
+    motor: "dynein",
+    steps: r,
+    cycle: i,
+    stepRate: n,
+    position: v + (V - v) * g,
+    stepSize: v - V,
+    leadingHead: b[0].x <= b[1].x ? 0 : 1,
+    movingHead: m,
+    swing: g,
+    atpUsed: r + (i >= 0.3 ? 1 : 0),
+    heads: b,
+    ...Pr(i, lo, Di),
+  };
+}
+const Ne = {
+    pf: 13,
+    mono: 4,
+    rise: 12 / 13,
+    R: 10,
+    outer: 12.5,
+  },
+  qi = 0.12,
+  qs = (t) => qi + (2 * Math.PI * t) / Ne.pf,
+  Es = (t, e = new k()) => e.set(0, Math.sin(qs(t)), Math.cos(qs(t))),
+  Ei = (t, e, o) => o + t * Ne.rise + Ne.mono * e + Ne.mono / 2;
+function qo(t, e, o) {
+  const s = `${t}@nm`;
+  return (
+    me[s] ||
+      (me[s] = {
+        ...me[t],
+        edge: me[t].edge * e,
+        fill: me[t].fill * o,
+      }),
+    s
+  );
+}
+const Je = {
+  tubulin: qo("tubulin", 0.22, 0.08),
+  protein: qo("protein", 0.8, 0.35),
+  vesicle: qo("vesicle", 0.4, 0.1),
+  lyso: qo("lyso", 0.7, 0.15),
+  dynein: "dynein@nm",
+};
+me["dynein@nm"] ||
+  (me["dynein@nm"] = {
+    color: "#ff5a3c",
+    edge: 0.3,
+    fill: 0.2,
+    label: "mCherry",
+  });
+const ke = {
+    bump: 0.35,
+    freq: 0.7,
+    edge: 0.6,
+  },
+  Ws = (t, e) => "#" + new he(t).multiplyScalar(e).getHexString(),
+  tn = (t, e, o) => "#" + new he(t).lerp(new he(e), o).getHexString(),
+  Eo = new Map(),
+  wo = (t, e) => (Eo.has(t) || Eo.set(t, e()), Eo.get(t));
+function Va(t, e) {
+  return wo(`tub|${t}|${e}`, () =>
+    Gt(2.2, {
+      detail: e === "high" ? 2 : 1,
+      scale: [1, 1.15, 1.24],
+      amp: 0.3,
+      freq: 0.6,
+      seed: t,
+    }),
+  );
+}
+function Fi({
+  length: t = 200,
+  seed: e = 1,
+  detail: o = "high",
+  flare: s = !0,
+} = {}) {
+  const n = Jt(e * 31 + 5),
+    a = -t / 2,
+    r = t / 2,
+    i = [[], []],
+    c = new Me(),
+    l = new Me(),
+    u = new Me(),
+    d = new k(1, 0, 0),
+    h = new k(0, 0, 1);
+  for (let b = 0; b < Ne.pf; b++) {
+    const v = qs(b),
+      V = Es(b),
+      D = new k(0, Math.cos(v), -Math.sin(v));
+    c.setFromAxisAngle(d, Math.PI / 2 - v);
+    const T = s ? Math.floor(q(n, 1, 7)) : 0,
+      E =
+        Math.floor((r - (b * Ne.rise + a) - 2) / Ne.mono) -
+        (s ? Math.floor(n() * 3) * 2 : 0);
+    let F = 0,
+      O = Ne.R,
+      X = 0;
+    for (let H = 0; H < E; H++) {
+      let N = Ei(b, H, a) + (H % 2 ? -0.3 : 0.3),
+        y = Ne.R;
+      const P = E - T;
+      (H >= P
+        ? ((X += 0.2 + 0.05 * n()),
+          (F += Ne.mono * Math.cos(X)),
+          (O += Ne.mono * Math.sin(X)),
+          (N = F),
+          (y = O))
+        : ((F = N), (O = y)),
+        l.setFromAxisAngle(h, H >= P ? X : 0),
+        u.setFromEuler(
+          new vn((n() - 0.5) * 0.25, (n() - 0.5) * 0.25, (n() - 0.5) * 0.15),
+        ));
+      const S = c.clone().multiply(l).multiply(u),
+        A = new k(N, 0, 0)
+          .addScaledVector(V, y)
+          .addScaledVector(D, (n() - 0.5) * 0.2);
+      i[H % 2].push({
+        position: A,
+        quaternion: S,
+        scale: 0.97 + n() * 0.06,
+      });
+    }
+  }
+  const m = new qt(),
+    g = et(tn(B.microtubule, "#ffffff", 0.12), {
+      ...ke,
+      roughness: 0.55,
+      sheen: 0.6,
+      rim: 0.32,
+    }),
+    p = et(Ws(B.microtubule, 0.6), {
+      ...ke,
+      roughness: 0.55,
+      sheen: 0.6,
+      rim: 0.28,
+    });
+  (m.add(xt(ee(Va(11, o), g, i[0]), Je.tubulin)),
+    m.add(xt(ee(Va(23, o), p, i[1]), Je.tubulin)));
+  const x = (b) => {
+    const v = i[b].filter(
+      (V) => V.position.z > 9 && Math.abs(V.position.x) < t * 0.3,
+    );
+    return (v[Math.floor(v.length * 0.4)] || i[b][0]).position
+      .clone()
+      .multiplyScalar(1.05);
+  };
+  return (
+    (m.userData = {
+      kind: "microtubule",
+      radius: t / 2 + 10,
+      length: t,
+      x0: a,
+      labels: [
+        {
+          text: translate("微管"),
+          at: new k(-t * 0.25, Ne.outer + 1, 0),
+        },
+        {
+          text: translate("α-微管蛋白"),
+          at: x(0),
+        },
+        {
+          text: translate("β-微管蛋白"),
+          at: x(1),
+        },
+        {
+          text: translate("正端"),
+          at: new k(r + 6, 0, 0),
+        },
+        {
+          text: translate("负端"),
+          at: new k(a - 2, 0, 0),
+        },
+      ],
+    }),
+    m
+  );
+}
+const ji = new k(0, 1, 0),
+  Oi = new k(0, 0, 1),
+  Ci = (t, e = 8) =>
+    wo(`rod|${t}|${e}`, () => new Ae(t, t, 1, e, 1, !1).translate(0, 0.5, 0)),
+  ws = new k();
+function Fo(t, e, o, s = 1) {
+  ws.subVectors(o, e);
+  const n = Math.max(0.001, ws.length());
+  (t.position.copy(e),
+    t.quaternion.setFromUnitVectors(ji, ws.divideScalar(n)),
+    (t.scale.y = n / s));
+}
+function zr(
+  t,
+  {
+    strand: e = 0.75,
+    r: o = 0.95,
+    pitch: s = 14,
+    radial: n = 6,
+    hinge: a = -1,
+  } = {},
+) {
+  return wo(`cc|${t}|${e}|${o}|${a}`, () => {
+    const r = [];
+    for (const i of [0, Math.PI]) {
+      const c = [];
+      for (let l = 0; l <= t + 1e-6; l += 0.8) {
+        const u = i + (2 * Math.PI * l) / s,
+          d = a > 0 ? 1 + 0.9 * Math.exp(-(((l - a) / 2.5) ** 2)) : 1;
+        c.push(new k(Math.cos(u) * o * d, l, Math.sin(u) * o * d));
+      }
+      r.push(
+        De(c, e, {
+          tubular: c.length * 2,
+          radial: n,
+        }),
+      );
+    }
+    return ue(r);
+  });
+}
+const go = 1.45,
+  Li = 1.05;
+function Ir() {
+  return wo("nuc", () => ({
+    base: ue([
+      Gt(0.55, {
+        detail: 2,
+        scale: [1.3, 0.55, 1],
+        seed: 3,
+      }).translate(-0.35, 0.1, 0),
+      Gt(0.45, {
+        detail: 2,
+        scale: [1, 0.6, 1],
+        seed: 4,
+      }).translate(0.65, -0.15, 0),
+    ]),
+    phos: new pe(0.42, 2),
+  }));
+}
+const Na = [
+  new k(1.35, -0.45, 0.1),
+  new k(2.05, -0.75, -0.1),
+  new k(2.75, -1, 0.1),
+];
+function eo() {
+  const { base: t, phos: e } = Ir(),
+    o = new qt(),
+    s = new mt(
+      t,
+      et(B.ribosome, {
+        ...ke,
+        bump: 0.05,
+        emissive: B.ribosome,
+        emissiveIntensity: 0.55,
+        rim: 0.6,
+      }),
+    );
+  o.add(s);
+  const n = et(B.golgiTrans, {
+      ...ke,
+      bump: 0.05,
+      emissive: "#ff9a3c",
+      emissiveIntensity: 1.4,
+      rim: 0.8,
+    }),
+    a = Na.map((r) => {
+      const i = new qt();
+      return (i.position.copy(r), i.add(new mt(e, n)), o.add(i), i);
+    });
+  return (
+    o.scale.setScalar(go),
+    (o.userData.set = (r) => {
+      ((o.visible = r !== "empty"),
+        (a[2].visible = r === "ATP" || r === "ADP·Pi"),
+        a[2].position.copy(Na[2]),
+        r === "ADP·Pi" && a[2].position.add(new k(0.35, -0.2, 0.25)));
+    }),
+    o
+  );
+}
+function $r() {
+  const t = new qt();
+  return (
+    t.add(
+      new mt(
+        Ir().phos,
+        et(B.golgiTrans, {
+          ...ke,
+          bump: 0.05,
+          emissive: "#ff9a3c",
+          emissiveIntensity: 1.4,
+          rim: 0.8,
+        }),
+      ),
+    ),
+    t.scale.setScalar(go),
+    t
+  );
+}
+const Qe = (t, e) =>
+    Math.sin(t * 2.3 + e) * 0.6 +
+    Math.sin(t * 5.1 + e * 1.7) * 0.3 +
+    Math.sin(t * 9.7 + e * 2.9) * 0.15,
+  Ze = (t) => ((t = Math.min(1, Math.max(0, t))), t * t * (3 - 2 * t)),
+  vs = (t, e) => ((t % e) + e) % e;
+function Dr({
+  r: t,
+  color: e,
+  stain: o,
+  seed: s,
+  detail: n,
+  content: a = "granules",
+}) {
+  const r = new qt(),
+    i = n === "high",
+    c = Gt(t, {
+      detail: i ? 28 : 14,
+      amp: t * 0.025,
+      freq: 1.6 / t,
+      seed: s,
+    }),
+    l = Gt(t - 4.5, {
+      detail: i ? 22 : 10,
+      amp: t * 0.025,
+      freq: 1.6 / t,
+      seed: s,
+    });
+  (r.add(
+    xt(
+      new mt(
+        c,
+        Zn(e, {
+          bump: 0.45,
+          freq: 1.3,
+          edge: 0.6,
+          opacity: 0.34,
+          rim: 0.9,
+        }),
+      ),
+      o,
+    ),
+  ),
+    r.add(
+      xt(
+        new mt(
+          l,
+          Zn(tn(e, "#ffffff", 0.25), {
+            bump: 0.3,
+            freq: 1.3,
+            edge: 0.6,
+            opacity: 0.22,
+            rim: 0.5,
+          }),
+        ),
+        o,
+      ),
+    ));
+  const u = Jt(s * 17 + 3),
+    d = ue([
+      Gt(2.4, {
+        detail: 3,
+        scale: [1.2, 1.7, 1],
+        amp: 0.5,
+        freq: 0.5,
+        seed: s + 2,
+      }),
+      Gt(1.8, {
+        detail: 2,
+        amp: 0.4,
+        freq: 0.6,
+        seed: s + 3,
+      }).translate(1.2, 2.6, 0.4),
+    ]),
+    h = Co(c, i ? 26 : 10, s + 5).map(({ position: g, normal: p }) => ({
+      position: g.clone().addScaledVector(p, -1.8),
+      normal: p,
+      scale: q(u, 0.75, 1.2),
+    }));
+  r.add(
+    xt(
+      ee(
+        d,
+        et(tn(e, B.membrane, 0.5), {
+          ...ke,
+          rim: 0.3,
+        }),
+        h,
+      ),
+      o,
+    ),
+  );
+  const m = [];
+  if (a === "granules") {
+    const g = Gt(3, {
+      detail: 2,
+      amp: 0.6,
+      freq: 0.4,
+      seed: s + 9,
+    });
+    for (let p = 0; p < (i ? 46 : 18); p++) {
+      const x = new k(u() - 0.5, u() - 0.5, u() - 0.5)
+        .normalize()
+        .multiplyScalar(Math.cbrt(u()) * (t - 11));
+      m.push({
+        position: x,
+        scale: q(u, 0.7, 1.5),
+      });
+    }
+    r.add(
+      ee(
+        g,
+        et(Ws(e, 0.8), {
+          ...ke,
+          emissive: e,
+          emissiveIntensity: 0.12,
+        }),
+        m,
+      ),
+    );
+  } else {
+    const g = Gt(6, {
+      detail: i ? 10 : 5,
+      amp: 0.4,
+      seed: s + 9,
+    });
+    for (let p = 0; p < 6; p++) {
+      const x = new k(u() - 0.5, u() - 0.5, u() - 0.5)
+        .normalize()
+        .multiplyScalar(q(u, 4, t - 14));
+      m.push({
+        position: x,
+        scale: q(u, 0.8, 1.3),
+      });
+    }
+    r.add(
+      xt(
+        ee(
+          g,
+          Zn(tn(e, "#ffffff", 0.35), {
+            bump: 0.3,
+            freq: 1.3,
+            opacity: 0.5,
+          }),
+          m,
+        ),
+        o,
+      ),
+    );
+  }
+  return ((r.userData.radius = t), r);
+}
+function Ta(t, e = 5, o = 0.38, s = 22) {
+  const n = t.clone(),
+    a = new k(),
+    r = new k();
+  let i = 0;
+  return {
+    pos: n,
+    vel: a,
+    shift(c) {
+      n.x += c;
+    },
+    step(c, l) {
+      const u = Math.max(1, Math.ceil(l / 0.016666666666666666)),
+        d = l / u;
+      for (let h = 0; h < u; h++)
+        ((i += d),
+          r
+            .subVectors(c, n)
+            .multiplyScalar(e)
+            .addScaledVector(a, -2 * o * Math.sqrt(e)),
+          (r.x += s * Qe(i * 0.8, 1)),
+          (r.y += s * Qe(i * 0.7, 4)),
+          (r.z += s * Qe(i * 0.75, 7)),
+          a.addScaledVector(r, d),
+          n.addScaledVector(a, d));
+    },
+  };
+}
+const Ss = 3,
+  uo = 176;
+function _i(t, e) {
+  const o = t === "high",
+    s = new qt(),
+    n = et(B.protein, {
+      ...ke,
+      sheen: 0.8,
+      rim: 0.45,
+      cap: "#d8f5a8",
+    }),
+    a = et(tn(B.protein, "#ffffff", 0.18), {
+      ...ke,
+      bump: 0.15,
+      rim: 0.4,
+    }),
+    r = et(tn(B.protein, "#ffffff", 0.35), {
+      ...ke,
+      bump: 0.1,
+      rim: 0.5,
+    }),
+    i = [0, 1].map((b) => {
+      const v = xt(
+        new mt(
+          Gt(3.1, {
+            detail: o ? 8 : 4,
+            scale: [1.25, 0.86, 0.8],
+            amp: 0.5,
+            freq: 0.45,
+            seed: e + 40 + b,
+          }),
+          n,
+        ),
+        Je.protein,
+      );
+      return (s.add(v), v);
+    }),
+    c = [0, 1].map(() =>
+      s.add(xt(new mt(Ci(0.55), r), Je.protein)).children.at(-1),
+    ),
+    l = 56,
+    u = xt(
+      new mt(
+        zr(l, {
+          hinge: 30,
+          radial: o ? 6 : 4,
+        }),
+        a,
+      ),
+      Je.protein,
+    );
+  s.add(u);
+  const d = new qt(),
+    h = Gt(1.9, {
+      detail: o ? 5 : 3,
+      scale: [1, 2.2, 1],
+      amp: 0.35,
+      freq: 0.6,
+      seed: e + 50,
+    }),
+    m = et(B.glyco, {
+      ...ke,
+      rim: 0.4,
+    });
+  for (const b of [-1, 1]) {
+    const v = new mt(h, m);
+    (v.position.set(b * 2.6, 5.5, b * 1.2),
+      (v.rotation.z = -b * 0.5),
+      d.add(v));
+  }
+  const g = new mt(
+    Gt(2.4, {
+      detail: o ? 5 : 3,
+      scale: [1.2, 1, 1],
+      amp: 0.35,
+      seed: e + 51,
+    }),
+    a,
+  );
+  (g.position.set(0, 2, 0), d.add(g), s.add(xt(d, Je.protein)));
+  const p = [0, 1].map(() => ({
+    docked: eo(),
+    incoming: eo(),
+    adp: eo(),
+    pi: $r(),
+  }));
+  for (const b of p)
+    (b.incoming.userData.set("ATP"),
+      b.adp.userData.set("ADP"),
+      s.add(b.docked, b.incoming, b.adp, b.pi));
+  const x = Dr({
+    r: 40,
+    color: B.vesicle,
+    stain: Je.vesicle,
+    seed: e + 60,
+    detail: t,
+  });
+  return (
+    s.add(x),
+    {
+      g: s,
+      heads: i,
+      necks: c,
+      stalk: u,
+      STALK: l,
+      tail: d,
+      nuc: p,
+      vesicle: x,
+    }
+  );
+}
+const Ra = [10, 11];
+function qa(t, e, o, s, n = 1.3) {
+  return wo(`lumpy|${t}|${e}|${o}|${s}`, () => {
+    const a = Jt(s),
+      r = [];
+    for (let i = 0; i <= t + 1e-6; i += n) {
+      const c = e + (o - e) * (i / t),
+        l = [q(a, 0.8, 1.15), q(a, 1.1, 1.6), q(a, 0.8, 1.15)],
+        u = Gt(c * q(a, 0.8, 1.05), {
+          detail: 2,
+          scale: l,
+          amp: c * 0.18,
+          freq: 0.9 / c,
+          seed: s + Math.round(i * 7),
+        });
+      (u.rotateZ((a() - 0.5) * 0.9).rotateX((a() - 0.5) * 0.9),
+        r.push(u.translate((a() - 0.5) * c * 0.7, i, (a() - 0.5) * c * 0.7)),
+        a() < 0.3 &&
+          r.push(
+            Gt(c * 0.7, {
+              detail: 2,
+              amp: c * 0.1,
+              seed: s + Math.round(i * 13),
+            }).translate((a() - 0.5) * c * 2.4, i, (a() - 0.5) * c * 2.4),
+          ));
+    }
+    return ue(r);
+  });
+}
+function Hi(t, e, o) {
+  const s = t === "high",
+    n = new qt(),
+    a = 15,
+    r = 5.3,
+    i = new k(0, a + 1.5 + r + 1.6, 0),
+    c = [];
+  for (let T = 1; T <= 6; T++) {
+    const E = -Math.PI / 2 + (T - 4.5) * (Math.PI / 3),
+      F = Gt(2.5, {
+        detail: s ? 6 : 3,
+        scale: [1.3, 0.85, 1],
+        amp: 0.28,
+        freq: 0.5,
+        seed: e + T,
+      }),
+      O = new mt(F, T === 1 ? o.aaa1 : o.ring);
+    (O.position.copy(i).add(new k(Math.cos(E) * r, Math.sin(E) * r, 0)),
+      (O.rotation.z = E + Math.PI / 2),
+      n.add(O),
+      c.push(O));
+  }
+  const l = new mt(
+    Gt(3.4, {
+      detail: s ? 6 : 3,
+      scale: [1.3, 0.9, 0.4],
+      amp: 0.35,
+      seed: e + 9,
+    }),
+    o.ct,
+  );
+  (l.position.copy(i).add(new k(-1, -1.2, -2.6)), n.add(l));
+  const u = new mt(
+    zr(a + 1, {
+      strand: 0.55,
+      r: 0.7,
+      radial: s ? 6 : 4,
+      pitch: 11,
+    }),
+    o.stalk,
+  );
+  (u.position.set(0, 1.2, 0), n.add(u));
+  const d = c[4].position,
+    h = new mt(
+      De(
+        [
+          d.clone().add(new k(0.5, -1.6, 0.4)),
+          new k(2.4, 12.5, 0.4),
+          new k(0.7, 9, 0.2),
+        ],
+        0.45,
+        {
+          radial: 5,
+          tubular: 14,
+        },
+      ),
+      o.stalk,
+    );
+  n.add(h);
+  const m = new mt(
+    Gt(1.9, {
+      detail: s ? 5 : 3,
+      scale: [1.25, 0.9, 1.05],
+      amp: 0.3,
+      seed: e + 11,
+    }),
+    o.mtbd,
+  );
+  (m.position.set(0, 1, 0), n.add(m));
+  const g = c[0].position.clone().setZ(2.4),
+    p = i.clone().add(new k(-3.6, -4.1, 2.6)),
+    x = new qt();
+  x.position.copy(g);
+  const b = g
+      .clone()
+      .lerp(p, 0.5)
+      .add(new k(0.4, 0.6, 1.3))
+      .sub(g),
+    v = new ac(new k(), b, p.clone().sub(g)),
+    V = [];
+  for (let T = 0; T <= 12; T++) {
+    const E = v.getPoint(T / 12);
+    V.push(
+      Gt(1.15 - 0.3 * (T / 12), {
+        detail: s ? 3 : 2,
+        amp: 0.15,
+        seed: e + 60 + T,
+      }).translate(E.x, E.y, E.z),
+    );
+  }
+  const D = new mt(ue(V), o.linker);
+  return (
+    x.add(D),
+    n.add(x),
+    (n.userData = {
+      ringC: i,
+      pivot: x,
+      Elocal: p.clone().sub(g),
+      pocket: i
+        .clone()
+        .lerp(c[0].position, 0.55)
+        .lerp(c[1].position, 0.3)
+        .add(new k(0, 0, 2.6)),
+    }),
+    n
+  );
+}
+const Vr = 14,
+  Ea = 36;
+function Gi(t, e) {
+  const o = new qt(),
+    s = B.golgi,
+    n = {
+      ring: et(s, {
+        ...ke,
+        sheen: 0.8,
+        rim: 0.45,
+      }),
+      aaa1: et(tn(s, B.golgiTrans, 0.7), {
+        ...ke,
+        sheen: 0.8,
+        rim: 0.45,
+      }),
+      ct: et(Ws(s, 0.75), {
+        ...ke,
+        rim: 0.35,
+      }),
+      stalk: et(tn(s, "#ffffff", 0.3), {
+        ...ke,
+        bump: 0.12,
+        rim: 0.4,
+      }),
+      mtbd: et(tn(s, B.golgiCis, 0.5), {
+        ...ke,
+        rim: 0.4,
+      }),
+      linker: et(B.mitoOuter, {
+        ...ke,
+        bump: 0.15,
+        rim: 0.5,
+      }),
+      tail: et(tn(s, B.intermediate, 0.55), {
+        ...ke,
+        rim: 0.4,
+      }),
+      adaptor: et(tn(B.intermediate, "#ffffff", 0.2), {
+        ...ke,
+        rim: 0.4,
+      }),
+    },
+    a = [0, 1].map((d) =>
+      o.add(xt(Hi(t, e + 100 + d * 20, n), Je.dynein)).children.at(-1),
+    ),
+    r = [0, 1].map((d) =>
+      o
+        .add(xt(new mt(qa(Vr, 1.25, 1.6, e + 30 + d), n.tail), Je.dynein))
+        .children.at(-1),
+    ),
+    i = qa(Ea, 2.6, 1.8, e + 40, 2.2),
+    c = xt(new mt(i, n.adaptor), Je.dynein);
+  o.add(c);
+  const l = [0, 1].map(() => ({
+    docked: eo(),
+    incoming: eo(),
+    adp: eo(),
+    pi: $r(),
+  }));
+  for (const d of l)
+    (d.incoming.userData.set("ATP"),
+      d.adp.userData.set("ADP"),
+      o.add(d.docked, d.incoming, d.adp, d.pi));
+  const u = Dr({
+    r: 32,
+    color: B.lysosome,
+    stain: Je.lyso,
+    seed: e + 70,
+    detail: t,
+    content: "ilv",
+  });
+  return (
+    o.add(u),
+    {
+      g: o,
+      heads: a,
+      tails: r,
+      tailMesh: c,
+      TAIL: Ea,
+      nuc: l,
+      vesicle: u,
+    }
+  );
+}
+function Ui({
+  seed: t = 1,
+  detail: e = "high",
+  kinesinRate: o = 1.2,
+  dyneinRate: s = 1.1,
+} = {}) {
+  const n = new qt(),
+    r = Fi({
+      length: 260,
+      seed: t,
+      detail: e,
+    });
+  n.add(r);
+  const i = r.userData.x0,
+    c = _i(e, t),
+    l = Gi(e, t);
+  n.add(c.g, l.g);
+  const u = (_) => i + _ * Ne.rise + 6,
+    d = u(Ss) - 4 + 8 * Math.round((-92 - u(Ss)) / 8),
+    h = Ra.map((_) => u(_) - 4 + 8 * Math.round((92 - u(_)) / 8)),
+    m = Es(Ss),
+    g = Ra.map((_) => Es(_)),
+    p = new k(-0.8, 0.5, -0.33).normalize(),
+    x = new k(0.8, -0.55, -0.1).normalize();
+  let b = 0,
+    v = 1,
+    V = 0,
+    D = 0,
+    T,
+    E;
+  const F = Ta(new k(-110, 60, -30)),
+    O = Ta(new k(110, -60, -30), 4, 0.35, 18);
+  let X = !1,
+    H = !1;
+  const N = new k(),
+    y = new k(),
+    P = new k(),
+    S = new k(),
+    A = new vn(),
+    G = new k(1, 0, 0),
+    ct = new k(),
+    kt = new k(),
+    At = new k(),
+    yt = new k(),
+    ft = new oo(),
+    Nt = {
+      kHeads: new k(),
+      kAtp: new k(),
+      kVes: new k(),
+      dRing: new k(),
+      dVes: new k(),
+    },
+    M = (_) => Ze(_ / 14) * Ze((uo - _) / 14);
+  function L(_, nt, ut, zt) {
+    const Et = 0.02 + 0.98 * ut;
+    (_.scale.setScalar(Et),
+      _.position
+        .copy(nt)
+        .multiplyScalar(1 - Et)
+        .addScaledVector(zt, 1 - ut));
+  }
+  function at(_, nt, ut, zt, Et, jt, j, $, W) {
+    (_.docked.userData.set(ut),
+      _.docked.position.copy(zt),
+      _.docked.quaternion.copy(nt.quaternion),
+      _.docked.scale.setScalar(Li));
+    const dt = (rt, Ot) => {
+        const Bt = vs(jt - rt, 2);
+        return Bt < Ot ? Bt / Ot : -1;
+      },
+      Dt = dt(j.inStart, j.inDur);
+    if (((_.incoming.visible = Dt >= 0), Dt >= 0)) {
+      const rt = 1 - Ze(Dt);
+      (_.incoming.position.copy(zt).addScaledVector(Et, 26 * rt),
+        (_.incoming.position.x += 3 * rt * Qe($ * 1.3, W)),
+        (_.incoming.position.z += 3 * rt * Qe($ * 1.1, W + 2)),
+        _.incoming.rotation.set($ * 1.7 * rt + W, $ * 1.3 * rt, 0),
+        _.incoming.scale.setScalar(go * Ze(Dt * 5)));
+    }
+    const gt = (rt, Ot, Bt, Ct, ot) => {
+      const J = dt(Ot, Bt);
+      ((rt.visible = J >= 0),
+        !(J < 0) &&
+          (rt.position.copy(zt).addScaledVector(Et, 24 * Ze(J)),
+          (rt.position.x += 4 * J * Qe($ * 1.2, W + Ct)),
+          (rt.position.z += 4 * J * Qe($, W + Ct + 3)),
+          rt.rotation.set($ * 0.9 + Ct, $ * 1.4, 0),
+          rt.scale.setScalar(ot * (1 - Ze((J - 0.7) / 0.3)))));
+    };
+    (gt(_.adp, j.adp, j.relDur, 5, go), gt(_.pi, j.pi, j.relDur, 9, go));
+  }
+  const Z = {
+      inStart: 0.84,
+      inDur: 0.27,
+      pi: 0.3,
+      adp: 0.84,
+      relDur: 0.4,
+    },
+    U = {
+      inStart: 1.55,
+      inDur: 0.55,
+      pi: 0.86,
+      adp: 0.95,
+      relDur: 0.45,
+    };
+  function I(_, nt) {
+    T = Ni(_, {
+      stepRate: o,
+    });
+    const ut = uo * Math.floor(T.position / uo),
+      zt = T.position - ut;
+    (ut !== V && (F.shift(-(ut - V)), (V = ut)),
+      T.heads[T.movingHead === 0 ? 1 : 0],
+      T.steps);
+    const Et = T.cycle,
+      jt = d + T.steps * 8 - V;
+    T.heads.forEach((rt, Ot) => {
+      const Bt = c.heads[Ot],
+        Ct = Ot === T.movingHead;
+      Bt.position
+        .set(d + rt.x - V, 0, rt.z)
+        .addScaledVector(m, Ne.outer + 2.3 + rt.lift);
+      const ot = Ct ? Math.sin(Math.PI * T.swing) : 0;
+      (A.set(
+        0.5 * ot * (Ot ? 1 : -1) + 0.15 * ot * Qe(_ * 3, Ot),
+        0.6 * ot * (Ot ? -1 : 1),
+        -0.18 -
+          0.5 * ot +
+          (Ct ? 0.25 * (1 - T.swing) * Math.min(1, rt.lift) : 0),
+      ),
+        Bt.quaternion.setFromEuler(A));
+    });
+    const j = Ze((Et - 0.22) / 0.16),
+      $ = Ze((Et - 0.78) / 0.22);
+    (P.set(jt + 5 * j + 3 * $, 0, 0).addScaledVector(m, Ne.outer + 10.5),
+      (P.z += 0.6 * Qe(_ * 2, 3)),
+      T.heads.forEach((rt, Ot) => {
+        (S.set(-1.6, 2.2, 0)
+          .applyQuaternion(c.heads[Ot].quaternion)
+          .add(c.heads[Ot].position),
+          Fo(c.necks[Ot], S, P));
+      }));
+    const W = N.copy(P).addScaledVector(p, c.STALK + 6 + 40);
+    (X || (F.pos.copy(W), (X = !0)), F.step(W, nt));
+    const dt = F.pos;
+    (c.vesicle.position.copy(dt),
+      c.vesicle.rotation.set(0.002 * dt.y, _ * 0.05, 0.004 * (dt.x - P.x)),
+      y.subVectors(P, dt).normalize(),
+      S.copy(dt).addScaledVector(y, 40 + 6.5),
+      Fo(c.stalk, P, S, c.STALK),
+      (c.stalk.scale.x = c.stalk.scale.z = 1),
+      c.tail.position.copy(S),
+      c.tail.quaternion.copy(c.stalk.quaternion),
+      T.heads.forEach((rt, Ot) => {
+        const Bt = c.heads[Ot],
+          Ct = S.set(-0.6, 1.9, 0.9)
+            .applyQuaternion(Bt.quaternion)
+            .add(Bt.position)
+            .clone(),
+          ot = vs(_ * T.stepRate - (Ot === 1 ? 0 : 1), 2);
+        at(
+          c.nuc[Ot],
+          Bt,
+          rt.nucleotide,
+          Ct,
+          y.set(0.35, 0.8, 0.5).normalize().clone(),
+          ot,
+          Z,
+          _,
+          Ot * 3 + 1,
+        );
+      }));
+    const Dt = M(zt);
+    (N.set(jt + 4, Ne.outer + 3, 0),
+      L(c.g, N, Dt, y.set(0, 26, -46)),
+      Nt.kHeads.copy(P).add(y.set(0, 3, 0)),
+      Nt.kVes.copy(dt).add(y.set(0, 40, 0)));
+    const gt = c.nuc.find((rt) => rt.incoming.visible);
+    Nt.kAtp.copy(
+      gt ? gt.incoming.position : c.nuc[T.leadingHead].docked.position,
+    );
+    for (const rt of ["kHeads", "kVes", "kAtp"])
+      Nt[rt].multiplyScalar(c.g.scale.x).add(c.g.position);
+    Nt.kEnv = Dt;
+  }
+  function Q(_, nt) {
+    E = Ri(_, {
+      stepRate: s,
+      seed: t + 3,
+    });
+    const ut = -uo * Math.floor(-E.position / uo),
+      zt = ut - E.position;
+    ut !== D && (O.shift(-(ut - D)), (D = ut));
+    const Et = E.cycle,
+      jt = [];
+    (E.heads.forEach((Dt, gt) => {
+      const rt = l.heads[gt],
+        Ot = gt === E.movingHead,
+        Bt = g[gt];
+      rt.position
+        .set(h[gt] + Dt.x - D, 0, Dt.z * 1.5)
+        .addScaledVector(Bt, Ne.outer + 0.3 + Dt.lift);
+      const Ct = Ot ? Math.sin(Math.PI * E.swing) : 0,
+        J =
+          0.05 +
+          0.7 * Ze((E.heads[1 - gt].x - Dt.x + 6) / 12) -
+          0.2 * Ct +
+          0.06 * Qe(_ * 1.7, gt + 5);
+      (kt.copy(Bt).multiplyScalar(Math.cos(J)).addScaledVector(G, -Math.sin(J)),
+        kt
+          .addScaledVector(
+            yt.set(0, -Bt.z, Bt.y),
+            (gt ? 1 : -1) * (0.12 + 0.15 * Ct * Qe(_ * 2.5, gt)),
+          )
+          .normalize(),
+        At.set(0.25, -0.35, 1)
+          .addScaledVector(kt, -At.set(0.25, -0.35, 1).dot(kt))
+          .normalize(),
+        ct.crossVectors(kt, At),
+        rt.quaternion.setFromRotationMatrix(ft.makeBasis(ct, kt, At)));
+      const bt = Ot ? Ze((Et - 0.22) / 0.18) * (1 - Ze((Et - 0.8) / 0.15)) : 0;
+      ((rt.userData.pivot.rotation.z = -0.75 * bt),
+        jt.push(
+          y
+            .copy(rt.userData.Elocal)
+            .applyAxisAngle(Oi, -0.75 * bt)
+            .add(rt.userData.pivot.position)
+            .applyQuaternion(rt.quaternion)
+            .add(rt.position)
+            .clone(),
+        ));
+    }),
+      P.copy(jt[0])
+        .add(jt[1])
+        .multiplyScalar(0.5)
+        .add(N.set(6, -9, 2)));
+    for (let Dt = 0; Dt < 2; Dt++) Fo(l.tails[Dt], jt[Dt], P, Vr);
+    const j = N.copy(P).addScaledVector(x, l.TAIL + 32 + 2);
+    (H || (O.pos.copy(j), (H = !0)), O.step(j, nt));
+    const $ = O.pos;
+    (l.vesicle.position.copy($),
+      l.vesicle.rotation.set(0.003 * $.y, -_ * 0.04, 0.003 * ($.x - P.x)),
+      y.subVectors(P, $).normalize(),
+      S.copy($).addScaledVector(y, 33),
+      Fo(l.tailMesh, S, P, l.TAIL),
+      E.heads.forEach((Dt, gt) => {
+        const rt = l.heads[gt],
+          Ot = N.copy(rt.userData.pocket)
+            .applyQuaternion(rt.quaternion)
+            .add(rt.position)
+            .clone(),
+          Bt = vs(_ * E.stepRate - (gt === 1 ? 0 : 1), 2),
+          Ct = y.set(0, -0.7, 0.7).normalize().clone();
+        at(l.nuc[gt], rt, Dt.nucleotide, Ot, Ct, Bt, U, _, gt * 3 + 11);
+      }));
+    const W = M(zt),
+      dt = l.heads[0].position
+        .clone()
+        .add(l.heads[1].position)
+        .multiplyScalar(0.5);
+    (L(l.g, dt, W, y.set(0, -26, -46)),
+      Nt.dRing
+        .copy(l.heads[E.leadingHead].userData.ringC)
+        .applyQuaternion(l.heads[E.leadingHead].quaternion)
+        .add(l.heads[E.leadingHead].position)
+        .add(y.set(0, -8, 0)),
+      Nt.dVes.copy($).add(y.set(0, -32, 0)));
+    for (const Dt of ["dRing", "dVes"])
+      Nt[Dt].multiplyScalar(l.g.scale.x).add(l.g.position);
+  }
+  function z(_, nt) {
+    ((nt = Math.min(0.1, Math.max(0, nt || 0))),
+      (b += nt * v),
+      I(b, nt * v),
+      Q(b, nt * v));
+  }
+  (z(0, 0),
+    (n.userData = {
+      kind: "motor-proteins",
+      radius: 150,
+      unit: "nm",
+      update: z,
+      labels: [...r.userData.labels],
+      liveLabels: () => [
+        {
+          text: translate("驱动蛋白"),
+          at: Nt.kHeads.clone(),
+        },
+        {
+          text: translate("囊泡"),
+          at: Nt.kVes.clone(),
+        },
+        {
+          text: "ATP",
+          at: Nt.kAtp.clone(),
+        },
+        {
+          text: translate("动力蛋白"),
+          at: Nt.dRing.clone(),
+        },
+        {
+          text: translate("内体"),
+          at: Nt.dVes.clone(),
+        },
+      ],
+    }));
+  const K = (_) => ({
+    steps: _.steps,
+    distance: Math.abs(_.position),
+    atpUsed: _.atpUsed,
+    phase: _.phase,
+    phaseProgress: _.phaseProgress,
+  });
+  return {
+    group: n,
+    update: z,
+    state: () => ({
+      time: b,
+      kinesin: K(T),
+      dynein: K(E),
+    }),
+    setSpeed(_) {
+      v = Math.max(0, +_ || 0);
+    },
+  };
+}
+const Kt = (t, e, o) => new k(t, e, o),
+  Un = Kt(0, 1, 0),
+  Bi = {
+    dna: translate("细胞核 DNA"),
+    nucleolus: translate("核仁"),
+    mito: translate("线粒体"),
+    er: translate("内质网 · 核膜"),
+    golgi: translate("高尔基体"),
+    lyso: translate("溶酶体"),
+    perox: translate("过氧化物酶体"),
+    actin: translate("微丝"),
+    tubulin: translate("微管 · 中心体"),
+    membrane: translate("细胞膜"),
+    chloro: translate("叶绿素（自发荧光）"),
+    wall: translate("细胞壁"),
+    vesicle: translate("囊泡"),
+    protein: translate("蛋白质（GFP 标记）"),
+    "dynein@nm": translate("动力蛋白"),
+  },
+  Ki = {
+    nucleus: "#9d84e6",
+    mitochondrion: "#ff8a66",
+    chloroplast: "#4cb84f",
+    rer: "#3fb8cc",
+    ser: "#62d6b4",
+    golgi: "#f2a83c",
+    lysosome: "#e85f9e",
+    peroxisome: "#d4b04a",
+    vacuole: "#7cc6ff",
+    ribosome: "#f6e3a6",
+    centrosome: "#e8ecf6",
+    membrane: "#f2c9a0",
+    cellwall: "#b8da6c",
+    cytoskeleton: "#7ad8ff",
+    vesicle: "#ffd98a",
+    nucleoid: "#c9a0ff",
+    plasmid: "#ff9ad5",
+    capsule: "#9ee0d0",
+    flagellum: "#e8e0c8",
+    pili: "#e8e0c8",
+    bacterialWall: "#b8da6c",
+  },
+  Wi = {
+    O2: ["O₂", "#ff6a5a"],
+    CO2: ["CO₂", "#9aa3ad"],
+    H2O: ["H₂O", "#6fb8ff"],
+    K: ["K⁺", "#ffb347"],
+    Na: ["Na⁺", "#b48cff"],
+    glucose: [translate("葡萄糖"), "#f4e2a8"],
+    cargo: [translate("大分子"), "#c8ff5a"],
+  },
+  Xi = {
+    simple: "simple-dc",
+    facilitated: "carrier-dc",
+    passiveO2: "passive-o2",
+    activeO2: "active-o2",
+  },
+  Fa = [
+    "nucleus",
+    "rer",
+    "ser",
+    "golgi",
+    "mitochondrion",
+    "lysosome",
+    "peroxisome",
+    "centrosome",
+    "vesicle",
+    "membrane",
+  ],
+  Yi = [
+    "nucleoid",
+    "plasmid",
+    "ribosome",
+    "capsule",
+    "bacterialWall",
+    "membrane",
+    "flagellum",
+    "pili",
+  ];
+function Zi() {
+  const t = (w) => document.querySelector(w),
+    e = t("#c3"),
+    o = gc(e),
+    s = (w) => (w.sub === w.title ? "" : w.sub),
+    n = {
+      lesson: 0,
+      view: {
+        ...xn[0].view,
+      },
+      mode: "illus",
+      selected: null,
+      detail: "mitochondrion",
+      compare: "both",
+      prok: "structure",
+      transport: "simple",
+      skeleton: "network",
+      playing: !0,
+    };
+  let a = null;
+  const r = {},
+    i = (w, R) => r[w] || (r[w] = R()),
+    c = [new So(), new So()],
+    l = new k();
+  function u() {
+    return (
+      l.copy(o.camera.position).sub(o.controls.target),
+      (l.y = 0),
+      l.lengthSq() < 1e-6 && l.set(0, 0, 1),
+      l.normalize().clone()
+    );
+  }
+  function d() {
+    const w = a?.cut;
+    if (!w || !n.view.cut) {
+      je.length && ko([]);
+      return;
+    }
+    if (w.type === "fixed") {
+      je[0] !== w.planes[0] && ko(w.planes);
+      return;
+    }
+    const R = w.center(),
+      C = u();
+    if (w.type === "wedge") {
+      const tt = C.clone().applyAxisAngle(Un, Math.PI / 4),
+        it = C.clone().applyAxisAngle(Un, -Math.PI / 4);
+      (c[0].set(tt.clone().negate(), tt.dot(R)),
+        c[1].set(it.clone().negate(), it.dot(R)),
+        je.length !== 2 && ko(c));
+    } else {
+      const tt = w.offset || 0;
+      (c[0].set(C.clone().negate(), C.dot(R) + tt),
+        (je.length !== 1 || je[0] !== c[0]) && ko([c[0]]));
+    }
+  }
+  const h = (w) => je.length > 0 && je.every((R) => R.distanceToPoint(w) < 0);
+  function m() {
+    return i("animal", () =>
+      Qc({
+        seed: 1,
+      }),
+    );
+  }
+  function g() {
+    return i("plant", () =>
+      ti({
+        seed: 2,
+      }),
+    );
+  }
+  const p = (w) => () =>
+      (w.userData.labels || []).map((R) => ({
+        text: R.text,
+        at: w.localToWorld(R.at.clone()),
+      })),
+    x = (w) => () =>
+      w.userData.liveLabels
+        ? [
+            ...p(w)(),
+            ...w.userData.liveLabels().map((R) => ({
+              text: R.text,
+              at: w.localToWorld(R.at.clone()),
+            })),
+          ]
+        : p(w)();
+  function b(w, R = 0.4) {
+    let C = null,
+      tt = 1 / 0;
+    const it = o.camera.position;
+    for (const wt of w) {
+      if (!wt.visible) continue;
+      const Ft = wt.getWorldPosition(new k());
+      if (h(Ft)) continue;
+      const Wt = wt.userData.radius || 0.6;
+      if (
+        !(je.length
+          ? Math.min(...je.map((pt) => Math.abs(pt.distanceToPoint(Ft)))) <
+            Wt + R
+          : !0)
+      )
+        continue;
+      const Pt = Ft.distanceTo(it);
+      Pt < tt && ((tt = Pt), (C = wt));
+    }
+    return C;
+  }
+  function v(w, R, { offset: C = new k() } = {}) {
+    let tt = [],
+      it = 0;
+    return () => {
+      if (it++ % 12 === 0) {
+        tt = [];
+        for (const wt of R) {
+          const Ft = yn[wt];
+          if (!Ft) continue;
+          let Wt = null;
+          if (wt === "membrane") {
+            const Tt = u().applyAxisAngle(Un, Math.PI * 0.42),
+              Pt = w.layout,
+              pt = Pt.semi || Pt.half;
+            Wt = Kt(Tt.x * pt[0], pt[1] * 0.45, Tt.z * pt[2])
+              .multiplyScalar(w.type === "plant" ? 1 : 0.93)
+              .add(C);
+          } else if (wt === "rer" || wt === "ser") {
+            const Tt = w[wt];
+            Wt =
+              (Tt?.userData.labels || [])
+                .map((_t) => Tt.localToWorld(_t.at.clone()))
+                .find((_t) => !h(_t)) || null;
+          } else if (wt === "nucleus") Wt = w.nucleus.getWorldPosition(new k());
+          else {
+            const Tt = w.byKind.get(wt) || [],
+              Pt = b(Tt);
+            Wt = Pt ? Pt.getWorldPosition(new k()) : null;
+          }
+          Wt &&
+            tt.push({
+              text: Ft.name,
+              at: Wt,
+              kind: wt,
+              on: n.selected?.kind === wt,
+            });
+        }
+      }
+      for (const wt of tt) wt.on = n.selected?.kind === wt.kind;
+      return tt;
+    };
+  }
+  function V() {
+    const w = m();
+    return {
+      id: "overview",
+      subject: translate("动物细胞"),
+      root: w.group,
+      unit: "µm",
+      cut: {
+        type: "wedge",
+        center: () => w.nucleus.getWorldPosition(new k()).add(Kt(0.4, 0, 0.4)),
+      },
+      view: {
+        target: Kt(-0.6, 0, -0.4),
+        dir: Kt(1, 0.62, 1.05),
+        dist: 52,
+      },
+      min: 2,
+      max: 120,
+      pick: w.pick,
+      labels: v(w, Fa),
+      enter() {
+        (w.group.position.set(0, 0, 0), (w.skeleton.visible = !1));
+      },
+    };
+  }
+  const D = {
+    nucleus: () => ({
+      obj: Lo({
+        radius: 3.2,
+        seed: 5,
+        detail: "high",
+      }),
+      dist: 15,
+    }),
+    mitochondrion: () => ({
+      obj: rr({
+        length: 2.6,
+        radius: 0.5,
+        bend: 0.15,
+        seed: 3,
+        detail: "high",
+      }),
+      dist: 5.2,
+    }),
+    chloroplast: () => ({
+      obj: cr({
+        seed: 4,
+        detail: "high",
+      }),
+      dist: 9,
+    }),
+    rer: () => {
+      const w = new qt(),
+        R = Lo({
+          radius: 3.2,
+          seed: 5,
+          detail: "low",
+        }),
+        C = Gs({
+          nucleusRadius: 3.2,
+          side: Kt(1, 0.1, 0.4).normalize(),
+          seed: 7,
+          detail: "high",
+          ribosomeScale: 1,
+        });
+      return (
+        w.add(R, C),
+        (w.userData.labels = [
+          ...(C.userData.labels || []),
+          {
+            text: translate("细胞核"),
+            at: Kt(-1.5, 1.2, -1.5),
+          },
+        ]),
+        {
+          obj: w,
+          dist: 13,
+          target: Kt(2.2, 0, 1),
+        }
+      );
+    },
+    ser: () => ({
+      obj: sr({
+        nucleusRadius: 3.2,
+        reach: 7,
+        seed: 9,
+        detail: "high",
+      }),
+      dist: 20,
+    }),
+    golgi: () => ({
+      obj: ar({
+        seed: 51,
+        detail: "high",
+      }),
+      dist: 6.5,
+    }),
+    lysosome: () => ({
+      obj: Wa({
+        radius: 0.4,
+        seed: 21,
+        detail: "high",
+      }),
+      dist: 2.4,
+    }),
+    peroxisome: () => ({
+      obj: Xa({
+        radius: 0.3,
+        seed: 31,
+        detail: "high",
+      }),
+      dist: 1.9,
+    }),
+    ribosome: () => ({
+      obj: Tc({
+        detail: "high",
+      }),
+      dist: 0.11,
+    }),
+    centrosome: () => ({
+      obj: Qa({
+        seed: 61,
+        detail: "high",
+      }),
+      dist: 2.6,
+    }),
+    vacuole: () => ({
+      obj: ir({
+        size: [18, 10, 10],
+        seed: 3,
+        detail: "high",
+      }),
+      dist: 40,
+    }),
+  };
+  function T() {
+    const w = n.detail,
+      R = i(`detail:${w}`, () => {
+        const C = D[w](),
+          tt = new qt();
+        tt.add(C.obj);
+        const it = new ta().setFromObject(C.obj);
+        return {
+          ...C,
+          root: tt,
+          center: C.target || it.getCenter(new k()),
+        };
+      });
+    return {
+      id: `detail:${w}`,
+      root: R.root,
+      unit: "µm",
+      cut: {
+        type: "plane",
+        center: () => R.center,
+      },
+      view: {
+        target: R.center,
+        dir: Kt(0.85, 0.5, 1),
+        dist: R.dist,
+      },
+      min: R.dist * 0.12,
+      max: R.dist * 4,
+      labels: x(R.obj),
+    };
+  }
+  const E = {
+      animal: Kt(-12.5, 0, 0),
+      plant: Kt(16, 0, 0),
+    },
+    F = [];
+  function O() {
+    const w = m(),
+      R = g(),
+      C = i("compareRoot", () => new qt()),
+      tt = {
+        both: {
+          target: Kt(3.5, -1, 0),
+          dir: Kt(0.2, 0.5, 1),
+          dist: 118,
+        },
+        animal: {
+          target: E.animal,
+          dir: Kt(0.6, 0.55, 1),
+          dist: 50,
+        },
+        plant: {
+          target: E.plant,
+          dir: Kt(0.5, 0.6, 1),
+          dist: 62,
+        },
+      },
+      it = v(
+        w,
+        ["nucleus", "mitochondrion", "centrosome", "lysosome", "golgi"],
+        {},
+      ),
+      wt = v(R, ["cellwall", "vacuole", "chloroplast", "nucleus", "membrane"], {
+        offset: E.plant,
+      });
+    return {
+      id: "compare",
+      subject: translate("动物细胞与植物细胞"),
+      root: C,
+      unit: "µm",
+      cut: {
+        type: "plane",
+        center: () => o.controls.target.clone(),
+      },
+      view: tt[n.compare],
+      min: 3,
+      max: 180,
+      pick: null,
+      labels: () => [...it(), ...wt()],
+      enter() {
+        if (
+          (w.group.position.copy(E.animal),
+          R.group.position.copy(E.plant),
+          (w.skeleton.visible = !1),
+          C.add(w.group, R.group),
+          !F.length)
+        ) {
+          const Ft = (Wt, Tt) => F.push(Vs(Wt, Tt));
+          (Ft(R.wall, "#5c7a1c"),
+            Ft(R.vacuole, "#7cc6ff"),
+            (R.byKind.get("chloroplast") || []).forEach((Wt) =>
+              Ft(Wt, "#7dff6a"),
+            ),
+            (w.byKind.get("centrosome") || []).forEach((Wt) =>
+              Ft(Wt, "#ffffff"),
+            ),
+            (w.byKind.get("lysosome") || []).forEach((Wt) =>
+              Ft(Wt, "#ff7ab8"),
+            ));
+        }
+        F.forEach((Ft) => (Ft.visible = !!n.view.diff));
+      },
+      exit() {
+        F.forEach((Ft) => (Ft.visible = !1));
+      },
+    };
+  }
+  function X() {
+    const w = i("bacterium", () =>
+      pi({
+        seed: 3,
+        detail: "high",
+      }),
+    );
+    if (n.prok === "structure") {
+      const it = i("bacRoot", () => new qt());
+      return {
+        id: "prok:structure",
+        subject: translate("大肠杆菌"),
+        root: it,
+        unit: "µm",
+        cut: {
+          type: "plane",
+          center: () => Kt(0, 0, 0),
+        },
+        view: {
+          target: Kt(0, 0, 0),
+          dir: Kt(0.4, 0.5, 1),
+          dist: 7.5,
+        },
+        min: 0.8,
+        max: 40,
+        labels: p(w),
+        enter() {
+          (w.position.set(0, 0, 0), it.add(w));
+        },
+      };
+    }
+    const R = m(),
+      C = i("scaleRoot", () => new qt()),
+      tt = Kt(13.5, -2, 4);
+    return {
+      id: "prok:scale",
+      subject: translate("大肠杆菌与动物细胞"),
+      root: C,
+      unit: "µm",
+      cut: null,
+      view: {
+        target: Kt(4, -0.5, 1),
+        dir: Kt(0.2, 0.35, 1),
+        dist: 56,
+      },
+      min: 2,
+      max: 140,
+      labels: () => [
+        {
+          text: translate("动物细胞"),
+          sub: "≈ 20 µm",
+          at: Kt(-5.5, 5.2, 5.5),
+        },
+        {
+          text: translate("细菌"),
+          sub: "≈ 2 µm",
+          at: tt.clone(),
+        },
+      ],
+      enter() {
+        (R.group.position.set(0, 0, 0),
+          (R.skeleton.visible = !1),
+          w.position.copy(tt),
+          C.add(R.group, w));
+      },
+    };
+  }
+  function H() {
+    const w = i("membrane", () =>
+        gi({
+          seed: 4,
+          detail: "high",
+        }),
+      ),
+      R = i("memRoot", () => new qt()),
+      C = w.group || w;
+    return {
+      id: "membrane",
+      subject: translate("细胞膜"),
+      root: R,
+      unit: "nm",
+      cut: null,
+      view: {
+        target: Kt(0, -2, 0),
+        dir: Kt(0.55, 0.42, 1),
+        dist: 92,
+      },
+      min: 8,
+      max: 220,
+      labels: p(C),
+      update: (tt, it) => w.update?.(tt, it),
+      enter() {
+        R.add(C);
+      },
+    };
+  }
+  function N() {
+    const w = i("transport", () =>
+        Ii({
+          seed: 5,
+          detail: "high",
+        }),
+      ),
+      R = i("trRoot", () => new qt());
+    w.mode !== n.transport && w.setMode(n.transport);
+    const C = n.transport === "endo" || n.transport === "exo",
+      tt = w.group.userData.focus;
+    return {
+      id: "transport",
+      subject: translate("细胞膜"),
+      root: R,
+      unit: "nm",
+      cut: null,
+      view: {
+        target: (tt ? tt.clone() : Kt(0, C ? -6 : 0, C ? -4 : 2)).add(
+          Kt(0, C ? 0 : -4.5, 0),
+        ),
+        dir: Kt(0.45, 0.22, 1),
+        dist: C ? 120 : 86,
+      },
+      min: 8,
+      max: 260,
+      labels: () =>
+        w.labels().map((it) => ({
+          text: it.text,
+          at: w.group.localToWorld(it.at.clone()),
+        })),
+      update: (it, wt) => n.playing && w.update(it, wt),
+      enter() {
+        R.add(w.group);
+      },
+      api: w,
+    };
+  }
+  function y() {
+    const w = m();
+    (w.group.position.set(0, 0, 0), w.group.updateMatrixWorld(!0));
+    const R = i("secretion", () => ai(w)),
+      C = i("secRoot", () => new qt()),
+      tt = new So(),
+      it = R.view,
+      wt = it.dir.clone().setY(0).normalize();
+    return (
+      tt.set(wt.clone().negate(), wt.dot(it.planePoint) + 1),
+      {
+        id: "secretion",
+        subject: translate("胰腺腺泡细胞"),
+        root: C,
+        unit: "µm",
+        cut: {
+          type: "fixed",
+          planes: [tt],
+        },
+        view: {
+          target: it.target,
+          dir: it.dir,
+          dist: it.dist * 2.6,
+        },
+        min: 2,
+        max: 120,
+        labels: R.labels,
+        update: (Ft, Wt) => R.update(Ft, Wt),
+        enter() {
+          ((w.skeleton.visible = !1),
+            C.add(w.group),
+            w.group.add(R.group),
+            (R.playing = n.playing));
+        },
+        exit() {
+          R.group.removeFromParent();
+        },
+        api: R,
+      }
+    );
+  }
+  const P = [];
+  function S() {
+    if (n.skeleton === "motor") {
+      const C = i("motor", () =>
+          Ui({
+            seed: 6,
+            detail: "high",
+          }),
+        ),
+        tt = i("motorRoot", () => new qt());
+      return {
+        id: "motor",
+        subject: translate("微管与马达蛋白"),
+        root: tt,
+        unit: "nm",
+        cut: null,
+        view: {
+          target: Kt(0, 8, 0),
+          dir: Kt(0.25, 0.3, 1),
+          dist: 210,
+        },
+        min: 15,
+        max: 500,
+        labels: x(C.group),
+        update: (it, wt) => n.playing && C.update(it, wt),
+        enter() {
+          tt.add(C.group);
+        },
+        api: C,
+      };
+    }
+    if (n.skeleton === "streaming") {
+      const C = g(),
+        tt = i("streamRoot", () => new qt()),
+        it = C.layout,
+        wt = (r.flow ||= (C.byKind.get("chloroplast") || []).map((Pt) => {
+          const pt = Pt.position.clone();
+          return {
+            o: Pt,
+            home: pt.clone(),
+            depth: -As(pt.toArray(), [0, 0, 0], it.half, it.corner),
+          };
+        })),
+        Ft = (Pt) => As(Pt.toArray(), [0, 0, 0], it.half, it.corner),
+        Wt = (Pt) =>
+          Kt(
+            Ft(Kt(Pt.x + 0.01, Pt.y, Pt.z)) - Ft(Kt(Pt.x - 0.01, Pt.y, Pt.z)),
+            Ft(Kt(Pt.x, Pt.y + 0.01, Pt.z)) - Ft(Kt(Pt.x, Pt.y - 0.01, Pt.z)),
+            Ft(Kt(Pt.x, Pt.y, Pt.z + 0.01)) - Ft(Kt(Pt.x, Pt.y, Pt.z - 0.01)),
+          ).normalize(),
+        Tt = new So(Kt(0, -1, 0), 1.2);
+      return {
+        id: "streaming",
+        subject: translate("黑藻叶片细胞"),
+        root: tt,
+        unit: "µm",
+        cut: {
+          type: "fixed",
+          planes: [Tt],
+        },
+        view: {
+          target: Kt(0, 0, 0),
+          dir: Kt(0.15, 1.6, 0.9),
+          dist: 58,
+        },
+        min: 4,
+        max: 140,
+        labels: v(C, ["chloroplast", "vacuole", "nucleus", "cellwall"]),
+        update(Pt, pt) {
+          if (n.playing)
+            for (const _t of wt) {
+              const ae = _t.o.position,
+                xe = Wt(ae),
+                ne = new k().crossVectors(Un, ae);
+              ne.addScaledVector(xe, -ne.dot(xe));
+              const ze = 1.6 * Math.min(1, ne.length() / 4);
+              if (ne.lengthSq() < 1e-6) continue;
+              (ne.normalize(), ae.addScaledVector(ne, ze * pt));
+              const He = Ft(ae) + _t.depth;
+              ae.addScaledVector(Wt(ae), -He);
+              const dn = Wt(ae),
+                Ge = new k().crossVectors(ne, dn).normalize(),
+                Ye = new k().crossVectors(dn, Ge),
+                On = new Me().setFromRotationMatrix(
+                  new oo().makeBasis(Ye, dn, Ge),
+                );
+              _t.o.quaternion.slerp(On, Math.min(1, pt * 3));
+            }
+        },
+        enter() {
+          (C.group.position.set(0, 0, 0), tt.add(C.group));
+        },
+      };
+    }
+    const w = m(),
+      R = i("skelRoot", () => new qt());
+    return {
+      id: "network",
+      subject: translate("细胞骨架"),
+      root: R,
+      unit: "µm",
+      cut: {
+        type: "wedge",
+        center: () => w.nucleus.getWorldPosition(new k()),
+      },
+      view: {
+        target: Kt(0, 0, 0),
+        dir: Kt(0.8, 0.7, 1),
+        dist: 48,
+      },
+      min: 2,
+      max: 120,
+      labels: () => {
+        const C = w.skeleton;
+        return (C.userData.labels || [])
+          .map((tt) => ({
+            text: tt.text,
+            at: C.localToWorld(tt.at.clone()),
+          }))
+          .filter((tt) => !h(tt.at));
+      },
+      enter() {
+        (w.group.position.set(0, 0, 0),
+          R.add(w.group),
+          (w.skeleton.visible = !0),
+          A());
+        for (const [C, tt] of w.byKind)
+          if (
+            !["nucleus", "membrane", "cytoskeleton", "centrosome"].includes(C)
+          )
+            for (const it of tt)
+              it.visible && !it.isMesh && ((it.visible = !1), P.push(it));
+        for (const C of [w.ribosomes])
+          C.visible && ((C.visible = !1), P.push(C));
+      },
+      exit() {
+        (P.forEach((C) => (C.visible = !0)),
+          (P.length = 0),
+          (w.skeleton.visible = !1));
+      },
+    };
+  }
+  function A() {
+    const w = r.animal?.skeleton;
+    if (!w) return;
+    const R = (C, tt) => {
+      const it = w.getObjectByName(C);
+      it && (it.visible = tt);
+    };
+    (R("microtubules", n.view.mt !== !1),
+      R("actin", n.view.actin !== !1),
+      R("intermediate", n.view.ift !== !1));
+  }
+  function G() {
+    switch (W().mode) {
+      case "overview":
+        return V();
+      case "detail":
+        return T();
+      case "compare":
+        return O();
+      case "prokaryote":
+        return X();
+      case "membrane":
+        return H();
+      case "transport":
+        return N();
+      case "secretion":
+        return y();
+      case "skeleton":
+        return S();
+    }
+  }
+  let ct = [];
+  function kt(w = !1) {
+    (a && (a.exit?.(), o.root.remove(a.root)),
+      L(!1),
+      (a = G()),
+      a.enter?.(),
+      o.adopt(a.root),
+      (ct = []),
+      a.root.traverse((R) => R.userData.update && ct.push(R.userData.update)),
+      (o.controls.minDistance = a.min),
+      (o.controls.maxDistance = a.max),
+      (o.camera.near = a.min * 0.05),
+      (o.camera.far = a.max * 6),
+      o.camera.updateProjectionMatrix(),
+      w || At(!0),
+      $());
+  }
+  function At(w = !1) {
+    const R = a.view;
+    w
+      ? o.jumpTo(R.target, R.dist, R.dir)
+      : o.flyTo(R.target, R.dist, {
+          dir: R.dir,
+        });
+  }
+  const yt = t("#loading");
+  function ft(w) {
+    (yt.classList.add("on"),
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          try {
+            w();
+          } finally {
+            yt.classList.remove("on");
+          }
+        }),
+      ));
+  }
+  let Nt = null;
+  function M(w, R) {
+    if (
+      (L(!1),
+      (n.selected = {
+        kind: w,
+        target: R,
+      }),
+      R)
+    ) {
+      Nt = Vs(R, "#c8ff8a");
+      const C = R.getWorldPosition(new k()),
+        tt =
+          R.userData.radius ||
+          new ta().setFromObject(R).getBoundingSphere(new rc()).radius,
+        it = R.userData.focus || C;
+      o.flyTo(it, Math.min(30, Math.max(3.2, tt * 5.5)));
+    }
+    Ct();
+  }
+  function L(w = !0) {
+    (Nt && Nt.removeFromParent(), (Nt = null));
+    const R = !!n.selected;
+    ((n.selected = null), w && R && (Ct(), At()));
+  }
+  function at(w) {
+    const R = r.animal;
+    if (!R) return;
+    if (w === "rer" || w === "ser") {
+      const it = R[w],
+        wt =
+          R.pick.children.find((Ft) => Ft.userData.kind === w)?.userData
+            .focus || it.getWorldPosition(new k());
+      (L(!1),
+        (n.selected = {
+          kind: w,
+          target: it,
+        }),
+        o.flyTo(wt, 13),
+        Ct());
+      return;
+    }
+    if (w === "membrane") {
+      (L(!1),
+        (n.selected = {
+          kind: w,
+          target: null,
+        }));
+      const it = u().applyAxisAngle(Un, Math.PI * 0.42);
+      (o.flyTo(Kt(it.x * 9, 3.5, it.z * 9), 14), Ct());
+      return;
+    }
+    const C = R.byKind.get(w) || [],
+      tt = b(C, 2) || C[0];
+    tt && M(w, tt);
+  }
+  let Z = null;
+  (e.addEventListener(
+    "pointerdown",
+    (w) =>
+      (Z = {
+        x: w.clientX,
+        y: w.clientY,
+      }),
+  ),
+    e.addEventListener("pointerup", (w) => {
+      if (!Z || Math.hypot(w.clientX - Z.x, w.clientY - Z.y) > 5) return;
+      Z = null;
+      const R = U(w.clientX, w.clientY);
+      R ? M(R.kind, R.target) : n.selected && L();
+    }));
+  function U(w, R) {
+    if (!a?.pick || !a.pick.parent) return null;
+    for (const C of o.pick(w, R, [a.pick])) {
+      if (h(C.point)) continue;
+      const tt = C.object.userData;
+      if (tt.kind === "rer") {
+        const it = r.animal.nucleus.getWorldPosition(new k());
+        if (
+          C.point
+            .clone()
+            .sub(it)
+            .normalize()
+            .dot(
+              r.animal.layout.rerSide ? Kt(...r.animal.layout.rerSide) : Un,
+            ) < 0.15
+        )
+          continue;
+      }
+      return {
+        kind: tt.kind,
+        target: tt.target,
+      };
+    }
+    return null;
+  }
+  const I = t("#tip");
+  let Q = null;
+  (e.addEventListener("pointermove", (w) => {
+    Q = {
+      x: w.clientX,
+      y: w.clientY,
+    };
+  }),
+    e.addEventListener("pointerleave", () => {
+      ((Q = null), (I.hidden = !0), e.classList.remove("hot"));
+    }));
+  function z() {
+    if (!Q) return;
+    const { x: w, y: R } = Q;
+    Q = null;
+    const C = a?.pick && !o.flying() ? U(w, R) : null;
+    if ((e.classList.toggle("hot", !!C), !C)) return void (I.hidden = !0);
+    const tt = yn[C.kind],
+      it = e.getBoundingClientRect();
+    ((I.innerHTML = `${tt.name}<small>${tt.en}</small>`),
+      (I.style.left = `${w - it.left}px`),
+      (I.style.top = `${R - it.top}px`),
+      (I.hidden = !1));
+  }
+  const K = t("#labels"),
+    _ = t("#leaders"),
+    nt = [];
+  function ut() {
+    const w =
+        n.view.labels && a?.labels
+          ? a.labels().filter((Tt) => Tt.at && !h(Tt.at))
+          : [],
+      R = e.clientWidth,
+      C = e.clientHeight,
+      tt = o.project(o.controls.target),
+      it = [];
+    for (const Tt of w) {
+      const Pt = o.project(Tt.at);
+      if (
+        !Pt.visible ||
+        Pt.x < -40 ||
+        Pt.x > R + 40 ||
+        Pt.y < -40 ||
+        Pt.y > C + 40
+      )
+        continue;
+      let pt = Pt.x - tt.x,
+        _t = Pt.y - tt.y;
+      const ae = Math.hypot(pt, _t) || 1;
+      ae < 4 && ((pt = 1), (_t = -0.6));
+      const xe = 56 / Math.max(ae, 1),
+        ne = pt >= 0;
+      it.push({
+        it: Tt,
+        ax: Pt.x,
+        ay: Pt.y,
+        x: Pt.x + pt * xe + (ne ? 14 : -14),
+        y: Pt.y + _t * xe,
+        right: ne,
+      });
+    }
+    for (const Tt of [!0, !1]) {
+      const Pt = it
+        .filter((pt) => pt.right === Tt)
+        .sort((pt, _t) => pt.y - _t.y);
+      for (let pt = 1; pt < Pt.length; pt++)
+        Pt[pt].y - Pt[pt - 1].y < 26 && (Pt[pt].y = Pt[pt - 1].y + 26);
+    }
+    for (; nt.length < it.length;) {
+      const Tt = document.createElement("div");
+      ((Tt.className = "lb tag"), K.appendChild(Tt), nt.push(Tt));
+    }
+    const wt = e.getBoundingClientRect(),
+      Ft = [
+        "#chapter",
+        "#spec",
+        "#hud",
+        "#chart",
+        "#stageBar",
+        "#scalebar",
+        "#legend",
+      ]
+        .map((Tt) => t(Tt))
+        .filter((Tt) => Tt && !Tt.hidden && Tt.offsetParent)
+        .map((Tt) => {
+          const Pt = Tt.getBoundingClientRect();
+          return {
+            l: Pt.left - wt.left - 6,
+            r: Pt.right - wt.left + 6,
+            t: Pt.top - wt.top - 6,
+            b: Pt.bottom - wt.top + 6,
+          };
+        })
+        .filter((Tt) => Tt.r > Tt.l && Tt.b > Tt.t);
+    let Wt = "";
+    (nt.forEach((Tt, Pt) => {
+      const pt = it[Pt];
+      if (!pt) return void (Tt.style.display = "none");
+      Tt.style.display = "";
+      const _t = pt.it.sub
+        ? `${pt.it.text}<small>${pt.it.sub}</small>`
+        : pt.it.text;
+      (Tt.dataset.html !== _t && ((Tt.innerHTML = _t), (Tt.dataset.html = _t)),
+        Tt.classList.toggle("on", !!pt.it.on));
+      const ae = Tt.offsetWidth || 80;
+      ((pt.x = pt.right
+        ? Math.min(pt.x, R - ae - 12)
+        : Math.max(pt.x, ae + 12)),
+        (pt.y = Math.min(Math.max(pt.y, 16), C - 16)));
+      const xe = Tt.offsetHeight || 22;
+      for (const ne of Ft) {
+        const ze = pt.right ? pt.x : pt.x - ae;
+        (pt.right ? pt.x + ae : pt.x) > ne.l &&
+          ze < ne.r &&
+          pt.y + xe / 2 > ne.t &&
+          pt.y - xe / 2 < ne.b &&
+          (pt.y =
+            ne.t + (ne.b - ne.t) / 2 > C / 2
+              ? ne.t - xe / 2 - 4
+              : ne.b + xe / 2 + 4);
+      }
+      ((Tt.style.transform = `translate(${pt.x.toFixed(1)}px,${pt.y.toFixed(1)}px) translate(${pt.right ? "0" : "-100%"},-50%)`),
+        (Wt += `<line x1="${pt.ax.toFixed(1)}" y1="${pt.ay.toFixed(1)}" x2="${pt.x.toFixed(1)}" y2="${pt.y.toFixed(1)}"/><circle cx="${pt.ax.toFixed(1)}" cy="${pt.ay.toFixed(1)}" r="2.6"/>`));
+    }),
+      (_.innerHTML = Wt));
+  }
+  const zt = (w, R) => {
+    const C = R === "nm" ? w : w * 1e3;
+    return C >= 1e3
+      ? `${+(C / 1e3).toPrecision(3)} µm`
+      : `${+C.toPrecision(3)} nm`;
+  };
+  let Et = "";
+  function jt() {
+    const w = o.camera.position.distanceTo(o.controls.target),
+      R = e.clientHeight || 1,
+      C = (2 * w * Math.tan(jo.degToRad(o.camera.fov / 2))) / R,
+      tt = C * 110,
+      it = Math.pow(10, Math.floor(Math.log10(tt))),
+      wt = [1, 2, 5, 10]
+        .map((pt) => pt * it)
+        .reduce((pt, _t) => (Math.abs(_t - tt) < Math.abs(pt - tt) ? _t : pt)),
+      Ft = wt / C,
+      Wt = zt(wt, a.unit),
+      Tt = `${Ft.toFixed(0)}|${Wt}`;
+    if (Tt === Et) return;
+    ((Et = Tt),
+      (t("#scalebar i").style.width = `${Ft.toFixed(0)}px`),
+      (t("#scalebar span").textContent = Wt));
+    const Pt = t("#specFw");
+    Pt && (Pt.textContent = zt(C * e.clientWidth, a.unit));
+  }
+  function j() {
+    const w = W(),
+      R = n.selected && yn[n.selected.kind];
+    let C = a?.subject || w.title;
+    (w.mode === "detail" && (C = yn[n.detail].name), R && (C = R.name));
+    const tt = a?.unit === "nm" ? translate("分子尺度") : translate("细胞尺度");
+    ((t("#spec").innerHTML = `
+      <div><span>${translate("观察对象")}</span><b>${C}</b></div>
+      <div><span>${translate("视野宽度")}</span><b id="specFw">—</b></div>
+      <div><span>${tt}</span><b>${n.mode === "fluor" ? translate("荧光显微") : translate("科学插画")}</b></div>`),
+      (Et = ""));
+  }
+  function $() {
+    const w = t("#legend");
+    if (n.mode !== "fluor" || !a) return void (w.hidden = !0);
+    const R = new Set(),
+      C = (tt, it) => {
+        if (!tt.visible) return;
+        const wt = tt.userData.stain ?? it;
+        if (
+          (tt.isMesh || tt.isLine || tt.isPoints) &&
+          wt &&
+          wt !== "none" &&
+          wt !== "faint" &&
+          me[wt]
+        ) {
+          const Ft = wt.replace(/(@nm|_nm)$/, "");
+          R.add(me[Ft] ? Ft : wt);
+        }
+        tt.children.forEach((Ft) => C(Ft, wt));
+      };
+    (C(a.root),
+      (w.innerHTML = [...R]
+        .filter((tt) => me[tt])
+        .slice(0, 8)
+        .map(
+          (tt) =>
+            `<div><i style="background:${me[tt].color};color:${me[tt].color}"></i>${Bi[tt] || tt}${me[tt].label ? ` <em>${me[tt].label}</em>` : ""}</div>`,
+        )
+        .join("")),
+      (w.hidden = !R.size));
+  }
+  const W = () => xn[n.lesson],
+    dt = (w) => `<span class="m${w}">${na[w]}</span>`,
+    Dt = {
+      both: translate("动植物细胞都有"),
+      animal: translate("主要见于动物细胞"),
+      plant: translate("植物细胞特有"),
+      prokaryote: translate("原核细胞"),
+    };
+  function gt(w) {
+    const R = yn[w];
+    return R
+      ? `<div class="mcard">
+      <div class="mh"><b>${R.name}</b><span>${R.en}</span></div>
+      <div class="tags">${R.where === "prokaryote" ? "" : dt(R.membrane)}<span>${Dt[R.where]}</span>${R.extended ? `<span>${translate("大学拓展")}</span>` : ""}</div>
+      <p class="role">${R.role}</p>
+      <div class="body">${R.body}</div>
+    </div>`
+      : "";
+  }
+  function rt(w, R, C, tt) {
+    const it = (wt) =>
+      `<button data-${C}="${wt}" class="${wt === R ? "on" : ""}"><i style="background:${Ki[wt] || "#ccc"}"></i><span>${yn[wt].name}</span></button>`;
+    return tt
+      ? `<div class="olist">${tt.map(([wt, Ft]) => `<div class="gh">${wt}</div>${Ft.map(it).join("")}`).join("")}</div>`
+      : `<div class="olist">${w.map(it).join("")}</div>`;
+  }
+  const Ot = () => `<table class="ctable">
+    <tr><th></th><th>${translate("动物细胞")}</th><th>${translate("植物细胞")}</th></tr>
+    <tr><td>${translate("细胞壁")}</td><td>${translate("无")}</td><td>${translate("有（纤维素和果胶）")}</td></tr>
+    <tr><td>${translate("叶绿体")}</td><td>${translate("无")}</td><td>${translate("绿色部位的细胞有")}</td></tr>
+    <tr><td>${translate("液泡")}</td><td>${translate("小或无")}</td><td>${translate("成熟细胞有中央大液泡")}</td></tr>
+    <tr><td>${translate("中心体")}</td><td>${translate("有")}</td><td>${translate("高等植物无")}</td></tr>
+    <tr><td>${translate("溶酶体")}</td><td>${translate("有")}</td><td>${translate("一般不提")}</td></tr>
+    <tr><td>${translate("形状")}</td><td>${translate("多样，较柔软")}</td><td>${translate("较规则，有固定形态")}</td></tr>
+  </table>`,
+    Bt = () => `<table class="ctable">
+    <tr><th></th><th>${translate("原核细胞")}</th><th>${translate("真核细胞")}</th></tr>
+    <tr><td>${translate("细胞核")}</td><td>${translate("无核膜、核仁，DNA 在拟核")}</td><td>${translate("有以核膜为界限的细胞核")}</td></tr>
+    <tr><td>${translate("DNA")}</td><td>${translate("环状，裸露，不形成染色体")}</td><td>${translate("与蛋白质结合形成染色体")}</td></tr>
+    <tr><td>${translate("细胞器")}</td><td>${translate("只有核糖体")}</td><td>${translate("有多种细胞器")}</td></tr>
+    <tr><td>${translate("细胞壁")}</td><td>${translate("主要成分是肽聚糖")}</td><td>${translate("植物：纤维素和果胶；动物无")}</td></tr>
+    <tr><td>${translate("大小")}</td><td>1–10 µm</td><td>10–100 µm</td></tr>
+    <tr><td>${translate("举例")}</td><td>${translate("细菌、蓝细菌")}</td><td>${translate("动物、植物、真菌")}</td></tr>
+  </table>`;
+  function Ct() {
+    const w = W();
+    let R = "";
+    if (w.mode === "overview")
+      R =
+        (n.selected
+          ? gt(n.selected.kind)
+          : `<p class="note">${translate("点击舞台中的结构，或从下面的列表中选择。按 Esc 返回全景。")}</p>`) +
+        rt(Fa, n.selected?.kind, "sel");
+    else if (w.mode === "detail") {
+      const C = [2, 1, 0].map((tt) => [
+        na[tt],
+        oa.filter((it) => yn[it].membrane === tt),
+      ]);
+      R = gt(n.detail) + rt(null, n.detail, "detail", C);
+    } else if (w.mode === "compare") R = Ot();
+    else if (w.mode === "prokaryote")
+      R =
+        Bt() +
+        rt(Yi, n.selected?.kind, "info") +
+        (n.selected ? gt(n.selected.kind) : "");
+    else if (w.mode === "transport") {
+      const C = sa.find((tt) => tt.id === n.transport);
+      R = `<div class="mcard"><div class="mh"><b>${C.name}</b><span>${C.kind}</span></div><div class="body"><p>${C.desc}</p></div></div>`;
+    } else if (w.mode === "skeleton") {
+      const C = aa.find((tt) => tt.id === n.skeleton);
+      R = `<div class="mcard"><div class="mh"><b>${C.name}</b></div><div class="body"><p>${C.desc}</p></div></div>`;
+    }
+    ((t("#lesson").innerHTML =
+      `<div class="lh"><em>${String(n.lesson + 1).padStart(2, "0")}</em><div><h2>${w.title}</h2><small>${s(w)}</small></div></div><div class="body">${w.body}</div>${R}`),
+      j(),
+      ot());
+  }
+  function ot() {
+    const w = W(),
+      R = t("#stageBar"),
+      C = (it, wt, Ft) =>
+        it
+          .map(
+            ([Wt, Tt]) =>
+              `<button data-${Ft}="${Wt}" class="${Wt === wt ? "on" : ""}">${Tt}</button>`,
+          )
+          .join("");
+    let tt = "";
+    (w.mode === "compare"
+      ? (tt = C(
+          [
+            ["both", translate("并排")],
+            ["animal", translate("动物细胞")],
+            ["plant", translate("植物细胞")],
+          ],
+          n.compare,
+          "cmp",
+        ))
+      : w.mode === "prokaryote"
+        ? (tt = C(
+            [
+              ["structure", translate("细菌结构")],
+              ["scale", translate("尺度对比")],
+            ],
+            n.prok,
+            "prok",
+          ))
+        : w.mode === "transport"
+          ? (tt =
+              C(
+                sa.map((it) => [it.id, it.short]),
+                n.transport,
+                "tr",
+              ) + J())
+          : w.mode === "secretion"
+            ? (tt = J(!0))
+            : w.mode === "skeleton"
+              ? (tt =
+                  C(
+                    aa.map((it) => [it.id, it.name]),
+                    n.skeleton,
+                    "sk",
+                  ) + (n.skeleton === "network" ? "" : J()))
+              : w.mode === "detail" &&
+                (tt = C(
+                  oa.slice(0, 7).map((it) => [it, yn[it].name]),
+                  n.detail,
+                  "detail",
+                )),
+      (R.innerHTML = tt),
+      (R.hidden = !tt));
+  }
+  function J(w = !1) {
+    return `<i class="sep"></i><button class="act" data-play="1">${n.playing ? translate("暂停") : translate("播放")}</button>${w ? `<button data-replay="1">${translate("重新开始")}</button>` : ""}`;
+  }
+  function bt(w) {
+    const R = [];
+    return (
+      !["membrane", "transport"].includes(w.mode) &&
+        !(w.mode === "skeleton" && n.skeleton === "motor") &&
+        !(w.mode === "prokaryote" && n.prok === "scale") &&
+        R.push(["cut", translate("剖切")]),
+      R.push(
+        ["labels", translate("名称标注")],
+        ["spin", translate("自动旋转")],
+      ),
+      w.mode === "compare" && R.push(["diff", translate("突出差异")]),
+      w.mode === "skeleton" &&
+        n.skeleton === "network" &&
+        R.push(
+          ["mt", translate("微管")],
+          ["actin", translate("微丝")],
+          ["ift", translate("中间纤维")],
+        ),
+      R
+    );
+  }
+  function It() {
+    ((t("#tgs").innerHTML = bt(W())
+      .map(
+        ([w, R]) =>
+          `<button class="tg ${n.view[w] !== !1 && n.view[w] ? "on" : ""}" data-tg="${w}"><i></i>${R}</button>`,
+      )
+      .join("")),
+      document
+        .querySelectorAll("#modeSeg button")
+        .forEach((w) => w.classList.toggle("on", w.dataset.mode === n.mode)));
+  }
+  const ht = t("#hud");
+  let Ut = 0;
+  function Xt() {
+    if (Ut++ % 6) return;
+    let w = "";
+    if (a?.id === "transport") {
+      const R = a.api.counts?.() || {},
+        C = Object.entries(R)
+          .map(([it, wt]) => {
+            const Ft = wt.inside + wt.outside || 1,
+              [Wt, Tt] = Wi[it] || [it, "#a6e07a"];
+            return `<div class="row"><span>${Wt}</span><div class="bar"><i style="width:${((100 * wt.outside) / Ft).toFixed(0)}%;background:${Tt}"></i></div><b>${wt.outside}:${wt.inside}</b></div>`;
+          })
+          .join(""),
+        tt = a.api.atp?.();
+      w = `<div class="hh">${translate("膜外 : 膜内")}</div>${C}${tt != null ? `<div class="row"><span>ATP</span><div class="bar"><i style="width:${Math.min(100, tt)}%;background:#ffd36a"></i></div><b>${Math.round(tt)}</b></div>` : ""}`;
+    } else if (a?.id === "secretion") {
+      const R = a.api;
+      w = `<div class="hh">t = ${Math.round(R.minutes())} min</div><div class="status"><i></i>${R.step()}</div>`;
+    } else if (a?.id === "motor") {
+      const R = a.api.state(),
+        C = R.kinesin || R;
+      w = `<div class="hh">${translate("驱动蛋白")}</div><div class="kv"><span>${translate("步数")}</span><b>${C.steps ?? "—"}</b><span>${translate("位移")}</span><b>${C.distance != null ? `${Math.round(C.distance)} nm` : "—"}</b><span>${translate("消耗 ATP")}</span><b>${C.atpUsed ?? "—"}</b></div>`;
+    }
+    ((ht.hidden = !w), w && ht.innerHTML !== w && (ht.innerHTML = w));
+  }
+  const Zt = t("#chart");
+  function te() {
+    const w = a?.id === "transport" || a?.id === "secretion";
+    ((Zt.hidden = !w),
+      w &&
+        (a.id === "secretion"
+          ? ((t("#chartH").textContent = translate(
+              "³H-亮氨酸放射性的分布 · 膜面积的变化",
+            )),
+            ri(t("#chartC"), a.api.minutes(), {
+              time: translate("时间 / min"),
+              radio: translate("放射性"),
+              rer: translate("粗面内质网"),
+              golgi: translate("高尔基体"),
+              vesicle: translate("分泌小泡"),
+              erM: translate("内质网膜"),
+              golgiM: translate("高尔基体膜"),
+              plasma: translate("细胞膜"),
+              before: translate("分泌前"),
+              now: translate("当前"),
+            }))
+          : ((t("#chartH").textContent = translate("运输速率曲线")),
+            ci(t("#chartC"), n.transport, (R, C) => Mr(Xi[R], C), {
+              vsConc: translate("速率 – 浓度差"),
+              vsO2: translate("速率 – O₂ 浓度"),
+              conc: translate("浓度差"),
+              o2: translate("O₂ 浓度"),
+              rate: translate("速率"),
+              simple: translate("自由扩散"),
+              facilitated: translate("协助扩散"),
+              passive: translate("被动运输"),
+              active: translate("主动运输"),
+            }))));
+  }
+  function de(w) {
+    n.lesson = (w + xn.length) % xn.length;
+    const R = W();
+    ((n.view = {
+      ...R.view,
+    }),
+      (n.playing = !0),
+      history.replaceState(null, "", `#${n.lesson + 1}`),
+      document.querySelectorAll("#nav .ni").forEach((tt, it) => {
+        (tt.classList.toggle("on", it === n.lesson),
+          it === n.lesson && tt.classList.add("seen"));
+      }),
+      document.querySelectorAll("#prog i").forEach((tt, it) => {
+        (tt.classList.toggle("on", it < n.lesson),
+          tt.classList.toggle("cur", it === n.lesson));
+      }));
+    const C = t("#chapter");
+    ((C.querySelector(".n").textContent =
+      `${String(n.lesson + 1).padStart(2, "0")} / ${String(xn.length).padStart(2, "0")}`),
+      (C.querySelector("h1").textContent = R.title),
+      (C.querySelector("p").textContent = s(R)),
+      C.classList.remove("in"),
+      C.offsetWidth,
+      C.classList.add("in"),
+      ft(() => {
+        (kt(), Ct(), It(), te());
+      }),
+      (t("#lesson").scrollTop = 0));
+  }
+  function we(w = !1) {
+    ft(() => {
+      (kt(w), Ct(), It(), te());
+    });
+  }
+  ((t("#nav").innerHTML =
+    `<div class="navh">${translate("章节")}</div>` +
+    xn
+      .map(
+        (w, R) =>
+          `<button class="ni" data-go="${R}"><em>${String(R + 1).padStart(2, "0")}</em><b>${w.title}</b><small>${s(w)}</small></button>`,
+      )
+      .join("") +
+    `<div class="navf">${translate("<kbd>←</kbd> <kbd>→</kbd> 切换章节<br><kbd>R</kbd> 重置视角 <kbd>Space</kbd> 播放 / 暂停<br><kbd>M</kbd> 切换荧光显微 <kbd>Esc</kbd> 返回")}</div>`),
+    (t("#prog").innerHTML = xn.map(() => "<i></i>").join("")),
+    t("#nav").addEventListener("click", (w) => {
+      const R = w.target.closest("[data-go]");
+      R && de(+R.dataset.go);
+    }));
+  function Pe(w) {
+    ((n.mode = w), o.setMode(w), It(), $(), j());
+  }
+  function Oe() {
+    ((n.playing = !n.playing),
+      a?.api && "playing" in a.api && (a.api.playing = n.playing),
+      ot());
+  }
+  (document.addEventListener("click", (w) => {
+    const R = w.target.closest(
+      "[data-tg],[data-mode],[data-sel],[data-detail],[data-cmp],[data-prok],[data-tr],[data-sk],[data-play],[data-replay],[data-info]",
+    );
+    if (!R || R.disabled) return;
+    const C = R.dataset;
+    C.mode
+      ? Pe(C.mode)
+      : C.tg
+        ? ((n.view[C.tg] = !n.view[C.tg]),
+          C.tg === "diff" && F.forEach((tt) => (tt.visible = !!n.view.diff)),
+          ["mt", "actin", "ift"].includes(C.tg) && (A(), $()),
+          It())
+        : C.sel
+          ? at(C.sel)
+          : C.detail
+            ? ((n.detail = C.detail), we())
+            : C.cmp
+              ? ((n.compare = C.cmp), (a.view = O().view), At(), ot())
+              : C.prok
+                ? ((n.prok = C.prok), (n.selected = null), we())
+                : C.tr
+                  ? ((n.transport = C.tr),
+                    a.api?.setMode(C.tr),
+                    (a.view = N().view),
+                    At(),
+                    Ct(),
+                    te())
+                  : C.sk
+                    ? ((n.skeleton = C.sk), we())
+                    : C.play
+                      ? Oe()
+                      : C.replay
+                        ? (a.api?.reset?.(),
+                          (n.playing = !0),
+                          a.api && (a.api.playing = !0),
+                          ot())
+                        : C.info &&
+                          ((n.selected = {
+                            kind: C.info,
+                            target: null,
+                          }),
+                          Ct());
+  }),
+    (t("#bPrev").onclick = () => de(n.lesson - 1)),
+    (t("#bNext").onclick = () => de(n.lesson + 1)),
+    (t("#bReset").onclick = () => (n.selected ? L() : At())),
+    (t("#bFull").onclick = () =>
+      document.fullscreenElement
+        ? document.exitFullscreen()
+        : document.documentElement.requestFullscreen?.()),
+    window.addEventListener("keydown", (w) => {
+      w.target.closest?.("input,textarea") ||
+        (w.key === "ArrowLeft"
+          ? de(n.lesson - 1)
+          : w.key === "ArrowRight"
+            ? de(n.lesson + 1)
+            : w.key === "r" || w.key === "R"
+              ? t("#bReset").click()
+              : w.key === "f" || w.key === "F"
+                ? t("#bFull").click()
+                : w.key === "m" || w.key === "M"
+                  ? Pe(n.mode === "fluor" ? "illus" : "fluor")
+                  : w.key === "Escape"
+                    ? L()
+                    : w.key === " " && (w.preventDefault(), Oe()));
+    }),
+    new ResizeObserver(() => {
+      (o.resize(), te(), (Et = ""));
+    }).observe(t("#stage")));
+  let qe = performance.now(),
+    re = 0,
+    Ee = 0;
+  function ve(w) {
+    const R = Math.max(0, Math.min(0.05, (w - qe) / 1e3));
+    if (((qe = w), (re += R), a)) {
+      if (
+        ((o.controls.autoRotate = !!n.view.spin && !n.selected),
+        (Ha.uPulse.value = 0.55 + 0.45 * Math.sin(re * 3.2)),
+        d(),
+        a.update?.(re, R),
+        n.playing)
+      )
+        for (const C of ct) C(re, R);
+      (z(),
+        o.render(R),
+        ut(),
+        jt(),
+        Xt(),
+        a.id === "secretion" && Ee++ % 10 === 0 && te());
+    }
+    requestAnimationFrame(ve);
+  }
+  const Se = parseInt(location.hash.slice(1), 10);
+  (de(Number.isFinite(Se) && Se >= 1 && Se <= xn.length ? Se - 1 : 0),
+    requestAnimationFrame(ve),
+    document.body.classList.add("ready"));
+}
+function cellLabPage() {
+  return (
+    React.useLayoutEffect(() => {
+      ((document.title = translate("细胞 · 三维结构")), Zi());
+    }, []),
+    jsxRuntime.jsxs("div", {
+      id: "app",
+      children: [
+        jsxRuntime.jsxs("header", {
+          id: "top",
+          children: [
+            jsxRuntime.jsx("a", {
+              className: "back",
+              href: localizedUrl("/"),
+              children: "← WEDULAB",
+            }),
+            jsxRuntime.jsxs("div", {
+              className: "brand",
+              children: [
+                jsxRuntime.jsxs("svg", {
+                  viewBox: "0 0 32 32",
+                  fill: "none",
+                  "aria-hidden": "true",
+                  children: [
+                    jsxRuntime.jsx("path", {
+                      d: "M16 3.5c6.6 0 12.5 4.6 12.5 12.2 0 7.3-5.6 12.8-12.6 12.8C8.6 28.5 3.5 23.3 3.5 16 3.5 8.6 9.3 3.5 16 3.5z",
+                      fill: "#5aa62b",
+                      fillOpacity: ".12",
+                      stroke: "#5aa62b",
+                      strokeWidth: "1.3",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "13.5",
+                      cy: "14.5",
+                      r: "5",
+                      fill: "#9d84e6",
+                      fillOpacity: ".35",
+                      stroke: "#9d84e6",
+                      strokeWidth: "1.1",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "12.6",
+                      cy: "13.6",
+                      r: "1.6",
+                      fill: "#5b2fa6",
+                    }),
+                    jsxRuntime.jsx("rect", {
+                      x: "19",
+                      y: "18",
+                      width: "6.5",
+                      height: "3",
+                      rx: "1.5",
+                      transform: "rotate(-28 22 19.5)",
+                      fill: "#ff8a66",
+                    }),
+                    jsxRuntime.jsx("circle", {
+                      cx: "21.5",
+                      cy: "10",
+                      r: "1.3",
+                      fill: "#e85f9e",
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsxs("div", {
+                  children: [
+                    jsxRuntime.jsxs("b", {
+                      children: [
+                        "CELL",
+                        jsxRuntime.jsx("i", {
+                          children: "LAB",
+                        }),
+                      ],
+                    }),
+                    jsxRuntime.jsx("span", {
+                      children: translate("细胞 · 三维结构"),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("div", {
+              className: "prog",
+              id: "prog",
+            }),
+            jsxRuntime.jsx(jr, {}),
+            jsxRuntime.jsxs("div", {
+              className: "tbtns",
+              children: [
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bPrev",
+                  title: translate("上一节 (←)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M10 3L5 8l5 5",
+                    }),
+                  }),
+                }),
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bNext",
+                  title: translate("下一节 (→)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M6 3l5 5-5 5",
+                    }),
+                  }),
+                }),
+                jsxRuntime.jsxs("button", {
+                  className: "tb",
+                  id: "bReset",
+                  title: translate("重置视角 (R)"),
+                  children: [
+                    jsxRuntime.jsxs("svg", {
+                      viewBox: "0 0 16 16",
+                      children: [
+                        jsxRuntime.jsx("path", {
+                          d: "M2.5 8a5.5 5.5 0 1 0 1.8-4.1",
+                        }),
+                        jsxRuntime.jsx("path", {
+                          d: "M2.5 2.5v3h3",
+                        }),
+                      ],
+                    }),
+                    translate("视角"),
+                  ],
+                }),
+                jsxRuntime.jsx("button", {
+                  className: "tb",
+                  id: "bFull",
+                  title: translate("全屏 (F)"),
+                  children: jsxRuntime.jsx("svg", {
+                    viewBox: "0 0 16 16",
+                    children: jsxRuntime.jsx("path", {
+                      d: "M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4",
+                    }),
+                  }),
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsxRuntime.jsx("nav", {
+          id: "nav",
+        }),
+        jsxRuntime.jsxs("main", {
+          id: "stage",
+          children: [
+            jsxRuntime.jsx("canvas", {
+              id: "c3",
+            }),
+            jsxRuntime.jsx("svg", {
+              id: "leaders",
+            }),
+            jsxRuntime.jsx("div", {
+              id: "labels",
+            }),
+            jsxRuntime.jsx("div", {
+              id: "tip",
+              hidden: !0,
+            }),
+            jsxRuntime.jsx("div", {
+              id: "spec",
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "chapter",
+              children: [
+                jsxRuntime.jsx("div", {
+                  className: "n",
+                }),
+                jsxRuntime.jsx("h1", {}),
+                jsxRuntime.jsx("p", {}),
+              ],
+            }),
+            jsxRuntime.jsx("div", {
+              id: "hud",
+              hidden: !0,
+            }),
+            jsxRuntime.jsx("div", {
+              id: "legend",
+              hidden: !0,
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "scalebar",
+              children: [jsxRuntime.jsx("i", {}), jsxRuntime.jsx("span", {})],
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "chart",
+              hidden: !0,
+              children: [
+                jsxRuntime.jsx("div", {
+                  className: "ch-h",
+                  id: "chartH",
+                }),
+                jsxRuntime.jsx("canvas", {
+                  id: "chartC",
+                }),
+              ],
+            }),
+            jsxRuntime.jsx("div", {
+              id: "stageBar",
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "loading",
+              children: [
+                jsxRuntime.jsx("i", {}),
+                jsxRuntime.jsx("span", {
+                  children: translate("正在构建细胞模型…"),
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsxRuntime.jsxs("aside", {
+          id: "panel",
+          children: [
+            jsxRuntime.jsx("div", {
+              id: "lesson",
+            }),
+            jsxRuntime.jsxs("div", {
+              id: "view",
+              children: [
+                jsxRuntime.jsx("div", {
+                  className: "vh",
+                  children: translate("VIEW · 显示设置"),
+                }),
+                jsxRuntime.jsxs("div", {
+                  className: "seg",
+                  id: "modeSeg",
+                  children: [
+                    jsxRuntime.jsx("button", {
+                      "data-mode": "illus",
+                      children: translate("科学插画"),
+                    }),
+                    jsxRuntime.jsx("button", {
+                      "data-mode": "fluor",
+                      children: translate("荧光显微"),
+                    }),
+                  ],
+                }),
+                jsxRuntime.jsx("div", {
+                  className: "tgs",
+                  id: "tgs",
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    })
+  );
+}
+export { cellLabPage as default };

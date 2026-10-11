@@ -1,0 +1,618 @@
+{
+  "route": "/labs/mechanism",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "反应机理 · 分子动画",
+      "text": "← WEDULAB\nMECHANISM\n反应机理 · 分子动画\n简体中文\n视角\n高中有机\n01\n酯化反应\n02\n酯的碱性水解\n03\n乙烯与溴的加成\n04\n乙烯的加聚反应\n05\n甲烷与氯气的取代\n06\n乙醇的催化氧化\n07\n乙醇的消去反应\n08\n苯的溴代反应\n离子反应\n09\n酸碱中和\n10\n生成氯化银沉淀\n11\n锌置换铜\n12\n钠与水反应\n燃烧与氧化还原\n13\n甲烷燃烧\n14\n氢气在氯气中燃烧\n15\n铝热反应\n大学有机机理\n16\nSN2 反应\n17\nSN1 反应\n18\nE2 消除\n19\n酯化反应完整机理\nSpace 播放 / 暂停\n← → 上一步 / 下一步\n↑ ↓ 切换反应\nC\nC\nO\nO\nH\nH\nH\nH\nC\nC\n18O\nH\nH\nH\nH\nH\nH\n步骤\n01 / 04\n阶段\n反应物\n能量\n—\n高中有机\n酯化反应\n\nCH3COOH + CH3CH218OH ⇌ CH3CO18OCH2CH3 + H2O\n\n1×\n酯化反应\nCH3COOH + CH3CH218OH ⇌ CH3CO18OCH2CH3 + H2O\n浓硫酸\n加热\n1\n反应物\n2\n相互靠近\n3\n旧键断裂、新键形成\n4\n生成酯和水\n第 1 步 · 反应物\n\n乙酸与乙醇。用 18O 标记乙醇中的氧原子，看它最后去了哪里。\n\n能量变化\n宏观现象\n\n饱和碳酸钠溶液液面上出现有香味的油状液体（乙酸乙酯）。浓硫酸作催化剂和吸水剂。\n\nVIEW · 显示设置\n原子符号\n溶剂水分子\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 264222,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (https://wedulab.com/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at ue (https://wedulab.com/assets/studio-DdpeYmJn.js:1:1890)\n    at ae (https://wedulab.com/assets/Page-BIoROilc.js:1:5656)\n    at Ce (https://wedulab.com/assets/Page-BIoROilc.js:1:41444)\n    at https://wedulab.com/assets/Page-BIoROilc.js:9:3673\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ae (https://wedulab.com/assets/studio-DdpeYmJn.js:1:1458)\n    at ue (https://wedulab.com/assets/studio-DdpeYmJn.js:1:2089)\n    at ae (https://wedulab.com/assets/Page-BIoROilc.js:1:5656)\n    at Ce (https://wedulab.com/assets/Page-BIoROilc.js:1:41444)\n    at https://wedulab.com/assets/Page-BIoROilc.js:9:3673\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at https://wedulab.com/assets/Page-BIoROilc.js:1:6563\n    at new re (https://wedulab.com/assets/Page-BIoROilc.js:1:6801)\n    at b (https://wedulab.com/assets/Page-BIoROilc.js:1:41970)\n    at Ce (https://wedulab.com/assets/Page-BIoROilc.js:9:3522)\n    at https://wedulab.com/assets/Page-BIoROilc.js:9:3673\n    at Yl (https://wedulab.com/assets/index-KVDz72un.js:1719:95838)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117583)\n    at qa (https://wedulab.com/assets/index-KVDz72un.js:1719:117573)\n    at Ac (https://wedulab.com/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "epC",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at g (https://wedulab.com/assets/Page-BIoROilc.js:7:907)\n    at E (https://wedulab.com/assets/Page-BIoROilc.js:9:3373)\n    at <anonymous>:8:199\n    at Array.forEach (<anonymous>)\n    at window.__advanceFrames (<anonymous>:8:187)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:24)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        }
+      ],
+      "resources": [
+        "https://wedulab.com/assets/index-KVDz72un.js",
+        "https://wedulab.com/assets/index-BOM_njxY.css",
+        "https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "https://wedulab.com/assets/Page-BIoROilc.js",
+        "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+        "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "https://wedulab.com/assets/OutputPass-B-cSf-Py.js",
+        "https://wedulab.com/assets/studio-DdpeYmJn.js",
+        "https://wedulab.com/assets/theme-CtpKaZpm.css",
+        "https://wedulab.com/assets/Page-DOSkEJv0.css",
+        "https://wedulab.com/assets/studio-spZVrGLA.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "https://wedulab.com/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个反应 (↑)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个反应 (↓)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n酯化反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n酯的碱性水解",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n乙烯与溴的加成",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n乙烯的加聚反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n甲烷与氯气的取代",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n乙醇的催化氧化",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n乙醇的消去反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n苯的溴代反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n酸碱中和",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n生成氯化银沉淀",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n锌置换铜",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "12\n钠与水反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "13\n甲烷燃烧",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "14\n氢气在氯气中燃烧",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "15\n铝热反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "16\nSN2 反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "17\nSN1 反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "18\nE2 消除",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "19\n酯化反应完整机理",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "",
+          "type": "submit",
+          "title": "上一步"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "",
+          "type": "submit",
+          "title": "下一步"
+        },
+        {
+          "tag": "INPUT",
+          "id": "tl",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "原子符号",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "溶剂水分子",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "反应机理 · 分子动画",
+      "text": "← WEDULAB\nMECHANISM\n反应机理 · 分子动画\n简体中文\n视角\n高中有机\n01\n酯化反应\n02\n酯的碱性水解\n03\n乙烯与溴的加成\n04\n乙烯的加聚反应\n05\n甲烷与氯气的取代\n06\n乙醇的催化氧化\n07\n乙醇的消去反应\n08\n苯的溴代反应\n离子反应\n09\n酸碱中和\n10\n生成氯化银沉淀\n11\n锌置换铜\n12\n钠与水反应\n燃烧与氧化还原\n13\n甲烷燃烧\n14\n氢气在氯气中燃烧\n15\n铝热反应\n大学有机机理\n16\nSN2 反应\n17\nSN1 反应\n18\nE2 消除\n19\n酯化反应完整机理\nSpace 播放 / 暂停\n← → 上一步 / 下一步\n↑ ↓ 切换反应\nC\nC\nO\nO\nH\nH\nH\nH\nC\nC\n18O\nH\nH\nH\nH\nH\nH\n步骤\n01 / 04\n阶段\n反应物\n能量\n—\n高中有机\n酯化反应\n\nCH3COOH + CH3CH218OH ⇌ CH3CO18OCH2CH3 + H2O\n\n1×\n酯化反应\nCH3COOH + CH3CH218OH ⇌ CH3CO18OCH2CH3 + H2O\n浓硫酸\n加热\n1\n反应物\n2\n相互靠近\n3\n旧键断裂、新键形成\n4\n生成酯和水\n第 1 步 · 反应物\n\n乙酸与乙醇。用 18O 标记乙醇中的氧原子，看它最后去了哪里。\n\n能量变化\n宏观现象\n\n饱和碳酸钠溶液液面上出现有香味的油状液体（乙酸乙酯）。浓硫酸作催化剂和吸水剂。\n\nVIEW · 显示设置\n原子符号\n溶剂水分子\n自动旋转\n问题反馈\n作者：WY",
+      "randomCalls": 264222,
+      "canvas": [
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at le (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67387)\n    at new _d (http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js:3682:67897)\n    at ue (http://127.0.0.1:4173/assets/studio-DdpeYmJn.js:1:1890)\n    at ae (http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:5656)\n    at Ce (http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:41444)\n    at http://127.0.0.1:4173/assets/Page-BIoROilc.js:9:3673\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ae (http://127.0.0.1:4173/assets/studio-DdpeYmJn.js:1:1458)\n    at ue (http://127.0.0.1:4173/assets/studio-DdpeYmJn.js:1:2089)\n    at ae (http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:5656)\n    at Ce (http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:41444)\n    at http://127.0.0.1:4173/assets/Page-BIoROilc.js:9:3673\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:6563\n    at new re (http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:6801)\n    at b (http://127.0.0.1:4173/assets/Page-BIoROilc.js:1:41970)\n    at Ce (http://127.0.0.1:4173/assets/Page-BIoROilc.js:9:3522)\n    at http://127.0.0.1:4173/assets/Page-BIoROilc.js:9:3673\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)"
+        },
+        {
+          "id": "epC",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at g (http://127.0.0.1:4173/assets/Page-BIoROilc.js:7:907)\n    at E (http://127.0.0.1:4173/assets/Page-BIoROilc.js:9:3373)\n    at <anonymous>:8:199\n    at Array.forEach (<anonymous>)\n    at window.__advanceFrames (<anonymous>:8:187)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:24)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-BIoROilc.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/OutputPass-B-cSf-Py.js",
+        "http://127.0.0.1:4173/assets/theme-CtpKaZpm.css",
+        "http://127.0.0.1:4173/assets/Page-DOSkEJv0.css",
+        "http://127.0.0.1:4173/assets/studio-DdpeYmJn.js",
+        "http://127.0.0.1:4173/assets/studio-spZVrGLA.css",
+        "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一个反应 (↑)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一个反应 (↓)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bReset",
+          "text": "视角",
+          "type": "submit",
+          "title": "重置视角 (R)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n酯化反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n酯的碱性水解",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n乙烯与溴的加成",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n乙烯的加聚反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n甲烷与氯气的取代",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n乙醇的催化氧化",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n乙醇的消去反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n苯的溴代反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n酸碱中和",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n生成氯化银沉淀",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "11\n锌置换铜",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "12\n钠与水反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "13\n甲烷燃烧",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "14\n氢气在氯气中燃烧",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "15\n铝热反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "16\nSN2 反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "17\nSN1 反应",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "18\nE2 消除",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "19\n酯化反应完整机理",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "",
+          "type": "submit",
+          "title": "上一步"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "",
+          "type": "submit",
+          "title": "下一步"
+        },
+        {
+          "tag": "INPUT",
+          "id": "tl",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "1×",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "原子符号",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "溶剂水分子",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

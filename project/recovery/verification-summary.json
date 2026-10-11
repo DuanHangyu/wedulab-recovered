@@ -1,0 +1,799 @@
+{
+  "desktopProjectComparison": [
+    {
+      "route": "/",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 3607200,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/atmos",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/cell",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/conic",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/construct",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/contour",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/drift",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/earth",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/fields",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/func",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/geo",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/mechanism",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/micro",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/motion",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/optics",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/orbital",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/pythagoras",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/reaction",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/volt",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/vsepr",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/water",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/waves",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/wonder",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    }
+  ],
+  "mobileProjectComparison": [
+    {
+      "route": "/",
+      "differentPixels": 0,
+      "textMatch": true
+    },
+    {
+      "route": "/labs/contour",
+      "differentPixels": 0,
+      "textMatch": true
+    },
+    {
+      "route": "/labs/geo",
+      "differentPixels": 0,
+      "textMatch": true
+    },
+    {
+      "route": "/labs/micro",
+      "differentPixels": 0,
+      "textMatch": true
+    },
+    {
+      "route": "/labs/vsepr",
+      "differentPixels": 0,
+      "textMatch": true
+    },
+    {
+      "route": "/labs/water",
+      "differentPixels": 0,
+      "textMatch": true
+    }
+  ],
+  "labInteractions": [
+    {
+      "lab": "atmos",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/atmos?lang=zh-CN#0",
+      "after": "http://127.0.0.1:4176/labs/atmos?lang=zh-CN#1",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "cell",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/cell?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/cell?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "conic",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/conic?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/conic?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "construct",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/construct?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/construct?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "contour",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/contour?lang=zh-CN#0",
+      "after": "http://127.0.0.1:4176/labs/contour?lang=zh-CN#1",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "drift",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/drift?lang=zh-CN#0",
+      "after": "http://127.0.0.1:4176/labs/drift?lang=zh-CN#1",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "earth",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/earth?lang=zh-CN#0",
+      "after": "http://127.0.0.1:4176/labs/earth?lang=zh-CN#1",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "fields",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/fields?lang=zh-CN#efield",
+      "after": "http://127.0.0.1:4176/labs/fields?lang=zh-CN#work",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "func",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/func?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/func?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "geo",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/geo?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/geo?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "mechanism",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/mechanism?lang=zh-CN#esterification",
+      "after": "http://127.0.0.1:4176/labs/mechanism?lang=zh-CN#saponification",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "micro",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/micro?lang=zh-CN#free",
+      "after": "http://127.0.0.1:4176/labs/micro?lang=zh-CN#parts",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "motion",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/motion?lang=zh-CN#tape",
+      "after": "http://127.0.0.1:4176/labs/motion?lang=zh-CN#gates",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "optics",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/optics?lang=zh-CN#reflect",
+      "after": "http://127.0.0.1:4176/labs/optics?lang=zh-CN#mirrorimg",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "orbital",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/orbital?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/orbital?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "pythagoras",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/pythagoras?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/pythagoras?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "reaction",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/reaction?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/reaction?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "volt",
+      "action": "暂停求解器、切换电路图",
+      "before": "http://127.0.0.1:4176/labs/volt?lang=zh-CN",
+      "after": "http://127.0.0.1:4176/labs/volt?lang=zh-CN",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "vsepr",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/vsepr?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/vsepr?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "water",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/water?lang=zh-CN#stores",
+      "after": "http://127.0.0.1:4176/labs/water?lang=zh-CN#phase",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "waves",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/waves?lang=zh-CN#spring",
+      "after": "http://127.0.0.1:4176/labs/waves?lang=zh-CN#pendulum",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "lab": "wonder",
+      "action": "下一章节",
+      "before": "http://127.0.0.1:4176/labs/wonder?lang=zh-CN#1",
+      "after": "http://127.0.0.1:4176/labs/wonder?lang=zh-CN#2",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "adminUI": {
+    "login": true,
+    "summaryRendered": true,
+    "feedbackVisible": true,
+    "errors": []
+  },
+  "htmlTemplates": 144,
+  "semanticModules": 40,
+  "sourceAssets": 138,
+  "fontStylesheets": 5,
+  "fontFiles": 21,
+  "sourceComparison": [
+    {
+      "route": "/",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 3607200,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/atmos",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/cell",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/conic",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/construct",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/contour",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/drift",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/earth",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/fields",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/func",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/geo",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/mechanism",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/micro",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/motion",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/optics",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/orbital",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/pythagoras",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/reaction",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/volt",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/vsepr",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/water",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/waves",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    },
+    {
+      "route": "/labs/wonder",
+      "titleMatch": true,
+      "textMatch": true,
+      "differentPixels": 0,
+      "totalPixels": 1440000,
+      "errors": [
+        [],
+        []
+      ]
+    }
+  ],
+  "additionalInteractions": {
+    "home": {
+      "filterMathCards": 6,
+      "initialCards": 12,
+      "expandedCards": 22,
+      "mobileViewport": [
+        390,
+        844
+      ],
+      "horizontalOverflow": false
+    },
+    "languages": [
+      "zh-CN",
+      "zh-Hant",
+      "ja",
+      "ko",
+      "tr",
+      "en"
+    ],
+    "languageChecks": "Titles, document.lang and experiment links verified for all six locales.",
+    "contour": {
+      "keyboardChapter": "#1",
+      "profileVisible": true,
+      "profileDistance": "6.29km",
+      "profileHighest": "1284m",
+      "profileLowest": "173m",
+      "lineOfSight": "not visible"
+    },
+    "earth": {
+      "chapter": "#5",
+      "winterDay": 356,
+      "summerDay": 173,
+      "readoutsChange": true
+    },
+    "vsepr": {
+      "AX2": "linear",
+      "AX4": "tetrahedral",
+      "readoutsChange": true
+    },
+    "legacyRedirects": [
+      "/index.html?lang=en#follow -> /?lang=en#follow",
+      "/contour-lab.html?lang=zh-CN#2 -> /labs/contour?lang=zh-CN#2"
+    ],
+    "feedback": {
+      "submittedLocally": true,
+      "receivedIntegerId": 1
+    },
+    "volt": {
+      "exportJSON": true,
+      "importJSON": true,
+      "presetLibrary": 21,
+      "RCpresetLoaded": true,
+      "RCcomponentCount": 5,
+      "RCwireCount": 16,
+      "RCnodeCount": 6,
+      "solver": "MNA · Newton · BDF2"
+    }
+  },
+  "status": "complete",
+  "archiveSmoke": {
+    "extractIntegrity": "passed",
+    "tests": "passed",
+    "build": "passed",
+    "productionServer": "passed",
+    "htmlJSFontsHTTP": "passed"
+  }
+}

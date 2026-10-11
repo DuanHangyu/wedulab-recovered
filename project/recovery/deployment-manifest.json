@@ -1,0 +1,830 @@
+{
+  "assets/index-BOM_njxY.css": {
+    "url": "https://wedulab.com/assets/index-BOM_njxY.css",
+    "status": "200",
+    "bytes": 4713,
+    "sha256": "9847eef69f684f79a3f391f5f39753480a7754ee85cc23b9669c29be4a1c131f"
+  },
+  "assets/index-KVDz72un.js": {
+    "url": "https://wedulab.com/assets/index-KVDz72un.js",
+    "status": "200",
+    "bytes": 3235781,
+    "sha256": "210771c104612287b49e673797e577f46b7275237ff8d1e9b35e74133ad4409c"
+  },
+  "assets/Analytics-CEgp3ZXb.css": {
+    "url": "https://wedulab.com/assets/Analytics-CEgp3ZXb.css",
+    "status": "200",
+    "bytes": 18423,
+    "sha256": "b07d876adccaafb472ca9944174f81cbec9f005584ddfffd18d5da47e047ffcb"
+  },
+  "assets/Analytics-DJiIjrsr.js": {
+    "url": "https://wedulab.com/assets/Analytics-DJiIjrsr.js",
+    "status": "200",
+    "bytes": 26664,
+    "sha256": "53cf5eaf6effff07b188fed344858115798573778c66d687ab0f906bd64bc0f9"
+  },
+  "assets/BufferGeometryUtils--VnzLiDd.js": {
+    "url": "https://wedulab.com/assets/BufferGeometryUtils--VnzLiDd.js",
+    "status": "200",
+    "bytes": 5180,
+    "sha256": "c684ae06c839c8d088f9adab2d6e599bce284bfcfac4a571e53a8a01ec85a7de"
+  },
+  "assets/Home-CfI5xIBn.css": {
+    "url": "https://wedulab.com/assets/Home-CfI5xIBn.css",
+    "status": "200",
+    "bytes": 8554,
+    "sha256": "2d8cd58ae88003f133a4f8faef3c21f184d0203960ea06d1720689dded5afa9a"
+  },
+  "assets/Home-DIbY4xn7.js": {
+    "url": "https://wedulab.com/assets/Home-DIbY4xn7.js",
+    "status": "200",
+    "bytes": 5624,
+    "sha256": "b5474f28e9f7b176735a12bea3db9c85c7cb9bcee8cf55b5011f9c61377bb7cd"
+  },
+  "assets/LanguageSwitcher-G8ZoNuu-.css": {
+    "url": "https://wedulab.com/assets/LanguageSwitcher-G8ZoNuu-.css",
+    "status": "200",
+    "bytes": 2464,
+    "sha256": "1e6cd7f94279f07a572b215e929a7f0fd139101c6eb105494d092f26a4857044"
+  },
+  "assets/LanguageSwitcher-K4pSOXN-.js": {
+    "url": "https://wedulab.com/assets/LanguageSwitcher-K4pSOXN-.js",
+    "status": "200",
+    "bytes": 3112,
+    "sha256": "de8537d207066bfc2fd7066025fac0258c851c55320e3fe7758df267af8e34b7"
+  },
+  "assets/LineSegments2-CF4-EQBa.js": {
+    "url": "https://wedulab.com/assets/LineSegments2-CF4-EQBa.js",
+    "status": "200",
+    "bytes": 16047,
+    "sha256": "728ccb48deb4f971958aaa6dae94c4516544e87c6a05fb1b7b66f99e7b92227f"
+  },
+  "assets/OrbitControls-D-zZTbsE.js": {
+    "url": "https://wedulab.com/assets/OrbitControls-D-zZTbsE.js",
+    "status": "200",
+    "bytes": 610970,
+    "sha256": "ebfb93f9c96b2a53e266d64dbe23b42cd6078b5703a82f640de2830f625bda2c"
+  },
+  "assets/OutputPass-B-cSf-Py.js": {
+    "url": "https://wedulab.com/assets/OutputPass-B-cSf-Py.js",
+    "status": "200",
+    "bytes": 697709,
+    "sha256": "5fe0e7f12660b4453be4522d5701f254c7103e83aa44f1a906e6364a19ff8e75"
+  },
+  "assets/Page-9KV-PZLB.js": {
+    "url": "https://wedulab.com/assets/Page-9KV-PZLB.js",
+    "status": "200",
+    "bytes": 28980,
+    "sha256": "ec63fed1799a7fa31e473abc2058971c3f22c79ec95441a6b4f2900d11805b7c"
+  },
+  "assets/Page-B-ZrcdrO.js": {
+    "url": "https://wedulab.com/assets/Page-B-ZrcdrO.js",
+    "status": "200",
+    "bytes": 364316,
+    "sha256": "e2a8c1449ef1645785eff6fa6ea08227cedc6e9d86c34fc05cfb698a8fd02a8d"
+  },
+  "assets/Page-BAtiytRK.css": {
+    "url": "https://wedulab.com/assets/Page-BAtiytRK.css",
+    "status": "200",
+    "bytes": 5292,
+    "sha256": "67e4595e496cd716efd383985d98dcea16c77b60dd6e569c87c3f3d853e6bfe4"
+  },
+  "assets/Page-BHNjPbNx.js": {
+    "url": "https://wedulab.com/assets/Page-BHNjPbNx.js",
+    "status": "200",
+    "bytes": 31534,
+    "sha256": "fd7dcde2bc64ec41fe1076236dd7179235d2f5db7b108d75fc78b95668a1cfd7"
+  },
+  "assets/Page-BIoROilc.js": {
+    "url": "https://wedulab.com/assets/Page-BIoROilc.js",
+    "status": "200",
+    "bytes": 58735,
+    "sha256": "03d52217233408fe45a4cee9a31a188dbb8858e55e255af17aeaf2b70d726956"
+  },
+  "assets/Page-BM6zSfKl.css": {
+    "url": "https://wedulab.com/assets/Page-BM6zSfKl.css",
+    "status": "200",
+    "bytes": 109,
+    "sha256": "6171f2c692f9b7a5379f66d46c44d29fda2627c6d84b7696d5b546e4e85315d7"
+  },
+  "assets/Page-BUeo7GFe.css": {
+    "url": "https://wedulab.com/assets/Page-BUeo7GFe.css",
+    "status": "200",
+    "bytes": 2024,
+    "sha256": "8ea18547a3ac6bd444b2aca8fcc6d569586acb7a42706b582f1e254337190d5a"
+  },
+  "assets/Page-BeNhPUo6.css": {
+    "url": "https://wedulab.com/assets/Page-BeNhPUo6.css",
+    "status": "200",
+    "bytes": 4352,
+    "sha256": "f6ee9f4bbaee1651b2368dbe143a6e63a9680cf5fb230e223bd2122b84062a8e"
+  },
+  "assets/Page-Bjq3k2Gg.js": {
+    "url": "https://wedulab.com/assets/Page-Bjq3k2Gg.js",
+    "status": "200",
+    "bytes": 98462,
+    "sha256": "11f2ba749c18b7c5b08a67110f851b9a0378d95ba8f71a51a287d58a47f48e1b"
+  },
+  "assets/Page-BmHCOAca.js": {
+    "url": "https://wedulab.com/assets/Page-BmHCOAca.js",
+    "status": "200",
+    "bytes": 49557,
+    "sha256": "d37b45a46f7e79c1d59b48aa80350f89263b08737c2d646b45671a548a1e5a31"
+  },
+  "assets/Page-ByKJXWQd.js": {
+    "url": "https://wedulab.com/assets/Page-ByKJXWQd.js",
+    "status": "200",
+    "bytes": 39231,
+    "sha256": "3696ae48d13fa5283f3e549751679698fdfca9504b95d9364ada82a3fdaa6af2"
+  },
+  "assets/Page-C7ATjR3d.js": {
+    "url": "https://wedulab.com/assets/Page-C7ATjR3d.js",
+    "status": "200",
+    "bytes": 149863,
+    "sha256": "5b2996aa53b0ce6a0612fbd2c99dc75a1e92837aaef271ffaf7921d1ffad5747"
+  },
+  "assets/Page-C83Ns7th.js": {
+    "url": "https://wedulab.com/assets/Page-C83Ns7th.js",
+    "status": "200",
+    "bytes": 67248,
+    "sha256": "62a39212afd6ec7d153f8252a7386bc17a59f4fef6d369a2a7244f2f1427646c"
+  },
+  "assets/Page-C9Fi6SfR.js": {
+    "url": "https://wedulab.com/assets/Page-C9Fi6SfR.js",
+    "status": "200",
+    "bytes": 39414,
+    "sha256": "4127e241b37c6197302a0b892f1a6919c59e0d44b0f771c70a109481f5521674"
+  },
+  "assets/Page-CCiHCD5r.js": {
+    "url": "https://wedulab.com/assets/Page-CCiHCD5r.js",
+    "status": "200",
+    "bytes": 71048,
+    "sha256": "edcd3a4b1fa9e996ef2d0d9cea87d9af78b9d5d866fa48d785392c4dd04171a6"
+  },
+  "assets/Page-CM2MSrBx.css": {
+    "url": "https://wedulab.com/assets/Page-CM2MSrBx.css",
+    "status": "200",
+    "bytes": 14867,
+    "sha256": "055e5ec27e4d0b7ad034e411398bb84746e813616a197909b544aabf314d0e00"
+  },
+  "assets/Page-CNIimdwS.css": {
+    "url": "https://wedulab.com/assets/Page-CNIimdwS.css",
+    "status": "200",
+    "bytes": 2223,
+    "sha256": "d5244f002b531dfbcd8e8090266997a8bf4da324eb5d28a05b548952edfad90a"
+  },
+  "assets/Page-CgFkwjK4.css": {
+    "url": "https://wedulab.com/assets/Page-CgFkwjK4.css",
+    "status": "200",
+    "bytes": 24966,
+    "sha256": "80a51ac312455b0ebdd26eb829613149dfa4878f5567645a305d58796f606fef"
+  },
+  "assets/Page-Ck6gdys0.css": {
+    "url": "https://wedulab.com/assets/Page-Ck6gdys0.css",
+    "status": "200",
+    "bytes": 2901,
+    "sha256": "d4cd87c37b7cc6131df0cb13075e94f05c107063829f0ff2e9443292a1fa63b7"
+  },
+  "assets/Page-CnNnv5QM.css": {
+    "url": "https://wedulab.com/assets/Page-CnNnv5QM.css",
+    "status": "200",
+    "bytes": 1370,
+    "sha256": "9cb2e2a0f691b64ad17da470aab49e3fad259e50c46a0cd252cb2849a55253ce"
+  },
+  "assets/Page-Cr2PYwGd.css": {
+    "url": "https://wedulab.com/assets/Page-Cr2PYwGd.css",
+    "status": "200",
+    "bytes": 565,
+    "sha256": "9361902ef49933536e32cdd463df51d321e6b42829df1710142948df2d408f0a"
+  },
+  "assets/Page-CrUrCqRl.css": {
+    "url": "https://wedulab.com/assets/Page-CrUrCqRl.css",
+    "status": "200",
+    "bytes": 1857,
+    "sha256": "e812b7b44fc576ddc0052e0e06e321dc3ccaadc3ef93e2c7541bf5986840b5de"
+  },
+  "assets/Page-DDIIxL8W.js": {
+    "url": "https://wedulab.com/assets/Page-DDIIxL8W.js",
+    "status": "200",
+    "bytes": 198427,
+    "sha256": "65c0dd4e4502891c31fe6b82f2c25b383e23dbda73d6b690d01bafef2fe262e4"
+  },
+  "assets/Page-DOSkEJv0.css": {
+    "url": "https://wedulab.com/assets/Page-DOSkEJv0.css",
+    "status": "200",
+    "bytes": 4446,
+    "sha256": "2020a4700dec73ed1dbe4368fbec42b4af650ca831ec0961833360b07b8b5cc3"
+  },
+  "assets/Page-DRo91e6G.css": {
+    "url": "https://wedulab.com/assets/Page-DRo91e6G.css",
+    "status": "200",
+    "bytes": 17785,
+    "sha256": "15d986aa7efdfff4a208a9a0e4a0ef1d1b4911607667f340ac69b90f20f18190"
+  },
+  "assets/Page-DSUG_-HG.css": {
+    "url": "https://wedulab.com/assets/Page-DSUG_-HG.css",
+    "status": "200",
+    "bytes": 32478,
+    "sha256": "abf57534905fb72c6297914db7a8085dd770830ea58b73e847406056b10d5fcb"
+  },
+  "assets/Page-DTutw72u.css": {
+    "url": "https://wedulab.com/assets/Page-DTutw72u.css",
+    "status": "200",
+    "bytes": 1473,
+    "sha256": "54c52f8100f557e9ca8a5b8d49c5c9651490cec30bc4fb2918118016f80ca9e6"
+  },
+  "assets/Page-DUKGQ0YZ.css": {
+    "url": "https://wedulab.com/assets/Page-DUKGQ0YZ.css",
+    "status": "200",
+    "bytes": 26961,
+    "sha256": "e3626ffbed2841ec00c444ec77fb80d9b7161b796fd07ec5da6b9cecc6853596"
+  },
+  "assets/Page-DarYlYHC.css": {
+    "url": "https://wedulab.com/assets/Page-DarYlYHC.css",
+    "status": "200",
+    "bytes": 5204,
+    "sha256": "e1bba99d760c1e4bf6763e9dac5996a48e5bdba841df29698ceee1a1a5b64e9d"
+  },
+  "assets/Page-DbWcpJ3P.js": {
+    "url": "https://wedulab.com/assets/Page-DbWcpJ3P.js",
+    "status": "200",
+    "bytes": 31222,
+    "sha256": "cdd21119e3a9666b526f6bb4b1ab68782a440538bd7d06627971827205ab645d"
+  },
+  "assets/Page-DhtjytuL.js": {
+    "url": "https://wedulab.com/assets/Page-DhtjytuL.js",
+    "status": "200",
+    "bytes": 223940,
+    "sha256": "179ec6297f630f1ca0b78693b64fd38e36a6510fd3bf3593f0f4c8ae808f7e44"
+  },
+  "assets/Page-DpQvKtp-.js": {
+    "url": "https://wedulab.com/assets/Page-DpQvKtp-.js",
+    "status": "200",
+    "bytes": 227715,
+    "sha256": "e6d26d7611430eec2c24bc1efb59c7774109ad359507fc6a58f75923cf866c6b"
+  },
+  "assets/Page-DtRXWW06.js": {
+    "url": "https://wedulab.com/assets/Page-DtRXWW06.js",
+    "status": "200",
+    "bytes": 61258,
+    "sha256": "f42a1526663c0bbb883042bcc4b246f0709e517b2bb9354703068c60dd005071"
+  },
+  "assets/Page-DwZTQJtf.js": {
+    "url": "https://wedulab.com/assets/Page-DwZTQJtf.js",
+    "status": "200",
+    "bytes": 105174,
+    "sha256": "f3bf7862d2384c24131f971eab5012f93eb596697c1a38a6e78f434d4f079049"
+  },
+  "assets/Page-Dxi9rB2i.css": {
+    "url": "https://wedulab.com/assets/Page-Dxi9rB2i.css",
+    "status": "200",
+    "bytes": 23048,
+    "sha256": "77c7bcb3eb8c4aad6e3268413502467a54990e0ef940efb5510211577c6c76ac"
+  },
+  "assets/Page-ObqXJVw4.css": {
+    "url": "https://wedulab.com/assets/Page-ObqXJVw4.css",
+    "status": "200",
+    "bytes": 1568,
+    "sha256": "6544a39c28ae2709fd610abcc2616d3e2407592c9c20a3ebbe6662db1a3c5a20"
+  },
+  "assets/Page-iY65WCs6.js": {
+    "url": "https://wedulab.com/assets/Page-iY65WCs6.js",
+    "status": "200",
+    "bytes": 52452,
+    "sha256": "2f294135bc24b3984109a856fe696caacb3907ed739c602b438981622a12e64a"
+  },
+  "assets/Page-kcZ9bXrN.css": {
+    "url": "https://wedulab.com/assets/Page-kcZ9bXrN.css",
+    "status": "200",
+    "bytes": 22412,
+    "sha256": "521b22d597c1d47ccd6b5f2d908bbbdffb117be7e1c5f9f76b0131a354fd2979"
+  },
+  "assets/Page-l40zoFTw.css": {
+    "url": "https://wedulab.com/assets/Page-l40zoFTw.css",
+    "status": "200",
+    "bytes": 27295,
+    "sha256": "7d0db6926c7691f96aebc1fba93efa1367360c894dfff0692d64dd7988dce66d"
+  },
+  "assets/Page-qS6a4Hdm.js": {
+    "url": "https://wedulab.com/assets/Page-qS6a4Hdm.js",
+    "status": "200",
+    "bytes": 328528,
+    "sha256": "23808a30b72e7bde9886469d2a7d2546e736a41dfbeb90b14c3d3a9593645035"
+  },
+  "assets/Page-rwd5-Bjn.js": {
+    "url": "https://wedulab.com/assets/Page-rwd5-Bjn.js",
+    "status": "200",
+    "bytes": 143262,
+    "sha256": "d4bad5fcdef4ba95e18842a8d5493e30872da9e8e9f7e54b160bc248a669495d"
+  },
+  "assets/Page-t52A13oF.js": {
+    "url": "https://wedulab.com/assets/Page-t52A13oF.js",
+    "status": "200",
+    "bytes": 72301,
+    "sha256": "94401875b57a03c5a303df20c3b3244a75b9eb00e1732a67e54b8471b54c1870"
+  },
+  "assets/Page-tKxVWO0n.js": {
+    "url": "https://wedulab.com/assets/Page-tKxVWO0n.js",
+    "status": "200",
+    "bytes": 33085,
+    "sha256": "efcd389a54706b40977e0b1f47702a473dc285dc6f46b6aad883dfde3f8d5599"
+  },
+  "assets/RoundedBoxGeometry-BuxEdaMS.js": {
+    "url": "https://wedulab.com/assets/RoundedBoxGeometry-BuxEdaMS.js",
+    "status": "200",
+    "bytes": 1536,
+    "sha256": "97802245cc36b5b25848aaf1aed7996623573411a35c95cd2803a170e414aff1"
+  },
+  "assets/catalog-XdwsjaGd.js": {
+    "url": "https://wedulab.com/assets/catalog-XdwsjaGd.js",
+    "status": "200",
+    "bytes": 39358,
+    "sha256": "278d0937cca4854c6ca86e2c115ffddda946517988b5236be1ee486bd0c7904d"
+  },
+  "assets/charts-CzzpgoDB.js": {
+    "url": "https://wedulab.com/assets/charts-CzzpgoDB.js",
+    "status": "200",
+    "bytes": 16320,
+    "sha256": "b414dcf56f0d109e6eb9a2bf86623bb65b45708d5fa7c2d576b7c2092d73c37b"
+  },
+  "assets/confetti-D_DoZ5bY.js": {
+    "url": "https://wedulab.com/assets/confetti-D_DoZ5bY.js",
+    "status": "200",
+    "bytes": 755,
+    "sha256": "1c9212c677d8707d7d4bee0ff33c31096624b662785b5b335d434d0f29601318"
+  },
+  "assets/earth_bm_07-CEsBUeyA.js": {
+    "url": "https://wedulab.com/assets/earth_bm_07-CEsBUeyA.js",
+    "status": "200",
+    "bytes": 54,
+    "sha256": "1d7f02c0ecf640a82d83d5247eb728d5585945fc13931b20e574d22e9a815da7"
+  },
+  "assets/earth_clouds_1024-Dm-FkLh-.js": {
+    "url": "https://wedulab.com/assets/earth_clouds_1024-Dm-FkLh-.js",
+    "status": "200",
+    "bytes": 261,
+    "sha256": "831bbe2e2ff9ac893804efdf716aaa90753565aafb56834972cc6c7efc9d075f"
+  },
+  "assets/math-CnOtOUG7.css": {
+    "url": "https://wedulab.com/assets/math-CnOtOUG7.css",
+    "status": "200",
+    "bytes": 5328,
+    "sha256": "1e0a0c3b2ac0ecf73cbe548b6b79ccac4d8a8d8491d78c4d67636402e0762272"
+  },
+  "assets/math-_7kWGBgE.js": {
+    "url": "https://wedulab.com/assets/math-_7kWGBgE.js",
+    "status": "200",
+    "bytes": 23288,
+    "sha256": "f56ef9f57a191882f7fbe5c036dd6847bdad5386b528a15ce2ab1fe890850f86"
+  },
+  "assets/outline-B5slIcEP.js": {
+    "url": "https://wedulab.com/assets/outline-B5slIcEP.js",
+    "status": "200",
+    "bytes": 743,
+    "sha256": "0345eaa7c1671366e4b479636051f59830fb44af165dc5397c1804532fee5bca"
+  },
+  "assets/studio-DdpeYmJn.js": {
+    "url": "https://wedulab.com/assets/studio-DdpeYmJn.js",
+    "status": "200",
+    "bytes": 5902,
+    "sha256": "fadca24d262738199b682db3d9f65d2bb434875d2fba213c36ac85772670688f"
+  },
+  "assets/studio-spZVrGLA.css": {
+    "url": "https://wedulab.com/assets/studio-spZVrGLA.css",
+    "status": "200",
+    "bytes": 2933,
+    "sha256": "e892d968350b24b9b58387662a2f0568df3c167064424e63574a0528e4bf21f1"
+  },
+  "assets/theme-BwshCFgs.css": {
+    "url": "https://wedulab.com/assets/theme-BwshCFgs.css",
+    "status": "200",
+    "bytes": 21979,
+    "sha256": "1826628d751b202a9433e764ee616534ebcd7e8ba57ce4da08306a395fa0ee7c"
+  },
+  "assets/theme-CtpKaZpm.css": {
+    "url": "https://wedulab.com/assets/theme-CtpKaZpm.css",
+    "status": "200",
+    "bytes": 11477,
+    "sha256": "b17c8032dcea9024dbd0a3089ea4000192c5a1f41d6ea9cefa429392f3a535c8"
+  },
+  "assets/theme-aLwyR9RG.js": {
+    "url": "https://wedulab.com/assets/theme-aLwyR9RG.js",
+    "status": "200",
+    "bytes": 4326,
+    "sha256": "33710139cdef226c5db574aa68346b4316725110e75f80869c82aff4df0fbd02"
+  },
+  "assets/KaTeX_AMS-Regular-BQhdFMY1.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+    "status": "200",
+    "bytes": 28076,
+    "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+  },
+  "assets/KaTeX_AMS-Regular-DMm9YOAa.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+    "status": "200",
+    "bytes": 33516,
+    "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251"
+  },
+  "assets/KaTeX_AMS-Regular-DRggAlZN.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+    "status": "200",
+    "bytes": 63632,
+    "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13"
+  },
+  "assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+    "status": "200",
+    "bytes": 12368,
+    "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268"
+  },
+  "assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+    "status": "200",
+    "bytes": 7716,
+    "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed"
+  },
+  "assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+    "status": "200",
+    "bytes": 6912,
+    "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+  },
+  "assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+    "status": "200",
+    "bytes": 7656,
+    "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c"
+  },
+  "assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+    "status": "200",
+    "bytes": 6908,
+    "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+  },
+  "assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+    "status": "200",
+    "bytes": 12344,
+    "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7"
+  },
+  "assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+    "status": "200",
+    "bytes": 19584,
+    "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1"
+  },
+  "assets/KaTeX_Fraktur-Bold-BsDP51OF.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+    "status": "200",
+    "bytes": 13296,
+    "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb"
+  },
+  "assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+    "status": "200",
+    "bytes": 11348,
+    "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+  },
+  "assets/KaTeX_Fraktur-Regular-CB_wures.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+    "status": "200",
+    "bytes": 19572,
+    "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3"
+  },
+  "assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+    "status": "200",
+    "bytes": 11316,
+    "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+  },
+  "assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+    "status": "200",
+    "bytes": 13208,
+    "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463"
+  },
+  "assets/KaTeX_Main-Bold-Cx986IdX.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+    "status": "200",
+    "bytes": 25324,
+    "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+  },
+  "assets/KaTeX_Main-Bold-Jm3AIy58.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+    "status": "200",
+    "bytes": 29912,
+    "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822"
+  },
+  "assets/KaTeX_Main-Bold-waoOVXN0.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+    "status": "200",
+    "bytes": 51336,
+    "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8"
+  },
+  "assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+    "status": "200",
+    "bytes": 16780,
+    "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+  },
+  "assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+    "status": "200",
+    "bytes": 32968,
+    "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f"
+  },
+  "assets/KaTeX_Main-BoldItalic-SpSLRI95.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+    "status": "200",
+    "bytes": 19412,
+    "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c"
+  },
+  "assets/KaTeX_Main-Italic-3WenGoN9.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+    "status": "200",
+    "bytes": 33580,
+    "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a"
+  },
+  "assets/KaTeX_Main-Italic-BMLOBm91.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+    "status": "200",
+    "bytes": 19676,
+    "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf"
+  },
+  "assets/KaTeX_Main-Italic-NWA7e6Wa.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+    "status": "200",
+    "bytes": 16988,
+    "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+  },
+  "assets/KaTeX_Main-Regular-B22Nviop.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+    "status": "200",
+    "bytes": 26272,
+    "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+  },
+  "assets/KaTeX_Main-Regular-Dr94JaBh.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+    "status": "200",
+    "bytes": 30772,
+    "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc"
+  },
+  "assets/KaTeX_Main-Regular-ypZvNtVU.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+    "status": "200",
+    "bytes": 53580,
+    "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830"
+  },
+  "assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+    "status": "200",
+    "bytes": 31196,
+    "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5"
+  },
+  "assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+    "status": "200",
+    "bytes": 16400,
+    "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+  },
+  "assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+    "status": "200",
+    "bytes": 18668,
+    "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e"
+  },
+  "assets/KaTeX_Math-Italic-DA0__PXp.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+    "status": "200",
+    "bytes": 18748,
+    "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571"
+  },
+  "assets/KaTeX_Math-Italic-flOr_0UB.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+    "status": "200",
+    "bytes": 31308,
+    "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a"
+  },
+  "assets/KaTeX_Math-Italic-t53AETM-.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+    "status": "200",
+    "bytes": 16440,
+    "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+  },
+  "assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+    "status": "200",
+    "bytes": 24504,
+    "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0"
+  },
+  "assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+    "status": "200",
+    "bytes": 12216,
+    "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+  },
+  "assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+    "status": "200",
+    "bytes": 14408,
+    "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba"
+  },
+  "assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+    "status": "200",
+    "bytes": 12028,
+    "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+  },
+  "assets/KaTeX_SansSerif-Italic-DN2j7dab.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+    "status": "200",
+    "bytes": 14112,
+    "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2"
+  },
+  "assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+    "status": "200",
+    "bytes": 22364,
+    "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083"
+  },
+  "assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+    "status": "200",
+    "bytes": 19436,
+    "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad"
+  },
+  "assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+    "status": "200",
+    "bytes": 12316,
+    "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605"
+  },
+  "assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+    "status": "200",
+    "bytes": 10344,
+    "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+  },
+  "assets/KaTeX_Script-Regular-C5JkGWo-.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+    "status": "200",
+    "bytes": 16648,
+    "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67"
+  },
+  "assets/KaTeX_Script-Regular-D3wIWfF6.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+    "status": "200",
+    "bytes": 9644,
+    "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+  },
+  "assets/KaTeX_Script-Regular-D5yQViql.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Script-Regular-D5yQViql.woff",
+    "status": "200",
+    "bytes": 10588,
+    "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a"
+  },
+  "assets/KaTeX_Size1-Regular-C195tn64.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Size1-Regular-C195tn64.woff",
+    "status": "200",
+    "bytes": 6496,
+    "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9"
+  },
+  "assets/KaTeX_Size1-Regular-Dbsnue_I.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+    "status": "200",
+    "bytes": 12228,
+    "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b"
+  },
+  "assets/KaTeX_Size1-Regular-mCD8mA8B.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+    "status": "200",
+    "bytes": 5468,
+    "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+  },
+  "assets/KaTeX_Size2-Regular-B7gKUWhC.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+    "status": "200",
+    "bytes": 11508,
+    "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b"
+  },
+  "assets/KaTeX_Size2-Regular-Dy4dx90m.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+    "status": "200",
+    "bytes": 5208,
+    "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+  },
+  "assets/KaTeX_Size2-Regular-oD1tc_U0.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+    "status": "200",
+    "bytes": 6188,
+    "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d"
+  },
+  "assets/KaTeX_Size3-Regular-CTq5MqoE.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+    "status": "200",
+    "bytes": 4420,
+    "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949"
+  },
+  "assets/KaTeX_Size3-Regular-DgpXs0kz.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+    "status": "200",
+    "bytes": 7588,
+    "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082"
+  },
+  "assets/KaTeX_Size4-Regular-BF-4gkZK.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+    "status": "200",
+    "bytes": 5980,
+    "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58"
+  },
+  "assets/KaTeX_Size4-Regular-DWFBv043.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+    "status": "200",
+    "bytes": 10364,
+    "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877"
+  },
+  "assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+    "status": "200",
+    "bytes": 4928,
+    "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+  },
+  "assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff": {
+    "url": "https://wedulab.com/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+    "status": "200",
+    "bytes": 16028,
+    "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7"
+  },
+  "assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2": {
+    "url": "https://wedulab.com/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+    "status": "200",
+    "bytes": 13568,
+    "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+  },
+  "assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf": {
+    "url": "https://wedulab.com/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+    "status": "200",
+    "bytes": 27556,
+    "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa"
+  },
+  "assets/climate-Dn10DvAr.bin": {
+    "url": "https://wedulab.com/assets/climate-Dn10DvAr.bin",
+    "status": "200",
+    "bytes": 378432,
+    "sha256": "b7532839d49b5a007b50ea452399fa2aad7fd33ff1a4e1a5cb18ec570f9d0278"
+  },
+  "assets/earth_bm_01-AeM0Q4AK.jpg": {
+    "url": "https://wedulab.com/assets/earth_bm_01-AeM0Q4AK.jpg",
+    "status": "200",
+    "bytes": 1132974,
+    "sha256": "e94a6ff47e28299a2afa47234ea77ad5f5d675551869b5609760e3f74dcccc7f"
+  },
+  "assets/earth_bm_07-DvX0MfOX.jpg": {
+    "url": "https://wedulab.com/assets/earth_bm_07-DvX0MfOX.jpg",
+    "status": "200",
+    "bytes": 1011282,
+    "sha256": "c50c881ce5cc4ee0e3953e0e99ea11afd9ec12bac5c35c7a1cdf5e9808d0619b"
+  },
+  "assets/earth_clouds_1024-CKDLEBqO.png": {
+    "url": "https://wedulab.com/assets/earth_clouds_1024-CKDLEBqO.png",
+    "status": "200",
+    "bytes": 260222,
+    "sha256": "7d3b82ef6b3feb506fc06f02a744aed3d864e23e7417075005f4082a7ff935a4"
+  },
+  "assets/earth_lights_2048-Bf-MO9Bx.png": {
+    "url": "https://wedulab.com/assets/earth_lights_2048-Bf-MO9Bx.png",
+    "status": "200",
+    "bytes": 734910,
+    "sha256": "3cc6972d1d5b6310f33ea6ef4cc14a38f1dd141a91d26888206889327d983d7b"
+  },
+  "assets/earth_normal_2048-BD2vMuPH.jpg": {
+    "url": "https://wedulab.com/assets/earth_normal_2048-BD2vMuPH.jpg",
+    "status": "200",
+    "bytes": 336774,
+    "sha256": "3fc43e9639c34e8223c4a871e3bdf5b2d52ee79f7e89ce3f28cba45d4cac031a"
+  },
+  "assets/earth_specular_2048-6aAFN27D.jpg": {
+    "url": "https://wedulab.com/assets/earth_specular_2048-6aAFN27D.jpg",
+    "status": "200",
+    "bytes": 223421,
+    "sha256": "2df48906732d7a458b2d0a7cdec51a829262307c6bdee4cfdf079a4dd7c71c69"
+  },
+  "assets/gzh-Cftvd3Gm.jpg": {
+    "url": "https://wedulab.com/assets/gzh-Cftvd3Gm.jpg",
+    "status": "200",
+    "bytes": 61607,
+    "sha256": "8686beecb00ce016232ebb40fac9e2f3695568e3c8b9c1c440f868b11dd66006"
+  },
+  "assets/land-50m-fTrrQOwI.js": {
+    "url": "https://wedulab.com/assets/land-50m-fTrrQOwI.js",
+    "status": "200",
+    "bytes": 545654,
+    "sha256": "2610a2fdaf406df0d14005368a335b092a02b41535ea5f4173f459dec3f6ba98"
+  },
+  "assets/xhs-BYYp__GP.jpg": {
+    "url": "https://wedulab.com/assets/xhs-BYYp__GP.jpg",
+    "status": "200",
+    "bytes": 135227,
+    "sha256": "a95e664c6ccb7da0fa0edd486eef4653f88660ee324d8ea34706b2d99453dce6"
+  }
+}

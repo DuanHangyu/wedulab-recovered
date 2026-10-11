@@ -1,0 +1,580 @@
+{
+  "route": "/labs/atmos",
+  "titleMatch": true,
+  "textMatch": true,
+  "differentPixels": 0,
+  "totalPixels": 1440000,
+  "states": [
+    {
+      "title": "大气环流粒子课堂",
+      "text": "← WEDULAB\nATMOS·FLOW\n大气环流 · 粒子动画演示\n简体中文\nTHERMAL · 热力环流\n00\n大气运动总览\nOVERVIEW\n01\n热力环流原理\nTHERMAL CIRCULATION\n02\n城市热岛环流\nURBAN HEAT ISLAND\n03\n海陆风\nSEA & LAND BREEZE\n04\n山谷风\nMOUNTAIN & VALLEY BREEZE\nGLOBAL · 全球大气环流\n05\n单圈环流\nSINGLE-CELL MODEL\n06\n三圈环流\nTHREE-CELL MODEL\n07\n气压带与风带\nPRESSURE & WIND BELTS\n08\n季节移动\nSEASONAL SHIFT\n09\n海陆分布与季风\nLAND–SEA CONTRAST & MONSOON\nREVIEW · 复习\n10\n随堂检测\nQUIZ\n← → 切换章节\nF 全屏\n赤道低气压带\n副热带高气压带\n副热带高气压带\n副极地低气压带\n副极地低气压带\n极地高气压带\n极地高气压带\n东北信风带\n盛行西风带\n极地东风带\n东南信风带\n盛行西风带\n极地东风带\n低纬环流\n中纬环流\n高纬环流\n低纬环流\n中纬环流\n高纬环流\n对流层顶\nCHAPTER 00 / 10\n大气运动总览\n\nOVERVIEW\n\n信风带\n盛行西风带\n极地东风带\n高气压带\n低气压带\n剖面：上升\n剖面：下沉\n00\n大气运动总览\nOVERVIEW\n\n大气运动的根本能量来自太阳辐射。地表冷热不均引起空气的垂直运动和同一水平面上的气压差，形成热力环流；在全球尺度上，再叠加地球自转的影响，就形成了三圈环流和七个气压带、六个风带。\n\n两个模块\n01–04\n热力环流\n原理四步拆解、城市热岛、海陆风、山谷风——二维剖面上的粒子流动。\n05–09\n全球大气环流\n单圈与三圈环流、气压带和风带、季节移动，以及基于 NCEP 真实资料的海陆分布与季风。\n操作\n三维地球可拖动旋转、滚轮缩放；地球边缘的光环是经向环流剖面，始终朝向你。\n键盘 ← → 切换章节，F 全屏，适合投屏讲解。\nVIEW · 显示设置\n理想模型\n真实气候 · NCEP\n流速\n1.00×\n地面风\n环流剖面\n气压带\n经纬网\n云层\n标注\n自动旋转\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ws (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:4192)\n    at http://127.0.0.1:4173/assets/Page-C83Ns7th.js:163:5074\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ws (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:4250)\n    at http://127.0.0.1:4173/assets/Page-C83Ns7th.js:163:5074\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at me (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:8565)\n    at ws (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:9453)\n    at http://127.0.0.1:4173/assets/Page-C83Ns7th.js:163:5074\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at me (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:8565)\n    at ws (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:9460)\n    at http://127.0.0.1:4173/assets/Page-C83Ns7th.js:163:5074\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106076)"
+        },
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ze (http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js:2827:44115)\n    at new Ue (http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js:2827:44507)\n    at ws (http://127.0.0.1:4173/assets/Page-C83Ns7th.js:8:17756)\n    at http://127.0.0.1:4173/assets/Page-C83Ns7th.js:163:5074\n    at Yl (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:95838)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117583)\n    at qa (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:117573)\n    at Ac (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:106346)\n    at Ja (http://127.0.0.1:4173/assets/index-KVDz72un.js:1719:116740)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4173/assets/index-KVDz72un.js",
+        "http://127.0.0.1:4173/assets/index-BOM_njxY.css",
+        "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap",
+        "http://127.0.0.1:4173/assets/Page-C83Ns7th.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-K4pSOXN-.js",
+        "http://127.0.0.1:4173/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4173/assets/earth_clouds_1024-Dm-FkLh-.js",
+        "http://127.0.0.1:4173/assets/OrbitControls-D-zZTbsE.js",
+        "http://127.0.0.1:4173/assets/Page-CM2MSrBx.css",
+        "http://127.0.0.1:4173/assets/earth_bm_07-CEsBUeyA.js",
+        "http://127.0.0.1:4173/assets/climate-Dn10DvAr.bin",
+        "http://127.0.0.1:4173/assets/earth_bm_01-AeM0Q4AK.jpg",
+        "http://127.0.0.1:4173/assets/earth_normal_2048-BD2vMuPH.jpg",
+        "http://127.0.0.1:4173/assets/earth_specular_2048-6aAFN27D.jpg",
+        "http://127.0.0.1:4173/assets/earth_bm_07-DvX0MfOX.jpg",
+        "http://127.0.0.1:4173/assets/earth_lights_2048-Bf-MO9Bx.png",
+        "http://127.0.0.1:4173/assets/earth_clouds_1024-CKDLEBqO.png",
+        "http://127.0.0.1:4173/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "00\n大气运动总览\nOVERVIEW",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n热力环流原理\nTHERMAL CIRCULATION",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n城市热岛环流\nURBAN HEAT ISLAND",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n海陆风\nSEA & LAND BREEZE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n山谷风\nMOUNTAIN & VALLEY BREEZE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n单圈环流\nSINGLE-CELL MODEL",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n三圈环流\nTHREE-CELL MODEL",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n气压带与风带\nPRESSURE & WIND BELTS",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n季节移动\nSEASONAL SHIFT",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n海陆分布与季风\nLAND–SEA CONTRAST & MONSOON",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n随堂检测\nQUIZ",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01–04\n热力环流\n原理四步拆解、城市热岛、海陆风、山谷风——二维剖面上的粒子流动。",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05–09\n全球大气环流\n单圈与三圈环流、气压带和风带、季节移动，以及基于 NCEP 真实资料的海陆分布与季风。",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "理想模型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "真实气候 · NCEP",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "kR",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "地面风",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "环流剖面",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "气压带",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "经纬网",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "云层",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "大气环流粒子课堂",
+      "text": "← WEDULAB\nATMOS·FLOW\n大气环流 · 粒子动画演示\n简体中文\nTHERMAL · 热力环流\n00\n大气运动总览\nOVERVIEW\n01\n热力环流原理\nTHERMAL CIRCULATION\n02\n城市热岛环流\nURBAN HEAT ISLAND\n03\n海陆风\nSEA & LAND BREEZE\n04\n山谷风\nMOUNTAIN & VALLEY BREEZE\nGLOBAL · 全球大气环流\n05\n单圈环流\nSINGLE-CELL MODEL\n06\n三圈环流\nTHREE-CELL MODEL\n07\n气压带与风带\nPRESSURE & WIND BELTS\n08\n季节移动\nSEASONAL SHIFT\n09\n海陆分布与季风\nLAND–SEA CONTRAST & MONSOON\nREVIEW · 复习\n10\n随堂检测\nQUIZ\n← → 切换章节\nF 全屏\n赤道低气压带\n副热带高气压带\n副热带高气压带\n副极地低气压带\n副极地低气压带\n极地高气压带\n极地高气压带\n东北信风带\n盛行西风带\n极地东风带\n东南信风带\n盛行西风带\n极地东风带\n低纬环流\n中纬环流\n高纬环流\n低纬环流\n中纬环流\n高纬环流\n对流层顶\nCHAPTER 00 / 10\n大气运动总览\n\nOVERVIEW\n\n信风带\n盛行西风带\n极地东风带\n高气压带\n低气压带\n剖面：上升\n剖面：下沉\n00\n大气运动总览\nOVERVIEW\n\n大气运动的根本能量来自太阳辐射。地表冷热不均引起空气的垂直运动和同一水平面上的气压差，形成热力环流；在全球尺度上，再叠加地球自转的影响，就形成了三圈环流和七个气压带、六个风带。\n\n两个模块\n01–04\n热力环流\n原理四步拆解、城市热岛、海陆风、山谷风——二维剖面上的粒子流动。\n05–09\n全球大气环流\n单圈与三圈环流、气压带和风带、季节移动，以及基于 NCEP 真实资料的海陆分布与季风。\n操作\n三维地球可拖动旋转、滚轮缩放；地球边缘的光环是经向环流剖面，始终朝向你。\n键盘 ← → 切换章节，F 全屏，适合投屏讲解。\nVIEW · 显示设置\n理想模型\n真实气候 · NCEP\n流速\n1.00×\n地面风\n环流剖面\n气压带\n经纬网\n云层\n标注\n自动旋转\n问题反馈\n作者：WY",
+      "canvas": [
+        {
+          "id": "c2",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ws (http://127.0.0.1:4174/src/labs/atmos/Page.js:333:12)\n    at http://127.0.0.1:4174/src/labs/atmos/Page.js:3012:50\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ws (http://127.0.0.1:4174/src/labs/atmos/Page.js:335:12)\n    at http://127.0.0.1:4174/src/labs/atmos/Page.js:3012:50\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at me (http://127.0.0.1:4174/src/labs/atmos/Page.js:635:17)\n    at ws (http://127.0.0.1:4174/src/labs/atmos/Page.js:669:15)\n    at http://127.0.0.1:4174/src/labs/atmos/Page.js:3012:50\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)"
+        },
+        {
+          "id": "",
+          "type": "2d",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at me (http://127.0.0.1:4174/src/labs/atmos/Page.js:635:17)\n    at ws (http://127.0.0.1:4174/src/labs/atmos/Page.js:669:23)\n    at http://127.0.0.1:4174/src/labs/atmos/Page.js:3012:50\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9170:10)"
+        },
+        {
+          "id": "c3",
+          "type": "webgl2",
+          "stack": "Error\n    at HTMLCanvasElement.getContext (<anonymous>:10:238)\n    at ze (http://127.0.0.1:4174/src/vendor/OrbitControls-D-zZTbsE.js:16343:16)\n    at new Ue (http://127.0.0.1:4174/src/vendor/OrbitControls-D-zZTbsE.js:16365:57)\n    at ws (http://127.0.0.1:4174/src/labs/atmos/Page.js:1139:10)\n    at http://127.0.0.1:4174/src/labs/atmos/Page.js:3012:50\n    at Yl (http://127.0.0.1:4174/src/core/runtime.js:8463:19)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:25)\n    at qa (http://127.0.0.1:4174/src/core/runtime.js:10027:12)\n    at Ac (http://127.0.0.1:4174/src/core/runtime.js:9187:17)\n    at Ja (http://127.0.0.1:4174/src/core/runtime.js:9963:39)"
+        }
+      ],
+      "resources": [
+        "http://127.0.0.1:4174/src/main.js",
+        "http://127.0.0.1:4174/assets/index-BOM_njxY.css",
+        "http://127.0.0.1:4174/fonts/fonts.css",
+        "http://127.0.0.1:4174/src/core/runtime.js",
+        "http://127.0.0.1:4174/src/i18n/messages/en.js",
+        "http://127.0.0.1:4174/src/i18n/messages/zh-Hant.js",
+        "http://127.0.0.1:4174/src/i18n/messages/tr.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ko.js",
+        "http://127.0.0.1:4174/src/i18n/messages/ja.js",
+        "http://127.0.0.1:4174/src/labs/atmos/Page.js",
+        "http://127.0.0.1:4174/src/components/LanguageSwitcher.js",
+        "http://127.0.0.1:4174/assets/LanguageSwitcher-G8ZoNuu-.css",
+        "http://127.0.0.1:4174/src/vendor/OrbitControls-D-zZTbsE.js",
+        "http://127.0.0.1:4174/src/vendor/earth_clouds_1024-Dm-FkLh-.js",
+        "http://127.0.0.1:4174/src/vendor/earth_bm_07-CEsBUeyA.js",
+        "http://127.0.0.1:4174/assets/Page-CM2MSrBx.css",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkebIlFQA.ttf",
+        "http://127.0.0.1:4174/fonts/cIf6MapbsEk7TDLdtEz1BwkmmA.ttf",
+        "http://127.0.0.1:4174/assets/climate-Dn10DvAr.bin",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8FqtjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/cIflMapbsEk7TDLdtEz1BwkeJI9FQA.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7RlrCWv.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWv.ttf",
+        "http://127.0.0.1:4174/fonts/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf",
+        "http://127.0.0.1:4174/fonts/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7QrrCWv.ttf",
+        "http://127.0.0.1:4174/assets/earth_bm_01-AeM0Q4AK.jpg",
+        "http://127.0.0.1:4174/assets/earth_normal_2048-BD2vMuPH.jpg",
+        "http://127.0.0.1:4174/assets/earth_specular_2048-6aAFN27D.jpg",
+        "http://127.0.0.1:4174/assets/earth_bm_07-DvX0MfOX.jpg",
+        "http://127.0.0.1:4174/assets/earth_lights_2048-Bf-MO9Bx.png",
+        "http://127.0.0.1:4174/assets/earth_clouds_1024-CKDLEBqO.png",
+        "http://127.0.0.1:4174/api/v1/analytics/events"
+      ],
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "简体中文",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bPrev",
+          "text": "",
+          "type": "submit",
+          "title": "上一节 (←)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bNext",
+          "text": "",
+          "type": "submit",
+          "title": "下一节 (→)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "bFull",
+          "text": "",
+          "type": "submit",
+          "title": "全屏 (F)"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "00\n大气运动总览\nOVERVIEW",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01\n热力环流原理\nTHERMAL CIRCULATION",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "02\n城市热岛环流\nURBAN HEAT ISLAND",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "03\n海陆风\nSEA & LAND BREEZE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "04\n山谷风\nMOUNTAIN & VALLEY BREEZE",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05\n单圈环流\nSINGLE-CELL MODEL",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "06\n三圈环流\nTHREE-CELL MODEL",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "07\n气压带与风带\nPRESSURE & WIND BELTS",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "08\n季节移动\nSEASONAL SHIFT",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "09\n海陆分布与季风\nLAND–SEA CONTRAST & MONSOON",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "10\n随堂检测\nQUIZ",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "01–04\n热力环流\n原理四步拆解、城市热岛、海陆风、山谷风——二维剖面上的粒子流动。",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "05–09\n全球大气环流\n单圈与三圈环流、气压带和风带、季节移动，以及基于 NCEP 真实资料的海陆分布与季风。",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "理想模型",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "真实气候 · NCEP",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "kR",
+          "text": "",
+          "type": "range",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "地面风",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "环流剖面",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "气压带",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "经纬网",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "云层",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "标注",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "自动旋转",
+          "type": "submit",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "问题反馈",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "×",
+          "type": "button",
+          "title": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "text": "功能异常内容纠错功能建议",
+          "type": "select-one",
+          "title": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "",
+          "type": "text",
+          "title": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "提交反馈",
+          "type": "submit",
+          "title": ""
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
