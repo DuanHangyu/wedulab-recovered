@@ -7,7 +7,7 @@
   "states": [
     {
       "title": "圆锥曲线 · ConicLab",
-      "text": "← WEDULAB\nCONICLAB\n圆锥曲线\n简体中文\n纸面\n视角\n章节\n01\n圆锥的截线\nConic sections\n02\nDandelin 双球\nDandelin spheres\n03\n椭圆\nEllipse\n04\n双曲线\nHyperbola\n05\n抛物线\nParabola\n06\n离心率\nEccentricity\n07\n光学性质\nReflective property\n08\n直线与圆锥曲线\nLines and conics\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n圆锥的截线\n\nConic sections\n\n01\n圆锥的截线\nConic sections\n\n用平面去截一个对顶圆锥，截线随平面的倾斜程度变化：平面垂直于轴时是圆，稍微倾斜是椭圆，与某条母线平行时是抛物线，同时截到上下两个圆锥时是双曲线。\n\n设截面与轴所成的角为 β，圆锥的半顶角为 α，则离心率 e = cos β / cos α：β > α 为椭圆，β = α 为抛物线，β < α 为双曲线。\n\n圆\n椭圆\n抛物线\n双曲线\n过顶点\n截面倾角\n35°\n截面位置\n1.60\n半顶角 α\n30°\n椭圆\nβ > α\n截面与轴的夹角\nβ = 55°\n半顶角\nα = 30°\n离心率\ne = cos β / cos α = 0.662\na, b\n1.35, 1.01\n\n比较 β 与 α：β > α 为椭圆（β = 90° 时为圆），β = α 为抛物线，β < α 为双曲线。\n\nVIEW · 显示设置\n面填充\n被遮挡的线\n图上标注\n自动旋转\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nCONICLAB\n圆锥曲线\n简体中文\n纸面\n视角\n章节\n01\n圆锥的截线\nConic sections\n02\nDandelin 双球\nDandelin spheres\n03\n椭圆\nEllipse\n04\n双曲线\nHyperbola\n05\n抛物线\nParabola\n06\n离心率\nEccentricity\n07\n光学性质\nReflective property\n08\n直线与圆锥曲线\nLines and conics\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n圆锥的截线\n\nConic sections\n\n01\n圆锥的截线\nConic sections\n\n用平面去截一个对顶圆锥，截线随平面的倾斜程度变化：平面垂直于轴时是圆，稍微倾斜是椭圆，与某条母线平行时是抛物线，同时截到上下两个圆锥时是双曲线。\n\n设截面与轴所成的角为 β，圆锥的半顶角为 α，则离心率 e = cos β / cos α：β > α 为椭圆，β = α 为抛物线，β < α 为双曲线。\n\n圆\n椭圆\n抛物线\n双曲线\n过顶点\n截面倾角\n35°\n截面位置\n1.60\n半顶角 α\n30°\n椭圆\nβ > α\n截面与轴的夹角\nβ = 55°\n半顶角\nα = 30°\n离心率\ne = cos β / cos α = 0.662\na, b\n1.35, 1.01\n\n比较 β 与 α：β > α 为椭圆（β = 90° 时为圆），β = α 为抛物线，β < α 为双曲线。\n\nVIEW · 显示设置\n面填充\n被遮挡的线\n图上标注\n自动旋转\n问题反馈\n",
       "canvas": [
         {
           "id": "c3",
@@ -266,7 +266,7 @@
     },
     {
       "title": "圆锥曲线 · ConicLab",
-      "text": "← WEDULAB\nCONICLAB\n圆锥曲线\n简体中文\n纸面\n视角\n章节\n01\n圆锥的截线\nConic sections\n02\nDandelin 双球\nDandelin spheres\n03\n椭圆\nEllipse\n04\n双曲线\nHyperbola\n05\n抛物线\nParabola\n06\n离心率\nEccentricity\n07\n光学性质\nReflective property\n08\n直线与圆锥曲线\nLines and conics\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n圆锥的截线\n\nConic sections\n\n01\n圆锥的截线\nConic sections\n\n用平面去截一个对顶圆锥，截线随平面的倾斜程度变化：平面垂直于轴时是圆，稍微倾斜是椭圆，与某条母线平行时是抛物线，同时截到上下两个圆锥时是双曲线。\n\n设截面与轴所成的角为 β，圆锥的半顶角为 α，则离心率 e = cos β / cos α：β > α 为椭圆，β = α 为抛物线，β < α 为双曲线。\n\n圆\n椭圆\n抛物线\n双曲线\n过顶点\n截面倾角\n35°\n截面位置\n1.60\n半顶角 α\n30°\n椭圆\nβ > α\n截面与轴的夹角\nβ = 55°\n半顶角\nα = 30°\n离心率\ne = cos β / cos α = 0.662\na, b\n1.35, 1.01\n\n比较 β 与 α：β > α 为椭圆（β = 90° 时为圆），β = α 为抛物线，β < α 为双曲线。\n\nVIEW · 显示设置\n面填充\n被遮挡的线\n图上标注\n自动旋转\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nCONICLAB\n圆锥曲线\n简体中文\n纸面\n视角\n章节\n01\n圆锥的截线\nConic sections\n02\nDandelin 双球\nDandelin spheres\n03\n椭圆\nEllipse\n04\n双曲线\nHyperbola\n05\n抛物线\nParabola\n06\n离心率\nEccentricity\n07\n光学性质\nReflective property\n08\n直线与圆锥曲线\nLines and conics\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 08\n圆锥的截线\n\nConic sections\n\n01\n圆锥的截线\nConic sections\n\n用平面去截一个对顶圆锥，截线随平面的倾斜程度变化：平面垂直于轴时是圆，稍微倾斜是椭圆，与某条母线平行时是抛物线，同时截到上下两个圆锥时是双曲线。\n\n设截面与轴所成的角为 β，圆锥的半顶角为 α，则离心率 e = cos β / cos α：β > α 为椭圆，β = α 为抛物线，β < α 为双曲线。\n\n圆\n椭圆\n抛物线\n双曲线\n过顶点\n截面倾角\n35°\n截面位置\n1.60\n半顶角 α\n30°\n椭圆\nβ > α\n截面与轴的夹角\nβ = 55°\n半顶角\nα = 30°\n离心率\ne = cos β / cos α = 0.662\na, b\n1.35, 1.01\n\n比较 β 与 α：β > α 为椭圆（β = 90° 时为圆），β = α 为抛物线，β < α 为双曲线。\n\nVIEW · 显示设置\n面填充\n被遮挡的线\n图上标注\n自动旋转\n问题反馈\n",
       "canvas": [
         {
           "id": "c3",

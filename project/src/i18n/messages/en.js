@@ -25,18 +25,17 @@ export default {
     "Only administrators can view feedback. Do not include passwords or other sensitive information.",
   "正在提交…": "Submitting…",
   提交反馈: "Submit feedback",
-  "作者：WY": "Author: WY",
+
   展开更多: "Show more",
-  关注我: "Follow me",
-  "欢迎交流教学工具与创作想法。":
-    "Let’s connect over teaching tools and creative ideas.",
+
+
   在新标签页打开: "Opens in a new tab",
-  小红书: "Xiaohongshu",
-  微信公众号: "WeChat Official Account",
-  小红书账号二维码: "Xiaohongshu profile QR code",
-  微信公众号二维码: "WeChat Official Account QR code",
+
+
+
+
   查看原图: "View full-size image",
-  "扫码关注 · 点击查看原图": "Scan to follow · Click for full-size image",
+
   大气环流粒子课堂: "Atmospheric Circulation Lab",
   "大气环流 · 粒子动画演示":
     "Atmospheric circulation · Particle animation demonstration",

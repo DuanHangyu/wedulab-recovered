@@ -7,7 +7,7 @@
   "states": [
     {
       "title": "趣味数学 · WonderLab",
-      "text": "← WEDULAB\nWONDERLAB\n趣味数学\n简体中文\n纸面\n视角\n章节\n01\n谢尔宾斯基三角形\nSierpiński triangle\n02\n科赫雪花\nKoch snowflake\n03\n分形树\nFractal tree\n04\n莫比乌斯带\nMöbius strip\n05\n黄金分割\nThe golden ratio\n06\n向日葵的种子\nPhyllotaxis\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n谢尔宾斯基三角形\n\nSierpiński triangle\n\n暂停\n慢动作重来\n01\n谢尔宾斯基三角形\nSierpiński triangle\n\n玩一个游戏：在三角形里随便取一点，然后不断重复——随机选一个顶点，向它跳一半的距离，打一个点。\n\n每一步都是随机的，可几万个点打下来，出现的却是一个精致而规整的图形：谢尔宾斯基三角形。它的每一小块都和整体一模一样，这叫自相似，是分形的标志。\n\n混沌游戏\n递归删除\n三角形\n正方形\n五边形\n跳跃比例\n0.500\n混沌游戏\n已打 12 个点\n\n规则只有一条：随机选一个顶点，向它跳一半的距离，点一下。重复几万次，谢尔宾斯基三角形就自己出现了——尽管每一步都是随机的。\n\n拖动顶点可以改变形状。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nWONDERLAB\n趣味数学\n简体中文\n纸面\n视角\n章节\n01\n谢尔宾斯基三角形\nSierpiński triangle\n02\n科赫雪花\nKoch snowflake\n03\n分形树\nFractal tree\n04\n莫比乌斯带\nMöbius strip\n05\n黄金分割\nThe golden ratio\n06\n向日葵的种子\nPhyllotaxis\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n谢尔宾斯基三角形\n\nSierpiński triangle\n\n暂停\n慢动作重来\n01\n谢尔宾斯基三角形\nSierpiński triangle\n\n玩一个游戏：在三角形里随便取一点，然后不断重复——随机选一个顶点，向它跳一半的距离，打一个点。\n\n每一步都是随机的，可几万个点打下来，出现的却是一个精致而规整的图形：谢尔宾斯基三角形。它的每一小块都和整体一模一样，这叫自相似，是分形的标志。\n\n混沌游戏\n递归删除\n三角形\n正方形\n五边形\n跳跃比例\n0.500\n混沌游戏\n已打 12 个点\n\n规则只有一条：随机选一个顶点，向它跳一半的距离，点一下。重复几万次，谢尔宾斯基三角形就自己出现了——尽管每一步都是随机的。\n\n拖动顶点可以改变形状。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n",
       "randomCalls": 630,
       "canvas": [
         {
@@ -238,7 +238,7 @@
     },
     {
       "title": "趣味数学 · WonderLab",
-      "text": "← WEDULAB\nWONDERLAB\n趣味数学\n简体中文\n纸面\n视角\n章节\n01\n谢尔宾斯基三角形\nSierpiński triangle\n02\n科赫雪花\nKoch snowflake\n03\n分形树\nFractal tree\n04\n莫比乌斯带\nMöbius strip\n05\n黄金分割\nThe golden ratio\n06\n向日葵的种子\nPhyllotaxis\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n谢尔宾斯基三角形\n\nSierpiński triangle\n\n暂停\n慢动作重来\n01\n谢尔宾斯基三角形\nSierpiński triangle\n\n玩一个游戏：在三角形里随便取一点，然后不断重复——随机选一个顶点，向它跳一半的距离，打一个点。\n\n每一步都是随机的，可几万个点打下来，出现的却是一个精致而规整的图形：谢尔宾斯基三角形。它的每一小块都和整体一模一样，这叫自相似，是分形的标志。\n\n混沌游戏\n递归删除\n三角形\n正方形\n五边形\n跳跃比例\n0.500\n混沌游戏\n已打 12 个点\n\n规则只有一条：随机选一个顶点，向它跳一半的距离，点一下。重复几万次，谢尔宾斯基三角形就自己出现了——尽管每一步都是随机的。\n\n拖动顶点可以改变形状。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nWONDERLAB\n趣味数学\n简体中文\n纸面\n视角\n章节\n01\n谢尔宾斯基三角形\nSierpiński triangle\n02\n科赫雪花\nKoch snowflake\n03\n分形树\nFractal tree\n04\n莫比乌斯带\nMöbius strip\n05\n黄金分割\nThe golden ratio\n06\n向日葵的种子\nPhyllotaxis\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n谢尔宾斯基三角形\n\nSierpiński triangle\n\n暂停\n慢动作重来\n01\n谢尔宾斯基三角形\nSierpiński triangle\n\n玩一个游戏：在三角形里随便取一点，然后不断重复——随机选一个顶点，向它跳一半的距离，打一个点。\n\n每一步都是随机的，可几万个点打下来，出现的却是一个精致而规整的图形：谢尔宾斯基三角形。它的每一小块都和整体一模一样，这叫自相似，是分形的标志。\n\n混沌游戏\n递归删除\n三角形\n正方形\n五边形\n跳跃比例\n0.500\n混沌游戏\n已打 12 个点\n\n规则只有一条：随机选一个顶点，向它跳一半的距离，点一下。重复几万次，谢尔宾斯基三角形就自己出现了——尽管每一步都是随机的。\n\n拖动顶点可以改变形状。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n",
       "randomCalls": 630,
       "canvas": [
         {

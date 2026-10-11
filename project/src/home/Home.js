@@ -10,9 +10,7 @@ import {
 } from "../core/runtime.js";
 import { L as N } from "../components/LanguageSwitcher.js";
 import { T as o, s as m, P as v, S as b } from "./catalog.js";
-const w = "/assets/xhs-BYYp__GP.jpg",
-  y = "/assets/gzh-Cftvd3Gm.jpg",
-  d = o.filter((e) => e.status === "live"),
+const d = o.filter((e) => e.status === "live"),
   S = [...new Set(d.map((e) => e.subject))],
   x = (e) => {
     const i = b.findIndex((n) => n.name === e);
@@ -240,18 +238,7 @@ function Home() {
                   "面向课堂的交互式教学工具合集。打开即用，无需安装，适合投屏演示与学生自主探究。",
                 ),
               }),
-              jsxRuntime.jsxs("a", {
-                className: "social-shortcut",
-                href: "#follow",
-                children: [
-                  translate("关注我"),
-                  " ",
-                  jsxRuntime.jsx("span", {
-                    "aria-hidden": "true",
-                    children: "↗",
-                  }),
-                ],
-              }),
+
             ],
           }),
           jsxRuntime.jsx("nav", {
@@ -327,106 +314,7 @@ function Home() {
                 }),
             ],
           }),
-          jsxRuntime.jsxs("section", {
-            className: "social-section",
-            id: "follow",
-            "aria-labelledby": "social-title",
-            children: [
-              jsxRuntime.jsxs("div", {
-                className: "social-intro",
-                children: [
-                  jsxRuntime.jsx("span", {
-                    className: "eyebrow",
-                    children: "STAY CONNECTED",
-                  }),
-                  jsxRuntime.jsx("h2", {
-                    id: "social-title",
-                    children: translate("关注我"),
-                  }),
-                  jsxRuntime.jsx("p", {
-                    children: translate("欢迎交流教学工具与创作想法。"),
-                  }),
-                  jsxRuntime.jsxs("a", {
-                    className: "social-x",
-                    href: "https://x.com/akokoi1",
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                    children: [
-                      jsxRuntime.jsx("span", {
-                        className: "social-x-mark",
-                        "aria-hidden": "true",
-                        children: "𝕏",
-                      }),
-                      jsxRuntime.jsxs("span", {
-                        children: [
-                          jsxRuntime.jsx("strong", {
-                            children: "X · WY",
-                          }),
-                          jsxRuntime.jsx("small", {
-                            children: "@akokoi1",
-                          }),
-                        ],
-                      }),
-                      jsxRuntime.jsx("span", {
-                        className: "social-arrow",
-                        "aria-hidden": "true",
-                        children: "↗",
-                      }),
-                      jsxRuntime.jsx("span", {
-                        className: "social-sr-only",
-                        children: translate("在新标签页打开"),
-                      }),
-                    ],
-                  }),
-                ],
-              }),
-              [
-                {
-                  name: translate("小红书"),
-                  image: w,
-                  alt: translate("小红书账号二维码"),
-                },
-                {
-                  name: translate("微信公众号"),
-                  image: y,
-                  alt: translate("微信公众号二维码"),
-                },
-              ].map((r) =>
-                jsxRuntime.jsxs(
-                  "figure",
-                  {
-                    className: "social-qr",
-                    children: [
-                      jsxRuntime.jsx("a", {
-                        href: r.image,
-                        target: "_blank",
-                        rel: "noopener noreferrer",
-                        "aria-label": `${r.alt} · ${translate("查看原图")} · ${translate("在新标签页打开")}`,
-                        children: jsxRuntime.jsx("img", {
-                          src: r.image,
-                          alt: r.alt,
-                          width: "180",
-                          height: "180",
-                          loading: "lazy",
-                        }),
-                      }),
-                      jsxRuntime.jsxs("figcaption", {
-                        children: [
-                          jsxRuntime.jsx("h3", {
-                            children: r.name,
-                          }),
-                          jsxRuntime.jsx("p", {
-                            children: translate("扫码关注 · 点击查看原图"),
-                          }),
-                        ],
-                      }),
-                    ],
-                  },
-                  r.name,
-                ),
-              ),
-            ],
-          }),
+
         ],
       }),
       jsxRuntime.jsx("footer", {

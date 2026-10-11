@@ -7,7 +7,7 @@
   "states": [
     {
       "title": "勾股定理 · PythagoLab",
-      "text": "← WEDULAB\nPYTHAGOLAB\n勾股定理\n简体中文\n纸面\n视角\n章节\n01\n拼图挑战\nPerigal's puzzle\n02\n出入相补\nChinese dissection\n03\n欧几里得的证明\nEuclid I.47\n04\n更多证法\nMore proofs\n05\n倒水\nWater proof\n06\n勾股数\nPythagorean triples\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n拼图挑战\n\nPerigal's puzzle\n\n提示\n重来\n自动演示\n01\n拼图挑战\nPerigal's puzzle\n\n直角三角形三条边上各有一个正方形。勾股定理说：两个小正方形的面积之和，等于斜边上的大正方形的面积，a² + b² = c²。\n\n别急着算，先动手：b² 已经被切成 4 块，把它们和 a² 一起拖进 c²，看能不能拼满。\n\na : b\n3 : 4\n2 : 3\n1 : 2\n5 : 12\nPerigal 拼图\n亨利·佩里加尔，1873\na, b, c\n2.40, 3.20, 4.00\na² + b²\n5.76 + 10.24 = 16.00\nc²\n16.00\n已放好\n0 / 5\n\n把 b² 切成的 4 块和 a² 都拖进斜边上的大正方形 c²。点碎片中间的 ↺ 按钮（或单击碎片）可以把它旋转 90°；位置和方向都对时会自动吸附。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nPYTHAGOLAB\n勾股定理\n简体中文\n纸面\n视角\n章节\n01\n拼图挑战\nPerigal's puzzle\n02\n出入相补\nChinese dissection\n03\n欧几里得的证明\nEuclid I.47\n04\n更多证法\nMore proofs\n05\n倒水\nWater proof\n06\n勾股数\nPythagorean triples\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n拼图挑战\n\nPerigal's puzzle\n\n提示\n重来\n自动演示\n01\n拼图挑战\nPerigal's puzzle\n\n直角三角形三条边上各有一个正方形。勾股定理说：两个小正方形的面积之和，等于斜边上的大正方形的面积，a² + b² = c²。\n\n别急着算，先动手：b² 已经被切成 4 块，把它们和 a² 一起拖进 c²，看能不能拼满。\n\na : b\n3 : 4\n2 : 3\n1 : 2\n5 : 12\nPerigal 拼图\n亨利·佩里加尔，1873\na, b, c\n2.40, 3.20, 4.00\na² + b²\n5.76 + 10.24 = 16.00\nc²\n16.00\n已放好\n0 / 5\n\n把 b² 切成的 4 块和 a² 都拖进斜边上的大正方形 c²。点碎片中间的 ↺ 按钮（或单击碎片）可以把它旋转 90°；位置和方向都对时会自动吸附。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n",
       "randomCalls": 90,
       "canvas": [
         {
@@ -216,7 +216,7 @@
     },
     {
       "title": "勾股定理 · PythagoLab",
-      "text": "← WEDULAB\nPYTHAGOLAB\n勾股定理\n简体中文\n纸面\n视角\n章节\n01\n拼图挑战\nPerigal's puzzle\n02\n出入相补\nChinese dissection\n03\n欧几里得的证明\nEuclid I.47\n04\n更多证法\nMore proofs\n05\n倒水\nWater proof\n06\n勾股数\nPythagorean triples\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n拼图挑战\n\nPerigal's puzzle\n\n提示\n重来\n自动演示\n01\n拼图挑战\nPerigal's puzzle\n\n直角三角形三条边上各有一个正方形。勾股定理说：两个小正方形的面积之和，等于斜边上的大正方形的面积，a² + b² = c²。\n\n别急着算，先动手：b² 已经被切成 4 块，把它们和 a² 一起拖进 c²，看能不能拼满。\n\na : b\n3 : 4\n2 : 3\n1 : 2\n5 : 12\nPerigal 拼图\n亨利·佩里加尔，1873\na, b, c\n2.40, 3.20, 4.00\na² + b²\n5.76 + 10.24 = 16.00\nc²\n16.00\n已放好\n0 / 5\n\n把 b² 切成的 4 块和 a² 都拖进斜边上的大正方形 c²。点碎片中间的 ↺ 按钮（或单击碎片）可以把它旋转 90°；位置和方向都对时会自动吸附。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nPYTHAGOLAB\n勾股定理\n简体中文\n纸面\n视角\n章节\n01\n拼图挑战\nPerigal's puzzle\n02\n出入相补\nChinese dissection\n03\n欧几里得的证明\nEuclid I.47\n04\n更多证法\nMore proofs\n05\n倒水\nWater proof\n06\n勾股数\nPythagorean triples\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 06\n拼图挑战\n\nPerigal's puzzle\n\n提示\n重来\n自动演示\n01\n拼图挑战\nPerigal's puzzle\n\n直角三角形三条边上各有一个正方形。勾股定理说：两个小正方形的面积之和，等于斜边上的大正方形的面积，a² + b² = c²。\n\n别急着算，先动手：b² 已经被切成 4 块，把它们和 a² 一起拖进 c²，看能不能拼满。\n\na : b\n3 : 4\n2 : 3\n1 : 2\n5 : 12\nPerigal 拼图\n亨利·佩里加尔，1873\na, b, c\n2.40, 3.20, 4.00\na² + b²\n5.76 + 10.24 = 16.00\nc²\n16.00\n已放好\n0 / 5\n\n把 b² 切成的 4 块和 a² 都拖进斜边上的大正方形 c²。点碎片中间的 ↺ 按钮（或单击碎片）可以把它旋转 90°；位置和方向都对时会自动吸附。\n\nVIEW · 显示设置\n图上标注\n问题反馈\n",
       "randomCalls": 90,
       "canvas": [
         {

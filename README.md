@@ -96,8 +96,6 @@ npm start
 
 更多运行配置与维护说明见 [项目文档](project/README.md)。可下载版本见 [Releases](https://github.com/DuanHangyu/wedulab-recovered/releases)。
 
-## 作者与许可
-
-网站作者：**WY** · [X / @akokoi1](https://x.com/akokoi1)
+## 许可
 
 项目与所含第三方库、字体及数据的原有许可仍适用；本仓库未额外授予新的开源许可。

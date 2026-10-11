@@ -7,7 +7,7 @@
   "states": [
     {
       "title": "分子构型 · VSEPR",
-      "text": "← WEDULAB\nMOLECRAFT\n分子构型 · 价层电子对互斥\n简体中文\n视角\n章节\n01\n价层电子对互斥\nVSEPR\n02\n电子对构型与分子构型\nElectron vs. molecular geometry\n03\n键角比较\nBond angles\n04\n杂化轨道\nHybridization\n05\n分子极性\nPolarity\n06\n扩展八隅体\nExpanded octets\n07\n手性分子\nChirality\n08\n分子库\nLibrary\n← → 切换章节\nR 重置视角 Space 打乱\n108.4°\n111.5°\n01 / 08\n价层电子对互斥\n\nVSEPR\n\nAX4\n电子对构型\n正四面体形\n分子构型\n正四面体形\n模型键角\n108.4° · 111.5°\n已达到能量最低的排布\n01\n价层电子对互斥\nVSEPR\n\n中心原子周围的价层电子对（成键电子对与孤对电子）带负电，彼此排斥，会尽可能远离。\n\n左边每个电子域都在球面上受到其他电子域的推力。增减电子对，或点击打乱，看它们自己弹开，找到最稳定的排布。\n\n孤对电子只受一个原子核吸引，离核更近、更“胖”，所以排斥也更强。\n\n成键电子对\n−\n4\n+\n孤对电子\n−\n0\n+\n打乱\nSpace\n快速选择\nAX2\nAX3\nAX2E\nAX4\nAX3E\nAX2E2\nAX5\nAX4E\nAX3E2\nAX2E3\nAX6\nAX5E\nAX4E2\nAX3E3\nAX2E4\nAX7\nVIEW · 显示设置\n球棍模型\n空间填充\n孤对电子\n键角\n原子标签\n键偶极\n电子对构型\n杂化轨道\n自动旋转\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nMOLECRAFT\n分子构型 · 价层电子对互斥\n简体中文\n视角\n章节\n01\n价层电子对互斥\nVSEPR\n02\n电子对构型与分子构型\nElectron vs. molecular geometry\n03\n键角比较\nBond angles\n04\n杂化轨道\nHybridization\n05\n分子极性\nPolarity\n06\n扩展八隅体\nExpanded octets\n07\n手性分子\nChirality\n08\n分子库\nLibrary\n← → 切换章节\nR 重置视角 Space 打乱\n108.4°\n111.5°\n01 / 08\n价层电子对互斥\n\nVSEPR\n\nAX4\n电子对构型\n正四面体形\n分子构型\n正四面体形\n模型键角\n108.4° · 111.5°\n已达到能量最低的排布\n01\n价层电子对互斥\nVSEPR\n\n中心原子周围的价层电子对（成键电子对与孤对电子）带负电，彼此排斥，会尽可能远离。\n\n左边每个电子域都在球面上受到其他电子域的推力。增减电子对，或点击打乱，看它们自己弹开，找到最稳定的排布。\n\n孤对电子只受一个原子核吸引，离核更近、更“胖”，所以排斥也更强。\n\n成键电子对\n−\n4\n+\n孤对电子\n−\n0\n+\n打乱\nSpace\n快速选择\nAX2\nAX3\nAX2E\nAX4\nAX3E\nAX2E2\nAX5\nAX4E\nAX3E2\nAX2E3\nAX6\nAX5E\nAX4E2\nAX3E3\nAX2E4\nAX7\nVIEW · 显示设置\n球棍模型\n空间填充\n孤对电子\n键角\n原子标签\n键偶极\n电子对构型\n杂化轨道\n自动旋转\n问题反馈\n",
       "canvas": [
         {
           "id": "c3",
@@ -377,7 +377,7 @@
     },
     {
       "title": "分子构型 · VSEPR",
-      "text": "← WEDULAB\nMOLECRAFT\n分子构型 · 价层电子对互斥\n简体中文\n视角\n章节\n01\n价层电子对互斥\nVSEPR\n02\n电子对构型与分子构型\nElectron vs. molecular geometry\n03\n键角比较\nBond angles\n04\n杂化轨道\nHybridization\n05\n分子极性\nPolarity\n06\n扩展八隅体\nExpanded octets\n07\n手性分子\nChirality\n08\n分子库\nLibrary\n← → 切换章节\nR 重置视角 Space 打乱\n108.4°\n111.5°\n01 / 08\n价层电子对互斥\n\nVSEPR\n\nAX4\n电子对构型\n正四面体形\n分子构型\n正四面体形\n模型键角\n108.4° · 111.5°\n已达到能量最低的排布\n01\n价层电子对互斥\nVSEPR\n\n中心原子周围的价层电子对（成键电子对与孤对电子）带负电，彼此排斥，会尽可能远离。\n\n左边每个电子域都在球面上受到其他电子域的推力。增减电子对，或点击打乱，看它们自己弹开，找到最稳定的排布。\n\n孤对电子只受一个原子核吸引，离核更近、更“胖”，所以排斥也更强。\n\n成键电子对\n−\n4\n+\n孤对电子\n−\n0\n+\n打乱\nSpace\n快速选择\nAX2\nAX3\nAX2E\nAX4\nAX3E\nAX2E2\nAX5\nAX4E\nAX3E2\nAX2E3\nAX6\nAX5E\nAX4E2\nAX3E3\nAX2E4\nAX7\nVIEW · 显示设置\n球棍模型\n空间填充\n孤对电子\n键角\n原子标签\n键偶极\n电子对构型\n杂化轨道\n自动旋转\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nMOLECRAFT\n分子构型 · 价层电子对互斥\n简体中文\n视角\n章节\n01\n价层电子对互斥\nVSEPR\n02\n电子对构型与分子构型\nElectron vs. molecular geometry\n03\n键角比较\nBond angles\n04\n杂化轨道\nHybridization\n05\n分子极性\nPolarity\n06\n扩展八隅体\nExpanded octets\n07\n手性分子\nChirality\n08\n分子库\nLibrary\n← → 切换章节\nR 重置视角 Space 打乱\n108.4°\n111.5°\n01 / 08\n价层电子对互斥\n\nVSEPR\n\nAX4\n电子对构型\n正四面体形\n分子构型\n正四面体形\n模型键角\n108.4° · 111.5°\n已达到能量最低的排布\n01\n价层电子对互斥\nVSEPR\n\n中心原子周围的价层电子对（成键电子对与孤对电子）带负电，彼此排斥，会尽可能远离。\n\n左边每个电子域都在球面上受到其他电子域的推力。增减电子对，或点击打乱，看它们自己弹开，找到最稳定的排布。\n\n孤对电子只受一个原子核吸引，离核更近、更“胖”，所以排斥也更强。\n\n成键电子对\n−\n4\n+\n孤对电子\n−\n0\n+\n打乱\nSpace\n快速选择\nAX2\nAX3\nAX2E\nAX4\nAX3E\nAX2E2\nAX5\nAX4E\nAX3E2\nAX2E3\nAX6\nAX5E\nAX4E2\nAX3E3\nAX2E4\nAX7\nVIEW · 显示设置\n球棍模型\n空间填充\n孤对电子\n键角\n原子标签\n键偶极\n电子对构型\n杂化轨道\n自动旋转\n问题反馈\n",
       "canvas": [
         {
           "id": "c3",

@@ -7,7 +7,7 @@
   "states": [
     {
       "title": "尺规作图 · ConstructLab",
-      "text": "← WEDULAB\nCONSTRUCTLAB\n尺规作图与全等相似\n简体中文\n纸面\n视角\n章节\n01\n尺规闯关\nCompass & straightedge\n02\n作图回放\nStep-by-step replay\n03\n全等判定\nCongruent triangles\n04\n相似与位似\nSimilarity & homothety\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 04\n尺规闯关\n\nCompass & straightedge\n\n 圆规\n 直尺\n撤销\n重来\n提示\n看解法\n01\n尺规闯关\nCompass & straightedge\n\n古希腊人只用两件工具作图：圆规（以一点为圆心、过另一点画圆）和没有刻度的直尺（过两点画直线）。\n\n先选工具，再依次点两个已有的点。新的交点会自动出现，之后就可以在它们上面落笔。\n\n用尽量少的步数完成目标，拿到三颗星。\n\n1. 等边三角形\n\n以 AB 为边作等边三角形。\n\n步数\n0\n三星步数\n4\n目标\n0 / 2\n1\n等边三角形\n☆☆☆\n2\n中垂线\n☆☆☆\n3\n中点\n☆☆☆\n4\n角平分线\n☆☆☆\n5\n过线上一点作垂线\n☆☆☆\n6\n过线外一点作垂线\n☆☆☆\n7\n平行线\n☆☆☆\n8\n圆内接正六边形\n☆☆☆\n9\n正方形\n☆☆☆\n10\n找圆心\n☆☆☆\n11\n黄金分割点\n☆☆☆\n12\n30° 角\n☆☆☆\n自由作图\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nCONSTRUCTLAB\n尺规作图与全等相似\n简体中文\n纸面\n视角\n章节\n01\n尺规闯关\nCompass & straightedge\n02\n作图回放\nStep-by-step replay\n03\n全等判定\nCongruent triangles\n04\n相似与位似\nSimilarity & homothety\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 04\n尺规闯关\n\nCompass & straightedge\n\n 圆规\n 直尺\n撤销\n重来\n提示\n看解法\n01\n尺规闯关\nCompass & straightedge\n\n古希腊人只用两件工具作图：圆规（以一点为圆心、过另一点画圆）和没有刻度的直尺（过两点画直线）。\n\n先选工具，再依次点两个已有的点。新的交点会自动出现，之后就可以在它们上面落笔。\n\n用尽量少的步数完成目标，拿到三颗星。\n\n1. 等边三角形\n\n以 AB 为边作等边三角形。\n\n步数\n0\n三星步数\n4\n目标\n0 / 2\n1\n等边三角形\n☆☆☆\n2\n中垂线\n☆☆☆\n3\n中点\n☆☆☆\n4\n角平分线\n☆☆☆\n5\n过线上一点作垂线\n☆☆☆\n6\n过线外一点作垂线\n☆☆☆\n7\n平行线\n☆☆☆\n8\n圆内接正六边形\n☆☆☆\n9\n正方形\n☆☆☆\n10\n找圆心\n☆☆☆\n11\n黄金分割点\n☆☆☆\n12\n30° 角\n☆☆☆\n自由作图\nVIEW · 显示设置\n图上标注\n问题反馈\n",
       "randomCalls": 90,
       "canvas": [
         {
@@ -286,7 +286,7 @@
     },
     {
       "title": "尺规作图 · ConstructLab",
-      "text": "← WEDULAB\nCONSTRUCTLAB\n尺规作图与全等相似\n简体中文\n纸面\n视角\n章节\n01\n尺规闯关\nCompass & straightedge\n02\n作图回放\nStep-by-step replay\n03\n全等判定\nCongruent triangles\n04\n相似与位似\nSimilarity & homothety\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 04\n尺规闯关\n\nCompass & straightedge\n\n 圆规\n 直尺\n撤销\n重来\n提示\n看解法\n01\n尺规闯关\nCompass & straightedge\n\n古希腊人只用两件工具作图：圆规（以一点为圆心、过另一点画圆）和没有刻度的直尺（过两点画直线）。\n\n先选工具，再依次点两个已有的点。新的交点会自动出现，之后就可以在它们上面落笔。\n\n用尽量少的步数完成目标，拿到三颗星。\n\n1. 等边三角形\n\n以 AB 为边作等边三角形。\n\n步数\n0\n三星步数\n4\n目标\n0 / 2\n1\n等边三角形\n☆☆☆\n2\n中垂线\n☆☆☆\n3\n中点\n☆☆☆\n4\n角平分线\n☆☆☆\n5\n过线上一点作垂线\n☆☆☆\n6\n过线外一点作垂线\n☆☆☆\n7\n平行线\n☆☆☆\n8\n圆内接正六边形\n☆☆☆\n9\n正方形\n☆☆☆\n10\n找圆心\n☆☆☆\n11\n黄金分割点\n☆☆☆\n12\n30° 角\n☆☆☆\n自由作图\nVIEW · 显示设置\n图上标注\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nCONSTRUCTLAB\n尺规作图与全等相似\n简体中文\n纸面\n视角\n章节\n01\n尺规闯关\nCompass & straightedge\n02\n作图回放\nStep-by-step replay\n03\n全等判定\nCongruent triangles\n04\n相似与位似\nSimilarity & homothety\n← → 切换章节\nR 重置视角 T 切换风格\nSpace 播放 / 暂停\n01 / 04\n尺规闯关\n\nCompass & straightedge\n\n 圆规\n 直尺\n撤销\n重来\n提示\n看解法\n01\n尺规闯关\nCompass & straightedge\n\n古希腊人只用两件工具作图：圆规（以一点为圆心、过另一点画圆）和没有刻度的直尺（过两点画直线）。\n\n先选工具，再依次点两个已有的点。新的交点会自动出现，之后就可以在它们上面落笔。\n\n用尽量少的步数完成目标，拿到三颗星。\n\n1. 等边三角形\n\n以 AB 为边作等边三角形。\n\n步数\n0\n三星步数\n4\n目标\n0 / 2\n1\n等边三角形\n☆☆☆\n2\n中垂线\n☆☆☆\n3\n中点\n☆☆☆\n4\n角平分线\n☆☆☆\n5\n过线上一点作垂线\n☆☆☆\n6\n过线外一点作垂线\n☆☆☆\n7\n平行线\n☆☆☆\n8\n圆内接正六边形\n☆☆☆\n9\n正方形\n☆☆☆\n10\n找圆心\n☆☆☆\n11\n黄金分割点\n☆☆☆\n12\n30° 角\n☆☆☆\n自由作图\nVIEW · 显示设置\n图上标注\n问题反馈\n",
       "randomCalls": 90,
       "canvas": [
         {

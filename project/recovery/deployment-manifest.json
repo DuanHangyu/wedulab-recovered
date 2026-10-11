@@ -809,22 +809,10 @@
     "bytes": 223421,
     "sha256": "2df48906732d7a458b2d0a7cdec51a829262307c6bdee4cfdf079a4dd7c71c69"
   },
-  "assets/gzh-Cftvd3Gm.jpg": {
-    "url": "https://wedulab.com/assets/gzh-Cftvd3Gm.jpg",
-    "status": "200",
-    "bytes": 61607,
-    "sha256": "8686beecb00ce016232ebb40fac9e2f3695568e3c8b9c1c440f868b11dd66006"
-  },
   "assets/land-50m-fTrrQOwI.js": {
     "url": "https://wedulab.com/assets/land-50m-fTrrQOwI.js",
     "status": "200",
     "bytes": 545654,
     "sha256": "2610a2fdaf406df0d14005368a335b092a02b41535ea5f4173f459dec3f6ba98"
-  },
-  "assets/xhs-BYYp__GP.jpg": {
-    "url": "https://wedulab.com/assets/xhs-BYYp__GP.jpg",
-    "status": "200",
-    "bytes": 135227,
-    "sha256": "a95e664c6ccb7da0fa0edd486eef4653f88660ee324d8ea34706b2d99453dce6"
   }
 }

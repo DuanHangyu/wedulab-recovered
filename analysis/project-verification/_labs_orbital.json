@@ -7,7 +7,7 @@
   "states": [
     {
       "title": "原子轨道 · 电子云",
-      "text": "← WEDULAB\nORBITALLAB\n原子轨道 · 电子云\n简体中文\n视角\n章节\n01\n电子云\nElectron cloud\n02\n轨道形状\nOrbital shapes\n03\n径向分布与节面\nRadial distribution\n04\n能级与构造原理\nAufbau principle\n05\n电子排布\nElectron configuration\n06\n量子数\nQuantum numbers\n07\n轨道库\nLibrary\n← → 切换章节\nR 重置视角 Space 下一步\nx\ny\nz\n薛定谔方程\nĤψ = Eψ\n量子数 N · L · M\n1 · 0 · 0\n轨道\n1s\n已记录电子位置\n2,484\n\n暖色 / 冷色：波函数的正 / 负相位\n细亮的壳层：等概率面\n\n能级\n01 / 07\n电子云\n\nElectron cloud\n\n1s\n2s\n2pz\n暂停\n重新记录\n01\n电子云\nElectron cloud\n\n我们无法同时确定电子的位置和速度，只能说电子在某处出现的概率有多大。\n\n舞台上每一个点都是一次“测量”记录下的电子位置。记录得越多，点的疏密就越清楚地显示出概率密度 |ψ|²——这就是电子云。\n\n点密的地方电子出现的概率大，并不是那里有很多电子。\n\n1s\nn = 1 · l = 0 · m = 0\n径向节面\n0\n角节面\n0\n节面总数\n0\n平均半径\n⟨r⟩ = 1.5 a₀\n\ns 轨道球形对称，没有角节面。\n\nVIEW · 显示设置\n电子云\n等值面\n相位\n坐标轴\n截面\n自动旋转\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nORBITALLAB\n原子轨道 · 电子云\n简体中文\n视角\n章节\n01\n电子云\nElectron cloud\n02\n轨道形状\nOrbital shapes\n03\n径向分布与节面\nRadial distribution\n04\n能级与构造原理\nAufbau principle\n05\n电子排布\nElectron configuration\n06\n量子数\nQuantum numbers\n07\n轨道库\nLibrary\n← → 切换章节\nR 重置视角 Space 下一步\nx\ny\nz\n薛定谔方程\nĤψ = Eψ\n量子数 N · L · M\n1 · 0 · 0\n轨道\n1s\n已记录电子位置\n2,484\n\n暖色 / 冷色：波函数的正 / 负相位\n细亮的壳层：等概率面\n\n能级\n01 / 07\n电子云\n\nElectron cloud\n\n1s\n2s\n2pz\n暂停\n重新记录\n01\n电子云\nElectron cloud\n\n我们无法同时确定电子的位置和速度，只能说电子在某处出现的概率有多大。\n\n舞台上每一个点都是一次“测量”记录下的电子位置。记录得越多，点的疏密就越清楚地显示出概率密度 |ψ|²——这就是电子云。\n\n点密的地方电子出现的概率大，并不是那里有很多电子。\n\n1s\nn = 1 · l = 0 · m = 0\n径向节面\n0\n角节面\n0\n节面总数\n0\n平均半径\n⟨r⟩ = 1.5 a₀\n\ns 轨道球形对称，没有角节面。\n\nVIEW · 显示设置\n电子云\n等值面\n相位\n坐标轴\n截面\n自动旋转\n问题反馈\n",
       "canvas": [
         {
           "id": "c3",
@@ -243,7 +243,7 @@
     },
     {
       "title": "原子轨道 · 电子云",
-      "text": "← WEDULAB\nORBITALLAB\n原子轨道 · 电子云\n简体中文\n视角\n章节\n01\n电子云\nElectron cloud\n02\n轨道形状\nOrbital shapes\n03\n径向分布与节面\nRadial distribution\n04\n能级与构造原理\nAufbau principle\n05\n电子排布\nElectron configuration\n06\n量子数\nQuantum numbers\n07\n轨道库\nLibrary\n← → 切换章节\nR 重置视角 Space 下一步\nx\ny\nz\n薛定谔方程\nĤψ = Eψ\n量子数 N · L · M\n1 · 0 · 0\n轨道\n1s\n已记录电子位置\n2,484\n\n暖色 / 冷色：波函数的正 / 负相位\n细亮的壳层：等概率面\n\n能级\n01 / 07\n电子云\n\nElectron cloud\n\n1s\n2s\n2pz\n暂停\n重新记录\n01\n电子云\nElectron cloud\n\n我们无法同时确定电子的位置和速度，只能说电子在某处出现的概率有多大。\n\n舞台上每一个点都是一次“测量”记录下的电子位置。记录得越多，点的疏密就越清楚地显示出概率密度 |ψ|²——这就是电子云。\n\n点密的地方电子出现的概率大，并不是那里有很多电子。\n\n1s\nn = 1 · l = 0 · m = 0\n径向节面\n0\n角节面\n0\n节面总数\n0\n平均半径\n⟨r⟩ = 1.5 a₀\n\ns 轨道球形对称，没有角节面。\n\nVIEW · 显示设置\n电子云\n等值面\n相位\n坐标轴\n截面\n自动旋转\n问题反馈\n作者：WY",
+      "text": "← WEDULAB\nORBITALLAB\n原子轨道 · 电子云\n简体中文\n视角\n章节\n01\n电子云\nElectron cloud\n02\n轨道形状\nOrbital shapes\n03\n径向分布与节面\nRadial distribution\n04\n能级与构造原理\nAufbau principle\n05\n电子排布\nElectron configuration\n06\n量子数\nQuantum numbers\n07\n轨道库\nLibrary\n← → 切换章节\nR 重置视角 Space 下一步\nx\ny\nz\n薛定谔方程\nĤψ = Eψ\n量子数 N · L · M\n1 · 0 · 0\n轨道\n1s\n已记录电子位置\n2,484\n\n暖色 / 冷色：波函数的正 / 负相位\n细亮的壳层：等概率面\n\n能级\n01 / 07\n电子云\n\nElectron cloud\n\n1s\n2s\n2pz\n暂停\n重新记录\n01\n电子云\nElectron cloud\n\n我们无法同时确定电子的位置和速度，只能说电子在某处出现的概率有多大。\n\n舞台上每一个点都是一次“测量”记录下的电子位置。记录得越多，点的疏密就越清楚地显示出概率密度 |ψ|²——这就是电子云。\n\n点密的地方电子出现的概率大，并不是那里有很多电子。\n\n1s\nn = 1 · l = 0 · m = 0\n径向节面\n0\n角节面\n0\n节面总数\n0\n平均半径\n⟨r⟩ = 1.5 a₀\n\ns 轨道球形对称，没有角节面。\n\nVIEW · 显示设置\n电子云\n等值面\n相位\n坐标轴\n截面\n自动旋转\n问题反馈\n",
       "canvas": [
         {
           "id": "c3",

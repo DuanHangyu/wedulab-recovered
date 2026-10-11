@@ -286,23 +286,6 @@ else {
                 jsxRuntime.jsx(f, {}),
                 !currentPath.startsWith("/admin/") &&
                   jsxRuntime.jsx(FeedbackWidget, {}),
-                currentPath.startsWith("/labs/") &&
-                  jsxRuntime.jsx("div", {
-                    "aria-hidden": "true",
-                    style: {
-                      position: "fixed",
-                      left: "max(16px, env(safe-area-inset-left))",
-                      bottom: "max(12px, env(safe-area-inset-bottom))",
-                      zIndex: 9999,
-                      pointerEvents: "none",
-                      userSelect: "none",
-                      font: "700 18px/1 Arial, sans-serif",
-                      letterSpacing: "0.12em",
-                      color: "rgba(128,128,128,.5)",
-                      textShadow: "0 1px 2px rgba(255,255,255,.35)",
-                    },
-                    children: translate("作者：WY"),
-                  }),
               ],
             })
           : jsxRuntime.jsx(PageStatus, {

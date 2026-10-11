@@ -1,10 +1,10 @@
 {
-  "wedulab-production-backup.zip": {
-    "bytes": 52103803,
-    "sha256": "ea6e19fa16a6aabf1f56a6551917b0d546cda23e4205adbcb05559dd785d4dc8"
-  },
   "wedulab-restored.zip": {
-    "bytes": 53191368,
-    "sha256": "d2a318b05c4c741a3d96694520979e28bd98fda5da8e7675f04ae398c286988c"
+    "bytes": 53011489,
+    "sha256": "1ed8b3182d7ef5a07b591434ae9d40dd87fce4ec10d223dc2858a2d8bdcf891a"
+  },
+  "wedulab-production-backup.zip": {
+    "bytes": 51908974,
+    "sha256": "6f9a9854cec2601ce6c768cf4ea032a9b8841fb8fe503b9e96479de37d44fee9"
   }
 }
